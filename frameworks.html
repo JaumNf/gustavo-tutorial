@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Frameworks — Gustavo Tutorial</title>
+<meta name="description" content="React, Next.js, Vue, Tailwind e Vite — o que existe fora do vanilla e quando cada um paga o próprio custo.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Frameworks — Gustavo Tutorial">
+<meta property="og:description" content="React, Next.js, Vue, Tailwind e Vite — o que existe fora do vanilla e quando cada um paga o próprio custo.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="topo">
+<div class="topo__interno">
+<a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
+<div class="filtros" role="group" aria-label="Filtrar tópicos">
+<button class="filtro" data-filtro="tudo" aria-pressed="true">Tudo</button>
+<button class="filtro" data-filtro="revisao" aria-pressed="false">Revisão</button>
+<button class="filtro" data-filtro="novo" aria-pressed="false">Novo</button>
+</div>
+<button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+</div>
+<nav class="trilhas" aria-label="Trilhas">
+<div class="trilhas__interno">
+<a href="index.html" class="trilha">Início</a>
+<a href="html-puro.html" class="trilha">HTML puro</a>
+<a href="frameworks.html" class="trilha is-ativa">Frameworks</a>
+<a href="back-end.html" class="trilha">Back-end</a>
+<a href="negocio.html" class="trilha">Negócio</a>
+</div>
+</nav>
+</header>
+<div class="palco">
+<nav class="sumario" id="sumario" aria-label="Sumário">
+<button class="sumario__abrir" id="sumario-abrir" aria-expanded="false" aria-controls="sumario-lista"><span>Sumário</span><span aria-hidden="true">&#9662;</span></button>
+<div class="sumario__lista" id="sumario-lista">
+<p class="sumario__titulo">Frameworks</p>
+<a class="sumario__parte" href="#s1">1 · Outras formas de construir</a>
+<ol>
+<li><a href="#t-comparacao">O mesmo card em três abordagens</a></li>
+<li><a href="#t-componentes">Pensar em componentes</a></li>
+<li><a href="#t-vite">Começando um projeto com Vite</a></li>
+<li><a href="#t-tailwind">Tailwind na prática</a></li>
+</ol>
+</div>
+</nav>
+<main class="leitura">
+<section class="abertura">
+<h1>Frameworks</h1>
+<p class="abertura__lead">Esta trilha não é sobre trocar de ferramenta: é sobre enxergar o mesmo problema resolvido de outras formas e saber julgar cada uma.</p>
+<div class="legenda">
+<span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
+<span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
+<span>1 partes · 4 tópicos</span>
+</div>
+</section>
+<p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
+<section class="parte" id="s1">
+      <div class="parte__cabeca">
+        <span class="parte__num">PARTE 1</span>
+        <h2>Outras formas de construir</h2>
+      </div>
+      <p class="parte__resumo">O que você não usa hoje — e por isso mesmo vale entender. Aqui o objetivo não é trocar de ferramenta: é enxergar o mesmo problema resolvido de três jeitos e saber julgar cada um.</p>
+
+      <article class="topico" id="t-comparacao" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>O mesmo card em três abordagens</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Um card de drink, com nome, ingredientes e um selo de “sem álcool”. Mesmo resultado visual, três caminhos.</p>
+
+          <h4>1. HTML puro — o seu jeito</h4>
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">vanilla</span><button class="copiar">copiar</button></div>
+            <pre><code>&lt;article class="card"&gt;
+  &lt;h3 class="card__nome"&gt;Pantanal&lt;/h3&gt;
+  &lt;p class="card__ingredientes"&gt;maracujá · hortelã · tônica&lt;/p&gt;
+  &lt;span class="card__selo"&gt;sem álcool&lt;/span&gt;
+&lt;/article&gt;
+
+&lt;style&gt;
+  .card { padding: 20px; border: 1px solid #ddd; border-radius: 6px; }
+  .card__nome { font-size: 20px; margin: 0 0 6px; }
+  .card__selo { font-size: 11px; text-transform: uppercase; color: #7A1C30; }
+&lt;/style&gt;</code></pre>
+          </div>
+          <p>Para dez drinks, você repete o bloco dez vezes — ou gera com <code>map()</code> a partir de um array, como vimos na Parte 5.</p>
+
+          <h4>2. React — componente com propriedades</h4>
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">react</span><button class="copiar">copiar</button></div>
+            <pre><code>function Card({ nome, ingredientes, semAlcool }) {
+  return (
+    &lt;article className="card"&gt;
+      &lt;h3 className="card__nome"&gt;{nome}&lt;/h3&gt;
+      &lt;p className="card__ingredientes"&gt;{ingredientes.join(' · ')}&lt;/p&gt;
+      {semAlcool &amp;&amp; &lt;span className="card__selo"&gt;sem álcool&lt;/span&gt;}
+    &lt;/article&gt;
+  );
+}
+
+// usando com uma lista
+&lt;div className="carta"&gt;
+  {drinks.map(d =&gt; &lt;Card key={d.nome} {...d} /&gt;)}
+&lt;/div&gt;</code></pre>
+          </div>
+          <p>O card virou uma função que recebe dados. O <code>{semAlcool &amp;&amp; ...}</code> é a forma do React de dizer “só mostre se for verdadeiro”. O <code>key</code> é obrigatório em listas — é como o React identifica cada item quando algo muda.</p>
+
+          <h4>3. Tailwind — estilo direto na marcação</h4>
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">tailwind</span><button class="copiar">copiar</button></div>
+            <pre><code>&lt;article class="p-5 border border-gray-300 rounded-md"&gt;
+  &lt;h3 class="text-xl mb-1.5"&gt;Pantanal&lt;/h3&gt;
+  &lt;p class="text-gray-600"&gt;maracujá · hortelã · tônica&lt;/p&gt;
+  &lt;span class="text-xs uppercase text-red-900"&gt;sem álcool&lt;/span&gt;
+&lt;/article&gt;</code></pre>
+          </div>
+          <p>Não existe arquivo de CSS: cada classe é uma propriedade. Rápido de escrever, e a marcação fica longa.</p>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Critério</th><th>Vanilla</th><th>React</th><th>Tailwind</th></tr></thead>
+              <tbody>
+                <tr><td>Precisa de build</td><td>Não</td><td>Sim</td><td>Sim (ou CDN, limitado)</td></tr>
+                <tr><td>Repetir 10 vezes</td><td>Gera com <code>map</code></td><td>Trivial</td><td>Igual ao vanilla</td></tr>
+                <tr><td>Mudar o estilo de todos</td><td>Uma regra CSS</td><td>Uma regra CSS</td><td>Editar cada elemento</td></tr>
+                <tr><td>Ler o HTML depois</td><td>Limpo</td><td>Misturado com lógica</td><td>Poluído de classes</td></tr>
+                <tr><td>Abre sem servidor</td><td>Sim</td><td>Não</td><td>Não</td></tr>
+                <tr><td>Envelhece bem</td><td>Muito</td><td>Exige manutenção</td><td>Exige manutenção</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="nota">
+            <strong>O que essa comparação deve deixar claro:</strong> nenhuma das três é melhor em abstrato. O React ganha quando existem muitos componentes com estado mudando; o Tailwind ganha quando várias pessoas mexem no mesmo projeto e ninguém quer brigar por nome de classe; o vanilla ganha quando o projeto é pequeno, precisa durar e não deve depender de nada.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-componentes" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Pensar em componentes</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Esta é a ideia que vale levar de volta para o HTML puro, mesmo sem nunca usar framework. Componente é uma unidade fechada: aparência, comportamento e dados no mesmo lugar, sem depender de onde foi colocada.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">nomeando como componente (BEM)</span><button class="copiar">copiar</button></div>
+            <pre><code>/* bloco */          .card { }
+/* elemento */       .card__titulo { }
+                     .card__selo { }
+/* modificador */    .card--destaque { }
+                     .card--sem-foto { }</code></pre>
+          </div>
+
+          <p>Essa convenção — chamada BEM — resolve dois problemas de uma vez: o nome diz a que componente a regra pertence, e a especificidade fica sempre baixa e igual, então nada briga com nada.</p>
+
+          <h4>Web Components — componentes de verdade, sem framework</h4>
+          <p>O navegador permite criar suas próprias tags. Não é comum em landing page, mas é a resposta nativa ao problema que o React resolve.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">javascript</span><button class="copiar">copiar</button></div>
+            <pre><code>class BotaoZap extends HTMLElement {
+  connectedCallback() {
+    const numero = this.getAttribute('numero');
+    const texto  = this.getAttribute('texto') || 'Falar no WhatsApp';
+    this.innerHTML =
+      `&lt;a class="botao" target="_blank" rel="noopener"
+          href="https://wa.me/${numero}"&gt;${texto}&lt;/a&gt;`;
+  }
+}
+customElements.define('botao-zap', BotaoZap);</code></pre>
+          </div>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">usando</span><button class="copiar">copiar</button></div>
+            <pre><code>&lt;botao-zap numero="5567999999999" texto="Pedir orçamento"&gt;&lt;/botao-zap&gt;</code></pre>
+          </div>
+
+          <div class="nota">
+            <strong>A lição transferível:</strong> mesmo sem Web Components, organize seu CSS por componente e não por página. Um bloco <code>/* === CARD === */</code> com tudo sobre o card junto é a versão simples dessa ideia — e é o que torna o copiar-e-colar entre projetos confiável.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-vite" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Começando um projeto com Vite</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Se um dia você quiser experimentar React ou trabalhar com arquivos separados e build, o caminho de entrada hoje é o Vite. Vale fazer uma vez só para ver como é.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">terminal</span><button class="copiar">copiar</button></div>
+            <pre><code>npm create vite@latest meu-projeto
+# escolha "Vanilla" para JS puro, ou "React"
+
+cd meu-projeto
+npm install
+npm run dev      # servidor local, recarrega ao salvar
+npm run build    # gera a pasta dist/ pronta para publicar</code></pre>
+          </div>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Pasta / arquivo</th><th>O que é</th></tr></thead>
+              <tbody>
+                <tr><td><code>index.html</code></td><td>A página. Aqui ele fica na raiz, não escondido</td></tr>
+                <tr><td><code>src/</code></td><td>Seu código-fonte</td></tr>
+                <tr><td><code>public/</code></td><td>Arquivos copiados sem processamento (favicon, imagens)</td></tr>
+                <tr><td><code>dist/</code></td><td>O resultado do build — é isso que vai pro servidor</td></tr>
+                <tr><td><code>node_modules/</code></td><td>Dependências baixadas. Nunca vai pro Git</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="nota">
+            <strong>O que muda no seu dia:</strong> você deixa de abrir o arquivo e passa a rodar um comando. Em troca ganha recarga automática, imports entre arquivos e minificação no build. Para landing page única, é troca ruim; para um projeto com muitas telas, é troca óbvia.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-tailwind" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Tailwind na prática</h3>
+          <span class="tag tag--novo">Novo</span>
+          <span class="tag tag--css">CSS</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Vale entender porque é o que você mais vai encontrar em vaga, tutorial e projeto de terceiro. A ideia: em vez de nomear componentes, você compõe a partir de classes de uma propriedade cada.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">a lógica das classes</span><button class="copiar">copiar</button></div>
+            <pre><code>p-4          padding: 1rem
+px-6         padding esquerda e direita: 1.5rem
+mt-2         margin-top: 0.5rem
+text-xl      font-size: 1.25rem
+font-bold    font-weight: 700
+flex         display: flex
+gap-4        gap: 1rem
+md:flex-row  vira linha a partir do breakpoint médio
+hover:bg-red-900   muda o fundo no hover</code></pre>
+          </div>
+
+          <p>Os prefixos são a parte inteligente: <code>md:</code>, <code>hover:</code>, <code>dark:</code>, <code>focus:</code> aplicam a classe só naquela condição — sem escrever media query nem pseudo-classe.</p>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Ganha em</th><th>Perde em</th></tr></thead>
+              <tbody>
+                <tr><td>Velocidade de escrita</td><td>HTML fica longo e difícil de ler</td></tr>
+                <tr><td>Nunca inventar nome de classe</td><td>Mudar todos os botões exige editar cada um</td></tr>
+                <tr><td>Consistência forçada por uma escala</td><td>Exige build para funcionar bem</td></tr>
+                <tr><td>CSS final pequeno (remove o não usado)</td><td>Curva até decorar as abreviações</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="nota nota--alerta">
+            <strong>Não use a versão CDN em produção.</strong> Ela compila no navegador do visitante, o que é lento e pesado. A CDN serve para testar e aprender; num projeto real, Tailwind precisa do build que remove as classes não usadas.
+          </div>
+
+          <div class="nota">
+            <strong>O que dá para roubar sem adotar:</strong> a escala de espaçamento. Tailwind usa múltiplos de 4px, e obrigar-se a isso — 4, 8, 12, 16, 24, 32, 48 — elimina aquele espaçamento de 13px que só existe porque ficou parecendo certo na hora. Dá para fazer isso com variáveis CSS no seu arquivo único.
+          </div>
+        </div>
+      </article>
+</section>
+</main>
+</div>
+<footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<script src="app.js"></script>
+</body>
+</html>
