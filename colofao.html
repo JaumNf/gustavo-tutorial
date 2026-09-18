@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Colofão — Gustavo Tutorial</title>
+<meta name="description" content="Como este site foi feito: o processo, as escolhas técnicas, o que a IA fez e o que não fez.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Colofão — Gustavo Tutorial">
+<meta property="og:description" content="Como este site foi feito: o processo, as escolhas técnicas, o que a IA fez e o que não fez.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="topo">
+<div class="topo__interno">
+<a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
+<span style="margin-left:auto"></span><button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+</div>
+<nav class="navmenu" aria-label="Trilhas">
+<details class="navmenu__caixa" id="navmenu">
+<summary class="navmenu__botao">Trilhas<span aria-hidden="true">&#9662;</span></summary>
+<div class="navmenu__painel">
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Construir</p>
+<a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Quando precisa de servidor</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Vender</p>
+<a href="landing-pages.html"><strong>Landing pages</strong><span>A estratégia da página</span></a>
+<a href="trafego.html"><strong>Tráfego</strong><span>Ser encontrado no Google</span></a>
+<a href="negocio.html"><strong>Negócio</strong><span>Preço, escopo e contrato</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Método</p>
+<a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
+<a href="colofao.html" class="is-atual"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+</div>
+</details>
+<span class="navmenu__aqui">Colofão</span>
+</nav></header>
+<main class="home">
+<section class="home__hero">
+<h1>Colofão</h1>
+<p>Colofão é a página no fim de um livro que conta como ele foi feito: em que tipografia, por quem, com que método. Esta é a deste site — escrita porque um material que ensina processo deveria mostrar o próprio.</p>
+</section>
+
+<p class="home__titulo">Como foi feito</p>
+
+<div class="home__nota" style="background:transparent;border-left-color:var(--accent);margin-top:0">
+<strong>Em uma frase:</strong> o conteúdo nasceu de uma conversa longa com o Claude, da Anthropic, ao longo de um dia. Cada trilha começou como uma dúvida real de trabalho — o que é framework, o que falta estudar, como passar informação para uma IA — e virou material porque a resposta era grande demais para caber numa conversa.
+</div>
+
+<div class="colofao">
+
+<section class="colofao__bloco">
+<h2>O processo</h2>
+<p>Nada aqui foi planejado como site. Começou com uma pergunta sobre frameworks, virou um glossário, o glossário virou uma página, a página virou trilha, e as trilhas viraram isto. A estrutura foi aparecendo conforme o assunto pedia — o que é, por sinal, o oposto do que a trilha de Landing pages recomenda, e funcionou aqui justamente porque não havia cliente, prazo nem objeção a derrubar.</p>
+<p>O método que se repetiu em cada trilha foi o mesmo descrito na trilha de IA: primeiro o esqueleto com as partes e o que cada uma responderia, depois o preenchimento seção por seção, e no fim uma passada de revisão separada. Os textos saíram em blocos, nunca de uma vez — pelo motivo técnico explicado lá: página inteira numa resposta só estoura o limite e volta truncada.</p>
+</section>
+
+<section class="colofao__bloco">
+<h2>O que a máquina fez</h2>
+<p>Escreveu o texto, organizou a estrutura, montou o HTML e o CSS, gerou as páginas por script, conferiu o resultado no navegador, empacotou os arquivos e configurou o deploy. Também discordou algumas vezes — sobre esconder o gerador atrás de senha, sobre inventar fotos de banco de imagem, sobre publicar número que ninguém tinha confirmado.</p>
+</section>
+
+<section class="colofao__bloco">
+<h2>O que a máquina não fez</h2>
+<p>Não decidiu o que entra. Não trouxe o contexto — os clientes reais, o que dá errado na prática, o que o mercado de Campo Grande pede. Não julgou o que é verdade. Não assumiu responsabilidade por nada do que está publicado aqui.</p>
+<p>Isso não é modéstia protocolar: é o argumento central da Parte 7 da trilha de IA. Quem publica responde. A ferramenta produz volume e consistência; o julgamento, o contexto e a assinatura continuam sendo de quem escolhe apertar o botão.</p>
+</section>
+
+<section class="colofao__bloco">
+<h2>Feito com</h2>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Camada</th><th>Escolha</th><th>Por quê</th></tr></thead>
+<tbody>
+<tr><td>Estrutura</td><td>HTML escrito à mão</td><td>Sem framework, sem build, sem dependência que envelhece</td></tr>
+<tr><td>Estilo</td><td>CSS puro, tokens no <code>:root</code></td><td>Tema claro e escuro trocando só as variáveis</td></tr>
+<tr><td>Comportamento</td><td>JavaScript puro, sem biblioteca</td><td>Filtro, marcador de progresso, sumário e gerador cabem em 200 linhas</td></tr>
+<tr><td>Tipografia</td><td>Bricolage Grotesque, Source Serif 4, JetBrains Mono</td><td>Grotesca com caráter nos títulos, serifada no corpo porque é material de leitura longa</td></tr>
+<tr><td>Único externo</td><td>Google Fonts</td><td>A única exceção à regra de não depender de terceiros</td></tr>
+<tr><td>Versionamento</td><td>Git e GitHub</td><td>Público, para servir de exemplo do que a trilha ensina</td></tr>
+<tr><td>Publicação</td><td>Vercel, ligada ao repositório</td><td>Cada push republica sozinho</td></tr>
+</tbody></table></div>
+<p>O site inteiro são oito arquivos HTML, uma folha de estilo e dois scripts. Abre sem servidor, funciona offline depois de carregado, e não tem uma linha de código que dependa de alguém manter um pacote atualizado.</p>
+</section>
+
+<section class="colofao__bloco">
+<h2>Uso</h2>
+<p>O conteúdo é aberto. Se serviu para alguém estudar, ensinar, ou copiar um trecho para explicar algo a um cliente, cumpriu o que devia. O código está no repositório e pode ser lido, copiado e adaptado.</p>
+<p>O que se pede em troca é o que a trilha de IA defende: não publicar como seu o que você não revisou, e não apresentar como verdade o que não conferiu.</p>
+</section>
+
+<section class="colofao__bloco">
+<h2>Agradecimento</h2>
+<p>Ao Claude, pela conversa — pela paciência com as perguntas fora de ordem, pelas discordâncias quando eu estava errado, e por transformar um dia de dúvidas soltas em material que outras pessoas podem usar.</p>
+<p class="colofao__assinatura">Gustavo · Campo Grande, setembro de 2026</p>
+</section>
+
+</div>
+</main>
+
+<footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<script src="app.js"></script>
+</body>
+</html>

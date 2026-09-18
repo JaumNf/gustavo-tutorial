@@ -108,3 +108,17 @@
     });
   }
 })();
+/* menu de trilhas: fecha ao clicar fora e no Esc (melhoria opcional) */
+(function () {
+  var menu = document.getElementById('navmenu');
+  if (!menu) return;
+  document.addEventListener('click', function (e) {
+    if (menu.open && !menu.contains(e.target)) menu.open = false;
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && menu.open) {
+      menu.open = false;
+      menu.querySelector('summary').focus();
+    }
+  });
+})();

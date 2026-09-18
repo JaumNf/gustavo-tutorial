@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Tráfego — Gustavo Tutorial</title>
+<meta name="description" content="Como a busca funciona, Search Console, SEO local com o Perfil da Empresa, GA4 e o básico de anúncios — o que faz um site ser encontrado.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Tráfego — Gustavo Tutorial">
+<meta property="og:description" content="Como a busca funciona, Search Console, SEO local com o Perfil da Empresa, GA4 e o básico de anúncios — o que faz um site ser encontrado.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="topo">
+<div class="topo__interno">
+<a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
+<div class="filtros" role="group" aria-label="Filtrar tópicos">
+<button class="filtro" data-filtro="tudo" aria-pressed="true">Tudo</button>
+<button class="filtro" data-filtro="revisao" aria-pressed="false">Revisão</button>
+<button class="filtro" data-filtro="novo" aria-pressed="false">Novo</button>
+</div>
+<button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+</div>
+<nav class="navmenu" aria-label="Trilhas">
+<details class="navmenu__caixa" id="navmenu">
+<summary class="navmenu__botao">Trilhas<span aria-hidden="true">&#9662;</span></summary>
+<div class="navmenu__painel">
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Construir</p>
+<a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Quando precisa de servidor</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Vender</p>
+<a href="landing-pages.html"><strong>Landing pages</strong><span>A estratégia da página</span></a>
+<a href="trafego.html" class="is-atual"><strong>Tráfego</strong><span>Ser encontrado no Google</span></a>
+<a href="negocio.html"><strong>Negócio</strong><span>Preço, escopo e contrato</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Método</p>
+<a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
+<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+</div>
+</details>
+<span class="navmenu__aqui">Tráfego</span>
+</nav></header>
+<div class="palco">
+<nav class="sumario" id="sumario" aria-label="Sumário">
+<button class="sumario__abrir" id="sumario-abrir" aria-expanded="false" aria-controls="sumario-lista"><span>Sumário</span><span aria-hidden="true">&#9662;</span></button>
+<div class="sumario__lista" id="sumario-lista">
+<p class="sumario__titulo">Tráfego</p>
+<a class="sumario__parte" href="#s1">1 · Como a busca funciona</a>
+<ol>
+<li><a href="#t-tr-mecanismo">Rastrear, indexar, ranquear</a></li>
+<li><a href="#t-tr-robots">robots.txt e sitemap.xml</a></li>
+<li><a href="#t-tr-js">Por que HTML puro tem vantagem aqui</a></li>
+</ol>
+<a class="sumario__parte" href="#s2">2 · Search Console</a>
+<ol>
+<li><a href="#t-tr-console">O que ele responde</a></li>
+<li><a href="#t-tr-usar">O que fazer com os dados</a></li>
+</ol>
+<a class="sumario__parte" href="#s3">3 · SEO na prática</a>
+<ol>
+<li><a href="#t-tr-intencao">Intenção de busca</a></li>
+<li><a href="#t-tr-palavras">Escolher palavras para negócio local</a></li>
+<li><a href="#t-tr-onpage">On-page: o que importa, em ordem</a></li>
+<li><a href="#t-tr-conteudo">Por que uma LP sozinha ranqueia pouco</a></li>
+</ol>
+<a class="sumario__parte" href="#s4">4 · SEO local</a>
+<ol>
+<li><a href="#t-tr-perfil">O Perfil da Empresa no Google</a></li>
+<li><a href="#t-tr-nap">Consistência de nome, endereço e telefone</a></li>
+<li><a href="#t-tr-avaliacoes">Avaliações: como pedir sem constranger</a></li>
+</ol>
+<a class="sumario__parte" href="#s5">5 · Analytics</a>
+<ol>
+<li><a href="#t-tr-ga4">GA4 na prática</a></li>
+<li><a href="#t-tr-oquever">O que olhar e o que ignorar</a></li>
+<li><a href="#t-tr-lgpd">Consentimento e LGPD</a></li>
+</ol>
+<a class="sumario__parte" href="#s6">6 · Anúncios, o básico</a>
+<ol>
+<li><a href="#t-tr-anuncio">Busca ou rede social</a></li>
+<li><a href="#t-tr-pixel">O que o cliente precisa entender</a></li>
+</ol>
+<a class="sumario__parte" href="#s7">7 · O sistema de visibilidade</a>
+<ol>
+<li><a href="#t-tr-90dias">Os primeiros noventa dias</a></li>
+<li><a href="#t-tr-expectativa">Alinhar expectativa antes de prometer</a></li>
+</ol>
+</div>
+</nav>
+<main class="leitura">
+<section class="abertura">
+<h1>Tráfego e visibilidade</h1>
+<p class="abertura__lead">A pergunta que todo cliente faz depois de quanto custa: vai aparecer no Google? Esta trilha responde de verdade — incluindo a parte que quase nenhum desenvolvedor conta, que é o perfil no Google valer mais que o site para negócio local.</p>
+<div class="legenda">
+<span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
+<span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
+<span>7 partes · 19 tópicos</span>
+</div>
+</section>
+<p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
+<section class="parte" id="s1">
+<div class="parte__cabeca"><span class="parte__num">PARTE 1</span><h2>Como a busca funciona</h2></div>
+<p class="parte__resumo">Antes de otimizar qualquer coisa, entender o mecanismo. Três etapas, e a maioria dos problemas de "não aparece no Google" acontece na primeira.</p>
+
+<article class="topico" id="t-tr-mecanismo" data-marca="novo">
+<div class="topico__cabeca"><h3>Rastrear, indexar, ranquear</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Buscador não pesquisa a internet quando você digita. Ele consulta um índice que montou antes. São três etapas distintas, e confundi-las leva a diagnóstico errado.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">as três etapas</span><button class="copiar">copiar</button></div><pre><code>1. RASTREAR   um robô visita a página e lê o HTML
+              falha se: bloqueado por robots.txt, servidor fora,
+              conteúdo só aparece depois de JavaScript
+
+2. INDEXAR    a página é analisada e guardada no índice
+              falha se: conteúdo duplicado, sem valor, noindex,
+              página órfã sem nenhum link apontando
+
+3. RANQUEAR   o índice é ordenado para cada busca
+              aqui entram relevância, autoridade, experiência
+              de uso e intenção da busca</code></pre></div>
+<p>"O site não aparece no Google" quase nunca é problema de ranqueamento no começo — é de rastreamento ou indexação. Site novo simplesmente ainda não foi visitado, ou foi visitado e não entrou no índice.</p>
+<div class="nota"><strong>Como verificar em dez segundos:</strong> busque <code>site:seudominio.com.br</code> no Google. Se aparecer resultado, a página está indexada e o problema é de posição. Se não aparecer nada, o problema é anterior — e otimizar título não resolve.</div>
+</div>
+</article>
+
+<article class="topico" id="t-tr-robots" data-marca="novo">
+<div class="topico__cabeca"><h3>robots.txt e sitemap.xml</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>Dois arquivos de texto na raiz do site que conversam com o robô. Para uma landing page simples eles quase não importam; a partir de várias páginas, passam a importar.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">robots.txt</span><button class="copiar">copiar</button></div><pre><code># permite tudo e aponta o mapa do site
+User-agent: *
+Allow: /
+
+Sitemap: https://seudominio.com.br/sitemap.xml</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">sitemap.xml</span><button class="copiar">copiar</button></div><pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+  &lt;url&gt;
+    &lt;loc&gt;https://seudominio.com.br/&lt;/loc&gt;
+    &lt;lastmod&gt;2026-09-18&lt;/lastmod&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;https://seudominio.com.br/servicos.html&lt;/loc&gt;
+    &lt;lastmod&gt;2026-09-18&lt;/lastmod&gt;
+  &lt;/url&gt;
+&lt;/urlset&gt;</code></pre></div>
+<div class="nota nota--alerta"><strong>O erro que mata site inteiro:</strong> subir para produção com <code>Disallow: /</code> no robots.txt, ou com <code>&lt;meta name="robots" content="noindex"&gt;</code> que ficou do ambiente de teste. O site funciona perfeitamente, e simplesmente nunca aparece. Vale conferir isso no checklist de lançamento.</div>
+<p>Outro detalhe: o <code>canonical</code>. Se a mesma página abre em <code>com.br</code>, <code>www.com.br</code> e <code>com.br/index.html</code>, o buscador vê três páginas iguais. A tag <code>&lt;link rel="canonical"&gt;</code> diz qual é a oficial.</p>
+</div>
+</article>
+
+<article class="topico" id="t-tr-js" data-marca="novo">
+<div class="topico__cabeca"><h3>Por que HTML puro tem vantagem aqui</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O robô lê o HTML que chega do servidor. Se o conteúdo só existe depois que o JavaScript roda, ele depende de uma segunda passada de processamento — que acontece, mas demora mais e falha mais.</p>
+<p>Numa página feita em HTML puro, todo o conteúdo já está no arquivo. Não existe essa etapa extra, não existe risco. É uma vantagem real da sua forma de entregar, e vale dizer isso ao cliente.</p>
+<div class="nota"><strong>Onde você pode se prejudicar sozinho:</strong> se um acordeão, um carrossel ou um bloco com <code>opacity: 0</code> esperando o <code>IntersectionObserver</code> esconder conteúdo que só aparece via JS, esse conteúdo pode não contar. O <code>&lt;details&gt;</code> nativo, ao contrário, mantém o texto no HTML mesmo fechado — mais um motivo para preferi-lo.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s2">
+<div class="parte__cabeca"><span class="parte__num">PARTE 2</span><h2>Search Console</h2></div>
+<p class="parte__resumo">A ferramenta mais útil e mais ignorada do conjunto. É gratuita, é do Google, e mostra exatamente o que ele pensa do site do seu cliente.</p>
+
+<article class="topico" id="t-tr-console" data-marca="novo">
+<div class="topico__cabeca"><h3>O que ele responde</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Analytics mostra o que acontece <em>dentro</em> do site. Search Console mostra o que acontece <em>antes</em> — na busca, onde a decisão de clicar é tomada. Para SEO, é a fonte primária.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Relatório</th><th>Responde</th></tr></thead>
+<tbody>
+<tr><td><strong>Desempenho</strong></td><td>Que buscas mostram o site, quantas impressões, quantos cliques, em que posição</td></tr>
+<tr><td><strong>Indexação de páginas</strong></td><td>O que está no índice e o que ficou de fora — com o motivo</td></tr>
+<tr><td><strong>Inspeção de URL</strong></td><td>O estado de uma página específica, e o botão para pedir indexação</td></tr>
+<tr><td><strong>Core Web Vitals</strong></td><td>Velocidade e estabilidade medidas em visitantes reais, não em teste</td></tr>
+<tr><td><strong>Usabilidade em dispositivos móveis</strong></td><td>Problemas de leitura e toque no celular</td></tr>
+</tbody></table></div>
+<p>A verificação de propriedade é feita por uma tag no <code>&lt;head&gt;</code> ou por registro DNS. Como você controla o HTML, a tag é o caminho de dois minutos.</p>
+</div>
+</article>
+
+<article class="topico" id="t-tr-usar" data-marca="novo">
+<div class="topico__cabeca"><h3>O que fazer com os dados</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O relatório de desempenho vira ação quando você cruza impressão com clique.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Padrão</th><th>Diagnóstico</th><th>O que fazer</th></tr></thead>
+<tbody>
+<tr><td>Muita impressão, pouco clique</td><td>Aparece, mas o resultado não convence</td><td>Reescrever title e description daquela busca</td></tr>
+<tr><td>Posição 8 a 15 em busca relevante</td><td>Perto da primeira página</td><td>Reforçar o conteúdo sobre esse tema — é o ganho mais fácil</td></tr>
+<tr><td>Buscas que você não esperava</td><td>O público usa outras palavras</td><td>Adotar as palavras dele na página</td></tr>
+<tr><td>Zero impressão</td><td>Não está indexado ou não é relevante para nada</td><td>Voltar para a Parte 1</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>O caso mais comum e mais fácil de resolver:</strong> a página aparece bem para uma busca, mas com um título que não responde àquela busca. Trocar o <code>&lt;title&gt;</code> é uma linha de código e costuma ser a mudança de maior retorno em SEO de site pequeno.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s3">
+<div class="parte__cabeca"><span class="parte__num">PARTE 3</span><h2>SEO na prática</h2></div>
+<p class="parte__resumo">O que realmente move ponteiro num site pequeno, e o que é mito repetido.</p>
+
+<article class="topico" id="t-tr-intencao" data-marca="novo">
+<div class="topico__cabeca"><h3>Intenção de busca</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O conceito mais útil de SEO, e o mais ignorado. Duas buscas com as mesmas palavras podem querer coisas opostas, e a página precisa corresponder ao que a pessoa quer <em>naquele momento</em>.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Intenção</th><th>Exemplo de busca</th><th>A página certa</th></tr></thead>
+<tbody>
+<tr><td>Informacional</td><td>"quanto custa reformar um apartamento"</td><td>Conteúdo que explica, não página de venda</td></tr>
+<tr><td>Comercial</td><td>"melhor arquiteta campo grande"</td><td>Comparação, prova, portfólio</td></tr>
+<tr><td>Transacional</td><td>"arquiteta campo grande orçamento"</td><td>A landing page, com CTA visível</td></tr>
+<tr><td>Navegacional</td><td>"vanessa carvalho arquitetura"</td><td>A home. Já sabe quem procura</td></tr>
+</tbody></table></div>
+<p>A consequência prática: uma landing page de venda dificilmente ranqueia para busca informacional, e forçar isso não funciona. Se o cliente quer aparecer para "quanto custa reformar", o caminho é conteúdo — um artigo que responda —, não otimizar a LP.</p>
+</div>
+</article>
+
+<article class="topico" id="t-tr-palavras" data-marca="novo">
+<div class="topico__cabeca"><h3>Escolher palavras para negócio local</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Negócio local não compete por termo genérico, e não deveria tentar. "Arquiteta" tem volume nacional e concorrência impossível; "arquiteta de interiores em Campo Grande" tem volume pequeno e intenção altíssima.</p>
+<h4>Como levantar sem ferramenta paga</h4>
+<ul>
+<li><strong>O autocompletar do Google.</strong> Digite o serviço e a cidade e veja o que ele sugere — são buscas reais.</li>
+<li><strong>"Pessoas também perguntam".</strong> Caixa de perguntas no meio dos resultados. Cada uma é uma dúvida real do público.</li>
+<li><strong>Buscas relacionadas</strong>, no rodapé da página de resultados.</li>
+<li><strong>O Search Console do próprio cliente</strong>, depois de um mês no ar. É a fonte mais confiável, porque são as buscas que já trazem gente.</li>
+<li><strong>O WhatsApp do cliente.</strong> As palavras que as pessoas usam ao perguntar são as mesmas que usam ao buscar.</li>
+</ul>
+<div class="nota"><strong>Regra prática:</strong> uma página, um tema principal. Tentar ranquear a mesma página para "reforma", "decoração", "projeto" e "marcenaria" costuma resultar em não ranquear para nenhum. Se são quatro serviços distintos, são quatro páginas.</div>
+</div>
+</article>
+
+<article class="topico" id="t-tr-onpage" data-marca="revisao">
+<div class="topico__cabeca"><h3>On-page: o que importa, em ordem</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Elemento</th><th>Peso</th><th>Como fazer</th></tr></thead>
+<tbody>
+<tr><td><code>&lt;title&gt;</code></td><td>Alto</td><td>Serviço + diferencial + cidade. Até ~60 caracteres</td></tr>
+<tr><td>Conteúdo da página</td><td>Alto</td><td>Responder de verdade à busca, com as palavras do público</td></tr>
+<tr><td><code>&lt;h1&gt;</code></td><td>Médio</td><td>Um por página, coerente com o title</td></tr>
+<tr><td>URL</td><td>Médio</td><td>Curta e legível: <code>/reforma-de-apartamento</code></td></tr>
+<tr><td>Meta description</td><td>Indireto</td><td>Não ranqueia, mas decide o clique. Escreva como anúncio</td></tr>
+<tr><td>Dados estruturados</td><td>Médio no local</td><td>JSON-LD de <code>LocalBusiness</code> com endereço e telefone</td></tr>
+<tr><td><code>alt</code> das imagens</td><td>Baixo, mas soma</td><td>Descritivo e honesto</td></tr>
+<tr><td>Velocidade e mobile</td><td>Alto como piso</td><td>Não te faz subir, mas te derruba se for ruim</td></tr>
+</tbody></table></div>
+<div class="nota nota--alerta"><strong>Dois mitos que ainda circulam:</strong> repetir a palavra-chave várias vezes no texto ("keyword stuffing") hoje atrapalha em vez de ajudar; e a meta keywords não é usada por nenhum buscador relevante há mais de uma década.</div>
+</div>
+</article>
+
+<article class="topico" id="t-tr-conteudo" data-marca="novo">
+<div class="topico__cabeca"><h3>Por que uma LP sozinha ranqueia pouco</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Vale ser honesto com o cliente sobre isso, de preferência antes de fechar. Uma landing page única é excelente para converter quem já chegou, e fraca para <em>trazer</em> gente pela busca orgânica — ela responde a uma intenção só, tem pouco conteúdo e poucos motivos para outros sites a linkarem.</p>
+<p>Os caminhos para trazer tráfego, em ordem de esforço:</p>
+<ol>
+<li><strong>Perfil da Empresa no Google.</strong> Para negócio local, quase sempre traz mais contato que o site. É a Parte 4.</li>
+<li><strong>Páginas por serviço.</strong> Uma para cada serviço principal, cada uma respondendo a uma busca diferente.</li>
+<li><strong>Conteúdo que responde dúvida.</strong> Um punhado de artigos bons sobre as perguntas reais do público.</li>
+<li><strong>Anúncio.</strong> Traz tráfego imediato enquanto o orgânico não existe — e custa dinheiro todo mês.</li>
+</ol>
+<div class="nota"><strong>Como isso vira proposta:</strong> "a landing page converte quem chega; para chegar gente, existem três caminhos". Isso posiciona você como quem entende o problema inteiro — e abre trabalho recorrente em vez de projeto único.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s4">
+<div class="parte__cabeca"><span class="parte__num">PARTE 4</span><h2>SEO local</h2></div>
+<p class="parte__resumo">Para cliente de serviço local, esta parte vale mais que todo o resto da trilha junta — e quase nenhum desenvolvedor fala sobre ela.</p>
+
+<article class="topico" id="t-tr-perfil" data-marca="novo">
+<div class="topico__cabeca"><h3>O Perfil da Empresa no Google</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Quando alguém busca um serviço com intenção local, o bloco de mapa com três empresas aparece acima dos resultados normais. Esse bloco vem do Perfil da Empresa — o antigo Google Meu Negócio — e não do site.</p>
+<p>Ou seja: é possível um cliente receber contato todo dia sem ter site nenhum, e é possível ter um site lindo e não aparecer ali. Para negócio local, o perfil costuma ser o ativo mais importante.</p>
+<h4>O que faz diferença no perfil</h4>
+<ul>
+<li><strong>Categoria principal correta.</strong> A escolha da categoria é provavelmente a decisão mais determinante, e muita gente escolhe errado.</li>
+<li><strong>Endereço e área de atendimento</strong> coerentes com onde ele realmente atende.</li>
+<li><strong>Avaliações</strong> — quantidade, nota e, principalmente, constância. Vinte avaliações ao longo do ano valem mais que vinte no mesmo dia.</li>
+<li><strong>Respostas às avaliações</strong>, inclusive às negativas. Mostra que o negócio está vivo.</li>
+<li><strong>Fotos reais e recentes</strong>, adicionadas com frequência.</li>
+<li><strong>Horário correto</strong>, incluindo feriados.</li>
+<li><strong>Serviços e descrição</strong> preenchidos com as palavras que o público usa.</li>
+</ul>
+<div class="nota"><strong>O que isso significa para você:</strong> configurar e organizar o perfil do cliente é um serviço vendável, leva uma tarde, e costuma dar mais resultado que qualquer ajuste no site. É também a melhor porta de entrada para um plano mensal.</div>
+</div>
+</article>
+
+<article class="topico" id="t-tr-nap" data-marca="novo">
+<div class="topico__cabeca"><h3>Consistência de nome, endereço e telefone</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O buscador cruza informações de várias fontes para confiar que um negócio existe e é aquele mesmo. Se o telefone no site é diferente do perfil, e o endereço aparece escrito de três jeitos em diretórios diferentes, essa confiança cai.</p>
+<p>A sigla que se usa é NAP — nome, endereço, telefone. A regra é simples: <strong>exatamente igual em todo lugar</strong>, até na abreviação da rua.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">o mesmo dado, marcado no site</span><button class="copiar">copiar</button></div><pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Vanessa Carvalho Arquitetura",
+  "telephone": "+556799999-9999",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Rua Exemplo, 123",
+    "addressLocality": "Campo Grande",
+    "addressRegion": "MS",
+    "postalCode": "79000-000"
+  },
+  "areaServed": "Campo Grande e região",
+  "url": "https://vanessacarvalho.com.br"
+}
+&lt;/script&gt;</code></pre></div>
+<p>Esse bloco no site, batendo exatamente com o perfil, é o sinal mais direto que você pode dar — e é HTML puro, sem dependência nenhuma.</p>
+</div>
+</article>
+
+<article class="topico" id="t-tr-avaliacoes" data-marca="novo">
+<div class="topico__cabeca"><h3>Avaliações: como pedir sem constranger</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Avaliação é o item que mais move o perfil e o que mais gera desconforto em pedir. Três coisas resolvem quase tudo.</p>
+<p><strong>Pedir na hora certa.</strong> O melhor momento é logo depois da entrega, quando o cliente está satisfeito — não semanas depois.</p>
+<p><strong>Pedir com um link direto.</strong> O Google gera um link curto de avaliação. Mandar "clique aqui e deixe sua avaliação" converte muito mais que "procura a gente no Google e avalia".</p>
+<p><strong>Tornar rotina.</strong> Uma mensagem padrão enviada a todo cliente ao finalizar. Não depende de lembrar nem de coragem.</p>
+<div class="nota nota--alerta"><strong>O que não fazer:</strong> comprar avaliação, pedir para amigos que não foram clientes, ou oferecer desconto em troca. Além de violar as regras da plataforma e arriscar o perfil, avaliação falsa é reconhecível — e o dano de ser pego é maior que o ganho.</div>
+<p>Sobre avaliação negativa: responder com calma e oferecer solução costuma impressionar mais quem lê do que uma sequência de notas cinco. Quem está decidindo lê justamente as negativas para ver como o negócio reage.</p>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s5">
+<div class="parte__cabeca"><span class="parte__num">PARTE 5</span><h2>Analytics</h2></div>
+<p class="parte__resumo">Medir o que acontece dentro do site — e resistir à tentação de medir tudo.</p>
+
+<article class="topico" id="t-tr-ga4" data-marca="novo">
+<div class="topico__cabeca"><h3>GA4 na prática</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>O Google Analytics 4 funciona por <strong>eventos</strong>: tudo é um evento, inclusive visualizar uma página. Isso confunde quem vem da versão antiga, mas simplifica o que interessa — marcar a conversão.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">a tag, no head</span><button class="copiar">copiar</button></div><pre><code>&lt;script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"&gt;&lt;/script&gt;
+&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXX');
+&lt;/script&gt;</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">o evento que importa</span><button class="copiar">copiar</button></div><pre><code>// marca todo clique que leva ao WhatsApp, e de onde saiu
+document.querySelectorAll('[href*="wa.me"]').forEach(function (link) {
+  link.addEventListener('click', function () {
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'clique_whatsapp', {
+      origem: link.dataset.origem || 'sem-origem'
+    });
+  });
+});</code></pre></div>
+<p>Com <code>data-origem="hero"</code>, <code>data-origem="flutuante"</code> e <code>data-origem="conversao"</code> nos links, você descobre qual parte da página converte — informação que muda a próxima versão da página.</p>
+<div class="nota">No painel do GA4, esse evento precisa ser marcado como <strong>evento principal</strong> (antiga "conversão") para aparecer nos relatórios certos. Sem esse passo, ele fica perdido no meio dos outros.</div>
+</div>
+</article>
+
+<article class="topico" id="t-tr-oquever" data-marca="novo">
+<div class="topico__cabeca"><h3>O que olhar e o que ignorar</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Olhe</th><th>Ignore</th></tr></thead>
+<tbody>
+<tr><td>Eventos de conversão</td><td>Tempo médio na página</td></tr>
+<tr><td>Origem do tráfego</td><td>Taxa de rejeição, isolada</td></tr>
+<tr><td>Celular vs desktop</td><td>Mapa de calor sem volume</td></tr>
+<tr><td>Páginas mais vistas</td><td>Visitas totais como métrica de sucesso</td></tr>
+<tr><td>Buscas do Search Console</td><td>Qualquer número com menos de algumas dezenas de casos</td></tr>
+</tbody></table></div>
+<p>A coluna da direita não é inútil — é ruidosa em volume pequeno. Com trinta visitas por semana, "tempo médio" é definido por duas pessoas que deixaram a aba aberta.</p>
+<div class="nota"><strong>Alternativas mais leves:</strong> Plausible e Umami fazem o essencial, carregam bem menos, não usam cookie e simplificam a conversa de LGPD. Para landing page de cliente pequeno, costumam ser escolha melhor que o GA4 — que existe principalmente para integrar com anúncios.</div>
+</div>
+</article>
+
+<article class="topico" id="t-tr-lgpd" data-marca="novo">
+<div class="topico__cabeca"><h3>Consentimento e LGPD</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Analytics com cookie e pixel de anúncio coletam dado pessoal. Isso exige aviso claro e base legal, e a responsabilidade formal é do cliente — mas quem instalou a tag foi você.</p>
+<h4>O caminho limpo</h4>
+<ul>
+<li>Não instalar rastreamento que o cliente não pediu e não entende.</li>
+<li>Se instalar, deixar aviso de cookies que <strong>realmente</strong> bloqueia antes do aceite — banner decorativo que carrega tudo assim mesmo é pior que nada, porque cria aparência de conformidade.</li>
+<li>Ter política de privacidade acessível, ainda que simples.</li>
+<li>Preferir ferramenta sem cookie quando a necessidade é só saber quantas visitas chegaram.</li>
+</ul>
+<div class="nota nota--alerta">Isto é orientação prática, não parecer jurídico. Para caso concreto — principalmente em saúde, jurídico ou qualquer setor que trate dado sensível — a palavra final é de advogado.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s6">
+<div class="parte__cabeca"><span class="parte__num">PARTE 6</span><h2>Anúncios, o básico</h2></div>
+<p class="parte__resumo">Você não precisa gerenciar campanha, mas precisa saber conversar sobre isso — porque a página que você entrega vai receber esse tráfego.</p>
+
+<article class="topico" id="t-tr-anuncio" data-marca="novo">
+<div class="topico__cabeca"><h3>Busca ou rede social</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th></th><th>Google Ads (busca)</th><th>Meta Ads (Instagram e Facebook)</th></tr></thead>
+<tbody>
+<tr><td>Estado da pessoa</td><td>Já está procurando</td><td>Não estava procurando nada</td></tr>
+<tr><td>Temperatura</td><td>Morno a quente</td><td>Frio</td></tr>
+<tr><td>Página ideal</td><td>Direta, com CTA visível logo</td><td>Mais longa, começando pelo problema</td></tr>
+<tr><td>Custo por clique</td><td>Maior</td><td>Menor</td></tr>
+<tr><td>Bom para</td><td>Serviço com demanda existente</td><td>Serviço que precisa ser despertado</td></tr>
+</tbody></table></div>
+<p>Essa distinção é o que liga anúncio e página. Usar a mesma LP nos dois canais é o erro mais comum — e o motivo mais frequente de "investi em anúncio e não veio nada".</p>
+<div class="nota"><strong>A regra da correspondência:</strong> a promessa do anúncio precisa aparecer na primeira tela da página, com as mesmas palavras. Se o anúncio diz "reforma com cronograma fechado" e a página abre com "transformamos ambientes", a pessoa sente que caiu no lugar errado e volta.</div>
+</div>
+</article>
+
+<article class="topico" id="t-tr-pixel" data-marca="novo">
+<div class="topico__cabeca"><h3>O que o cliente precisa entender</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Três coisas evitam frustração e cobrança injusta em cima de você.</p>
+<p><strong>Anúncio é aluguel, não compra.</strong> No dia que parar de pagar, o tráfego some. Diferente do orgânico e do perfil no Google, que continuam trabalhando.</p>
+<p><strong>Precisa de volume mínimo para funcionar.</strong> Campanha com verba muito baixa não consegue aprender nem gerar dado suficiente para otimizar.</p>
+<p><strong>O gargalo raramente é a página.</strong> Se o anúncio traz público errado, nenhuma página converte. Separar as métricas — quantos cliques, quantas conversas, quantos fechamentos — mostra onde está o problema.</p>
+<div class="nota nota--alerta"><strong>Sobre o pixel:</strong> se o cliente vai anunciar, o pixel precisa estar instalado <em>antes</em> do início da campanha, e o evento de conversão precisa disparar no clique do WhatsApp. Sem isso, a plataforma não tem como otimizar, e o dinheiro é gasto às cegas. É item de checklist de lançamento, não de depois.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s7">
+<div class="parte__cabeca"><span class="parte__num">PARTE 7</span><h2>O sistema de visibilidade</h2></div>
+<p class="parte__resumo">Juntando tudo: o que fazer, em que ordem, nos primeiros noventa dias de um cliente novo.</p>
+
+<article class="topico" id="t-tr-90dias" data-marca="novo">
+<div class="topico__cabeca"><h3>Os primeiros noventa dias</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">roteiro</span><button class="copiar">copiar</button></div><pre><code>SEMANA 1  — fundação
+  [ ] site no ar, HTTPS, indexação liberada
+  [ ] Search Console verificado, sitemap enviado
+  [ ] Perfil da Empresa criado ou reivindicado
+  [ ] categoria principal escolhida com cuidado
+  [ ] NAP igual no site e no perfil
+  [ ] analytics instalado, evento de WhatsApp marcado
+
+MÊS 1     — primeiros sinais
+  [ ] 5 fotos reais no perfil
+  [ ] rotina de pedir avaliação implantada
+  [ ] conferir no Search Console se indexou
+  [ ] anotar a linha de base: contatos por semana
+
+MÊS 2     — ajuste
+  [ ] ler as buscas reais no Search Console
+  [ ] corrigir title e description conforme elas
+  [ ] responder dúvidas repetidas na própria página
+  [ ] primeiras avaliações respondidas
+
+MÊS 3     — expansão
+  [ ] avaliar se cabe página por serviço
+  [ ] avaliar se cabe conteúdo para busca informacional
+  [ ] revisar o que converteu e o que não
+  [ ] decidir com o cliente: orgânico, anúncio, ou os dois</code></pre></div>
+<div class="nota"><strong>Por que isso é bom comercialmente:</strong> esse roteiro transforma "fiz um site" em acompanhamento de três meses com entregas visíveis. É o argumento mais natural para mensalidade — e cada item da lista é pequeno, então o custo do seu lado é baixo.</div>
+</div>
+</article>
+
+<article class="topico" id="t-tr-expectativa" data-marca="novo">
+<div class="topico__cabeca"><h3>Alinhar expectativa antes de prometer</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>SEO orgânico é lento. Perfil no Google é mais rápido. Anúncio é imediato e pago. Dizer isso na proposta evita a conversa ruim no mês seguinte.</p>
+<p>E uma honestidade que protege você: <strong>ninguém garante primeira posição</strong>. Quem garante está vendendo o que não controla. O que se garante é o trabalho — site indexável, perfil bem configurado, conteúdo correspondente à busca, medição instalada — e isso é bastante.</p>
+<div class="nota"><strong>Frase que funciona na proposta:</strong> "não vendo posição no Google, porque ninguém controla isso. Entrego o site pronto para ser encontrado, o perfil configurado e a medição funcionando — e a gente acompanha o resultado real por três meses."</div>
+</div>
+</article>
+</section>
+
+</main>
+</div>
+<footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<script src="app.js"></script>
+</body>
+</html>

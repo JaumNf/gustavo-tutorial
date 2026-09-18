@@ -20,25 +20,40 @@
 <a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
 <span style="margin-left:auto"></span><button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
 </div>
-<nav class="trilhas" aria-label="Trilhas">
-<div class="trilhas__interno">
-<a href="index.html" class="trilha is-ativa">Início</a>
-<a href="html-puro.html" class="trilha">HTML puro</a>
-<a href="frameworks.html" class="trilha">Frameworks</a>
-<a href="back-end.html" class="trilha">Back-end</a>
-<a href="negocio.html" class="trilha">Negócio</a>
-<a href="ia.html" class="trilha">IA</a>
+<nav class="navmenu" aria-label="Trilhas">
+<details class="navmenu__caixa" id="navmenu">
+<summary class="navmenu__botao">Trilhas<span aria-hidden="true">&#9662;</span></summary>
+<div class="navmenu__painel">
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Construir</p>
+<a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Quando precisa de servidor</span></a>
 </div>
-</nav>
-</header>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Vender</p>
+<a href="landing-pages.html"><strong>Landing pages</strong><span>A estratégia da página</span></a>
+<a href="trafego.html"><strong>Tráfego</strong><span>Ser encontrado no Google</span></a>
+<a href="negocio.html"><strong>Negócio</strong><span>Preço, escopo e contrato</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Método</p>
+<a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
+<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+</div>
+</details>
+
+</nav></header>
 <main class="home">
 <section class="home__hero">
 <h1>Gustavo Tutorial</h1>
 <p>Material de estudo de desenvolvimento web, escrito em português e organizado por trilhas. Cada tópico traz o conceito, um exemplo de código real e a decisão prática por trás dele — nada de exemplo genérico que não se usa em projeto de verdade.</p>
 <div class="home__nums">
-<span><strong>5</strong> trilhas</span>
-<span><strong>23</strong> partes</span>
-<span><strong>123</strong> tópicos</span>
+<span><strong>8</strong> trilhas</span>
+<span><strong>52</strong> partes</span>
+<span><strong>220</strong> tópicos</span>
 <span>atualizado em setembro de 2026</span>
 </div>
 </section>
@@ -53,13 +68,37 @@
 <p>HTML, CSS e JavaScript sem framework nenhum. Começa em o que é front-end e termina com o site no ar, com domínio e HTTPS. É a trilha que dá conta de um projeto inteiro sozinha.</p>
 <span class="card-trilha__pe">12 partes · 66 tópicos →</span>
 </a>
+<a class="card-trilha" href="landing-pages.html">
+<div class="card-trilha__topo">
+<h2>Landing pages</h2>
+<span class="tag tag--novo">Trilha completa</span>
+</div>
+<p>A estratégia por trás da página: como extrair a informação do cliente, levantar as objeções reais, montar a arquitetura de seções, e o que colocar no lugar da prova social quando ela não existe — ou é proibida pelo conselho da categoria.</p>
+<span class="card-trilha__pe">8 partes · 28 tópicos →</span>
+</a>
+<a class="card-trilha" href="trafego.html">
+<div class="card-trilha__topo">
+<h2>Tráfego</h2>
+<span class="tag tag--novo">Trilha completa</span>
+</div>
+<p>Como a busca realmente funciona, Search Console na prática, e SEO local — o Perfil da Empresa no Google, que para cliente local costuma trazer mais contato que o site inteiro. Mais GA4 com evento de conversão e o básico de anúncios.</p>
+<span class="card-trilha__pe">7 partes · 19 tópicos →</span>
+</a>
+<a class="card-trilha" href="movimento.html">
+<div class="card-trilha__topo">
+<h2>Movimento</h2>
+<span class="tag tag--novo">Trilha completa</span>
+</div>
+<p>Animação que parece profissional é questão de tempo, curva e contenção — não de biblioteca. O que o CSS moderno já resolve sozinho, Motion e GSAP na prática, um catálogo para copiar em CSS, Motion e GSAP lado a lado, e um laboratório com doze efeitos rodando ao vivo na própria página.</p>
+<span class="card-trilha__pe">10 partes · 40 tópicos · 12 exemplos rodando →</span>
+</a>
 <a class="card-trilha" href="frameworks.html">
 <div class="card-trilha__topo">
 <h2>Frameworks</h2>
-<span class="tag tag--revisao">Em construção</span>
+<span class="tag tag--novo">Trilha completa</span>
 </div>
-<p>React, Next.js, Vue, Svelte, Tailwind e Vite. O mesmo card de produto escrito de três formas diferentes, lado a lado, com a tabela que mostra o que cada abordagem cobra em troca.</p>
-<span class="card-trilha__pe">1 parte · 4 tópicos →</span>
+<p>Todos os formatos além do HTML puro: React e Tailwind lado a lado com vanilla, geradores de site estático como Astro, interatividade leve com Alpine, e os construtores visuais com que você compete no orçamento do cliente.</p>
+<span class="card-trilha__pe">4 partes · 13 tópicos →</span>
 </a>
 <a class="card-trilha" href="back-end.html">
 <div class="card-trilha__topo">
@@ -83,12 +122,12 @@
 <span class="tag tag--novo">Trilha completa</span>
 </div>
 <p>Como passar informação para uma IA produzir o que você quer: as formas de referência, a anatomia do brief, como fatiar o trabalho, o feedback que converge em vez de oscilar, os riscos de entregar isso a um cliente, e modelos de comando prontos.</p>
-<span class="card-trilha__pe">8 partes · 43 tópicos →</span>
+<span class="card-trilha__pe">9 partes · 44 tópicos · com gerador →</span>
 </a>
 </div>
 
 <div class="home__nota">
-<strong>Por onde começar:</strong> se você está aprendendo agora, vá pela trilha <a href="html-puro.html">HTML puro</a> na ordem das partes — ela é autossuficiente e leva do zero a um site publicado. As outras três partem dela e existem para mostrar o que há fora desse caminho.
+<strong>Por onde começar:</strong> se você está aprendendo agora, vá pela trilha <a href="html-puro.html">HTML puro</a> na ordem das partes — ela é autossuficiente e leva do zero a um site publicado. Depois dela, <a href="landing-pages.html">Landing pages</a> e <a href="trafego.html">Tráfego</a> são as que mais mudam resultado de cliente. A de <a href="ia.html">IA</a> é sobre o método de trabalho em si, e traz um gerador de comando pronto para usar.
 </div>
 
 <div class="home__nota" style="background:transparent;border-left-color:var(--line)">

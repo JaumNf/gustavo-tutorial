@@ -25,17 +25,32 @@
 </div>
 <button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
 </div>
-<nav class="trilhas" aria-label="Trilhas">
-<div class="trilhas__interno">
-<a href="index.html" class="trilha">Início</a>
-<a href="html-puro.html" class="trilha">HTML puro</a>
-<a href="frameworks.html" class="trilha">Frameworks</a>
-<a href="back-end.html" class="trilha">Back-end</a>
-<a href="negocio.html" class="trilha">Negócio</a>
-<a href="ia.html" class="trilha is-ativa">IA</a>
+<nav class="navmenu" aria-label="Trilhas">
+<details class="navmenu__caixa" id="navmenu">
+<summary class="navmenu__botao">Trilhas<span aria-hidden="true">&#9662;</span></summary>
+<div class="navmenu__painel">
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Construir</p>
+<a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Quando precisa de servidor</span></a>
 </div>
-</nav>
-</header>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Vender</p>
+<a href="landing-pages.html"><strong>Landing pages</strong><span>A estratégia da página</span></a>
+<a href="trafego.html"><strong>Tráfego</strong><span>Ser encontrado no Google</span></a>
+<a href="negocio.html"><strong>Negócio</strong><span>Preço, escopo e contrato</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Método</p>
+<a href="ia.html" class="is-atual"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
+<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+</div>
+</details>
+<span class="navmenu__aqui">Trabalhando com IA</span>
+</nav></header>
 <div class="palco">
 <nav class="sumario" id="sumario" aria-label="Sumário">
 <button class="sumario__abrir" id="sumario-abrir" aria-expanded="false" aria-controls="sumario-lista"><span>Sumário</span><span aria-hidden="true">&#9662;</span></button>
@@ -108,6 +123,10 @@
 <li><a href="#t-ia-modelo-revisao">5 · Revisão final antes de entregar</a></li>
 <li><a href="#t-ia-modelo-contexto">6 · Recomeçar conversa e arquivo de projeto</a></li>
 </ol>
+<a class="sumario__parte" href="#s9">9 · Gerador de comando</a>
+<ol>
+<li><a href="#t-ia-gerador">Monte seu comando</a></li>
+</ol>
 </div>
 </nav>
 <main class="leitura">
@@ -117,7 +136,7 @@
 <div class="legenda">
 <span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
 <span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
-<span>8 partes · 43 tópicos</span>
+<span>9 partes · 44 tópicos</span>
 </div>
 </section>
 <p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
@@ -769,9 +788,51 @@ hero · prova · serviços · processo · conversão · rodapé
 </article>
 </section>
 
+
+<section class="parte" id="s9">
+<div class="parte__cabeca"><span class="parte__num">PARTE 9</span><h2>Gerador de comando</h2></div>
+<p class="parte__resumo">A ferramenta que aplica tudo que está acima. Preencha os campos, o comando se monta ao lado — e o painel aponta o que está fraco antes de você mandar.</p>
+
+<article class="topico" id="t-ia-gerador" data-marca="novo">
+<div class="topico__cabeca"><h3>Monte seu comando</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo ferramenta">
+
+<div class="ger__tipos" id="ger-tipos" role="group" aria-label="Tipo de comando">
+<button class="ger__tipo" data-tipo="lp" aria-pressed="true">Landing page</button>
+<button class="ger__tipo" data-tipo="secao" aria-pressed="false">Nova seção</button>
+<button class="ger__tipo" data-tipo="feedback" aria-pressed="false">Feedback</button>
+<button class="ger__tipo" data-tipo="revisao" aria-pressed="false">Revisão final</button>
+<button class="ger__tipo" data-tipo="recomecar" aria-pressed="false">Recomeçar</button>
+</div>
+
+<div class="ger">
+<div class="ger__form" id="ger-form"></div>
+
+<div class="ger__lado">
+<div class="ger__saida-caixa">
+<div class="ger__saida-barra">
+<span class="ger__saida-rot">Comando</span>
+<button class="copiar" id="ger-copiar" type="button">copiar</button>
+</div>
+<pre class="ger__saida"><code id="ger-saida"></code></pre>
+</div>
+
+<div class="ger__diag" id="ger-diag"></div>
+
+<button class="ger__limpar" id="ger-limpar" type="button">Limpar campos</button>
+</div>
+</div>
+
+<p class="ger__nota">Nada do que você digita sai do seu navegador — o gerador é HTML e JavaScript puros, sem servidor. Os campos ficam salvos localmente, só para você não perder o preenchimento ao fechar a aba.</p>
+
+</div>
+</article>
+</section>
+
 </main>
 </div>
 <footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
 <script src="app.js"></script>
+<script src="gerador.js"></script>
 </body>
 </html>

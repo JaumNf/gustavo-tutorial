@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Movimento — Gustavo Tutorial</title>
+<meta name="description" content="Princípios de animação, o que o CSS moderno já resolve sozinho, quando vale usar biblioteca, performance, acessibilidade e receitas prontas.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Movimento — Gustavo Tutorial">
+<meta property="og:description" content="Princípios de animação, o que o CSS moderno já resolve sozinho, quando vale usar biblioteca, performance, acessibilidade e receitas prontas.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="topo">
+<div class="topo__interno">
+<a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
+<div class="filtros" role="group" aria-label="Filtrar tópicos">
+<button class="filtro" data-filtro="tudo" aria-pressed="true">Tudo</button>
+<button class="filtro" data-filtro="revisao" aria-pressed="false">Revisão</button>
+<button class="filtro" data-filtro="novo" aria-pressed="false">Novo</button>
+</div>
+<button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+</div>
+<nav class="navmenu" aria-label="Trilhas">
+<details class="navmenu__caixa" id="navmenu">
+<summary class="navmenu__botao">Trilhas<span aria-hidden="true">&#9662;</span></summary>
+<div class="navmenu__painel">
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Construir</p>
+<a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="movimento.html" class="is-atual"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Quando precisa de servidor</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Vender</p>
+<a href="landing-pages.html"><strong>Landing pages</strong><span>A estratégia da página</span></a>
+<a href="trafego.html"><strong>Tráfego</strong><span>Ser encontrado no Google</span></a>
+<a href="negocio.html"><strong>Negócio</strong><span>Preço, escopo e contrato</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Método</p>
+<a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
+<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+</div>
+</details>
+<span class="navmenu__aqui">Movimento</span>
+</nav></header>
+<div class="palco">
+<nav class="sumario" id="sumario" aria-label="Sumário">
+<button class="sumario__abrir" id="sumario-abrir" aria-expanded="false" aria-controls="sumario-lista"><span>Sumário</span><span aria-hidden="true">&#9662;</span></button>
+<div class="sumario__lista" id="sumario-lista">
+<p class="sumario__titulo">Movimento</p>
+<a class="sumario__parte" href="#s1">1 · Princípios</a>
+<ol>
+<li><a href="#t-mv-porque">Por que animar</a></li>
+<li><a href="#t-mv-tempo">Duração: as faixas que funcionam</a></li>
+<li><a href="#t-mv-curva">Curva e mola</a></li>
+<li><a href="#t-mv-stagger">Encadeamento</a></li>
+<li><a href="#t-mv-contencao">A contenção é o que parece caro</a></li>
+</ol>
+<a class="sumario__parte" href="#s2">2 · O que o CSS já resolve</a>
+<ol>
+<li><a href="#t-mv-transicao">Transição e keyframes</a></li>
+<li><a href="#t-mv-scroll">Animação por rolagem, sem JavaScript</a></li>
+<li><a href="#t-mv-entrada-saida">Animar entrada e saída de elementos</a></li>
+<li><a href="#t-mv-view-transitions">View Transitions</a></li>
+</ol>
+<a class="sumario__parte" href="#s3">3 · Ferramentas de JavaScript</a>
+<ol>
+<li><a href="#t-mv-quando-lib">Quando vale sair do CSS</a></li>
+<li><a href="#t-mv-libs">As bibliotecas, em ordem de peso</a></li>
+<li><a href="#t-mv-smooth">Rolagem suave: cuidado</a></li>
+</ol>
+<a class="sumario__parte" href="#s4">4 · Performance</a>
+<ol>
+<li><a href="#t-mv-duas">Anime duas propriedades</a></li>
+<li><a href="#t-mv-testar">Testar onde dói</a></li>
+</ol>
+<a class="sumario__parte" href="#s5">5 · Acessibilidade e conversão</a>
+<ol>
+<li><a href="#t-mv-reduced">prefers-reduced-motion não é opcional</a></li>
+<li><a href="#t-mv-conversao">Quando animação derruba conversão</a></li>
+</ol>
+<a class="sumario__parte" href="#s6">6 · Receitas</a>
+<ol>
+<li><a href="#t-mv-receitas">Seis efeitos prontos</a></li>
+</ol>
+<a class="sumario__parte" href="#s7">7 · Motion na prática</a>
+<ol>
+<li><a href="#t-mt-oque">O que é e quando instalar</a></li>
+<li><a href="#t-mt-animate">animate — a função central</a></li>
+<li><a href="#t-mt-mola">Mola de verdade</a></li>
+<li><a href="#t-mt-inview">inView e stagger</a></li>
+<li><a href="#t-mt-scroll">scroll — animação atrelada à rolagem</a></li>
+</ol>
+<a class="sumario__parte" href="#s8">8 · GSAP na prática</a>
+<ol>
+<li><a href="#t-gs-oque">O que é, e a mudança de licença</a></li>
+<li><a href="#t-gs-basico">to, from e fromTo</a></li>
+<li><a href="#t-gs-timeline">Timeline — o verdadeiro diferencial</a></li>
+<li><a href="#t-gs-scrolltrigger">ScrollTrigger</a></li>
+<li><a href="#t-gs-escolher">Motion ou GSAP</a></li>
+</ol>
+<a class="sumario__parte" href="#s9">9 · Catálogo para copiar</a>
+<ol>
+<li><a href="#t-cat-base">A base que todos usam</a></li>
+<li><a href="#t-cat-reveal">1 · Reveal ao rolar</a></li>
+<li><a href="#t-cat-stagger">2 · Lista entrando em sequência</a></li>
+<li><a href="#t-cat-botao">3 · Botão com retorno físico</a></li>
+<li><a href="#t-cat-contador">4 · Contador que anima ao aparecer</a></li>
+<li><a href="#t-cat-narrativa">5 · Seção presa contando uma história</a></li>
+<li><a href="#t-cat-transicao">6 · Transição entre páginas</a></li>
+<li><a href="#t-cat-decisao">A tabela de decisão</a></li>
+</ol>
+<a class="sumario__parte" href="#s10">10 · Laboratório: os efeitos rodando</a>
+<ol>
+<li><a href="#t-lab-como">Como ler esta parte</a></li>
+<li><a href="#t-lab-entradas">1 · Entradas</a></li>
+<li><a href="#t-lab-toque">2 · Reação ao toque</a></li>
+<li><a href="#t-lab-rolagem">3 · Ligado à rolagem</a></li>
+<li><a href="#t-lab-detalhes">4 · Detalhes que vendem</a></li>
+</ol>
+</div>
+</nav>
+<main class="leitura">
+<section class="abertura">
+<h1>Movimento</h1>
+<p class="abertura__lead">Animação boa quase nunca é questão de biblioteca — é questão de tempo, curva e contenção. Esta trilha cobre os princípios, o que o CSS moderno já faz sem JavaScript, quando vale mesmo instalar algo, e por que movimento demais derruba conversão.</p>
+<div class="legenda">
+<span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
+<span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
+<span>10 partes · 40 tópicos</span>
+</div>
+</section>
+<p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
+<section class="parte" id="s1">
+<div class="parte__cabeca"><span class="parte__num">PARTE 1</span><h2>Princípios</h2></div>
+<p class="parte__resumo">O que separa animação amadora de profissional quase nunca é a biblioteca. É tempo, curva e contenção.</p>
+
+<article class="topico" id="t-mv-porque" data-marca="novo">
+<div class="topico__cabeca"><h3>Por que animar</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Animação sem função vira ruído. Antes de qualquer efeito, a pergunta é qual destes quatro papéis ele cumpre.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Papel</th><th>O que resolve</th><th>Exemplo</th></tr></thead>
+<tbody>
+<tr><td><strong>Retorno</strong></td><td>Confirmar que a ação foi registrada</td><td>Botão que afunda ao clique</td></tr>
+<tr><td><strong>Continuidade</strong></td><td>Mostrar de onde veio e para onde foi</td><td>Card que cresce e vira a página inteira</td></tr>
+<tr><td><strong>Atenção</strong></td><td>Dizer o que olhar primeiro</td><td>Entrada em sequência de uma lista</td></tr>
+<tr><td><strong>Personalidade</strong></td><td>Dar caráter à marca</td><td>Uma mola mais solta, um tempo mais lento</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>O teste:</strong> se você desligar a animação e nada piorar de entendimento, ela existe só por enfeite — e aí precisa ser discreta o suficiente para não custar atenção nem desempenho.</div>
+</div>
+</article>
+
+<article class="topico" id="t-mv-tempo" data-marca="novo">
+<div class="topico__cabeca"><h3>Duração: as faixas que funcionam</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Tempo errado é o erro mais comum e o mais fácil de corrigir. A regra geral: quanto maior o elemento e maior a distância percorrida, mais longa a animação.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Situação</th><th>Faixa</th></tr></thead>
+<tbody>
+<tr><td>Hover, foco, troca de cor</td><td>100–200ms</td></tr>
+<tr><td>Botão, ícone, elemento pequeno</td><td>150–250ms</td></tr>
+<tr><td>Card entrando, menu abrindo</td><td>250–400ms</td></tr>
+<tr><td>Seção inteira, modal, página</td><td>400–600ms</td></tr>
+<tr><td>Qualquer coisa acima de 700ms</td><td>Quase sempre lento demais</td></tr>
+</tbody></table></div>
+<p>Duas assimetrias que quase ninguém aplica e fazem diferença grande: <strong>sair é mais rápido que entrar</strong> (a pessoa já decidiu, não precisa ver a saída), e <strong>o que responde a um clique é mais rápido</strong> que o que acontece sozinho.</p>
+</div>
+</article>
+
+<article class="topico" id="t-mv-curva" data-marca="novo">
+<div class="topico__cabeca"><h3>Curva e mola</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>A curva define a aceleração ao longo do tempo. É ela que faz um movimento parecer natural ou robótico.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">as curvas que resolvem quase tudo</span><button class="copiar">copiar</button></div><pre><code>/* entrada — começa rápido, freia no fim.
+   É a curva que dá sensação de "chegou e assentou" */
+--saida-suave: cubic-bezier(.22, .61, .36, 1);
+
+/* saída — sai acelerando, não precisa frear */
+--entrada-rapida: cubic-bezier(.4, 0, 1, 1);
+
+/* dos dois lados, para movimento contínuo */
+--padrao: cubic-bezier(.4, 0, .2, 1);
+
+/* NUNCA use linear em movimento de interface.
+   Só serve para rotação contínua e barra de progresso. */</code></pre></div>
+<h4>Mola</h4>
+<p>Mola (<em>spring</em>) não é definida por duração e curva, e sim por rigidez, amortecimento e massa — como um objeto físico. O resultado tem uma pequena ultrapassagem antes de assentar, e é isso que dá a sensação de "vivo" que se vê em sites como o da biblioteca Motion.</p>
+<p>O CSS não tem mola nativa; é o principal motivo real para usar biblioteca de animação. Dá para imitar com <code>cubic-bezier</code> de valores acima de 1, mas é aproximação.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">mola aproximada em CSS puro</span><button class="copiar">copiar</button></div><pre><code>.botao {
+  transition: transform .4s cubic-bezier(.34, 1.56, .64, 1);
+}
+.botao:hover { transform: scale(1.04); }
+/* o 1.56 é o que faz passar do ponto e voltar */</code></pre></div>
+<div class="nota nota--alerta"><strong>Mola tem hora.</strong> Ela combina com marca descontraída e com elemento pequeno. Num site de advogado ou de clínica, o mesmo efeito lê como falta de seriedade. Curva sóbria é o padrão seguro; mola é escolha de personalidade.</div>
+</div>
+</article>
+
+<article class="topico" id="t-mv-stagger" data-marca="novo">
+<div class="topico__cabeca"><h3>Encadeamento</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Quando vários elementos entram juntos, entrar <em>ao mesmo tempo</em> parece bloco caindo. Com um atraso pequeno entre eles, vira sequência — e a sequência guia o olho na ordem que você quer.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css puro, sem JS</span><button class="copiar">copiar</button></div><pre><code>.card { animation: surgir .5s cubic-bezier(.22,.61,.36,1) both; }
+
+.card:nth-child(1) { animation-delay: 0ms; }
+.card:nth-child(2) { animation-delay: 60ms; }
+.card:nth-child(3) { animation-delay: 120ms; }
+.card:nth-child(4) { animation-delay: 180ms; }</code></pre></div>
+<p>O atraso ideal costuma ficar entre 40 e 80ms. Abaixo disso não se percebe; acima de 120ms a lista parece lenta, e com muitos itens o último demora demais para aparecer.</p>
+<div class="nota"><strong>Com muitos itens, encadeie só os primeiros.</strong> Doze cards com 80ms de atraso somam quase um segundo até o último. Aplicar o atraso apenas aos quatro primeiros mantém o efeito sem a espera.</div>
+</div>
+</article>
+
+<article class="topico" id="t-mv-contencao" data-marca="novo">
+<div class="topico__cabeca"><h3>A contenção é o que parece caro</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Site com animação em tudo não parece sofisticado — parece inseguro. Os sites que impressionam por movimento quase sempre concentram o efeito em um ou dois momentos e deixam o resto quieto.</p>
+<h4>Três regras que seguram a mão</h4>
+<ul>
+<li><strong>Um momento de destaque por página.</strong> Se tudo chama atenção, nada chama.</li>
+<li><strong>Distância curta.</strong> Elemento que sobe 16 a 24 pixels parece intencional; subindo 100, parece que estava fora do lugar.</li>
+<li><strong>Nunca anime o que a pessoa precisa ler agora.</strong> Texto que aparece depois é texto que alguém não leu.</li>
+</ul>
+<div class="nota nota--alerta"><strong>Conteúdo não pode depender de animação.</strong> Se o CSS deixa o bloco em <code>opacity: 0</code> esperando o JavaScript, e o JavaScript falha, o conteúdo some — para o visitante e para o buscador. O estado final deve ser o padrão; o estado inicial se aplica só quando o script confirma que assumiu.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s2">
+<div class="parte__cabeca"><span class="parte__num">PARTE 2</span><h2>O que o CSS já resolve</h2></div>
+<p class="parte__resumo">Boa parte do que se faz com biblioteca hoje é CSS nativo. Sem peso, sem dependência, e rodando fora da thread principal.</p>
+
+<article class="topico" id="t-mv-transicao" data-marca="revisao">
+<div class="topico__cabeca"><h3>Transição e keyframes</h3><span class="tag tag--revisao">Revisão</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p><code>transition</code> suaviza a passagem entre dois estados; <code>@keyframes</code> define uma sequência própria. Vale reforçar uma prática: declare a transição no estado normal, não no <code>:hover</code> — assim ela vale na ida e na volta.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>/* certo — vale nos dois sentidos */
+.botao { transition: transform .2s var(--padrao); }
+.botao:hover { transform: translateY(-2px); }
+
+/* errado — só anima ao entrar, volta seco */
+.botao:hover { transform: translateY(-2px); transition: transform .2s; }</code></pre></div>
+</div>
+</article>
+
+<article class="topico" id="t-mv-scroll" data-marca="revisao">
+<div class="topico__cabeca"><h3>Animação por rolagem, sem JavaScript</h3><span class="tag tag--revisao">Revisão</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>O reveal ao rolar — que historicamente exige <code>IntersectionObserver</code> ou uma biblioteca — virou CSS nativo, e roda na thread de composição, sem travar mesmo em aparelho fraco.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>@keyframes surgir {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.secao {
+  animation: surgir linear both;
+  animation-timeline: view();
+  animation-range: entry 15% cover 40%;
+}
+
+/* barra de progresso de leitura */
+.progresso {
+  animation: encher linear;
+  animation-timeline: scroll();
+  transform-origin: left;
+}
+@keyframes encher { from { scale: 0 1; } to { scale: 1 1; } }</code></pre></div>
+<p><code>view()</code> atrela a animação à entrada do elemento na tela; <code>scroll()</code> atrela à rolagem da página inteira. O <code>animation-range</code> define em que ponto da entrada o movimento começa e termina.</p>
+<div class="nota nota--alerta"><strong>Suporte ainda é desigual.</strong> Chrome e Edge sim; os demais chegaram depois. Como é animação, degradar é seguro: onde não funciona, o elemento simplesmente aparece pronto. Mas isso só vale se o estado final for o padrão — veja a regra da Parte 1.</div>
+</div>
+</article>
+
+<article class="topico" id="t-mv-entrada-saida" data-marca="novo">
+<div class="topico__cabeca"><h3>Animar entrada e saída de elementos</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Esse era o buraco clássico do CSS: não dava para animar um elemento que acabou de ser criado, nem segurar um que está sendo removido. Era o motivo mais comum de recorrer a biblioteca. Hoje existem três peças que resolvem.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.painel {
+  opacity: 1;
+  transition: opacity .3s, display .3s allow-discrete;
+}
+
+/* estado de partida, no primeiro quadro em que ele existe */
+@starting-style {
+  .painel { opacity: 0; }
+}
+
+/* ao sair */
+.painel[hidden] { opacity: 0; }</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Peça</th><th>O que faz</th></tr></thead>
+<tbody>
+<tr><td><code>@starting-style</code></td><td>Define de onde o elemento parte quando aparece</td></tr>
+<tr><td><code>allow-discrete</code></td><td>Permite animar propriedades que antes trocavam de uma vez, como <code>display</code></td></tr>
+<tr><td><code>transition-behavior</code></td><td>Controla esse comportamento de forma explícita</td></tr>
+</tbody></table></div>
+<p>Com isso, um modal em <code>&lt;dialog&gt;</code> ou um menu com <code>popover</code> ganha entrada e saída animadas sem uma linha de JavaScript.</p>
+</div>
+</article>
+
+<article class="topico" id="t-mv-view-transitions" data-marca="revisao">
+<div class="topico__cabeca"><h3>View Transitions</h3><span class="tag tag--revisao">Revisão</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Transição entre estados ou entre páginas, com o navegador calculando o caminho. É o recurso que mais aproxima um site estático da sensação de aplicativo — e são duas linhas.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>@view-transition { navigation: auto; }
+
+/* o elemento que "viaja" entre as duas páginas */
+.capa-projeto { view-transition-name: capa; }
+
+/* ajustando o tempo da transição */
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: .35s; }</code></pre></div>
+<p>Com o mesmo <code>view-transition-name</code> nas duas páginas, o navegador entende que é o mesmo elemento e anima a passagem — a foto do card cresce e vira a foto do topo da página seguinte. Num portfólio, o efeito é notável e o custo é quase zero.</p>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s3">
+<div class="parte__cabeca"><span class="parte__num">PARTE 3</span><h2>Ferramentas de JavaScript</h2></div>
+<p class="parte__resumo">Quando o CSS não dá conta — e o que cada biblioteca cobra em troca.</p>
+
+<article class="topico" id="t-mv-quando-lib" data-marca="novo">
+<div class="topico__cabeca"><h3>Quando vale sair do CSS</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Três situações justificam biblioteca. Fora delas, o CSS resolve mais barato.</p>
+<ul>
+<li><strong>Mola de verdade.</strong> Física, com rigidez e amortecimento, respondendo à velocidade do gesto. O CSS só aproxima.</li>
+<li><strong>Sequência complexa e sincronizada.</strong> Uma linha do tempo com dez passos encadeados, que precisa ser pausada, revertida ou controlada por código.</li>
+<li><strong>Animação dirigida por dado.</strong> Valores que mudam em tempo real — arrastar, gesto, número que sobe conforme um cálculo.</li>
+</ul>
+</div>
+</article>
+
+<article class="topico" id="t-mv-libs" data-marca="novo">
+<div class="topico__cabeca"><h3>As bibliotecas, em ordem de peso</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Ferramenta</th><th>O que é</th><th>Quando usar</th></tr></thead>
+<tbody>
+<tr><td><strong>CSS puro</strong></td><td>Zero peso</td><td>A maioria absoluta dos casos</td></tr>
+<tr><td><strong>Web Animations API</strong></td><td>Nativa do navegador, controlada por JS</td><td>Precisa de controle mas não quer dependência</td></tr>
+<tr><td><strong>Motion</strong> (motion.dev)</td><td>Antigo Framer Motion, hoje independente, com versão em JavaScript puro além da de React. Molas de verdade, API enxuta</td><td>Quando a mola e o encadeamento são o ponto</td></tr>
+<tr><td><strong>GSAP</strong></td><td>O veterano. Linha do tempo poderosa, controle fino, muitos plugins</td><td>Sequências longas e sincronizadas</td></tr>
+<tr><td><strong>Lottie</strong></td><td>Roda animação exportada do After Effects</td><td>Ilustração animada vinda de designer</td></tr>
+</tbody></table></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">a API nativa, que já existe</span><button class="copiar">copiar</button></div><pre><code>// Web Animations API — sem biblioteca nenhuma
+card.animate(
+  [
+    { opacity: 0, transform: 'translateY(20px)' },
+    { opacity: 1, transform: 'translateY(0)' }
+  ],
+  { duration: 400, easing: 'cubic-bezier(.22,.61,.36,1)', fill: 'both' }
+);</code></pre></div>
+<div class="nota"><strong>Antes de instalar qualquer coisa, pergunte:</strong> o que exatamente o CSS não faz aqui? Na maioria dos projetos de landing page a resposta é "nada" — e aí a biblioteca só adiciona peso, dependência que envelhece e uma etapa de build que você não tinha.</div>
+</div>
+</article>
+
+<article class="topico" id="t-mv-smooth" data-marca="novo">
+<div class="topico__cabeca"><h3>Rolagem suave: cuidado</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Bibliotecas de rolagem suave — Lenis é a mais conhecida — sequestram a rolagem da página para dar inércia. É um efeito bonito em vitrine de estúdio e problemático em site de serviço.</p>
+<h4>O que elas custam</h4>
+<ul>
+<li>Quebram a rolagem nativa que a pessoa conhece, incluindo a velocidade que ela configurou no sistema.</li>
+<li>Atrapalham navegação por teclado e leitor de tela.</li>
+<li>Adicionam atraso entre o gesto e a resposta — que é exatamente a sensação de site travado.</li>
+<li>Costumam conflitar com <code>position: sticky</code> e com âncoras.</li>
+</ul>
+<div class="nota">Para ancoragem suave entre seções, o CSS já resolve com <code>scroll-behavior: smooth</code> — e respeitando <code>prefers-reduced-motion</code>. Isso cobre o caso legítimo sem nenhum dos custos acima.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s4">
+<div class="parte__cabeca"><span class="parte__num">PARTE 4</span><h2>Performance</h2></div>
+<p class="parte__resumo">Animação que engasga é pior que animação nenhuma. O que trava, por quê, e como testar de verdade.</p>
+
+<article class="topico" id="t-mv-duas" data-marca="revisao">
+<div class="topico__cabeca"><h3>Anime duas propriedades</h3><span class="tag tag--revisao">Revisão</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>O navegador desenha a tela em etapas: calcular posições, pintar e compor. <code>transform</code> e <code>opacity</code> mexem só na última — que roda na placa de vídeo. Tudo o mais força recalcular a página inteira, a cada quadro.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Em vez de animar</th><th>Anime</th></tr></thead>
+<tbody>
+<tr><td><code>left</code>, <code>top</code>, <code>margin</code></td><td><code>transform: translate()</code></td></tr>
+<tr><td><code>width</code>, <code>height</code></td><td><code>transform: scale()</code></td></tr>
+<tr><td><code>display</code></td><td><code>opacity</code> + <code>allow-discrete</code></td></tr>
+<tr><td>Sombra pesada em movimento</td><td>Uma camada com sombra pronta, variando a opacidade</td></tr>
+</tbody></table></div>
+<p>Sobre <code>will-change</code>: ele avisa o navegador para preparar o elemento, e usado em excesso consome memória e piora tudo. Aplique em poucos elementos, e só quando houver engasgo medido — não preventivamente.</p>
+</div>
+</article>
+
+<article class="topico" id="t-mv-testar" data-marca="novo">
+<div class="topico__cabeca"><h3>Testar onde dói</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Seu computador roda qualquer animação a 60 quadros por segundo. O celular de quatro anos do cliente do seu cliente, não. Testar no lugar errado é o que faz animação travada chegar em produção.</p>
+<ul>
+<li><strong>DevTools → Performance</strong>, com limitação de CPU em 4x ou 6x. Simula aparelho fraco no seu próprio computador.</li>
+<li><strong>Aba Rendering → Frame Rendering Stats</strong> mostra a taxa de quadros ao vivo enquanto você rola.</li>
+<li><strong>Um celular de verdade</strong>, de preferência antigo. Nada substitui.</li>
+</ul>
+<div class="nota nota--alerta"><strong>O sintoma clássico:</strong> a página abre bem e engasga ao rolar. Quase sempre é animação disparada por <code>scroll</code> sem <code>requestAnimationFrame</code>, ou muitos elementos observados ao mesmo tempo sem <code>unobserve</code> depois que já animaram.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s5">
+<div class="parte__cabeca"><span class="parte__num">PARTE 5</span><h2>Acessibilidade e conversão</h2></div>
+<p class="parte__resumo">Movimento afeta gente de verdade — e afeta o resultado da página. Duas coisas que raramente entram na conversa sobre animação.</p>
+
+<article class="topico" id="t-mv-reduced" data-marca="revisao">
+<div class="topico__cabeca"><h3>prefers-reduced-motion não é opcional</h3><span class="tag tag--revisao">Revisão</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Parte das pessoas sente enjoo, tontura ou desconforto real com movimento na tela — é chamado de sensibilidade vestibular, e quem tem costuma já ter desligado animação no sistema. A media query existe para respeitar essa escolha.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">o mínimo, em todo projeto</span><button class="copiar">copiar</button></div><pre><code>@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}</code></pre></div>
+<p>Uma abordagem mais cuidadosa não desliga tudo: mantém mudanças de cor e opacidade, que raramente incomodam, e elimina só deslocamento, escala e paralaxe — que são os que causam desconforto.</p>
+<div class="nota"><strong>O que mais incomoda, em ordem:</strong> paralaxe, elementos grandes atravessando a tela, zoom automático, rotação e piscar. Fade e mudança de cor são quase sempre seguros.</div>
+</div>
+</article>
+
+<article class="topico" id="t-mv-conversao" data-marca="novo">
+<div class="topico__cabeca"><h3>Quando animação derruba conversão</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Numa página institucional, animação demais é questão de gosto. Numa página que precisa gerar contato, ela custa dinheiro.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Prática</th><th>Por que custa</th></tr></thead>
+<tbody>
+<tr><td>Hero que anima antes de mostrar o texto</td><td>Os primeiros segundos decidem se a pessoa fica — e ela passa esperando</td></tr>
+<tr><td>Conteúdo que só aparece ao rolar</td><td>Quem chega e não vê nada acha que a página quebrou</td></tr>
+<tr><td>Paralaxe pesada no celular</td><td>Engasga justamente onde está a maioria do tráfego</td></tr>
+<tr><td>Botão com animação chamativa demais</td><td>Lê como anúncio, e anúncio a pessoa ignora por reflexo</td></tr>
+<tr><td>Rolagem sequestrada</td><td>Tira o controle de quem quer só achar o telefone</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>A regra que resolve:</strong> tudo que for essencial para decidir — o que é, para quem, quanto custa, como falar com você — aparece imediatamente, sem depender de rolagem nem de espera. O movimento entra no que é secundário.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s6">
+<div class="parte__cabeca"><span class="parte__num">PARTE 6</span><h2>Receitas</h2></div>
+<p class="parte__resumo">Os efeitos que aparecem em quase todo projeto, prontos, em CSS puro ou com o mínimo de JavaScript.</p>
+
+<article class="topico" id="t-mv-receitas" data-marca="novo">
+<div class="topico__cabeca"><h3>Seis efeitos prontos</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+
+<h4>1 · Reveal ao rolar, com degradação segura</h4>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>/* estado final é o padrão — se o JS falhar, aparece normal */
+[data-reveal] { opacity: 1; }
+
+/* o estado inicial só vale quando o JS confirma que assumiu */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .6s var(--saida-suave),
+              transform .6s var(--saida-suave);
+}
+.js [data-reveal].is-in { opacity: 1; transform: none; }</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>document.documentElement.classList.add('js');
+
+var obs = new IntersectionObserver(function (ents) {
+  ents.forEach(function (e) {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('is-in');
+    obs.unobserve(e.target);
+  });
+}, { threshold: .15 });
+
+document.querySelectorAll('[data-reveal]').forEach(function (el) {
+  obs.observe(el);
+});</code></pre></div>
+
+<h4>2 · Menu que abre com altura automática</h4>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>/* grid resolve o problema clássico de animar height: auto */
+.painel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .3s var(--padrao);
+}
+.painel.is-aberto { grid-template-rows: 1fr; }
+.painel > div { overflow: hidden; }</code></pre></div>
+
+<h4>3 · Botão com retorno ao toque</h4>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.botao {
+  transition: transform .15s var(--padrao), background .2s;
+}
+.botao:hover  { transform: translateY(-2px); }
+.botao:active { transform: translateY(0) scale(.98); transition-duration: .05s; }</code></pre></div>
+
+<h4>4 · Contador que anima ao aparecer</h4>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>function contar(el) {
+  var alvo = Number(el.dataset.num), inicio = performance.now(), dur = 1400;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.textContent = alvo; return;
+  }
+  (function passo(agora) {
+    var t = Math.min((agora - inicio) / dur, 1);
+    el.textContent = Math.round(alvo * (1 - Math.pow(1 - t, 3)));
+    if (t &lt; 1) requestAnimationFrame(passo);
+  })(inicio);
+}</code></pre></div>
+
+<h4>5 · Imagem que cresce no hover, sem estourar</h4>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.moldura { overflow: hidden; border-radius: 6px; }
+.moldura img {
+  transition: transform .5s var(--saida-suave);
+  will-change: transform;
+}
+.moldura:hover img { transform: scale(1.05); }</code></pre></div>
+
+<h4>6 · Barra de progresso de leitura</h4>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css puro, sem JS</span><button class="copiar">copiar</button></div><pre><code>.progresso {
+  position: fixed; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--destaque); transform-origin: left;
+  animation: encher linear;
+  animation-timeline: scroll();
+}
+@keyframes encher { from { scale: 0 1; } to { scale: 1 1; } }</code></pre></div>
+
+<div class="nota">Todas usam as variáveis de curva da Parte 1. Declare-as uma vez no <code>:root</code> e o movimento do site inteiro fica coerente — é a mesma lógica de token que vale para cor e espaçamento.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s7">
+<div class="parte__cabeca"><span class="parte__num">PARTE 7</span><h2>Motion na prática</h2></div>
+<p class="parte__resumo">A biblioteca que era Framer Motion e hoje é independente, com versão em JavaScript puro. É a que dá mola de verdade — o principal motivo real para sair do CSS.</p>
+
+<article class="topico" id="t-mt-oque" data-marca="novo">
+<div class="topico__cabeca"><h3>O que é e quando instalar</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>O Motion nasceu como Framer Motion, biblioteca de animação para React. Hoje é projeto independente e tem API em JavaScript puro — ou seja, cabe no seu jeito de trabalhar, sem React e sem build.</p>
+<p>A razão para usá-lo, e a única que realmente justifica, é a <strong>mola</strong>. O CSS anima por duração e curva; o Motion anima por física — rigidez, amortecimento e velocidade. A diferença aparece em movimento que responde a gesto, e no jeito como o elemento assenta no fim.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">via CDN, versão global — não precisa de build</span><button class="copiar">copiar</button></div><pre><code>&lt;script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  const { animate, scroll, inView, stagger, hover } = Motion;
+&lt;/script&gt;</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">via CDN, como módulo</span><button class="copiar">copiar</button></div><pre><code>&lt;script type="module"&gt;
+  import { animate, scroll, inView, stagger }
+    from "https://cdn.jsdelivr.net/npm/motion@latest/+esm";
+&lt;/script&gt;</code></pre></div>
+<div class="nota nota--alerta"><strong>Fixe a versão em projeto de cliente.</strong> <code>@latest</code> serve para testar; em produção, troque pelo número da versão. Se a biblioteca mudar de comportamento numa atualização, o site do cliente muda junto — sem você saber.</div>
+</div>
+</article>
+
+<article class="topico" id="t-mt-animate" data-marca="novo">
+<div class="topico__cabeca"><h3>animate — a função central</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>Três argumentos: o que animar, para onde, e como.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>animate(
+  '.card',                                  // seletor ou elemento
+  { opacity: [0, 1], y: [20, 0] },          // de → para
+  { duration: 0.5, ease: [.22, .61, .36, 1] }
+);</code></pre></div>
+<p>Duas diferenças em relação ao CSS que valem notar. A duração é em <strong>segundos</strong>, não milissegundos. E existem atalhos de transformação independentes — <code>x</code>, <code>y</code>, <code>rotate</code>, <code>scale</code> — que podem ser animados separadamente, coisa que no CSS exige montar a string de <code>transform</code> inteira.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Opção</th><th>O que faz</th></tr></thead>
+<tbody>
+<tr><td><code>duration</code></td><td>Tempo em segundos</td></tr>
+<tr><td><code>delay</code></td><td>Espera antes de começar; aceita <code>stagger()</code></td></tr>
+<tr><td><code>ease</code></td><td>Curva: nome pronto ou array de bézier</td></tr>
+<tr><td><code>type: 'spring'</code></td><td>Troca duração e curva por física</td></tr>
+<tr><td><code>stiffness</code>, <code>damping</code></td><td>Rigidez e amortecimento da mola</td></tr>
+<tr><td><code>repeat</code></td><td>Quantas vezes repetir</td></tr>
+</tbody></table></div>
+</div>
+</article>
+
+<article class="topico" id="t-mt-mola" data-marca="novo">
+<div class="topico__cabeca"><h3>Mola de verdade</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>Aqui está a diferença que justifica a biblioteca. Em vez de dizer quanto tempo dura, você descreve o comportamento físico e deixa o tempo ser consequência.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">botão que responde ao toque</span><button class="copiar">copiar</button></div><pre><code>const botao = document.querySelector('.cta');
+
+botao.addEventListener('pointerdown', () =&gt; {
+  animate(botao, { scale: 0.96 }, { type: 'spring', stiffness: 600, damping: 20 });
+});
+
+botao.addEventListener('pointerup', () =&gt; {
+  animate(botao, { scale: 1 }, { type: 'spring', stiffness: 400, damping: 12 });
+});</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Parâmetro</th><th>Aumentar deixa</th><th>Faixa que costuma funcionar</th></tr></thead>
+<tbody>
+<tr><td><code>stiffness</code></td><td>Mais rápido e mais seco</td><td>200 a 700</td></tr>
+<tr><td><code>damping</code></td><td>Menos oscilação no fim</td><td>10 a 30</td></tr>
+<tr><td><code>mass</code></td><td>Mais pesado e lento</td><td>0.5 a 2</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Como calibrar sem chutar:</strong> comece com <code>stiffness: 400</code> e <code>damping: 20</code>. Se ficou mole demais, suba a rigidez. Se ficou tremendo no fim, suba o amortecimento. Amortecimento muito alto elimina a mola e vira uma curva comum — se você chegou aí, provavelmente o CSS resolvia.</div>
+</div>
+</article>
+
+<article class="topico" id="t-mt-inview" data-marca="novo">
+<div class="topico__cabeca"><h3>inView e stagger</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>O reveal ao rolar em duas linhas, com encadeamento incluído.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>inView('.secao', (elemento) =&gt; {
+  animate(
+    elemento.querySelectorAll('.card'),
+    { opacity: [0, 1], y: [24, 0] },
+    { duration: 0.5, delay: stagger(0.06) }
+  );
+}, { amount: 0.2 });   // dispara com 20% visível</code></pre></div>
+<p>O <code>stagger(0.06)</code> aplica 60 milissegundos de atraso crescente entre os elementos — exatamente o encadeamento da Parte 1, sem calcular índice na mão.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">encadeamento a partir do centro</span><button class="copiar">copiar</button></div><pre><code>delay: stagger(0.05, { from: 'center' })
+// também aceita 'first', 'last' e um índice</code></pre></div>
+<div class="nota nota--alerta"><strong>A regra da Parte 1 continua valendo.</strong> Se o CSS deixar o card em <code>opacity: 0</code> à espera dessa função e o script não carregar, o conteúdo some. O estado final é o padrão; o inicial entra pela animação, que parte de <code>[0, 1]</code>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-mt-scroll" data-marca="novo">
+<div class="topico__cabeca"><h3>scroll — animação atrelada à rolagem</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>Diferente do <code>inView</code>, que dispara uma vez, o <code>scroll</code> liga o progresso da animação ao progresso da rolagem: rolou metade, a animação está na metade; voltou, ela volta.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">barra de progresso de leitura</span><button class="copiar">copiar</button></div><pre><code>scroll(
+  animate('.progresso', { scaleX: [0, 1] })
+);</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">parallax suave na foto do topo</span><button class="copiar">copiar</button></div><pre><code>scroll(
+  animate('.hero__foto', { y: [0, 80] }),
+  { target: document.querySelector('.hero'), offset: ['start start', 'end start'] }
+);</code></pre></div>
+<div class="nota">Vale comparar com a Parte 2: <code>animation-timeline: scroll()</code> faz a mesma coisa em CSS puro, sem biblioteca, e rodando fora da thread principal. Se o efeito é simples, o CSS ganha. O <code>scroll</code> do Motion compensa quando você precisa de lógica no meio — ler o progresso, decidir algo, animar mais de uma coisa em proporções diferentes.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s8">
+<div class="parte__cabeca"><span class="parte__num">PARTE 8</span><h2>GSAP na prática</h2></div>
+<p class="parte__resumo">O veterano da animação na web. Desde que a Webflow comprou o projeto, é inteiramente gratuito — inclusive os plugins que antes eram pagos, como o ScrollTrigger.</p>
+
+<article class="topico" id="t-gs-oque" data-marca="novo">
+<div class="topico__cabeca"><h3>O que é, e a mudança de licença</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>O GSAP existe há muito mais tempo que qualquer biblioteca atual e continua sendo a referência quando o assunto é sequência complexa. Por anos, os plugins mais interessantes eram pagos — o que afastava quem fazia site de cliente pequeno.</p>
+<p>Isso mudou: depois da aquisição pela Webflow, a biblioteca e todos os plugins passaram a ser gratuitos, inclusive para uso comercial. Na prática, o <strong>ScrollTrigger</strong> — que é o motivo principal de usar GSAP — está liberado.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">via CDN</span><button class="copiar">copiar</button></div><pre><code>&lt;script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  gsap.registerPlugin(ScrollTrigger);
+&lt;/script&gt;</code></pre></div>
+<div class="nota"><strong>Peso:</strong> o núcleo do GSAP mais o ScrollTrigger somam bem mais que o Motion. Para uma landing page com dois efeitos, é caro. Para um site que se sustenta em movimento — portfólio, apresentação de produto, página de evento — o custo se paga.</div>
+</div>
+</article>
+
+<article class="topico" id="t-gs-basico" data-marca="novo">
+<div class="topico__cabeca"><h3>to, from e fromTo</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>// do estado atual PARA o que você descrever
+gsap.to('.card', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' });
+
+// DE um estado até o atual — o mais útil para entrada
+gsap.from('.card', { opacity: 0, y: 24, duration: 0.6, stagger: 0.06 });
+
+// de um estado explícito até outro
+gsap.fromTo('.selo',
+  { scale: 0.8, opacity: 0 },
+  { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(1.7)' }
+);</code></pre></div>
+<p>O <code>gsap.from</code> é o que mais aparece em animação de entrada, e tem uma vantagem sobre o CSS: o estado final é o que está escrito na folha de estilo. Se o script não rodar, o elemento fica visível — a degradação segura vem de graça.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Curva</th><th>Sensação</th></tr></thead>
+<tbody>
+<tr><td><code>power2.out</code> a <code>power4.out</code></td><td>Entrada que freia. O padrão para quase tudo</td></tr>
+<tr><td><code>power2.in</code></td><td>Saída que acelera</td></tr>
+<tr><td><code>back.out(1.7)</code></td><td>Passa do ponto e volta — parecido com mola</td></tr>
+<tr><td><code>elastic.out</code></td><td>Oscila bastante. Use com muita parcimônia</td></tr>
+<tr><td><code>none</code></td><td>Linear. Só para rotação contínua</td></tr>
+</tbody></table></div>
+</div>
+</article>
+
+<article class="topico" id="t-gs-timeline" data-marca="novo">
+<div class="topico__cabeca"><h3>Timeline — o verdadeiro diferencial</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>É aqui que o GSAP não tem concorrente. Uma linha do tempo encadeia animações em sequência, e você controla a posição de cada uma em relação às outras — sem calcular atraso na mão.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">entrada orquestrada da hero</span><button class="copiar">copiar</button></div><pre><code>const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.6 } });
+
+tl.from('.hero__rotulo', { opacity: 0, y: 12 })
+  .from('.hero__titulo', { opacity: 0, y: 24 }, '-=0.35')  // sobrepõe 0,35s
+  .from('.hero__sub',    { opacity: 0, y: 18 }, '-=0.4')
+  .from('.hero__cta',    { opacity: 0, scale: .94 }, '-=0.3')
+  .from('.hero__selo',   { opacity: 0 }, '&lt;');             // junto com o anterior</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Posição</th><th>Significa</th></tr></thead>
+<tbody>
+<tr><td>omitida</td><td>Depois que a anterior terminar</td></tr>
+<tr><td><code>'-=0.3'</code></td><td>Começa 0,3s antes do fim da anterior</td></tr>
+<tr><td><code>'+=0.2'</code></td><td>Espera 0,2s depois da anterior</td></tr>
+<tr><td><code>'&lt;'</code></td><td>Ao mesmo tempo que a anterior</td></tr>
+<tr><td><code>0.5</code></td><td>No segundo 0,5 da linha do tempo</td></tr>
+</tbody></table></div>
+<p>E a linha do tempo inteira pode ser pausada, revertida, acelerada ou controlada por rolagem — coisa que encadeamento de <code>animation-delay</code> em CSS não permite.</p>
+</div>
+</article>
+
+<article class="topico" id="t-gs-scrolltrigger" data-marca="novo">
+<div class="topico__cabeca"><h3>ScrollTrigger</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>O plugin que faz o GSAP valer o peso. Ele liga qualquer animação à posição da rolagem, e resolve o efeito de <strong>prender a seção</strong> enquanto a animação acontece — que é a base daqueles sites onde a tela fica parada e o conteúdo se transforma.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">reveal simples</span><button class="copiar">copiar</button></div><pre><code>gsap.from('.secao__card', {
+  opacity: 0, y: 30, duration: 0.6, stagger: 0.08,
+  scrollTrigger: {
+    trigger: '.secao',
+    start: 'top 80%',        // topo da seção a 80% da altura da janela
+    toggleActions: 'play none none none'
+  }
+});</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">seção presa contando o cronograma</span><button class="copiar">copiar</button></div><pre><code>const etapas = gsap.timeline({
+  scrollTrigger: {
+    trigger: '.cronograma',
+    start: 'top top',
+    end: '+=2000',      // dura 2000px de rolagem
+    pin: true,          // prende a seção na tela
+    scrub: 1,           // segue a rolagem, com 1s de suavização
+    markers: false      // true durante o desenvolvimento
+  }
+});
+
+etapas.from('.semana-1', { opacity: 0, x: -40 })
+      .from('.semana-2', { opacity: 0, x: -40 })
+      .from('.semana-3', { opacity: 0, x: -40 })
+      .from('.semana-4', { opacity: 0, x: -40 });</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Opção</th><th>O que faz</th></tr></thead>
+<tbody>
+<tr><td><code>trigger</code></td><td>O elemento cuja posição define o início</td></tr>
+<tr><td><code>start</code> / <code>end</code></td><td>Onde começa e termina: <code>'top 80%'</code>, <code>'+=2000'</code></td></tr>
+<tr><td><code>scrub</code></td><td><code>true</code> cola na rolagem; número adiciona suavização</td></tr>
+<tr><td><code>pin</code></td><td>Prende o elemento enquanto o gatilho está ativo</td></tr>
+<tr><td><code>toggleActions</code></td><td>O que fazer ao entrar, sair, voltar e sair de volta</td></tr>
+<tr><td><code>markers</code></td><td>Mostra as linhas de início e fim. Indispensável para ajustar</td></tr>
+</tbody></table></div>
+<div class="nota nota--alerta"><strong>Ligue <code>markers: true</code> enquanto ajusta e desligue antes de publicar.</strong> É o erro de distração mais comum com ScrollTrigger — as linhas coloridas vão para produção e ficam por meses.</div>
+<div class="nota nota--alerta"><strong>Cuidado com <code>pin</code> no celular.</strong> Prender seção em tela pequena costuma atrapalhar mais que impressionar, e quem quer só achar o telefone fica preso rolando. Vale envolver o efeito numa checagem de largura e desligar abaixo de 900px.</div>
+</div>
+</article>
+
+<article class="topico" id="t-gs-escolher" data-marca="novo">
+<div class="topico__cabeca"><h3>Motion ou GSAP</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Critério</th><th>CSS puro</th><th>Motion</th><th>GSAP</th></tr></thead>
+<tbody>
+<tr><td>Peso</td><td>Zero</td><td>Pequeno</td><td>Maior, ainda mais com plugins</td></tr>
+<tr><td>Mola física</td><td>Só aproximação</td><td>Sim, é a especialidade</td><td>Sim, via curvas e plugin</td></tr>
+<tr><td>Sequência longa</td><td>Difícil</td><td>Possível</td><td>Melhor da categoria</td></tr>
+<tr><td>Prender seção na rolagem</td><td>Não</td><td>Não pronto</td><td>Sim, com ScrollTrigger</td></tr>
+<tr><td>Curva de aprendizado</td><td>Curta</td><td>Curta</td><td>Média</td></tr>
+<tr><td>Precisa de build</td><td>Não</td><td>Não, via CDN</td><td>Não, via CDN</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>A regra que eu seguiria:</strong> CSS até não dar mais. Se o que falta é mola ou gesto, Motion. Se o que falta é uma narrativa presa à rolagem, com seção fixa e vários passos sincronizados, GSAP com ScrollTrigger. Usar os dois no mesmo projeto raramente se justifica.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s9">
+<div class="parte__cabeca"><span class="parte__num">PARTE 9</span><h2>Catálogo para copiar</h2></div>
+<p class="parte__resumo">Os efeitos que mais aparecem, cada um nas três formas — para você comparar o custo e escolher. Todos respeitam <code>prefers-reduced-motion</code> e degradam sem quebrar.</p>
+
+<article class="topico" id="t-cat-base" data-marca="novo">
+<div class="topico__cabeca"><h3>A base que todos usam</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Declare as curvas uma vez, como token, e o movimento do site inteiro fica coerente.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">no :root</span><button class="copiar">copiar</button></div><pre><code>:root {
+  --saida:  cubic-bezier(.22, .61, .36, 1);   /* entrada que freia  */
+  --padrao: cubic-bezier(.4, 0, .2, 1);       /* uso geral          */
+  --mola:   cubic-bezier(.34, 1.56, .64, 1);  /* passa e volta      */
+  --t-rapido: .15s;
+  --t-medio:  .3s;
+  --t-lento:  .55s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">a checagem, para as versões com JavaScript</span><button class="copiar">copiar</button></div><pre><code>const semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+// envolva qualquer animação por script:  if (semMovimento) return;</code></pre></div>
+</div>
+</article>
+
+<article class="topico" id="t-cat-reveal" data-marca="novo">
+<div class="topico__cabeca"><h3>1 · Reveal ao rolar</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css puro — nenhuma dependência</span><button class="copiar">copiar</button></div><pre><code>@keyframes surgir {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: none; }
+}
+.revela {
+  animation: surgir .55s var(--saida) both;
+  animation-timeline: view();
+  animation-range: entry 12% cover 38%;
+}</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">motion</span><button class="copiar">copiar</button></div><pre><code>inView('.revela', (el) =&gt; {
+  animate(el, { opacity: [0, 1], y: [22, 0] },
+             { duration: .55, ease: [.22,.61,.36,1] });
+}, { amount: .2 });</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">gsap</span><button class="copiar">copiar</button></div><pre><code>gsap.utils.toArray('.revela').forEach((el) =&gt; {
+  gsap.from(el, {
+    opacity: 0, y: 22, duration: .55, ease: 'power3.out',
+    scrollTrigger: { trigger: el, start: 'top 85%' }
+  });
+});</code></pre></div>
+<div class="nota"><strong>Escolha:</strong> CSS. É o caso em que a versão nativa é melhor que as duas bibliotecas — roda fora da thread principal e não custa nada. Use JavaScript só se precisar de suporte em navegador antigo.</div>
+</div>
+</article>
+
+<article class="topico" id="t-cat-stagger" data-marca="novo">
+<div class="topico__cabeca"><h3>2 · Lista entrando em sequência</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.card { animation: surgir .5s var(--saida) both; }
+.card:nth-child(1) { animation-delay: 0ms;   }
+.card:nth-child(2) { animation-delay: 60ms;  }
+.card:nth-child(3) { animation-delay: 120ms; }
+.card:nth-child(n+4) { animation-delay: 180ms; }  /* o resto junto */</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">motion</span><button class="copiar">copiar</button></div><pre><code>animate('.card', { opacity: [0,1], y: [22,0] },
+        { duration: .5, delay: stagger(.06) });</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">gsap</span><button class="copiar">copiar</button></div><pre><code>gsap.from('.card', { opacity: 0, y: 22, duration: .5, stagger: .06 });</code></pre></div>
+<div class="nota"><strong>Escolha:</strong> se a lista tem número fixo e pequeno, CSS. Se o número vem de dado e varia, biblioteca — porque escrever <code>nth-child</code> para uma lista de tamanho desconhecido não funciona.</div>
+</div>
+</article>
+
+<article class="topico" id="t-cat-botao" data-marca="novo">
+<div class="topico__cabeca"><h3>3 · Botão com retorno físico</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css — mola aproximada</span><button class="copiar">copiar</button></div><pre><code>.cta {
+  transition: transform var(--t-rapido) var(--mola), background .2s;
+}
+.cta:hover  { transform: translateY(-2px); }
+.cta:active { transform: translateY(0) scale(.97); transition-duration: .06s; }</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">motion — mola de verdade</span><button class="copiar">copiar</button></div><pre><code>const cta = document.querySelector('.cta');
+if (!semMovimento) {
+  cta.addEventListener('pointerdown', () =&gt;
+    animate(cta, { scale: .96 }, { type: 'spring', stiffness: 600, damping: 20 }));
+  cta.addEventListener('pointerup', () =&gt;
+    animate(cta, { scale: 1 }, { type: 'spring', stiffness: 400, damping: 12 }));
+}</code></pre></div>
+<div class="nota"><strong>Escolha:</strong> CSS, na quase totalidade dos casos. A mola real só se percebe num botão grande e num contexto de marca descontraída — e ela não aumenta conversão.</div>
+</div>
+</article>
+
+<article class="topico" id="t-cat-contador" data-marca="novo">
+<div class="topico__cabeca"><h3>4 · Contador que anima ao aparecer</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">javascript puro</span><button class="copiar">copiar</button></div><pre><code>// &lt;span class="num" data-num="300"&gt;0&lt;/span&gt;
+new IntersectionObserver((ents, obs) =&gt; {
+  ents.forEach((e) =&gt; {
+    if (!e.isIntersecting) return;
+    obs.unobserve(e.target);
+    const alvo = Number(e.target.dataset.num);
+    if (semMovimento) { e.target.textContent = alvo; return; }
+    const ini = performance.now(), dur = 1400;
+    (function passo(t) {
+      const p = Math.min((t - ini) / dur, 1);
+      e.target.textContent = Math.round(alvo * (1 - Math.pow(1 - p, 3)));
+      if (p &lt; 1) requestAnimationFrame(passo);
+    })(ini);
+  });
+}, { threshold: .4 }).observe(document.querySelector('.num'));</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">gsap — bem mais curto</span><button class="copiar">copiar</button></div><pre><code>const alvo = { v: 0 };
+gsap.to(alvo, {
+  v: 300, duration: 1.4, ease: 'power2.out',
+  onUpdate: () =&gt; el.textContent = Math.round(alvo.v),
+  scrollTrigger: { trigger: el, start: 'top 85%' }
+});</code></pre></div>
+<div class="nota"><strong>Escolha:</strong> se já tem GSAP no projeto por outro motivo, use ele. Se não tem, não instale por causa de um contador — a versão em JavaScript puro resolve.</div>
+<div class="nota nota--alerta">Lembre da regra da Parte 7 da trilha de IA: número em site de cliente só entra se for verdadeiro e confirmado por ele. Contador animado em cima de número inventado é publicidade enganosa com efeito bonito.</div>
+</div>
+</article>
+
+<article class="topico" id="t-cat-narrativa" data-marca="novo">
+<div class="topico__cabeca"><h3>5 · Seção presa contando uma história</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>Este é o único efeito da lista que só o GSAP entrega pronto — e é o que faz aqueles sites de agência parecerem caros. Aplicado ao seu contexto: a seção de cronograma que se revela semana a semana enquanto a pessoa rola.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">gsap + scrolltrigger</span><button class="copiar">copiar</button></div><pre><code>if (window.innerWidth &gt; 900 &amp;&amp; !semMovimento) {
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '.cronograma',
+      start: 'top top',
+      end: '+=1800',
+      pin: true,
+      scrub: 1
+    }
+  });
+
+  gsap.utils.toArray('.cronograma__semana').forEach((sem) =&gt; {
+    tl.from(sem, { opacity: 0, x: -40, duration: 1 });
+  });
+}</code></pre></div>
+<div class="nota nota--alerta"><strong>Três cuidados antes de usar num cliente:</strong> desligado no celular, como acima; o conteúdo precisa existir no HTML e estar legível sem o efeito; e a pessoa tem que conseguir passar pela seção rápido se quiser — prender por 4000 pixels de rolagem irrita mais do que impressiona.</div>
+</div>
+</article>
+
+<article class="topico" id="t-cat-transicao" data-marca="novo">
+<div class="topico__cabeca"><h3>6 · Transição entre páginas</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Duas linhas de CSS que dão a um site multi-página a sensação de aplicativo. Nenhuma biblioteca faz melhor que o nativo aqui.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>@view-transition { navigation: auto; }
+
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: .3s; }
+
+/* a foto que "viaja" do card para a página do projeto */
+.projeto__capa { view-transition-name: capa; }</code></pre></div>
+<div class="nota"><strong>Escolha:</strong> CSS, sem discussão. Onde o navegador não suportar, a navegação acontece do jeito normal — degradação perfeita.</div>
+</div>
+</article>
+
+<article class="topico" id="t-cat-decisao" data-marca="novo">
+<div class="topico__cabeca"><h3>A tabela de decisão</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Efeito</th><th>Use</th><th>Por quê</th></tr></thead>
+<tbody>
+<tr><td>Reveal ao rolar</td><td>CSS</td><td>Nativo faz melhor e de graça</td></tr>
+<tr><td>Hover e foco</td><td>CSS</td><td>Nunca precisou de biblioteca</td></tr>
+<tr><td>Transição entre páginas</td><td>CSS</td><td>View Transitions resolve nativo</td></tr>
+<tr><td>Lista de tamanho variável</td><td>Motion ou GSAP</td><td><code>nth-child</code> não dá conta</td></tr>
+<tr><td>Mola respondendo a gesto</td><td>Motion</td><td>É a especialidade dele</td></tr>
+<tr><td>Sequência longa e controlável</td><td>GSAP</td><td>Timeline sem concorrente</td></tr>
+<tr><td>Seção presa na rolagem</td><td>GSAP</td><td>ScrollTrigger com <code>pin</code></td></tr>
+<tr><td>Número contando</td><td>JS puro</td><td>Vinte linhas; não vale uma dependência</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Antes de instalar qualquer uma das duas, a pergunta permanece:</strong> o que exatamente o CSS não faz aqui? Em landing page de serviço, a resposta honesta costuma ser "nada" — e o peso, a dependência que envelhece e o risco de o CDN cair são custos reais cobrados de um cliente que nunca vai perceber a diferença.</div>
+</div>
+</article>
+</section>
+
+
+<section class="parte" id="s10">
+<div class="parte__cabeca"><span class="parte__num">PARTE 10</span><h2>Laboratório: os efeitos rodando</h2></div>
+<p class="parte__resumo">Doze efeitos funcionando aqui dentro da página, cada um com o código que o faz funcionar. Passe o mouse, role, clique em <em>rodar</em>. Todos respeitam <code>prefers-reduced-motion</code> e nenhum depende de biblioteca para existir — só três usam Motion ou GSAP, e mesmo esses caem para a versão nativa se a biblioteca não carregar.</p>
+
+<article class="topico" id="t-lab-como" data-marca="novo">
+<div class="topico__cabeca"><h3>Como ler esta parte</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Cada cartão tem três coisas: o efeito rodando, o selo da tecnologia que o move, e o código dobrado em <em>ver código</em>. O código é o de verdade — o mesmo que está rodando na sua tela agora, sem versão simplificada para a aula.</p>
+<p>O botão <em>rodar</em> reinicia o efeito. Os que reagem a mouse ou rolagem não têm botão: o gesto é o disparo. E todos só começam a animar quando o cartão entra na tela — a mesma regra que você aplica em produção, porque animar o que ninguém está vendo é gastar processamento à toa e derrubar bateria de celular.</p>
+<div class="nota"><strong>Sobre os três selos:</strong> <code>CSS</code> significa que não há uma linha de JavaScript envolvida. <code>JS</code> é JavaScript puro, sem dependência. <code>Motion</code> e <code>GSAP</code> são os únicos que carregam biblioteca — e, olhando os doze, é fácil ver o quanto disso o navegador já faz sozinho.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lab-entradas" data-marca="novo">
+<div class="topico__cabeca"><h3>1 · Entradas — o primeiro segundo</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O que acontece nos primeiros instantes da página. A regra aqui é contenção: se a entrada demora mais que um segundo no total, o visitante já sentiu que o site está lento, mesmo que esteja rápido.</p>
+<div class="lab">
+
+<div class="demo" data-demo="cascata">
+<div class="demo__palco">
+<div class="d-cascata">
+<div class="pc" style="--i:0"><span class="pc__ponto"></span>Reforma completa</div>
+<div class="pc" style="--i:1"><span class="pc__ponto"></span>Projeto de interiores</div>
+<div class="pc" style="--i:2"><span class="pc__ponto"></span>Consultoria de ambiente</div>
+</div>
+</div>
+<div class="demo__pe"><div class="demo__info"><strong>Entrada em cascata</strong><span>70ms entre itens</span></div><div class="demo__acoes"><span class="demo__selo" data-l="css">CSS</span><button class="demo__rodar">rodar</button></div></div>
+<details class="demo__codigo"><summary>ver código</summary>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">html + css</span><button class="copiar">copiar</button></div><pre><code>&lt;div class="servicos"&gt;
+  &lt;div class="card" style="--i:0"&gt;Reforma completa&lt;/div&gt;
+  &lt;div class="card" style="--i:1"&gt;Projeto de interiores&lt;/div&gt;
+  &lt;div class="card" style="--i:2"&gt;Consultoria&lt;/div&gt;
+&lt;/div&gt;
+
+.card {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: sobe .5s cubic-bezier(.22,1,.36,1) forwards;
+  animation-delay: calc(var(--i) * 70ms);
+}
+@keyframes sobe { to { opacity: 1; transform: none; } }</code></pre></div>
+</details>
+</div>
+
+<div class="demo" data-demo="timeline">
+<div class="demo__palco">
+<div class="d-timeline">
+<div class="d-timeline__t">Arquitetura que cabe no seu prazo</div>
+<div class="d-timeline__s">Campo Grande · MS</div>
+<button class="pc-cta" type="button">Falar no WhatsApp</button>
+</div>
+</div>
+<div class="demo__pe"><div class="demo__info"><strong>Sequência de hero</strong><span>título, apoio, botão</span></div><div class="demo__acoes"><span class="demo__selo" data-l="gsap">GSAP</span><button class="demo__rodar">rodar</button></div></div>
+<details class="demo__codigo"><summary>ver código</summary>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>// o valor da timeline é o parâmetro de posição:
+// '-=0.25' faz o próximo começar antes do anterior terminar
+gsap.timeline()
+  .from('.hero h1',  { y: 22, opacity: 0, duration: .5,  ease: 'power3.out' })
+  .from('.hero p',   { y: 16, opacity: 0, duration: .45, ease: 'power3.out' }, '-=0.25')
+  .from('.hero .cta',{ scale: .85, opacity: 0, duration: .45, ease: 'back.out(1.7)' }, '-=0.2');
+
+// sem GSAP, a mesma coisa em nativo:
+document.querySelectorAll('.hero > *').forEach((el, i) =&gt; {
+  el.animate(
+    [{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'none' }],
+    { duration: 450, delay: i * 200, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'both' }
+  );
+});</code></pre></div>
+</details>
+</div>
+
+<div class="demo" data-demo="esqueleto">
+<div class="demo__palco">
+<div class="d-esqueleto">
+<div class="d-esqueleto__linha"></div>
+<div class="d-esqueleto__linha"></div>
+<div class="d-esqueleto__linha"></div>
+<div class="d-esqueleto__real"><strong>Vanessa Carvalho</strong><span>Arquiteta · CAU A12345-6</span></div>
+</div>
+</div>
+<div class="demo__pe"><div class="demo__info"><strong>Esqueleto de carregamento</strong><span>placeholder → conteúdo</span></div><div class="demo__acoes"><span class="demo__selo" data-l="css">CSS</span><button class="demo__rodar">rodar</button></div></div>
+<details class="demo__codigo"><summary>ver código</summary>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.linha {
+  height: 11px; border-radius: 3px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #d5d5d5 37%, #e8e8e8 63%);
+  background-size: 400% 100%;
+  animation: brilho 1.3s linear infinite;
+}
+@keyframes brilho { to { background-position: -135% 0; } }
+
+/* quando o conteúdo chega, some com o esqueleto */
+.bloco.pronto .linha { display: none; }</code></pre></div>
+</details>
+</div>
+
+</div>
+<div class="nota"><strong>Sobre o esqueleto:</strong> só vale quando o conteúdo realmente demora — dado vindo de API, imagem pesada. Em landing page estática ele é teatro: você está fingindo uma espera que não existe, e o visitante espera de verdade.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lab-toque" data-marca="novo">
+<div class="topico__cabeca"><h3>2 · Reação ao toque</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Resposta ao gesto do visitante. Aqui a duração tem que ser curta — acima de 250ms o elemento parece preguiçoso, porque a mão já terminou o movimento e a interface ainda está indo.</p>
+<div class="lab">
+
+<div class="demo" data-demo="mola">
+<div class="demo__palco">
+<div class="d-mola"><button class="pc-cta" type="button">Pedir orçamento</button></div>
+</div>
+<div class="demo__pe"><div class="demo__info"><strong>Mola de verdade</strong><span>stiffness 260 · damping 12</span></div><div class="demo__acoes"><span class="demo__selo" data-l="motion">Motion</span><button class="demo__rodar">rodar</button></div></div>
+<details class="demo__codigo"><summary>ver código</summary>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>&lt;script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"&gt;&lt;/script&gt;
+
+const { animate } = Motion;
+
+animate('.cta', { scale: [0.6, 1] }, {
+  type: 'spring',
+  stiffness: 260,   // força da mola: maior = mais rápido
+  damping: 12,      // freio: menor = mais quique
+  mass: 1           // peso: maior = mais lento e pesado
+});</code></pre></div>
+</details>
+</div>
+
+<div class="demo">
+<div class="demo__palco">
+<div class="d-hover"><div class="pc">Reforma de apartamento<small>a partir de 45 dias</small></div></div>
+</div>
+<div class="demo__pe"><div class="demo__info"><strong>Card que convida</strong><span>passe o mouse</span></div><div class="demo__acoes"><span class="demo__selo" data-l="css">CSS</span></div></div>
+<details class="demo__codigo"><summary>ver código</summary>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.card {
+  transition: transform .25s cubic-bezier(.22,1,.36,1),
+              box-shadow .25s, border-color .25s;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px -14px rgba(0,0,0,.45);
+  border-color: var(--accent);
+}
+/* nunca anime só no :hover — o teclado também navega */
+.card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }</code></pre></div>
+</details>
+</div>
+
+<div class="demo" data-demo="tilt">
+<div class="demo__palco">
+<div class="d-tilt"><div class="d-tilt__carta">mexa o mouse</div></div>
+</div>
+<div class="demo__pe"><div class="demo__info"><strong>Inclinação 3D</strong><span>22° de amplitude</span></div><div class="demo__acoes"><span class="demo__selo" data-l="js">JS</span></div></div>
+<details class="demo__codigo"><summary>ver código</summary>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">css + js</span><button class="copiar">copiar</button></div><pre><code>.palco { perspective: 600px; }
+.carta { transform-style: preserve-3d; transition: transform .12s ease-out; }
+
+palco.addEventListener('pointermove', (e) =&gt; {
+  const r = palco.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width  - .5;   // -0.5 a 0.5
+  const y = (e.clientY - r.top)  / r.height - .5;
+  carta.style.transform = `rotateY(${x * 22}deg) rotateX(${-y * 22}deg)`;
+});
+palco.addEventListener('pointerleave', () =&gt; carta.style.transform = '');</code></pre></div>
+</details>
+</div>
+
+</div>
+<div class="nota"><strong>Cuidado com o tilt:</strong> ele não existe no celular, que é onde 70% do tráfego de cliente local está. Use como tempero em desktop, nunca como parte essencial da leitura.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lab-rolagem" data-marca="novo">
+<div class="topico__cabeca"><h3>3 · Ligado à rolagem</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Os três abaixo têm caixas de rolagem próprias — role dentro delas para ver o efeito. É a categoria mais fácil de exagerar: cada elemento que aparece atrasa a leitura em um quarto de segundo, e uma página com trinta deles vira um site que se recusa a ser lido.</p>
+<div class="lab">
+
+<div class="demo" data-demo="rolagem">
+<div class="demo__palco">
+<div class="d-rolagem"><div class="d-rolagem__interno">
+<div class="d-rolagem__espaco">role para baixo ↓</div>
+<div class="pc"><span class="pc__ponto"></span>Planta humanizada</div>
+<div class="pc"><span class="pc__ponto"></span>Visita técnica</div>
+<div class="pc"><span class="pc__ponto"></span>Acompanhamento de obra</div>
+<div class="d-rolagem__espaco">fim</div>
+</div></div>
+</div>
+<div class="demo__pe"><div class="demo__info"><strong>Revelar ao aparecer</strong><span>IntersectionObserver</span></div><div class="demo__acoes"><span class="demo__selo" data-l="js">JS</span><button class="demo__rodar">rodar</button></div></div>
+<details class="demo__codigo"><summary>ver código</summary>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">css + js</span><button class="copiar">copiar</button></div><pre><code>.revela { opacity: 0; transform: translateY(16px);
+          transition: opacity .5s, transform .5s cubic-bezier(.22,1,.36,1); }
+.revela.visivel { opacity: 1; transform: none; }
+
+const obs = new IntersectionObserver((entradas) =&gt; {
+  entradas.forEach(e =&gt; {
+    // quem já passou por cima da tela numa rolagem rápida
+    // nunca dispara o isIntersecting — e ficaria invisível para sempre
+    const jaPassou = e.boundingClientRect.top &lt; e.rootBounds.top;
+    if (e.isIntersecting || jaPassou) {
+      e.target.classList.add('visivel');
+      obs.unobserve(e.target);   // anima uma vez só, e para de observar
+    }
+  });
+}, { threshold: 0.35 });
+
+document.querySelectorAll('.revela').forEach(el =&gt; obs.observe(el));</code></pre></div>
+</details>
+</div>
+
+<div class="demo" data-demo="barra">
+<div class="demo__palco">
+<div class="d-barra">
+<div class="d-barra__trilho"><div class="d-barra__fita"></div></div>
+<div class="d-barra__caixa"><div class="d-barra__longo">role esta caixa e olhe a barra acima ↑</div></div>
+</div>
+</div>
+<div class="demo__pe"><div class="demo__info"><strong>Progresso de leitura</strong><span>scrollTop ÷ altura total</span></div><div class="demo__acoes"><span class="demo__selo" data-l="js">JS</span><button class="demo__rodar">rodar</button></div></div>
+<details class="demo__codigo"><summary>ver código</summary>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css puro moderno</span><button class="copiar">copiar</button></div><pre><code>/* na página inteira, sem uma linha de JavaScript: */
+.barra {
+  position: fixed; top: 0; left: 0; height: 4px;
+  background: var(--accent); transform-origin: 0 50%;
+  animation: enche linear;
+  animation-timeline: scroll(root block);
+}
+@keyframes enche { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* onde scroll() ainda não existe, a conta é esta: */
+const max = el.scrollHeight - el.clientHeight;
+fita.style.width = (el.scrollTop / max) * 100 + '%';</code></pre></div>
+</details>
+</div>
+
+<div class="demo">
+<div class="demo__palco">
+<div class="d-marquee"><div class="d-marquee__fita">
+<div class="pc">Reforma</div><div class="pc">Interiores</div><div class="pc">Comercial</div>
+<div class="pc">Reforma</div><div class="pc">Interiores</div><div class="pc">Comercial</div>
+</div></div>
+</div>
+<div class="demo__pe"><div class="demo__info"><strong>Faixa infinita</strong><span>passe o mouse para pausar</span></div><div class="demo__acoes"><span class="demo__selo" data-l="css">CSS</span></div></div>
+<details class="demo__codigo"><summary>ver código</summary>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>/* o segredo: duplique a lista e ande exatamente 50% */
+.fita { display: flex; gap: 10px; width: max-content;
+        animation: corre 14s linear infinite; }
+@keyframes corre { to { transform: translateX(-50%); } }
+
+.marquee { overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+
+.marquee:hover .fita { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .fita { animation: none; } }</code></pre></div>
+</details>
+</div>
+
+</div>
+</div>
+</article>
+
+<article class="topico" id="t-lab-detalhes" data-marca="novo">
+<div class="topico__cabeca"><h3>4 · Detalhes que vendem</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Os três que mais aparecem em página de serviço: o número que conta, a dúvida que abre e o botão que chama atenção sem gritar.</p>
+<div class="lab">
+
+<div class="demo" data-demo="contador">
+<div class="demo__palco">
+<div class="d-contador"><div class="d-contador__num">0</div><div class="d-contador__rot">obras entregues</div></div>
+</div>
+<div class="demo__pe"><div class="demo__info"><strong>Número contando</strong><span>rAF · easeOutCubic</span></div><div class="demo__acoes"><span class="demo__selo" data-l="js">JS</span><button class="demo__rodar">rodar</button></div></div>
+<details class="demo__codigo"><summary>ver código</summary>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>function contar(el, alvo, dur = 1400) {
+  let ini = null;
+  function passo(t) {
+    if (ini === null) ini = t;
+    const p = Math.min((t - ini) / dur, 1);
+    const e = 1 - Math.pow(1 - p, 3);      // easeOutCubic: rápido e desacelera
+    el.textContent = Math.round(alvo * e);
+    if (p &lt; 1) requestAnimationFrame(passo);
+  }
+  requestAnimationFrame(passo);
+}
+
+/* e no CSS, para o número não tremer enquanto conta: */
+.numero { font-variant-numeric: tabular-nums; }</code></pre></div>
+</details>
+</div>
+
+<div class="demo" data-demo="acordeao">
+<div class="demo__palco">
+<div class="d-acordeao">
+<div class="d-acordeao__item"><button class="d-acordeao__cab" type="button">Quanto custa?<span aria-hidden="true">+</span></button><div class="d-acordeao__corpo"><div><p>Depende da metragem e do escopo. Projetos de interiores começam em R$ 8 mil.</p></div></div></div>
+<div class="d-acordeao__item"><button class="d-acordeao__cab" type="button">Quanto demora?<span aria-hidden="true">+</span></button><div class="d-acordeao__corpo"><div><p>De 45 a 90 dias, contando aprovação e execução.</p></div></div></div>
+</div>
+</div>
+<div class="demo__pe"><div class="demo__info"><strong>Dúvida que abre</strong><span>0fr → 1fr</span></div><div class="demo__acoes"><span class="demo__selo" data-l="css">CSS</span></div></div>
+<details class="demo__codigo"><summary>ver código</summary>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>/* animar height: auto nunca funcionou. grid resolve: */
+.corpo { display: grid; grid-template-rows: 0fr;
+         transition: grid-template-rows .32s cubic-bezier(.4,0,.2,1); }
+.item.aberto .corpo { grid-template-rows: 1fr; }
+.corpo &gt; div { overflow: hidden; }   /* esta linha é obrigatória */
+
+/* o JS é uma linha: */
+cab.addEventListener('click', () =&gt; item.classList.toggle('aberto'));</code></pre></div>
+</details>
+</div>
+
+<div class="demo">
+<div class="demo__palco">
+<div class="d-pulso"><button class="pc-cta" type="button">Chamar no WhatsApp</button></div>
+</div>
+<div class="demo__pe"><div class="demo__info"><strong>Pulso no CTA</strong><span>anel a cada 2,4s</span></div><div class="demo__acoes"><span class="demo__selo" data-l="css">CSS</span></div></div>
+<details class="demo__codigo"><summary>ver código</summary>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.cta { position: relative; }
+.cta::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent);
+  animation: pulso 2.4s cubic-bezier(.22,1,.36,1) infinite;
+}
+@keyframes pulso { to { box-shadow: 0 0 0 16px transparent; } }
+
+/* o ::after não captura clique, então o botão continua clicável */
+@media (prefers-reduced-motion: reduce) { .cta::after { animation: none; } }</code></pre></div>
+</details>
+</div>
+
+</div>
+<div class="nota"><strong>Regra do pulso:</strong> um por página, no CTA principal, e só ele. Dois elementos pulsando ao mesmo tempo não chamam o dobro da atenção — chamam zero, porque o olho para de saber para onde ir.</div>
+</div>
+</article>
+</section>
+
+</main>
+</div>
+<footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<script src="app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
+<script src="demos.js" defer></script>
+</body>
+</html>

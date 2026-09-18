@@ -25,17 +25,32 @@
 </div>
 <button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
 </div>
-<nav class="trilhas" aria-label="Trilhas">
-<div class="trilhas__interno">
-<a href="index.html" class="trilha">Início</a>
-<a href="html-puro.html" class="trilha is-ativa">HTML puro</a>
-<a href="frameworks.html" class="trilha">Frameworks</a>
-<a href="back-end.html" class="trilha">Back-end</a>
-<a href="negocio.html" class="trilha">Negócio</a>
-<a href="ia.html" class="trilha">IA</a>
+<nav class="navmenu" aria-label="Trilhas">
+<details class="navmenu__caixa" id="navmenu">
+<summary class="navmenu__botao">Trilhas<span aria-hidden="true">&#9662;</span></summary>
+<div class="navmenu__painel">
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Construir</p>
+<a href="html-puro.html" class="is-atual"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Quando precisa de servidor</span></a>
 </div>
-</nav>
-</header>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Vender</p>
+<a href="landing-pages.html"><strong>Landing pages</strong><span>A estratégia da página</span></a>
+<a href="trafego.html"><strong>Tráfego</strong><span>Ser encontrado no Google</span></a>
+<a href="negocio.html"><strong>Negócio</strong><span>Preço, escopo e contrato</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Método</p>
+<a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
+<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+</div>
+</details>
+<span class="navmenu__aqui">HTML puro</span>
+</nav></header>
 <div class="palco">
 <nav class="sumario" id="sumario" aria-label="Sumário">
 <button class="sumario__abrir" id="sumario-abrir" aria-expanded="false" aria-controls="sumario-lista"><span>Sumário</span><span aria-hidden="true">&#9662;</span></button>

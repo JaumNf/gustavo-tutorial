@@ -25,17 +25,32 @@
 </div>
 <button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
 </div>
-<nav class="trilhas" aria-label="Trilhas">
-<div class="trilhas__interno">
-<a href="index.html" class="trilha">Início</a>
-<a href="html-puro.html" class="trilha">HTML puro</a>
-<a href="frameworks.html" class="trilha is-ativa">Frameworks</a>
-<a href="back-end.html" class="trilha">Back-end</a>
-<a href="negocio.html" class="trilha">Negócio</a>
-<a href="ia.html" class="trilha">IA</a>
+<nav class="navmenu" aria-label="Trilhas">
+<details class="navmenu__caixa" id="navmenu">
+<summary class="navmenu__botao">Trilhas<span aria-hidden="true">&#9662;</span></summary>
+<div class="navmenu__painel">
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Construir</p>
+<a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="frameworks.html" class="is-atual"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Quando precisa de servidor</span></a>
 </div>
-</nav>
-</header>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Vender</p>
+<a href="landing-pages.html"><strong>Landing pages</strong><span>A estratégia da página</span></a>
+<a href="trafego.html"><strong>Tráfego</strong><span>Ser encontrado no Google</span></a>
+<a href="negocio.html"><strong>Negócio</strong><span>Preço, escopo e contrato</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Método</p>
+<a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
+<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+</div>
+</details>
+<span class="navmenu__aqui">Frameworks</span>
+</nav></header>
 <div class="palco">
 <nav class="sumario" id="sumario" aria-label="Sumário">
 <button class="sumario__abrir" id="sumario-abrir" aria-expanded="false" aria-controls="sumario-lista"><span>Sumário</span><span aria-hidden="true">&#9662;</span></button>
@@ -48,6 +63,24 @@
 <li><a href="#t-vite">Começando um projeto com Vite</a></li>
 <li><a href="#t-tailwind">Tailwind na prática</a></li>
 </ol>
+<a class="sumario__parte" href="#s2">2 · Geradores de site estático</a>
+<ol>
+<li><a href="#t-fw-problema">O problema que eles resolvem</a></li>
+<li><a href="#t-fw-astro">Astro</a></li>
+<li><a href="#t-fw-outros-ssg">Eleventy, Hugo e os demais</a></li>
+</ol>
+<a class="sumario__parte" href="#s3">3 · Interatividade sem framework</a>
+<ol>
+<li><a href="#t-fw-alpine">Alpine.js</a></li>
+<li><a href="#t-fw-htmx">htmx</a></li>
+<li><a href="#t-fw-escolher-leve">Qual usar, e quando não usar nenhum</a></li>
+</ol>
+<a class="sumario__parte" href="#s4">4 · Construtores visuais e o resto do mercado</a>
+<ol>
+<li><a href="#t-fw-construtores">WordPress, Webflow, Framer, Wix</a></li>
+<li><a href="#t-fw-competir">Como se posicionar — e quando indicar o concorrente</a></li>
+<li><a href="#t-fw-legado">Servidor tradicional e HTML de e-mail</a></li>
+</ol>
 </div>
 </nav>
 <main class="leitura">
@@ -57,7 +90,7 @@
 <div class="legenda">
 <span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
 <span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
-<span>1 partes · 4 tópicos</span>
+<span>4 partes · 13 tópicos</span>
 </div>
 </section>
 <p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
@@ -275,6 +308,211 @@ hover:bg-red-900   muda o fundo no hover</code></pre>
         </div>
       </article>
 </section>
+<section class="parte" id="s2">
+<div class="parte__cabeca"><span class="parte__num">PARTE 2</span><h2>Geradores de site estático</h2></div>
+<p class="parte__resumo">O formato que faltava entre HTML puro e framework. Provavelmente o próximo passo natural de quem entrega arquivo único hoje.</p>
+
+<article class="topico" id="t-fw-problema" data-marca="novo">
+<div class="topico__cabeca"><h3>O problema que eles resolvem</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Um cliente pede quinze páginas. Em HTML puro, o menu é copiado quinze vezes. Quando ele quiser trocar um item, são quinze arquivos para editar — e basta esquecer um para o site ficar inconsistente.</p>
+<p>A saída óbvia parece ser React ou Next. Mas React resolve um problema diferente: manter tela e dados em sincronia enquanto a pessoa interage. Num site que não muda depois de carregado, isso é peso sem contrapartida.</p>
+<p><strong>Gerador de site estático</strong> resolve exatamente o problema que existe: você escreve pedaços reutilizáveis, ele monta as páginas finais, e o que vai pro ar é HTML pronto. Mesmo resultado do seu arquivo único — rápido, sem framework no navegador, indexável — só que sem a cópia manual.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">o espectro completo</span><button class="copiar">copiar</button></div><pre><code>HTML puro        → 1 a 5 páginas, conteúdo fixo, zero build
+                   (o que você faz hoje)
+
+Gerador estático → 5 a 500 páginas, conteúdo repetitivo,
+                   ainda sem framework no navegador
+
+Framework (SPA)  → estado complexo, dados mudando em tempo real,
+                   área logada
+
+Framework + SSR  → tudo acima, com conteúdo dinâmico
+                   e SEO importante</code></pre></div>
+</div>
+</article>
+
+<article class="topico" id="t-fw-astro" data-marca="novo">
+<div class="topico__cabeca"><h3>Astro</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>É o que faz mais sentido para quem vem do HTML puro, porque a sintaxe é quase HTML. Cada arquivo é uma página; cada componente é um pedaço de marcação com um bloco de código no topo.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">um componente</span><button class="copiar">copiar</button></div><pre><code>---
+// tudo entre os traços roda na hora de gerar, não no navegador
+const { nome, ingredientes, semAlcool } = Astro.props;
+---
+
+&lt;article class="card"&gt;
+  &lt;h3&gt;{nome}&lt;/h3&gt;
+  &lt;p&gt;{ingredientes.join(' · ')}&lt;/p&gt;
+  {semAlcool &amp;&amp; &lt;span class="card__selo"&gt;sem álcool&lt;/span&gt;}
+&lt;/article&gt;
+
+&lt;style&gt;
+  /* este CSS vale só para este componente */
+  .card { padding: 20px; border: 1px solid var(--linha); }
+&lt;/style&gt;</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">usando</span><button class="copiar">copiar</button></div><pre><code>---
+import Card from '../components/Card.astro';
+import { drinks } from '../dados/drinks.js';
+---
+
+&lt;div class="carta"&gt;
+  {drinks.map(d =&gt; &lt;Card {...d} /&gt;)}
+&lt;/div&gt;</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Característica</th><th>O que significa na prática</th></tr></thead>
+<tbody>
+<tr><td>Zero JavaScript por padrão</td><td>O site final é HTML e CSS. Nada roda no navegador a menos que você peça</td></tr>
+<tr><td>Sintaxe próxima do HTML</td><td>A curva de aprendizado é curta para quem já escreve HTML</td></tr>
+<tr><td>CSS por componente</td><td>Acaba o medo de nome de classe colidindo</td></tr>
+<tr><td>Rotas por arquivo</td><td><code>src/pages/contato.astro</code> vira <code>/contato</code></td></tr>
+<tr><td>Ilhas de interatividade</td><td>Dá para usar React só num componente específico, se precisar</td></tr>
+<tr><td>Conteúdo em Markdown</td><td>Blog e artigos viram arquivos de texto, sem CMS</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>O que muda no seu dia:</strong> você passa a rodar <code>npm run dev</code> em vez de abrir o arquivo, e <code>npm run build</code> gera a pasta que sobe pro servidor. Em troca, o menu existe em um lugar só.</div>
+</div>
+</article>
+
+<article class="topico" id="t-fw-outros-ssg" data-marca="novo">
+<div class="topico__cabeca"><h3>Eleventy, Hugo e os demais</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Gerador</th><th>Perfil</th><th>Bom quando</th></tr></thead>
+<tbody>
+<tr><td><strong>Astro</strong></td><td>Moderno, componentes, ecossistema grande</td><td>Site com componentes e alguma interatividade</td></tr>
+<tr><td><strong>Eleventy</strong></td><td>Minimalista, flexível, quase sem opinião</td><td>Você quer controle total do HTML final</td></tr>
+<tr><td><strong>Hugo</strong></td><td>Escrito em Go, absurdamente rápido</td><td>Milhares de páginas; build em segundos</td></tr>
+<tr><td><strong>Next.js / Nuxt</strong></td><td>Framework completo que também gera estático</td><td>Já usa React ou Vue e quer as duas coisas</td></tr>
+</tbody></table></div>
+<p>Para o tipo de projeto que você faz, a escolha real é entre Astro e Eleventy. Astro se você quer componentes e uma estrutura mais guiada; Eleventy se você quer que o HTML final seja exatamente o que você escreveu, sem camada nenhuma.</p>
+<div class="nota nota--alerta"><strong>O que você perde ao adotar qualquer um deles:</strong> a entrega deixa de ser um arquivo que abre com dois cliques. Passa a exigir Node instalado, <code>npm install</code> e um comando de build. Para landing page única, isso é perda líquida. A partir de cinco páginas com partes repetidas, o ganho supera.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s3">
+<div class="parte__cabeca"><span class="parte__num">PARTE 3</span><h2>Interatividade sem framework</h2></div>
+<p class="parte__resumo">Para quando o JavaScript puro começa a ficar repetitivo, mas React seria exagero. Duas ferramentas que funcionam via CDN, sem build.</p>
+
+<article class="topico" id="t-fw-alpine" data-marca="novo">
+<div class="topico__cabeca"><h3>Alpine.js</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>Reatividade escrita em atributos, direto no HTML. Cerca de 15KB, via CDN, sem etapa de build — cabe no seu formato de entrega.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">menu, contador e aba com zero JavaScript escrito</span><button class="copiar">copiar</button></div><pre><code>&lt;script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"&gt;&lt;/script&gt;
+
+&lt;!-- menu que abre e fecha --&gt;
+&lt;div x-data="{ aberto: false }"&gt;
+  &lt;button @click="aberto = !aberto" :aria-expanded="aberto"&gt;Menu&lt;/button&gt;
+  &lt;nav x-show="aberto" @click.outside="aberto = false"&gt;
+    &lt;a href="#sobre"&gt;Sobre&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/div&gt;
+
+&lt;!-- FAQ em acordeão --&gt;
+&lt;div x-data="{ atual: null }"&gt;
+  &lt;template x-for="(p, i) in perguntas"&gt;
+    &lt;div&gt;
+      &lt;button @click="atual = atual === i ? null : i" x-text="p.titulo"&gt;&lt;/button&gt;
+      &lt;p x-show="atual === i" x-text="p.resposta"&gt;&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/template&gt;
+&lt;/div&gt;</code></pre></div>
+<p>A vantagem sobre JavaScript puro aparece quando há vários estados na mesma página: menu aberto, aba selecionada, filtro ativo, modal visível. Em JS puro isso vira um monte de <code>classList.toggle</code> espalhado; no Alpine, o estado fica declarado ao lado do elemento.</p>
+<div class="nota nota--alerta"><strong>A troca:</strong> o HTML fica mais poluído e o site passa a depender de uma biblioteca externa. Se o CDN cair ou a pessoa estiver sem JavaScript, nada funciona — o que reforça a regra de sempre ter um caminho alternativo para o essencial.</div>
+</div>
+</article>
+
+<article class="topico" id="t-fw-htmx" data-marca="novo">
+<div class="topico__cabeca"><h3>htmx</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>Filosofia diferente: em vez de trazer dados e montar a tela no navegador, o servidor devolve HTML pronto e o htmx troca o pedaço da página.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div><pre><code>&lt;button hx-post="/contato"
+        hx-target="#resposta"
+        hx-swap="innerHTML"&gt;
+  Enviar
+&lt;/button&gt;
+
+&lt;div id="resposta"&gt;&lt;/div&gt;
+&lt;!-- o servidor responde com HTML; o htmx coloca ali dentro --&gt;</code></pre></div>
+<p>Faz sentido quando existe servidor do outro lado — PHP, Python, Node. Para site estático, quase não se aplica. Vale conhecer porque é uma corrente forte hoje entre quem acha que o front-end ficou complexo demais, e porque combina com a lógica de serverless da trilha de Back-end.</p>
+</div>
+</article>
+
+<article class="topico" id="t-fw-escolher-leve" data-marca="novo">
+<div class="topico__cabeca"><h3>Qual usar, e quando não usar nenhum</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Situação</th><th>Escolha</th></tr></thead>
+<tbody>
+<tr><td>Um menu e um formulário</td><td>JavaScript puro. Não instale nada</td></tr>
+<tr><td>Vários estados independentes na mesma página</td><td>Alpine</td></tr>
+<tr><td>Página que conversa com servidor sem recarregar</td><td>htmx</td></tr>
+<tr><td>Interface com muitos componentes e estado compartilhado</td><td>Aí sim, framework</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Um critério honesto:</strong> conte quantas vezes você escreveu <code>classList.toggle</code> no projeto. Até umas cinco, JavaScript puro está bom. Acima disso, o código começa a ficar difícil de seguir, e uma ferramenta que declara estado passa a compensar.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s4">
+<div class="parte__cabeca"><span class="parte__num">PARTE 4</span><h2>Construtores visuais e o resto do mercado</h2></div>
+<p class="parte__resumo">O que seus concorrentes usam, o que os clientes já ouviram falar, e como se posicionar sem competir em preço.</p>
+
+<article class="topico" id="t-fw-construtores" data-marca="novo">
+<div class="topico__cabeca"><h3>WordPress, Webflow, Framer, Wix</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Ferramenta</th><th>O que é</th><th>Força</th><th>Fraqueza</th></tr></thead>
+<tbody>
+<tr><td><strong>WordPress</strong></td><td>CMS com tema e plugin; move uma fatia enorme da web</td><td>Cliente edita sozinho; ecossistema gigante; barato de achar quem mexe</td><td>Lento se malcuidado; exige atualização constante; alvo comum de invasão</td></tr>
+<tr><td><strong>Webflow</strong></td><td>Editor visual que gera código de verdade</td><td>Resultado limpo; CMS embutido; bom para designer</td><td>Mensalidade; sair de lá depois é trabalhoso</td></tr>
+<tr><td><strong>Framer</strong></td><td>Vem do design, virou publicador de sites</td><td>Animação nativa e boa; muito rápido para landing page</td><td>Mensalidade; menos controle fino</td></tr>
+<tr><td><strong>Wix / Squarespace</strong></td><td>Construtor para o dono do negócio montar sozinho</td><td>Barato; ninguém precisa de você</td><td>Resultado genérico; performance fraca; pouco controle</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Por que conhecer:</strong> é com isso que você compete no orçamento do cliente. Quando ele diz "meu sobrinho faz no Wix por 300 reais", você precisa saber exatamente o que ele ganha e o que perde — senão a conversa vira briga de preço, que você perde.</div>
+</div>
+</article>
+
+<article class="topico" id="t-fw-competir" data-marca="novo">
+<div class="topico__cabeca"><h3>Como se posicionar — e quando indicar o concorrente</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Competir com construtor visual em preço é perder. O que você vende é diferente, e vale nomear a diferença.</p>
+<h4>O que você entrega que eles não entregam</h4>
+<ul>
+<li><strong>Estratégia.</strong> A arquitetura de seções derivada das objeções reais do cliente. Template não faz isso.</li>
+<li><strong>Performance de verdade.</strong> Página que carrega em um segundo no celular, sem os quilos de script que vêm de fábrica.</li>
+<li><strong>Sem mensalidade de plataforma.</strong> O arquivo é dele e roda em qualquer lugar.</li>
+<li><strong>Nada de genérico.</strong> Um site que não parece com mais dez mil.</li>
+<li><strong>Uma pessoa responsável.</strong> Com nome, que atende quando quebra.</li>
+</ul>
+<h4>Quando indicar outro caminho é a resposta certa</h4>
+<p>Se o cliente vai publicar conteúdo toda semana, se ele quer um catálogo com centenas de produtos, se ele precisa de loja com pagamento e estoque, ou se o orçamento simplesmente não comporta trabalho sob medida — dizer isso na cara é melhor que aceitar e entregar mal.</p>
+<div class="nota"><strong>Isso costuma render mais, não menos.</strong> Cliente que recebe uma recomendação honesta contra o seu próprio faturamento lembra de você — e indica. E você fica com os projetos em que seu trabalho realmente faz diferença, em vez de manutenção de WordPress por preço baixo.</div>
+</div>
+</article>
+
+<article class="topico" id="t-fw-legado" data-marca="novo">
+<div class="topico__cabeca"><h3>Servidor tradicional e HTML de e-mail</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<h4>Renderização no servidor à moda antiga</h4>
+<p>PHP com Laravel, templates de Django, Rails. Não são modernos, mas movem uma parte enorme da web brasileira — e é o que você vai encontrar se pegar manutenção de site existente. O modelo é simples e ainda válido: o servidor monta o HTML e manda pronto. É, no fundo, a mesma ideia do gerador estático, só que na hora do pedido em vez de na hora do build.</p>
+
+<h4>HTML de e-mail</h4>
+<p>Um mundo à parte, e vale saber que existe antes de aceitar o trabalho achando que é como fazer uma página.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Na web</th><th>No e-mail</th></tr></thead>
+<tbody>
+<tr><td>Flexbox e Grid</td><td>Tabelas aninhadas, como em 2005</td></tr>
+<tr><td>CSS em arquivo ou <code>&lt;style&gt;</code></td><td>CSS inline em cada elemento</td></tr>
+<tr><td>Fontes do Google</td><td>Fontes do sistema, com sorte</td></tr>
+<tr><td>JavaScript</td><td>Nenhum</td></tr>
+<tr><td>Testar em três navegadores</td><td>Testar em dezenas de clientes de e-mail</td></tr>
+</tbody></table></div>
+<div class="nota nota--alerta"><strong>Se um cliente pedir newsletter,</strong> o caminho sensato quase nunca é escrever HTML de e-mail à mão: é usar o editor da própria ferramenta de envio, que já resolveu a compatibilidade. Cobrar por isso como se fosse uma página é subestimar o trabalho — e fazer à mão sem experiência é entrar num buraco.</div>
+</div>
+</article>
+</section>
+
 </main>
 </div>
 <footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>

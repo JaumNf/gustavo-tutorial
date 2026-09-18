@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Landing pages — Gustavo Tutorial</title>
+<meta name="description" content="A estratégia de uma landing page que converte: descoberta, objeções, arquitetura de seções, hero, prova quando não existe, conversão e medição.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Landing pages — Gustavo Tutorial">
+<meta property="og:description" content="A estratégia de uma landing page que converte: descoberta, objeções, arquitetura de seções, hero, prova quando não existe, conversão e medição.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="topo">
+<div class="topo__interno">
+<a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
+<div class="filtros" role="group" aria-label="Filtrar tópicos">
+<button class="filtro" data-filtro="tudo" aria-pressed="true">Tudo</button>
+<button class="filtro" data-filtro="revisao" aria-pressed="false">Revisão</button>
+<button class="filtro" data-filtro="novo" aria-pressed="false">Novo</button>
+</div>
+<button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+</div>
+<nav class="navmenu" aria-label="Trilhas">
+<details class="navmenu__caixa" id="navmenu">
+<summary class="navmenu__botao">Trilhas<span aria-hidden="true">&#9662;</span></summary>
+<div class="navmenu__painel">
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Construir</p>
+<a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Quando precisa de servidor</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Vender</p>
+<a href="landing-pages.html" class="is-atual"><strong>Landing pages</strong><span>A estratégia da página</span></a>
+<a href="trafego.html"><strong>Tráfego</strong><span>Ser encontrado no Google</span></a>
+<a href="negocio.html"><strong>Negócio</strong><span>Preço, escopo e contrato</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Método</p>
+<a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
+<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+</div>
+</details>
+<span class="navmenu__aqui">Landing pages</span>
+</nav></header>
+<div class="palco">
+<nav class="sumario" id="sumario" aria-label="Sumário">
+<button class="sumario__abrir" id="sumario-abrir" aria-expanded="false" aria-controls="sumario-lista"><span>Sumário</span><span aria-hidden="true">&#9662;</span></button>
+<div class="sumario__lista" id="sumario-lista">
+<p class="sumario__titulo">Landing pages</p>
+<a class="sumario__parte" href="#s1">1 · Antes de desenhar: a descoberta</a>
+<ol>
+<li><a href="#t-lp-oferta">Landing page não conserta oferta ruim</a></li>
+<li><a href="#t-lp-perguntas">As perguntas que extraem o que importa</a></li>
+<li><a href="#t-lp-trafego">Tráfego frio, morno e quente</a></li>
+<li><a href="#t-lp-cliente-nao-sabe">Quando o cliente não sabe responder</a></li>
+</ol>
+<a class="sumario__parte" href="#s2">2 · Objeções</a>
+<ol>
+<li><a href="#t-lp-objecao">A página é uma conversa de objeções</a></li>
+<li><a href="#t-lp-levantar">Como levantar as objeções reais</a></li>
+<li><a href="#t-lp-mapear">Mapear objeção para seção</a></li>
+</ol>
+<a class="sumario__parte" href="#s3">3 · Arquitetura de seções</a>
+<ol>
+<li><a href="#t-lp-sequencia">A sequência lógica</a></li>
+<li><a href="#t-lp-catalogo">O catálogo de seções</a></li>
+<li><a href="#t-lp-quantas">Quantas seções, e o que corta</a></li>
+<li><a href="#t-lp-ordem-trafego">A ordem muda com o tráfego</a></li>
+</ol>
+<a class="sumario__parte" href="#s4">4 · A hero</a>
+<ol>
+<li><a href="#t-lp-hero-tarefa">O que a hero precisa resolver</a></li>
+<li><a href="#t-lp-hero-erros">Os erros mais caros</a></li>
+<li><a href="#t-lp-hero-frio">A hero muda com a temperatura</a></li>
+</ol>
+<a class="sumario__parte" href="#s5">5 · Prova quando ela não existe</a>
+<ol>
+<li><a href="#t-lp-sem-prova">O problema, e o que não fazer</a></li>
+<li><a href="#t-lp-substitutos">Os cinco substitutos</a></li>
+<li><a href="#t-lp-regulamentacao">Quando a prova é proibida: regulamentação por setor</a></li>
+</ol>
+<a class="sumario__parte" href="#s6">6 · A conversão</a>
+<ol>
+<li><a href="#t-lp-canal">Escolher o canal</a></li>
+<li><a href="#t-lp-atrito">Cada campo cobra um preço</a></li>
+<li><a href="#t-lp-mensagem">A mensagem pré-preenchida</a></li>
+<li><a href="#t-lp-depois">O que acontece depois do clique</a></li>
+</ol>
+<a class="sumario__parte" href="#s7">7 · Medir e melhorar</a>
+<ol>
+<li><a href="#t-lp-medir">O que medir de verdade</a></li>
+<li><a href="#t-lp-base">Construa sua própria linha de base</a></li>
+<li><a href="#t-lp-teste-gente">Teste com três pessoas vale mais que teste A/B</a></li>
+<li><a href="#t-lp-revisao30">A revisão de trinta dias</a></li>
+</ol>
+<a class="sumario__parte" href="#s8">8 · O projeto do começo ao fim</a>
+<ol>
+<li><a href="#t-lp-fluxo">As sete etapas</a></li>
+<li><a href="#t-lp-checklist">Checklist antes de publicar</a></li>
+<li><a href="#t-lp-entregar">O que entregar além do link</a></li>
+</ol>
+</div>
+</nav>
+<main class="leitura">
+<section class="abertura">
+<h1>Landing pages</h1>
+<p class="abertura__lead">A camada que fica entre saber programar e saber vender: por que cada seção existe, em que ordem ela entra, e o que fazer quando o cliente não tem depoimento, não tem foto e não sabe explicar o próprio serviço. É a parte do ofício que não está em documentação.</p>
+<div class="legenda">
+<span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
+<span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
+<span>8 partes · 28 tópicos</span>
+</div>
+</section>
+<p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
+<section class="parte" id="s1">
+<div class="parte__cabeca"><span class="parte__num">PARTE 1</span><h2>Antes de desenhar: a descoberta</h2></div>
+<p class="parte__resumo">A etapa que decide se o projeto vai dar certo — e a que quase todo mundo pula para ir logo para o Figma. Página boa não conserta briefing ruim.</p>
+
+<article class="topico" id="t-lp-oferta" data-marca="novo">
+<div class="topico__cabeca"><h3>Landing page não conserta oferta ruim</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Antes de qualquer coisa, vale entender o que uma LP faz e o que ela não faz. Ela <strong>apresenta</strong> uma oferta e <strong>remove atrito</strong> entre o interesse e a ação. Ela não cria demanda, não conserta preço fora de mercado e não faz alguém querer o que não quer.</p>
+<p>Se o cliente cobra o dobro do mercado sem justificativa, se o serviço dele é idêntico ao de mais dez na cidade, ou se ele não sabe explicar para quem serve, nenhuma página resolve. E é comum: quando o cliente diz "preciso de um site porque não está vendendo", muitas vezes o site é o último dos problemas.</p>
+<div class="nota"><strong>Três perguntas que revelam se a oferta está de pé:</strong> Por que alguém escolheria você em vez do concorrente mais barato? O que acontece se a pessoa não contratar ninguém? Qual é o motivo mais comum de alguém desistir na hora de fechar? Se o cliente trava nas três, o problema não é design.</p>
+<p>Isso não significa recusar o trabalho. Significa dizer com clareza o que a página pode fazer, para não ser cobrado por um resultado que nunca dependeu dela.</p>
+</div>
+</article>
+
+<article class="topico" id="t-lp-perguntas" data-marca="novo">
+<div class="topico__cabeca"><h3>As perguntas que extraem o que importa</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Cliente raramente sabe responder "como você quer o site". Sabe muito bem responder sobre o próprio trabalho. A descoberta boa pergunta sobre o trabalho, não sobre o site.</p>
+
+<h4>Sobre a oferta</h4>
+<ul>
+<li>Me descreve o serviço como se eu fosse um cliente seu, não um desenvolvedor.</li>
+<li>Quanto custa, mais ou menos? O que faz variar o preço?</li>
+<li>O que está incluso que as pessoas não imaginam que está?</li>
+<li>Tem algo que você faz e os concorrentes não fazem?</li>
+</ul>
+
+<h4>Sobre o cliente dele</h4>
+<ul>
+<li>Me conta do último cliente que fechou. Como ele chegou até você?</li>
+<li>O que ele perguntou antes de fechar?</li>
+<li>Teve alguém que quase fechou e desistiu? Por quê?</li>
+<li>Que tipo de cliente você prefere não pegar?</li>
+</ul>
+
+<h4>Sobre o mundo do ofício</h4>
+<ul>
+<li>Que objeto físico representa o seu trabalho?</li>
+<li>O que o cliente comenta depois que termina?</li>
+<li>Qual parte do serviço as pessoas não sabem que existe?</li>
+</ul>
+
+<div class="nota"><strong>A pergunta que mais rende:</strong> "me conta do último cliente que fechou". Ela traz oferta, público, canal, objeção e linguagem real de uma vez — tudo em forma de história concreta, que é como as pessoas conseguem responder. As respostas dessa pergunta viram copy quase direto.</div>
+
+<p>E uma regra de escuta: <strong>anote as palavras exatas que o cliente usa</strong>. Se ele diz "montagem" e não "instalação", "sessão" e não "consulta", essas são as palavras que o público dele também usa. Traduzir para o seu vocabulário afasta.</p>
+</div>
+</article>
+
+<article class="topico" id="t-lp-trafego" data-marca="revisao">
+<div class="topico__cabeca"><h3>Tráfego frio, morno e quente</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>A mesma oferta pede páginas diferentes conforme o estado de quem chega. Errar aqui estraga tudo o que vem depois, porque muda a ordem das seções, o tamanho da página e o tom.</p>
+
+<div class="tabela-caixa"><table>
+<thead><tr><th>Temperatura</th><th>Como chega</th><th>O que a página precisa fazer</th></tr></thead>
+<tbody>
+<tr><td><strong>Quente</strong></td><td>Indicação direta, já conversou com o cliente</td><td>Confirmar que é sério e dar o caminho para agir. Página curta</td></tr>
+<tr><td><strong>Morno</strong></td><td>Instagram, busca local, já está procurando resolver o problema</td><td>Provar competência, derrubar objeções, facilitar o contato</td></tr>
+<tr><td><strong>Frio</strong></td><td>Anúncio, ainda não decidiu que precisa</td><td>Educar antes de vender. Página mais longa, começando pelo problema</td></tr>
+</tbody></table></div>
+
+<p>A diferença prática mais visível está na abertura. Para tráfego morno ou quente, a página abre com prova visual e diz de cara o que é. Para tráfego frio, abrir vendendo afasta — é preciso primeiro nomear o problema que a pessoa tem e ainda não associou a uma solução.</p>
+
+<div class="nota nota--alerta"><strong>Declare a suposição.</strong> Se o cliente não souber de onde vem o tráfego, escolha a hipótese mais provável e <em>escreva isso no documento do projeto</em>: "assumindo tráfego morno vindo de Instagram e indicação". Assim, se depois entrar tráfego pago, fica claro que a página precisa mudar — e por quê. Sem isso, a mudança vira acusação de erro.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lp-cliente-nao-sabe" data-marca="novo">
+<div class="topico__cabeca"><h3>Quando o cliente não sabe responder</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Acontece muito, e não é má vontade: a pessoa é boa no ofício dela e nunca precisou articular isso em palavras. Três saídas que funcionam.</p>
+<p><strong>Troque a pergunta abstrata por uma história.</strong> "Quem é seu público?" costuma render "todo mundo que precisa". "Me conta dos três últimos clientes" rende um retrato real.</p>
+<p><strong>Ofereça opções em vez de campo aberto.</strong> "O que é mais importante: parecer acessível ou parecer premium?" É muito mais fácil escolher do que descrever.</p>
+<p><strong>Mostre e deixe reagir.</strong> Três páginas de outros negócios, com a pergunta "qual dessas você não gostaria de parecer?". A reação negativa é mais precisa e mais rápida que a positiva.</p>
+<div class="nota">Se mesmo assim ficar vago, escreva a sua interpretação e mande para ele confirmar: "entendi que o foco é X e que Y fica de fora — está certo?". Cliente valida melhor do que descreve.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s2">
+<div class="parte__cabeca"><span class="parte__num">PARTE 2</span><h2>Objeções</h2></div>
+<p class="parte__resumo">O conceito que organiza a página inteira. Uma LP não é uma apresentação do negócio — é uma sequência de respostas às razões pelas quais a pessoa não fecharia.</p>
+
+<article class="topico" id="t-lp-objecao" data-marca="revisao">
+<div class="topico__cabeca"><h3>A página é uma conversa de objeções</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>Quem chega numa landing page já tem algum interesse — senão não teria clicado. O que impede a ação não é falta de informação genérica sobre a empresa: são dúvidas específicas.</p>
+<p>Daí a regra que organiza tudo: <strong>cada seção existe para derrubar uma objeção</strong>. Seção que não responde a nenhuma pergunta real do visitante é decoração, e decoração empurra a conversão para baixo na tela.</p>
+<p>Isso muda o jeito de planejar. Em vez de perguntar "que seções essa página tem?", pergunte "o que impede essa pessoa de chamar no WhatsApp agora?" — e cada resposta vira uma seção.</p>
+<div class="nota"><strong>Teste rápido para qualquer seção:</strong> qual pergunta do visitante ela responde? Se você não conseguir escrever a pergunta em uma frase, a seção sai. "Quem somos" quase nunca passa nesse teste; "quanto custa e o que está incluso" quase sempre passa.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lp-levantar" data-marca="novo">
+<div class="topico__cabeca"><h3>Como levantar as objeções reais</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Objeção imaginada leva a página para o lado errado. As reais vêm de três fontes, em ordem de qualidade.</p>
+<p><strong>1. A memória do cliente.</strong> "O que as pessoas perguntam antes de fechar?" e "quem desistiu, desistiu por quê?". É a fonte mais direta e quase sempre suficiente.</p>
+<p><strong>2. As conversas que já existem.</strong> Peça para ele abrir o WhatsApp e ler as últimas cinco negociações. As mesmas dúvidas aparecem repetidas, com as palavras exatas do público.</p>
+<p><strong>3. Comentários e avaliações do setor.</strong> Avaliações de concorrentes no Google mostram o que dá errado no mercado — e o que dá errado é exatamente o que o próximo cliente teme.</p>
+
+<h4>As cinco famílias que aparecem em quase todo serviço</h4>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Família</th><th>Como soa na cabeça da pessoa</th><th>O que derruba</th></tr></thead>
+<tbody>
+<tr><td>Adequação</td><td>"Isso serve para o meu caso?"</td><td>Exemplos do tipo exato de caso dela</td></tr>
+<tr><td>Competência</td><td>"Essa pessoa sabe o que faz?"</td><td>Processo explicado, especificidade, trabalho anterior</td></tr>
+<tr><td>Preço</td><td>"Vou tomar susto no orçamento?"</td><td>Faixa, o que faz variar, o que está incluso</td></tr>
+<tr><td>Risco</td><td>"E se der errado ou sumirem no meio?"</td><td>Garantia, contrato, acompanhamento, prazo escrito</td></tr>
+<tr><td>Esforço</td><td>"Vai dar trabalho pra mim?"</td><td>Mostrar o que é feito por você e o que sobra pra ela</td></tr>
+</tbody></table></div>
+
+<div class="nota nota--alerta"><strong>Preço é a objeção que mais gente esconde.</strong> A tentação é não falar de dinheiro para "não assustar". O efeito real é o contrário: a pessoa que não faz ideia do valor não pede orçamento, e a que pede vem desqualificada. Faixa de preço, ou pelo menos o que faz o preço variar, filtra melhor do que qualquer campo de formulário.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lp-mapear" data-marca="novo">
+<div class="topico__cabeca"><h3>Mapear objeção para seção</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Com as objeções na mão, a estrutura da página praticamente se escreve sozinha. O documento fica assim:</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">mapa de objeções — exemplo real</span><button class="copiar">copiar</button></div><pre><code>CLIENTE: arquiteta, reforma de apartamento, R$ 8–25k
+
+OBJEÇÃO 1  "Será que ela atende apartamento pequeno como o meu?"
+  → seção  Projetos, com metragem visível em cada um
+
+OBJEÇÃO 2  "Reforma sempre atrasa e estoura o orçamento."
+  → seção  Cronograma, semana a semana, com o que acontece
+           em cada uma
+
+OBJEÇÃO 3  "Quanto custa? Não faço ideia se cabe no meu bolso."
+  → seção  Como funciona o investimento: faixa e o que
+           faz variar
+
+OBJEÇÃO 4  "Vou ter que acompanhar obra? Não tenho tempo."
+  → seção  O que é meu e o que é seu — divisão de tarefas
+
+NÃO ENTRA: "Sobre mim", "Nossos valores", "Missão e visão"
+           — nenhuma responde a nada.</code></pre></div>
+<p>Repare que a seção de cronograma nasceu da objeção, não de uma referência visual. É assim que a página ganha identidade: a estrutura vem do problema do cliente, não do layout que estava na moda.</p>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s3">
+<div class="parte__cabeca"><span class="parte__num">PARTE 3</span><h2>Arquitetura de seções</h2></div>
+<p class="parte__resumo">A ordem em que os blocos aparecem, o que cada um resolve, e quantos a página deve ter.</p>
+
+<article class="topico" id="t-lp-sequencia" data-marca="novo">
+<div class="topico__cabeca"><h3>A sequência lógica</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Independente do setor, a página segue o caminho de uma conversa de venda. Cada etapa só faz sentido se a anterior foi resolvida.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">a espinha</span><button class="copiar">copiar</button></div><pre><code>1. O QUE É          → em três segundos, sem rolar
+2. PARA QUEM        → a pessoa precisa se reconhecer
+3. POR QUE ACREDITAR→ prova, processo, especificidade
+4. O QUE TE IMPEDE  → as objeções, uma por seção
+5. O QUE FAZER      → a ação, sem atrito</code></pre></div>
+<p>Em tráfego frio, entra uma etapa antes de tudo: <strong>o problema</strong>. A pessoa precisa reconhecer a dor antes de ouvir a solução, senão a oferta chega sem endereço.</p>
+<div class="nota"><strong>A ação não fica só no fim.</strong> A pessoa pode decidir em qualquer ponto da página — e quando decide, precisa ter o botão ali. O CTA repete ao longo da página, no fim de cada bloco de argumento, sempre com o mesmo texto e o mesmo destino.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lp-catalogo" data-marca="novo">
+<div class="topico__cabeca"><h3>O catálogo de seções</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>As seções que aparecem com frequência em serviço local, e a objeção que cada uma existe para derrubar.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Seção</th><th>Responde</th><th>Entra quando</th></tr></thead>
+<tbody>
+<tr><td><strong>Hero</strong></td><td>O que é isso e serve pra mim?</td><td>Sempre</td></tr>
+<tr><td><strong>Prova visual</strong><br>(fotos do trabalho)</td><td>Como fica o resultado?</td><td>Quando o serviço tem resultado visível</td></tr>
+<tr><td><strong>Para quem é</strong></td><td>Meu caso se encaixa?</td><td>Quando o serviço tem recorte claro</td></tr>
+<tr><td><strong>Processo</strong></td><td>Como funciona? Vou ficar perdido?</td><td>Serviço longo ou pouco conhecido</td></tr>
+<tr><td><strong>Números</strong></td><td>Vocês têm rodagem?</td><td>Só com números reais e confirmados</td></tr>
+<tr><td><strong>Depoimentos</strong></td><td>Como foi na prática, na voz de quem contratou?</td><td>Só com depoimento real e autorizado</td></tr>
+<tr><td><strong>Investimento</strong></td><td>Quanto custa?</td><td>Quase sempre — pelo menos a faixa</td></tr>
+<tr><td><strong>FAQ</strong></td><td>As dúvidas que sobraram</td><td>Quando há 4+ objeções pequenas</td></tr>
+<tr><td><strong>Quem faz</strong></td><td>Com quem eu vou falar?</td><td>Serviço pessoal, de confiança</td></tr>
+<tr><td><strong>Conversão</strong></td><td>O que eu faço agora?</td><td>Sempre</td></tr>
+</tbody></table></div>
+<div class="nota nota--alerta"><strong>Duas seções que quase nunca se justificam:</strong> "Missão, visão e valores" e "Nossa história desde 1998". Nenhuma responde a uma dúvida de quem está decidindo. Se o cliente insistir, o lugar delas é depois da conversão, não antes — e em uma linha, não em uma seção.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lp-quantas" data-marca="novo">
+<div class="topico__cabeca"><h3>Quantas seções, e o que corta</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Não existe número certo — existe número justificado. Se são cinco objeções reais, são cinco blocos mais hero e conversão. Se são duas, a página é curta e está certa assim.</p>
+<p>O erro comum não é página curta demais: é página inflada com seção que ninguém pediu, empurrando a conversão para longe. Cada bloco a mais é uma chance a mais de a pessoa sair.</p>
+<h4>Sinais de que sobrou seção</h4>
+<ul>
+<li>Você não consegue escrever, em uma frase, a pergunta que ela responde.</li>
+<li>O conteúdo dela é adjetivo: "qualidade", "compromisso", "excelência".</li>
+<li>Ela existe porque "toda landing page tem".</li>
+<li>Ela repete o que a seção anterior já disse com outras palavras.</li>
+</ul>
+<div class="nota"><strong>Quando faltar material para uma seção, ela não entra.</strong> Sem depoimento real, a seção de depoimentos não vai ao ar. Sem seis logos, a seção de empresas atendidas sai. Página com bloco vazio ou com conteúdo inventado é pior do que página sem o bloco.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lp-ordem-trafego" data-marca="novo">
+<div class="topico__cabeca"><h3>A ordem muda com o tráfego</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>A mesma lista de seções, reordenada, vira uma página diferente.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">morno — Instagram e indicação</span><button class="copiar">copiar</button></div><pre><code>Hero (prova visual já na abertura)
+Projetos
+Processo
+Investimento
+Conversão</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">frio — anúncio</span><button class="copiar">copiar</button></div><pre><code>Hero (nomeia o PROBLEMA, não o serviço)
+O que costuma dar errado quando se faz sozinho
+Como funciona o jeito certo
+Projetos
+Investimento
+Objeções / FAQ
+Conversão</code></pre></div>
+<p>A página fria é mais longa porque precisa construir a necessidade antes de apresentar a oferta. Usar a página morna em tráfego pago costuma resultar em muito clique e nenhuma conversa — e o diagnóstico errado de que "o anúncio não funciona".</p>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s4">
+<div class="parte__cabeca"><span class="parte__num">PARTE 4</span><h2>A hero</h2></div>
+<p class="parte__resumo">A seção que decide se a pessoa rola ou fecha. É onde mais se erra, e o erro quase nunca é de design.</p>
+
+<article class="topico" id="t-lp-hero-tarefa" data-marca="novo">
+<div class="topico__cabeca"><h3>O que a hero precisa resolver</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Em poucos segundos, sem a pessoa rolar nada, ela precisa responder três coisas: <strong>o que é</strong>, <strong>para quem é</strong> e <strong>o que fazer agora</strong>. Se qualquer uma faltar, o resto da página não é lido.</p>
+<p>Os cinco elementos que dão conta disso:</p>
+<ol>
+<li><strong>Rótulo</strong> — categoria e lugar, em uma linha. "Bar de drinks · Mato Grosso do Sul". Resolve "o que é" e "atende aqui" antes mesmo do título.</li>
+<li><strong>Título</strong> — a promessa central, em linguagem de cliente. Não o nome da empresa.</li>
+<li><strong>Subtítulo</strong> — o que está incluso e para quem, em uma ou duas linhas concretas.</li>
+<li><strong>Ação principal</strong> — o botão, com texto que diz o que acontece.</li>
+<li><strong>Reforço de escopo</strong> — uma linha discreta listando os casos atendidos: "Casamentos · Aniversários · Corporativo".</li>
+</ol>
+<div class="nota">Aquele quinto item é o mais subestimado. Ele resolve a objeção de adequação — "será que serve pro meu caso?" — antes de a pessoa precisar procurar. Custa uma linha de texto e evita saída imediata.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lp-hero-erros" data-marca="novo">
+<div class="topico__cabeca"><h3>Os erros mais caros</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Erro</th><th>Por que custa caro</th></tr></thead>
+<tbody>
+<tr><td>Título com o nome da empresa</td><td>"Art Bar" não diz nada para quem não conhece. O nome vai no menu, não no H1</td></tr>
+<tr><td>Título genérico de categoria</td><td>"Transformamos ambientes" poderia ser de qualquer um. Não posiciona nem diferencia</td></tr>
+<tr><td>Hero ocupando 100vh</td><td>Empurra todo o resto para fora da primeira tela, e no celular a barra do navegador ainda come um pedaço</td></tr>
+<tr><td>Foto bonita sem informação</td><td>Imagem sozinha não responde "para quem". Bonito não é o mesmo que claro</td></tr>
+<tr><td>Dois CTAs com o mesmo peso</td><td>Duas ações competindo derrubam as duas. Um primário, um discreto</td></tr>
+<tr><td>Texto sobre foto sem gradiente</td><td>Legível no seu monitor, ilegível no celular no sol</td></tr>
+</tbody></table></div>
+<div class="nota nota--alerta"><strong>O teste dos cinco segundos:</strong> mostre a hero para alguém que não conhece o negócio, conte cinco segundos, tire da tela e pergunte o que a empresa faz e para quem. Se a pessoa hesitar, o problema é a hero — e nenhuma seção abaixo vai consertar.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lp-hero-frio" data-marca="novo">
+<div class="topico__cabeca"><h3>A hero muda com a temperatura</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">morno — quem já procura o serviço</span><button class="copiar">copiar</button></div><pre><code>RÓTULO    Arquitetura de interiores · Campo Grande
+TÍTULO    Sua reforma com prazo fechado e obra acompanhada
+          toda semana
+SUBTÍTULO Projeto e execução de reforma de apartamento,
+          do desenho à última medida conferida.
+CTA       Pedir orçamento no WhatsApp
+REFORÇO   Sala · Cozinha · Quarto · Apartamento inteiro</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">frio — quem ainda não decidiu contratar</span><button class="copiar">copiar</button></div><pre><code>RÓTULO    Reforma de apartamento
+TÍTULO    Reforma que atrasa três meses não é azar.
+          É falta de cronograma.
+SUBTÍTULO A maior parte dos estouros de prazo e orçamento
+          começa antes da primeira parede cair.
+CTA       Ver como funciona o cronograma fechado
+REFORÇO   —</code></pre></div>
+<p>A segunda não vende o serviço na abertura: ela nomeia o problema e promete explicação. A venda vem depois, quando a pessoa já concordou que o problema existe.</p>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s5">
+<div class="parte__cabeca"><span class="parte__num">PARTE 5</span><h2>Prova quando ela não existe</h2></div>
+<p class="parte__resumo">O caso mais comum no trabalho com cliente pequeno: negócio novo, sem depoimento, sem portfólio — e às vezes proibido por lei de ter. O que fazer no lugar.</p>
+
+<article class="topico" id="t-lp-sem-prova" data-marca="revisao">
+<div class="topico__cabeca"><h3>O problema, e o que não fazer</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>Quase todo material sobre conversão assume que existe prova social: depoimentos, logos de clientes, número de atendimentos, avaliação média. Na prática, o cliente pequeno costuma não ter nada disso — e a página precisa funcionar assim mesmo.</p>
+<div class="nota nota--alerta"><strong>O que não fazer é inventar.</strong> Depoimento fictício e número chutado são publicidade enganosa, e quem publica responde. Vale também para o "só como exemplo, depois a gente troca": exemplo é exatamente o que acaba publicado. Toda lacuna vira <code>[PREENCHER]</code> e entra na lista de pendências.</div>
+<p>A boa notícia é que prova social é só <em>um</em> dos jeitos de reduzir risco percebido. Existem outros, e vários deles são mais fortes.</p>
+</div>
+</article>
+
+<article class="topico" id="t-lp-substitutos" data-marca="novo">
+<div class="topico__cabeca"><h3>Os cinco substitutos</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<h4>1. Especificidade</h4>
+<p>O sinal mais barato e mais eficaz de competência. Quem domina o ofício fala em detalhe; quem não domina fala em adjetivo. "Atendemos com qualidade" não prova nada. "Entregamos a planta com as medidas conferidas no local, não as da planta do prédio — que quase nunca batem" prova muito, e não precisa de nenhum cliente anterior.</p>
+
+<h4>2. Processo transparente</h4>
+<p>Mostrar como o trabalho acontece, etapa por etapa, reduz medo sem precisar de terceiros. Quem explica o processo demonstra que já pensou nele. Uma linha do tempo com o que acontece em cada semana vale mais que três depoimentos genéricos.</p>
+
+<h4>3. Transparência de preço</h4>
+<p>Dizer a faixa e o que faz variar sinaliza confiança. Quem esconde preço até o último momento é justamente quem a pessoa teme.</p>
+
+<h4>4. Redução de risco</h4>
+<p>O que acontece se der errado: contrato, prazo escrito, política de revisão, primeira conversa sem compromisso, pagamento por etapa. Cada item desses tira peso da decisão.</p>
+
+<h4>5. Demonstração</h4>
+<p>Mostrar o trabalho em vez de falar dele. Fotos do processo, um vídeo curto, um exemplo resolvido, o material que o cliente recebe. Se não há cliente anterior, há trabalho próprio: um projeto de estudo, a própria casa, um caso hipotético bem executado — desde que identificado como tal.</p>
+
+<div class="nota"><strong>Onde isso costuma sair melhor que depoimento:</strong> depoimento genérico ("ótimo profissional, recomendo") não convence ninguém. Um processo bem explicado convence. Quando o cliente não tem prova social, a página não fica pior — ela fica mais concreta, porque não tem como se apoiar em elogio.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lp-regulamentacao" data-marca="novo">
+<div class="topico__cabeca"><h3>Quando a prova é proibida: regulamentação por setor</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Algumas profissões têm regras próprias de publicidade, definidas pelo conselho da categoria. Elas pesam mais que qualquer boa prática de conversão — e desconhecê-las expõe o cliente.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Setor</th><th>Restrições típicas</th></tr></thead>
+<tbody>
+<tr><td>Psicologia e psicanálise</td><td>Depoimento de paciente e promessa de resultado são vedados; sensacionalismo e comparação também</td></tr>
+<tr><td>Medicina e odontologia</td><td>Foto de antes e depois, promessa de resultado e divulgação de preço têm restrição forte</td></tr>
+<tr><td>Advocacia</td><td>Publicidade de captação é restrita; o tom aceito é informativo, não promocional</td></tr>
+<tr><td>Nutrição, fisioterapia e afins</td><td>Regras próprias, geralmente sobre resultado e antes/depois</td></tr>
+</tbody></table></div>
+<div class="nota nota--alerta"><strong>Como tratar isso na prática:</strong> pergunte ao cliente, logo na descoberta, se a profissão dele tem código de publicidade — e peça que ele confirme com o conselho o que pode e o que não pode. Você não é o responsável por interpretar a norma, mas é quem constrói a página: identificar a restrição antes de desenhar evita refazer tudo. E isto aqui é orientação prática, não parecer jurídico — a palavra final é do conselho e de quem assina o registro.</div>
+<p>O lado bom: página com restrição é onde os cinco substitutos brilham. Sem poder prometer resultado nem exibir depoimento, sobra o que é mais sólido de qualquer forma — clareza, processo e especificidade.</p>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s6">
+<div class="parte__cabeca"><span class="parte__num">PARTE 6</span><h2>A conversão</h2></div>
+<p class="parte__resumo">O ponto onde interesse vira conversa. Onde toda decisão anterior é cobrada — e onde a maior parte da perda acontece.</p>
+
+<article class="topico" id="t-lp-canal" data-marca="novo">
+<div class="topico__cabeca"><h3>Escolher o canal</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Canal</th><th>Fricção</th><th>Melhor para</th><th>Custo escondido</th></tr></thead>
+<tbody>
+<tr><td><strong>WhatsApp</strong></td><td>Muito baixa</td><td>Serviço local, decisão conversada, ticket médio</td><td>Exige alguém respondendo rápido</td></tr>
+<tr><td><strong>Formulário</strong></td><td>Média a alta</td><td>Quando é preciso qualificar antes de falar</td><td>Cai em e-mail que ninguém abre</td></tr>
+<tr><td><strong>Agendamento</strong></td><td>Média</td><td>Consulta, sessão, visita com hora marcada</td><td>Depende de agenda sempre atualizada</td></tr>
+<tr><td><strong>Telefone</strong></td><td>Alta</td><td>Público mais velho, urgência</td><td>Muita gente não liga mais para desconhecido</td></tr>
+</tbody></table></div>
+<p>Para serviço local no Brasil, WhatsApp ganha na maioria dos casos: a pessoa já está no aplicativo, já sabe usar, e a conversa começa sem formulário. Mas ele só funciona se alguém responder — e isso é decisão do cliente, não sua.</p>
+<div class="nota"><strong>Um canal principal, não quatro.</strong> WhatsApp, formulário, telefone e Instagram competindo com o mesmo peso dividem a atenção e derrubam todos. Escolha um, dê destaque, e deixe os outros discretos no rodapé para quem realmente preferir.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lp-atrito" data-marca="novo">
+<div class="topico__cabeca"><h3>Cada campo cobra um preço</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Todo campo a mais derruba a taxa de preenchimento. A pergunta para cada um é: <strong>esse dado muda a sua resposta?</strong> Se não muda, ele sai — você pergunta na conversa.</p>
+<p>O critério prático: peça só o que qualifica ou o que permite responder melhor. Nome e uma forma de contato quase sempre bastam. Data e quantidade entram quando mudam o orçamento. "Como nos conheceu" é curiosidade sua, não necessidade dela — pergunte depois.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">o formulário que abre o WhatsApp</span><button class="copiar">copiar</button></div><pre><code>Quatro campos, no máximo, e todos com motivo:
+
+  Nome          → para a mensagem chegar personalizada
+  Tipo de evento→ muda completamente o orçamento
+  Data          → define disponibilidade
+  Convidados    → define escala e preço
+
+O botão não envia formulário: monta a mensagem e abre
+o WhatsApp já preenchido. A pessoa só aperta enviar.</code></pre></div>
+<p>Esse padrão junta o melhor dos dois: você recebe o lead já qualificado, e ela não preencheu formulário nenhum — só respondeu quatro perguntas e caiu numa conversa.</p>
+<div class="nota nota--alerta"><strong>Sempre deixe um caminho sem JavaScript.</strong> Ao lado do formulário, um link direto para o WhatsApp com mensagem genérica. Se o script falhar, se o navegador for antigo, se a pessoa tiver JS desligado — o contato continua possível. É a diferença entre perder um lead e não perder.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lp-mensagem" data-marca="novo">
+<div class="topico__cabeca"><h3>A mensagem pré-preenchida</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Detalhe pequeno com efeito grande: a mensagem que já vem escrita reduz o travamento de "e agora, o que eu escrevo?".</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">o que muda</span><button class="copiar">copiar</button></div><pre><code>FRACO
+"Olá, gostaria de mais informações."
+→ o cliente recebe e não sabe de quê, nem de onde veio
+
+FORTE
+"Olá! Vim pelo site do Art Bar.
+
+ Nome: Ana
+ Evento: Casamento
+ Data: 12 de dezembro de 2026
+ Convidados: 120
+
+ Podem me passar um orçamento?"
+→ o cliente já responde com preço, e sabe a origem</code></pre></div>
+<p>Vale também marcar a origem quando existe mais de um ponto de entrada — hero, meio da página, botão flutuante. Um parâmetro discreto na mensagem revela qual parte da página converte, sem depender de analytics.</p>
+</div>
+</article>
+
+<article class="topico" id="t-lp-depois" data-marca="novo">
+<div class="topico__cabeca"><h3>O que acontece depois do clique</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>A página entrega a conversa. O que acontece em seguida não é código, mas decide se o projeto foi considerado um sucesso — e a conta costuma vir para você.</p>
+<p>O cenário clássico: a LP funciona, os contatos chegam, o cliente demora dois dias para responder, os leads esfriam, e o veredito vira "o site não trouxe nada".</p>
+<h4>O que combinar antes de entregar</h4>
+<ul>
+<li><strong>Quem responde, e em quanto tempo.</strong> Contato de serviço esfria rápido — a diferença entre responder em minutos e em um dia é enorme.</li>
+<li><strong>Qual é a primeira mensagem.</strong> Vale escrever junto com o cliente uma resposta padrão, para ele não travar nem improvisar.</li>
+<li><strong>O que fazer fora do horário.</strong> Mensagem automática dizendo quando responde já evita metade da frustração.</li>
+<li><strong>Onde anotar.</strong> Nem que seja uma planilha. Sem registro, ninguém sabe quantos contatos viraram cliente — e sem isso não dá para saber se a página funcionou.</li>
+</ul>
+<div class="nota"><strong>Isso é argumento comercial, não só zelo.</strong> Combinar o pós-clique com o cliente mostra que você pensa no resultado dele, não só na entrega do arquivo. E protege você do julgamento injusto quando o gargalo está do outro lado.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s7">
+<div class="parte__cabeca"><span class="parte__num">PARTE 7</span><h2>Medir e melhorar</h2></div>
+<p class="parte__resumo">Como saber se a página funcionou — e o que fazer quando o volume é pequeno demais para estatística.</p>
+
+<article class="topico" id="t-lp-medir" data-marca="novo">
+<div class="topico__cabeca"><h3>O que medir de verdade</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Visita não é resultado. Uma página com mil visitas e nenhum contato é pior que uma com cinquenta e cinco conversas. A cadeia que importa tem quatro elos:</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">a cadeia</span><button class="copiar">copiar</button></div><pre><code>visitas → cliques no CTA → conversas iniciadas → clientes fechados
+
+Cada elo tem um dono diferente:
+  visitas → CTA        ... a página (você)
+  CTA → conversa       ... a página e o canal (você)
+  conversa → cliente   ... o atendimento (o cliente)</code></pre></div>
+<p>Separar isso protege os dois lados. Se muita gente clica e pouca conversa começa, o problema é a transição — mensagem confusa, número errado, WhatsApp Business mal configurado. Se muita conversa começa e nada fecha, o problema é preço, atendimento ou qualificação — não a página.</p>
+<div class="nota"><strong>O mínimo viável de medição:</strong> Search Console para saber que buscas trazem gente, um evento de clique no CTA, e uma planilha onde o cliente anota cada contato e o que aconteceu. Isso já responde as perguntas que importam. Dashboard bonito sem o último item não responde nada.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lp-base" data-marca="novo">
+<div class="topico__cabeca"><h3>Construa sua própria linha de base</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>É tentador procurar "qual é a taxa de conversão boa para o meu setor". O número que você vai achar na internet quase nunca serve: varia enormemente com temperatura do tráfego, ticket, região e o que está sendo contado como conversão. Comparar-se a ele leva a conclusão errada nos dois sentidos.</p>
+<p>O que funciona é medir o <strong>seu</strong> ponto de partida e comparar consigo mesmo. Nos primeiros trinta dias, registre a cadeia inteira. Esse número vira a referência do projeto — e qualquer mudança depois é avaliada contra ele, não contra uma média de artigo.</p>
+<div class="nota nota--alerta"><strong>Cuidado com número pequeno.</strong> Com quinze visitas e dois contatos, a "taxa de conversão de 13%" não significa nada: um contato a mais ou a menos muda tudo. Em volume baixo, olhe os casos individuais — o que a pessoa perguntou, onde ela travou — em vez da porcentagem.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lp-teste-gente" data-marca="novo">
+<div class="topico__cabeca"><h3>Teste com três pessoas vale mais que teste A/B</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Teste A/B precisa de volume que a maioria dos clientes locais não tem. Com poucas conversões por mês, a diferença que aparece é ruído.</p>
+<p>O que rende muito mais, e custa uma tarde: mostrar a página para três pessoas parecidas com o público e <strong>observar em silêncio</strong>.</p>
+<h4>Como fazer</h4>
+<ol>
+<li>Peça para a pessoa narrar em voz alta o que está pensando enquanto navega.</li>
+<li>Não explique nada. Não defenda. Só observe onde ela hesita, volta ou franze a testa.</li>
+<li>Duas perguntas ao final: "o que essa empresa faz?" e "o que você faria se quisesse contratar?".</li>
+<li>Anote onde ela travou — não o que ela sugeriu. Sugestão de leigo sobre design costuma ser ruim; observação de onde ela travou é ouro.</li>
+</ol>
+<div class="nota">Três pessoas costumam revelar os problemas grandes. A partir da quarta, começa a repetir. É pouco esforço para o retorno — e você sai com problemas concretos em vez de opinião.</div>
+<p>Teste A/B passa a fazer sentido quando o volume é alto o suficiente para a diferença ser visível — o que, em serviço local, costuma significar tráfego pago constante. Aí o que vale testar, em ordem: o título da hero, o texto do botão e o número de campos.</p>
+</div>
+</article>
+
+<article class="topico" id="t-lp-revisao30" data-marca="novo">
+<div class="topico__cabeca"><h3>A revisão de trinta dias</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Entregar e sumir é desperdício — para o cliente e para você. Um retorno combinado depois de um mês custa pouco e rende muito.</p>
+<ul>
+<li>Quantos contatos chegaram? O que eles perguntaram?</li>
+<li>Alguma dúvida se repetiu? <strong>Dúvida repetida é objeção que a página não respondeu</strong> — e vira seção nova ou item de FAQ.</li>
+<li>Algum contato veio completamente fora do perfil? A página está atraindo errado, ou falta um filtro.</li>
+<li>Os <code>[PREENCHER]</code> foram resolvidos? Fotos reais entraram no lugar das provisórias?</li>
+<li>Apareceu depoimento real que agora pode entrar?</li>
+</ul>
+<div class="nota"><strong>Isso vira receita.</strong> A revisão de trinta dias é o gancho natural para um plano de manutenção — e é muito mais fácil vender continuidade mostrando um ajuste concreto baseado em dado do que oferecendo "manutenção" no abstrato.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s8">
+<div class="parte__cabeca"><span class="parte__num">PARTE 8</span><h2>O projeto do começo ao fim</h2></div>
+<p class="parte__resumo">A sequência completa, da primeira conversa à publicação — e o que conferir antes de mandar o link para o cliente.</p>
+
+<article class="topico" id="t-lp-fluxo" data-marca="novo">
+<div class="topico__cabeca"><h3>As sete etapas</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">fluxo</span><button class="copiar">copiar</button></div><pre><code>1. DESCOBERTA     conversa guiada; anotar as palavras dele
+                  saída: oferta, público, canal, temperatura
+
+2. OBJEÇÕES       listar 3 a 5 reais, da memória dele
+                  saída: mapa objeção → seção
+
+3. ARQUITETURA    ordem das seções, justificada uma a uma
+                  saída: documento de estrutura, aprovado
+                  antes de qualquer código
+
+4. COPY           rascunho de todo o texto, com [PREENCHER]
+                  onde falta informação
+                  saída: copy aprovada pelo cliente
+
+5. ASSETS         cobrar fotos, logo, número, CNPJ
+                  saída: checklist de pendências
+
+6. CONSTRUÇÃO     sistema visual + hero, depois seção
+                  por seção
+                  saída: arquivo único
+
+7. REVISÃO        técnica, de conteúdo e de consistência
+                  saída: link publicado</code></pre></div>
+<div class="nota nota--alerta"><strong>A etapa 3 aprovada por escrito é o que protege o prazo.</strong> Mudança de estrutura depois do código pronto é retrabalho caro; mudança no documento é uma linha. Se o cliente mudar de ideia depois de aprovar, fica claro que é escopo novo — e isso é conversa comercial, não briga.</div>
+<p>As etapas 4 e 5 andam juntas e são as que mais atrasam projeto, porque dependem do cliente. Deixe explícito desde o começo que o prazo começa a contar quando o material chega.</p>
+</div>
+</article>
+
+<article class="topico" id="t-lp-checklist" data-marca="novo">
+<div class="topico__cabeca"><h3>Checklist antes de publicar</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">estratégia</span><button class="copiar">copiar</button></div><pre><code>[ ] Cada seção responde a uma objeção que dá pra escrever
+[ ] Uma única ação principal, repetida ao longo da página
+[ ] A hero passa no teste dos cinco segundos
+[ ] Nenhum dado, número ou depoimento inventado
+[ ] Todo [PREENCHER] resolvido ou listado como pendência
+[ ] Restrição do conselho da categoria verificada, se houver</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">técnico</span><button class="copiar">copiar</button></div><pre><code>[ ] Testado em 390px, sem estouro horizontal
+[ ] Contraste do texto principal conferido
+[ ] Toda imagem com alt; fotos redimensionadas e em WebP
+[ ] title, description e og:image preenchidos
+[ ] Link do WhatsApp abre com a mensagem certa
+[ ] Página funciona com JavaScript desligado
+[ ] prefers-reduced-motion respeitado
+[ ] Nenhuma chave, token ou senha no código
+[ ] Ctrl+U: nada no fonte que não possa ser público</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">combinado com o cliente</span><button class="copiar">copiar</button></div><pre><code>[ ] Quem responde o WhatsApp, e em quanto tempo
+[ ] Mensagem automática fora do horário
+[ ] Onde os contatos vão ser anotados
+[ ] Conta de hospedagem e domínio no nome dele
+[ ] Quantas rodadas de ajuste estão incluídas
+[ ] Retorno marcado para daqui a trinta dias</code></pre></div>
+</div>
+</article>
+
+<article class="topico" id="t-lp-entregar" data-marca="novo">
+<div class="topico__cabeca"><h3>O que entregar além do link</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Entregar só a URL subestima o próprio trabalho. O que acompanha a entrega muda a percepção de valor — e reduz o suporte depois.</p>
+<ul>
+<li><strong>O arquivo.</strong> Ele é dono do que pagou. Mandar o HTML evita a sensação de dependência.</li>
+<li><strong>A lista de pendências.</strong> O que ainda está como <code>[PREENCHER]</code> e o que trocar quando chegar material real.</li>
+<li><strong>Como pedir alteração.</strong> Por onde falar, o que está incluso, o que é cobrado à parte.</li>
+<li><strong>O que foi decidido e por quê.</strong> Meia página explicando as escolhas principais — por que uma ação só, por que o preço aparece, por que não tem seção de depoimentos ainda. Isso transforma o trabalho de "fez um site" em "resolveu um problema", e é o que sustenta seu preço na próxima negociação.</li>
+</ul>
+<div class="nota">Esse último item é o mais barato de produzir e o que mais muda a conversa. O cliente não sabe avaliar CSS, mas sabe avaliar raciocínio — e é o raciocínio que ele está comprando.</div>
+</div>
+</article>
+</section>
+
+</main>
+</div>
+<footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<script src="app.js"></script>
+</body>
+</html>
