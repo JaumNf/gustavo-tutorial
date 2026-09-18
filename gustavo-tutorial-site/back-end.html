@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Back-end — Gustavo Tutorial</title>
+<meta name="description" content="Serverless, formulário que envia e-mail de verdade, automação e CMS — o caminho entre site estático e servidor.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Back-end — Gustavo Tutorial">
+<meta property="og:description" content="Serverless, formulário que envia e-mail de verdade, automação e CMS — o caminho entre site estático e servidor.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="topo">
+<div class="topo__interno">
+<a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
+<div class="filtros" role="group" aria-label="Filtrar tópicos">
+<button class="filtro" data-filtro="tudo" aria-pressed="true">Tudo</button>
+<button class="filtro" data-filtro="revisao" aria-pressed="false">Revisão</button>
+<button class="filtro" data-filtro="novo" aria-pressed="false">Novo</button>
+</div>
+<button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+</div>
+<nav class="trilhas" aria-label="Trilhas">
+<div class="trilhas__interno">
+<a href="index.html" class="trilha">Início</a>
+<a href="html-puro.html" class="trilha">HTML puro</a>
+<a href="frameworks.html" class="trilha">Frameworks</a>
+<a href="back-end.html" class="trilha is-ativa">Back-end</a>
+<a href="negocio.html" class="trilha">Negócio</a>
+</div>
+</nav>
+</header>
+<div class="palco">
+<nav class="sumario" id="sumario" aria-label="Sumário">
+<button class="sumario__abrir" id="sumario-abrir" aria-expanded="false" aria-controls="sumario-lista"><span>Sumário</span><span aria-hidden="true">&#9662;</span></button>
+<div class="sumario__lista" id="sumario-lista">
+<p class="sumario__titulo">Back-end</p>
+<a class="sumario__parte" href="#s1">1 · Quando você precisa de servidor</a>
+<ol>
+<li><a href="#t-serverless">Serverless functions</a></li>
+<li><a href="#t-form-email">Formulário que envia e-mail de verdade</a></li>
+<li><a href="#t-nocode">Automação sem código</a></li>
+<li><a href="#t-cms">Headless CMS</a></li>
+</ol>
+</div>
+</nav>
+<main class="leitura">
+<section class="abertura">
+<h1>Back-end</h1>
+<p class="abertura__lead">Tudo que não cabe no navegador: guardar dados, enviar e-mail, esconder uma chave de API, deixar o cliente editar o próprio conteúdo.</p>
+<div class="legenda">
+<span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
+<span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
+<span>1 partes · 4 tópicos</span>
+</div>
+</section>
+<p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
+<section class="parte" id="s1">
+      <div class="parte__cabeca">
+        <span class="parte__num">PARTE 1</span>
+        <h2>Quando você precisa de servidor</h2>
+      </div>
+      <p class="parte__resumo">O caminho entre “HTML puro” e “montar um back-end inteiro”. É aqui que moram os pedidos de cliente que hoje você precisa recusar ou improvisar.</p>
+
+      <article class="topico" id="t-serverless" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Serverless functions</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Em vez de manter um servidor ligado, você escreve uma função isolada que roda só quando alguém chama, e depois desliga. Sem servidor para administrar, sem custo fixo, e o plano gratuito da Vercel ou Netlify cobre muito mais do que uma landing page precisa.</p>
+
+          <p>Na Vercel, basta criar uma pasta <code>api/</code> ao lado do seu HTML. Cada arquivo ali vira um endereço.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">api/contato.js</span><button class="copiar">copiar</button></div>
+            <pre><code>export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ erro: 'Método não permitido' });
+  }
+
+  const { nome, email, mensagem } = req.body;
+
+  if (!nome || !email) {
+    return res.status(400).json({ erro: 'Nome e e-mail são obrigatórios' });
+  }
+
+  // a chave fica AQUI, no servidor — nunca no HTML
+  const chave = process.env.CHAVE_EMAIL;
+
+  // ... envia o e-mail ...
+
+  res.status(200).json({ ok: true });
+}</code></pre>
+          </div>
+
+          <p>O arquivo acima responde em <code>/api/contato</code>. Do lado do site, você chama com <code>fetch</code> — aquilo da Parte 5.</p>
+
+          <div class="nota">
+            <strong>Por que isso resolve o seu problema principal:</strong> a chave de API fica em variável de ambiente, no servidor, invisível para o visitante. É exatamente o que falta numa landing page estática e o motivo de tantas integrações serem impossíveis sem back-end.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-form-email" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Formulário que envia e-mail de verdade</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>O pedido mais comum depois do WhatsApp. Existem três caminhos, do mais simples ao mais controlado.</p>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Caminho</th><th>Como funciona</th><th>Custo / esforço</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Serviço de formulário</strong><br>(Formspree, Web3Forms)</td><td>Você aponta o <code>action</code> do form para eles; o e-mail chega na caixa do cliente</td><td>Minutos. Plano gratuito costuma bastar</td></tr>
+                <tr><td><strong>Serverless + API de e-mail</strong><br>(Resend, SendGrid)</td><td>Sua função recebe e dispara o e-mail</td><td>Uma tarde. Controle total do texto e do fluxo</td></tr>
+                <tr><td><strong>Back-end próprio</strong></td><td>Servidor rodando o tempo todo</td><td>Só se houver outros motivos</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">o caminho mais rápido</span><button class="copiar">copiar</button></div>
+            <pre><code>&lt;form action="https://formspree.io/f/SEU_ID" method="POST"&gt;
+  &lt;label for="email"&gt;Seu e-mail&lt;/label&gt;
+  &lt;input id="email" type="email" name="email" required&gt;
+
+  &lt;label for="msg"&gt;Mensagem&lt;/label&gt;
+  &lt;textarea id="msg" name="mensagem" required&gt;&lt;/textarea&gt;
+
+  &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+          </div>
+
+          <p>Sem JavaScript nenhum, e continua funcionando com JS desligado. É difícil bater essa relação esforço/resultado.</p>
+
+          <div class="nota nota--alerta">
+            <strong>Spam é garantido.</strong> Todo formulário público recebe robô. Os serviços acima já filtram, mas some um campo escondido (“honeypot”) que humano nunca preenche: se vier preenchido, é robô. Evita a maior parte sem incomodar ninguém com captcha.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-nocode" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Automação sem código</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Ferramentas que conectam serviços por interface visual. Resolvem boa parte dos pedidos de “back-end” sem você programar — e são vendáveis como serviço à parte.</p>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Ferramenta</th><th>Característica</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Make</strong> (ex-Integromat)</td><td>Visual, poderoso, plano gratuito generoso</td></tr>
+                <tr><td><strong>Zapier</strong></td><td>O mais conhecido; mais caro</td></tr>
+                <tr><td><strong>n8n</strong></td><td>Código aberto, pode rodar no seu próprio servidor</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Um fluxo típico que o cliente valoriza: o formulário do site chega no Make; ele grava a linha numa planilha do Google, manda um e-mail de confirmação para quem preencheu, avisa o cliente no WhatsApp e cria o contato no CRM. Nada disso exige uma linha de código.</p>
+
+          <div class="nota">
+            <strong>Oportunidade comercial:</strong> a automação normalmente vale mais para o cliente que a página em si — ela economiza o tempo dele toda semana, não uma vez. E é trabalho recorrente, diferente da landing page, que se entrega e acaba.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-cms" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Headless CMS</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Um painel onde o cliente edita o conteúdo, sem mexer no site. “Headless” significa que ele só guarda e entrega os dados — quem desenha a página continua sendo você.</p>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Opção</th><th>Quando faz sentido</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Google Sheets</strong></td><td>O cliente já sabe usar. Publique a planilha e leia o JSON. Solução mais subestimada que existe</td></tr>
+                <tr><td><strong>Notion</strong></td><td>Se o cliente já usa Notion, a API dele serve de CMS</td></tr>
+                <tr><td><strong>Sanity, Strapi, Contentful</strong></td><td>CMS de verdade, com tipos de conteúdo e permissões</td></tr>
+                <tr><td><strong>Decap CMS</strong></td><td>Grava direto no repositório Git. Gratuito, sem banco de dados</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="nota">
+            <strong>Antes de montar qualquer CMS, faça a pergunta:</strong> com que frequência esse conteúdo muda de verdade? Cardápio que muda toda semana justifica. “Sobre nós” que mudou duas vezes em três anos não justifica — ali, editar o HTML e republicar custa menos para todo mundo.
+          </div>
+        </div>
+      </article>
+</section>
+</main>
+</div>
+<footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Negócio — Gustavo Tutorial</title>
+<meta name="description" content="Design system, tipografia, copy que converte, escopo, preço e contrato — o que decide quanto você cobra.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Negócio — Gustavo Tutorial">
+<meta property="og:description" content="Design system, tipografia, copy que converte, escopo, preço e contrato — o que decide quanto você cobra.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="topo">
+<div class="topo__interno">
+<a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
+<div class="filtros" role="group" aria-label="Filtrar tópicos">
+<button class="filtro" data-filtro="tudo" aria-pressed="true">Tudo</button>
+<button class="filtro" data-filtro="revisao" aria-pressed="false">Revisão</button>
+<button class="filtro" data-filtro="novo" aria-pressed="false">Novo</button>
+</div>
+<button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+</div>
+<nav class="trilhas" aria-label="Trilhas">
+<div class="trilhas__interno">
+<a href="index.html" class="trilha">Início</a>
+<a href="html-puro.html" class="trilha">HTML puro</a>
+<a href="frameworks.html" class="trilha">Frameworks</a>
+<a href="back-end.html" class="trilha">Back-end</a>
+<a href="negocio.html" class="trilha is-ativa">Negócio</a>
+</div>
+</nav>
+</header>
+<div class="palco">
+<nav class="sumario" id="sumario" aria-label="Sumário">
+<button class="sumario__abrir" id="sumario-abrir" aria-expanded="false" aria-controls="sumario-lista"><span>Sumário</span><span aria-hidden="true">&#9662;</span></button>
+<div class="sumario__lista" id="sumario-lista">
+<p class="sumario__titulo">Negócio</p>
+<a class="sumario__parte" href="#s1">1 · O lado que não é código</a>
+<ol>
+<li><a href="#t-designsystem">Design system e tokens</a></li>
+<li><a href="#t-tipografia">Escala tipográfica</a></li>
+<li><a href="#t-cor">Cor e contraste</a></li>
+<li><a href="#t-copy">Copywriting de conversão</a></li>
+<li><a href="#t-ab">Teste A/B</a></li>
+<li><a href="#t-comercial">Escopo, preço e contrato</a></li>
+</ol>
+</div>
+</nav>
+<main class="leitura">
+<section class="abertura">
+<h1>Negócio</h1>
+<p class="abertura__lead">A parte que quase ninguém estuda e que costuma dar mais retorno que qualquer tecnologia nova.</p>
+<div class="legenda">
+<span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
+<span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
+<span>1 partes · 6 tópicos</span>
+</div>
+</section>
+<p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
+<section class="parte" id="s1">
+      <div class="parte__cabeca">
+        <span class="parte__num">PARTE 1</span>
+        <h2>O lado que não é código</h2>
+      </div>
+      <p class="parte__resumo">O que costuma separar quem entrega site de quem entrega resultado — e, na prática, o que mais influencia quanto você consegue cobrar.</p>
+
+      <article class="topico" id="t-designsystem" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Design system e tokens</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Design system é um conjunto de decisões tomadas uma vez e reaproveitadas: cores, espaçamentos, tamanhos de fonte, raios de borda, sombras. Você já faz isso quando escreve um bloco <code>:root</code> — a diferença é tratá-lo como sistema, não como lista de cores.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">um sistema mínimo</span><button class="copiar">copiar</button></div>
+            <pre><code>:root {
+  /* cor: por papel, não por aparência */
+  --cor-fundo:     #0B0B0B;
+  --cor-superficie:#161616;
+  --cor-texto:     #F9F8F6;
+  --cor-marca:     #7A1C30;
+
+  /* espaço: escala fixa, sem valores avulsos */
+  --e-1: 4px;   --e-2: 8px;   --e-3: 16px;
+  --e-4: 24px;  --e-5: 40px;  --e-6: 64px;
+
+  /* texto: escala, não números soltos */
+  --t-pequeno: 14px;
+  --t-corpo:   17px;
+  --t-titulo:  clamp(28px, 4vw, 44px);
+
+  --raio: 6px;
+}</code></pre>
+          </div>
+
+          <p>O detalhe que faz diferença é nomear por <em>papel</em> e não por aparência. <code>--cor-marca</code> continua fazendo sentido quando o cliente troca de vermelho para verde; <code>--vermelho</code> vira mentira no mesmo dia.</p>
+
+          <div class="nota">
+            <strong>O valor prático:</strong> com uma escala fixa de espaçamento, some a pergunta “18px ou 20px aqui?”. Você escolhe entre seis valores, e a página fica visualmente coerente sem esforço. Menos decisão, mais consistência.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-tipografia" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Escala tipográfica</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Em vez de escolher tamanhos no olho, você parte de um tamanho base e multiplica por uma razão constante. O resultado tem hierarquia clara porque os saltos são proporcionais.</p>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Papel</th><th>Razão 1,25 (suave)</th><th>Razão 1,414 (dramática)</th></tr></thead>
+              <tbody>
+                <tr><td>Legenda</td><td>13px</td><td>12px</td></tr>
+                <tr><td>Corpo</td><td>16px</td><td>16px</td></tr>
+                <tr><td>Subtítulo</td><td>20px</td><td>23px</td></tr>
+                <tr><td>Título de seção</td><td>25px</td><td>32px</td></tr>
+                <tr><td>Título principal</td><td>31px</td><td>45px</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>Três regras que resolvem a maior parte</h4>
+          <ul>
+            <li><strong>Largura de linha entre 60 e 75 caracteres.</strong> Use <code>max-width: 65ch</code>. Linha longa demais cansa; curta demais pica a leitura.</li>
+            <li><strong>Altura de linha maior no texto pequeno.</strong> Corpo em 1,5 a 1,6; títulos grandes em 1,1 a 1,2. Título com altura de corpo parece frouxo.</li>
+            <li><strong>Menos pesos, mais contraste.</strong> Dois pesos bem diferentes (400 e 700) leem melhor que quatro parecidos.</li>
+          </ul>
+
+          <div class="nota">
+            <strong>Um detalhe barato que eleva o acabamento:</strong> <code>text-wrap: balance</code> nos títulos. Ele distribui as palavras entre as linhas em vez de deixar uma palavra órfã na última. Uma linha de CSS, efeito visível.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-cor" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Cor e contraste</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Contraste não é questão de gosto: é número. A relação entre a cor do texto e a do fundo tem valor medido, e existe mínimo.</p>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Situação</th><th>Mínimo</th></tr></thead>
+              <tbody>
+                <tr><td>Texto normal</td><td>4,5:1</td></tr>
+                <tr><td>Texto grande (24px+, ou 19px negrito)</td><td>3:1</td></tr>
+                <tr><td>Borda de campo, ícone informativo</td><td>3:1</td></tr>
+                <tr><td>Texto decorativo, desabilitado</td><td>Sem exigência</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Ferramentas: o próprio DevTools mostra a relação ao inspecionar um texto; fora dele, o WebAIM Contrast Checker resolve em segundos.</p>
+
+          <h4>Montando uma paleta a partir da marca</h4>
+          <ol>
+            <li><strong>Uma cor de marca.</strong> Vem do cliente. Use com parcimônia — botão principal, links, detalhes.</li>
+            <li><strong>Neutros com viés.</strong> Cinza puro parece descuido. Um cinza levemente puxado para o matiz da marca parece escolhido.</li>
+            <li><strong>Cores de estado.</strong> Erro, sucesso e aviso são separados da cor da marca — verde de sucesso não deveria ser a cor do botão.</li>
+            <li><strong>Teste os dois temas.</strong> Uma cor que funciona no claro pode sumir no escuro.</li>
+          </ol>
+
+          <div class="nota nota--alerta">
+            <strong>Armadilha comum:</strong> dourado, amarelo e laranja claros quase sempre reprovam sobre fundo branco. Se o cliente tem uma cor dessas na marca, ela funciona como fundo com texto escuro por cima — não como texto.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-copy" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Copywriting de conversão</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Numa landing page, o texto converte mais que o layout. E quase sempre é a parte que ninguém trata com cuidado.</p>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Em vez de</th><th>Escreva</th><th>Por quê</th></tr></thead>
+              <tbody>
+                <tr><td>“Bem-vindo ao nosso site”</td><td>“Bar de drinks completo para o seu evento”</td><td>Diz o que é em três segundos</td></tr>
+                <tr><td>“Qualidade e excelência”</td><td>“Bartenders treinados e estrutura montada por nós”</td><td>Específico é crível; adjetivo não é</td></tr>
+                <tr><td>“Saiba mais”</td><td>“Ver eventos que fizemos”</td><td>O botão diz o que acontece ao clicar</td></tr>
+                <tr><td>“Entre em contato”</td><td>“Pedir orçamento no WhatsApp”</td><td>Ação concreta, canal explícito</td></tr>
+                <tr><td>“Enviar”</td><td>“Quero meu orçamento”</td><td>Fala do ganho da pessoa, não da ação do sistema</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>A estrutura que funciona na maioria dos casos</h4>
+          <ol>
+            <li><strong>O que é</strong> — em uma frase, sem rodeio</li>
+            <li><strong>Para quem</strong> — a pessoa precisa se reconhecer</li>
+            <li><strong>Prova</strong> — foto, número, depoimento real</li>
+            <li><strong>Objeções</strong> — as três dúvidas que travam a decisão</li>
+            <li><strong>Ação</strong> — uma só, repetida ao longo da página</li>
+          </ol>
+
+          <div class="nota">
+            <strong>Uma ação por página.</strong> Botão de WhatsApp disputando com formulário, telefone e Instagram divide a atenção e derruba os dois. Escolha a ação principal e deixe o resto discreto no rodapé.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-ab" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Teste A/B</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Mostrar duas versões para públicos diferentes e comparar qual converte mais. Substitui opinião por dado — inclusive a sua.</p>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>O que testar</th><th>Impacto típico</th></tr></thead>
+              <tbody>
+                <tr><td>Título do topo</td><td>Alto — é o que decide se a pessoa fica</td></tr>
+                <tr><td>Texto do botão</td><td>Médio a alto, e é barato de trocar</td></tr>
+                <tr><td>Número de campos do formulário</td><td>Alto</td></tr>
+                <tr><td>Foto do topo</td><td>Médio</td></tr>
+                <tr><td>Cor do botão</td><td>Baixo — apesar da fama</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="nota nota--alerta">
+            <strong>O limite honesto:</strong> teste A/B precisa de volume. Com 40 visitas por mês, a diferença que você vê é ruído, não resultado. Abaixo de algumas centenas de conversões, o caminho melhor é entrevistar três clientes e perguntar o que quase os fez desistir.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-comercial" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Escopo, preço e contrato</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>A parte que costuma dar mais retorno que qualquer tecnologia nova — e a que quase ninguém estuda.</p>
+
+          <h4>Escopo: o que trava projeto não é código</h4>
+          <p>O padrão que mais atrasa entrega é o cliente não mandar o material. Deixe explícito desde o começo o que você precisa dele — fotos, textos, logo, número, CNPJ — e que o prazo começa a contar quando isso chegar. Aquela lista de itens <code>[PREENCHER]</code> que você já monta é exatamente esse documento.</p>
+
+          <h4>Rodadas de revisão</h4>
+          <p>“Ajustes ilimitados” é o que transforma um projeto de duas semanas em quatro meses. Duas ou três rodadas incluídas, e as seguintes cobradas à parte — dito na proposta, não descoberto no meio.</p>
+
+          <h4>Preço por valor, não por hora</h4>
+          <p>Cobrar por hora pune você por ficar mais rápido. À medida que você acumula componentes prontos e entrega em um dia o que antes levava uma semana, a cobrança por hora derruba seu preço justamente quando sua competência sobe.</p>
+
+          <h4>Depois da entrega</h4>
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Pergunta</th><th>Decida antes, não depois</th></tr></thead>
+              <tbody>
+                <tr><td>Quem paga a hospedagem e o domínio?</td><td>Ideal: o cliente, em conta no nome dele</td></tr>
+                <tr><td>Quem tem as senhas?</td><td>Ele. Você com acesso, não com posse</td></tr>
+                <tr><td>Pequenas alterações depois?</td><td>Avulso ou mensalidade — mas com preço definido</td></tr>
+                <tr><td>Quanto tempo você garante correções?</td><td>30 a 90 dias para defeito é razoável</td></tr>
+                <tr><td>Pode usar no seu portfólio?</td><td>Combine na hora do contrato</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="nota">
+            <strong>Manutenção é o que estabiliza a renda.</strong> Landing page é receita única: entregou, acabou. Um plano mensal — hospedagem, pequenas alterações, relatório de visitas, backup — transforma cliente entregue em receita recorrente, e é o que faz esse trabalho parar de recomeçar do zero todo mês.
+          </div>
+        </div>
+      </article>
+</section>
+</main>
+</div>
+<footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<script src="app.js"></script>
+</body>
+</html>

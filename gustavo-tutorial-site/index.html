@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Gustavo Tutorial</title>
+<meta name="description" content="Tutorial de desenvolvimento web escrito em português, do HTML puro ao lado comercial do trabalho.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Gustavo Tutorial">
+<meta property="og:description" content="Tutorial de desenvolvimento web escrito em português, do HTML puro ao lado comercial do trabalho.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="topo">
+<div class="topo__interno">
+<a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
+<span style="margin-left:auto"></span><button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+</div>
+<nav class="trilhas" aria-label="Trilhas">
+<div class="trilhas__interno">
+<a href="index.html" class="trilha is-ativa">Início</a>
+<a href="html-puro.html" class="trilha">HTML puro</a>
+<a href="frameworks.html" class="trilha">Frameworks</a>
+<a href="back-end.html" class="trilha">Back-end</a>
+<a href="negocio.html" class="trilha">Negócio</a>
+</div>
+</nav>
+</header>
+<main class="home">
+<section class="home__hero">
+<h1>Gustavo Tutorial</h1>
+<p>Material de estudo de desenvolvimento web, escrito em português e organizado por trilhas. Cada tópico traz o conceito, um exemplo de código real e a decisão prática por trás dele — nada de exemplo genérico que não se usa em projeto de verdade.</p>
+<div class="home__nums">
+<span><strong>4</strong> trilhas</span>
+<span><strong>15</strong> partes</span>
+<span><strong>80</strong> tópicos</span>
+<span>atualizado em setembro de 2026</span>
+</div>
+</section>
+
+<p class="home__titulo">Trilhas</p>
+<div class="cards">
+<a class="card-trilha" href="html-puro.html">
+<div class="card-trilha__topo">
+<h2>HTML puro</h2>
+<span class="tag tag--novo">Trilha completa</span>
+</div>
+<p>HTML, CSS e JavaScript sem framework nenhum. Começa em o que é front-end e termina com o site no ar, com domínio e HTTPS. É a trilha que dá conta de um projeto inteiro sozinha.</p>
+<span class="card-trilha__pe">12 partes · 66 tópicos →</span>
+</a>
+<a class="card-trilha" href="frameworks.html">
+<div class="card-trilha__topo">
+<h2>Frameworks</h2>
+<span class="tag tag--revisao">Em construção</span>
+</div>
+<p>React, Next.js, Vue, Svelte, Tailwind e Vite. O mesmo card de produto escrito de três formas diferentes, lado a lado, com a tabela que mostra o que cada abordagem cobra em troca.</p>
+<span class="card-trilha__pe">1 parte · 4 tópicos →</span>
+</a>
+<a class="card-trilha" href="back-end.html">
+<div class="card-trilha__topo">
+<h2>Back-end</h2>
+<span class="tag tag--revisao">Em construção</span>
+</div>
+<p>O que não cabe no navegador: serverless functions, formulário que envia e-mail de verdade, automação sem código e painel para o cliente editar o próprio conteúdo.</p>
+<span class="card-trilha__pe">1 parte · 4 tópicos →</span>
+</a>
+<a class="card-trilha" href="negocio.html">
+<div class="card-trilha__topo">
+<h2>Negócio</h2>
+<span class="tag tag--revisao">Em construção</span>
+</div>
+<p>Design system, escala tipográfica, contraste, copy que converte e teste A/B — mais escopo, preço, contrato e o que combinar antes de entregar.</p>
+<span class="card-trilha__pe">1 parte · 6 tópicos →</span>
+</a>
+</div>
+
+<div class="home__nota">
+<strong>Por onde começar:</strong> se você está aprendendo agora, vá pela trilha <a href="html-puro.html">HTML puro</a> na ordem das partes — ela é autossuficiente e leva do zero a um site publicado. As outras três partem dela e existem para mostrar o que há fora desse caminho.
+</div>
+
+<div class="home__nota" style="background:transparent;border-left-color:var(--line)">
+<strong>Sobre “HTML puro”:</strong> o nome da trilha é simplificação. O que está ali é HTML, CSS e JavaScript escritos direto, sem framework e sem etapa de build — o que o mercado chama de <em>vanilla</em>. As três linguagens aparecem por inteiro; o que não aparece é intermediário entre elas e o navegador.
+</div>
+</main>
+<footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<script src="app.js"></script>
+</body>
+</html>
