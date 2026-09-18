@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>IA — Gustavo Tutorial</title>
+<meta name="description" content="Como passar informação para uma IA produzir o que você quer: referências, brief, fatiamento, feedback, limites e modelos prontos.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="IA — Gustavo Tutorial">
+<meta property="og:description" content="Como passar informação para uma IA produzir o que você quer: referências, brief, fatiamento, feedback, limites e modelos prontos.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="topo">
+<div class="topo__interno">
+<a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
+<div class="filtros" role="group" aria-label="Filtrar tópicos">
+<button class="filtro" data-filtro="tudo" aria-pressed="true">Tudo</button>
+<button class="filtro" data-filtro="revisao" aria-pressed="false">Revisão</button>
+<button class="filtro" data-filtro="novo" aria-pressed="false">Novo</button>
+</div>
+<button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+</div>
+<nav class="trilhas" aria-label="Trilhas">
+<div class="trilhas__interno">
+<a href="index.html" class="trilha">Início</a>
+<a href="html-puro.html" class="trilha">HTML puro</a>
+<a href="frameworks.html" class="trilha">Frameworks</a>
+<a href="back-end.html" class="trilha">Back-end</a>
+<a href="negocio.html" class="trilha">Negócio</a>
+<a href="ia.html" class="trilha is-ativa">IA</a>
+</div>
+</nav>
+</header>
+<div class="palco">
+<nav class="sumario" id="sumario" aria-label="Sumário">
+<button class="sumario__abrir" id="sumario-abrir" aria-expanded="false" aria-controls="sumario-lista"><span>Sumário</span><span aria-hidden="true">&#9662;</span></button>
+<div class="sumario__lista" id="sumario-lista">
+<p class="sumario__titulo">IA</p>
+<a class="sumario__parte" href="#s1">1 · Como a IA funciona, na prática</a>
+<ol>
+<li><a href="#t-ia-liberdade">Referência não deixa melhor, deixa consistente</a></li>
+<li><a href="#t-ia-adjetivo">Adjetivo não carrega informação</a></li>
+<li><a href="#t-ia-deriva">A atenção degrada em saída longa</a></li>
+<li><a href="#t-ia-teto">Existe um teto de saída por resposta</a></li>
+<li><a href="#t-ia-critica">Criticar é mais fácil que acertar de primeira</a></li>
+</ol>
+<a class="sumario__parte" href="#s2">2 · Formas de referência</a>
+<ol>
+<li><a href="#t-ia-estrutura">Referências de estrutura — travam o esqueleto</a></li>
+<li><a href="#t-ia-estilo">Referências de estilo — travam a pele</a></li>
+<li><a href="#t-ia-comportamento">Referências de comportamento — travam o movimento</a></li>
+<li><a href="#t-ia-conteudo">Referências de conteúdo — e essa muda mais do que parece</a></li>
+<li><a href="#t-ia-negativa">Referências negativas — travam por exclusão</a></li>
+<li><a href="#t-ia-clima">Referências de clima — quando você não sabe nomear</a></li>
+<li><a href="#t-ia-armadilhas">As duas armadilhas</a></li>
+</ol>
+<a class="sumario__parte" href="#s3">3 · A anatomia do brief</a>
+<ol>
+<li><a href="#t-ia-ordem">A ordem que funciona</a></li>
+<li><a href="#t-ia-mundo">O mundo concreto é o que gera distinção</a></li>
+<li><a href="#t-ia-exemplo">Um brief real, comentado</a></li>
+<li><a href="#t-ia-tamanho">Comando longo não é comando bom</a></li>
+</ol>
+<a class="sumario__parte" href="#s4">4 · Fatiar o trabalho</a>
+<ol>
+<li><a href="#t-ia-porque-fatiar">Por que a página inteira de uma vez dá errado</a></li>
+<li><a href="#t-ia-tamanho-parte">O primeiro pedido não é "a hero"</a></li>
+<li><a href="#t-ia-estrategias">Vertical ou horizontal: escolha por onde está o risco</a></li>
+<li><a href="#t-ia-cirurgico">O fraseado que evita reescrita</a></li>
+<li><a href="#t-ia-revisao">A revisão é um pedido próprio</a></li>
+</ol>
+<a class="sumario__parte" href="#s5">5 · Antes, durante e depois de cada pedido</a>
+<ol>
+<li><a href="#t-ia-plano">Peça o plano antes do código</a></li>
+<li><a href="#t-ia-opcoes">Peça opções, não uma resposta</a></li>
+<li><a href="#t-ia-decisoes">Diga quais decisões não são suas</a></li>
+<li><a href="#t-ia-medo">Diga qual erro você teme</a></li>
+<li><a href="#t-ia-feedback">Feedback que converge em vez de oscilar</a></li>
+<li><a href="#t-ia-verificar">Dê um jeito de verificar</a></li>
+</ol>
+<a class="sumario__parte" href="#s6">6 · Contexto e continuidade</a>
+<ol>
+<li><a href="#t-ia-degrada">Conversa longa degrada — e o sintoma é reconhecível</a></li>
+<li><a href="#t-ia-arquivo-estado">Em projeto de código, o resumo vira arquivo</a></li>
+<li><a href="#t-ia-vocabulario">Vocabulário fixo</a></li>
+<li><a href="#t-ia-skills">Skills: o que colocar e o que não adianta</a></li>
+<li><a href="#t-ia-padrao">Use seu próprio trabalho como padrão</a></li>
+</ol>
+<a class="sumario__parte" href="#s7">7 · Limites e riscos</a>
+<ol>
+<li><a href="#t-ia-erros">O que a IA erra com frequência</a></li>
+<li><a href="#t-ia-invencao">Invenção: o risco mais caro do ofício</a></li>
+<li><a href="#t-ia-direitos">Direitos: imagem, fonte e cópia de layout</a></li>
+<li><a href="#t-ia-seguranca">Segurança e dados do cliente</a></li>
+<li><a href="#t-ia-responsabilidade">A assinatura é sua</a></li>
+</ol>
+<a class="sumario__parte" href="#s8">8 · Modelos prontos</a>
+<ol>
+<li><a href="#t-ia-modelo-brief">1 · Brief de landing page</a></li>
+<li><a href="#t-ia-modelo-secao">2 · Adicionar uma seção</a></li>
+<li><a href="#t-ia-modelo-feedback">3 · Dar feedback</a></li>
+<li><a href="#t-ia-modelo-critica">4 · Pedir autocrítica</a></li>
+<li><a href="#t-ia-modelo-revisao">5 · Revisão final antes de entregar</a></li>
+<li><a href="#t-ia-modelo-contexto">6 · Recomeçar conversa e arquivo de projeto</a></li>
+</ol>
+</div>
+</nav>
+<main class="leitura">
+<section class="abertura">
+<h1>Trabalhando com IA</h1>
+<p class="abertura__lead">Trabalhar com IA não é saber pedir bonito — é saber o que a ferramenta trava e o que ela inventa. Esta trilha reúne as formas de referência, a anatomia do brief, como fatiar o trabalho, o feedback que converge, os riscos de entregar isso a um cliente pagante, e modelos prontos para copiar.</p>
+<div class="legenda">
+<span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
+<span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
+<span>8 partes · 43 tópicos</span>
+</div>
+</section>
+<p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
+<section class="parte" id="s1">
+<div class="parte__cabeca"><span class="parte__num">PARTE 1</span><h2>Como a IA funciona, na prática</h2></div>
+<p class="parte__resumo">Não a explicação técnica do modelo — o modelo mental que muda como você escreve o pedido. Cinco fatos com consequência direta.</p>
+
+<article class="topico" id="t-ia-liberdade" data-marca="revisao">
+<div class="topico__cabeca"><h3>Referência não deixa melhor, deixa consistente</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>A intuição comum é que mandar uma referência torna o resultado melhor. O efeito real é outro: ela torna o resultado <strong>previsível</strong>. Sem referência, o modelo escolhe entre milhares de caminhos plausíveis e tende ao mais comum — que é a média da internet. Com referência, ele escolhe perto daquilo.</p>
+<p>A consequência prática é que uma referência ruim produz um resultado ruim com muita fidelidade. E que uma referência sem explicação vira ordem de cópia: ele reproduz inclusive o que era acidental, como a cor de fundo que você nem tinha reparado.</p>
+<div class="nota"><strong>A formulação que ajuda:</strong> o seu trabalho no pedido não é descrever o que você quer. É <em>reduzir os graus de liberdade</em> nas coisas que importam para você, e deixá-los abertos nas que não importam. Todo item do brief deveria fechar uma decisão ou não estar lá.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ia-adjetivo" data-marca="revisao">
+<div class="topico__cabeca"><h3>Adjetivo não carrega informação</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>"Moderno", "clean", "elegante", "sofisticado", "profissional". Cada uma dessas palavras cobre milhares de resultados visuais diferentes. Quando o pedido é feito só de adjetivo, não há redução de escolha nenhuma — e o resultado cai no padrão.</p>
+<p>É exatamente por isso que tanto material gerado por IA tem cara de template: não porque a ferramenta seja limitada, mas porque o pedido não decidiu nada.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">o mesmo pedido, duas versões</span><button class="copiar">copiar</button></div><pre><code>RUIM
+"Quero um visual moderno e elegante para um bar de drinks."
+→ fundo escuro, dourado, foto de drink, serifada. O padrão.
+
+BOM
+"Fundo preto, marsala como única cor de destaque, tipografia
+ didone nos títulos. A gramática visual é a de um cardápio:
+ rótulo em caixa alta, linha pontilhada ligando nome e valor.
+ Nada de dourado, nada de foto de banco de imagem."
+→ cinco decisões fechadas, o resto aberto.</code></pre></div>
+<p>Repare que a segunda versão não é mais detalhada em tudo. Ela é específica em cinco pontos e silenciosa no resto — e é o silêncio deliberado que deixa espaço para a máquina resolver bem o que você não se importa.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-deriva" data-marca="revisao">
+<div class="topico__cabeca"><h3>A atenção degrada em saída longa</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>As restrições dadas no começo do pedido pesam menos conforme a geração avança. Na oitava seção de uma página, a regra que a primeira seção respeitou pode simplesmente não ser aplicada.</p>
+<p>O sintoma é característico: a seção final usa um espaçamento que não existe na escala, esquece o <code>alt</code> das imagens, inventa uma cor fora da paleta. Não é aleatório — é o efeito de distância.</p>
+<p>Duas consequências: <strong>quebre o trabalho em partes</strong>, porque cada pedido novo reancora as regras; e <strong>repita a restrição crítica no fim do pedido</strong>, porque o começo e o fim são as posições de maior atenção, e o meio é onde se perde coisa.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-teto" data-marca="revisao">
+<div class="topico__cabeca"><h3>Existe um teto de saída por resposta</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>Cada resposta tem um limite de tamanho. Uma landing page completa em arquivo único, com CSS e JS embutidos, chega fácil a 40–80KB — e páginas longas passam do teto.</p>
+<p>O corte não é limpo nem avisado: vem HTML truncado, tag aberta, CSS pela metade. Você só descobre abrindo o arquivo.</p>
+<div class="nota nota--alerta"><strong>Como evitar:</strong> nunca peça "a página inteira" de uma vez em arquivo único. Peça por seção. No ambiente de código, onde a ferramenta edita o arquivo no disco em vez de reescrever tudo na resposta, o limite afrouxa bastante — mas a deriva de atenção continua valendo.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ia-critica" data-marca="novo">
+<div class="topico__cabeca"><h3>Criticar é mais fácil que acertar de primeira</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Avaliar um resultado pronto e produzir um resultado do zero são tarefas diferentes, e a segunda é mais difícil. Na prática, um modelo aponta com facilidade problemas que não evitou enquanto escrevia — porque durante a escrita ele está ocupado produzindo.</p>
+<p>Isso abre uma técnica barata e muito eficaz: pedir a autocrítica como <strong>passo separado</strong>.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">comando</span><button class="copiar">copiar</button></div><pre><code>"Liste três problemas com o que você acabou de escrever,
+ do mais grave ao menos grave. Não corrija ainda."</code></pre></div>
+<p>Com frequência o terceiro item da lista é algo que você não teria notado sozinho. Só depois de ler a lista você decide o que mandar corrigir — e corrige um de cada vez.</p>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s2">
+<div class="parte__cabeca"><span class="parte__num">PARTE 2</span><h2>Formas de referência</h2></div>
+<p class="parte__resumo">Cada tipo de referência trava uma camada diferente. Escolher a certa é escolher o que você quer travar — e o que quer deixar livre.</p>
+
+<article class="topico" id="t-ia-estrutura" data-marca="revisao">
+<div class="topico__cabeca"><h3>Referências de estrutura — travam o esqueleto</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p><strong>Rabisco à mão, fotografado.</strong> A mais subestimada de todas. Um desenho tosco de caixas e linhas comunica hierarquia e ordem com precisão total e não contamina com estilo nenhum — porque não tem estilo. Um print de site, ao contrário, entrega layout e aparência grudados, queira você ou não.</p>
+<p><strong>Wireframe ou arquivo de design.</strong> Mesma função, mais preciso: medidas, proporções e espaçamentos reais. Use quando o layout já está decidido e você quer execução fiel em vez de interpretação.</p>
+<p><strong>Print de site, só pelo layout.</strong> Funciona, desde que você diga explicitamente o que ignorar: <em>"quero a estrutura de seções, ignore cores e tipografia"</em>. Sem essa frase, vem tudo junto.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-estilo" data-marca="revisao">
+<div class="topico__cabeca"><h3>Referências de estilo — travam a pele</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p><strong>Paleta pronta.</strong> Cinco cores com o papel de cada uma — fundo, destaque, texto, superfície, apoio — eliminam a maior fonte isolada de resultado genérico. Só a lista de hexadecimais, sem os papéis, resolve menos.</p>
+<p><strong>Fonte nomeada.</strong> "Bricolage Grotesque no título, Source Serif no corpo" trava peso, personalidade e metade do clima numa linha.</p>
+<p><strong>Moodboard.</strong> Com uma imagem, ela é copiada. Com cinco, o que sobressai é o <em>denominador comum</em> — que costuma ser exatamente o que você quer e não sabe nomear. Funciona melhor com imagens visualmente variadas que compartilham um sentimento.</p>
+<p><strong>Referência fora da web.</strong> Capa de disco, embalagem, pôster de cinema, página de revista, rótulo de vinho, menu impresso, fachada. Como não é site, não existe "cara de site" para copiar — é preciso traduzir, e tradução gera coisa nova. Quase todo resultado com identidade real vem de uma referência assim, não de outro site do mesmo setor.</p>
+<div class="nota"><strong>Exemplo:</strong> para um bar de drinks, mandar a foto de um cardápio impresso bonito rende muito mais que mandar o site de outro bar. O segundo produz variação do concorrente; o primeiro produz algo que não existia.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ia-comportamento" data-marca="revisao">
+<div class="topico__cabeca"><h3>Referências de comportamento — travam o movimento</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p><strong>Gravação de tela.</strong> Nenhuma imagem parada comunica interação. Quinze segundos rolando a página de referência mostram o ritmo: o que aparece quando, o que é sutil, o que é chamativo. Se movimento importa no projeto, é a única referência que resolve.</p>
+<p><strong>GIF de um componente.</strong> Para uma coisa específica — o menu abrindo, o card virando — é mais eficiente que qualquer descrição.</p>
+<p><strong>Descrição de temporização.</strong> Sem arquivo nenhum: <em>"quero o reveal quase imperceptível, não aquele que sobe cinquenta pixels"</em> já direciona.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-conteudo" data-marca="revisao">
+<div class="topico__cabeca"><h3>Referências de conteúdo — e essa muda mais do que parece</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p><strong>A copy real, mesmo crua.</strong> O design de uma página é quase todo determinado pelo texto que vai dentro dela. Um título de quatro palavras e um de dezoito pedem hierarquias diferentes. Quando o pedido vem com "lorem ipsum" ou "texto aqui", o layout é projetado para um texto médio imaginário — e depois nada encaixa.</p>
+<p><strong>As fotos reais.</strong> Se as fotos do cliente são verticais, mal iluminadas e sem sobra nas bordas, isso muda o layout inteiro. Projetar para foto horizontal profissional e receber foto de celular é retrabalho garantido.</p>
+<p><strong>Os números reais.</strong> Três drinks ou trinta? Dois depoimentos ou doze? A resposta decide se a seção é uma grade, um carrossel, ou se ela simplesmente não deveria existir.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-negativa" data-marca="revisao">
+<div class="topico__cabeca"><h3>Referências negativas — travam por exclusão</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>Dizer o que <strong>não</strong> pode aparecer corta o espaço de possibilidades muito mais rápido que dizer o que pode. É a categoria com melhor relação entre esforço de escrita e efeito no resultado.</p>
+<p><strong>Contra-referência:</strong> <em>"o site do concorrente X — não quero parecer com aquilo"</em>. Uma frase elimina uma região inteira.</p>
+<p><strong>Lista do proibido:</strong> sem gradiente roxo, sem ícone genérico de foguete, sem foto de banco de imagem, sem contador regressivo falso, sem seção de FAQ.</p>
+<p><strong>Restrição técnica:</strong> arquivo único, sem build, funciona com JavaScript desligado, só Google Fonts de externo. Não parece referência de design, mas é — ela elimina de saída toda solução que dependeria de biblioteca e força a resolver com CSS, o que costuma produzir resultado mais enxuto.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-clima" data-marca="revisao">
+<div class="topico__cabeca"><h3>Referências de clima — quando você não sabe nomear</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p><strong>A analogia.</strong> <em>"Quero que pareça um bar de hotel dos anos 30, não uma balada."</em> <em>"Quero que pareça consultório, não clínica popular."</em> Carrega um mundo inteiro de convenções visuais junto, e funciona sem nenhum arquivo.</p>
+<p><strong>A pessoa concreta.</strong> Descrever quem vai abrir a página — <em>"noiva de 28 anos, organizando o casamento pelo celular, à noite, cansada"</em> — muda decisões reais de tamanho de fonte, contraste e quantidade de texto. É mais útil que "público A/B feminino 25-40".</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-armadilhas" data-marca="revisao">
+<div class="topico__cabeca"><h3>As duas armadilhas</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p><strong>Referência demais vira papa.</strong> Acima de quatro ou cinco, elas começam a se contradizer e o resultado tende à média delas — que é justamente o genérico que você queria evitar. Três com motivo valem mais que dez sem.</p>
+<p><strong>Referência sem motivo é ordem de cópia.</strong> Toda vez que mandar algo, junte uma frase dizendo o que ali interessa. É a diferença entre "faça assim" e "entenda isso e aplique".</p>
+<div class="nota"><strong>A técnica das três referências:</strong> <em>"Do site A quero o ritmo de rolagem, cada seção ocupando uma tela. Do B, o jeito que a tipografia é gigante e o resto minúsculo. Do C, só a paleta. Não quero o menu de nenhum dos três."</em> Isso produz uma direção que não é nenhuma das três — que é exatamente o que o cliente precisa, já que ele não quer ser cópia de ninguém.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s3">
+<div class="parte__cabeca"><span class="parte__num">PARTE 3</span><h2>A anatomia do brief</h2></div>
+<p class="parte__resumo">A ordem importa, o tamanho não. Duzentas palavras de decisão valem mais que duas mil de adjetivo.</p>
+
+<article class="topico" id="t-ia-ordem" data-marca="revisao">
+<div class="topico__cabeca"><h3>A ordem que funciona</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<ol>
+<li><strong>O que a página precisa fazer</strong> — uma ação só. Se houver duas, escolha a principal e rebaixe a outra.</li>
+<li><strong>Quem chega nela, e de onde</strong> — tráfego de anúncio e tráfego de indicação pedem páginas diferentes.</li>
+<li><strong>O mundo concreto do negócio</strong> — objetos, termos e rituais daquele ofício.</li>
+<li><strong>As decisões já tomadas</strong> — paleta com papéis, tipografia, formato de entrega.</li>
+<li><strong>As referências, com o motivo de cada uma.</strong></li>
+<li><strong>O que não pode aparecer.</strong></li>
+</ol>
+<p>Os itens 3 e 6 são os que quase todo brief pula, e são os dois que mais afastam do genérico.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-mundo" data-marca="revisao">
+<div class="topico__cabeca"><h3>O mundo concreto é o que gera distinção</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>Essa é a parte que quase ninguém usa e que mais muda o resultado. Descrever a <em>categoria</em> do negócio produz design de categoria. Descrever o <em>material</em> dele produz design daquele negócio.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Categoria (fraco)</th><th>Mundo concreto (forte)</th></tr></thead>
+<tbody>
+<tr><td>Bar de drinks</td><td>O objeto do ofício é o cardápio. O que o cliente lembra é o bartender montando o drink na frente dele</td></tr>
+<tr><td>Escola de dança</td><td>Chão, espelho, barra, marcação no piso, contagem de tempo, apresentação de fim de ano</td></tr>
+<tr><td>Arquiteta de interiores</td><td>Planta baixa, escala, cronograma por semana, amostra de material, medida em centímetro</td></tr>
+<tr><td>Psicanalista</td><td>Sessão com hora marcada, escuta, sigilo, o mesmo horário toda semana</td></tr>
+</tbody></table></div>
+<p>A coluna da direita é material de design. Dela saem decisões que nenhuma referência de site produziria — a linha pontilhada de cardápio, a linha do tempo com semanas marcadas, a grade que lembra planta baixa.</p>
+<div class="nota"><strong>Como levantar isso com o cliente:</strong> três perguntas resolvem. Que objeto físico representa o seu trabalho? O que o cliente comenta depois que termina? Qual parte do serviço as pessoas não sabem que existe?</div>
+</div>
+</article>
+
+<article class="topico" id="t-ia-exemplo" data-marca="novo">
+<div class="topico__cabeca"><h3>Um brief real, comentado</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Abaixo um brief de verdade, com o comentário do que cada bloco está fazendo.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">brief</span><button class="copiar">copiar</button></div><pre><code>Crie uma LP para Vanessa Carvalho, arquiteta em Campo Grande.
+   └ quem, e onde. Define língua, referência cultural e escala.
+
+Foco: reforma e interiores de apartamento, ticket R$ 8–25k.
+   └ o ticket diz o nível de acabamento esperado da página.
+     Serviço de 500 reais e de 25 mil não têm o mesmo visual.
+
+Público: adultos querendo reformar um ambiente, querem confiança.
+   └ "querem confiança" é estado mental, não demografia.
+     Isso muda o que a página precisa provar.
+
+Diferencial: acompanha a obra semanalmente e entrega
+cronograma fechado.
+   └ diferencial concreto e verificável, não adjetivo.
+     Isso vira seção, não frase de efeito.
+
+Paleta: #305546 primária (botões, títulos, footer)
+        #567A6B secundária (hover, ícones, detalhes)
+        #B7C5D1 apoio (fundos alternados, cards)
+        #FFFCF7 fundo — não use branco puro
+        #3F444D texto
+   └ cor COM papel. "Não use branco puro" é uma
+     restrição negativa valendo por si só.
+
+CTA único: WhatsApp com mensagem pré-preenchida.
+Sem formulário.
+   └ uma ação, e a exclusão explícita da alternativa.
+
+Entrega: HTML único autocontido, CSS e JS inline.
+   └ restrição técnica: elimina toda solução com build.
+
+Começa só pela hero.
+   └ fatiamento. Provavelmente a linha mais valiosa
+     do brief inteiro.</code></pre></div>
+<div class="nota"><strong>O que falta nele:</strong> o mundo concreto (planta, escala, cronograma como objeto visual) e a lista do proibido. Com esses dois, sairia a página <em>dela</em>; sem eles, sai uma boa página de arquiteta.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ia-tamanho" data-marca="novo">
+<div class="topico__cabeca"><h3>Comando longo não é comando bom</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O que aumenta a qualidade é <strong>densidade de decisão</strong>, não volume de texto. Um brief de duas mil palavras cheio de frases que caberiam em qualquer projeto informa menos que duzentas palavras que fecham dez escolhas.</p>
+<p>Um teste rápido: leia cada frase do seu brief e pergunte <em>"isso poderia estar no brief de qualquer outro cliente?"</em>. Se puder, ela não está informando — está ocupando espaço e diluindo o que importa.</p>
+<div class="nota nota--alerta"><strong>Onde colocar o que não pode falhar:</strong> o começo e o fim de um pedido são as posições de maior atenção; o meio é onde se perde coisa. Restrição crítica — formato de entrega, o que não pode aparecer — vale repetida no final, mesmo já tendo sido dita no começo.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s4">
+<div class="parte__cabeca"><span class="parte__num">PARTE 4</span><h2>Fatiar o trabalho</h2></div>
+<p class="parte__resumo">Quanto pedir por vez. A resposta muda conforme onde está o risco do projeto — e conforme a ferramenta escreve na resposta ou edita um arquivo.</p>
+
+<article class="topico" id="t-ia-porque-fatiar" data-marca="revisao">
+<div class="topico__cabeca"><h3>Por que a página inteira de uma vez dá errado</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>São três motivos independentes, e cada um sozinho já justifica fatiar.</p>
+<p><strong>O teto de saída.</strong> Página longa em arquivo único estoura o limite e vem truncada, sem aviso.</p>
+<p><strong>A deriva de atenção.</strong> As regras do começo pesam menos na oitava seção.</p>
+<p><strong>O custo de correção.</strong> Se a hero saiu na direção errada e a página inteira já foi construída em cima dela, corrigir significa regenerar tudo — e regenerar introduz variação nova nas partes que estavam certas. Uma seção por vez faz o erro custar uma seção.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-tamanho-parte" data-marca="revisao">
+<div class="topico__cabeca"><h3>O primeiro pedido não é "a hero"</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>Parte pequena demais também é ruim: pedir um botão por vez destrói o que importa em design, que é a <strong>relação entre as partes</strong>. Ritmo de espaçamento, hierarquia entre seções, alternância de fundo — nada disso existe dentro de um componente isolado.</p>
+<p>O tamanho certo para o primeiro pedido é <strong>o sistema visual mais uma seção construída em cima dele</strong>:</p>
+<ul>
+<li>o bloco <code>:root</code> completo — cores com papel, escala de espaçamento, escala tipográfica, raio, transição</li>
+<li>as fontes carregadas, com os pesos definidos</li>
+<li>o reset e as classes base de botão, container e seção</li>
+<li>a hero inteira, usando apenas o que está acima</li>
+</ul>
+<p>Depois disso cada seção nova é barata e sai consistente, porque as decisões já estão escritas no arquivo e são lidas em vez de reinventadas. Se você pedir só a hero sem o sistema, as decisões ficam implícitas e espalhadas no CSS dela — e na terceira seção começa a divergir.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-estrategias" data-marca="revisao">
+<div class="topico__cabeca"><h3>Vertical ou horizontal: escolha por onde está o risco</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Estratégia</th><th>Como é</th><th>Use quando</th></tr></thead>
+<tbody>
+<tr><td><strong>Vertical</strong></td><td>Acaba uma seção por vez, com acabamento final</td><td>A dúvida é visual. Você precisa aprovar a direção antes de investir no resto</td></tr>
+<tr><td><strong>Horizontal</strong></td><td>Página inteira em rascunho estrutural, depois refina</td><td>A dúvida é de arquitetura: quais seções entram, em que ordem, se a conversão está no lugar</td></tr>
+</tbody></table></div>
+<p>O horizontal é um wireframe feito em código: todas as seções existindo, com texto real e visual cru. Fazer horizontal quando a dúvida era visual é desperdício, e o contrário também.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-cirurgico" data-marca="revisao">
+<div class="topico__cabeca"><h3>O fraseado que evita reescrita</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>Numa ferramenta que edita arquivos no disco, o jeito de pedir decide se a edição é cirúrgica ou se o arquivo inteiro é reescrito. Reescrita é mais lenta, mais cara e introduz variação em partes já aprovadas.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">comparação</span><button class="copiar">copiar</button></div><pre><code>VAGO  → pode reescrever tudo
+"agora faça a seção de serviços"
+
+PRECISO → edição pontual
+"adicione a seção de serviços depois da hero,
+ usando os tokens que já estão no :root.
+ Não toque em nenhuma outra parte do arquivo."</code></pre></div>
+<p>Duas frases a mais que mudam completamente o custo da operação e protegem o que já estava certo.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-revisao" data-marca="revisao">
+<div class="topico__cabeca"><h3>A revisão é um pedido próprio</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>Revisão feita junto com criação sai superficial, porque a atenção está ocupada produzindo. Como pedido separado, vira outra tarefa — ler o que existe com olhar crítico — e o resultado é bem melhor.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">o pedido de revisão final</span><button class="copiar">copiar</button></div><pre><code>"Não escreva nada novo. Revise o arquivo e me diga o que
+ está errado nestes pontos:
+ - responsivo em 390px: algo estoura na horizontal?
+ - contraste: todo texto atinge 4.5:1?
+ - toda imagem tem alt descritivo?
+ - title, description e og:image estão preenchidos?
+ - prefers-reduced-motion está respeitado?
+ - tem algum valor fora da escala de espaçamento?
+ Liste os problemas. Não corrija ainda."</code></pre></div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s5">
+<div class="parte__cabeca"><span class="parte__num">PARTE 5</span><h2>Antes, durante e depois de cada pedido</h2></div>
+<p class="parte__resumo">Onde mais se perde tempo não é escrevendo o pedido — é no vaivém depois que o resultado chega.</p>
+
+<article class="topico" id="t-ia-plano" data-marca="revisao">
+<div class="topico__cabeca"><h3>Peça o plano antes do código</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">comando</span><button class="copiar">copiar</button></div><pre><code>"Antes de escrever qualquer código, me diga em cinco linhas
+ qual é o plano: paleta, tipografia, estrutura da hero e o
+ que você vai assumir onde o brief não decidiu."</code></pre></div>
+<p>Se o plano estiver errado, corrigir custa uma frase. Se trezentas linhas já existirem, custa tudo de novo. E há um efeito colateral bom: um plano escrito antes gera código mais coerente do que decidir enquanto escreve.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-opcoes" data-marca="revisao">
+<div class="topico__cabeca"><h3>Peça opções, não uma resposta</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p><em>"Me dê três direções possíveis para a hero, uma frase cada. Não escreva código ainda."</em></p>
+<p>Três frases custam segundos e evitam construir a direção errada inteira. Funciona especialmente bem quando você não sabe o que quer mas reconhece quando vê — que é o estado mais comum no começo de um projeto.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-decisoes" data-marca="revisao">
+<div class="topico__cabeca"><h3>Diga quais decisões não são suas</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>Isso resolve dois problemas opostos: perguntas demais e suposições demais.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">comando</span><button class="copiar">copiar</button></div><pre><code>"Paleta e fonte estão travadas, não mude.
+ Estrutura da hero, escala de espaçamento e microcopy são
+ sua decisão — não pergunte, decida e me diga o que decidiu."</code></pre></div>
+<p>A segunda metade é a que importa: "decida e me diga o que decidiu" mantém você no controle sem travar o andamento.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-medo" data-marca="revisao">
+<div class="topico__cabeca"><h3>Diga qual erro você teme</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>Instrução negativa específica muda o comportamento mais que qualquer instrução positiva. <em>"Meu medo é ficar com cara de template de arquiteta"</em> faz evitar ativamente a região genérica. <em>"Faça bonito"</em> não faz nada.</p>
+<p>Vale para qualquer eixo: <em>"meu medo é o cliente achar caro demais pro que aparenta"</em>, <em>"meu medo é ficar pesado no celular"</em>, <em>"meu medo é parecer clínica popular"</em>.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-feedback" data-marca="revisao">
+<div class="topico__cabeca"><h3>Feedback que converge em vez de oscilar</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>Este é o ponto que mais economiza tempo no processo inteiro. Feedback vago faz o resultado <strong>oscilar</strong>: "não gostei, tenta de novo" provoca mudanças aleatórias, inclusive nas partes que você tinha aprovado. Aí você pede para voltar, e começa o vaivém.</p>
+<p>Feedback que converge tem três partes: <strong>o que manter</strong>, <strong>o que está errado</strong>, e <strong>por quê</strong>.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">comparação</span><button class="copiar">copiar</button></div><pre><code>OSCILA
+"o texto tá estranho, arruma"
+
+CONVERGE
+"A estrutura e a paleta estão certas, mantenha.
+ O título está grande demais em relação ao subtítulo —
+ a hierarquia ficou desequilibrada.
+ Reduza só o título."</code></pre></div>
+<p><strong>Mude uma variável por vez.</strong> Se você pedir cor, tipografia e espaçamento no mesmo comando e o resultado piorar, não dá para saber qual das três causou. Em revisão visual isso pesa muito.</p>
+<p><strong>Diga o que não pode mudar.</strong> <em>"Não toque na hero, ela está aprovada."</em> Provavelmente a frase que mais economiza retrabalho em conversa longa — sem ela, partes fechadas são "melhoradas" de passagem.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-verificar" data-marca="novo">
+<div class="topico__cabeca"><h3>Dê um jeito de verificar</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Quando existe um teste objetivo, peça o teste em vez de confiar na aparência. A diferença é entregar pelo que <em>parece</em> certo e entregar pelo que foi <em>checado</em>.</p>
+<ul>
+<li><em>"Abra em 390px de largura e me diga se algo estoura na horizontal."</em></li>
+<li><em>"Calcule o contraste do texto #3F444D sobre o fundo #B7C5D1 e me diga o número."</em></li>
+<li><em>"Conte quantas imagens existem e quantas têm alt preenchido."</em></li>
+<li><em>"Rode o arquivo e me diga se o console acusa erro."</em></li>
+</ul>
+<div class="nota">Pedidos assim funcionam melhor em ferramenta que executa código de verdade. Em conversa comum, o equivalente é pedir a conferência explícita item a item — menos confiável, mas ainda melhor que não pedir.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s6">
+<div class="parte__cabeca"><span class="parte__num">PARTE 6</span><h2>Contexto e continuidade</h2></div>
+<p class="parte__resumo">Como manter consistência entre sessões, entre projetos e ao longo de uma conversa que ficou longa demais.</p>
+
+<article class="topico" id="t-ia-degrada" data-marca="revisao">
+<div class="topico__cabeca"><h3>Conversa longa degrada — e o sintoma é reconhecível</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>Quanto mais coisa acumula, mais decisões de momentos diferentes se misturam. O sintoma é característico: erro já corrigido reaparece, restrição que estava valendo é esquecida, o ritmo cai.</p>
+<p>Quando isso acontece, <strong>corrigir mais não resolve</strong> — cada correção nova entra no mesmo acúmulo que está causando o problema.</p>
+<p>O que resolve é recomeçar com um <strong>resumo</strong>, não com o histórico. Cinco linhas de estado valem mais que cinquenta mensagens — e vêm sem o ruído das tentativas que deram errado.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">resumo para recomeçar</span><button class="copiar">copiar</button></div><pre><code>PROJETO: LP da Vanessa Carvalho, arquiteta, Campo Grande.
+TRAVADO: paleta (#305546 / #567A6B / #B7C5D1 / #FFFCF7 / #3F444D),
+         fonte X no título e Y no corpo, CTA único no WhatsApp,
+         entrega em arquivo único com CSS e JS inline.
+PRONTO:  hero e seção de serviços, aprovadas.
+FALTA:   cronograma, prova, conversão, rodapé.
+AGORA:   a seção de cronograma, usando os tokens existentes.</code></pre></div>
+</div>
+</article>
+
+<article class="topico" id="t-ia-arquivo-estado" data-marca="revisao">
+<div class="topico__cabeca"><h3>Em projeto de código, o resumo vira arquivo</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>Um arquivo de contexto na raiz do projeto — em Claude Code, o <code>CLAUDE.md</code> — carrega sozinho em toda sessão. É a versão permanente do resumo acima, e é mais importante que qualquer skill: a skill descreve <em>como trabalhar em geral</em>, esse arquivo descreve <em>este projeto</em>.</p>
+<p>O que vale estar nele: as decisões travadas, o padrão de entrega, o que já está aprovado e não deve ser tocado, e as convenções de nome que você usa.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-vocabulario" data-marca="revisao">
+<div class="topico__cabeca"><h3>Vocabulário fixo</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>Chamar a mesma coisa de "hero" hoje, "topo" amanhã e "banner" depois obriga a reinferir a cada pedido — e às vezes a inferência erra. Nomear as seções uma vez e manter deixa cada pedido seguinte mais curto e mais preciso.</p>
+<p>Um conjunto que funciona para landing page: <strong>hero, prova, serviços, processo, conversão, rodapé</strong>. Qualquer conjunto serve, desde que não mude.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-skills" data-marca="novo">
+<div class="topico__cabeca"><h3>Skills: o que colocar e o que não adianta</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Uma skill é um brief permanente: em vez de redigitar as mesmas regras em todo projeto, elas viram um arquivo que carrega sozinho quando o assunto aparece.</p>
+<p>O que funciona dentro dela, na ordem de retorno:</p>
+<ol>
+<li><strong>As invariantes.</strong> Arquivo único, CSS e JS inline, nenhum CDN além do Google Fonts, funciona com JavaScript desligado, nada inventado — tudo marcado <code>[PREENCHER]</code>. Objetivo, nunca muda, fácil de escrever.</li>
+<li><strong>Os mecanismos repetidos.</strong> O formulário que monta a mensagem do WhatsApp, o menu que vira sólido ao rolar, o reveal, a facade do vídeo. Colocar o <em>código real</em> desses blocos elimina a reescrita — e reescrita é onde entra variação indesejada.</li>
+<li><strong>As regras de arquitetura.</strong> "Seção sem objeção respondida não entra." "Sem depoimento real, a seção não vai ao ar." Julgamento codificado.</li>
+</ol>
+<div class="nota nota--alerta"><strong>O que não adianta:</strong> gosto descrito em adjetivo. Uma skill que diz "design elegante e moderno" não vale nada — é o mesmo problema do brief com adjetivo, só que permanente. O que transfere é decisão e exemplo: a escala de espaçamento em números, os pares de fonte aprovados, a lista do que nunca aparece, e <strong>um projeto anterior inteiro como referência</strong>. Um exemplo real ensina mais que vinte linhas de princípio, porque carrega junto as microdecisões que ninguém escreve.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ia-padrao" data-marca="revisao">
+<div class="topico__cabeca"><h3>Use seu próprio trabalho como padrão</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>"No padrão do projeto X" transfere mais que três parágrafos de descrição, porque carrega junto todas as microdecisões. Vale manter um projeto seu como referência canônica, citá-lo por nome, e mantê-lo acessível — num repositório, numa pasta, dentro da skill.</p>
+<p>É também o que faz seu trabalho ficar reconhecível ao longo do tempo, em vez de cada projeto ser uma reinvenção.</p>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s7">
+<div class="parte__cabeca"><span class="parte__num">PARTE 7</span><h2>Limites e riscos</h2></div>
+<p class="parte__resumo">O que a IA erra com frequência, e o que pode virar problema real quando o trabalho é entregue a um cliente pagante. Esta parte é a que protege você.</p>
+
+<article class="topico" id="t-ia-erros" data-marca="novo">
+<div class="topico__cabeca"><h3>O que a IA erra com frequência</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Saber onde a ferramenta é fraca vale mais que saber onde ela é forte — porque é onde você precisa olhar.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Ponto fraco</th><th>Como aparece</th><th>Quem resolve</th></tr></thead>
+<tbody>
+<tr><td>Nuance visual</td><td>Peso ótico, textura, o ajuste de meio pixel que faz parecer profissional</td><td>Você, olhando</td></tr>
+<tr><td>Consistência em arquivo longo</td><td>Valor fora da escala, classe duplicada, cor que não está na paleta</td><td>Pedido de revisão separado</td></tr>
+<tr><td>Contagem e proporção</td><td>"Seis cards" que viram cinco; larguras que não somam</td><td>Conferência explícita</td></tr>
+<tr><td>Fatos recentes</td><td>Versão de biblioteca, preço, quem ocupa um cargo</td><td>Verificar na fonte</td></tr>
+<tr><td>Detalhe do seu contexto</td><td>O que o cliente falou por telefone e não está escrito</td><td>Só você tem</td></tr>
+</tbody></table></div>
+<div class="nota">A divisão saudável de trabalho: a máquina produz volume e consistência; você julga o que só se julga olhando, e traz o que só você sabe. Quem trata a IA como substituto do julgamento entrega trabalho medíocre rápido.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ia-invencao" data-marca="novo">
+<div class="topico__cabeca"><h3>Invenção: o risco mais caro do ofício</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Peça uma landing page completa e, se nada impedir, ela virá com depoimentos, números de clientes atendidos, anos de mercado e selos de certificação. Tudo inventado, tudo verossímil, tudo pronto para ir ao ar.</p>
+<p>Isso não é detalhe estético — é exposição real. Depoimento falso e número inventado no site de um cliente são publicidade enganosa, e quem publicou responde. Em algumas profissões é mais grave ainda: psicólogo não pode publicar depoimento nem promessa de resultado, e a regra vem do próprio conselho da categoria.</p>
+<div class="nota nota--alerta"><strong>A regra que resolve, e que vale colocar em toda skill e todo brief:</strong> nada que não tenha sido fornecido pode ser preenchido. Toda lacuna vira <code>[PREENCHER]</code> visível no código, e vira item de checklist para cobrar do cliente. Número, depoimento, credencial, prêmio, logo de empresa atendida — nenhum deles se inventa, nem "só como exemplo", porque exemplo é exatamente o que acaba publicado.</div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">a linha que vale em todo pedido</span><button class="copiar">copiar</button></div><pre><code>"Não invente nenhum dado. Todo número, depoimento, nome ou
+ credencial que eu não tiver fornecido deve aparecer como
+ [PREENCHER] no código e ser listado no final como pendência."</code></pre></div>
+</div>
+</article>
+
+<article class="topico" id="t-ia-direitos" data-marca="novo">
+<div class="topico__cabeca"><h3>Direitos: imagem, fonte e cópia de layout</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p><strong>Foto.</strong> Imagem achada na busca não é livre por estar visível. Apontar direto para o servidor de outro site (hotlink) soma dois problemas: licença e a imagem sumir ou virar marca d'água sem aviso. Para material temporário de aprovação, o caminho seguro é banco com licença livre para uso comercial — Unsplash, Pexels — ou bloco de placeholder desenhado em CSS. Antes de publicar, foto real do cliente.</p>
+<p><strong>Fonte.</strong> Nem toda fonte bonita pode ser embutida num site comercial. Google Fonts resolve a maior parte sem custo nem dor de cabeça. Fonte paga exige licença de uso web, que é diferente da licença de desktop — e quem instala responde.</p>
+<p><strong>Layout.</strong> Pedir para reproduzir o site de alguém produz um clone, e clone traz dois problemas de uma vez: exposição jurídica e ausência de identidade. O cliente não quer o site do concorrente com outro logo — ele quer parecer melhor que o concorrente.</p>
+<div class="nota"><strong>Onde está a linha, na prática:</strong> estrutura e padrão de interface são de uso comum — ninguém é dono de "menu fixo com logo à esquerda". O que é protegido é a expressão específica: a arte, a foto, o texto, o conjunto visual particular daquela marca. Inspirar-se na estrutura é normal no ofício; reproduzir a expressão não é.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ia-seguranca" data-marca="novo">
+<div class="topico__cabeca"><h3>Segurança e dados do cliente</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p><strong>No código.</strong> A regra da Parte de segurança vale em dobro quando o código é gerado: tudo que está no front-end é público. Se a IA propuser colar uma chave de API no HTML para "facilitar a integração", isso vira credencial exposta no site do seu cliente. Chave de envio de e-mail, token de CRM, senha — nenhuma dessas pode existir no arquivo que vai pro navegador.</p>
+<p><strong>No chat.</strong> O que você cola no pedido sai do seu computador. Não vale colar senha, chave, token, contrato assinado, dado pessoal de terceiro nem base de clientes. Se precisar trabalhar com uma estrutura de dados, mande o formato com valores fictícios — funciona igual para o que você precisa.</p>
+<p><strong>LGPD.</strong> Se o site coleta qualquer dado pessoal — formulário, analytics com cookie, pixel de anúncio — existe obrigação de aviso e base legal. A responsabilidade formal é do cliente, mas quem instalou a tag foi você, e é você que vai ser chamado quando der problema. O caminho limpo é não instalar rastreamento sem o cliente pedir e saber, e deixar o ponto marcado no código para ele decidir. Vale lembrar que isto é orientação prática, não parecer jurídico — para caso concreto, advogado.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-responsabilidade" data-marca="novo">
+<div class="topico__cabeca"><h3>A assinatura é sua</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O cliente não contratou uma ferramenta, contratou você. Se a página tiver um número inventado, um contraste ilegível ou uma foto sem licença, o problema é seu — e a explicação "a IA que escreveu" não existe como defesa, nem comercial nem jurídica.</p>
+<p>Na prática isso significa uma coisa simples: <strong>nada vai para o cliente sem você ter lido</strong>. Não reler porque "estava bom" é o atalho que transforma ganho de produtividade em risco acumulado.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">checagem antes de entregar</span><button class="copiar">copiar</button></div><pre><code>[ ] Nenhum número, depoimento ou credencial inventado
+[ ] Todo [PREENCHER] resolvido ou listado como pendência
+[ ] Fotos com licença verificada
+[ ] Nenhuma chave, token ou senha no código
+[ ] Contraste conferido no texto principal
+[ ] Testado em 390px de largura
+[ ] Links de WhatsApp e âncoras funcionando
+[ ] Ctrl+U: nada no fonte que você não queira público</code></pre></div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s8">
+<div class="parte__cabeca"><span class="parte__num">PARTE 8</span><h2>Modelos prontos</h2></div>
+<p class="parte__resumo">Os seis comandos que cobrem o ciclo inteiro de um projeto. Copie, troque o conteúdo entre colchetes, use.</p>
+
+<article class="topico" id="t-ia-modelo-brief" data-marca="novo">
+<div class="topico__cabeca"><h3>1 · Brief de landing page</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">modelo</span><button class="copiar">copiar</button></div><pre><code>Crie uma landing page para [NOME], [OFÍCIO] em [CIDADE].
+
+AÇÃO ÚNICA: [o que a pessoa deve fazer]. Sem [a alternativa
+que você está excluindo].
+
+PÚBLICO: [quem é, e o estado mental — o que teme, o que quer
+resolver]. Chega por [origem do tráfego].
+
+DIFERENCIAL: [algo concreto e verificável, não adjetivo].
+
+MUNDO CONCRETO: os objetos e termos do ofício são
+[lista: instrumento, documento, ritual, unidade de medida].
+Pode usar isso como gramática visual.
+
+DECIDIDO:
+- paleta: [cor] [papel] / [cor] [papel] / ...
+- tipografia: [fonte] no título, [fonte] no corpo
+- entrega: arquivo HTML único, CSS e JS inline, sem build,
+  funcionando com JavaScript desligado
+
+REFERÊNCIAS:
+- [ref 1] — quero daqui [o quê]
+- [ref 2] — quero daqui [o quê]
+
+NÃO QUERO: [3 a 5 itens concretos].
+MEU MEDO: [o erro específico que você teme].
+
+Não invente nenhum dado: o que eu não forneci vira
+[PREENCHER] e entra numa lista de pendências no final.
+
+Comece só pela [primeira seção], junto com o sistema visual
+completo no :root. Antes de escrever, me diga o plano em
+cinco linhas.</code></pre></div>
+</div>
+</article>
+
+<article class="topico" id="t-ia-modelo-secao" data-marca="novo">
+<div class="topico__cabeca"><h3>2 · Adicionar uma seção</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">modelo</span><button class="copiar">copiar</button></div><pre><code>Adicione a seção [NOME] logo depois de [SEÇÃO ANTERIOR].
+
+Ela existe para responder: "[a objeção ou pergunta do
+visitante que essa seção resolve]".
+
+Conteúdo: [o que vai dentro].
+
+Use os tokens que já estão no :root — não crie cor, medida
+nem tamanho de fonte novo. Mantenha a alternância de fundo
+em relação à seção anterior.
+
+Não toque em nenhuma outra parte do arquivo.</code></pre></div>
+<p>As duas últimas linhas são o que diferencia uma edição pontual de uma reescrita do arquivo inteiro.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-modelo-feedback" data-marca="novo">
+<div class="topico__cabeca"><h3>3 · Dar feedback</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">modelo</span><button class="copiar">copiar</button></div><pre><code>MANTENHA: [o que está certo — seja específico, não "o resto"].
+
+MUDE: [uma coisa só].
+POR QUÊ: [o efeito indesejado que ela está causando].
+
+Não mexa em mais nada.</code></pre></div>
+<p>Se você tem três críticas, mande três comandos. Juntar as três num só impede saber qual mudança causou o quê — e é assim que uma revisão vira vaivém.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ia-modelo-critica" data-marca="novo">
+<div class="topico__cabeca"><h3>4 · Pedir autocrítica</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">modelo</span><button class="copiar">copiar</button></div><pre><code>Não corrija nada ainda.
+
+Liste os três maiores problemas do que você acabou de
+escrever, do mais grave ao menos grave, considerando:
+hierarquia visual, legibilidade, coerência com o sistema
+de tokens, e se alguma seção não está respondendo a
+nenhuma objeção real.
+
+Para cada um, diga o que você faria.</code></pre></div>
+</div>
+</article>
+
+<article class="topico" id="t-ia-modelo-revisao" data-marca="novo">
+<div class="topico__cabeca"><h3>5 · Revisão final antes de entregar</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">modelo</span><button class="copiar">copiar</button></div><pre><code>Não escreva nada novo. Só revise e me diga o que encontrar.
+
+TÉCNICO
+- estoura na horizontal em 390px?
+- todo texto atinge contraste 4.5:1?
+- toda imagem tem alt descritivo?
+- title, description e og:image preenchidos?
+- prefers-reduced-motion respeitado?
+- funciona com JavaScript desligado?
+
+CONTEÚDO
+- tem algum dado, número ou depoimento que eu não forneci?
+- todos os [PREENCHER] estão listados?
+- tem chave, token ou senha no arquivo?
+
+CONSISTÊNCIA
+- algum valor de espaçamento fora da escala?
+- alguma cor fora da paleta?
+
+Liste os problemas numerados. Não corrija.</code></pre></div>
+</div>
+</article>
+
+<article class="topico" id="t-ia-modelo-contexto" data-marca="novo">
+<div class="topico__cabeca"><h3>6 · Recomeçar conversa e arquivo de projeto</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">resumo para colar numa conversa nova</span><button class="copiar">copiar</button></div><pre><code>PROJETO: [o que é, para quem]
+TRAVADO: [paleta, fontes, CTA, formato de entrega]
+PRONTO:  [o que já está aprovado e não deve mudar]
+FALTA:   [o que ainda não existe]
+AGORA:   [o próximo passo, um só]</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">CLAUDE.md na raiz do projeto</span><button class="copiar">copiar</button></div><pre><code># [Nome do projeto]
+
+## Entrega
+Arquivo HTML único, CSS e JS inline. Sem build.
+Único externo permitido: Google Fonts.
+A página funciona com JavaScript desligado.
+
+## Sistema
+Tokens no :root. Nenhuma cor ou medida fora da escala.
+Espaçamento: 4 / 8 / 16 / 24 / 40 / 64.
+Tipografia: [fonte] título, [fonte] corpo.
+
+## Regras
+Nada inventado — lacuna vira [PREENCHER] e entra na
+lista de pendências.
+Seção que não responde a uma objeção não entra.
+Sem depoimento, a seção de depoimentos não vai ao ar.
+
+## Nomes das seções
+hero · prova · serviços · processo · conversão · rodapé
+
+## Aprovado, não mexer
+[lista do que já está fechado]</code></pre></div>
+<div class="nota">Esse arquivo é o que mantém consistência entre sessões. Vale mais que qualquer configuração: ele descreve <em>este</em> projeto, e é lido antes de qualquer coisa ser escrita.</div>
+</div>
+</article>
+</section>
+
+</main>
+</div>
+<footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<script src="app.js"></script>
+</body>
+</html>
