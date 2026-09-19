@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Qualidade — Gustavo Tutorial</title>
+<meta name="description" content="Imagens, acessibilidade, Core Web Vitals, formulários e a checklist que evita o site quebrado.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Qualidade — Gustavo Tutorial">
+<meta property="og:description" content="Imagens, acessibilidade, Core Web Vitals, formulários e a checklist que evita o site quebrado.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0D6B62" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
+<meta name="author" content="Gustavo">
+<link rel="canonical" href="https://gustavo-tutorial.vercel.app/qualidade.html">
+<meta property="og:url" content="https://gustavo-tutorial.vercel.app/qualidade.html">
+<meta property="og:image" content="https://gustavo-tutorial.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Gustavo Tutorial">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo">
+<div class="topo__interno">
+<a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
+<div class="filtros" role="group" aria-label="Filtrar tópicos">
+<button class="filtro" data-filtro="tudo" aria-pressed="true">Tudo</button>
+<button class="filtro" data-filtro="revisao" aria-pressed="false">Revisão</button>
+<button class="filtro" data-filtro="novo" aria-pressed="false">Novo</button>
+</div>
+<button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+</div>
+<nav class="navmenu" aria-label="Trilhas">
+<details class="navmenu__caixa" id="navmenu">
+<summary class="navmenu__botao">Trilhas<span aria-hidden="true">&#9662;</span></summary>
+<div class="navmenu__painel">
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Construir</p>
+<a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="qualidade.html" class="is-atual"><strong>Qualidade</strong><span>Imagem, a11y, Vitals e testes</span></a>
+<a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="motion.html"><strong>Referência: Motion</strong><span>A API inteira, em português</span></a>
+<a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Servidor, banco e login</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Vender</p>
+<a href="landing-pages.html"><strong>Landing pages</strong><span>A estratégia da página</span></a>
+<a href="trafego.html"><strong>Tráfego</strong><span>Ser encontrado no Google</span></a>
+<a href="negocio.html"><strong>Negócio</strong><span>Preço, escopo e contrato</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Método</p>
+<a href="fluxo.html"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
+<a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
+<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+<div class="navmenu__grupo navmenu__grupo--trabalhar">
+<p class="navmenu__rotulo">Trabalhar</p>
+<a href="ferramentas.html"><strong>Ferramentas</strong><span>As oito do dia a dia</span></a>
+<a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
+<a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
+<a href="ferramentas.html#f-zap"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
+<a href="ferramentas.html#f-utm"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
+<a href="ia.html#t-gerador"><strong>Gerador de comando</strong><span>Brief para a IA</span></a>
+</div>
+</div>
+</details>
+
+<span class="navmenu__aqui">Qualidade</span>
+</nav></header>
+<div class="palco">
+<nav class="sumario" id="sumario" aria-label="Sumário">
+<button class="sumario__abrir" id="sumario-abrir" aria-expanded="false" aria-controls="sumario-lista"><span>Sumário</span><span aria-hidden="true">&#9662;</span></button>
+<div class="sumario__lista" id="sumario-lista">
+<p class="sumario__titulo">Qualidade</p>
+<a class="sumario__parte" href="#s1">1 · Imagens e mídia</a>
+<ol>
+<li><a href="#t-img-peso">O que realmente pesa numa página</a></li>
+<li><a href="#t-img-formatos">Qual formato usar</a></li>
+<li><a href="#t-img-comprimir">Comprimir — alvos e ferramentas</a></li>
+<li><a href="#t-img-responsiva">srcset e sizes — a imagem certa para cada tela</a></li>
+<li><a href="#t-img-carregamento">Quando carregar — lazy, priority e o pulo do layout</a></li>
+<li><a href="#t-img-picture">&lt;picture&gt; — formato moderno com reserva</a></li>
+<li><a href="#t-img-direitos">De onde vem a foto — e o risco real</a></li>
+<li><a href="#t-img-favicon">Favicon e imagem de compartilhamento</a></li>
+</ol>
+<a class="sumario__parte" href="#s2">2 · Acessibilidade</a>
+<ol>
+<li><a href="#t-a11y-porque">Por que importa — inclusive juridicamente</a></li>
+<li><a href="#t-a11y-semantica">Semântica: o HTML certo já é metade do caminho</a></li>
+<li><a href="#t-a11y-teclado">Teclado e foco visível</a></li>
+<li><a href="#t-a11y-alt">Texto alternativo que serve para alguma coisa</a></li>
+<li><a href="#t-a11y-contraste">Contraste medido, não achado</a></li>
+<li><a href="#t-a11y-aria">ARIA — e quando não usar</a></li>
+<li><a href="#t-a11y-testar">Testar em quinze minutos</a></li>
+</ol>
+<a class="sumario__parte" href="#s3">3 · Performance medida</a>
+<ol>
+<li><a href="#t-perf-vitals">Core Web Vitals — os três números</a></li>
+<li><a href="#t-perf-lcp">Consertar o LCP</a></li>
+<li><a href="#t-perf-cls">Consertar o CLS</a></li>
+<li><a href="#t-perf-inp">Consertar o INP</a></li>
+<li><a href="#t-perf-fontes">Fontes — o gargalo que ninguém vê</a></li>
+<li><a href="#t-perf-medir">Campo e laboratório — dois números diferentes</a></li>
+</ol>
+<a class="sumario__parte" href="#s4">4 · Formulários que funcionam no Brasil</a>
+<ol>
+<li><a href="#t-form-quando">Quando formulário perde para o WhatsApp</a></li>
+<li><a href="#t-form-nativo">O que o navegador já faz de graça</a></li>
+<li><a href="#t-form-mascara">Máscara de telefone e CPF</a></li>
+<li><a href="#t-form-cep">CEP que preenche o endereço</a></li>
+<li><a href="#t-form-spam">Spam — honeypot antes de CAPTCHA</a></li>
+<li><a href="#t-form-erro">Erro acessível e envio de verdade</a></li>
+</ol>
+<a class="sumario__parte" href="#s5">5 · Testar antes de entregar</a>
+<ol>
+<li><a href="#t-teste-checklist">A checklist de entrega</a></li>
+<li><a href="#t-teste-navegadores">Quais navegadores importam aqui</a></li>
+<li><a href="#t-teste-safari">As manias do Safari no iPhone</a></li>
+<li><a href="#t-teste-quebrado">Caçar link, imagem e metadado quebrado</a></li>
+<li><a href="#t-teste-auto">Teste de fumaça automatizado</a></li>
+<li><a href="#t-teste-cliente">Como apresentar para o cliente aprovar</a></li>
+</ol>
+</div>
+</nav>
+<main class="leitura" id="conteudo" tabindex="-1">
+<section class="abertura">
+<h1>Qualidade</h1>
+<p class="abertura__lead">Esta trilha é sobre o que separa uma página que funciona de uma página que funciona bem: o peso da imagem, quem consegue usar, quanto demora para aparecer, e o que se confere antes de mandar o link para o cliente.</p>
+<div class="legenda">
+<span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
+<span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
+<span>6 partes · 40 tópicos</span>
+</div>
+</section>
+<p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
+
+<section class="parte" id="s1">
+<div class="parte__cabeca"><span class="parte__num">PARTE 1</span><h2>Imagens e mídia</h2></div>
+<p class="parte__resumo">É onde está 80% do peso de uma landing page e a maior parte da diferença entre um site que abre em um segundo e um que abre em oito. Também é onde mora o risco jurídico mais bobo do ofício: usar foto que não é sua.</p>
+
+<article class="topico" id="t-img-peso" data-marca="novo">
+<div class="topico__cabeca"><h3>O que realmente pesa numa página</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Abra a aba Network de qualquer landing page e ordene por tamanho. A ordem é quase sempre a mesma: imagem, imagem, imagem, fonte, JavaScript, CSS, HTML. O HTML — o arquivo que você passou o dia escrevendo — costuma ser o menor de todos.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Recurso</th><th>Peso típico mal feito</th><th>Peso bem feito</th></tr></thead>
+<tbody>
+<tr><td>Foto de hero</td><td>3 a 6 MB (direto da câmera ou do celular)</td><td>80 a 150 KB</td></tr>
+<tr><td>Galeria de 8 fotos</td><td>20 MB</td><td>500 KB</td></tr>
+<tr><td>Fontes</td><td>400 KB (6 pesos de 2 famílias)</td><td>60 KB (2 pesos)</td></tr>
+<tr><td>HTML da página</td><td>—</td><td>30 a 80 KB</td></tr>
+</tbody></table></div>
+<p>A conclusão prática é dura e libertadora: <strong>você pode escrever o CSS mais elegante do mundo que não muda nada se a foto da hero tem 4 MB</strong>. Otimizar imagem é a única tarefa de performance que vale fazer antes de qualquer outra.</p>
+<div class="nota"><strong>A conta que convence o cliente:</strong> 4G brasileiro real entrega algo perto de 2 MB por segundo em condição boa, bem menos em movimento. Uma página de 8 MB leva mais de dez segundos. Metade dos visitantes desiste antes de três.</div>
+</div>
+</article>
+
+<article class="topico" id="t-img-formatos" data-marca="novo">
+<div class="topico__cabeca"><h3>Qual formato usar</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Formato</th><th>Use para</th><th>Observação</th></tr></thead>
+<tbody>
+<tr><td><strong>AVIF</strong></td><td>Foto, hoje, como primeira escolha</td><td>Menor de todos — 30 a 50% abaixo do WebP. Suportado em todos os navegadores atuais.</td></tr>
+<tr><td><strong>WebP</strong></td><td>Foto, como alternativa de segurança</td><td>Suporte praticamente universal há anos. Se só puder escolher um, escolha este.</td></tr>
+<tr><td><strong>JPG</strong></td><td>Último fallback</td><td>Ainda pesa 30% mais que WebP na mesma qualidade.</td></tr>
+<tr><td><strong>PNG</strong></td><td>Só quando precisa de transparência dura</td><td>Para foto, é o pior dos mundos: enorme. Logo em PNG quase sempre deveria ser SVG.</td></tr>
+<tr><td><strong>SVG</strong></td><td>Logo, ícone, ilustração geométrica</td><td>Escala em qualquer tela sem perder nitidez e costuma ter poucos KB. É texto — pode editar cor no próprio código.</td></tr>
+<tr><td><strong>GIF</strong></td><td>Nunca</td><td>Para animação curta, um <code>&lt;video&gt;</code> em MP4 pesa 10 vezes menos.</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Regra prática:</strong> foto vira AVIF com WebP de reserva. Logo e ícone viram SVG. Se o cliente mandou o logo em JPG com fundo branco, peça o vetor — todo designer que fez aquele logo tem o arquivo <code>.ai</code> ou <code>.svg</code>. Vale insistir: logo pixelado no topo da página é a primeira coisa que derruba a percepção de profissionalismo.</div>
+</div>
+</article>
+
+<article class="topico" id="t-img-comprimir" data-marca="novo">
+<div class="topico__cabeca"><h3>Comprimir — alvos e ferramentas</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Antes de comprimir, <strong>redimensione</strong>. Uma foto de 6000px de largura numa área que exibe 1200px é desperdício puro, e nenhuma compressão conserta isso.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Uso</th><th>Largura máxima</th><th>Alvo de peso</th></tr></thead>
+<tbody>
+<tr><td>Hero de tela cheia</td><td>1920px (e uma versão de 960px para celular)</td><td>até 150 KB</td></tr>
+<tr><td>Foto dentro de seção</td><td>1200px</td><td>até 100 KB</td></tr>
+<tr><td>Card / galeria</td><td>800px</td><td>até 60 KB</td></tr>
+<tr><td>Avatar, ícone</td><td>200px</td><td>até 15 KB</td></tr>
+</tbody></table></div>
+<p>Sem instalar nada: <strong>Squoosh</strong> (squoosh.app) faz uma imagem por vez mostrando antes e depois lado a lado — bom para calibrar o olho. Qualidade 75 a 80 em AVIF/WebP é indistinguível do original em quase toda foto.</p>
+<p>No terminal, para o lote inteiro de uma vez:</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code># ImageMagick — redimensiona e converte a pasta toda
+magick mogrify -resize 1200x -quality 80 -format webp *.jpg
+
+# Sharp (Node) — mais rápido e melhor qualidade
+npx @squoosh/cli --avif '{"quality":75}' --resize '{"width":1200}' fotos/*.jpg
+
+# conferir o resultado
+ls -lh *.webp</code></pre></div>
+<div class="nota"><strong>O hábito que resolve:</strong> nenhuma imagem entra no projeto sem passar por isso. Crie a pasta <code>fotos-brutas/</code> fora do repositório (está no <code>.gitignore</code>), processe de lá para dentro, e o que vai para o Git já está pronto.</div>
+</div>
+</article>
+
+<article class="topico" id="t-img-responsiva" data-marca="novo">
+<div class="topico__cabeca"><h3>srcset e sizes — a imagem certa para cada tela</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>Mandar a imagem de 1920px para um celular de 390px é mandar quatro vezes mais pixel do que a tela consegue mostrar. O <code>srcset</code> deixa o navegador escolher.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div><pre><code>&lt;img
+  src="hero-1200.webp"
+  srcset="hero-600.webp 600w,
+          hero-1200.webp 1200w,
+          hero-1920.webp 1920w"
+  sizes="(max-width: 700px) 100vw, 1200px"
+  width="1200" height="800"
+  alt="Sala de estar reformada com marcenaria clara e iluminação embutida"
+  fetchpriority="high"&gt;</code></pre></div>
+<p>O <code>srcset</code> lista as versões com a largura real em pixels (<code>w</code>). O <code>sizes</code> avisa qual espaço a imagem vai ocupar — é a informação que falta para o navegador decidir, e é o que quase todo mundo esquece de escrever.</p>
+<div class="nota"><strong>Não exagere:</strong> três versões cobrem tudo. Gerar sete tamanhos é trabalho que não se paga. E se a imagem sempre aparece pequena — um avatar, um ícone de serviço — uma versão só basta.</div>
+</div>
+</article>
+
+<article class="topico" id="t-img-carregamento" data-marca="novo">
+<div class="topico__cabeca"><h3>Quando carregar — lazy, priority e o pulo do layout</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div><pre><code>&lt;!-- a imagem da hero: aparece de cara, tem que vir primeiro --&gt;
+&lt;img src="hero.webp" width="1200" height="800" alt="..." fetchpriority="high"&gt;
+
+&lt;!-- tudo que está abaixo da dobra --&gt;
+&lt;img src="obra-3.webp" width="800" height="600" alt="..."
+     loading="lazy" decoding="async"&gt;</code></pre></div>
+<div class="nota"><strong>Erro clássico:</strong> colocar <code>loading="lazy"</code> na imagem da hero. Ela é justamente a que o navegador deveria buscar primeiro — atrasá-la piora diretamente a nota de LCP. Lazy é para o que está fora da tela, e só.</div>
+<p>E o <code>width</code> com <code>height</code> em <em>toda</em> imagem: sem eles, o navegador não sabe quanto espaço reservar, a página monta, a imagem chega e tudo pula para baixo. É o CLS — a métrica que mede exatamente esse salto. Os dois números não precisam ser o tamanho final na tela; precisam ser a proporção correta, e o CSS cuida do resto:</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>img { max-width: 100%; height: auto; display: block; }
+
+/* quando a área tem tamanho fixo e a foto precisa preencher */
+.card__foto { aspect-ratio: 4 / 3; object-fit: cover; }</code></pre></div>
+</div>
+</article>
+
+<article class="topico" id="t-img-picture" data-marca="novo">
+<div class="topico__cabeca"><h3>&lt;picture&gt; — formato moderno com reserva</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>O navegador lê os <code>&lt;source&gt;</code> de cima para baixo e usa o primeiro que entende. O <code>&lt;img&gt;</code> no final é obrigatório e é o que sempre funciona.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div><pre><code>&lt;picture&gt;
+  &lt;source srcset="hero.avif" type="image/avif"&gt;
+  &lt;source srcset="hero.webp" type="image/webp"&gt;
+  &lt;img src="hero.jpg" width="1200" height="800" alt="..." fetchpriority="high"&gt;
+&lt;/picture&gt;
+
+&lt;!-- e o outro uso: foto DIFERENTE por tamanho de tela --&gt;
+&lt;picture&gt;
+  &lt;source media="(max-width: 700px)" srcset="hero-vertical.webp"&gt;
+  &lt;img src="hero-horizontal.webp" width="1600" height="900" alt="..."&gt;
+&lt;/picture&gt;</code></pre></div>
+<div class="nota">Esse segundo caso é <em>art direction</em>, e resolve um problema real: a foto panorâmica que funciona no desktop vira uma faixa ilegível no celular. Em vez de espremer, você troca por um recorte vertical da mesma cena.</div>
+</div>
+</article>
+
+<article class="topico" id="t-img-direitos" data-marca="novo">
+<div class="topico__cabeca"><h3>De onde vem a foto — e o risco real</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Pegar imagem no Google e colocar no site do cliente é a prática mais comum e mais arriscada do mercado. Existem empresas que fazem busca reversa automatizada e cobram — a cobrança chega para o cliente, e a conversa sobre quem colocou aquilo ali chega para você.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Fonte</th><th>Pode usar comercialmente?</th><th>Atenção</th></tr></thead>
+<tbody>
+<tr><td>Unsplash, Pexels, Pixabay</td><td>Sim, gratuito</td><td>Sem exclusividade — o concorrente pode usar a mesma. Cuidado com foto que tem rosto identificável ou marca visível.</td></tr>
+<tr><td>Bancos pagos (Shutterstock, Adobe Stock)</td><td>Sim, conforme a licença comprada</td><td>A licença costuma ser por projeto. Guarde o comprovante.</td></tr>
+<tr><td>Google Imagens</td><td>Não</td><td>Buscador não é banco de imagem. "Estava na internet" não é licença.</td></tr>
+<tr><td>Instagram do cliente</td><td>Depende</td><td>Se o cliente tirou, sim. Se foi fotógrafo contratado, o direito costuma ser do fotógrafo — pergunte.</td></tr>
+<tr><td>Imagem gerada por IA</td><td>Em geral sim</td><td>Regras mudam por ferramenta e por país. Nunca use para simular obra que o cliente não fez.</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>A regra ética que vale mais que a jurídica:</strong> foto de banco em site de serviço é provisória, para o cliente ver o layout. Obra de arquitetura que não é do arquiteto, prato que não é do restaurante, sala que não é da clínica — isso é o visitante sendo enganado. Combine desde o orçamento: as fotos definitivas são responsabilidade do cliente, e entram antes de publicar.</div>
+</div>
+</article>
+
+<article class="topico" id="t-img-favicon" data-marca="novo">
+<div class="topico__cabeca"><h3>Favicon e imagem de compartilhamento</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>Duas imagens que ninguém lembra e que aparecem em todo lugar: o ícone da aba e a miniatura que aparece quando o link é colado no WhatsApp.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">no head</span><button class="copiar">copiar</button></div><pre><code>&lt;link rel="icon" href="/favicon.svg" type="image/svg+xml"&gt;
+&lt;link rel="icon" href="/favicon.ico" sizes="32x32"&gt;
+&lt;link rel="apple-touch-icon" href="/apple-touch-icon.png"&gt;&lt;!-- 180x180 --&gt;
+
+&lt;meta property="og:title" content="Vanessa Carvalho · Arquitetura em Campo Grande"&gt;
+&lt;meta property="og:description" content="Projetos de interiores e reforma de apartamento, do projeto à entrega."&gt;
+&lt;meta property="og:image" content="https://site.com.br/og.jpg"&gt;&lt;!-- 1200x630 --&gt;
+&lt;meta property="og:url" content="https://site.com.br/"&gt;
+&lt;meta name="twitter:card" content="summary_large_image"&gt;</code></pre></div>
+<div class="nota"><strong>Três detalhes que quebram na prática:</strong> a <code>og:image</code> precisa de URL absoluta (com <code>https://</code>), precisa ser JPG ou PNG — WhatsApp e Facebook ainda engasgam com WebP —, e precisa pesar menos de 300 KB. Teste colando o link no seu próprio WhatsApp antes de entregar; se a miniatura não aparecer, o cliente vai notar antes de você.</div>
+</div>
+</article>
+</section>
+<section class="parte" id="s2">
+<div class="parte__cabeca"><span class="parte__num">PARTE 2</span><h2>Acessibilidade</h2></div>
+<p class="parte__resumo">Um site acessível é um site que funciona para quem não enxerga bem, não usa mouse, não ouve, ou está com o braço quebrado. No Brasil também é lei. E, para o seu trabalho, é o argumento de venda que nenhum concorrente de orçamento está usando.</p>
+
+<article class="topico" id="t-a11y-porque" data-marca="novo">
+<div class="topico__cabeca"><h3>Por que importa — inclusive juridicamente</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Cerca de um quarto da população brasileira declara algum tipo de deficiência, e a maior parte é visual. Some quem tem 60 anos e presbiopia, quem está no sol com o brilho baixo, quem quebrou o braço direito. Acessibilidade não é caso de nicho — é o caso comum em condição ruim.</p>
+<p>O lado legal: a <strong>Lei Brasileira de Inclusão</strong> (13.146/2015) determina que sites de empresas com sede ou representação comercial no país sejam acessíveis. Para órgãos públicos existe o <strong>eMAG</strong>, que é obrigatório. O padrão técnico que todo mundo usa como referência é o <strong>WCAG</strong>, nível AA.</p>
+<div class="nota"><strong>Como isso vira venda:</strong> na proposta, "o site é entregue com acessibilidade conforme WCAG AA, atendendo à Lei Brasileira de Inclusão" é uma linha que o concorrente que cobra R$ 400 não escreve. Para cliente que é clínica, escritório de advocacia ou qualquer negócio que atende idoso, isso pesa — e o custo para você é quase zero se for feito desde o começo.</div>
+</div>
+</article>
+
+<article class="topico" id="t-a11y-semantica" data-marca="revisao">
+<div class="topico__cabeca"><h3>Semântica: o HTML certo já é metade do caminho</h3><span class="tag tag--revisao">Revisão</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>Leitor de tela navega pela estrutura, não pela aparência. Se a estrutura existe, ele funciona sozinho. Se tudo é <code>&lt;div&gt;</code>, ele lê uma sopa sem começo nem fim.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div><pre><code>&lt;!-- inacessível: o leitor de tela não sabe o que é nada disso --&gt;
+&lt;div class="topo"&gt;&lt;div class="menu"&gt;...&lt;/div&gt;&lt;/div&gt;
+&lt;div class="titulo-grande"&gt;Arquitetura em Campo Grande&lt;/div&gt;
+&lt;div class="botao" onclick="abrir()"&gt;Orçamento&lt;/div&gt;
+
+&lt;!-- acessível: mesma aparência, estrutura declarada --&gt;
+&lt;header&gt;&lt;nav aria-label="Principal"&gt;...&lt;/nav&gt;&lt;/header&gt;
+&lt;main&gt;
+  &lt;h1&gt;Arquitetura em Campo Grande&lt;/h1&gt;
+  &lt;button type="button"&gt;Orçamento&lt;/button&gt;
+&lt;/main&gt;
+&lt;footer&gt;...&lt;/footer&gt;</code></pre></div>
+<p>A hierarquia de títulos é a outra metade: <strong>um <code>&lt;h1&gt;</code> por página</strong>, e nada de pular de <code>h2</code> para <code>h4</code> porque ficou do tamanho certo. Tamanho é trabalho do CSS; o número do título é informação de estrutura.</p>
+<div class="nota"><strong>Div com onclick é o pecado mais comum.</strong> Um <code>&lt;button&gt;</code> de verdade já recebe foco pelo Tab, já dispara com Enter e Espaço, e já se anuncia como botão. Refazer tudo isso na mão com ARIA dá dez linhas — usar a tag certa dá zero.</div>
+</div>
+</article>
+
+<article class="topico" id="t-a11y-teclado" data-marca="novo">
+<div class="topico__cabeca"><h3>Teclado e foco visível</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Teste de trinta segundos que revela quase tudo: abra sua página e navegue só com <strong>Tab</strong>. Você deveria conseguir chegar em todo link, todo botão e todo campo, sempre vendo onde está.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>/* NUNCA faça isso — é o crime número um de acessibilidade */
+*:focus { outline: none; }
+
+/* faça isso: um foco visível que combina com o site */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* e o pulo do gato para site com cabeçalho fixo */
+html { scroll-padding-top: 90px; }</code></pre></div>
+<p><code>:focus-visible</code> é a solução do dilema antigo: ele mostra o contorno para quem navega por teclado e não mostra para quem clicou com o mouse. Era exatamente isso que as pessoas tentavam resolver apagando o outline.</p>
+<div class="nota"><strong>Link de pular para o conteúdo:</strong> quem usa teclado tem que passar pelos dez itens do menu em toda página. Um link escondido, que aparece ao receber foco, resolve — e leva quatro linhas de CSS:</div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html + css</span><button class="copiar">copiar</button></div><pre><code>&lt;a class="pular" href="#conteudo"&gt;Pular para o conteúdo&lt;/a&gt;
+
+.pular { position:absolute; left:-9999px; }
+.pular:focus { left:8px; top:8px; z-index:999; background:#fff;
+               padding:10px 14px; border:2px solid currentColor; }</code></pre></div>
+</div>
+</article>
+
+<article class="topico" id="t-a11y-alt" data-marca="novo">
+<div class="topico__cabeca"><h3>Texto alternativo que serve para alguma coisa</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>A regra é uma pergunta: <em>se eu tivesse que ler esta página por telefone para alguém, o que eu diria sobre esta imagem?</em></p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div><pre><code>&lt;!-- inútil --&gt;
+&lt;img src="img1.jpg" alt="imagem"&gt;
+&lt;img src="img1.jpg" alt="foto reforma apartamento campo grande arquitetura"&gt;
+
+&lt;!-- útil --&gt;
+&lt;img src="sala.jpg" alt="Sala integrada com cozinha, marcenaria clara e
+     bancada de madeira maciça separando os ambientes"&gt;
+
+&lt;!-- decorativa: alt vazio, de propósito --&gt;
+&lt;img src="textura.svg" alt=""&gt;
+
+&lt;!-- imagem que É um link --&gt;
+&lt;a href="/"&gt;&lt;img src="logo.svg" alt="Vanessa Carvalho, página inicial"&gt;&lt;/a&gt;</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Situação</th><th>O que escrever</th></tr></thead>
+<tbody>
+<tr><td>Foto que informa</td><td>Descreva o que importa na foto, em uma frase</td></tr>
+<tr><td>Decoração pura</td><td><code>alt=""</code> — vazio, mas presente. Sem o atributo, o leitor lê o nome do arquivo.</td></tr>
+<tr><td>Logo</td><td>O nome da empresa</td></tr>
+<tr><td>Ícone ao lado de texto</td><td><code>alt=""</code> — o texto já diz</td></tr>
+<tr><td>Imagem com texto dentro</td><td>Transcreva o texto. Melhor ainda: não coloque texto dentro de imagem.</td></tr>
+</tbody></table></div>
+<div class="nota">Não comece com "imagem de" ou "foto de" — o leitor de tela já anuncia que é uma imagem. E não repita a legenda que está logo abaixo: a pessoa ouve duas vezes.</div>
+</div>
+</article>
+
+<article class="topico" id="t-a11y-contraste" data-marca="novo">
+<div class="topico__cabeca"><h3>Contraste medido, não achado</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Cinza claro sobre branco é a assinatura visual do site que ninguém consegue ler no celular no sol. O padrão WCAG AA tem números:</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Elemento</th><th>Contraste mínimo</th></tr></thead>
+<tbody>
+<tr><td>Texto normal</td><td>4.5:1</td></tr>
+<tr><td>Texto grande (24px, ou 19px em negrito)</td><td>3:1</td></tr>
+<tr><td>Borda de campo, ícone que informa</td><td>3:1</td></tr>
+<tr><td>Texto sobre foto</td><td>4.5:1 — contra a parte mais clara da foto</td></tr>
+</tbody></table></div>
+<p>Onde medir: as próprias DevTools mostram a razão ao clicar no quadradinho de cor no painel Styles, com um aviso quando reprova. Para conferir uma paleta inteira, o WebAIM Contrast Checker.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>/* texto sobre foto: nunca confie na foto */
+.hero { position: relative; }
+.hero::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,.15));
+}
+.hero__texto { position: relative; z-index: 1; color: #fff; }</code></pre></div>
+<div class="nota"><strong>E o detalhe que quase todo site erra:</strong> placeholder de campo em cinza claro. Ele é texto, precisa dos mesmos 4.5:1 — e, mesmo legível, placeholder não substitui <code>&lt;label&gt;</code>, porque some assim que a pessoa começa a digitar.</div>
+</div>
+</article>
+
+<article class="topico" id="t-a11y-aria" data-marca="novo">
+<div class="topico__cabeca"><h3>ARIA — e quando não usar</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>A primeira regra oficial do ARIA é: <strong>não use ARIA</strong>. Se existe um elemento HTML que faz aquilo, use o elemento. ARIA só descreve — não adiciona comportamento nenhum.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div><pre><code>&lt;!-- errado: parece botão, mas não recebe Tab nem responde a Enter --&gt;
+&lt;div role="button" onclick="enviar()"&gt;Enviar&lt;/div&gt;
+
+&lt;!-- certo --&gt;
+&lt;button type="button" onclick="enviar()"&gt;Enviar&lt;/button&gt;</code></pre></div>
+<p>Os poucos atributos que você realmente vai usar em site de serviço:</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div><pre><code>&lt;!-- botão sem texto visível --&gt;
+&lt;button aria-label="Abrir menu"&gt;&lt;svg aria-hidden="true"&gt;...&lt;/svg&gt;&lt;/button&gt;
+
+&lt;!-- diferenciar navs quando há mais de uma --&gt;
+&lt;nav aria-label="Principal"&gt;  &lt;nav aria-label="Rodapé"&gt;
+
+&lt;!-- estado que muda --&gt;
+&lt;button aria-expanded="false" aria-controls="painel"&gt;Dúvidas&lt;/button&gt;
+
+&lt;!-- decoração que o leitor deve ignorar --&gt;
+&lt;span aria-hidden="true"&gt;→&lt;/span&gt;
+
+&lt;!-- mensagem que aparece depois e precisa ser anunciada --&gt;
+&lt;p role="status"&gt;Mensagem enviada.&lt;/p&gt;</code></pre></div>
+<div class="nota"><strong>ARIA errado é pior que ARIA nenhum.</strong> Um <code>aria-expanded="false"</code> que nunca vira <code>true</code> faz o leitor de tela anunciar o oposto do que está acontecendo. Se você não vai manter o atributo sincronizado no JavaScript, não o coloque.</div>
+</div>
+</article>
+
+<article class="topico" id="t-a11y-testar" data-marca="novo">
+<div class="topico__cabeca"><h3>Testar em quinze minutos</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Ferramenta automática pega só uns 30% dos problemas — mas são 30% de graça, e a parte manual é rápida.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Passo</th><th>Como</th><th>Tempo</th></tr></thead>
+<tbody>
+<tr><td>Auditoria automática</td><td>Lighthouse, aba Acessibilidade. Ou a extensão <strong>axe DevTools</strong>, que é mais detalhada.</td><td>2 min</td></tr>
+<tr><td>Só teclado</td><td>Tab do topo ao fim. Chega em tudo? Vê onde está? Consegue sair do menu com Esc?</td><td>3 min</td></tr>
+<tr><td>Zoom 200%</td><td><code>Ctrl +</code> até 200%. Nada pode sumir nem exigir rolagem horizontal.</td><td>2 min</td></tr>
+<tr><td>Leitor de tela</td><td>NVDA no Windows (grátis) ou VoiceOver no Mac (<code>Cmd+F5</code>). Ouça só a hero e o formulário.</td><td>5 min</td></tr>
+<tr><td>Sem cor</td><td>DevTools → Rendering → simular acromatopsia. A informação continua clara?</td><td>1 min</td></tr>
+</tbody></table></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">console — auditoria rápida</span><button class="copiar">copiar</button></div><pre><code>$$('img').filter(i =&gt; !i.hasAttribute('alt'))          // imagem sem alt
+$$('a').filter(a =&gt; !a.textContent.trim() &amp;&amp; !a.getAttribute('aria-label'))
+$$('input').filter(i =&gt; !i.labels?.length &amp;&amp; !i.getAttribute('aria-label'))
+document.querySelectorAll('h1').length                  // deve ser 1
+$$('button').filter(b =&gt; !b.textContent.trim() &amp;&amp; !b.getAttribute('aria-label'))</code></pre></div>
+<div class="nota">A primeira vez que você ouvir sua própria página num leitor de tela é desconfortável e vale por um curso inteiro. Cinco minutos, uma vez, e você nunca mais escreve <code>alt="imagem"</code>.</div>
+</div>
+</article>
+</section>
+<section class="parte" id="s3">
+<div class="parte__cabeca"><span class="parte__num">PARTE 3</span><h2>Performance medida</h2></div>
+<p class="parte__resumo">Performance não é sensação, é três números que o Google publica e usa para ranquear. Saber o nome de cada um e o que conserta cada um transforma "o site está lento" em uma lista de tarefas.</p>
+
+<article class="topico" id="t-perf-vitals" data-marca="novo">
+<div class="topico__cabeca"><h3>Core Web Vitals — os três números</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Métrica</th><th>Mede</th><th>Bom</th><th>Ruim</th></tr></thead>
+<tbody>
+<tr><td><strong>LCP</strong><br><span style="font-size:13px">Largest Contentful Paint</span></td><td>Quando a maior coisa da tela terminou de aparecer — geralmente a foto ou o título da hero</td><td>até 2,5s</td><td>acima de 4s</td></tr>
+<tr><td><strong>INP</strong><br><span style="font-size:13px">Interaction to Next Paint</span></td><td>Quanto a página demora para responder a um clique ou toque</td><td>até 200ms</td><td>acima de 500ms</td></tr>
+<tr><td><strong>CLS</strong><br><span style="font-size:13px">Cumulative Layout Shift</span></td><td>Quanto a página pula sozinha enquanto carrega</td><td>até 0,1</td><td>acima de 0,25</td></tr>
+</tbody></table></div>
+<p>Traduzindo para o que o visitante sente: <strong>LCP é "demorou para aparecer"</strong>, <strong>INP é "travou quando cliquei"</strong>, <strong>CLS é "eu ia clicar e o botão fugiu"</strong>.</p>
+<div class="nota">O INP substituiu o antigo FID em 2024 e é bem mais exigente, porque mede todas as interações da visita, não só a primeira. Em site de HTML puro ele costuma estar ótimo sem esforço nenhum — é uma vantagem sua que vale citar em proposta.</div>
+</div>
+</article>
+
+<article class="topico" id="t-perf-lcp" data-marca="novo">
+<div class="topico__cabeca"><h3>Consertar o LCP</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Primeiro descubra <em>qual</em> elemento é o LCP: rode o Lighthouse e ele aponta na seção de diagnóstico. Em landing page é quase sempre a foto da hero ou o <code>&lt;h1&gt;</code>.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div><pre><code>&lt;!-- 1. avise o navegador antes mesmo de ele achar a imagem --&gt;
+&lt;link rel="preload" as="image" href="hero.webp" fetchpriority="high"&gt;
+
+&lt;!-- 2. nunca lazy na hero, sempre prioridade alta --&gt;
+&lt;img src="hero.webp" fetchpriority="high" width="1200" height="800" alt="..."&gt;
+
+&lt;!-- 3. conexão antecipada com o que vem de fora --&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Causa</th><th>Conserto</th></tr></thead>
+<tbody>
+<tr><td>Imagem da hero pesada</td><td>Comprimir e servir AVIF/WebP — resolve a maioria dos casos sozinho</td></tr>
+<tr><td>Imagem com <code>loading="lazy"</code></td><td>Tirar o lazy da hero</td></tr>
+<tr><td>Fonte bloqueando o texto</td><td><code>font-display: swap</code> e preload da fonte principal</td></tr>
+<tr><td>CSS gigante no caminho crítico</td><td>Em HTML único isso não existe; em site com muitos CSS, carregar o resto depois</td></tr>
+<tr><td>Servidor lento</td><td>Hospedagem com CDN. Vercel, Netlify e Cloudflare Pages resolvem de graça.</td></tr>
+</tbody></table></div>
+</div>
+</article>
+
+<article class="topico" id="t-perf-cls" data-marca="novo">
+<div class="topico__cabeca"><h3>Consertar o CLS</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>CLS é o mais fácil de zerar e o mais irritante para quem visita. Quatro causas cobrem praticamente todos os casos.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>/* 1. imagem sem dimensão → sempre width e height no HTML */
+img, video { max-width: 100%; height: auto; }
+
+/* 2. área que recebe conteúdo depois → reserve o espaço antes */
+.mapa { aspect-ratio: 16 / 9; }
+.depoimentos { min-height: 320px; }
+
+/* 3. fonte que troca e muda a altura do texto */
+@font-face {
+  font-family: 'Bricolage';
+  src: url(...) format('woff2');
+  font-display: swap;
+  size-adjust: 100%;      /* ajuste fino para a fonte de reserva ocupar o mesmo espaço */
+}
+
+/* 4. banner/aviso que empurra a página → sobreponha, não empurre */
+.aviso-cookie { position: fixed; bottom: 0; left: 0; right: 0; }</code></pre></div>
+<div class="nota"><strong>Como ver o pulo acontecendo:</strong> DevTools → Performance → grave o carregamento com throttling ligado. A linha "Layout Shift" marca cada salto, e clicando nela o navegador mostra qual elemento se mexeu.</div>
+</div>
+</article>
+
+<article class="topico" id="t-perf-inp" data-marca="novo">
+<div class="topico__cabeca"><h3>Consertar o INP</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>INP ruim quer dizer uma coisa só: tem JavaScript demais ocupando a única linha de execução que o navegador tem. Enquanto uma função roda, nada responde.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>// 1. scripts de terceiro NUNCA bloqueando
+&lt;script src="analytics.js" defer&gt;&lt;/script&gt;
+
+// 2. evento que dispara muito precisa de freio
+window.addEventListener('scroll', debounce(minhaFuncao, 100), { passive: true });
+
+// 3. trabalho pesado sai do caminho da interação
+btn.addEventListener('click', () =&gt; {
+  mostrarResultado();                    // o que o usuário precisa ver AGORA
+  requestIdleCallback(() =&gt; registrar()); // o resto espera a folga
+});
+
+// 4. animar só transform e opacity — o resto força recálculo de layout</code></pre></div>
+<div class="nota"><strong>O maior vilão em site de cliente costuma ser terceiro:</strong> pixel do Meta, chat de atendimento, mapa do Google embutido, widget de avaliação. Cada um traz o próprio JavaScript. Meça antes e depois de adicionar cada um — e leve o número para a conversa quando o cliente pedir o quinto widget.</div>
+</div>
+</article>
+
+<article class="topico" id="t-perf-fontes" data-marca="novo">
+<div class="topico__cabeca"><h3>Fontes — o gargalo que ninguém vê</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Fonte externa é o segundo maior peso depois de imagem, e afeta LCP e CLS ao mesmo tempo. Três decisões resolvem.</p>
+<p><strong>Menos pesos.</strong> Duas famílias, dois ou três pesos cada. Seis pesos de duas famílias são uns 400 KB por nada — o olho não distingue 300 de 400 no corpo de texto.</p>
+<p><strong>Sempre <code>font-display: swap</code>.</strong> Sem ele, o navegador esconde o texto por até três segundos esperando a fonte chegar. O visitante olha uma tela em branco enquanto o texto existe e está pronto.</p>
+<p><strong>Considere hospedar você mesmo.</strong> Baixar o <code>.woff2</code> e servir do próprio domínio elimina uma conexão externa, e ainda ajuda na conversa de LGPD — o Google Fonts registra o IP de quem visita.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>@font-face {
+  font-family: 'Inter';
+  src: url('/fontes/inter-400.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153;  /* só latim — corta metade do arquivo */
+}</code></pre></div>
+<div class="nota"><strong>A opção de custo zero:</strong> a pilha de fontes do sistema. <code>font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif</code> carrega instantaneamente porque já está no aparelho, e fica nativa em cada sistema. Para site de serviço onde a tipografia não é o argumento, é uma escolha defensável — e o LCP agradece.</div>
+</div>
+</article>
+
+<article class="topico" id="t-perf-medir" data-marca="novo">
+<div class="topico__cabeca"><h3>Campo e laboratório — dois números diferentes</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Esta distinção evita muita discussão inútil com cliente.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th></th><th>Laboratório</th><th>Campo</th></tr></thead>
+<tbody>
+<tr><td>Onde</td><td>Lighthouse, PageSpeed (seção de cima)</td><td>PageSpeed (seção "Descubra a experiência dos usuários reais")</td></tr>
+<tr><td>O que é</td><td>Uma simulação controlada, agora</td><td>Medição real dos visitantes nos últimos 28 dias</td></tr>
+<tr><td>Serve para</td><td>Diagnosticar e comparar antes/depois</td><td>Saber a verdade — é o que o Google usa</td></tr>
+<tr><td>Limitação</td><td>Varia a cada execução; não é o que ninguém sentiu</td><td>Só existe com tráfego suficiente</td></tr>
+</tbody></table></div>
+<p>Fluxo que funciona: use o Lighthouse durante o desenvolvimento para achar e consertar, e o dado de campo um mês depois da publicação para confirmar que o conserto valeu no mundo real.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">medir no próprio site</span><button class="copiar">copiar</button></div><pre><code>// registra o LCP real de cada visitante — sem biblioteca
+new PerformanceObserver((lista) =&gt; {
+  const ultimo = lista.getEntries().at(-1);
+  console.log('LCP:', Math.round(ultimo.startTime), 'ms', ultimo.element);
+}).observe({ type: 'largest-contentful-paint', buffered: true });</code></pre></div>
+<div class="nota"><strong>O alvo sensato:</strong> acima de 90 no Lighthouse mobile e os três Vitals no verde. Perseguir 100 costuma custar horas para ganhar meio segundo que ninguém percebe — tempo que renderia mais aplicado na oferta da página.</div>
+</div>
+</article>
+</section>
+<section class="parte" id="s4">
+<div class="parte__cabeca"><span class="parte__num">PARTE 4</span><h2>Formulários que funcionam no Brasil</h2></div>
+<p class="parte__resumo">Você entrega páginas com CTA de WhatsApp, e está certo — mas uma hora aparece o cliente que precisa de formulário. Quando aparecer, os problemas são sempre os mesmos: máscara de telefone, CEP, spam e mensagem de erro que ninguém entende.</p>
+
+<article class="topico" id="t-form-quando" data-marca="novo">
+<div class="topico__cabeca"><h3>Quando formulário perde para o WhatsApp</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Situação</th><th>Melhor caminho</th><th>Por quê</th></tr></thead>
+<tbody>
+<tr><td>Serviço local, ticket médio, decisão rápida</td><td>WhatsApp</td><td>Conversa começa na hora; formulário vira e-mail que o cliente lê amanhã</td></tr>
+<tr><td>Precisa de anexo (planta, exame, documento)</td><td>WhatsApp</td><td>Mandar arquivo é trivial ali e chato num formulário</td></tr>
+<tr><td>Cliente quer os dados organizados numa planilha</td><td>Formulário</td><td>Conversa de WhatsApp não vira relatório</td></tr>
+<tr><td>Muitos contatos por dia, com triagem</td><td>Formulário</td><td>Campos obrigatórios filtram quem não é público</td></tr>
+<tr><td>Fora do horário comercial</td><td>Os dois</td><td>WhatsApp com resposta automática, formulário como alternativa</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>O erro comum é oferecer os dois com o mesmo destaque.</strong> Escolha um caminho principal e deixe o outro discreto. Duas chamadas de igual peso fazem a pessoa hesitar — e hesitação, numa página de venda, é abandono.</div>
+</div>
+</article>
+
+<article class="topico" id="t-form-nativo" data-marca="revisao">
+<div class="topico__cabeca"><h3>O que o navegador já faz de graça</h3><span class="tag tag--revisao">Revisão</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>Muita gente escreve cem linhas de JavaScript para validar o que o HTML valida sozinho — e ainda perde o teclado certo no celular, que é o detalhe que mais muda a experiência.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div><pre><code>&lt;label for="nome"&gt;Nome&lt;/label&gt;
+&lt;input id="nome" name="nome" type="text" required
+       autocomplete="name" minlength="3"&gt;
+
+&lt;label for="fone"&gt;WhatsApp&lt;/label&gt;
+&lt;input id="fone" name="fone" type="tel" required
+       autocomplete="tel" inputmode="numeric"
+       placeholder="(67) 99999-9999"&gt;
+
+&lt;label for="email"&gt;E-mail&lt;/label&gt;
+&lt;input id="email" name="email" type="email"
+       autocomplete="email" inputmode="email"&gt;
+
+&lt;label for="msg"&gt;O que você precisa?&lt;/label&gt;
+&lt;textarea id="msg" name="msg" rows="4" maxlength="500"&gt;&lt;/textarea&gt;</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Atributo</th><th>O que ganha</th></tr></thead>
+<tbody>
+<tr><td><code>type="tel"</code> + <code>inputmode="numeric"</code></td><td>Teclado numérico no celular — sozinho já reduz abandono</td></tr>
+<tr><td><code>autocomplete</code></td><td>O navegador preenche com os dados salvos da pessoa</td></tr>
+<tr><td><code>required</code></td><td>Validação e aviso nativos, já acessíveis</td></tr>
+<tr><td><code>&lt;label for&gt;</code></td><td>Clicar no rótulo foca o campo; leitor de tela anuncia junto</td></tr>
+</tbody></table></div>
+<div class="nota"><code>autocomplete="off"</code> em formulário de contato é maltrato: você está impedindo a pessoa de preencher em dois toques. Só faz sentido em campo que não deve ser lembrado, como um código de uso único.</div>
+</div>
+</article>
+
+<article class="topico" id="t-form-mascara" data-marca="novo">
+<div class="topico__cabeca"><h3>Máscara de telefone e CPF</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>Sem biblioteca, sem dependência. A ideia é sempre a mesma: tira tudo que não é dígito, limita o tamanho, e reinsere os separadores.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>function mascaraTelefone(v) {
+  v = v.replace(/\D/g, '').slice(0, 11);
+  if (v.length &lt;= 10) return v.replace(/(\d{0,2})(\d{0,4})(\d{0,4})/,
+      (_, a, b, c) =&gt; (a ? '(' + a : '') + (b ? ') ' + b : '') + (c ? '-' + c : ''));
+  return v.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+}
+
+function mascaraCPF(v) {
+  return v.replace(/\D/g, '').slice(0, 11)
+          .replace(/(\d{3})(\d)/, '$1.$2')
+          .replace(/(\d{3})(\d)/, '$1.$2')
+          .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+}
+
+document.querySelector('#fone').addEventListener('input', (e) =&gt; {
+  e.target.value = mascaraTelefone(e.target.value);
+});</code></pre></div>
+<div class="nota"><strong>Validar CPF é diferente de mascarar.</strong> O CPF tem dígito verificador; 111.111.111-11 passa na máscara e não existe. Só valide de verdade se o negócio precisa — para formulário de contato de arquiteta, pedir CPF já é pedir demais, e cada campo a mais derruba a conversão.</div>
+</div>
+</article>
+
+<article class="topico" id="t-form-cep" data-marca="novo">
+<div class="topico__cabeca"><h3>CEP que preenche o endereço</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>O ViaCEP é gratuito, não exige cadastro nem chave, e economiza quatro campos de digitação no celular.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>const cep = document.querySelector('#cep');
+
+cep.addEventListener('blur', async () =&gt; {
+  const valor = cep.value.replace(/\D/g, '');
+  if (valor.length !== 8) return;
+
+  try {
+    const r = await fetch(`https://viacep.com.br/ws/${valor}/json/`);
+    const d = await r.json();
+    if (d.erro) { avisar('CEP não encontrado'); return; }
+
+    document.querySelector('#rua').value    = d.logradouro;
+    document.querySelector('#bairro').value = d.bairro;
+    document.querySelector('#cidade').value = d.localidade;
+    document.querySelector('#uf').value     = d.uf;
+    document.querySelector('#numero').focus();   // manda o foco para o que falta
+  } catch {
+    avisar('Não consegui buscar o CEP. Preencha o endereço manualmente.');
+  }
+});</code></pre></div>
+<div class="nota">Duas coisas que separam o bom do ruim aqui: <strong>sempre deixe os campos editáveis</strong> (CEP de rua nova vem errado ou vazio) e <strong>sempre tenha o caminho manual</strong> quando a consulta falhar. API de terceiro cai, e o formulário não pode cair junto.</div>
+</div>
+</article>
+
+<article class="topico" id="t-form-spam" data-marca="novo">
+<div class="topico__cabeca"><h3>Spam — honeypot antes de CAPTCHA</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>CAPTCHA é o último recurso, não o primeiro: ele cobra esforço de todo visitante legítimo para barrar robô. Comece pelo que é invisível.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html + js</span><button class="copiar">copiar</button></div><pre><code>&lt;!-- campo isca: pessoa não vê, robô preenche --&gt;
+&lt;div aria-hidden="true" style="position:absolute;left:-9999px"&gt;
+  &lt;label&gt;Não preencha este campo
+    &lt;input type="text" name="website" tabindex="-1" autocomplete="off"&gt;
+  &lt;/label&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+const inicio = Date.now();
+
+form.addEventListener('submit', (e) =&gt; {
+  // 1. a isca foi preenchida? é robô
+  if (form.website.value) { e.preventDefault(); return; }
+  // 2. preencheu tudo em menos de 3 segundos? é robô
+  if (Date.now() - inicio &lt; 3000) { e.preventDefault(); return; }
+});
+&lt;/script&gt;</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Camada</th><th>Custo para o visitante</th><th>Barra</th></tr></thead>
+<tbody>
+<tr><td>Honeypot</td><td>Zero</td><td>A maioria dos robôs simples</td></tr>
+<tr><td>Tempo mínimo</td><td>Zero</td><td>Preenchimento automatizado</td></tr>
+<tr><td>Limite por IP no servidor</td><td>Zero</td><td>Envio em massa</td></tr>
+<tr><td>Cloudflare Turnstile</td><td>Quase zero — invisível na maioria das vezes</td><td>Robô sofisticado</td></tr>
+<tr><td>reCAPTCHA com imagens</td><td>Alto — e é um problema de acessibilidade</td><td>Quase tudo, mas afasta gente</td></tr>
+</tbody></table></div>
+<div class="nota">Em formulário de serviço local, as duas primeiras camadas resolvem o problema inteiro. Se ainda vier spam, Turnstile antes de reCAPTCHA — o da Cloudflare é gratuito e quase sempre não pede nada ao visitante.</div>
+</div>
+</article>
+
+<article class="topico" id="t-form-erro" data-marca="novo">
+<div class="topico__cabeca"><h3>Erro acessível e envio de verdade</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>Mensagem de erro em vermelho ao lado do campo não serve para quem não enxerga a cor nem para quem usa leitor de tela. Três atributos resolvem.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html + js</span><button class="copiar">copiar</button></div><pre><code>&lt;label for="fone"&gt;WhatsApp&lt;/label&gt;
+&lt;input id="fone" name="fone" type="tel" required
+       aria-describedby="erro-fone" aria-invalid="false"&gt;
+&lt;p id="erro-fone" class="erro" role="alert"&gt;&lt;/p&gt;
+
+&lt;script&gt;
+function marcarErro(campo, mensagem) {
+  const alvo = document.querySelector('#erro-' + campo.name);
+  alvo.textContent = mensagem;                    // role="alert" faz anunciar
+  campo.setAttribute('aria-invalid', 'true');
+}
+&lt;/script&gt;</code></pre></div>
+<p>E para enviar de verdade sem back-end, três caminhos:</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Caminho</th><th>Quando usa</th></tr></thead>
+<tbody>
+<tr><td><strong>Formspree / Web3Forms</strong></td><td>Cola a URL no <code>action</code> e o e-mail chega. Plano gratuito cobre site de serviço.</td></tr>
+<tr><td><strong>Função serverless</strong> (Vercel)</td><td>Quando precisa validar no servidor, gravar em planilha ou integrar com CRM</td></tr>
+<tr><td><strong>Montar link de WhatsApp</strong></td><td>O "formulário" só organiza a mensagem e abre a conversa já escrita</td></tr>
+</tbody></table></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">o terceiro caminho, na prática</span><button class="copiar">copiar</button></div><pre><code>form.addEventListener('submit', (e) =&gt; {
+  e.preventDefault();
+  const texto = `Olá! Sou ${form.nome.value}.
+Preciso de: ${form.servico.value}
+Bairro: ${form.bairro.value}`;
+  location.href = 'https://wa.me/5567999999999?text=' + encodeURIComponent(texto);
+});</code></pre></div>
+<div class="nota">Esse último é o melhor dos dois mundos para o seu tipo de cliente: a triagem organizada do formulário, com a conversa começando na hora — e sem back-end, sem e-mail que ninguém lê, sem custo mensal.</div>
+</div>
+</article>
+</section>
+<section class="parte" id="s5">
+<div class="parte__cabeca"><span class="parte__num">PARTE 5</span><h2>Testar antes de entregar</h2></div>
+<p class="parte__resumo">A diferença entre o freelancer que some depois da entrega e o profissional que o cliente indica é, na prática, uma lista de verificação. Vinte minutos aqui evitam a mensagem de domingo à noite dizendo que o site está quebrado.</p>
+
+<article class="topico" id="t-teste-checklist" data-marca="novo">
+<div class="topico__cabeca"><h3>A checklist de entrega</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Rode na URL de produção, não no arquivo local — metade dos problemas só aparece no domínio real.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Item</th><th>Como confere</th></tr></thead>
+<tbody>
+<tr><td>Todo CTA abre o WhatsApp certo</td><td>Clique em <em>todos</em>. Número errado é o erro mais caro e mais comum.</td></tr>
+<tr><td>Mensagem pré-preenchida faz sentido</td><td>Leia o que chega. Acento quebrado denuncia falta de <code>encodeURIComponent</code>.</td></tr>
+<tr><td>Nenhum texto de exemplo sobrou</td><td><code>grep -ri "lorem\|exemplo\|xxx\|99999" *.html</code></td></tr>
+<tr><td>Título e descrição de cada página</td><td>Únicos, com a cidade no título</td></tr>
+<tr><td>Miniatura de compartilhamento</td><td>Cole o link no seu WhatsApp e veja</td></tr>
+<tr><td>Favicon aparece na aba</td><td>Recarregue forçado</td></tr>
+<tr><td>Formulário envia e chega</td><td>Envie um de teste e confirme no destino</td></tr>
+<tr><td>Página de erro 404</td><td>Acesse <code>/pagina-que-nao-existe</code></td></tr>
+<tr><td>HTTPS com cadeado, sem aviso</td><td>Teste também sem <code>www</code></td></tr>
+<tr><td>Lighthouse mobile acima de 90</td><td>Em aba anônima</td></tr>
+<tr><td>Tab chega em tudo</td><td>Teclado, do topo ao rodapé</td></tr>
+<tr><td>Analytics registrando</td><td>GA4 → Tempo real, com você na página</td></tr>
+<tr><td>Sitemap e robots respondendo</td><td><code>/sitemap.xml</code> e <code>/robots.txt</code></td></tr>
+<tr><td>Console limpo</td><td>Nenhum erro vermelho</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Transforme isso num arquivo</strong> e guarde junto com o projeto. Checklist de cabeça é checklist que encolhe conforme o prazo aperta — e a primeira coisa que some é justamente a verificação do número do WhatsApp.</div>
+</div>
+</article>
+
+<article class="topico" id="t-teste-navegadores" data-marca="novo">
+<div class="topico__cabeca"><h3>Quais navegadores importam aqui</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>No Brasil, a realidade de tráfego de site de serviço local é mais concentrada do que parece: Chrome em Android domina, Safari no iPhone vem em segundo com folga, e o resto é ruído. Mas o segundo lugar é justamente o que costuma quebrar.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Navegador</th><th>Testar?</th><th>Observação</th></tr></thead>
+<tbody>
+<tr><td>Chrome Android</td><td>Sempre</td><td>É onde está a maioria</td></tr>
+<tr><td>Safari iOS</td><td>Sempre</td><td>Onde aparece diferença. Todo navegador no iPhone usa o motor do Safari — "Chrome no iPhone" é Safari por dentro.</td></tr>
+<tr><td>Chrome desktop</td><td>Sempre</td><td>É onde você desenvolve</td></tr>
+<tr><td>Safari macOS</td><td>Se tiver acesso</td><td>Costuma seguir o do iOS</td></tr>
+<tr><td>Firefox</td><td>Rápido</td><td>Raramente diverge hoje</td></tr>
+<tr><td>Edge</td><td>Não</td><td>É Chrome por dentro</td></tr>
+<tr><td>Internet Explorer</td><td>Não</td><td>Descontinuado. Se o cliente insistir, é conversa de escopo e de preço.</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Antes de usar algo novo:</strong> consulte <code>caniuse.com</code>. Ele mostra o suporte por navegador e — mais útil — a porcentagem de usuários no Brasil. É a diferença entre "posso usar?" e "posso usar <em>para este público</em>?".</div>
+</div>
+</article>
+
+<article class="topico" id="t-teste-safari" data-marca="novo">
+<div class="topico__cabeca"><h3>As manias do Safari no iPhone</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>A lista curta do que quebra só lá, e o conserto de cada um.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>/* 1. 100vh não é a altura visível — a barra do navegador come um pedaço */
+.hero { min-height: 100vh; }      /* corta conteúdo no iPhone */
+.hero { min-height: 100svh; }     /* certo: small viewport height */
+
+/* 2. campo com fonte menor que 16px faz a página dar zoom sozinha ao focar */
+input, select, textarea { font-size: 16px; }
+
+/* 3. rolagem com inércia dentro de caixa */
+.rolavel { -webkit-overflow-scrolling: touch; }
+
+/* 4. área segura do notch e da barra inferior */
+.rodape-fixo { padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
+
+/* 5. Safari antigo ignora gap em flex — teste antes de depender */
+/* 6. position: sticky quebra se algum pai tem overflow: hidden */</code></pre></div>
+<div class="nota"><strong>O do zoom é o mais traiçoeiro:</strong> o visitante toca no campo de telefone, a página dá um zoom que ele não pediu, ele não consegue mais ver o botão de enviar, e desiste. Você nunca vai ver isso acontecer no Chrome do seu computador. Uma linha de CSS resolve — e ela precisa estar lá desde o começo.</div>
+</div>
+</article>
+
+<article class="topico" id="t-teste-quebrado" data-marca="novo">
+<div class="topico__cabeca"><h3>Caçar link, imagem e metadado quebrado</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">console — cole na página publicada</span><button class="copiar">copiar</button></div><pre><code>// imagens que não carregaram
+$$('img').filter(i =&gt; !i.complete || i.naturalWidth === 0)
+
+// links vazios, quebrados ou ainda em "#"
+$$('a').filter(a =&gt; !a.getAttribute('href') || a.getAttribute('href') === '#')
+
+// links externos sem rel de segurança
+$$('a[target="_blank"]').filter(a =&gt; !a.rel.includes('noopener'))
+
+// metadados essenciais
+({
+  titulo: document.title,
+  descricao: document.querySelector('meta[name=description]')?.content,
+  og: document.querySelector('meta[property="og:image"]')?.content,
+  h1: $$('h1').map(h =&gt; h.textContent.trim()),
+  semAlt: $$('img').filter(i =&gt; !i.hasAttribute('alt')).length
+})</code></pre></div>
+<p>E do lado do terminal, antes mesmo de publicar:</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code>grep -ri "lorem\|TODO\|FIXME\|localhost" *.html      # sobras de desenvolvimento
+grep -o 'href="[^"]*\.html"' *.html | sort -u        # todos os links internos
+grep -o 'src="[^"]*"' *.html | sort -u               # todos os arquivos referenciados</code></pre></div>
+</div>
+</article>
+
+<article class="topico" id="t-teste-auto" data-marca="novo">
+<div class="topico__cabeca"><h3>Teste de fumaça automatizado</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>"Fumaça" vem da eletrônica: liga e vê se sai fumaça. Não testa tudo — testa se o essencial está de pé. Um arquivo, e você roda antes de toda entrega.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">teste.mjs — node teste.mjs</span><button class="copiar">copiar</button></div><pre><code>import { chromium } from 'playwright';
+
+const SITE = 'https://site-do-cliente.com.br';
+const b = await chromium.launch();
+const p = await (await b.newContext({ viewport: { width: 390, height: 800 } })).newPage();
+
+const erros = [];
+p.on('pageerror', e =&gt; erros.push('JS: ' + e.message));
+p.on('response', r =&gt; { if (r.status() &gt;= 400) erros.push(r.status() + ' ' + r.url()); });
+
+await p.goto(SITE, { waitUntil: 'networkidle' });
+
+const r = await p.evaluate(() =&gt; ({
+  titulo:   document.title,
+  h1:       document.querySelectorAll('h1').length,
+  zap:      [...document.querySelectorAll('a[href*="wa.me"]')].length,
+  semAlt:   [...document.querySelectorAll('img:not([alt])')].length,
+  overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+}));
+
+if (r.h1 !== 1)        erros.push('deveria ter exatamente 1 h1, tem ' + r.h1);
+if (r.zap === 0)       erros.push('nenhum link de WhatsApp na página');
+if (r.semAlt &gt; 0)      erros.push(r.semAlt + ' imagens sem alt');
+if (r.overflow &gt; 0)    erros.push('rolagem horizontal a 390px');
+
+console.log(r);
+console.log(erros.length ? erros : 'tudo certo');
+await b.close();</code></pre></div>
+<div class="nota">É exatamente o que eu rodei a cada mudança neste site — foi assim que apareceu a página que tinha ficado sem o link novo no menu. Copie, troque a URL e as regras pelo que importa no projeto do cliente, e guarde junto com o código.</div>
+</div>
+</article>
+
+<article class="topico" id="t-teste-cliente" data-marca="novo">
+<div class="topico__cabeca"><h3>Como apresentar para o cliente aprovar</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Mandar o link e escrever "pronto, dá uma olhada" é o caminho mais curto para dez mensagens de ajuste desconexas ao longo de três semanas.</p>
+<p><strong>Mande a URL de pré-visualização, não a de produção.</strong> Com o repositório ligado à Vercel, um branch já vira um endereço próprio — o cliente vê sem que nada esteja no ar de verdade.</p>
+<p><strong>Diga o que você quer que ele olhe.</strong> "Confere por favor: o telefone, os três serviços, e se o texto da hero está do jeito que você fala com seu cliente. O restante ainda vou ajustar." Sem isso, ele comenta a cor do botão e não percebe que o telefone está errado.</p>
+<p><strong>Peça para abrir no celular dele.</strong> É onde o cliente dele vai ver, e é onde aparece o que você não testou.</p>
+<p><strong>Combine quantas rodadas de ajuste estão incluídas.</strong> Duas é o padrão razoável. Isso é conversa de contrato — e está na trilha <a href="negocio.html">Negócio</a>.</p>
+<div class="nota"><strong>E registre a aprovação por escrito</strong>, mesmo que seja uma mensagem de WhatsApp dizendo "pode publicar". É o que separa "ajuste combinado" de "trabalho novo" três semanas depois.</div>
+</div>
+</article>
+</section>
+
+
+<section class="parte" id="s6">
+<div class="parte__cabeca"><span class="parte__num">PARTE 6</span><h2>Laboratório: ver a diferença</h2></div>
+<p class="parte__resumo">Tudo o que as cinco partes anteriores explicaram em texto, acontecendo aqui do lado. Mexa nos controles — a maioria destes problemas só fica óbvia quando você vê o certo e o errado na mesma tela.</p>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<filter id="f-protan"><feColorMatrix type="matrix" values="0.567 0.433 0 0 0  0.558 0.442 0 0 0  0 0.242 0.758 0 0  0 0 0 1 0"/></filter>
+<filter id="f-deutan"><feColorMatrix type="matrix" values="0.625 0.375 0 0 0  0.7 0.3 0 0 0  0 0.3 0.7 0 0  0 0 0 1 0"/></filter>
+<filter id="f-acroma"><feColorMatrix type="matrix" values="0.299 0.587 0.114 0 0  0.299 0.587 0.114 0 0  0.299 0.587 0.114 0 0  0 0 0 1 0"/></filter>
+</defs></svg>
+
+<article class="topico" id="t-vq-contraste" data-marca="novo">
+<div class="topico__cabeca"><h3>Contraste: o número, não o achismo</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo ferramenta">
+<p>Arraste e veja a razão de contraste mudar. O ponto de virada do WCAG AA para texto normal é <strong>4.5:1</strong> — abaixo disso reprova, e o que parece “cinza elegante” na sua tela vira ilegível no celular ao sol.</p>
+<div id="v-contraste">
+<div class="controle">
+<span>cor do texto</span>
+<input type="range" min="100" max="220" value="170" aria-label="Clareza do texto">
+<span class="valor">—</span>
+<span class="veredito">—</span>
+</div>
+<div style="background:#fff;border:1px solid var(--line);padding:18px">
+<p class="amostra-texto">Projetos de interiores e reforma de apartamento em Campo Grande. Atendimento do projeto à entrega da obra, com acompanhamento semanal.</p>
+</div>
+</div>
+<div class="nota">O momento interessante é perto de <strong>4.5</strong>: a diferença visual entre passar e reprovar é pequena, e a diferença para quem tem baixa visão é enorme. É por isso que se mede em vez de olhar.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vq-daltonismo" data-marca="novo">
+<div class="topico__cabeca"><h3>A cor que some para 8% dos homens</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo ferramenta">
+<p>A paleta de cima usa cor para informar: verde é disponível, vermelho é indisponível. Troque o tipo de visão e veja o que sobra da informação.</p>
+<div id="v-daltonismo">
+<div class="controle">
+<span>simular</span>
+<button class="acao" data-filtro="nenhum" aria-pressed="true">visão típica</button>
+<button class="acao" data-filtro="f-deutan" aria-pressed="false">deuteranopia</button>
+<button class="acao" data-filtro="f-protan" aria-pressed="false">protanopia</button>
+<button class="acao" data-filtro="f-acroma" aria-pressed="false">acromatopsia</button>
+</div>
+<div class="swatch-linha">
+<div class="swatch" style="background:#1F9D55;color:#fff">disponível</div>
+<div class="swatch" style="background:#C6371F;color:#fff">esgotado</div>
+<div class="swatch" style="background:#D9A404;color:#2A1F00">últimas vagas</div>
+<div class="swatch" style="background:#2563A8;color:#fff">sob consulta</div>
+</div>
+</div>
+<div class="nota"><strong>A regra que resolve:</strong> a cor nunca pode ser o <em>único</em> portador da informação. Acrescente um ícone, uma palavra ou um padrão. Em deuteranopia, o verde e o vermelho acima viram quase a mesma faixa — e o visitante não tem como saber qual é qual.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vq-foco" data-marca="novo">
+<div class="topico__cabeca"><h3>Foco visível — e o que acontece sem ele</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo ferramenta">
+<p>Clique em <em>percorrer com o teclado</em>. Os dois lados recebem foco na mesma ordem; só um deixa isso visível.</p>
+<div id="v-foco">
+<div class="controle"><button class="acao">percorrer com o teclado</button><span>os dois lados recebem foco — um deles você não vê</span></div>
+<div class="confronto">
+<div class="confronto__lado confronto__lado--ruim">
+<p class="confronto__rotulo">Assim não</p>
+<div class="confronto__palco">
+<div><button class="exemplo" type="button">Serviços</button><button class="exemplo" type="button">Orçamento</button><button class="exemplo" type="button">Contato</button></div>
+</div>
+<p class="confronto__nota">*:focus { outline: none; }</p>
+</div>
+<div class="confronto__lado confronto__lado--bom">
+<p class="confronto__rotulo">Assim sim</p>
+<div class="confronto__palco">
+<div><button class="exemplo" type="button">Serviços</button><button class="exemplo" type="button">Orçamento</button><button class="exemplo" type="button">Contato</button></div>
+</div>
+<p class="confronto__nota">:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }</p>
+</div>
+</div>
+</div>
+<div class="nota">Quem navega por teclado no lado esquerdo está às cegas: aperta Enter sem saber onde está. E <code>:focus-visible</code> resolve o motivo pelo qual as pessoas apagavam o contorno — ele não aparece para quem clicou com o mouse.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vq-cls" data-marca="novo">
+<div class="topico__cabeca"><h3>O pulo do layout, acontecendo</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo ferramenta">
+<p>Clique em <em>carregar a imagem</em> e tente clicar no botão verde do lado esquerdo antes de a foto chegar. É exatamente isso que o CLS mede.</p>
+<div id="v-cls">
+<div class="controle"><button class="acao">carregar a imagem</button><span>tente clicar no botão verde logo depois</span></div>
+<div class="confronto">
+<div class="confronto__lado confronto__lado--ruim">
+<p class="confronto__rotulo">Sem width e height</p>
+<div class="confronto__palco sem-reserva">
+<div class="pilha">
+<p class="v-cls-texto">Reforma de apartamento</p>
+<div class="v-cls-img"></div>
+<button class="v-cls-btn" type="button">Pedir orçamento</button>
+</div>
+</div>
+<p class="confronto__nota">&lt;img src="obra.webp"&gt;</p>
+</div>
+<div class="confronto__lado confronto__lado--bom">
+<p class="confronto__rotulo">Com espaço reservado</p>
+<div class="confronto__palco com-reserva">
+<div class="pilha">
+<p class="v-cls-texto">Reforma de apartamento</p>
+<div class="v-cls-img"></div>
+<button class="v-cls-btn" type="button">Pedir orçamento</button>
+</div>
+</div>
+<p class="confronto__nota">&lt;img src="obra.webp" width="800" height="600"&gt;</p>
+</div>
+</div>
+</div>
+<div class="nota">O botão do lado esquerdo foge no instante em que a imagem chega. No celular, com o dedo já a caminho, isso é o visitante clicando em outra coisa — e é por isso que o Google trata CLS como sinal de qualidade.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vq-peso" data-marca="novo">
+<div class="topico__cabeca"><h3>Quanto o peso custa em segundos</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo ferramenta">
+<p>Arraste até o tamanho de uma foto tirada com celular e sem tratamento. O tempo é calculado para 4G brasileiro em condição média — cerca de 1,6 MB por segundo.</p>
+<div id="v-peso">
+<div class="controle">
+<span>peso da imagem</span>
+<input type="range" min="40" max="4000" step="20" value="3200" aria-label="Peso da imagem em KB">
+<span class="valor">—</span>
+<span class="v-peso-tempo">—</span>
+<span class="veredito">—</span>
+</div>
+<div class="barra-peso">
+<div class="barra-peso__linha"><span>sua foto</span><div class="barra-peso__trilho"><div class="barra-peso__fita barra-peso__fita--alerta v-peso-fita"></div></div><span></span></div>
+<div class="barra-peso__linha"><span>bem feita</span><div class="barra-peso__trilho"><div class="barra-peso__fita" style="width:3%"></div></div><span>120 KB</span></div>
+</div>
+</div>
+<div class="nota"><strong>A conversa com o cliente é essa tela.</strong> Ninguém discute "otimizar imagem" no abstrato; todo mundo entende "a foto que você mandou faz a página levar dois segundos a mais, e metade das pessoas desiste antes de três".</div>
+</div>
+</article>
+
+<article class="topico" id="t-vq-form" data-marca="novo">
+<div class="topico__cabeca"><h3>Máscara ao vivo e erro que o leitor anuncia</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo ferramenta">
+<p>Digite só números no campo abaixo. À direita fica o valor cru, que é o que você deve enviar — a máscara é para o olho, não para o servidor.</p>
+<div id="v-mascara">
+<div class="controle">
+<input type="tel" inputmode="numeric" placeholder="digite o telefone" aria-label="Telefone de demonstração">
+<span>cru: <span class="v-cru">(vazio)</span></span>
+</div>
+</div>
+<p>E o erro de validação, nas duas versões. Clique em <em>tentar enviar</em>:</p>
+<div id="v-erro">
+<div class="controle"><button class="acao">tentar enviar vazio</button></div>
+<div class="confronto">
+<div class="confronto__lado confronto__lado--ruim">
+<p class="confronto__rotulo">Só visual</p>
+<div class="confronto__palco">
+<div style="width:100%"><label>WhatsApp</label><input type="tel" aria-label="exemplo ruim"><p class="v-erro-ruim"></p></div>
+</div>
+<p class="confronto__nota">borda vermelha + “Campo inválido”: não diz o que fazer, e o leitor de tela não anuncia</p>
+</div>
+<div class="confronto__lado confronto__lado--bom">
+<p class="confronto__rotulo">Acessível</p>
+<div class="confronto__palco">
+<div style="width:100%"><label for="v-erro-campo">WhatsApp</label><input id="v-erro-campo" type="tel" aria-describedby="v-erro-msg" aria-invalid="false"><p class="v-erro-bom" id="v-erro-msg" role="alert"></p></div>
+</div>
+<p class="confronto__nota">role="alert" + aria-invalid + mensagem que ensina o formato</p>
+</div>
+</div>
+</div>
+<div class="nota">Repare na diferença de texto: “Campo inválido” informa que deu errado. “Informe um WhatsApp com DDD, ex.: (67) 99999-8888” informa o que fazer. A segunda converte; a primeira faz a pessoa fechar a aba.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vq-zoom" data-marca="novo">
+<div class="topico__cabeca"><h3>Zoom de 200% e o que o leitor de tela ouve</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo ferramenta">
+<p>O WCAG exige que a página continue usável com o texto ampliado em 200%. Clique e veja o que acontece com largura fixa:</p>
+<div id="v-zoom">
+<div class="controle"><button class="acao">ampliar para 200%</button><span>é o que faz quem não enxerga bem de perto</span></div>
+<div class="confronto">
+<div class="confronto__lado confronto__lado--ruim">
+<p class="confronto__rotulo">Largura fixa</p>
+<div class="confronto__palco"><div class="trava">Reforma completa em até 90 dias</div></div>
+<p class="confronto__nota">width: 210px; white-space: nowrap</p>
+</div>
+<div class="confronto__lado confronto__lado--bom">
+<p class="confronto__rotulo">Largura que cede</p>
+<div class="confronto__palco"><div class="flui">Reforma completa em até 90 dias</div></div>
+<p class="confronto__nota">max-width: 210px — o texto quebra e continua inteiro</p>
+</div>
+</div>
+</div>
+<p style="margin-top:22px">E o alternativo de imagem, do jeito que ele realmente chega a quem não vê a tela:</p>
+<div id="v-alt">
+<div class="controle"><button class="acao">ouvir como leitor de tela</button></div>
+<div class="lab" style="grid-template-columns:repeat(auto-fit,minmax(190px,1fr))">
+<div class="figura"><div data-ouve="imagem"></div><small>alt="imagem"</small></div>
+<div class="figura"><div data-ouve="foto reforma apartamento campo grande arquitetura interiores projeto"></div><small>alt com palavras-chave empilhadas</small></div>
+<div class="figura"><div data-ouve="Sala integrada com cozinha, marcenaria clara e bancada de madeira separando os ambientes"></div><small>alt que descreve</small></div>
+</div>
+</div>
+<div class="nota">O do meio é o mais comum em site feito às pressas: alguém tentou fazer SEO no <code>alt</code>. O resultado é que a pessoa cega ouve uma lista de palavras soltas — e o Google, que entende a diferença há anos, também não ganha nada com isso.</div>
+</div>
+</article>
+</section>
+
+
+<nav class="passo" aria-label="Navegar entre trilhas">
+<a class="passo__item passo__item--ant" href="fluxo.html"><span>Anterior</span><strong>Fluxo de trabalho</strong></a>
+<a class="passo__item passo__item--prox" href="landing-pages.html"><span>Próxima</span><strong>Landing pages</strong></a>
+</nav>
+</main>
+</div>
+<footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<script src="app.js"></script>
+<script src="busca.js" defer></script>
+<script src="visuais.js" defer></script>
+</body>
+</html>

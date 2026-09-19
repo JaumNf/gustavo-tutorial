@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ferramentas — Gustavo Tutorial</title>
+<meta name="description" content="Seis ferramentas para usar durante o trabalho: checklist de entrega, briefing, link de WhatsApp, UTM, contraste e preço.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Ferramentas — Gustavo Tutorial">
+<meta property="og:description" content="Seis ferramentas para usar durante o trabalho.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0D6B62" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
+<meta name="author" content="Gustavo">
+<link rel="canonical" href="https://gustavo-tutorial.vercel.app/ferramentas.html">
+<meta property="og:url" content="https://gustavo-tutorial.vercel.app/ferramentas.html">
+<meta property="og:image" content="https://gustavo-tutorial.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Gustavo Tutorial">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo">
+<div class="topo__interno">
+<a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
+<button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+</div>
+<nav class="navmenu" aria-label="Trilhas">
+<details class="navmenu__caixa" id="navmenu">
+<summary class="navmenu__botao">Trilhas<span aria-hidden="true">&#9662;</span></summary>
+<div class="navmenu__painel">
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Construir</p>
+<a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="qualidade.html"><strong>Qualidade</strong><span>Imagem, a11y, Vitals e testes</span></a>
+<a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="motion.html"><strong>Referência: Motion</strong><span>A API inteira, em português</span></a>
+<a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Servidor, banco e login</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Vender</p>
+<a href="landing-pages.html"><strong>Landing pages</strong><span>A estratégia da página</span></a>
+<a href="trafego.html"><strong>Tráfego</strong><span>Ser encontrado no Google</span></a>
+<a href="negocio.html"><strong>Negócio</strong><span>Preço, escopo e contrato</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Método</p>
+<a href="fluxo.html"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
+<a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
+<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+<div class="navmenu__grupo navmenu__grupo--trabalhar">
+<p class="navmenu__rotulo">Trabalhar</p>
+<a href="ferramentas.html" class="is-atual"><strong>Ferramentas</strong><span>As oito do dia a dia</span></a>
+<a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
+<a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
+<a href="ferramentas.html#f-zap"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
+<a href="ferramentas.html#f-utm"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
+<a href="ia.html#t-gerador"><strong>Gerador de comando</strong><span>Brief para a IA</span></a>
+</div>
+</div>
+</details>
+
+<span class="navmenu__aqui">Ferramentas</span>
+</nav></header>
+<div class="palco palco--ref">
+<nav class="indice" id="indice" aria-label="Ferramentas">
+<button class="indice__abrir" id="indice-abrir" aria-expanded="false" aria-controls="indice-lista"><span>Ferramentas</span><span aria-hidden="true">&#9662;</span></button>
+<div class="indice__lista" id="indice-lista">
+<div class="indice__grupo">
+<p class="indice__rotulo">Entregar</p>
+<a href="#f-checklist">Checklist de entrega</a>
+<a href="#f-contraste">Contraste</a>
+<a href="#f-inventario">Inventário de acessos</a>
+</div>
+<div class="indice__grupo">
+<p class="indice__rotulo">Montar a página</p>
+<a href="#f-zap">Link de WhatsApp</a>
+<a href="#f-utm">Gerador de UTM</a>
+</div>
+<div class="indice__grupo">
+<p class="indice__rotulo">Antes do projeto</p>
+<a href="#f-briefing">Briefing</a>
+<a href="#f-proposta">Proposta que fecha</a>
+<a href="#f-preco">Preço</a>
+</div>
+<div class="indice__grupo">
+<p class="indice__rotulo">Em outra página</p>
+<a href="ia.html#t-gerador">Gerador de comando</a>
+</div>
+</div>
+</nav>
+
+<main class="leitura" id="conteudo" tabindex="-1">
+<section class="abertura">
+<h1>Ferramentas</h1>
+<p class="abertura__lead">O resto do site é para estudar. Esta página é para usar enquanto você trabalha. Tudo aqui roda no seu navegador, nada é enviado para lugar nenhum, e o que você preenche fica salvo neste aparelho até você limpar.</p>
+<div class="legenda"><span>8 ferramentas</span><span>salvas neste navegador</span></div>
+</section>
+
+<section class="parte" id="f-checklist">
+<div class="parte__cabeca"><span class="parte__num">FERRAMENTA</span><h2>Checklist de entrega</h2></div>
+<p class="parte__resumo">Os quatorze itens que se confere na URL de produção antes de dizer ao cliente que está pronto. Marque conforme for; fica salvo por cliente.</p>
+<div class="ferr" id="fer-checklist">
+<div class="ferr__topo">
+<input type="text" id="cl-cliente" class="ferr__campo" placeholder="nome do cliente" aria-label="Nome do cliente">
+<span class="ferr__contador" id="cl-contador">0 de 14</span>
+<button class="acao" id="cl-zerar" type="button">zerar</button>
+</div>
+<div class="ferr__barra"><div class="ferr__barra-fita" id="cl-fita"></div></div>
+<ul class="ferr__lista" id="cl-lista"></ul>
+<div class="nota">Transforme isto num hábito e o cliente para de encontrar erro antes de você. O item que mais aparece marcado errado é o primeiro — número de WhatsApp.</div>
+</div>
+</section>
+
+<section class="parte" id="f-zap">
+<div class="parte__cabeca"><span class="parte__num">FERRAMENTA</span><h2>Link de WhatsApp</h2></div>
+<p class="parte__resumo">Monta o link com a mensagem já escrita, com a codificação correta — que é onde o acento quebra quando se faz na mão.</p>
+<div class="ferr" id="fer-zap">
+<div class="ferr__linha">
+<label for="zp-num">Número <small>com DDD, sem +55</small></label>
+<input type="tel" id="zp-num" class="ferr__campo" placeholder="67999998888" inputmode="numeric">
+</div>
+<div class="ferr__linha">
+<label for="zp-msg">Mensagem que abre pronta</label>
+<textarea id="zp-msg" class="ferr__campo" rows="3">Olá! Vim pelo site e quero um orçamento.</textarea>
+</div>
+<div class="ferr__saida">
+<code id="zp-saida">—</code>
+<button class="acao" id="zp-copiar" type="button">copiar</button>
+</div>
+<div class="ferr__extra">
+<a id="zp-testar" class="acao" href="#" target="_blank" rel="noopener">testar o link</a>
+<span class="ferr__dica" id="zp-dica"></span>
+</div>
+<div class="nota"><strong>A mensagem importa mais que o link.</strong> "Olá! Vim pelo site" chega sem contexto. "Vim pela página de reforma e quero um orçamento" já diz ao cliente de onde veio e do que se trata — e economiza duas mensagens de ida e volta.</div>
+</div>
+</section>
+
+<section class="parte" id="f-utm">
+<div class="parte__cabeca"><span class="parte__num">FERRAMENTA</span><h2>Gerador de UTM</h2></div>
+<p class="parte__resumo">A URL marcada, com a convenção já aplicada — minúscula, sem acento, sem espaço. E o histórico do que você já gerou, que é a planilha que a trilha Tráfego manda manter.</p>
+<div class="ferr" id="fer-utm">
+<div class="ferr__linha"><label for="ut-url">Endereço do site</label>
+<input type="url" id="ut-url" class="ferr__campo" placeholder="https://site-do-cliente.com.br/"></div>
+<div class="ferr__grade">
+<div><label for="ut-source">source <small>onde estava o link</small></label>
+<input type="text" id="ut-source" class="ferr__campo" placeholder="instagram" list="ut-fontes">
+<datalist id="ut-fontes"><option value="instagram"><option value="google"><option value="facebook"><option value="whatsapp"><option value="cartao"><option value="email"></datalist></div>
+<div><label for="ut-medium">medium <small>como chegou</small></label>
+<input type="text" id="ut-medium" class="ferr__campo" placeholder="cpc" list="ut-meios">
+<datalist id="ut-meios"><option value="cpc"><option value="organic"><option value="social"><option value="bio"><option value="perfil"><option value="qr"><option value="assinatura"></datalist></div>
+<div><label for="ut-campaign">campaign <small>qual campanha</small></label>
+<input type="text" id="ut-campaign" class="ferr__campo" placeholder="reforma-outubro"></div>
+<div><label for="ut-content">content <small>opcional</small></label>
+<input type="text" id="ut-content" class="ferr__campo" placeholder="video-cozinha"></div>
+</div>
+<div class="ferr__saida"><code id="ut-saida">—</code><button class="acao" id="ut-copiar" type="button">copiar</button></div>
+<p class="ferr__dica" id="ut-dica"></p>
+<div class="ferr__historico">
+<div class="ferr__topo"><strong>Já gerados</strong><button class="acao" id="ut-limpar" type="button">limpar</button></div>
+<ul id="ut-lista"></ul>
+</div>
+<div class="nota"><strong>Nunca use UTM em link interno do próprio site.</strong> Isso reinicia a sessão no Analytics e apaga a origem verdadeira — você passa a achar que o tráfego veio do próprio site.</div>
+</div>
+</section>
+
+<section class="parte" id="f-contraste">
+<div class="parte__cabeca"><span class="parte__num">FERRAMENTA</span><h2>Contraste</h2></div>
+<p class="parte__resumo">Cole as duas cores do projeto e veja a razão, o veredito de cada nível e uma amostra real nos dois tamanhos de texto.</p>
+<div class="ferr" id="fer-contraste">
+<div class="ferr__grade ferr__grade--cores">
+<div><label for="ct-texto">Cor do texto</label>
+<div class="ferr__cor"><input type="color" id="ct-texto-p" value="#5F6E6B"><input type="text" id="ct-texto" class="ferr__campo" value="#5F6E6B"></div></div>
+<div><label for="ct-fundo">Cor do fundo</label>
+<div class="ferr__cor"><input type="color" id="ct-fundo-p" value="#FFFFFF"><input type="text" id="ct-fundo" class="ferr__campo" value="#FFFFFF"></div></div>
+</div>
+<div class="ferr__razao"><strong id="ct-razao">—</strong><span>de contraste</span></div>
+<div class="ferr__vereditos" id="ct-vereditos"></div>
+<div class="ferr__amostra" id="ct-amostra">
+<p class="ferr__amostra-g">Reforma completa em 45 dias</p>
+<p class="ferr__amostra-p">Projeto de interiores e acompanhamento de obra em Campo Grande, com prazo fechado em contrato e visita técnica inclusa.</p>
+</div>
+<p class="ferr__dica" id="ct-dica"></p>
+<div class="nota">Texto normal precisa de 4.5:1. Texto grande — 24px, ou 19px em negrito — precisa de 3:1. Borda de campo e ícone que informa, 3:1. Abaixo disso reprova no WCAG AA, que é o nível citado na Lei Brasileira de Inclusão.</div>
+</div>
+</section>
+
+<section class="parte" id="f-briefing">
+<div class="parte__cabeca"><span class="parte__num">FERRAMENTA</span><h2>Briefing</h2></div>
+<p class="parte__resumo">As dez perguntas da reunião de descoberta. Preencha durante a conversa e copie no fim — o texto sai pronto para colar no Claude Code ou mandar o cliente confirmar.</p>
+<div class="ferr" id="fer-briefing">
+<div class="ferr__topo">
+<input type="text" id="br-cliente" class="ferr__campo" placeholder="nome do cliente" aria-label="Nome do cliente">
+<span class="ferr__contador" id="br-contador">0 de 10</span>
+<button class="acao" id="br-copiar" type="button">copiar briefing</button>
+<button class="acao" id="br-zerar" type="button">zerar</button>
+</div>
+<div id="br-campos"></div>
+<div class="nota"><strong>A pergunta 5 é a que quase ninguém faz</strong> e a que mais rende: "qual a pergunta que todo cliente faz antes de fechar?". A resposta é, literalmente, a seção que faltava na página.</div>
+</div>
+</section>
+
+<section class="parte" id="f-preco">
+<div class="parte__cabeca"><span class="parte__num">FERRAMENTA</span><h2>Preço</h2></div>
+<p class="parte__resumo">Primeiro o seu custo real por hora trabalhada — que quase nunca é o que se imagina. Depois a faixa do projeto, a partir das horas que ele realmente leva.</p>
+<div class="ferr" id="fer-preco">
+<p class="ferr__secao">1 · Seu custo por hora</p>
+<div class="ferr__grade">
+<div><label for="pr-despesas">Despesas do mês <small>tudo: moradia, comida, internet, ferramentas</small></label>
+<input type="number" id="pr-despesas" class="ferr__campo" value="4500" min="0" step="100"></div>
+<div><label for="pr-retirada">Quanto quer tirar por mês <small>além das despesas</small></label>
+<input type="number" id="pr-retirada" class="ferr__campo" value="3000" min="0" step="100"></div>
+<div><label for="pr-dias">Dias trabalhados no mês</label>
+<input type="number" id="pr-dias" class="ferr__campo" value="20" min="1" max="31"></div>
+<div><label for="pr-horas">Horas faturáveis por dia <small>não são 8 — some proposta, cobrança, estudo</small></label>
+<input type="number" id="pr-horas" class="ferr__campo" value="5" min="1" max="12" step="0.5"></div>
+</div>
+<div class="ferr__resultado" id="pr-hora">—</div>
+
+<p class="ferr__secao">2 · O projeto</p>
+<div class="ferr__grade">
+<div><label for="pr-projeto">Horas estimadas</label>
+<input type="number" id="pr-projeto" class="ferr__campo" value="24" min="1" step="1"></div>
+<div><label for="pr-margem">Margem de erro <small>o projeto sempre leva mais</small></label>
+<select id="pr-margem" class="ferr__campo">
+<option value="1.2">20% — escopo bem fechado</option>
+<option value="1.4" selected>40% — o normal</option>
+<option value="1.7">70% — cliente indeciso ou escopo aberto</option>
+</select></div>
+</div>
+<div class="ferr__resultado" id="pr-faixa">—</div>
+<div class="nota"><strong>Isto é o seu piso, não o seu preço.</strong> Abaixo dessa faixa você está pagando para trabalhar. Acima dela entra o que a página vale para o negócio do cliente — e essa conta, que está na trilha <a href="negocio.html#t-cm-preco">Negócio</a>, é a que sustenta preço acima do concorrente de quatrocentos reais.</div>
+</div>
+</section>
+
+<section class="parte" id="f-proposta">
+<div class="parte__cabeca"><span class="parte__num">FERRAMENTA</span><h2>Proposta que fecha</h2></div>
+<p class="parte__resumo">Os oito pontos que fazem uma proposta mostrar que você entendeu o problema antes de mostrar o preço. Preencha e copie o texto pronto para mandar.</p>
+<div class="ferr" id="fer-proposta">
+<div class="ferr__topo">
+<input type="text" id="pp-cliente" class="ferr__campo" placeholder="nome do cliente" aria-label="Nome do cliente">
+<span class="ferr__contador" id="pp-contador">0 de 7</span>
+<button class="acao" id="pp-copiar" type="button">copiar proposta</button>
+<button class="acao" id="pp-zerar" type="button">zerar</button>
+</div>
+<div class="ferr__grade">
+<div><label for="pp-modelo">Modelo de preço</label>
+<select id="pp-modelo" class="ferr__campo">
+<option value="Por hora">Por hora</option>
+<option value="Por projeto" selected>Por projeto</option>
+<option value="Por valor">Por valor</option>
+</select></div>
+<div><label for="pp-validade">Validade da proposta <small>em dias</small></label>
+<input type="number" id="pp-validade" class="ferr__campo" value="15" min="1" max="90"></div>
+</div>
+<div id="pp-campos"></div>
+<p class="ferr__dica" id="pp-dica"></p>
+<div class="nota"><strong>Ofereça duas ou três opções</strong> — essencial e completo — em vez de uma só. Isso muda a pergunta de "faço ou não faço?" para "qual delas?", e a do meio costuma ser a escolhida.</div>
+</div>
+</section>
+
+<section class="parte" id="f-inventario">
+<div class="parte__cabeca"><span class="parte__num">FERRAMENTA</span><h2>Inventário de acessos</h2></div>
+<p class="parte__resumo">O mapa de onde está cada acesso do projeto e em nome de quem — sem senha nenhuma escrita nele. Entrega junto com o site.</p>
+<div class="ferr" id="fer-inventario">
+<div class="ferr__topo">
+<input type="text" id="iv-cliente" class="ferr__campo" placeholder="nome do cliente" aria-label="Nome do cliente">
+<button class="acao" id="iv-copiar" type="button">copiar inventário</button>
+<button class="acao" id="iv-zerar" type="button">zerar</button>
+</div>
+<div class="ferr__tabela-caixa">
+<div class="ferr__tabela" id="iv-tabela">
+<div class="ferr__tabela-cab"><span>Serviço</span><span>Titular</span><span>Onde</span><span></span></div>
+</div>
+</div>
+<button class="ferr__addlinha" id="iv-add" type="button">+ adicionar linha</button>
+<div class="nota"><strong>O princípio:</strong> tudo em nome do cliente, e você entra como colaborador convidado — revogável a qualquer momento. Isso protege os dois. Senha nenhuma vai neste documento; fica no gerenciador do próprio cliente.</div>
+</div>
+</section>
+
+<nav class="passo" aria-label="Navegar">
+<a class="passo__item passo__item--ant" href="index.html"><span>Voltar ao</span><strong>Início</strong></a>
+<a class="passo__item passo__item--prox" href="ia.html#t-gerador"><span>Outra ferramenta</span><strong>Gerador de comando</strong></a>
+</nav>
+</main>
+<aside class="nesta" id="nesta" aria-label="Nesta página"></aside>
+</div>
+<footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<script src="app.js"></script>
+<script src="ref.js" defer></script>
+<script src="busca.js" defer></script>
+<script src="ferramentas.js" defer></script>
+</body>
+</html>

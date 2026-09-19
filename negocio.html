@@ -9,12 +9,27 @@
 <meta property="og:title" content="Negócio — Gustavo Tutorial">
 <meta property="og:description" content="Design system, tipografia, copy que converte, escopo, preço e contrato — o que decide quanto você cobra.">
 <meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0D6B62" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
+<meta name="author" content="Gustavo">
+<link rel="canonical" href="https://gustavo-tutorial.vercel.app/negocio.html">
+<meta property="og:url" content="https://gustavo-tutorial.vercel.app/negocio.html">
+<meta property="og:image" content="https://gustavo-tutorial.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Gustavo Tutorial">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo">
 <div class="topo__interno">
 <a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
@@ -32,9 +47,11 @@
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Construir</p>
 <a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="qualidade.html"><strong>Qualidade</strong><span>Imagem, a11y, Vitals e testes</span></a>
 <a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="motion.html"><strong>Referência: Motion</strong><span>A API inteira, em português</span></a>
 <a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
-<a href="back-end.html"><strong>Back-end</strong><span>Quando precisa de servidor</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Servidor, banco e login</span></a>
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Vender</p>
@@ -44,8 +61,18 @@
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Método</p>
+<a href="fluxo.html"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
 <a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
 <a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+<div class="navmenu__grupo navmenu__grupo--trabalhar">
+<p class="navmenu__rotulo">Trabalhar</p>
+<a href="ferramentas.html"><strong>Ferramentas</strong><span>As oito do dia a dia</span></a>
+<a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
+<a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
+<a href="ferramentas.html#f-zap"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
+<a href="ferramentas.html#f-utm"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
+<a href="ia.html#t-gerador"><strong>Gerador de comando</strong><span>Brief para a IA</span></a>
 </div>
 </div>
 </details>
@@ -65,16 +92,61 @@
 <li><a href="#t-ab">Teste A/B</a></li>
 <li><a href="#t-comercial">Escopo, preço e contrato</a></li>
 </ol>
+<a class="sumario__parte" href="#s2">2 · Design que parece caro</a>
+<ol>
+<li><a href="#t-ds-hierarquia">Hierarquia: o olho precisa de uma ordem</a></li>
+<li><a href="#t-ds-espaco">Espaço — a escala de 8 e o ritmo</a></li>
+<li><a href="#t-ds-tipografia">Tipografia: tamanho, medida e altura</a></li>
+<li><a href="#t-ds-cor">Cor: a paleta que funciona</a></li>
+<li><a href="#t-ds-caro">O que faz parecer caro — e o que faz parecer barato</a></li>
+<li><a href="#t-ds-referencia">Usar referência sem copiar</a></li>
+<li><a href="#t-ds-erros">Os cinco erros que mais aparecem</a></li>
+</ol>
+<a class="sumario__parte" href="#s3">3 · LGPD como parte da entrega</a>
+<ol>
+<li><a href="#t-lgpd-oque">O que a lei pede de um site de serviço</a></li>
+<li><a href="#t-lgpd-coleta">O que você coleta sem perceber</a></li>
+<li><a href="#t-lgpd-banner">Aviso de cookies que não é teatro</a></li>
+<li><a href="#t-lgpd-politica">Política de privacidade — o esqueleto</a></li>
+<li><a href="#t-lgpd-escopo">O que é seu e o que é do cliente</a></li>
+</ol>
+<a class="sumario__parte" href="#s4">4 · Acessos, domínio e backup</a>
+<ol>
+<li><a href="#t-ac-dominio">O domínio é do cliente. Sempre.</a></li>
+<li><a href="#t-ac-inventario">O inventário de acessos</a></li>
+<li><a href="#t-ac-senha">Senha, 2FA e o que nunca fazer</a></li>
+<li><a href="#t-ac-backup">Backup — o que, onde, quando</a></li>
+<li><a href="#t-ac-sumir">Quando o cliente some — ou você</a></li>
+</ol>
+<a class="sumario__parte" href="#s5">5 · Manutenção e pós-entrega</a>
+<ol>
+<li><a href="#t-mt-ambientes">Produção e pré-visualização</a></li>
+<li><a href="#t-mt-pedidos">Como o cliente pede alteração</a></li>
+<li><a href="#t-mt-escopo">O que está e o que não está incluído</a></li>
+<li><a href="#t-mt-contrato">Contrato de manutenção</a></li>
+<li><a href="#t-mt-quebrou">Quando o site sai do ar</a></li>
+<li><a href="#t-mt-encerrar">Encerrar bem</a></li>
+</ol>
+<a class="sumario__parte" href="#s6">6 · O comercial</a>
+<ol>
+<li><a href="#t-cm-onde">Onde aparece cliente de serviço local</a></li>
+<li><a href="#t-cm-portfolio">Portfólio quando você tem pouco</a></li>
+<li><a href="#t-cm-reuniao">A reunião de briefing</a></li>
+<li><a href="#t-cm-proposta">A proposta que fecha</a></li>
+<li><a href="#t-cm-preco">Preço: os três modelos</a></li>
+<li><a href="#t-cm-desconto">Quando pedem desconto</a></li>
+<li><a href="#t-cm-sinais">Sinais de cliente que vai dar problema</a></li>
+</ol>
 </div>
 </nav>
-<main class="leitura">
+<main class="leitura" id="conteudo" tabindex="-1">
 <section class="abertura">
 <h1>Negócio</h1>
 <p class="abertura__lead">A parte que quase ninguém estuda e que costuma dar mais retorno que qualquer tecnologia nova.</p>
 <div class="legenda">
 <span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
 <span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
-<span>1 partes · 6 tópicos</span>
+<span>7 partes · 42 tópicos</span>
 </div>
 </section>
 <p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
@@ -293,9 +365,759 @@
         </div>
       </article>
 </section>
+
+<section class="parte" id="s2">
+<div class="parte__cabeca"><span class="parte__num">PARTE 2</span><h2>Design que parece caro</h2></div>
+<p class="parte__resumo">A diferença entre uma página que parece de agência e uma que parece de modelo pronto raramente está na criatividade. Está em quatro coisas medíveis: hierarquia, espaço, tipografia e contenção. Nenhuma delas exige talento artístico — todas exigem disciplina.</p>
+
+<article class="topico" id="t-ds-hierarquia" data-marca="novo">
+<div class="topico__cabeca"><h3>Hierarquia: o olho precisa de uma ordem</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Toda seção deve responder, em meio segundo, à pergunta "para onde eu olho primeiro?". Quando tudo tem o mesmo peso, a resposta é "para lugar nenhum" — e a pessoa rola.</p>
+<p>Você cria hierarquia com quatro ferramentas, em ordem de força:</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Ferramenta</th><th>Como usar</th><th>Erro comum</th></tr></thead>
+<tbody>
+<tr><td><strong>Tamanho</strong></td><td>O título da hero pode ser 4× o corpo. Diferença tímida não é hierarquia, é ruído.</td><td>Título 20px, texto 16px — ninguém percebe</td></tr>
+<tr><td><strong>Peso</strong></td><td>Negócio em 700 ou 800 contra corpo em 400. Dois pesos bastam.</td><td>Negrito espalhado em meia página</td></tr>
+<tr><td><strong>Cor</strong></td><td>Uma cor de destaque, no que é clicável. Texto em duas intensidades: principal e secundário.</td><td>Cinco cores, nenhuma significando nada</td></tr>
+<tr><td><strong>Espaço</strong></td><td>O que está junto pertence junto. Mais espaço antes de um título do que depois dele.</td><td>Espaçamento igual em tudo</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>O teste do olho apertado:</strong> feche os olhos até quase fechar e olhe a tela. O que continua legível é a hierarquia real da sua página. Se nada sobressai, ela não tem.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ds-espaco" data-marca="novo">
+<div class="topico__cabeca"><h3>Espaço — a escala de 8 e o ritmo</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Espaçamento escolhido no olho — 13px aqui, 27px ali — é o que faz uma página parecer amadora sem que ninguém saiba dizer por quê. A solução é não escolher: use uma escala.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>:root {
+  --e1: 4px;    --e2: 8px;    --e3: 12px;   --e4: 16px;
+  --e5: 24px;   --e6: 32px;   --e7: 48px;   --e8: 64px;
+  --e9: 96px;   --e10: 128px;
+}
+
+.card    { padding: var(--e5); }
+.card h3 { margin-bottom: var(--e3); }
+.secao   { padding-block: clamp(var(--e7), 8vw, var(--e10)); }</code></pre></div>
+<p>Duas regras que mudam o resultado imediatamente:</p>
+<p><strong>Espaço entre seções é muito maior do que você imagina.</strong> 96 a 128px no desktop. Página apertada parece panfleto; página respirada parece cara. Se está na dúvida, aumente.</p>
+<p><strong>Proximidade indica relação.</strong> O título fica colado no texto dele e longe do parágrafo anterior. Se o espaço acima e abaixo do título for igual, o leitor não sabe a que ele pertence.</p>
+<div class="nota">O <code>clamp()</code> resolve o espaçamento responsivo sem media query: mínimo no celular, cresce com a tela, para de crescer no máximo. <code>clamp(48px, 8vw, 128px)</code> é uma linha que substitui três pontos de quebra.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ds-tipografia" data-marca="novo">
+<div class="topico__cabeca"><h3>Tipografia: tamanho, medida e altura</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>body   { font-size: 17px; line-height: 1.6; }          /* corpo: 16 a 19px */
+p      { max-width: 68ch; }                             /* medida: 60 a 75 caracteres */
+h1     { font-size: clamp(34px, 6vw, 60px); line-height: 1.05; letter-spacing: -0.02em; }
+h2     { font-size: clamp(25px, 3.5vw, 36px); line-height: 1.15; }
+small  { font-size: 14px; }                             /* nada abaixo de 14 */</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Regra</th><th>Por quê</th></tr></thead>
+<tbody>
+<tr><td>Corpo entre 16 e 19px</td><td>14px em site de serviço é o que faz o cliente de 55 anos aproximar o celular do rosto</td></tr>
+<tr><td>Entrelinha 1.5 a 1.7 no corpo</td><td>Texto colado cansa; texto solto se desmancha</td></tr>
+<tr><td>Entrelinha 1.0 a 1.2 em título grande</td><td>Título com entrelinha de corpo fica com buraco no meio</td></tr>
+<tr><td>Medida de 60 a 75 caracteres</td><td>Acima disso o olho se perde ao voltar para a linha seguinte</td></tr>
+<tr><td><code>letter-spacing</code> negativo em título grande</td><td>Fonte cresce e as letras parecem afastar; -0.02em compensa</td></tr>
+<tr><td>Duas famílias, no máximo</td><td>Três famílias é a assinatura do site improvisado</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Onde dá para fugir do óbvio sem risco:</strong> use uma fonte com personalidade nos títulos e uma neutra e legível no corpo. O contraste entre as duas é o que dá identidade — e o corpo continua fácil de ler, que é o que importa para a venda.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ds-cor" data-marca="novo">
+<div class="topico__cabeca"><h3>Cor: a paleta que funciona</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>A estrutura que resolve praticamente qualquer site de serviço tem cinco papéis — não cinco cores bonitas, cinco funções.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>:root {
+  --fundo:     #FFFCF7;   /* nunca branco puro: #FFF cansa e achata */
+  --superficie:#FFFFFF;   /* card, caixa — separa do fundo por contraste sutil */
+  --texto:     #3F444D;   /* nunca preto puro: #000 vibra sobre branco */
+  --texto-fraco:#6B7280;  /* legenda, apoio — ainda com 4.5:1 */
+  --destaque:  #305546;   /* UMA cor: botão, link, ícone ativo */
+  --linha:     #E6E2DA;   /* divisórias */
+}</code></pre></div>
+<p><strong>Uma cor de destaque, usada com avareza.</strong> Se a cor do CTA aparece em dez lugares, ela deixa de significar "clique aqui". O botão principal é o único elemento com fundo sólido na cor de destaque da seção.</p>
+<p><strong>Proporção 60-30-10:</strong> 60% neutro de fundo, 30% da cor de superfície e texto, 10% de destaque. Site em que a cor da marca cobre metade da tela parece embalagem, não página de serviço.</p>
+<div class="nota"><strong>Off-white em vez de branco puro</strong> é a mudança de um caractere que mais melhora a percepção de acabamento. <code>#FFFCF7</code>, <code>#FAFAF8</code>, <code>#F4F6F4</code> — qualquer um deles dá à página uma sensação de material impresso em vez de tela de monitor.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ds-caro" data-marca="novo">
+<div class="topico__cabeca"><h3>O que faz parecer caro — e o que faz parecer barato</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Parece caro</th><th>Parece barato</th></tr></thead>
+<tbody>
+<tr><td>Muito espaço vazio</td><td>Tudo apertado, aproveitando cada pixel</td></tr>
+<tr><td>Uma foto ótima</td><td>Seis fotos medianas de banco de imagem</td></tr>
+<tr><td>Duas fontes, três pesos</td><td>Quatro fontes, sombra e contorno no texto</td></tr>
+<tr><td>Cantos consistentes (todos 4px ou todos 12px)</td><td>Cada elemento com um arredondamento</td></tr>
+<tr><td>Sombra sutil e única</td><td>Sombra forte em tudo, com cor</td></tr>
+<tr><td>Alinhamento rigoroso a uma grade</td><td>Elementos quase alinhados</td></tr>
+<tr><td>Texto específico e curto</td><td>"Soluções inovadoras com excelência e qualidade"</td></tr>
+<tr><td>Movimento discreto, em poucos pontos</td><td>Tudo entrando, girando e pulsando</td></tr>
+<tr><td>Ícone de uma família só</td><td>Emoji misturado com ícone de três estilos</td></tr>
+<tr><td>Foto do cliente real, mesmo imperfeita</td><td>Foto de escritório americano genérico</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>A coluna da esquerda é quase toda subtração.</strong> Quando a página não está boa, o instinto é acrescentar — mais um gradiente, mais um ícone, mais uma animação. Quase sempre o conserto é o contrário: tirar, alinhar e dar espaço.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ds-referencia" data-marca="novo">
+<div class="topico__cabeca"><h3>Usar referência sem copiar</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Olhar referência é obrigatório e não tem nada de vergonhoso — a questão é o que você extrai dela.</p>
+<p><strong>O que se copia:</strong> decisões estruturais e proporções. "A hero ocupa 80% da tela com uma foto só e três palavras", "os serviços são três cards com ícone acima do título", "o espaço entre seções é enorme". Isso é gramática visual, é de todo mundo.</p>
+<p><strong>O que não se copia:</strong> o layout inteiro com as cores trocadas, a ilustração, a foto, o texto, o código-fonte. Além do problema de direito autoral, tem o problema prático: o cliente dele e o seu não são iguais, e a página que funciona lá pode não funcionar aqui.</p>
+<div class="nota"><strong>O método que funciona:</strong> junte três a cinco referências <em>de setores diferentes</em>. Uma de arquitetura, uma de clínica, uma de software. Anote o que cada uma faz bem — não como ela é. Depois monte a sua a partir das anotações, sem as abas abertas. Se você está com a referência na tela enquanto escreve o CSS, você está copiando.</div>
+<p>Isso conversa direto com a trilha <a href="ia.html">Trabalhando com IA</a>: quando você passa referência para uma IA, a mesma distinção vale. Descrever a estrutura produz uma página sua; mandar a captura de tela e pedir "faça igual" produz uma cópia com outros textos.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ds-erros" data-marca="novo">
+<div class="topico__cabeca"><h3>Os cinco erros que mais aparecem</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p><strong>1. Texto sobre foto sem escurecer.</strong> Fica legível na sua tela e some na do cliente. Sempre um gradiente por cima, sempre contraste medido.</p>
+<p><strong>2. Centralizar tudo.</strong> Título centralizado funciona; parágrafo de cinco linhas centralizado obriga o olho a procurar o início de cada linha. Texto corrido é alinhado à esquerda.</p>
+<p><strong>3. Botão que não parece botão.</strong> Contorno fino, cor clara, sem preenchimento — o visitante não reconhece como clicável. O CTA principal é sólido, com contraste alto e área de toque de pelo menos 44px de altura.</p>
+<p><strong>4. Seções todas iguais.</strong> Oito blocos com o mesmo fundo, o mesmo espaçamento e o mesmo formato viram uma parede. Alterne: fundo neutro, fundo de superfície, uma seção com foto larga. A variação dá ritmo e marca o avanço da leitura.</p>
+<p><strong>5. Nenhum ponto de descanso.</strong> Informação densa do começo ao fim cansa. Uma frase grande sozinha no meio da página, com muito espaço em volta, funciona como respiro — e é onde o olho pousa quando a pessoa está rolando rápido.</p>
+</div>
+</article>
+</section>
+<section class="parte" id="s3">
+<div class="parte__cabeca"><span class="parte__num">PARTE 3</span><h2>LGPD como parte da entrega</h2></div>
+<p class="parte__resumo">Todo site de serviço coleta dado pessoal, mesmo o que "não tem formulário". A lei se aplica ao cliente, mas quem construiu o site é quem sabe o que está sendo coletado — e é quem deveria avisar. Isso vira diferencial na proposta e evita conversa ruim depois.</p>
+
+<article class="topico" id="t-lgpd-oque" data-marca="novo">
+<div class="topico__cabeca"><h3>O que a lei pede de um site de serviço</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>A LGPD (13.709/2018) trata de dado pessoal: qualquer informação que identifique alguém. Nome, e-mail, telefone, IP, identificador de navegação. Para um site de serviço local, ela se resume a quatro obrigações práticas.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Obrigação</th><th>Na prática</th></tr></thead>
+<tbody>
+<tr><td><strong>Finalidade</strong></td><td>Coletar só o que se usa, para um fim declarado. Pedir CPF num formulário de orçamento é coleta sem finalidade.</td></tr>
+<tr><td><strong>Transparência</strong></td><td>Uma política de privacidade acessível, escrita de forma legível, dizendo o que se coleta e por quê.</td></tr>
+<tr><td><strong>Base legal</strong></td><td>Consentimento para rastreamento de marketing; execução de contrato ou interesse legítimo para o contato que a própria pessoa iniciou.</td></tr>
+<tr><td><strong>Direitos do titular</strong></td><td>Um canal para a pessoa pedir acesso, correção ou exclusão dos dados dela. Um e-mail basta.</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Quem responde:</strong> o controlador é o cliente — é o negócio dele que decide por que coletar. Você, como quem construiu e às vezes opera o site, costuma se enquadrar como operador. Na prática isso significa duas coisas: você não é o responsável principal, e você deve deixar por escrito o que instalou e o que aquilo coleta.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lgpd-coleta" data-marca="novo">
+<div class="topico__cabeca"><h3>O que você coleta sem perceber</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Uma landing page "simples" quase sempre já está coletando mais do que o dono imagina:</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Item</th><th>O que coleta</th><th>Precisa de consentimento?</th></tr></thead>
+<tbody>
+<tr><td>Google Analytics / GA4</td><td>IP, identificador do navegador, comportamento</td><td>Sim — é rastreamento analítico</td></tr>
+<tr><td>Meta Pixel</td><td>Identificação para remarketing</td><td>Sim, e é o mais sensível dos dois</td></tr>
+<tr><td>Google Fonts pelo CDN</td><td>IP do visitante enviado ao Google</td><td>Zona cinzenta — hospedar a fonte no próprio domínio elimina a questão</td></tr>
+<tr><td>Mapa do Google embutido</td><td>IP e cookies do Google</td><td>Sim — carregue só depois do aceite, ou use uma imagem com link</td></tr>
+<tr><td>Chat de atendimento</td><td>Conversa inteira, em servidor de terceiro</td><td>Sim</td></tr>
+<tr><td>Link de WhatsApp</td><td>Nada até o clique; depois, a conversa é do WhatsApp</td><td>Não, mas a política deve mencionar</td></tr>
+<tr><td>Formulário</td><td>O que a pessoa digitou</td><td>Base legal é o próprio contato solicitado</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>O jeito honesto de vender isso:</strong> "seu site vai ter Analytics e pixel do Meta — os dois coletam dados de quem visita, então ele precisa de aviso de cookies e política de privacidade; já entrego assim". Leva trinta segundos na reunião e posiciona você acima de quem entrega sem nada.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lgpd-banner" data-marca="novo">
+<div class="topico__cabeca"><h3>Aviso de cookies que não é teatro</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>O banner só com "OK" que carrega os rastreadores antes de você clicar não cumpre nada — e é o mais comum no Brasil. O mínimo defensável tem três características: <strong>não carrega nada antes do aceite</strong>, <strong>recusar é tão fácil quanto aceitar</strong>, e <strong>a escolha fica registrada</strong>.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>// 1. nada de analytics até haver decisão
+function carregarAnalytics() {
+  const s = document.createElement('script');
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXX';
+  s.async = true;
+  document.head.appendChild(s);
+}
+
+// 2. respeita a decisão anterior
+let escolha = null;
+try { escolha = localStorage.getItem('lgpd'); } catch {}
+
+if (escolha === 'aceito') carregarAnalytics();
+else if (escolha === null) document.querySelector('#aviso').hidden = false;
+
+// 3. os dois botões têm o mesmo peso visual
+aceitar.onclick = () =&gt; { guardar('aceito'); carregarAnalytics(); };
+recusar.onclick = () =&gt; { guardar('recusado'); };
+
+function guardar(v) {
+  try { localStorage.setItem('lgpd', v); } catch {}
+  document.querySelector('#aviso').hidden = true;
+}</code></pre></div>
+<div class="nota"><strong>Detalhe de layout que também é de performance:</strong> o aviso deve ficar sobreposto (<code>position: fixed</code>), nunca empurrando o conteúdo — banner que empurra a página é uma das maiores fontes de CLS ruim. E ele precisa ser fechável pelo teclado, com Esc.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lgpd-politica" data-marca="novo">
+<div class="topico__cabeca"><h3>Política de privacidade — o esqueleto</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Não precisa de advogado para um site de serviço local com formulário de contato, mas precisa ser verdadeira — política copiada de outro site descreve coleta que não acontece e omite a que acontece.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">estrutura</span><button class="copiar">copiar</button></div><pre><code>1. Quem somos            nome da empresa, CNPJ, endereço, e-mail de contato
+2. Que dados coletamos   nome, telefone, e-mail (formulário)
+                         dados de navegação (Analytics, pixel)
+3. Para que              responder solicitação de orçamento; medir audiência
+4. Com quem compartilhamos  Google (Analytics), Meta (pixel), provedor de e-mail
+5. Por quanto tempo      ex.: contatos por 24 meses; navegação por 14 meses
+6. Seus direitos         acesso, correção, exclusão, revogação — por este e-mail
+7. Cookies               quais, para quê, como recusar
+8. Data da última atualização</code></pre></div>
+<div class="nota"><strong>Dois cuidados:</strong> o item 8 precisa ser real — política com data de três anos atrás sinaliza abandono. E se o cliente tem CNPJ, os dados dele no item 1 precisam ser os verdadeiros; página de política sem identificação de quem é o controlador não serve para nada.</div>
+<p>Deixe a política e um link para ela no rodapé de todas as páginas, junto com o aviso de cookies. É o lugar onde as pessoas procuram — e onde o buscador espera encontrar.</p>
+</div>
+</article>
+
+<article class="topico" id="t-lgpd-escopo" data-marca="novo">
+<div class="topico__cabeca"><h3>O que é seu e o que é do cliente</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Deixe explícito no orçamento, porque a ausência dessa linha é o que gera cobrança injusta depois.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Responsabilidade sua</th><th>Responsabilidade do cliente</th></tr></thead>
+<tbody>
+<tr><td>Implementar o aviso de cookies funcionando</td><td>Decidir o que coletar e por quê</td></tr>
+<tr><td>Entregar o modelo da política preenchido com o que o site realmente faz</td><td>Revisar, aprovar e manter atualizada</td></tr>
+<tr><td>Não instalar rastreador sem avisar</td><td>Responder aos pedidos de titulares</td></tr>
+<tr><td>Informar por escrito o que foi instalado</td><td>Guardar os dados recebidos com cuidado</td></tr>
+<tr><td>Não guardar dado de visitante em servidor seu</td><td>Indicar encarregado, se o porte exigir</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>E uma regra sua, de higiene:</strong> não peça ao cliente as senhas dele por WhatsApp, não guarde planilha com contatos de visitantes no seu computador, e apague o que você recebeu de teste quando a entrega terminar. Você não quer ser a origem de um vazamento de dado que nem era seu.</div>
+</div>
+</article>
+</section>
+<section class="parte" id="s4">
+<div class="parte__cabeca"><span class="parte__num">PARTE 4</span><h2>Acessos, domínio e backup</h2></div>
+<p class="parte__resumo">A parte chata que ninguém ensina e que decide se um projeto termina bem ou vira briga. Quem é dono do domínio, quem tem qual senha, e o que acontece se você sumir — ou se o cliente sumir.</p>
+
+<article class="topico" id="t-ac-dominio" data-marca="novo">
+<div class="topico__cabeca"><h3>O domínio é do cliente. Sempre.</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Registrar o domínio no seu CPF "para facilitar" parece gentileza e é a origem do pior tipo de conflito que existe nesse ofício. O domínio é o ativo do negócio dele — o endereço que está no cartão, no Google, nos anúncios.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Faça</th><th>Não faça</th></tr></thead>
+<tbody>
+<tr><td>Registrar no registro.br com o CNPJ ou CPF do cliente</td><td>Registrar no seu nome e "passar depois"</td></tr>
+<tr><td>Usar o e-mail do cliente como contato do domínio</td><td>Usar o seu e-mail — é ele quem recebe o aviso de renovação</td></tr>
+<tr><td>Sentar junto e fazer o registro na frente dele</td><td>Fazer sozinho e mandar o print</td></tr>
+<tr><td>Cobrar a taxa anual à parte, no nome dele</td><td>Pagar do seu bolso e embutir no serviço</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Domínio .com.br expira e é liberado.</strong> Se o aviso de renovação vai para um e-mail seu que você parou de olhar, o cliente perde o endereço — e qualquer pessoa pode registrar. É um dos poucos erros desse trabalho que não tem conserto.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ac-inventario" data-marca="novo">
+<div class="topico__cabeca"><h3>O inventário de acessos</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Um documento por cliente, entregue junto com o site. Sem senha escrita nele — só o mapa de onde está cada coisa e em nome de quem.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">acessos.md</span><button class="copiar">copiar</button></div><pre><code># Acessos — Vanessa Carvalho Arquitetura
+
+| Serviço                  | Titular            | Onde                  |
+|--------------------------|--------------------|-----------------------|
+| Domínio                  | Vanessa (CNPJ)     | registro.br           |
+| Hospedagem               | Vanessa            | Vercel                |
+| Repositório do código    | Gustavo (colab.)   | GitHub                |
+| Google Analytics         | Vanessa            | conta Google dela     |
+| Perfil da Empresa Google | Vanessa            | conta Google dela     |
+| E-mail profissional      | Vanessa            | Google Workspace      |
+
+Senhas: gerenciador do cliente. Nenhuma senha neste arquivo.
+Acesso do Gustavo: como colaborador convidado, revogável a qualquer momento.
+Atualizado em: 18/09/2026</code></pre></div>
+<div class="nota"><strong>O princípio:</strong> tudo em nome do cliente, e você entra como colaborador convidado. Isso protege os dois — ele não fica refém de você, e você não fica responsável por conta que não é sua. GitHub, Vercel, Analytics e Perfil da Empresa do Google têm convite de colaborador; use sempre esse caminho.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ac-senha" data-marca="novo">
+<div class="topico__cabeca"><h3>Senha, 2FA e o que nunca fazer</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p><strong>Nunca por WhatsApp, e-mail ou bloco de notas.</strong> Conversa de WhatsApp fica no aparelho dos dois, no backup da nuvem, e às vezes no computador do escritório que outras pessoas usam.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Situação</th><th>Caminho certo</th></tr></thead>
+<tbody>
+<tr><td>Você precisa de acesso a uma conta dele</td><td>Convite de colaborador, com a conta dele intacta</td></tr>
+<tr><td>Não existe convite de colaborador no serviço</td><td>Gerenciador de senhas com compartilhamento (Bitwarden tem plano gratuito)</td></tr>
+<tr><td>Precisa mandar uma senha uma vez só</td><td>Link que expira e se autodestrói</td></tr>
+<tr><td>Suas próprias senhas</td><td>Gerenciador, com 2FA ligado em tudo</td></tr>
+<tr><td>O projeto acabou</td><td>Peça para ele remover seu acesso — e confirme que removeu</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>2FA no seu GitHub não é opcional.</strong> Se alguém entra na sua conta, entra nos repositórios de todos os seus clientes ao mesmo tempo, e em tudo que estiver ligado à Vercel. É o ponto único de falha de todo o seu trabalho.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ac-backup" data-marca="novo">
+<div class="topico__cabeca"><h3>Backup — o que, onde, quando</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Para site estático, backup é mais simples do que parece — e é justamente por parecer simples que ninguém faz.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>O que</th><th>Onde</th><th>Frequência</th></tr></thead>
+<tbody>
+<tr><td>Código do site</td><td>Git local + GitHub</td><td>A cada mudança — é o próprio commit</td></tr>
+<tr><td>Fotos originais do cliente</td><td>Drive/nuvem, pasta por cliente</td><td>Assim que recebe</td></tr>
+<tr><td>Arquivos de design e logo vetorial</td><td>Mesma pasta</td><td>Assim que recebe</td></tr>
+<tr><td>Textos aprovados e briefing</td><td>Mesma pasta</td><td>Ao final de cada rodada</td></tr>
+<tr><td>Conteúdo de CMS, se houver</td><td>Exportação do painel</td><td>Mensal</td></tr>
+<tr><td>Inventário de acessos</td><td>Mesma pasta + cópia com o cliente</td><td>A cada mudança</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>A regra 3-2-1, na versão realista:</strong> o código está no seu computador, no GitHub e na Vercel — já são três cópias em dois lugares diferentes. O que costuma existir em cópia única são as fotos originais do cliente. É exatamente o que ele não tem como refazer.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ac-sumir" data-marca="novo">
+<div class="topico__cabeca"><h3>Quando o cliente some — ou você</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p><strong>Se o cliente some sem pagar:</strong> não derrube o site publicado e não apague nada. Isso é dano, e transforma uma cobrança legítima em uma disputa em que você está errado. O que se faz é suspender o trabalho novo, comunicar por escrito, e cobrar pelos meios normais. O combinado no contrato sobre parcelas e entrega é o que vale — e é por isso que ele existe.</p>
+<p><strong>Se você precisa sair do projeto:</strong> entregue o inventário de acessos atualizado, transfira o repositório ou garanta que o cliente tem acesso de dono, avise com prazo, e deixe um README explicando como o site é atualizado. Cliente abandonado com um site que ninguém consegue mexer é o que faz o mercado inteiro desconfiar de freelancer.</p>
+<div class="nota"><strong>O que evita os dois casos</strong> é a mesma coisa: entrada no início, entrega em etapas com aprovação registrada, e tudo em nome do cliente desde o primeiro dia. Quando não há refém de nenhum lado, a conversa continua sendo sobre trabalho.</div>
+</div>
+</article>
+</section>
+<section class="parte" id="s5">
+<div class="parte__cabeca"><span class="parte__num">PARTE 5</span><h2>Manutenção e pós-entrega</h2></div>
+<p class="parte__resumo">O site no ar não é o fim do projeto — é o começo da parte que pode virar receita fixa ou trabalho de graça, dependendo do que foi combinado antes.</p>
+
+<article class="topico" id="t-mt-ambientes" data-marca="novo">
+<div class="topico__cabeca"><h3>Produção e pré-visualização</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Depois que o site está no ar, você nunca mais mexe direto nele. A regra passa a ser: toda mudança nasce num branch, vira uma URL de pré-visualização, é aprovada ali, e só então entra em produção.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code>git switch -c promocao-outubro
+# ... faz a alteração ...
+git push -u origin promocao-outubro
+# a Vercel publica em promocao-outubro-nomedosite.vercel.app
+# cliente aprova nesse link
+
+git switch main &amp;&amp; git merge promocao-outubro &amp;&amp; git push
+# agora sim está no ar</code></pre></div>
+<div class="nota">Isso resolve o pior pesadelo do pós-entrega: mexer no site que está recebendo anúncio pago e quebrar durante a campanha. Com pré-visualização, o erro acontece num endereço que ninguém acessa.</div>
+</div>
+</article>
+
+<article class="topico" id="t-mt-pedidos" data-marca="novo">
+<div class="topico__cabeca"><h3>Como o cliente pede alteração</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Sem um canal definido, os pedidos chegam por áudio de WhatsApp no sábado, se perdem, e ninguém lembra o que foi combinado. Defina no início:</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Combine</th><th>Exemplo de como dizer</th></tr></thead>
+<tbody>
+<tr><td>Por onde</td><td>"Pedidos de alteração por e-mail ou por mensagem escrita, para eu conseguir registrar."</td></tr>
+<tr><td>Prazo de resposta</td><td>"Respondo em até 2 dias úteis; mudança pequena entra na mesma semana."</td></tr>
+<tr><td>O que é urgente</td><td>"Site fora do ar ou informação errada eu trato no mesmo dia. O resto entra na fila."</td></tr>
+<tr><td>Horário</td><td>"Atendo em horário comercial. Fora disso só o que estiver fora do ar."</td></tr>
+<tr><td>Como fica registrado</td><td>"Vou confirmando por escrito o que entendi antes de mexer."</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Confirmar por escrito antes de executar</strong> é o hábito que evita refazer: "Entendi que é trocar o texto da hero por X e a foto pela nova. Confirma?". Cinco linhas que economizam uma tarde — e que dão ao cliente a chance de perceber que ele mesmo pediu a coisa errada.</div>
+</div>
+</article>
+
+<article class="topico" id="t-mt-escopo" data-marca="novo">
+<div class="topico__cabeca"><h3>O que está e o que não está incluído</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>A frase "dá uma mexidinha rápida" é o começo de 90% do trabalho não pago desse ofício. A defesa não é dizer não — é ter definido antes o que é ajuste e o que é serviço novo.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Ajuste (incluído no período combinado)</th><th>Serviço novo (orçamento à parte)</th></tr></thead>
+<tbody>
+<tr><td>Corrigir erro de digitação</td><td>Reescrever a copy de uma seção</td></tr>
+<tr><td>Trocar um telefone, um horário</td><td>Adicionar uma seção nova</td></tr>
+<tr><td>Substituir uma foto pela versão nova</td><td>Tratar e recortar um lote de fotos</td></tr>
+<tr><td>Consertar algo que quebrou e era responsabilidade sua</td><td>Mudar o layout, as cores, a identidade</td></tr>
+<tr><td>Ajustar o que foi listado nas rodadas de revisão</td><td>Criar página nova, blog, área de cliente</td></tr>
+<tr><td></td><td>Integrar sistema, CRM, agendamento</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Como dizer sem atrito:</strong> "Isso é uma seção nova, então sai do escopo da entrega. Posso fazer por X, entrego em Y dias — quer que eu mande o orçamento?". Você não recusou; você precificou. A maioria dos clientes aceita numa boa — quem não aceita, te mostrou cedo como seria o resto da relação.</div>
+</div>
+</article>
+
+<article class="topico" id="t-mt-contrato" data-marca="novo">
+<div class="topico__cabeca"><h3>Contrato de manutenção</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>É o que transforma projeto pontual em receita previsível, e é mais fácil de vender depois de uma entrega boa do que no primeiro orçamento.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Modelo</th><th>Como funciona</th><th>Para quem</th></tr></thead>
+<tbody>
+<tr><td><strong>Horas mensais</strong></td><td>X horas por mês, acumula ou não acumula (defina)</td><td>Cliente que muda coisa toda hora</td></tr>
+<tr><td><strong>Pacote de itens</strong></td><td>Hospedagem, domínio, até N alterações pequenas, relatório mensal</td><td>O mais fácil de vender para serviço local</td></tr>
+<tr><td><strong>Sob demanda</strong></td><td>Valor por hora ou por tarefa, sem mensalidade</td><td>Cliente que quase não mexe</td></tr>
+<tr><td><strong>Performance</strong></td><td>Mensalidade + acompanhamento de tráfego e conversão</td><td>Cliente que investe em anúncio</td></tr>
+</tbody></table></div>
+<p>O que colocar num pacote mensal de site de serviço local, que justifica o valor e dá pouco trabalho:</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">pacote</span><button class="copiar">copiar</button></div><pre><code>· Hospedagem e certificado ativos
+· Até 2 alterações pequenas por mês
+· Verificação mensal: site no ar, formulário chegando, Lighthouse
+· Relatório curto: visitas, de onde vieram, quantos cliques no WhatsApp
+· Backup e atualização do que precisar
+· Atendimento prioritário se sair do ar</code></pre></div>
+<div class="nota"><strong>O relatório é o que segura o contrato.</strong> Sem ele, depois de três meses sem mexer em nada, o cliente pergunta pelo que está pagando. Uma página por mês com quatro números e uma frase de leitura é barata de produzir e responde a pergunta antes dela ser feita.</div>
+</div>
+</article>
+
+<article class="topico" id="t-mt-quebrou" data-marca="novo">
+<div class="topico__cabeca"><h3>Quando o site sai do ar</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Ordem de diagnóstico, do mais provável para o menos — e quase sempre para no terceiro item.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Verifique</th><th>Sintoma</th><th>Conserto</th></tr></thead>
+<tbody>
+<tr><td>Domínio expirou</td><td>"Servidor não encontrado" e o site da Vercel funciona</td><td>Renovar no registro.br</td></tr>
+<tr><td>Certificado vencido</td><td>Aviso de "não seguro"</td><td>Reemitir no painel da hospedagem</td></tr>
+<tr><td>Último deploy quebrou</td><td>Parou logo depois de uma mudança</td><td>"Promote to Production" na versão anterior</td></tr>
+<tr><td>DNS alterado</td><td>Alguém mexeu na zona</td><td>Comparar com o que a hospedagem pede</td></tr>
+<tr><td>Serviço de terceiro fora</td><td>Só uma parte quebrada</td><td>Página de status do serviço</td></tr>
+<tr><td>Hospedagem com incidente</td><td>Nada funciona, nem o painel</td><td>Avisar o cliente e esperar — e comunicar bem</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Comunique antes de consertar.</strong> Uma mensagem de duas linhas — "vi que o site está fora, já estou olhando, te aviso em 30 minutos" — vale mais para a relação do que consertar em silêncio em dez minutos. O cliente não sabe se você está trabalhando; ele só sabe que o site dele está fora.</div>
+</div>
+</article>
+
+<article class="topico" id="t-mt-encerrar" data-marca="novo">
+<div class="topico__cabeca"><h3>Encerrar bem</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Todo projeto termina — por conclusão, por o cliente parar de investir, ou porque ele achou alguém mais barato. Como você sai define se ele volta e se ele te indica.</p>
+<p><strong>Entregue o pacote de encerramento:</strong> o código (ou a transferência do repositório), o inventário de acessos atualizado, as fontes e imagens originais, e um documento curto explicando como o site é publicado. Isso leva meia hora e é o que separa profissional de refém.</p>
+<p><strong>Peça o depoimento na hora certa</strong> — logo depois da entrega aprovada, quando a satisfação está no pico, não seis meses depois. E peça específico: "o que mudou no seu contato de cliente desde que o site entrou no ar?" gera um depoimento útil; "pode escrever algo sobre meu trabalho?" gera "excelente profissional, recomendo".</p>
+<div class="nota"><strong>E deixe a porta aberta por escrito:</strong> "qualquer coisa que precisar no futuro, pode me chamar". Uma parte relevante do trabalho de quem faz site para negócio local vem de cliente antigo voltando — geralmente depois de tentar resolver sozinho ou com alguém mais barato.</div>
+</div>
+</article>
+</section>
+<section class="parte" id="s6">
+<div class="parte__cabeca"><span class="parte__num">PARTE 6</span><h2>O comercial</h2></div>
+<p class="parte__resumo">Saber construir não é saber vender. Esta parte é sobre onde aparece cliente de serviço local, o que mostrar quando você ainda tem pouco trabalho, como conduzir a reunião, e como cobrar sem chutar.</p>
+
+<article class="topico" id="t-cm-onde" data-marca="novo">
+<div class="topico__cabeca"><h3>Onde aparece cliente de serviço local</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Canal</th><th>Como funciona</th><th>Esforço × retorno</th></tr></thead>
+<tbody>
+<tr><td><strong>Indicação</strong></td><td>Cliente satisfeito indica. É a maior fatia do mercado.</td><td>Alto retorno, exige entregar bem antes</td></tr>
+<tr><td><strong>Prospecção direta</strong></td><td>Você acha um negócio com site ruim ou sem site e aborda com algo pronto</td><td>O mais previsível quando se está começando</td></tr>
+<tr><td><strong>Parceria</strong></td><td>Contador, gestor de tráfego, agência pequena sem quem faça site</td><td>Excelente — eles têm cliente e não têm sua mão</td></tr>
+<tr><td><strong>Instagram / portfólio</strong></td><td>Mostrar processo e antes/depois</td><td>Lento, mas compõe prova social</td></tr>
+<tr><td><strong>Google e anúncio</strong></td><td>Seu próprio site ranqueando para "criação de site em Campo Grande"</td><td>Demorado; bom a médio prazo</td></tr>
+<tr><td><strong>Marketplace de freela</strong></td><td>Plataformas de projeto</td><td>Preço achatado, cliente difícil</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Prospecção que funciona é específica.</strong> Não mande "faço sites, quer um orçamento?". Abra o site atual dele, rode o Lighthouse, tire o print do número no celular, e mande: "vi que sua página leva 9 segundos para abrir no celular — metade das pessoas desiste antes. Fiz um teste rápido do que dá para melhorar." Você entregou valor antes de pedir qualquer coisa.</div>
+</div>
+</article>
+
+<article class="topico" id="t-cm-portfolio" data-marca="novo">
+<div class="topico__cabeca"><h3>Portfólio quando você tem pouco</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O problema do começo é circular: ninguém contrata sem portfólio e não dá para ter portfólio sem contrato. Quatro saídas reais:</p>
+<p><strong>Refaça um site que existe.</strong> Escolha um negócio da sua cidade com site ruim, refaça a página inicial e apresente como estudo. Deixe claro que é um exercício não solicitado — e você tem, ao mesmo tempo, peça de portfólio e abordagem de prospecção.</p>
+<p><strong>Crie negócios fictícios plausíveis.</strong> Uma pizzaria, uma clínica, um estúdio de pilates. Sem nome de empresa real, sem depoimento inventado. Vale como demonstração de capacidade técnica e de repertório visual.</p>
+<p><strong>Faça um ou dois abaixo do preço, com contrapartida.</strong> Não de graça — de graça é desvalorizado e o cliente não se compromete. Preço reduzido em troca de depoimento, autorização de uso no portfólio e indicação.</p>
+<p><strong>Mostre o processo, não só o resultado.</strong> Três páginas parecidas convencem menos que uma com o raciocínio: qual era o problema, o que você decidiu e por quê, o que mudou. É justamente o que este site inteiro é.</p>
+<div class="nota"><strong>Nunca apresente como cliente quem não é cliente.</strong> "Trabalhei com a clínica X" quando foi um exercício seu é mentira que uma pergunta desfaz — e o setor é pequeno demais para isso.</div>
+</div>
+</article>
+
+<article class="topico" id="t-cm-reuniao" data-marca="novo">
+<div class="topico__cabeca"><h3>A reunião de briefing</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Quem conduz a reunião controla o escopo. Se o cliente conduz, você sai com uma lista de funcionalidades; se você conduz, sai com um problema a resolver e um orçamento coerente.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">roteiro</span><button class="copiar">copiar</button></div><pre><code>1. O que você vende, e para quem?
+2. Como seu cliente te encontra hoje?
+3. Quantos contatos você recebe por semana? De onde vêm?
+4. O que faz alguém escolher você em vez do concorrente?
+5. Qual a pergunta que todo cliente faz antes de fechar?
+6. Qual o ticket médio? Qual serviço você QUER vender mais?
+7. Tem fotos próprias? Logo em vetor?
+8. Quem responde o WhatsApp, e em quanto tempo?
+9. O que você acha que o site precisa ter? (deixe por último, de propósito)
+10. Quando precisa estar no ar, e por quê?</code></pre></div>
+<div class="nota"><strong>A pergunta 5 é a mais valiosa</strong> e quase ninguém faz. A resposta — "todo mundo pergunta se eu atendo plano de saúde", "todo mundo quer saber se dá para parcelar" — é literalmente a seção que faltava na página. Objeção respondida antes de ser feita é conversão.</div>
+<p>O detalhamento dessa conversa está na trilha <a href="landing-pages.html">Landing pages</a>, na parte de descoberta. Aqui o ponto é comercial: <strong>essa reunião é parte do serviço, e é o que justifica seu preço estar acima do concorrente que só pergunta quantas páginas.</strong></p>
+</div>
+</article>
+
+<article class="topico" id="t-cm-proposta" data-marca="novo">
+<div class="topico__cabeca"><h3>A proposta que fecha</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Proposta não é lista de tarefas com um preço no fim. Ela precisa mostrar que você entendeu o problema antes de mostrar o que vai fazer.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">estrutura</span><button class="copiar">copiar</button></div><pre><code>1. O que eu entendi          devolva o problema com as palavras DELE
+2. O que proponho            a solução, em uma frase
+3. O que está incluído       lista objetiva, incluindo o intangível
+                             (briefing, copy, acessibilidade, SEO, LGPD)
+4. O que não está incluído   a lista que evita mal-entendido
+5. Prazo e etapas            com o que depende dele (fotos, textos, aprovação)
+6. Investimento              valor, forma de pagamento, entrada
+7. Depois da entrega         rodadas de ajuste, manutenção opcional
+8. Validade da proposta      15 dias</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Faça</th><th>Não faça</th></tr></thead>
+<tbody>
+<tr><td>Ofereça duas ou três opções (essencial / completo)</td><td>Uma opção só — vira sim ou não</td></tr>
+<tr><td>Dizer o que não está incluído</td><td>Deixar implícito e brigar depois</td></tr>
+<tr><td>Prazo que depende de entrega dele</td><td>Prazo fixo ignorando que as fotos não existem</td></tr>
+<tr><td>Entrada de 40 a 50%</td><td>Tudo no fim</td></tr>
+<tr><td>Chamar de investimento e mostrar o retorno</td><td>Só o número, sem contexto</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Duas ou três opções muda a pergunta</strong> de "faço ou não faço?" para "qual delas?". A do meio costuma ser a escolhida — então é ela que deve ser a que você quer vender.</div>
+</div>
+</article>
+
+<article class="topico" id="t-cm-preco" data-marca="novo">
+<div class="topico__cabeca"><h3>Preço: os três modelos</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Modelo</th><th>Como</th><th>Problema</th></tr></thead>
+<tbody>
+<tr><td><strong>Por hora</strong></td><td>Valor/hora × estimativa</td><td>Pune você por ficar mais rápido. E ninguém quer contratar hora, quer resultado.</td></tr>
+<tr><td><strong>Por projeto</strong></td><td>Preço fechado pelo escopo</td><td>Escopo mal definido come sua margem — daí a importância do item 4 da proposta</td></tr>
+<tr><td><strong>Por valor</strong></td><td>Preço ligado ao que aquilo vale para o negócio dele</td><td>Exige entender o negócio. É onde estão as margens boas.</td></tr>
+</tbody></table></div>
+<p>A conta que sustenta qualquer um dos três: descubra seu custo real por hora trabalhada — despesas mensais divididas pelas horas que você de fato consegue faturar (que nunca são 8 por dia; some briefing, proposta, cobrança, estudo). Esse número é seu piso absoluto. Preço abaixo dele é prejuízo com trabalho junto.</p>
+<div class="nota"><strong>Sobre o valor:</strong> se uma landing page traz ao cliente dois contatos a mais por mês e o ticket dele é R$ 8 mil, o site se paga no primeiro mês. Essa conta, feita com os números que ele te deu no briefing, é o que sustenta um preço que não é o do concorrente de R$ 400. Faça a conta na frente dele.</div>
+</div>
+</article>
+
+<article class="topico" id="t-cm-desconto" data-marca="novo">
+<div class="topico__cabeca"><h3>Quando pedem desconto</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Baixar o preço mantendo o escopo ensina ao cliente que seu preço era inflado e que sempre dá para pedir mais. A regra é uma só: <strong>desconto sempre vem com redução de escopo ou ganho de contrapartida.</strong></p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Ele diz</th><th>Você responde</th></tr></thead>
+<tbody>
+<tr><td>"Está acima do que eu esperava"</td><td>"Entendo. Dá para chegar em X tirando a seção Y e você mesmo escrevendo os textos. Prefere assim?"</td></tr>
+<tr><td>"Fulano faz por R$ 500"</td><td>"Faz mesmo, e pode ser o suficiente. A diferença está em briefing, copy, acessibilidade e velocidade. Se o que você precisa é presença, o mais simples resolve."</td></tr>
+<tr><td>"Dá um desconto que eu indico"</td><td>"Indicação eu agradeço muito. Desconto eu consigo com pagamento à vista — 5%."</td></tr>
+<tr><td>"Depois a gente acerta"</td><td>"Trabalho com 50% de entrada. É o que me permite reservar a agenda."</td></tr>
+<tr><td>"Faz por menos que eu te dou mais trabalho"</td><td>"Fechando os dois juntos agora, consigo um valor melhor no conjunto."</td></tr>
+</tbody></table></div>
+<div class="nota">Reparou que nenhuma resposta é "não"? Todas são "sim, e aqui está o que muda". Você nunca recusa — você mostra o que o preço compra, e deixa a escolha com ele.</div>
+</div>
+</article>
+
+<article class="topico" id="t-cm-sinais" data-marca="novo">
+<div class="topico__cabeca"><h3>Sinais de cliente que vai dar problema</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Reconhecer cedo economiza meses. Nenhum destes é impeditivo sozinho — dois ou três juntos, pense bem.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Sinal</th><th>O que costuma virar</th></tr></thead>
+<tbody>
+<tr><td>Pechincha antes de saber o escopo</td><td>Vai pechinchar em tudo, até no fim</td></tr>
+<tr><td>Fala mal de todos os fornecedores anteriores</td><td>Você é o próximo da lista</td></tr>
+<tr><td>Não consegue dizer o que o negócio faz de diferente</td><td>Vai rejeitar toda copy sem saber explicar por quê</td></tr>
+<tr><td>Quer começar sem contrato, "por confiança"</td><td>Ausência de contrato só prejudica um dos dois lados</td></tr>
+<tr><td>Prazo apertado sem motivo real</td><td>Urgência artificial que vira cobrança</td></tr>
+<tr><td>Cinco pessoas opinando, nenhuma decide</td><td>Rodadas infinitas de revisão</td></tr>
+<tr><td>"É rapidinho, é só uma página"</td><td>Desvalorização do trabalho desde antes de começar</td></tr>
+<tr><td>Some por semanas e volta cobrando prazo</td><td>Atraso dele vira culpa sua</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Você pode recusar trabalho.</strong> Parece impossível no começo, mas um cliente ruim ocupa a agenda que caberia dois bons, desgasta e ainda costuma pagar pior. "Nesse momento minha agenda não comporta esse prazo" é uma recusa educada, verdadeira o bastante, e que não fecha portas.</div>
+</div>
+</article>
+</section>
+
+
+<section class="parte" id="s7">
+<div class="parte__cabeca"><span class="parte__num">PARTE 7</span><h2>Laboratório visual</h2></div>
+<p class="parte__resumo">A Parte 2 explicou em texto por que uma página parece cara ou barata. Aqui está a mesma coisa acontecendo: o mesmo conteúdo, montado das duas formas, lado a lado. É o tipo de diferença que some quando se lê e fica óbvia quando se vê.</p>
+
+<article class="topico" id="t-vn-hierarquia" data-marca="novo">
+<div class="topico__cabeca"><h3>Hierarquia: para onde o olho vai primeiro</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo ferramenta">
+<p>Mesmas palavras, mesmas cores, mesma largura. A única diferença é a variação de tamanho, peso e espaço.</p>
+<div class="confronto">
+<div class="confronto__lado confronto__lado--ruim">
+<p class="confronto__rotulo">Tudo com o mesmo peso</p>
+<div class="confronto__palco">
+<div class="v-plano">
+<p>Reforma completa de apartamento</p>
+<p>Do projeto à entrega da obra, com acompanhamento semanal e prazo fechado em contrato.</p>
+<p>A partir de 45 dias</p>
+<p>Pedir orçamento</p>
+</div>
+</div>
+<p class="confronto__nota">Nada sobressai — o olho começa em cima e desiste no meio</p>
+</div>
+<div class="confronto__lado confronto__lado--bom">
+<p class="confronto__rotulo">Com hierarquia</p>
+<div class="confronto__palco">
+<div class="v-hier">
+<h4>Reforma completa de apartamento</h4>
+<p>Do projeto à entrega da obra, com acompanhamento semanal e prazo fechado em contrato.</p>
+<span class="cta">Pedir orçamento</span>
+</div>
+</div>
+<p class="confronto__nota">Título 2× maior, apoio em cinza, ação em bloco sólido</p>
+</div>
+</div>
+<div class="nota"><strong>Faça o teste do olho apertado:</strong> feche os olhos até quase fechar e olhe os dois lados. À esquerda resta uma mancha cinza uniforme; à direita restam o título e o botão — que é exatamente a rota que você quer que o visitante siga.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vn-espaco" data-marca="novo">
+<div class="topico__cabeca"><h3>Espaço: escala contra achismo</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo ferramenta">
+<p>À esquerda, espaçamentos escolhidos no olho: 3px, 27px, 9px. À direita, um único valor de escala, que você controla no slider.</p>
+<div id="v-espaco">
+<div class="controle">
+<span>escala</span>
+<input type="range" min="4" max="40" step="4" value="16" aria-label="Espaçamento da escala">
+<span class="valor">—</span>
+</div>
+<div class="confronto">
+<div class="confronto__lado confronto__lado--ruim">
+<p class="confronto__rotulo">Valores avulsos</p>
+<div class="confronto__palco">
+<div class="v-esp-ruim" style="width:100%">
+<div class="bloco-fake" style="height:13px;width:62%"></div>
+<div class="bloco-fake" style="height:9px"></div>
+<div class="bloco-fake" style="height:9px;width:84%"></div>
+<div class="bloco-fake" style="height:30px;width:46%"></div>
+</div>
+</div>
+<p class="confronto__nota">margin: 3px / 27px / 9px — não há relação entre eles</p>
+</div>
+<div class="confronto__lado confronto__lado--bom">
+<p class="confronto__rotulo">Escala única</p>
+<div class="confronto__palco">
+<div class="v-esp-bom" style="width:100%">
+<div class="bloco-fake" style="height:13px;width:62%"></div>
+<div class="bloco-fake" style="height:9px"></div>
+<div class="bloco-fake" style="height:9px;width:84%"></div>
+<div class="bloco-fake" style="height:30px;width:46%"></div>
+</div>
+</div>
+<p class="confronto__nota">gap: var(--e) — um valor só, aplicado de forma consistente</p>
+</div>
+</div>
+</div>
+<div class="nota">Repare que o lado direito parece “certo” em qualquer posição do slider, e o esquerdo parece errado sempre. Não é o valor que importa — é a consistência. Essa é a razão de a escala existir.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vn-medida" data-marca="novo">
+<div class="topico__cabeca"><h3>Medida de linha: onde a leitura quebra</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo ferramenta">
+<p>Arraste e tente ler. A faixa confortável fica entre 55 e 78 caracteres por linha — abaixo, o olho pula demais; acima, ele se perde ao voltar para a linha seguinte.</p>
+<div id="v-medida">
+<div class="controle">
+<span>largura</span>
+<input type="range" min="20" max="120" value="66" aria-label="Medida de linha em caracteres">
+<span class="valor">—</span>
+<span class="veredito">—</span>
+</div>
+<div style="border:1px solid var(--line);padding:18px;background:var(--surface)">
+<p class="amostra-texto">Landing page não conserta oferta ruim. Se o preço está fora do mercado, se o prazo não fecha, se o serviço não resolve o problema que o cliente tem — a página bem feita apenas faz mais gente descobrir isso mais rápido. A primeira conversa com o cliente não é sobre design: é sobre o que ele vende e para quem.</p>
+</div>
+</div>
+<div class="nota">Em <code>ch</code>, a conta é feita pela largura do caractere zero da própria fonte, então a regra sobrevive a troca de tipografia. Um <code>max-width: 68ch</code> no parágrafo resolve isso para o site inteiro — é literalmente uma linha de CSS.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vn-cor" data-marca="novo">
+<div class="topico__cabeca"><h3>Cor na proporção certa</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo ferramenta">
+<p>À esquerda, cada elemento com a própria cor de destaque. À direita, a regra 60-30-10: neutro domina, e a cor da marca aparece só onde há ação.</p>
+<div class="confronto">
+<div class="confronto__lado confronto__lado--ruim">
+<p class="confronto__rotulo">Cor em tudo</p>
+<div class="confronto__palco">
+<div class="v-carnaval" style="width:100%">
+<span style="background:#B8461F">Reforma completa</span>
+<span style="background:#1B5A97">Projeto de interiores</span>
+<span style="background:#7E6000">Consultoria</span>
+<span style="background:#305546">Pedir orçamento</span>
+</div>
+</div>
+<p class="confronto__nota">Quatro destaques = nenhum destaque</p>
+</div>
+<div class="confronto__lado confronto__lado--bom">
+<p class="confronto__rotulo">Uma cor, com avareza</p>
+<div class="confronto__palco">
+<div class="v-carnaval" style="width:100%">
+<span style="background:var(--surface-2);color:var(--ink);border:1px solid var(--line)">Reforma completa</span>
+<span style="background:var(--surface-2);color:var(--ink);border:1px solid var(--line)">Projeto de interiores</span>
+<span style="background:var(--surface-2);color:var(--ink);border:1px solid var(--line)">Consultoria</span>
+<span style="background:var(--accent)">Pedir orçamento</span>
+</div>
+</div>
+<p class="confronto__nota">O único bloco sólido é o que você quer que seja clicado</p>
+</div>
+</div>
+<div class="nota">É o mesmo princípio do pulso no CTA, lá na trilha <a href="movimento.html">Movimento</a>: destaque é um recurso escasso. Distribuído igualmente, ele deixa de existir — e a página perde o único elemento que precisava ser encontrado em meio segundo.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vn-caro" data-marca="novo">
+<div class="topico__cabeca"><h3>O mesmo card, caro e barato</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo ferramenta">
+<p>Mesmo conteúdo, mesma paleta. A diferença está toda na coluna da esquerda da tabela da Parte 2: espaço, alinhamento, consistência de canto e contenção de efeito.</p>
+<div class="confronto">
+<div class="confronto__lado confronto__lado--ruim">
+<p class="confronto__rotulo">Parece barato</p>
+<div class="confronto__palco" style="padding:10px">
+<div class="v-centro" style="width:100%;background:var(--surface-2);border:2px solid var(--accent);border-radius:16px;padding:9px;box-shadow:0 6px 0 rgba(48,85,70,.45)">
+<p style="font-family:var(--font-display);font-size:19px;font-weight:800;margin:0 0 2px;text-shadow:1px 1px 0 rgba(0,0,0,.15)">✨ REFORMA COMPLETA ✨</p>
+<p style="font-family:var(--font-body);font-size:12px;font-style:italic;margin:0 0 6px;color:var(--muted)">Soluções inovadoras com excelência e qualidade para o seu lar dos sonhos!!</p>
+<span style="display:inline-block;font-size:11px;font-weight:700;background:var(--html);color:#fff;padding:5px 9px;border-radius:999px">CLIQUE AQUI »</span>
+</div>
+</div>
+<p class="confronto__nota">Tudo centralizado, sombra dura, três fontes, canto de outro raio, texto genérico</p>
+</div>
+<div class="confronto__lado confronto__lado--bom">
+<p class="confronto__rotulo">Parece caro</p>
+<div class="confronto__palco" style="padding:10px">
+<div class="v-esquerda" style="width:100%;background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:20px">
+<p style="font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 10px">Serviço</p>
+<p style="font-family:var(--font-display);font-size:19px;font-weight:800;letter-spacing:-.02em;margin:0 0 8px;color:var(--ink)">Reforma completa</p>
+<p style="font-family:var(--font-display);font-size:13px;color:var(--muted);margin:0 0 16px;line-height:1.5">Do projeto à entrega, com prazo fechado em contrato. A partir de 45 dias.</p>
+<span style="display:inline-block;font-family:var(--font-display);font-size:13px;font-weight:700;background:var(--accent);color:#fff;padding:10px 16px;border-radius:3px">Pedir orçamento</span>
+</div>
+</div>
+<p class="confronto__nota">Alinhado à esquerda, um raio só, espaço generoso, texto específico</p>
+</div>
+</div>
+<div class="nota"><strong>Nada do lado direito custa mais caro para produzir.</strong> Não tem foto melhor, não tem ilustração, não tem fonte paga. A diferença inteira é subtração e disciplina — e é por isso que "parecer caro" é uma habilidade que se aprende, não um orçamento que se gasta.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vn-centro" data-marca="novo">
+<div class="topico__cabeca"><h3>Quando centralizar atrapalha</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo ferramenta">
+<p>Título centralizado funciona. Parágrafo de várias linhas centralizado obriga o olho a procurar onde cada linha começa.</p>
+<div class="confronto">
+<div class="confronto__lado confronto__lado--ruim">
+<p class="confronto__rotulo">Parágrafo centralizado</p>
+<div class="confronto__palco">
+<p class="amostra-texto v-centro">Atendemos Campo Grande e região com projeto de interiores, reforma de apartamento e consultoria de ambiente. O acompanhamento é semanal e o prazo fica fechado em contrato.</p>
+</div>
+<p class="confronto__nota">Cada linha começa num lugar diferente</p>
+</div>
+<div class="confronto__lado confronto__lado--bom">
+<p class="confronto__rotulo">Alinhado à esquerda</p>
+<div class="confronto__palco">
+<p class="amostra-texto v-esquerda">Atendemos Campo Grande e região com projeto de interiores, reforma de apartamento e consultoria de ambiente. O acompanhamento é semanal e o prazo fica fechado em contrato.</p>
+</div>
+<p class="confronto__nota">Margem esquerda firme — o olho volta sempre para o mesmo ponto</p>
+</div>
+</div>
+<div class="nota">A regra prática: <strong>centralize o que tem até duas linhas</strong> — título, chamada curta, legenda. Texto corrido vai alinhado à esquerda. E justificado, que ninguém pediu, não: no navegador ele abre buracos entre as palavras, porque não existe hifenização decente por padrão.</div>
+</div>
+</article>
+</section>
+
+
+<nav class="passo" aria-label="Navegar entre trilhas">
+<a class="passo__item passo__item--ant" href="back-end.html"><span>Anterior</span><strong>Back-end</strong></a>
+<a class="passo__item passo__item--prox" href="ia.html"><span>Próxima</span><strong>Trabalhando com IA</strong></a>
+</nav>
 </main>
 </div>
 <footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
 <script src="app.js"></script>
+<script src="busca.js" defer></script>
+<script src="visuais.js" defer></script>
 </body>
 </html>

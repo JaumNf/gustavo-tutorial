@@ -60,6 +60,23 @@
     });
   });
 
+  /* progresso nos cards da home (usa o mesmo gt-estudados acima) */
+  var celulas = document.querySelectorAll('.grade .celula[href]');
+  if (celulas.length && window.GT_PROGRESSO) {
+    celulas.forEach(function (cel) {
+      var ids = window.GT_PROGRESSO[cel.getAttribute('href')];
+      if (!ids || !ids.length) return;
+      var feitos = ids.filter(function (id) { return estudados[id]; }).length;
+      if (!feitos) return;
+      var pe = cel.querySelector('.celula__pe');
+      if (!pe) return;
+      var badge = document.createElement('span');
+      badge.className = 'celula__progresso' + (feitos === ids.length ? ' is-completo' : '');
+      badge.textContent = feitos === ids.length ? 'completo' : feitos + ' de ' + ids.length;
+      pe.insertBefore(badge, pe.querySelector('.seta'));
+    });
+  }
+
   /* copiar codigo */
   document.querySelectorAll('.copiar').forEach(function (b) {
     b.addEventListener('click', function () {

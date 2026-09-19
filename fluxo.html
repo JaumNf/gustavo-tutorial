@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Fluxo de trabalho — Gustavo Tutorial</title>
+<meta name="description" content="Terminal, Git, DevTools e reuso sem build — as ferramentas que ficam entre você e o código.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Fluxo de trabalho — Gustavo Tutorial">
+<meta property="og:description" content="Terminal, Git, DevTools e reuso sem build — as ferramentas que ficam entre você e o código.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0D6B62" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
+<meta name="author" content="Gustavo">
+<link rel="canonical" href="https://gustavo-tutorial.vercel.app/fluxo.html">
+<meta property="og:url" content="https://gustavo-tutorial.vercel.app/fluxo.html">
+<meta property="og:image" content="https://gustavo-tutorial.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Gustavo Tutorial">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo">
+<div class="topo__interno">
+<a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
+<div class="filtros" role="group" aria-label="Filtrar tópicos">
+<button class="filtro" data-filtro="tudo" aria-pressed="true">Tudo</button>
+<button class="filtro" data-filtro="revisao" aria-pressed="false">Revisão</button>
+<button class="filtro" data-filtro="novo" aria-pressed="false">Novo</button>
+</div>
+<button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+</div>
+<nav class="navmenu" aria-label="Trilhas">
+<details class="navmenu__caixa" id="navmenu">
+<summary class="navmenu__botao">Trilhas<span aria-hidden="true">&#9662;</span></summary>
+<div class="navmenu__painel">
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Construir</p>
+<a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="qualidade.html"><strong>Qualidade</strong><span>Imagem, a11y, Vitals e testes</span></a>
+<a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="motion.html"><strong>Referência: Motion</strong><span>A API inteira, em português</span></a>
+<a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Servidor, banco e login</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Vender</p>
+<a href="landing-pages.html"><strong>Landing pages</strong><span>A estratégia da página</span></a>
+<a href="trafego.html"><strong>Tráfego</strong><span>Ser encontrado no Google</span></a>
+<a href="negocio.html"><strong>Negócio</strong><span>Preço, escopo e contrato</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Método</p>
+<a href="fluxo.html" class="is-atual"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
+<a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
+<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+<div class="navmenu__grupo navmenu__grupo--trabalhar">
+<p class="navmenu__rotulo">Trabalhar</p>
+<a href="ferramentas.html"><strong>Ferramentas</strong><span>As oito do dia a dia</span></a>
+<a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
+<a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
+<a href="ferramentas.html#f-zap"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
+<a href="ferramentas.html#f-utm"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
+<a href="ia.html#t-gerador"><strong>Gerador de comando</strong><span>Brief para a IA</span></a>
+</div>
+</div>
+</details>
+
+<span class="navmenu__aqui">Fluxo de trabalho</span>
+</nav></header>
+<div class="palco">
+<nav class="sumario" id="sumario" aria-label="Sumário">
+<button class="sumario__abrir" id="sumario-abrir" aria-expanded="false" aria-controls="sumario-lista"><span>Sumário</span><span aria-hidden="true">&#9662;</span></button>
+<div class="sumario__lista" id="sumario-lista">
+<p class="sumario__titulo">Fluxo de trabalho</p>
+<a class="sumario__parte" href="#s1">1 · O terminal</a>
+<ol>
+<li><a href="#t-term-porque">Por que sair do mouse</a></li>
+<li><a href="#t-term-abrir">Abrir o terminal — Windows, Mac e Linux</a></li>
+<li><a href="#t-term-navegar">Onde eu estou e como eu ando</a></li>
+<li><a href="#t-term-arquivos">Criar, copiar, mover, apagar</a></li>
+<li><a href="#t-term-atalhos">O que realmente economiza tempo</a></li>
+<li><a href="#t-term-encadear">Encadear comandos</a></li>
+<li><a href="#t-term-cuidado">Os comandos que não têm volta</a></li>
+</ol>
+<a class="sumario__parte" href="#s2">2 · Git: o conceito antes do comando</a>
+<ol>
+<li><a href="#t-git-problema">O problema que ele resolve</a></li>
+<li><a href="#t-git-modelo">As três áreas — o modelo mental inteiro</a></li>
+<li><a href="#t-git-commit">O que é um commit bom</a></li>
+<li><a href="#t-git-naoe">O que o Git não é</a></li>
+</ol>
+<a class="sumario__parte" href="#s3">3 · Git no dia a dia</a>
+<ol>
+<li><a href="#t-git-instalar">Instalar e configurar — uma vez só</a></li>
+<li><a href="#t-git-iniciar">Começar um projeto</a></li>
+<li><a href="#t-git-ciclo">O ciclo — status, add, commit</a></li>
+<li><a href="#t-git-ignorar">.gitignore — o que nunca deve entrar</a></li>
+<li><a href="#t-git-historico">Ler a história — log e diff</a></li>
+<li><a href="#t-git-desfazer">Desfazer — os três casos</a></li>
+<li><a href="#t-git-voltar">Recuperar uma versão antiga</a></li>
+</ol>
+<a class="sumario__parte" href="#s4">4 · Branch, GitHub e deploy automático</a>
+<ol>
+<li><a href="#t-git-branch">Branch — testar sem medo</a></li>
+<li><a href="#t-git-conflito">Conflito — o que é e como sair</a></li>
+<li><a href="#t-git-remoto">GitHub — mandar e trazer</a></li>
+<li><a href="#t-git-vercel">Push vira deploy</a></li>
+<li><a href="#t-git-erro-pasta">O erro que você já cometeu</a></li>
+<li><a href="#t-git-claude">Git com o Claude Code</a></li>
+</ol>
+<a class="sumario__parte" href="#s5">5 · DevTools: inspecionar e editar ao vivo</a>
+<ol>
+<li><a href="#t-dev-abrir">Abrir e se situar</a></li>
+<li><a href="#t-dev-elements">Elements — editar o site do cliente ao vivo</a></li>
+<li><a href="#t-dev-estados">Forçar estados — hover, focus, dark mode</a></li>
+<li><a href="#t-dev-layout">Caçar o problema de layout</a></li>
+<li><a href="#t-dev-fonte">Ver o código-fonte de verdade</a></li>
+</ol>
+<a class="sumario__parte" href="#s6">6 · DevTools: Console, Network e celular</a>
+<ol>
+<li><a href="#t-dev-console">Console — ler o erro em vez de temer</a></li>
+<li><a href="#t-dev-network">Network — descobrir o que pesa</a></li>
+<li><a href="#t-dev-dispositivo">Modo dispositivo — e o que ele não resolve</a></li>
+<li><a href="#t-dev-celular">Depurar no celular de verdade</a></li>
+<li><a href="#t-dev-lighthouse">Lighthouse — a nota e o que fazer com ela</a></li>
+<li><a href="#t-dev-cache">Cache — o "mas eu já corrigi isso"</a></li>
+</ol>
+<a class="sumario__parte" href="#s7">7 · Reuso sem build</a>
+<ol>
+<li><a href="#t-reuso-problema">O problema, com número</a></li>
+<li><a href="#t-reuso-script">Saída 1 — copiar, com um script que garante</a></li>
+<li><a href="#t-reuso-fetch">Saída 2 — carregar o pedaço com fetch</a></li>
+<li><a href="#t-reuso-template">Saída 3 — template para o que se repete na página</a></li>
+<li><a href="#t-reuso-componente">Saída 4 — Web Component</a></li>
+<li><a href="#t-reuso-build">Saída 5 — aceitar um build mínimo</a></li>
+<li><a href="#t-reuso-decisao">A tabela de decisão</a></li>
+</ol>
+</div>
+</nav>
+<main class="leitura" id="conteudo" tabindex="-1">
+<section class="abertura">
+<h1>Fluxo de trabalho</h1>
+<p class="abertura__lead">Esta trilha não é sobre linguagem: é sobre as ferramentas que ficam entre você e o código. Quem domina terminal, Git e DevTools trabalha mais rápido e, principalmente, com menos medo — porque tudo tem volta.</p>
+<div class="legenda">
+<span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
+<span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
+<span>7 partes · 42 tópicos</span>
+</div>
+</section>
+<p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
+
+<section class="parte" id="s1">
+<div class="parte__cabeca"><span class="parte__num">PARTE 1</span><h2>O terminal</h2></div>
+<p class="parte__resumo">A janela preta que assusta e depois vira a ferramenta mais rápida que você tem. Não é sobre decorar comandos — são seis que resolvem 95% do dia. É sobre entender que o computador aceita ordem escrita, e que ordem escrita se repete, se guarda e se automatiza.</p>
+
+<article class="topico" id="t-term-porque" data-marca="novo">
+<div class="topico__cabeca"><h3>Por que sair do mouse</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Você já usou o terminal sem saber: quando o Claude Code roda, é ali que ele está. Toda ferramenta séria de desenvolvimento — git, npm, Vercel, Astro — nasce como comando de terminal e só depois, às vezes, ganha uma interface gráfica.</p>
+<p>A diferença prática é esta: no mouse, renomear 40 arquivos são 40 operações manuais. No terminal, é uma linha. E a linha você pode salvar, repetir no mês seguinte e mandar para outra pessoa.</p>
+<div class="nota"><strong>O que trava a maioria:</strong> a ideia de que é preciso decorar. Não é. Ninguém decora — se consulta. O que você precisa entender de verdade são dois conceitos: <em>onde você está</em> e <em>o que o comando faz com o que está ali</em>. O resto é pesquisa.</div>
+</div>
+</article>
+
+<article class="topico" id="t-term-abrir" data-marca="novo">
+<div class="topico__cabeca"><h3>Abrir o terminal — Windows, Mac e Linux</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>No <strong>Windows</strong>, use o <em>PowerShell</em> ou, melhor ainda, o <em>Windows Terminal</em> (grátis na Microsoft Store). Atalho: tecla Windows, digite "terminal", Enter. Se você instalar o Git, ganha também o <em>Git Bash</em>, que fala a mesma língua do Mac e do Linux — é o que eu recomendo para começar, porque todo tutorial que você achar na internet vai assumir essa sintaxe.</p>
+<p>No <strong>Mac</strong>, é o <em>Terminal</em> (Cmd+Espaço, digite "terminal"). No <strong>Linux</strong>, Ctrl+Alt+T na maioria das distribuições.</p>
+<p>Dentro do VS Code, qualquer sistema: <code>Ctrl+'</code> (ou Ctrl+Shift+P → "toggle terminal"). Esse é o que você mais vai usar, porque ele já abre na pasta do projeto aberto.</p>
+<div class="nota"><strong>Atalho que vale ouro no Windows:</strong> abra a pasta do projeto no Explorador, clique na barra de endereço, apague o caminho, digite <code>cmd</code> e dê Enter. O terminal abre já naquela pasta. No Mac, clique com o botão direito na pasta → Serviços → "Novo Terminal na Pasta".</div>
+</div>
+</article>
+
+<article class="topico" id="t-term-navegar" data-marca="novo">
+<div class="topico__cabeca"><h3>Onde eu estou e como eu ando</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O terminal sempre está <em>dentro de uma pasta</em>. Todo comando age a partir dali. Se você entender só isso, metade da confusão some.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code>pwd              # "print working directory" — onde estou agora
+ls               # lista o que tem aqui   (Windows PowerShell: dir)
+ls -la           # lista tudo, inclusive arquivos ocultos, com detalhes
+
+cd projetos      # entra na pasta "projetos"
+cd ..            # sobe um nível
+cd ../..         # sobe dois
+cd ~             # vai para a sua pasta de usuário
+cd -             # volta para a pasta anterior (o "voltar" do navegador)</code></pre></div>
+<p>Caminho <strong>relativo</strong> parte de onde você está: <code>cd site/imagens</code>. Caminho <strong>absoluto</strong> parte da raiz e funciona de qualquer lugar: <code>cd /Users/gustavo/projetos/site</code> no Mac, <code>cd C:\Users\gustavo\projetos\site</code> no Windows.</p>
+<div class="nota"><strong>Pasta com espaço no nome</strong> quebra o comando, porque o espaço separa argumentos. Ou você põe aspas — <code>cd "meus projetos"</code> — ou você para de usar espaço em nome de pasta de projeto, que é o que todo mundo acaba fazendo.</div>
+</div>
+</article>
+
+<article class="topico" id="t-term-arquivos" data-marca="novo">
+<div class="topico__cabeca"><h3>Criar, copiar, mover, apagar</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code>mkdir cliente-vanessa          # cria pasta
+mkdir -p cliente/img/hero      # cria a árvore inteira de uma vez
+
+touch index.html               # cria arquivo vazio (Git Bash, Mac, Linux)
+New-Item index.html            # equivalente no PowerShell
+
+cp index.html backup.html      # copia
+cp -r site/ site-backup/       # copia pasta inteira (-r = recursivo)
+
+mv antigo.html novo.html       # renomeia
+mv index.html site/            # move para dentro de uma pasta
+
+rm arquivo.html                # apaga arquivo
+rm -r pasta/                   # apaga pasta inteira
+
+code .                         # abre a pasta atual no VS Code
+open .                         # abre no Finder (Mac)  |  explorer . no Windows</code></pre></div>
+<p>Repare que renomear e mover são o <em>mesmo</em> comando. Faz sentido: mover é mudar o caminho, renomear é mudar o final do caminho.</p>
+</div>
+</article>
+
+<article class="topico" id="t-term-atalhos" data-marca="novo">
+<div class="topico__cabeca"><h3>O que realmente economiza tempo</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Quatro hábitos separam quem sofre no terminal de quem voa nele.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Atalho</th><th>O que faz</th></tr></thead>
+<tbody>
+<tr><td><code>Tab</code></td><td>Completa nome de arquivo ou pasta. Digite <code>cd cli</code> e dê Tab — ele completa sozinho. Use sempre; erro de digitação em nome de arquivo some.</td></tr>
+<tr><td><code>↑</code> e <code>↓</code></td><td>Navega pelos comandos que você já rodou. O comando de ontem ainda está lá.</td></tr>
+<tr><td><code>Ctrl+R</code></td><td>Busca no histórico. Aperte e digite "commit" — ele acha o último commit que você fez.</td></tr>
+<tr><td><code>Ctrl+C</code></td><td>Aborta o que está rodando. Serve para sair de servidor local, de processo travado, de tudo.</td></tr>
+<tr><td><code>Ctrl+L</code></td><td>Limpa a tela (ou digite <code>clear</code>). Não apaga nada, só dá espaço.</td></tr>
+</tbody></table></div>
+<p>E os curingas, que é onde a economia vira absurda:</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code>ls *.html              # só os arquivos .html
+cp *.jpg fotos/        # copia todos os jpg de uma vez
+rm *.tmp               # apaga todos os temporários
+
+# quantas linhas tem cada página do site?
+wc -l *.html
+
+# em quais arquivos aparece o telefone antigo do cliente?
+grep -rl "3321-4455" .</code></pre></div>
+<div class="nota">Esse último — <code>grep</code> — é o que eu usei para conferir se o menu novo tinha entrado nas dez páginas do seu site. Ele procura um texto dentro dos arquivos, recursivamente, e lista onde achou. Em trabalho de cliente, é o comando que responde "onde mais esse telefone está escrito?" em dois segundos.</div>
+</div>
+</article>
+
+<article class="topico" id="t-term-encadear" data-marca="novo">
+<div class="topico__cabeca"><h3>Encadear comandos</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Três operadores, e você monta rotinas inteiras.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code>mkdir site &amp;&amp; cd site        # só entra se conseguiu criar
+git add . &amp;&amp; git commit -m "hero pronta"   # só commita se o add deu certo
+
+ls *.html | wc -l            # o "|" joga a saída de um na entrada do outro
+                             # = "liste os html e conte quantas linhas saíram"
+
+ls -la &gt; lista.txt           # manda a saída para um arquivo (sobrescreve)
+echo "nova linha" &gt;&gt; log.txt # acrescenta ao final do arquivo</code></pre></div>
+<p>O <code>&amp;&amp;</code> é o mais útil no dia a dia, justamente porque ele <em>para</em> se algo falhar. Se o <code>git add</code> der erro, você não quer que o commit aconteça mesmo assim.</p>
+</div>
+</article>
+
+<article class="topico" id="t-term-cuidado" data-marca="novo">
+<div class="topico__cabeca"><h3>Os comandos que não têm volta</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>No terminal não existe lixeira. <code>rm</code> apaga de verdade, na hora, sem perguntar.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code># SEMPRE veja antes de apagar
+ls *.tmp          # confere o que vai sumir
+rm *.tmp          # aí sim
+
+rm -i arquivo     # -i pergunta antes de cada um
+
+# nunca, em hipótese alguma:
+rm -rf /          # apaga o sistema inteiro
+rm -rf ~          # apaga sua pasta de usuário inteira</code></pre></div>
+<div class="nota"><strong>A regra que resolve:</strong> antes de qualquer <code>rm</code> com curinga, rode o mesmo padrão com <code>ls</code>. Se a lista que aparecer for exatamente o que você quer perder, troque <code>ls</code> por <code>rm</code> e rode. Leva três segundos e já salvou muita gente.</div>
+<p>E aqui está o melhor argumento para a parte seguinte: se o projeto estiver no Git, apagar arquivo errado deixa de ser tragédia e vira um comando de recuperação. É por isso que Git vem logo depois do terminal, e não depois de mais nada.</p>
+</div>
+</article>
+</section>
+<section class="parte" id="s2">
+<div class="parte__cabeca"><span class="parte__num">PARTE 2</span><h2>Git: o conceito antes do comando</h2></div>
+<p class="parte__resumo">Quase todo mundo aprende Git decorando comandos e fica anos sem entender o que está acontecendo. Vinte minutos de conceito aqui economizam meses de medo depois — porque quando você sabe o que cada área é, o comando certo se torna óbvio.</p>
+
+<article class="topico" id="t-git-problema" data-marca="novo">
+<div class="topico__cabeca"><h3>O problema que ele resolve</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Você já viveu isto: <code>index-final.html</code>, <code>index-final2.html</code>, <code>index-FINAL-agora-vai.html</code>. E na hora de saber o que mudou entre um e outro, ninguém sabe.</p>
+<p>Git responde quatro perguntas que a pasta de arquivos não responde:</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Pergunta</th><th>Sem Git</th><th>Com Git</th></tr></thead>
+<tbody>
+<tr><td>O que eu mudei desde ontem?</td><td>Você compara no olho</td><td><code>git diff</code></td></tr>
+<tr><td>Quando isso quebrou?</td><td>Não dá para saber</td><td><code>git log</code> e você lê a história</td></tr>
+<tr><td>Como volto pro que funcionava?</td><td>Reza</td><td>Um comando</td></tr>
+<tr><td>Posso testar uma ideia sem risco?</td><td>Copia a pasta inteira</td><td><code>git branch</code></td></tr>
+</tbody></table></div>
+<p>Para o seu caso específico tem uma quinta: <strong>quando o Claude Code muda dez arquivos de uma vez, o Git é o que te mostra exatamente o que ele fez</strong> — e o que te devolve o estado anterior se ele fez besteira. Sem isso, você está aceitando mudança no escuro.</p>
+</div>
+</article>
+
+<article class="topico" id="t-git-modelo" data-marca="novo">
+<div class="topico__cabeca"><h3>As três áreas — o modelo mental inteiro</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Todo comando de Git move arquivo entre três lugares. Entenda os três e o resto se explica.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Área</th><th>O que é</th><th>Como se chega nela</th></tr></thead>
+<tbody>
+<tr><td><strong>Diretório de trabalho</strong></td><td>Sua pasta, do jeito que está agora. É o que o VS Code mostra.</td><td>Você edita e salva</td></tr>
+<tr><td><strong>Área de preparo</strong> <span style="white-space:nowrap">(<em>staging</em>)</span></td><td>A bandeja onde você separa <em>o que vai</em> no próximo commit. Nem tudo que mudou precisa ir junto.</td><td><code>git add</code></td></tr>
+<tr><td><strong>Repositório</strong></td><td>A história gravada. Imutável. Cada ponto é um commit.</td><td><code>git commit</code></td></tr>
+</tbody></table></div>
+<p>Por que existe a bandeja do meio? Porque numa tarde você mexe no menu, corrige um telefone e começa uma seção nova. Isso é três assuntos. Se virar um commit só, a história fica inútil — e daqui a um mês, quando o telefone estiver errado, você não consegue desfazer só aquilo.</p>
+<div class="nota"><strong>Analogia que funciona:</strong> o diretório de trabalho é sua mesa bagunçada; o preparo é a caixa onde você separa o que vai pro correio; o commit é postar. Depois de postado, não volta — mas você tem o comprovante e sabe exatamente o que foi.</div>
+</div>
+</article>
+
+<article class="topico" id="t-git-commit" data-marca="novo">
+<div class="topico__cabeca"><h3>O que é um commit bom</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Um commit é uma foto do projeto inteiro mais uma mensagem explicando por quê. A foto o Git tira sozinho; a mensagem é sua, e é ela que decide se a história vai servir para alguma coisa.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">mensagens</span><button class="copiar">copiar</button></div><pre><code># ruim — não diz nada que o diff já não diga
+"alterações"
+"update"
+"ajustes finais"
+"asdasd"
+
+# bom — diz o QUÊ e, quando não é óbvio, o PORQUÊ
+"hero da Vanessa: troca foto e encurta headline"
+"corrige telefone no rodapé das 10 paginas"
+"menu vira dropdown agrupado — 10 links na barra nao cabiam no mobile"
+"revert: volta animação da hero, estava atrasando o LCP"</code></pre></div>
+<p>Duas regras de tamanho que resolvem quase tudo: <strong>um commit, um assunto</strong>; e <strong>se a mensagem precisa de "e", provavelmente são dois commits</strong>. "Corrige telefone e adiciona seção de FAQ" é dois.</p>
+<div class="nota"><strong>Escreva no presente e no imperativo:</strong> "corrige", não "corrigido" nem "corrigindo". É convenção universal e existe por um motivo prático — a mensagem descreve o que o commit <em>faz</em> quando aplicado, o que faz sentido tanto ao aplicar quanto ao desfazer.</div>
+</div>
+</article>
+
+<article class="topico" id="t-git-naoe" data-marca="novo">
+<div class="topico__cabeca"><h3>O que o Git não é</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Três confusões que custam caro:</p>
+<p><strong>Git não é GitHub.</strong> Git é o programa que roda no seu computador e guarda a história localmente — funciona sem internet, para sempre. GitHub é um site que hospeda cópias desses repositórios. Existem outros (GitLab, Bitbucket, Codeberg). Você pode usar Git a vida toda sem nunca criar conta em lugar nenhum.</p>
+<p><strong>Git não é backup.</strong> Ele guarda a história do que você mandou ele guardar. Arquivo que nunca entrou num commit não existe para ele. E se o HD morrer, morre o repositório junto — a cópia no GitHub é que cumpre o papel de backup, e é por isso que <code>push</code> importa.</p>
+<p><strong>Git não é para arquivo grande.</strong> Ele foi feito para texto, onde consegue guardar só a diferença entre versões. Foto de 8 MB da obra do cliente entra inteira, e de novo inteira a cada versão. Imagem de site (comprimida, uns 200 KB) tudo bem. Vídeo, PSD, pasta de fotos brutas do fotógrafo — não.</p>
+<div class="nota"><strong>Na prática, para você:</strong> o repositório guarda o site. As fotos originais do cliente ficam no Drive. O que vai para o Git é a versão já tratada e comprimida que entra na página.</div>
+</div>
+</article>
+</section>
+<section class="parte" id="s3">
+<div class="parte__cabeca"><span class="parte__num">PARTE 3</span><h2>Git no dia a dia</h2></div>
+<p class="parte__resumo">Os comandos que você vai usar todo dia, na ordem em que aparecem num projeto real. São menos do que parece: sete resolvem a semana inteira.</p>
+
+<article class="topico" id="t-git-instalar" data-marca="novo">
+<div class="topico__cabeca"><h3>Instalar e configurar — uma vez só</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Baixe em <code>git-scm.com</code>. No Windows, aceite os padrões e marque a opção que instala o Git Bash. No Mac, rodar <code>git --version</code> no Terminal já oferece a instalação.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code>git --version                       # confirma que instalou
+
+git config --global user.name "Gustavo"
+git config --global user.email "seu@email.com"
+
+git config --global init.defaultBranch main   # nome moderno do ramo principal
+git config --global core.editor "code --wait" # usa o VS Code quando pedir texto
+git config --list                             # confere tudo</code></pre></div>
+<div class="nota">Use o mesmo e-mail da sua conta do GitHub. É assim que o site liga os commits ao seu perfil — do contrário, seu trabalho aparece como se fosse de um desconhecido.</div>
+</div>
+</article>
+
+<article class="topico" id="t-git-iniciar" data-marca="novo">
+<div class="topico__cabeca"><h3>Começar um projeto</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code>mkdir lp-vanessa &amp;&amp; cd lp-vanessa
+git init                    # cria a pasta oculta .git — é o repositório inteiro
+
+# ou, para trazer um projeto que já existe no GitHub:
+git clone https://github.com/JaumNf/gustavo-tutorial.git
+cd gustavo-tutorial</code></pre></div>
+<p>O <code>git init</code> cria uma pasta <code>.git</code> escondida. Ela <em>é</em> o repositório: toda a história mora ali. Copiar a pasta do projeto copia a história junto; apagar a <code>.git</code> apaga a história e deixa só os arquivos atuais.</p>
+<div class="nota"><strong>Para o seu site hoje:</strong> em vez de arrastar arquivo no navegador do GitHub, o certo é <code>git clone</code> do repositório uma vez, editar os arquivos na sua máquina, e mandar com <code>push</code>. Foi exatamente o passo que faltava quando você subiu a pasta inteira por engano e o site quebrou.</div>
+</div>
+</article>
+
+<article class="topico" id="t-git-ciclo" data-marca="novo">
+<div class="topico__cabeca"><h3>O ciclo — status, add, commit</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Este é o Git inteiro do dia a dia. Você vai repetir isso dez vezes por dia e vai parar de pensar nele.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code>git status                  # o comando mais importante: o que mudou, o que está preparado
+
+git add index.html          # prepara um arquivo
+git add css/ js/            # prepara pastas inteiras
+git add .                   # prepara tudo que mudou
+git add -p                  # prepara pedaço por pedaço, perguntando (ótimo para separar assuntos)
+
+git commit -m "hero: nova foto e headline mais curta"
+
+git status                  # confirma: "working tree clean"</code></pre></div>
+<p><code>git status</code> é o comando que responde "e agora?". Rode-o sempre que estiver em dúvida — ele inclusive sugere o próximo comando no texto da resposta.</p>
+<div class="nota"><strong>Atalho que você vai usar:</strong> <code>git commit -am "mensagem"</code> faz add e commit de uma vez, mas só para arquivos que o Git <em>já conhece</em>. Arquivo novo continua precisando de <code>git add</code>. É a pegadinha número um de quem está começando: o arquivo novo simplesmente não entra e ninguém percebe.</div>
+</div>
+</article>
+
+<article class="topico" id="t-git-ignorar" data-marca="novo">
+<div class="topico__cabeca"><h3>.gitignore — o que nunca deve entrar</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Um arquivo chamado <code>.gitignore</code> na raiz do projeto lista o que o Git deve fingir que não existe.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">.gitignore</span><button class="copiar">copiar</button></div><pre><code># dependências — se reinstalam, não se versionam
+node_modules/
+
+# segredos — a linha mais importante deste arquivo
+.env
+.env.local
+*.key
+
+# lixo de sistema
+.DS_Store
+Thumbs.db
+
+# saída de build
+dist/
+.vercel/
+
+# originais pesados do cliente
+fotos-brutas/
+*.psd</code></pre></div>
+<div class="nota"><strong>Aviso sério:</strong> <code>.gitignore</code> só funciona para arquivo que <em>ainda não entrou</em>. Se você commitou uma chave de API e depois ignorou o arquivo, a chave continua na história, visível para sempre — e se o repositório for público, considere a chave vazada e troque na hora. Crie o <code>.gitignore</code> antes do primeiro commit, sempre.</div>
+</div>
+</article>
+
+<article class="topico" id="t-git-historico" data-marca="novo">
+<div class="topico__cabeca"><h3>Ler a história — log e diff</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code>git log                              # história completa (q sai)
+git log --oneline                    # uma linha por commit — o que você mais usa
+git log --oneline -10                # os dez últimos
+git log --oneline --graph --all      # desenha os ramos
+git log -p index.html                # história de UM arquivo, com as mudanças
+
+git diff                             # o que mudei e ainda não preparei
+git diff --staged                    # o que está preparado, prestes a virar commit
+git diff HEAD~1                      # o que mudou desde o commit anterior</code></pre></div>
+<p><code>git diff</code> é o hábito que mais protege você: <strong>leia o diff antes de todo commit</strong>. É onde você pega o <code>console.log</code> esquecido, o texto de teste que ficou na página e a linha que o Claude Code mudou sem avisar.</p>
+<div class="nota">No VS Code isso é visual: clique no arquivo na aba de Controle de Código-Fonte e ele mostra lado a lado o que saiu (vermelho) e o que entrou (verde). Para revisar mudança grande, é mais rápido que o terminal.</div>
+</div>
+</article>
+
+<article class="topico" id="t-git-desfazer" data-marca="novo">
+<div class="topico__cabeca"><h3>Desfazer — os três casos</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Aqui mora o medo, e ele acaba quando você percebe que são só três situações.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code># 1 · estraguei o arquivo e ainda NÃO commitei
+git restore index.html          # joga fora a alteração e volta ao último commit
+git restore .                   # em todos os arquivos — cuidado, não tem volta
+
+# 2 · preparei errado (fiz add do que não queria)
+git restore --staged index.html # tira da bandeja, mantém a alteração
+
+# 3 · commitei e me arrependi
+git commit --amend -m "mensagem certa"   # corrige o ÚLTIMO commit (só se ainda não deu push)
+git revert abc1234                       # cria um commit novo que desfaz aquele — seguro
+git reset --soft HEAD~1                  # desfaz o commit, mantém as alterações preparadas
+git reset --hard HEAD~1                  # desfaz o commit E joga as alterações fora</code></pre></div>
+<div class="nota"><strong>A regra que evita desastre:</strong> se o commit já foi para o GitHub, use <code>revert</code>. Ele desfaz criando história nova, e ninguém mais perde trabalho. <code>reset --hard</code> e <code>--amend</code> reescrevem a história — ótimos enquanto é só seu, problemáticos depois que outra pessoa (ou a Vercel) já leu aquilo.</div>
+</div>
+</article>
+
+<article class="topico" id="t-git-voltar" data-marca="novo">
+<div class="topico__cabeca"><h3>Recuperar uma versão antiga</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O cenário real: o cliente diz que a página de ontem estava melhor.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code>git log --oneline               # ache o código do commit, ex: 9f3a1c2
+
+# só olhar como o site estava naquele dia:
+git checkout 9f3a1c2            # o projeto inteiro volta no tempo
+git switch -                    # e volta para o presente
+
+# trazer UM arquivo daquela versão para o presente:
+git restore --source=9f3a1c2 index.html
+
+# apagou um arquivo sem querer e já commitou?
+git restore --source=HEAD~1 arquivo-que-sumiu.html</code></pre></div>
+<div class="nota"><strong>E o comando que salva quando tudo parece perdido:</strong> <code>git reflog</code>. Ele lista <em>todo</em> movimento que você fez no repositório, inclusive os que o <code>log</code> não mostra mais depois de um reset. Ache o código ali e volte para ele. Enquanto o commit existiu em algum momento, ele quase nunca some de verdade nos primeiros dias.</div>
+</div>
+</article>
+</section>
+<section class="parte" id="s4">
+<div class="parte__cabeca"><span class="parte__num">PARTE 4</span><h2>Branch, GitHub e deploy automático</h2></div>
+<p class="parte__resumo">Onde o Git deixa de ser só história e vira método de trabalho: testar sem risco, publicar sem arrastar arquivo, e voltar atrás com o site no ar.</p>
+
+<article class="topico" id="t-git-branch" data-marca="novo">
+<div class="topico__cabeca"><h3>Branch — testar sem medo</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Um <em>branch</em> é uma linha paralela da história. Você sai do principal, faz o que quiser, e ou junta de volta ou joga fora. Nada do que acontece ali afeta o site no ar.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code>git switch -c hero-nova       # cria e entra no branch (antes: git checkout -b)
+# ... trabalha, commita à vontade ...
+
+git switch main               # volta para o principal
+git merge hero-nova           # traz as mudanças para cá
+git branch -d hero-nova       # apaga o branch, já cumpriu o papel
+
+git branch                    # lista os que existem
+git branch -D hero-nova       # apaga mesmo sem ter juntado (a ideia não prestou)</code></pre></div>
+<div class="nota"><strong>Quando usar, no seu trabalho:</strong> toda vez que você for testar algo que pode não dar certo — uma hero diferente, uma animação nova, uma reorganização grande. E toda vez que for pedir ao Claude Code uma mudança ampla: cria o branch, deixa ele trabalhar, revisa o diff, e junta só se prestar. Se não prestar, <code>git branch -D</code> e não sobrou rastro.</div>
+</div>
+</article>
+
+<article class="topico" id="t-git-conflito" data-marca="novo">
+<div class="topico__cabeca"><h3>Conflito — o que é e como sair</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Conflito acontece quando dois branches mudaram <em>a mesma linha</em> do mesmo arquivo e o Git não tem como adivinhar qual vale. Ele para, marca o trecho e pede que você decida.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">no arquivo</span><button class="copiar">copiar</button></div><pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+&lt;h1&gt;Arquitetura que cabe no seu prazo&lt;/h1&gt;
+=======
+&lt;h1&gt;Projetos de interiores em Campo Grande&lt;/h1&gt;
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; hero-nova</code></pre></div>
+<p>Em cima, o que está no branch atual. Embaixo, o que vem do outro. Você apaga as três linhas de marcação e deixa o texto que quer ficar — pode ser um dos dois, pode ser uma mistura. Depois:</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code>git add index.html
+git commit                      # finaliza o merge
+
+git merge --abort               # ou desiste e volta tudo como estava</code></pre></div>
+<div class="nota">O VS Code mostra isso com botões — "Aceitar atual", "Aceitar entrada", "Aceitar ambos". Use. Editar marcação de conflito na mão é como quase todo mundo já deixou um <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> escapar para dentro do site publicado.</div>
+</div>
+</article>
+
+<article class="topico" id="t-git-remoto" data-marca="novo">
+<div class="topico__cabeca"><h3>GitHub — mandar e trazer</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code>git remote -v                              # quais servidores este projeto conhece
+git remote add origin https://github.com/JaumNf/gustavo-tutorial.git
+
+git push -u origin main    # manda pela primeira vez e guarda o destino
+git push                   # daí em diante, só isso
+
+git pull                   # traz o que mudou no servidor para cá
+git fetch                  # só verifica, sem mexer nos seus arquivos</code></pre></div>
+<p><code>origin</code> é só um apelido para o endereço do servidor — o nome padrão, nada mágico. <code>main</code> é o branch.</p>
+<div class="nota"><strong>Senha não funciona mais.</strong> O GitHub não aceita senha de conta no <code>push</code> desde 2021. Você usa um <em>Personal Access Token</em> (Settings → Developer settings → Tokens) no lugar da senha, ou configura chave SSH. O jeito mais simples hoje é instalar o <code>gh</code> (GitHub CLI) e rodar <code>gh auth login</code> — ele resolve tudo sozinho.</div>
+</div>
+</article>
+
+<article class="topico" id="t-git-vercel" data-marca="novo">
+<div class="topico__cabeca"><h3>Push vira deploy</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>É aqui que tudo se junta. Com o repositório ligado à Vercel — que é como o seu site já está hoje — publicar deixa de ser uma tarefa:</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code>git add .
+git commit -m "trilha de fluxo de trabalho"
+git push
+
+# pronto. A Vercel detecta, constrói e publica sozinha em ~30 segundos.</code></pre></div>
+<p>E tem o bônus que quase ninguém usa: <strong>todo branch ganha uma URL de pré-visualização própria</strong>. Você faz <code>git push -u origin hero-nova</code> e a Vercel publica aquele branch num endereço separado. Isso resolve um problema real do seu ofício — mandar para o cliente ver a proposta nova sem tocar no site que está no ar.</p>
+<div class="nota"><strong>E quando quebra em produção:</strong> no painel da Vercel, em Deployments, qualquer versão anterior tem a opção "Promote to Production". O site volta ao estado bom em segundos, enquanto você investiga com calma. Isso só existe porque cada deploy está amarrado a um commit.</div>
+</div>
+</article>
+
+<article class="topico" id="t-git-erro-pasta" data-marca="revisao">
+<div class="topico__cabeca"><h3>O erro que você já cometeu</h3><span class="tag tag--revisao">Revisão</span></div>
+<div class="topico__corpo">
+<p>Vale registrar porque é o erro mais comum de quem sobe arquivo pelo navegador: você arrastou a <em>pasta</em> <code>gustavo-tutorial-site/</code> para o GitHub. Os arquivos foram parar em <code>/gustavo-tutorial-site/index.html</code>, e a Vercel serve a raiz — então o site respondeu 404.</p>
+<p>O diagnóstico foi comparar duas URLs: <code>/estilo.css</code> deu 404 e <code>/gustavo-tutorial-site/estilo.css</code> deu 200. Isso localiza o problema em dez segundos e serve para qualquer site quebrado.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code># com Git, o mesmo erro não acontece — você trabalha DENTRO da pasta certa:
+cd gustavo-tutorial     # o clone do repositório
+cp ~/Downloads/gustavo-tutorial-site/*.html .
+cp ~/Downloads/gustavo-tutorial-site/*.css .
+cp ~/Downloads/gustavo-tutorial-site/*.js .
+git status              # confere: os arquivos estão na raiz
+git add . &amp;&amp; git commit -m "laboratorio de movimento" &amp;&amp; git push</code></pre></div>
+<div class="nota">Repare que o <code>git status</code> antes do commit teria mostrado o caminho errado imediatamente. É o mesmo princípio do <code>ls</code> antes do <code>rm</code>: olhar antes de confirmar.</div>
+</div>
+</article>
+
+<article class="topico" id="t-git-claude" data-marca="novo">
+<div class="topico__cabeca"><h3>Git com o Claude Code</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Esta é a parte que muda mais o seu dia, porque o problema de trabalhar com IA em código é exatamente o problema que o Git resolve: <em>como eu sei o que mudou e como eu volto?</em></p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Hábito</th><th>Por quê</th></tr></thead>
+<tbody>
+<tr><td>Commit antes de pedir</td><td>Cria o ponto de retorno. Sem ele, "desfaz isso" vira arqueologia.</td></tr>
+<tr><td>Branch para mudança grande</td><td>Reestruturação, seção nova, refatoração. Se não prestar, apaga o branch inteiro.</td></tr>
+<tr><td><code>git diff</code> antes de aceitar</td><td>É a revisão de verdade. Ler o resumo da IA não é revisar — ler o diff é.</td></tr>
+<tr><td>Um commit por etapa entregue</td><td>Casa com fatiar o trabalho: cada pedaço aprovado vira um commit.</td></tr>
+<tr><td>Nunca <code>add .</code> no escuro</td><td>Com IA mexendo em vários arquivos, <code>git status</code> primeiro, sempre.</td></tr>
+</tbody></table></div>
+<p>O ciclo completo fica assim:</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">terminal</span><button class="copiar">copiar</button></div><pre><code>git switch -c secao-faq          # ponto de partida limpo
+# ... pede a seção ao Claude Code ...
+git status                       # o que ele tocou?
+git diff                         # o que exatamente ele escreveu?
+git add . &amp;&amp; git commit -m "faq: quatro perguntas com acordeão"
+git switch main &amp;&amp; git merge secao-faq &amp;&amp; git push</code></pre></div>
+<div class="nota">Isso conversa direto com a trilha <a href="ia.html">Trabalhando com IA</a>: lá você aprende a fatiar o pedido; aqui, cada fatia aprovada vira um commit. As duas juntas é que dão o controle — pedido pequeno, commit pequeno, volta fácil.</div>
+</div>
+</article>
+</section>
+<section class="parte" id="s5">
+<div class="parte__cabeca"><span class="parte__num">PARTE 5</span><h2>DevTools: inspecionar e editar ao vivo</h2></div>
+<p class="parte__resumo">As ferramentas do desenvolvedor vêm dentro do navegador, de graça, e são onde você resolve problema de CSS em minuto em vez de hora. A maioria das pessoas usa 5% delas — aqui estão os 30% que importam.</p>
+
+<article class="topico" id="t-dev-abrir" data-marca="novo">
+<div class="topico__cabeca"><h3>Abrir e se situar</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p><code>F12</code>, ou <code>Ctrl+Shift+I</code> (<code>Cmd+Option+I</code> no Mac). Mas o jeito que economiza mais tempo é outro: <strong>botão direito no elemento → Inspecionar</strong>. Isso abre já com aquele elemento selecionado.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Aba</th><th>Para quê</th></tr></thead>
+<tbody>
+<tr><td><strong>Elements</strong></td><td>O HTML e o CSS como o navegador realmente entendeu. Onde você passa 60% do tempo.</td></tr>
+<tr><td><strong>Console</strong></td><td>Erros de JavaScript e testes rápidos de código.</td></tr>
+<tr><td><strong>Network</strong></td><td>Tudo que a página baixou, quanto pesou e quanto demorou.</td></tr>
+<tr><td><strong>Lighthouse</strong></td><td>Nota automática de performance, acessibilidade e SEO.</td></tr>
+<tr><td><strong>Application</strong></td><td>localStorage, cookies, service worker.</td></tr>
+</tbody></table></div>
+<div class="nota"><code>Ctrl+Shift+P</code> dentro das DevTools abre uma busca de comandos, igual à do VS Code. Digite "screenshot" e você tira print da página inteira, inclusive a parte que não cabe na tela — útil para mandar proposta ao cliente.</div>
+</div>
+</article>
+
+<article class="topico" id="t-dev-elements" data-marca="novo">
+<div class="topico__cabeca"><h3>Elements — editar o site do cliente ao vivo</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>No painel Elements, o lado esquerdo é o HTML e o direito é o CSS aplicado àquele elemento. Tudo é editável, e a página responde na hora. Nada disso é salvo — recarregou, voltou ao normal.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Ação</th><th>Como</th></tr></thead>
+<tbody>
+<tr><td>Mudar um valor de CSS</td><td>Clique no número e use ↑ ↓. Com Shift, anda de 10 em 10.</td></tr>
+<tr><td>Testar uma propriedade</td><td>Clique no espaço em branco da regra e digite. Ele autocompleta.</td></tr>
+<tr><td>Desligar uma regra</td><td>Caixinha ao lado dela. Ótimo para descobrir qual linha está causando o problema.</td></tr>
+<tr><td>Editar o texto da página</td><td>Duplo clique no texto dentro do HTML.</td></tr>
+<tr><td>Ver o valor final</td><td>Aba <em>Computed</em> — mostra o que venceu, depois de toda a cascata.</td></tr>
+<tr><td>Achar de onde veio</td><td>O nome do arquivo e a linha aparecem à direita de cada regra. Clique e ele te leva lá.</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>O uso comercial disso:</strong> abra o site atual do cliente, mude a cor do botão e o texto da chamada ao vivo, tire um print e mande. Você acabou de mostrar a melhoria no site dele, sem ter feito nada ainda. Funciona melhor que qualquer portfólio.</div>
+</div>
+</article>
+
+<article class="topico" id="t-dev-estados" data-marca="novo">
+<div class="topico__cabeca"><h3>Forçar estados — hover, focus, dark mode</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Como você estiliza <code>:hover</code> se o estilo some quando você tira o mouse para ir até as DevTools? Você força o estado.</p>
+<p>No painel Styles, o botão <code>:hov</code> abre caixas para <code>:hover</code>, <code>:active</code>, <code>:focus</code>, <code>:focus-visible</code> e <code>:visited</code>. Marque e o elemento fica travado naquele estado enquanto você ajusta.</p>
+<p>Logo ao lado, o ícone de pincel (<em>Rendering</em>, ou <code>Ctrl+Shift+P</code> → "rendering") tem as simulações que mais importam para o seu trabalho:</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Simulação</th><th>Testa</th></tr></thead>
+<tbody>
+<tr><td><code>prefers-color-scheme</code></td><td>Tema escuro sem mexer no sistema</td></tr>
+<tr><td><code>prefers-reduced-motion</code></td><td>Se suas animações realmente desligam</td></tr>
+<tr><td>Deficiências de visão</td><td>Como o daltônico vê seu contraste de botão</td></tr>
+<tr><td>Paint flashing</td><td>Pisca em verde o que o navegador redesenhou — expõe animação cara</td></tr>
+</tbody></table></div>
+<div class="nota">O simulador de daltonismo é o teste de dez segundos que evita o erro clássico: verde e vermelho como "disponível" e "indisponível". Para 8% dos homens, os dois são a mesma cor.</div>
+</div>
+</article>
+
+<article class="topico" id="t-dev-layout" data-marca="novo">
+<div class="topico__cabeca"><h3>Caçar o problema de layout</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Os três problemas de layout que mais aparecem e onde exatamente olhar:</p>
+<p><strong>"Por que tem espaço em branco aqui?"</strong> — passe o mouse sobre os elementos no painel Elements. O navegador pinta o box model por cima da página: azul é o conteúdo, verde é o padding, laranja é a margem. O culpado costuma estar na faixa laranja.</p>
+<p><strong>"Por que a página rola para o lado no celular?"</strong> — cole isto no Console e o elemento culpado fica com borda vermelha:</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">console</span><button class="copiar">copiar</button></div><pre><code>document.querySelectorAll('body *').forEach(el =&gt; {
+  if (el.getBoundingClientRect().right &gt; window.innerWidth) {
+    el.style.outline = '2px solid red';
+    console.log(el);
+  }
+});</code></pre></div>
+<p><strong>"Meu grid/flex não está fazendo o que eu quero"</strong> — ao lado do elemento aparece um selo <code>grid</code> ou <code>flex</code>. Clique: o navegador desenha as linhas, numera as colunas e mostra os espaçamentos sobre a página.</p>
+</div>
+</article>
+
+<article class="topico" id="t-dev-fonte" data-marca="novo">
+<div class="topico__cabeca"><h3>Ver o código-fonte de verdade</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Uma distinção que confunde muita gente: <code>Ctrl+U</code> mostra o HTML <em>que veio do servidor</em>. O painel Elements mostra o DOM <em>depois</em> de todo o JavaScript ter rodado. Num site feito em React, o primeiro vem quase vazio e o segundo está cheio.</p>
+<p>Isso tem consequência direta no seu trabalho: o Google, quando rastreia, começa pelo primeiro. É a razão técnica de HTML puro ter vantagem em SEO — o conteúdo já está lá, sem depender de nada rodar.</p>
+<div class="nota"><strong>Teste prático em site de concorrente:</strong> <code>Ctrl+U</code> e procure pelo texto da chamada principal. Se achar, é HTML servido pronto. Se não achar, o conteúdo depende de JavaScript — e você acabou de descobrir uma fraqueza de SEO que pode virar argumento na sua proposta.</div>
+</div>
+</article>
+</section>
+<section class="parte" id="s6">
+<div class="parte__cabeca"><span class="parte__num">PARTE 6</span><h2>DevTools: Console, Network e celular</h2></div>
+<p class="parte__resumo">A parte que responde "por que está lento" e "por que quebra só no iPhone do cliente". É também onde você para de adivinhar e passa a medir.</p>
+
+<article class="topico" id="t-dev-console" data-marca="novo">
+<div class="topico__cabeca"><h3>Console — ler o erro em vez de temer</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>Quando algo de JavaScript quebra, a página simplesmente para de fazer aquilo — sem aviso na tela. O Console é o único lugar onde o erro aparece. Primeira coisa a fazer quando "não está funcionando": abrir o Console.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">erros comuns</span><button class="copiar">copiar</button></div><pre><code>Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')
+→ o querySelector não achou o elemento. Erro de digitação na classe,
+  ou o script rodou antes do HTML existir.
+
+Uncaught ReferenceError: gsap is not defined
+→ a biblioteca não carregou. Veja a aba Network: o arquivo veio?
+
+Failed to load resource: 404 (Not Found)
+→ caminho de arquivo errado. Foi exatamente o seu erro da pasta no GitHub.
+
+Refused to load ... violates Content Security Policy
+→ o servidor bloqueou um script externo.</code></pre></div>
+<p>E o Console também é um laboratório: qualquer JavaScript roda ali, na página aberta, na hora.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">console</span><button class="copiar">copiar</button></div><pre><code>$0                          // o elemento selecionado no painel Elements
+$$('a')                     // atalho para querySelectorAll
+$$('img').filter(i =&gt; !i.alt)          // toda imagem sem texto alternativo
+$$('a').filter(a =&gt; !a.href)           // todo link quebrado
+document.querySelectorAll('h1').length // tem mais de um h1? (problema de SEO)</code></pre></div>
+<div class="nota">Essas três últimas linhas são uma auditoria de acessibilidade e SEO em dez segundos, em qualquer site — inclusive no do cliente, antes da reunião.</div>
+</div>
+</article>
+
+<article class="topico" id="t-dev-network" data-marca="novo">
+<div class="topico__cabeca"><h3>Network — descobrir o que pesa</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Abra a aba Network e recarregue com ela aberta (senão vem vazia). Cada linha é um arquivo que a página pediu.</p>
+<p>Ordene pela coluna <strong>Size</strong>, do maior para o menor. Em nove de dez sites lentos, as três primeiras linhas são imagens — e a conversa sobre performance acaba ali. No rodapé o navegador soma tudo: <em>requests</em> e <em>transferred</em>.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Referência</th><th>Peso total da página</th></tr></thead>
+<tbody>
+<tr><td>Excelente</td><td>abaixo de 500 KB</td></tr>
+<tr><td>Bom</td><td>até 1 MB</td></tr>
+<tr><td>Ruim no 4G</td><td>acima de 2 MB</td></tr>
+<tr><td>Vergonha</td><td>acima de 5 MB — e é mais comum do que parece</td></tr>
+</tbody></table></div>
+<p>Os filtros no topo (Doc, CSS, JS, Img, Font) isolam por tipo. E a coluna <em>Waterfall</em> mostra a ordem: o que está segurando o resto aparece como uma barra longa antes das outras.</p>
+<div class="nota"><strong>O teste que muda a conversa com o cliente:</strong> no seletor de velocidade, escolha "Slow 4G" e recarregue. É isso que a cliente dele sente ao abrir a página no ônibus. Quando você mostra essa tela, ninguém mais discute se vale comprimir as fotos.</div>
+</div>
+</article>
+
+<article class="topico" id="t-dev-dispositivo" data-marca="novo">
+<div class="topico__cabeca"><h3>Modo dispositivo — e o que ele não resolve</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p><code>Ctrl+Shift+M</code> liga o modo dispositivo: a página passa a ser renderizada numa largura de celular, com toque simulado.</p>
+<p>Use larguras reais, não as do menu apenas: <strong>360px</strong> (Android popular), <strong>390px</strong> (iPhone atual), <strong>430px</strong> (iPhone grande), <strong>768px</strong> (tablet). Se funciona em 360, funciona em quase tudo.</p>
+<div class="nota"><strong>O que ele mente:</strong> é o Chrome do seu computador fingindo ser um celular. Ele não reproduz o Safari do iPhone (que tem regras próprias), nem o desempenho real de um aparelho de entrada, nem a barra do navegador comendo altura da tela, nem como o teclado virtual empurra o layout quando o campo recebe foco. Aprovar layout só por aqui é o que faz o cliente abrir no próprio celular e achar quebrado.</div>
+</div>
+</article>
+
+<article class="topico" id="t-dev-celular" data-marca="novo">
+<div class="topico__cabeca"><h3>Depurar no celular de verdade</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Dá para abrir as DevTools do computador apontando para a página que está rodando no aparelho. É o que resolve o "só no meu iPhone que quebra".</p>
+<p><strong>Android + Chrome:</strong> no celular, Configurações → Sobre o telefone → toque 7 vezes em "Número da versão" para liberar as opções de desenvolvedor; ative a Depuração USB. Conecte o cabo, aceite o aviso, e no computador abra <code>chrome://inspect</code>. A aba aberta no celular aparece na lista com um botão <em>inspect</em>.</p>
+<p><strong>iPhone + Safari:</strong> no iPhone, Ajustes → Apps → Safari → Avançado → Inspetor da Web. No Mac, Safari → Ajustes → Avançado → "Mostrar recursos para desenvolvedores". Conecte o cabo e o aparelho aparece no menu Desenvolvedor do Safari.</p>
+<div class="nota"><strong>Sem Mac e precisa testar iPhone?</strong> Duas saídas honestas: peça a alguém com iPhone para abrir e mandar print e vídeo da tela, ou use um serviço de teste em aparelho real na nuvem (BrowserStack e LambdaTest têm plano gratuito limitado). Torcer para dar certo não é uma das opções — o Safari do iOS é onde mais aparece diferença, e boa parte dos clientes de serviço local usa iPhone.</div>
+</div>
+</article>
+
+<article class="topico" id="t-dev-lighthouse" data-marca="novo">
+<div class="topico__cabeca"><h3>Lighthouse — a nota e o que fazer com ela</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>A aba Lighthouse roda uma auditoria automática e devolve quatro notas: Performance, Acessibilidade, Boas práticas e SEO. Marque "Mobile" — é o que o Google usa para ranquear.</p>
+<p>Duas ressalvas para você não se enganar com o número:</p>
+<p><strong>Rode em aba anônima.</strong> Extensões do Chrome entram na conta e derrubam a nota de uma página que está ótima.</p>
+<p><strong>É laboratório, não realidade.</strong> Lighthouse simula um aparelho e uma rede. O dado que o Google realmente usa vem dos usuários de verdade e aparece no PageSpeed Insights (<code>pagespeed.web.dev</code>), na seção de dados de campo — que só existe depois que o site tem tráfego.</p>
+<div class="nota"><strong>Onde olhar primeiro:</strong> ignore a nota e desça até "Opportunities" e "Diagnostics". Ali está a lista do que consertar, ordenada por quanto tempo cada item economiza. Normalmente as duas primeiras linhas são imagem, e resolver só elas já sobe a nota dezenas de pontos. Nota 100 não é meta — nota acima de 90 no celular com a página fazendo o que precisa fazer é.</div>
+</div>
+</article>
+
+<article class="topico" id="t-dev-cache" data-marca="novo">
+<div class="topico__cabeca"><h3>Cache — o "mas eu já corrigi isso"</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Você corrige, publica, abre e a versão antiga continua lá. Não está louco: o navegador guardou o CSS antigo.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Situação</th><th>Solução</th></tr></thead>
+<tbody>
+<tr><td>Testando você mesmo</td><td>Com as DevTools abertas, botão direito no recarregar → "Limpar cache e atualizar forçado". Ou marque <em>Disable cache</em> na aba Network e deixe as DevTools abertas enquanto trabalha.</td></tr>
+<tr><td>O cliente é que está vendo antigo</td><td>Não peça para ele limpar cache — metade não vai conseguir. Mande o link com um parâmetro: <code>site.com.br/?v=2</code>. É outro endereço para o navegador.</td></tr>
+<tr><td>Para nunca mais acontecer</td><td>Versione o arquivo: <code>estilo.css?v=3</code> no <code>&lt;link&gt;</code>. Mudou o CSS, muda o número. A Vercel e as hospedagens modernas já fazem isso sozinhas no build.</td></tr>
+</tbody></table></div>
+<div class="nota">Antes de passar meia hora atrás de um bug, faça o recarregamento forçado. Uma parte desconfortavelmente grande dos "bugs" é cache — inclusive os que você jura que não são.</div>
+</div>
+</article>
+</section>
+<section class="parte" id="s7">
+<div class="parte__cabeca"><span class="parte__num">PARTE 7</span><h2>Reuso sem build</h2></div>
+<p class="parte__resumo">O menu deste site está escrito por inteiro em dez arquivos HTML. Mudar um link significa mudar dez vezes — e esse é o preço do HTML puro em site multi-página. Existem cinco saídas, cada uma com um custo diferente. A pior é a que a maioria escolhe sem pensar.</p>
+
+<article class="topico" id="t-reuso-problema" data-marca="novo">
+<div class="topico__cabeca"><h3>O problema, com número</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Quando este site ganhou a trilha de Movimento, o menu precisou de um link novo. Dez arquivos. Quando virou dropdown agrupado, foram dez blocos de HTML substituídos. Numa das vezes o <code>trafego.html</code> ficou de fora e ninguém percebeu na hora — porque conferir dez arquivos no olho é exatamente o tipo de tarefa em que o olho falha.</p>
+<p>Esse é o <em>único</em> problema real do HTML puro em site de várias páginas. Não é performance, não é SEO, não é capacidade: é repetição de trecho comum — cabeçalho, menu, rodapé, scripts.</p>
+<div class="nota"><strong>Quando isso não é problema:</strong> landing page de uma página só. Que é justamente o seu produto principal. Toda a discussão desta parte só começa a valer a partir do terceiro ou quarto arquivo HTML no mesmo projeto — antes disso, resolver é mais caro que conviver.</div>
+</div>
+</article>
+
+<article class="topico" id="t-reuso-script" data-marca="novo">
+<div class="topico__cabeca"><h3>Saída 1 — copiar, com um script que garante</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O HTML continua repetido, mas você nunca edita as dez cópias na mão: um script faz a substituição em todos os arquivos e você confere o resultado.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">menu.py</span><button class="copiar">copiar</button></div><pre><code>import glob, re
+
+NOVO = open('menu.html', encoding='utf-8').read()
+
+for arquivo in glob.glob('*.html'):
+    h = open(arquivo, encoding='utf-8').read()
+    # troca tudo entre &lt;nav class="navmenu"&gt; e &lt;/nav&gt;
+    h = re.sub(r'&lt;nav class="navmenu".*?&lt;/nav&gt;', NOVO, h, flags=re.S)
+    open(arquivo, 'w', encoding='utf-8').write(h)
+    print(arquivo, 'ok')</code></pre></div>
+<p>É feio e funciona. Foi assim que o menu deste site foi trocado nas dez páginas, e é assim que se corrige um telefone errado em vinte arquivos de um site antigo.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Ganha</th><th>Perde</th></tr></thead>
+<tbody>
+<tr><td>HTML servido pronto, SEO perfeito, zero dependência, funciona em qualquer hospedagem</td><td>Precisa rodar o script; se esquecer, as páginas divergem em silêncio</td></tr>
+</tbody></table></div>
+<div class="nota">Sempre feche com uma verificação, não com confiança: <code>grep -L "movimento.html" *.html</code> lista os arquivos que <em>não</em> têm o link novo. Se a saída vier vazia, entrou em todos.</div>
+</div>
+</article>
+
+<article class="topico" id="t-reuso-fetch" data-marca="novo">
+<div class="topico__cabeca"><h3>Saída 2 — carregar o pedaço com fetch</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>O menu vira um arquivo só, e cada página o busca ao carregar.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">html + js</span><button class="copiar">copiar</button></div><pre><code>&lt;!-- em toda página --&gt;
+&lt;div data-incluir="parciais/menu.html"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+document.querySelectorAll('[data-incluir]').forEach(async (el) =&gt; {
+  const r = await fetch(el.dataset.incluir);
+  el.innerHTML = await r.text();
+  // marca a página atual depois que o menu existe
+  const aqui = location.pathname.split('/').pop() || 'index.html';
+  el.querySelector(`a[href="${aqui}"]`)?.classList.add('is-atual');
+});
+&lt;/script&gt;</code></pre></div>
+<div class="nota"><strong>Não use isso para conteúdo que precisa ranquear.</strong> O HTML servido chega vazio; o menu só existe depois do JavaScript. Para um menu, o dano de SEO é pequeno — o Google executa JavaScript hoje, ainda que com atraso. Para texto de venda, título ou descrição, é sabotagem: você está escondendo do buscador exatamente o que ele precisa ler. Some ainda o <em>flash</em> de página sem menu, e o fato de que não funciona abrindo o arquivo direto do disco (<code>file://</code> bloqueia <code>fetch</code>) — você precisa de um servidor local mesmo para testar.</div>
+</div>
+</article>
+
+<article class="topico" id="t-reuso-template" data-marca="novo">
+<div class="topico__cabeca"><h3>Saída 3 — template para o que se repete na página</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p><code>&lt;template&gt;</code> é HTML que o navegador lê mas não mostra, e que você clona quantas vezes quiser. Não resolve o menu entre páginas — resolve o card que se repete <em>dentro</em> de uma página, a partir de uma lista de dados.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html + js</span><button class="copiar">copiar</button></div><pre><code>&lt;template id="tpl-servico"&gt;
+  &lt;article class="servico"&gt;
+    &lt;h3&gt;&lt;/h3&gt;
+    &lt;p&gt;&lt;/p&gt;
+    &lt;a class="cta"&gt;Pedir orçamento&lt;/a&gt;
+  &lt;/article&gt;
+&lt;/template&gt;
+&lt;div id="servicos"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+const SERVICOS = [
+  { titulo: 'Reforma completa',  texto: 'Do projeto à entrega da obra.' },
+  { titulo: 'Interiores',        texto: 'Marcenaria, iluminação e acabamento.' },
+  { titulo: 'Consultoria',       texto: 'Uma visita, um diagnóstico, um caminho.' },
+];
+
+const tpl = document.querySelector('#tpl-servico');
+const destino = document.querySelector('#servicos');
+
+SERVICOS.forEach(s =&gt; {
+  const no = tpl.content.cloneNode(true);
+  no.querySelector('h3').textContent = s.titulo;
+  no.querySelector('p').textContent  = s.texto;
+  no.querySelector('.cta').href =
+    'https://wa.me/5567999999999?text=' + encodeURIComponent('Quero saber sobre ' + s.titulo);
+  destino.appendChild(no);
+});
+&lt;/script&gt;</code></pre></div>
+<p>Repare no <code>textContent</code> em vez de <code>innerHTML</code>: com <code>textContent</code>, texto que vem de fora nunca vira código. É a defesa contra XSS embutida no hábito.</p>
+<div class="nota">Vale quando a lista é longa ou muda com frequência — catálogo de serviços, perguntas frequentes, depoimentos. Para três cards fixos, escrever os três em HTML é mais simples e melhor para SEO.</div>
+</div>
+</article>
+
+<article class="topico" id="t-reuso-componente" data-marca="novo">
+<div class="topico__cabeca"><h3>Saída 4 — Web Component</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>É o recurso nativo do navegador para criar sua própria tag. Sem framework, sem build.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>class BotaoZap extends HTMLElement {
+  connectedCallback() {
+    const texto = this.getAttribute('texto') || 'Falar no WhatsApp';
+    const msg   = this.getAttribute('mensagem') || 'Olá! Vim pelo site.';
+    this.innerHTML = `&lt;a class="cta" target="_blank" rel="noopener"
+        href="https://wa.me/5567999999999?text=${encodeURIComponent(msg)}"&gt;${texto}&lt;/a&gt;`;
+  }
+}
+customElements.define('botao-zap', BotaoZap);</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div><pre><code>&lt;botao-zap texto="Quero um orçamento"
+           mensagem="Vi a página de reforma e quero um orçamento"&gt;&lt;/botao-zap&gt;</code></pre></div>
+<div class="nota"><strong>Onde faz sentido:</strong> elemento que aparece muitas vezes com variação pequena, e cujo conteúdo não precisa ser lido pelo Google — botão, modal, carrossel, player. Para cabeçalho e rodapé, cai no mesmo problema do <code>fetch</code>: depende de JavaScript para existir. E evite o Shadow DOM aqui, senão o CSS do seu site não entra dentro do componente e você perde os tokens.</div>
+</div>
+</article>
+
+<article class="topico" id="t-reuso-build" data-marca="novo">
+<div class="topico__cabeca"><h3>Saída 5 — aceitar um build mínimo</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>É a resposta certa para a maioria dos sites com mais de cinco páginas, e a que dá mais preguiça de aceitar — porque parece que você está abandonando o HTML puro. Não está: o resultado publicado continua sendo HTML, CSS e JS estáticos. A diferença é que o computador monta as páginas antes de publicar, em vez de o navegador montar depois.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">com Astro</span><button class="copiar">copiar</button></div><pre><code>---
+import Menu from '../componentes/Menu.astro';
+---
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;&lt;title&gt;Movimento&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+  &lt;Menu atual="movimento" /&gt;
+  &lt;main&gt;...&lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+<p>O menu passa a existir em <em>um</em> arquivo. <code>npm run build</code> gera as dez páginas com o HTML completo dentro. SEO idêntico ao do HTML escrito na mão, porque é HTML escrito na mão — só que escrito uma vez.</p>
+<div class="nota"><strong>O custo honesto:</strong> passa a existir <code>node_modules</code>, <code>package.json</code> e uma versão de Node que envelhece. Daqui a três anos, abrir esse projeto pode exigir meia hora de conserto antes de mudar uma vírgula — enquanto um HTML puro abre e edita para sempre. Por isso a regra: <strong>site que o cliente vai mexer ou que você vai manter por anos, HTML puro; site com muitas páginas que você atualiza toda semana, build.</strong></div>
+</div>
+</article>
+
+<article class="topico" id="t-reuso-decisao" data-marca="novo">
+<div class="topico__cabeca"><h3>A tabela de decisão</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Situação</th><th>Saída</th><th>Por quê</th></tr></thead>
+<tbody>
+<tr><td>Landing page, 1 arquivo</td><td>Nenhuma</td><td>Não existe repetição para resolver</td></tr>
+<tr><td>2 a 4 páginas</td><td>Copiar + script</td><td>Mais barato que qualquer abstração</td></tr>
+<tr><td>5+ páginas, você mantém</td><td>Build mínimo (Astro, Eleventy)</td><td>Um arquivo de menu, HTML completo no fim</td></tr>
+<tr><td>Cards repetidos de uma lista</td><td><code>&lt;template&gt;</code></td><td>Nativo, sem dependência</td></tr>
+<tr><td>Botão/modal/carrossel recorrente</td><td>Web Component</td><td>Vira uma tag sua, reaproveitável entre projetos</td></tr>
+<tr><td>Trecho que não precisa ranquear</td><td><code>fetch</code></td><td>Simples, desde que o Google não precise ler</td></tr>
+<tr><td>Cabeçalho, rodapé, texto de venda</td><td>Nunca por JavaScript</td><td>É o que o buscador tem que encontrar no HTML servido</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Este site, em particular:</strong> dez páginas, mantido toda semana — pela tabela, já passou da hora de um build. Ele continua em HTML puro de propósito, porque é material de estudo sobre HTML puro e precisa poder ser aberto e lido arquivo por arquivo. É um caso em que a decisão certa tecnicamente perde para a decisão certa no contexto — e saber diferenciar as duas é metade do ofício.</div>
+</div>
+</article>
+</section>
+
+
+<nav class="passo" aria-label="Navegar entre trilhas">
+<a class="passo__item passo__item--ant" href="html-puro-2.html"><span>Anterior</span><strong>HTML puro — parte 2</strong></a>
+<a class="passo__item passo__item--prox" href="qualidade.html"><span>Próxima</span><strong>Qualidade</strong></a>
+</nav>
+</main>
+</div>
+<footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<script src="app.js"></script>
+<script src="busca.js" defer></script>
+</body>
+</html>

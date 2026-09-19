@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>HTML puro — parte 2 — Gustavo Tutorial</title>
+<meta name="description" content="Segunda metade da trilha de HTML puro: recursos nativos sem JavaScript, JS além do básico, ferramentas, entrega, segurança e glossário.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="HTML puro — parte 2 — Gustavo Tutorial">
+<meta property="og:description" content="Segunda metade da trilha de HTML puro: recursos nativos sem JavaScript, JS além do básico, ferramentas, entrega, segurança e glossário.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0D6B62" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
+<meta name="author" content="Gustavo">
+<link rel="canonical" href="https://gustavo-tutorial.vercel.app/html-puro-2.html">
+<meta property="og:url" content="https://gustavo-tutorial.vercel.app/html-puro-2.html">
+<meta property="og:image" content="https://gustavo-tutorial.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Gustavo Tutorial">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo">
+<div class="topo__interno">
+<a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
+<div class="filtros" role="group" aria-label="Filtrar tópicos">
+<button class="filtro" data-filtro="tudo" aria-pressed="true">Tudo</button>
+<button class="filtro" data-filtro="revisao" aria-pressed="false">Revisão</button>
+<button class="filtro" data-filtro="novo" aria-pressed="false">Novo</button>
+</div>
+<button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+</div>
+<nav class="navmenu" aria-label="Trilhas">
+<details class="navmenu__caixa" id="navmenu">
+<summary class="navmenu__botao">Trilhas<span aria-hidden="true">&#9662;</span></summary>
+<div class="navmenu__painel">
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Construir</p>
+<a href="html-puro.html" class="is-atual"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="qualidade.html"><strong>Qualidade</strong><span>Imagem, a11y, Vitals e testes</span></a>
+<a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="motion.html"><strong>Referência: Motion</strong><span>A API inteira, em português</span></a>
+<a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Servidor, banco e login</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Vender</p>
+<a href="landing-pages.html"><strong>Landing pages</strong><span>A estratégia da página</span></a>
+<a href="trafego.html"><strong>Tráfego</strong><span>Ser encontrado no Google</span></a>
+<a href="negocio.html"><strong>Negócio</strong><span>Preço, escopo e contrato</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Método</p>
+<a href="fluxo.html"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
+<a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
+<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+<div class="navmenu__grupo navmenu__grupo--trabalhar">
+<p class="navmenu__rotulo">Trabalhar</p>
+<a href="ferramentas.html"><strong>Ferramentas</strong><span>As oito do dia a dia</span></a>
+<a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
+<a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
+<a href="ferramentas.html#f-zap"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
+<a href="ferramentas.html#f-utm"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
+<a href="ia.html#t-gerador"><strong>Gerador de comando</strong><span>Brief para a IA</span></a>
+</div>
+</div>
+</details>
+<span class="navmenu__aqui">HTML puro · parte 2</span>
+</nav></header>
+<div class="palco">
+<nav class="sumario" id="sumario" aria-label="Sumário">
+<button class="sumario__abrir" id="sumario-abrir" aria-expanded="false" aria-controls="sumario-lista"><span>Sumário</span><span aria-hidden="true">&#9662;</span></button>
+<div class="sumario__lista" id="sumario-lista">
+<p class="sumario__titulo">HTML puro — parte 2</p>
+<a class="sumario__parte" href="#s7">7 · HTML que resolve sem JavaScript</a>
+<ol>
+<li><a href="#t-dialog"><code>&lt;dialog&gt;</code> — modal nativo</a></li>
+<li><a href="#t-details"><code>&lt;details&gt;</code> — acordeão de graça</a></li>
+<li><a href="#t-picture"><code>&lt;picture&gt;</code> e <code>srcset</code> — imagem responsiva de verdade</a></li>
+<li><a href="#t-popover">Popover API</a></li>
+</ol>
+<a class="sumario__parte" href="#s8">8 · JavaScript além do básico</a>
+<ol>
+<li><a href="#t-arrays">Métodos de array</a></li>
+<li><a href="#t-sintaxe">Destructuring, spread e outros atalhos</a></li>
+<li><a href="#t-modulos">Módulos ES</a></li>
+<li><a href="#t-debounce">Debounce e throttle</a></li>
+<li><a href="#t-apis-nav">APIs do navegador que valem conhecer</a></li>
+<li><a href="#t-pwa">PWA e Service Worker</a></li>
+</ol>
+<a class="sumario__parte" href="#s9">9 · Ferramentas e fluxo de trabalho</a>
+<ol>
+<li><a href="#t-emmet">Emmet</a></li>
+<li><a href="#t-editor">VS Code na prática</a></li>
+<li><a href="#t-prettier">Prettier e formatação</a></li>
+<li><a href="#t-figma">Do Figma para o código</a></li>
+</ol>
+<a class="sumario__parte" href="#s10">10 · Entrega e produção</a>
+<ol>
+<li><a href="#t-unico">HTML único autocontido</a></li>
+<li><a href="#t-performance">Performance</a></li>
+<li><a href="#t-seo">SEO e Open Graph</a></li>
+<li><a href="#t-hospedagem">Hospedagem e deploy</a></li>
+<li><a href="#t-dominio">Domínio, DNS e HTTPS</a></li>
+<li><a href="#t-git">Git e versionamento</a></li>
+<li><a href="#t-devtools">DevTools do navegador</a></li>
+<li><a href="#t-analytics">Analytics e rastreamento</a></li>
+</ol>
+<a class="sumario__parte" href="#s11">11 · Segurança</a>
+<ol>
+<li><a href="#t-xss">XSS — quando texto vira código</a></li>
+<li><a href="#t-csp">Content Security Policy</a></li>
+<li><a href="#t-segredos">Segredos, chaves e dependências</a></li>
+</ol>
+<a class="sumario__parte" href="#s12">12 · Glossário de siglas</a>
+<ol>
+<li><a href="#t-glossario">Siglas e termos</a></li>
+</ol>
+</div>
+</nav>
+<main class="leitura" id="conteudo" tabindex="-1">
+<section class="abertura">
+<h1>HTML puro — parte 2</h1>
+<p class="abertura__lead">Continuação da trilha de <a href="html-puro.html">HTML puro</a>: recursos nativos que dispensam JavaScript, JavaScript além do básico, ferramentas de fluxo, entrega em produção, segurança e o glossário de siglas. Se você ainda não leu a primeira metade, <a href="html-puro.html">comece por ela</a>.</p>
+<div class="legenda">
+<span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
+<span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
+<span>6 partes · 26 tópicos · parte 2 de 2</span>
+</div>
+</section>
+<p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
+<section class="parte" id="s7">
+      <div class="parte__cabeca">
+        <span class="parte__num">PARTE 7</span>
+        <h2>HTML que resolve sem JavaScript</h2>
+      </div>
+      <p class="parte__resumo">Elementos nativos que substituem código que você provavelmente escreve à mão — e que já vêm com teclado, foco e acessibilidade prontos.</p>
+
+      <article class="topico" id="t-dialog" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3><code>&lt;dialog&gt;</code> — modal nativo</h3>
+          <span class="tag tag--novo">Novo</span>
+          <span class="tag tag--html">HTML</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Fazer um modal à mão significa: escurecer o fundo, travar a rolagem, prender o foco dentro dele, fechar no Esc, devolver o foco ao abrir e fechar. O <code>&lt;dialog&gt;</code> entrega tudo isso de fábrica.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div>
+            <pre><code>&lt;button id="abrir"&gt;Ver fotos do evento&lt;/button&gt;
+
+&lt;dialog id="galeria"&gt;
+  &lt;img src="evento.webp" alt="Bar montado em casamento"&gt;
+  &lt;button id="fechar"&gt;Fechar&lt;/button&gt;
+&lt;/dialog&gt;</code></pre>
+          </div>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">javascript</span><button class="copiar">copiar</button></div>
+            <pre><code>const galeria = document.getElementById('galeria');
+
+abrir.addEventListener('click', () =&gt; galeria.showModal());
+fechar.addEventListener('click', () =&gt; galeria.close());
+
+// fechar ao clicar fora (o ::backdrop é o próprio dialog)
+galeria.addEventListener('click', (e) =&gt; {
+  if (e.target === galeria) galeria.close();
+});</code></pre>
+          </div>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div>
+            <pre><code>dialog { border: 0; border-radius: 8px; padding: 0; max-width: 90vw; }
+dialog::backdrop { background: rgba(0, 0, 0, .7); }</code></pre>
+          </div>
+
+          <p>O <code>::backdrop</code> é o fundo escuro — um pseudo-elemento que o navegador cria sozinho. Você não precisa daquela <code>&lt;div class="overlay"&gt;</code>.</p>
+
+          <div class="nota">
+            <strong>Atenção a um detalhe:</strong> <code>showModal()</code> e <code>show()</code> são diferentes. O primeiro trava a página e escurece o fundo; o segundo abre o dialog sem bloquear nada. Para lightbox e modal, é sempre <code>showModal()</code>.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-details" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3><code>&lt;details&gt;</code> — acordeão de graça</h3>
+          <span class="tag tag--novo">Novo</span>
+          <span class="tag tag--html">HTML</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Um FAQ que abre e fecha, sem uma linha de JavaScript, já acessível por teclado e indexável pelo Google.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div>
+            <pre><code>&lt;details name="faq"&gt;
+  &lt;summary&gt;Vocês atendem fora de Campo Grande?&lt;/summary&gt;
+  &lt;p&gt;Sim, atendemos todo o estado. Deslocamento cobrado à parte.&lt;/p&gt;
+&lt;/details&gt;
+
+&lt;details name="faq"&gt;
+  &lt;summary&gt;Qual o prazo mínimo para reservar?&lt;/summary&gt;
+  &lt;p&gt;Trinta dias para eventos até 100 convidados.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+          </div>
+
+          <p>O atributo <code>name</code> igual nos dois faz eles funcionarem como acordeão exclusivo: abrir um fecha o outro. Isso é recente e resolve mais um pedaço de JavaScript.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div>
+            <pre><code>summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 16px 0;
+  list-style: none;           /* tira a setinha padrão */
+}
+summary::-webkit-details-marker { display: none; }
+
+/* sua própria seta, girando ao abrir */
+summary::after {
+  content: "+";
+  float: right;
+  transition: transform .2s;
+}
+details[open] summary::after { transform: rotate(45deg); }</code></pre>
+          </div>
+
+          <div class="nota">
+            <strong>Ganho de SEO:</strong> diferente de um acordeão feito em JavaScript, o conteúdo fechado do <code>&lt;details&gt;</code> está no HTML e o Google lê. Um FAQ assim pode virar resultado enriquecido na busca.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-picture" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3><code>&lt;picture&gt;</code> e <code>srcset</code> — imagem responsiva de verdade</h3>
+          <span class="tag tag--novo">Novo</span>
+          <span class="tag tag--html">HTML</span>
+        </div>
+        <div class="topico__corpo">
+          <p>O <code>loading="lazy"</code> adia o carregamento; ele não diminui o arquivo. Mandar uma imagem de 1600px para um celular de 400px continua desperdiçando banda. O <code>srcset</code> resolve: você oferece versões, o navegador escolhe.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div>
+            <pre><code>&lt;img src="hero-800.webp"
+     srcset="hero-400.webp   400w,
+             hero-800.webp   800w,
+             hero-1600.webp 1600w"
+     sizes="(max-width: 700px) 100vw, 800px"
+     alt="Bar montado em festa ao ar livre"
+     width="1600" height="900"&gt;</code></pre>
+          </div>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Atributo</th><th>O que diz ao navegador</th></tr></thead>
+              <tbody>
+                <tr><td><code>srcset</code></td><td>Que versões existem e a largura real de cada uma (<code>w</code>)</td></tr>
+                <tr><td><code>sizes</code></td><td>Que espaço a imagem vai ocupar no layout, por faixa de tela</td></tr>
+                <tr><td><code>src</code></td><td>Reserva, para navegador antigo</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4><code>&lt;picture&gt;</code> — trocar o formato ou a própria foto</h4>
+          <p>Quando não é só tamanho: servir AVIF para quem suporta, ou usar um recorte vertical no celular e horizontal no desktop.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div>
+            <pre><code>&lt;picture&gt;
+  &lt;source type="image/avif" srcset="hero.avif"&gt;
+  &lt;source media="(max-width: 700px)" srcset="hero-vertical.webp"&gt;
+  &lt;img src="hero.jpg" alt="Bar montado em festa ao ar livre"&gt;
+&lt;/picture&gt;</code></pre>
+          </div>
+
+          <div class="nota">
+            <strong>Impacto real:</strong> numa landing page com foto de topo, isso costuma ser o maior ganho isolado de LCP no celular. Exportar três tamanhos dá cinco minutos de trabalho e corta metade do peso da página.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-popover" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Popover API</h3>
+          <span class="tag tag--novo">Novo</span>
+          <span class="tag tag--html">HTML</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Para tudo que aparece “por cima” mas não bloqueia a página: menu suspenso, tooltip, painel de filtro, aviso. Abre e fecha por atributo, sem JavaScript.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div>
+            <pre><code>&lt;button popovertarget="menu-mobile"&gt;Menu&lt;/button&gt;
+
+&lt;nav id="menu-mobile" popover&gt;
+  &lt;a href="#sobre"&gt;Sobre&lt;/a&gt;
+  &lt;a href="#contato"&gt;Contato&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+          </div>
+
+          <p>Só isso. O navegador cuida de abrir, fechar ao clicar fora, fechar no Esc e colocar acima de tudo — sem <code>z-index</code>, porque popover vive numa camada própria, acima da página inteira.</p>
+
+          <div class="nota">
+            <strong>Comparando com o <code>&lt;dialog&gt;</code>:</strong> dialog é para o que exige decisão — o resto da página fica bloqueado. Popover é para o que é auxiliar — a pessoa pode simplesmente clicar fora e continuar. Menu mobile é popover; confirmação de exclusão é dialog.
+          </div>
+        </div>
+      </article>
+</section>
+<section class="parte" id="s8">
+      <div class="parte__cabeca">
+        <span class="parte__num">PARTE 8</span>
+        <h2>JavaScript além do básico</h2>
+      </div>
+      <p class="parte__resumo">Sintaxe e recursos do navegador que aparecem em todo código moderno — e que você vai encontrar em qualquer exemplo que buscar na internet.</p>
+
+      <article class="topico" id="t-arrays" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Métodos de array</h3>
+          <span class="tag tag--novo">Novo</span>
+          <span class="tag tag--js">JS</span>
+        </div>
+        <div class="topico__corpo">
+          <p>São a forma moderna de trabalhar com listas. Em vez de um <code>for</code> com contador, você descreve o que quer.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">javascript</span><button class="copiar">copiar</button></div>
+            <pre><code>const drinks = [
+  { nome: "Negroni",  alcool: true,  preco: 32 },
+  { nome: "Maracujá", alcool: false, preco: 18 },
+  { nome: "Gin Tônica", alcool: true, preco: 28 }
+];
+
+// map — transforma cada item, devolve lista do mesmo tamanho
+const nomes = drinks.map(d =&gt; d.nome);
+// ["Negroni", "Maracujá", "Gin Tônica"]
+
+// filter — devolve só os que passam no teste
+const semAlcool = drinks.filter(d =&gt; !d.alcool);
+
+// find — devolve o PRIMEIRO que bate (ou undefined)
+const negroni = drinks.find(d =&gt; d.nome === "Negroni");
+
+// reduce — reduz a lista a um único valor
+const total = drinks.reduce((soma, d) =&gt; soma + d.preco, 0);  // 78
+
+// some / every — devolvem true ou false
+const temSemAlcool = drinks.some(d =&gt; !d.alcool);   // true
+const todosCaros   = drinks.every(d =&gt; d.preco &gt; 20); // false
+
+// sort — ordena (cuidado: altera o array original)
+const porPreco = [...drinks].sort((a, b) =&gt; a.preco - b.preco);</code></pre>
+          </div>
+
+          <p>O ganho fica claro quando você encadeia — gerar o HTML da carta de drinks, só os sem álcool, ordenados por preço:</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">javascript</span><button class="copiar">copiar</button></div>
+            <pre><code>const html = drinks
+  .filter(d =&gt; !d.alcool)
+  .sort((a, b) =&gt; a.preco - b.preco)
+  .map(d =&gt; `&lt;li&gt;${d.nome} — R$ ${d.preco}&lt;/li&gt;`)
+  .join('');</code></pre>
+          </div>
+
+          <div class="nota">
+            <strong>Regra para escolher:</strong> quer a lista transformada? <code>map</code>. Quer parte da lista? <code>filter</code>. Quer um item? <code>find</code>. Quer um número só? <code>reduce</code>. Quer sim ou não? <code>some</code> ou <code>every</code>.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-sintaxe" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Destructuring, spread e outros atalhos</h3>
+          <span class="tag tag--novo">Novo</span>
+          <span class="tag tag--js">JS</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Sintaxe que aparece em praticamente todo código dos últimos anos. Saber ler isso é o que separa entender um exemplo da internet de copiar sem saber o que faz.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">javascript</span><button class="copiar">copiar</button></div>
+            <pre><code>// DESTRUCTURING — extrair campos de um objeto
+const drink = { nome: "Negroni", preco: 32, alcool: true };
+
+const { nome, preco } = drink;        // cria duas variáveis
+const { nome: titulo } = drink;       // renomeando
+const { estoque = 0 } = drink;        // valor padrão se não existir
+
+// SPREAD (...) — espalhar o conteúdo
+const copia = { ...drink };                    // cópia rasa
+const atualizado = { ...drink, preco: 35 };    // cópia com campo trocado
+const juntos = [...listaA, ...listaB];         // juntar arrays
+
+// ENCADEAMENTO OPCIONAL (?.) — não quebra se não existir
+const cidade = cliente?.endereco?.cidade;   // undefined em vez de erro
+
+// OPERADOR ?? — usa o padrão só quando é null ou undefined
+const titulo2 = config.titulo ?? "Sem título";
+// (diferente do ||, que também troca string vazia e zero)
+
+// TEMPLATE LITERAL — texto com variáveis e quebras de linha
+const msg = `Olá ${nome}, o preço é R$ ${preco}.`;</code></pre>
+          </div>
+
+          <div class="nota nota--alerta">
+            <strong>Diferença que pega muita gente:</strong> <code>||</code> considera <code>0</code> e <code>""</code> como “vazio” e troca pelo padrão. O <code>??</code> só troca quando é <code>null</code> ou <code>undefined</code>. Num formulário onde zero é resposta válida, essa diferença é bug.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-modulos" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Módulos ES</h3>
+          <span class="tag tag--novo">Novo</span>
+          <span class="tag tag--js">JS</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Dividir o JavaScript em arquivos que se importam entre si. Funciona nativamente no navegador, sem bundler — basta declarar <code>type="module"</code>.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">whatsapp.js</span><button class="copiar">copiar</button></div>
+            <pre><code>export const NUMERO = "5567999999999";
+
+export function abrirWhatsApp(mensagem) {
+  const url = `https://wa.me/${NUMERO}?text=${encodeURIComponent(mensagem)}`;
+  window.open(url, '_blank', 'noopener');
+}</code></pre>
+          </div>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">index.html</span><button class="copiar">copiar</button></div>
+            <pre><code>&lt;script type="module"&gt;
+  import { abrirWhatsApp } from './whatsapp.js';
+
+  form.addEventListener('submit', (e) =&gt; {
+    e.preventDefault();
+    abrirWhatsApp('Olá! Vim pelo site.');
+  });
+&lt;/script&gt;</code></pre>
+          </div>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Detalhe</th><th>Consequência</th></tr></thead>
+              <tbody>
+                <tr><td>Módulo roda em modo estrito</td><td>Erros silenciosos viram erros visíveis</td></tr>
+                <tr><td>Carrega adiado por padrão</td><td>Não precisa colocar no fim do <code>&lt;body&gt;</code></td></tr>
+                <tr><td>Escopo próprio</td><td>Variáveis não vazam para o global</td></tr>
+                <tr><td>Exige servidor</td><td>Não funciona abrindo o arquivo direto (<code>file://</code>)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="nota nota--alerta">
+            <strong>Aquele último item importa para você.</strong> Módulos quebram o modelo de “abrir o HTML com dois cliques”. Se a entrega precisa funcionar sem servidor, mantenha o script inline. É mais um motivo pelo qual o arquivo único continua fazendo sentido no seu caso.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-debounce" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Debounce e throttle</h3>
+          <span class="tag tag--novo">Novo</span>
+          <span class="tag tag--js">JS</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Duas formas de conter eventos que disparam demais. <strong>Debounce</strong> espera a pessoa parar; <strong>throttle</strong> executa no máximo a cada X tempo.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">javascript</span><button class="copiar">copiar</button></div>
+            <pre><code>function debounce(fn, espera = 300) {
+  let t;
+  return function (...args) {
+    clearTimeout(t);
+    t = setTimeout(() =&gt; fn.apply(this, args), espera);
+  };
+}
+
+function throttle(fn, intervalo = 200) {
+  let liberado = true;
+  return function (...args) {
+    if (!liberado) return;
+    liberado = false;
+    fn.apply(this, args);
+    setTimeout(() =&gt; { liberado = true; }, intervalo);
+  };
+}
+
+// buscar só quando parar de digitar
+campo.addEventListener('input', debounce(buscarCep, 500));
+
+// recalcular no máximo 5x por segundo ao redimensionar
+window.addEventListener('resize', throttle(ajustarLayout, 200));</code></pre>
+          </div>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Situação</th><th>Use</th><th>Por quê</th></tr></thead>
+              <tbody>
+                <tr><td>Campo de busca</td><td>Debounce</td><td>Só interessa o texto final</td></tr>
+                <tr><td>Validar CEP enquanto digita</td><td>Debounce</td><td>Evita chamar a API a cada tecla</td></tr>
+                <tr><td>Redimensionar janela</td><td>Throttle</td><td>Precisa acompanhar, mas não 60x por segundo</td></tr>
+                <tr><td>Rolagem</td><td><code>requestAnimationFrame</code></td><td>Melhor que os dois para efeito visual</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-apis-nav" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>APIs do navegador que valem conhecer</h3>
+          <span class="tag tag--novo">Novo</span>
+          <span class="tag tag--js">JS</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Recursos nativos que resolvem problemas reais de landing page — nenhum precisa de biblioteca.</p>
+
+          <h4>Web Share — o compartilhar nativo do celular</h4>
+          <p>Abre o menu do sistema, com WhatsApp, Instagram e tudo que a pessoa tem instalado. Faz muito mais sentido que uma fileira de botões de rede social.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">javascript</span><button class="copiar">copiar</button></div>
+            <pre><code>botaoCompartilhar.addEventListener('click', async () =&gt; {
+  if (!navigator.share) {          // desktop geralmente não tem
+    botaoCompartilhar.hidden = true;
+    return;
+  }
+  try {
+    await navigator.share({
+      title: 'Art Bar',
+      text: 'Bar de drinks para eventos',
+      url: window.location.href
+    });
+  } catch (e) { /* a pessoa cancelou — não é erro */ }
+});</code></pre>
+          </div>
+
+          <h4>Clipboard — copiar com um clique</h4>
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">javascript</span><button class="copiar">copiar</button></div>
+            <pre><code>await navigator.clipboard.writeText('contato@artbar.com.br');
+// exige HTTPS e um gesto da pessoa (clique)</code></pre>
+          </div>
+
+          <h4>Outras que aparecem</h4>
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>API</th><th>Para que serve</th><th>Observação</th></tr></thead>
+              <tbody>
+                <tr><td><code>Geolocation</code></td><td>Localização da pessoa</td><td>Pede permissão; use só se agregar de verdade</td></tr>
+                <tr><td><code>Notification</code></td><td>Notificação do sistema</td><td>Pedir isso de cara afasta visitante</td></tr>
+                <tr><td><code>matchMedia</code></td><td>Ler media query pelo JS</td><td>Detectar tema escuro, tela pequena</td></tr>
+                <tr><td><code>ResizeObserver</code></td><td>Avisa quando um elemento muda de tamanho</td><td>Melhor que ouvir <code>resize</code></td></tr>
+                <tr><td><code>URLSearchParams</code></td><td>Ler parâmetros da URL</td><td>Saber de qual anúncio a pessoa veio</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">rastrear origem sem analytics</span><button class="copiar">copiar</button></div>
+            <pre><code>// artbar.com.br/?origem=instagram
+const origem = new URLSearchParams(location.search).get('origem');
+
+// entra na mensagem do WhatsApp — você descobre o que converteu
+const msg = `Olá! Vim pelo site${origem ? ` (${origem})` : ''}.`;</code></pre>
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-pwa" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>PWA e Service Worker</h3>
+          <span class="tag tag--novo">Novo</span>
+          <span class="tag tag--js">JS</span>
+        </div>
+        <div class="topico__corpo">
+          <p>PWA (Progressive Web App) é um site que o celular trata quase como aplicativo: instala na tela inicial, abre sem barra de navegador e funciona offline. São dois ingredientes.</p>
+
+          <h4>1. O manifesto — dados de instalação</h4>
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">manifest.json</span><button class="copiar">copiar</button></div>
+            <pre><code>{
+  "name": "Art Bar",
+  "short_name": "Art Bar",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0B0B",
+  "theme_color": "#7A1C30",
+  "icons": [
+    { "src": "/icone-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icone-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}</code></pre>
+          </div>
+
+          <h4>2. O service worker — o que faz funcionar offline</h4>
+          <p>É um script que fica entre o site e a internet, interceptando requisições. Ele guarda arquivos e responde com a cópia quando não há conexão.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">sw.js</span><button class="copiar">copiar</button></div>
+            <pre><code>const CACHE = 'artbar-v1';
+
+self.addEventListener('install', (e) =&gt; {
+  e.waitUntil(
+    caches.open(CACHE).then(c =&gt; c.addAll(['/', '/index.html']))
+  );
+});
+
+self.addEventListener('fetch', (e) =&gt; {
+  e.respondWith(
+    caches.match(e.request).then(r =&gt; r || fetch(e.request))
+  );
+});</code></pre>
+          </div>
+
+          <div class="nota nota--alerta">
+            <strong>Antes de vender PWA para um cliente:</strong> o service worker guarda versões antigas com muita eficiência. Se você não mudar o nome do cache a cada atualização, o cliente vai continuar vendo o site velho e jurar que você não publicou. É o problema número um de quem começa com PWA.
+          </div>
+
+          <div class="nota">
+            <strong>Vale a pena quando:</strong> o site é consultado repetidamente — cardápio, catálogo, área do aluno. Numa landing page que a pessoa visita uma vez e vai pro WhatsApp, não agrega.
+          </div>
+        </div>
+      </article>
+</section>
+<section class="parte" id="s9">
+      <div class="parte__cabeca">
+        <span class="parte__num">PARTE 9</span>
+        <h2>Ferramentas e fluxo de trabalho</h2>
+      </div>
+      <p class="parte__resumo">Nada disso é tecnologia web — é o que determina quanto tempo você leva para entregar. Provavelmente a parte com maior retorno por hora estudada.</p>
+
+      <article class="topico" id="t-emmet" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Emmet</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Já vem no VS Code, ligado. Você escreve uma abreviação, aperta Tab, e ela vira HTML completo. É o item desta lista que mais economiza tempo por dia.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">você digita</span><button class="copiar">copiar</button></div>
+            <pre><code>section.hero&gt;h1+p+a.botao{Falar no WhatsApp}</code></pre>
+          </div>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">Tab produz</span><button class="copiar">copiar</button></div>
+            <pre><code>&lt;section class="hero"&gt;
+  &lt;h1&gt;&lt;/h1&gt;
+  &lt;p&gt;&lt;/p&gt;
+  &lt;a href="" class="botao"&gt;Falar no WhatsApp&lt;/a&gt;
+&lt;/section&gt;</code></pre>
+          </div>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Símbolo</th><th>Significa</th><th>Exemplo</th></tr></thead>
+              <tbody>
+                <tr><td><code>&gt;</code></td><td>Filho</td><td><code>ul&gt;li</code></td></tr>
+                <tr><td><code>+</code></td><td>Irmão</td><td><code>h1+p</code></td></tr>
+                <tr><td><code>^</code></td><td>Sobe um nível</td><td><code>div&gt;p^span</code></td></tr>
+                <tr><td><code>*</code></td><td>Repete</td><td><code>li*5</code></td></tr>
+                <tr><td><code>.</code> / <code>#</code></td><td>Classe / id</td><td><code>div.card#topo</code></td></tr>
+                <tr><td><code>{}</code></td><td>Texto dentro</td><td><code>a{Clique}</code></td></tr>
+                <tr><td><code>[]</code></td><td>Atributo</td><td><code>img[alt="Bar"]</code></td></tr>
+                <tr><td><code>$</code></td><td>Número da repetição</td><td><code>li.item$*3</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">três exemplos que valem decorar</span><button class="copiar">copiar</button></div>
+            <pre><code>!                    → o esqueleto HTML inteiro, com head e meta
+ul&gt;li.item$*5&gt;a      → lista de 5 itens numerados, cada um com link
+.card*3&gt;img+h3+p     → três cards com imagem, título e parágrafo</code></pre>
+          </div>
+
+          <p>Funciona em CSS também: <code>m10-20</code> vira <code>margin: 10px 20px;</code>, <code>df</code> vira <code>display: flex;</code>, <code>p20</code> vira <code>padding: 20px;</code>.</p>
+        </div>
+      </article>
+
+      <article class="topico" id="t-editor" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>VS Code na prática</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <h4>Atalhos que mudam o ritmo</h4>
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Atalho</th><th>O que faz</th></tr></thead>
+              <tbody>
+                <tr><td><code>Alt + clique</code></td><td>Múltiplos cursores — edita vários lugares ao mesmo tempo</td></tr>
+                <tr><td><code>Ctrl + D</code></td><td>Seleciona a próxima ocorrência da palavra. Renomear classe fica trivial</td></tr>
+                <tr><td><code>Alt + ↑ / ↓</code></td><td>Move a linha para cima ou para baixo</td></tr>
+                <tr><td><code>Shift + Alt + ↓</code></td><td>Duplica a linha</td></tr>
+                <tr><td><code>Ctrl + /</code></td><td>Comenta ou descomenta</td></tr>
+                <tr><td><code>Ctrl + P</code></td><td>Abre arquivo pelo nome</td></tr>
+                <tr><td><code>Ctrl + Shift + F</code></td><td>Busca em todos os arquivos do projeto</td></tr>
+                <tr><td><code>F2</code></td><td>Renomeia em todos os lugares de uma vez</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>Extensões que valem para o seu fluxo</h4>
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Extensão</th><th>Para que</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Live Server</strong></td><td>Sobe um servidor local e recarrega ao salvar. Essencial</td></tr>
+                <tr><td><strong>Prettier</strong></td><td>Formata o código sozinho</td></tr>
+                <tr><td><strong>Auto Rename Tag</strong></td><td>Renomeia a tag de fechamento junto com a de abertura</td></tr>
+                <tr><td><strong>Color Highlight</strong></td><td>Mostra a cor real ao lado do hexadecimal</td></tr>
+                <tr><td><strong>Error Lens</strong></td><td>Mostra o erro na própria linha, sem precisar passar o mouse</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>Snippets — seus próprios atalhos</h4>
+          <p>Em <em>Arquivo → Preferências → Configurar snippets</em>, você cria abreviações suas. É aqui que entra aquele bloco de código que você copia de projeto em projeto.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">html.json</span><button class="copiar">copiar</button></div>
+            <pre><code>{
+  "Botão WhatsApp": {
+    "prefix": "zap",
+    "body": [
+      "&lt;a href=\"https://wa.me/$1\" class=\"botao\"",
+      "   target=\"_blank\" rel=\"noopener\"&gt;$2&lt;/a&gt;"
+    ],
+    "description": "Link de WhatsApp"
+  }
+}</code></pre>
+          </div>
+
+          <p>Agora digitar <code>zap</code> + Tab insere o bloco, com o cursor parando em cada <code>$1</code>, <code>$2</code>. É a versão organizada do “copiar e colar do projeto anterior”.</p>
+        </div>
+      </article>
+
+      <article class="topico" id="t-prettier" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Prettier e formatação</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>O Prettier reescreve o seu código com formatação consistente — indentação, aspas, quebras de linha — toda vez que você salva. Você para de pensar em alinhamento.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">.prettierrc</span><button class="copiar">copiar</button></div>
+            <pre><code>{
+  "printWidth": 90,
+  "singleQuote": true,
+  "tabWidth": 2
+}</code></pre>
+          </div>
+
+          <p>Para formatar ao salvar, ative <em>Format On Save</em> nas configurações do VS Code.</p>
+
+          <div class="nota">
+            <strong>Num arquivo único e longo, isso rende mais do que parece:</strong> código formatado de forma consistente é muito mais rápido de escanear com o olho quando você precisa achar uma seção seis meses depois.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-figma" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Do Figma para o código</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>O Figma é a ferramenta padrão de design de interface. Mesmo que você não desenhe nele, vai receber layout nele — e saber extrair as informações certas economiza muita conversa.</p>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>No Figma</th><th>O que você extrai</th></tr></thead>
+              <tbody>
+                <tr><td>Painel de inspeção</td><td>Cor exata, tamanho de fonte, espaçamento, raio de borda</td></tr>
+                <tr><td>Estilos de cor</td><td>A paleta — vira seu bloco <code>:root</code></td></tr>
+                <tr><td>Estilos de texto</td><td>A escala tipográfica</td></tr>
+                <tr><td>Auto layout</td><td>Já é Flexbox: direção, gap e alinhamento saem direto</td></tr>
+                <tr><td>Exportar</td><td>SVG para ícones e logo, WebP/PNG para fotos</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="nota nota--alerta">
+            <strong>Não copie o CSS que o Figma gera.</strong> Ele produz posicionamento absoluto e medidas fixas, que não são responsivas. Use o painel para ler os valores, mas escreva o layout você mesmo com Flex e Grid.
+          </div>
+
+          <p>Um hábito que evita retrabalho: antes de codar, pergunte ao designer o que acontece no celular. O Figma quase sempre mostra só a versão desktop, e adivinhar o comportamento responsivo é a fonte mais comum de “não era isso que eu queria”.</p>
+        </div>
+      </article>
+</section>
+<section class="parte" id="s10">
+      <div class="parte__cabeca">
+        <span class="parte__num">PARTE 10</span>
+        <h2>Entrega e produção</h2>
+      </div>
+      <p class="parte__resumo">A parte que separa “o site funciona na minha máquina” de “o cliente está no ar e vendendo”.</p>
+
+      <article class="topico" id="t-unico" data-marca="revisao">
+        <div class="topico__cabeca">
+          <h3>HTML único autocontido</h3>
+          <span class="tag tag--revisao">Revisão</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Um único arquivo <code>.html</code> com tudo dentro: o CSS numa tag <code>&lt;style&gt;</code> no <code>&lt;head&gt;</code>, o JS numa tag <code>&lt;script&gt;</code> no fim do <code>&lt;body&gt;</code>. Sem arquivos separados, sem instalação, sem etapa de build.</p>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Ganho</th><th>Custo</th></tr></thead>
+              <tbody>
+                <tr><td>Entrega de um arquivo só</td><td>Arquivo longo de navegar quando cresce</td></tr>
+                <tr><td>Sem caminho quebrado de CSS ou JS</td><td>Reaproveitar código entre projetos é copiar e colar</td></tr>
+                <tr><td>Menos requisições — carrega mais rápido</td><td>Nada é cacheado separadamente entre páginas</td></tr>
+                <tr><td>Hospeda em qualquer lugar</td><td>Diff do Git mistura HTML, CSS e JS</td></tr>
+                <tr><td>Nada envelhece: abre igual daqui a cinco anos</td><td>—</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="nota">
+            <strong>Sobre organização:</strong> separar arquivos não protege contra perda — isso é trabalho de backup e de Git. O que separar resolve é conforto de edição em projeto grande. Numa landing page, comentários de seção no CSS (<code>/* === MENU === */</code>) resolvem a navegação sem abrir mão da entrega enxuta.
+          </div>
+
+          <p>Um meio-termo válido: trabalhar com arquivos separados e juntar tudo só na hora de entregar. Você ganha conforto durante o desenvolvimento e mantém a entrega de um arquivo só.</p>
+        </div>
+      </article>
+
+      <article class="topico" id="t-performance" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Performance</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Em landing page, velocidade é conversão: cada segundo a mais de carregamento derruba a taxa de gente que fica. E quase sempre o culpado é o mesmo — imagem.</p>
+
+          <h4>Imagens, na ordem de impacto</h4>
+          <ol>
+            <li><strong>Redimensione antes de subir.</strong> Foto de celular tem 4000px de largura. Se ela aparece num espaço de 1200px, exporte em 1200px. É a economia mais fácil que existe.</li>
+            <li><strong>Converta para WebP.</strong> Mesma qualidade visual, arquivo 25–35% menor que JPG.</li>
+            <li><strong><code>loading="lazy"</code></strong> em tudo que está abaixo da dobra — nunca na imagem do topo.</li>
+            <li><strong><code>width</code> e <code>height</code> no HTML</strong>, para o navegador reservar o espaço e a página não pular enquanto carrega.</li>
+          </ol>
+
+          <h4>As três métricas que o Google mede</h4>
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Sigla</th><th>Mede</th><th>Alvo</th><th>Vilão típico</th></tr></thead>
+              <tbody>
+                <tr><td><strong>LCP</strong></td><td>Quando o maior elemento aparece</td><td>abaixo de 2,5s</td><td>Imagem de hero pesada</td></tr>
+                <tr><td><strong>CLS</strong></td><td>Quanto o layout “pula” ao carregar</td><td>abaixo de 0,1</td><td>Imagem sem dimensão; fonte trocando</td></tr>
+                <tr><td><strong>INP</strong></td><td>Demora para responder ao toque</td><td>abaixo de 200ms</td><td>JS pesado bloqueando a thread</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>Outros pontos que rendem</h4>
+          <ul>
+            <li><strong>Fontes:</strong> use <code>&amp;display=swap</code> e carregue só os pesos que realmente aparecem. Cada peso extra é um arquivo.</li>
+            <li><strong>Vídeo do YouTube:</strong> um embed direto custa centenas de KB antes de alguém apertar play. Use uma imagem estática com botão e só injete o <code>&lt;iframe&gt;</code> no clique.</li>
+            <li><strong>Teste no lugar certo:</strong> PageSpeed Insights, na aba de celular, com conexão lenta simulada. Seu notebook no wi-fi de casa mente.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="topico" id="t-seo" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>SEO e Open Graph</h3>
+          <span class="tag tag--novo">Novo</span>
+          <span class="tag tag--html">HTML</span>
+        </div>
+        <div class="topico__corpo">
+          <p>SEO em landing page de serviço local é simples: título claro, descrição honesta, HTML semântico, site rápido e dados de negócio marcados. Não tem truque.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">o mínimo no head</span><button class="copiar">copiar</button></div>
+            <pre><code>&lt;title&gt;Art Bar — Bar de Drinks para Casamentos | Campo Grande MS&lt;/title&gt;
+&lt;meta name="description"
+      content="Bar de drinks completo para casamentos e eventos
+               corporativos em MS. Peça seu orçamento no WhatsApp."&gt;
+&lt;link rel="canonical" href="https://artbar.com.br/"&gt;
+
+&lt;!-- Open Graph: como o link aparece no WhatsApp e redes --&gt;
+&lt;meta property="og:title"       content="Art Bar — Bar de Drinks"&gt;
+&lt;meta property="og:description" content="Coquetelaria autoral para o seu evento."&gt;
+&lt;meta property="og:image"       content="https://artbar.com.br/capa.jpg"&gt;
+&lt;meta property="og:url"         content="https://artbar.com.br/"&gt;
+&lt;meta property="og:type"        content="website"&gt;</code></pre>
+          </div>
+
+          <div class="nota">
+            <strong>O <code>og:image</code> não é detalhe.</strong> Sem ele, o link compartilhado no WhatsApp aparece como um retângulo cinza sem imagem. Considerando que é por ali que o cliente vai divulgar, essa tag sozinha muda a taxa de clique. Tamanho: 1200×630.
+          </div>
+
+          <h4>JSON-LD — dados estruturados</h4>
+          <p>Um bloco que descreve o negócio em linguagem de máquina. É o que permite ao Google mostrar endereço, telefone e avaliação direto no resultado da busca.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div>
+            <pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Art Bar",
+  "telephone": "+5567999999999",
+  "email": "contato@artbar.com.br",
+  "areaServed": "Mato Grosso do Sul",
+  "url": "https://artbar.com.br"
+}
+&lt;/script&gt;</code></pre>
+          </div>
+
+          <h4>Checklist de SEO on-page</h4>
+          <ul>
+            <li>Um <code>&lt;h1&gt;</code> por página, com a palavra que a pessoa busca</li>
+            <li><code>&lt;html lang="pt-BR"&gt;</code></li>
+            <li><code>alt</code> descritivo em todas as imagens</li>
+            <li>URL limpa, sem parâmetro estranho</li>
+            <li>Site rápido no celular</li>
+            <li>Google Meu Negócio preenchido — para negócio local, pesa mais que o site</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="topico" id="t-hospedagem" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Hospedagem e deploy</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p><strong>Deploy</strong> é o ato de colocar o site no ar. Para arquivo estático, hoje isso é gratuito e leva minutos.</p>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Opção</th><th>Como funciona</th><th>Bom para</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Netlify</strong></td><td>Arraste a pasta no site e está no ar. Ou conecte ao Git</td><td>O caminho mais rápido para landing page</td></tr>
+                <tr><td><strong>Vercel</strong></td><td>Igual, integrado ao Git. Dona do Next.js</td><td>Mesma coisa; obrigatório se um dia usar Next</td></tr>
+                <tr><td><strong>GitHub Pages</strong></td><td>Publica direto de um repositório</td><td>Projeto pessoal, portfólio</td></tr>
+                <tr><td><strong>Cloudflare Pages</strong></td><td>Rede global muito rápida</td><td>Público espalhado geograficamente</td></tr>
+                <tr><td><strong>Hospedagem tradicional</strong></td><td>Você envia por FTP para um servidor</td><td>Quando o cliente já paga uma e quer usar</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Todas as opções gratuitas acima já vêm com HTTPS e CDN incluídos. Para um HTML único, a diferença prática entre elas é pequena — escolha pela facilidade de você mesmo atualizar depois.</p>
+
+          <div class="nota">
+            <strong>Uma decisão que vale conversar com o cliente:</strong> a conta é dele ou sua? Se o site fica na sua conta, ele depende de você para qualquer coisa — e você fica responsável para sempre. Criar a conta no nome dele, com o e-mail dele, evita um tipo específico de dor de cabeça futura.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-dominio" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Domínio, DNS e HTTPS</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p><strong>Domínio</strong> é o endereço (<code>artbar.com.br</code>), alugado por ano. No Brasil, <code>.com.br</code> se registra no <strong>registro.br</strong>, direto e barato.</p>
+
+          <p><strong>DNS</strong> é a lista telefônica da internet: traduz o nome do domínio para o endereço do servidor. Quando você aponta um domínio para a Netlify, está editando DNS.</p>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Registro</th><th>Para que serve</th></tr></thead>
+              <tbody>
+                <tr><td><strong>A</strong></td><td>Aponta o domínio para um endereço IP</td></tr>
+                <tr><td><strong>CNAME</strong></td><td>Aponta um subdomínio para outro nome (<code>www</code> → <code>site.netlify.app</code>)</td></tr>
+                <tr><td><strong>MX</strong></td><td>Define quem recebe o e-mail do domínio</td></tr>
+                <tr><td><strong>TXT</strong></td><td>Verificações — Google, segurança de e-mail</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="nota nota--alerta">
+            <strong>Propagação de DNS leva tempo.</strong> Mudança pode demorar de minutos a algumas horas para valer em todo lugar. Se você acabou de apontar e não abriu, não mexa de novo — espere. Mexer duas vezes é o que costuma criar o problema de verdade.
+          </div>
+
+          <p><strong>HTTPS</strong> é a versão criptografada do protocolo, sinalizada pelo cadeado. Hoje é obrigatório: navegador marca site sem HTTPS como “não seguro” e o Google rebaixa. Nas hospedagens citadas, ele é automático e gratuito — você não precisa comprar certificado.</p>
+        </div>
+      </article>
+
+      <article class="topico" id="t-git" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Git e versionamento</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Git guarda o histórico do seu projeto: cada versão salva fica registrada, e você pode voltar a qualquer ponto. Resolve de vez o <code>site-final-v2-AGORA-VAI.html</code>.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">o essencial</span><button class="copiar">copiar</button></div>
+            <pre><code>git init                      # começa a versionar esta pasta
+git add .                     # marca o que entra na próxima versão
+git commit -m "Hero e menu"   # grava a versão com uma descrição
+git log --oneline             # lista o histórico
+
+git remote add origin URL     # conecta a um repositório no GitHub
+git push                      # envia
+git pull                      # traz o que mudou lá</code></pre>
+          </div>
+
+          <p>O ganho direto para você: trabalhar sem medo. Pode reescrever a seção inteira sabendo que a versão anterior está guardada. E se o cliente disser “prefiro como estava antes”, você tem o antes.</p>
+
+          <div class="nota">
+            <strong>Bônus que resolve o deploy junto:</strong> conectando o repositório à Netlify ou à Vercel, cada <code>git push</code> publica o site automaticamente. Você deixa de subir arquivo na mão — salvar e enviar vira a mesma ação.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-devtools" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>DevTools do navegador</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>F12 no Chrome. É a ferramenta que mais acelera aprendizado de front-end, porque mostra o efeito de cada mudança na hora.</p>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Aba</th><th>Para que usar</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Elements</strong></td><td>Ver o HTML real e editar CSS ao vivo, sem salvar arquivo</td></tr>
+                <tr><td><strong>Console</strong></td><td>Ler erros de JavaScript. Primeira parada quando “não funciona”</td></tr>
+                <tr><td><strong>Network</strong></td><td>Ver o que carrega, o tamanho de cada arquivo e o que está pesando</td></tr>
+                <tr><td><strong>Lighthouse</strong></td><td>Relatório de performance, SEO e acessibilidade com nota</td></tr>
+                <tr><td><strong>Device toolbar</strong></td><td>Simular celular e testar responsividade (Ctrl+Shift+M)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="nota">
+            <strong>Fluxo que vale adotar:</strong> antes de entregar, rode o Lighthouse na aba mobile. Ele aponta imagem sem <code>alt</code>, contraste ruim, imagem grande demais e falta de meta tag — uma revisão automática do seu próprio trabalho, em trinta segundos.
+          </div>
+
+          <p>No Elements você também consegue inspecionar qualquer site da internet e ver exatamente como um efeito foi feito. É a melhor forma de estudar layout que você achou bonito.</p>
+        </div>
+      </article>
+
+      <article class="topico" id="t-analytics" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Analytics e rastreamento</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Sem medição, ninguém sabe se a landing page funcionou. Dois números importam: quanta gente chegou e quanta clicou no WhatsApp.</p>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Ferramenta</th><th>Para que</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Google Analytics 4</strong></td><td>Visitas, origem do tráfego, eventos de conversão</td></tr>
+                <tr><td><strong>Google Search Console</strong></td><td>Que buscas trazem gente ao site. Gratuito e subaproveitado</td></tr>
+                <tr><td><strong>Meta Pixel</strong></td><td>Necessário se o cliente anuncia no Instagram ou Facebook</td></tr>
+                <tr><td><strong>Alternativas leves</strong></td><td>Plausible, Umami — mais simples e sem cookie</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">marcar o clique no WhatsApp</span><button class="copiar">copiar</button></div>
+            <pre><code>document.querySelectorAll('[href*="wa.me"]').forEach(link =&gt; {
+  link.addEventListener('click', () =&gt; {
+    if (typeof gtag === 'function') {
+      gtag('event', 'clique_whatsapp', { local: link.dataset.origem });
+    }
+  });
+});</code></pre>
+          </div>
+
+          <div class="nota nota--alerta">
+            <strong>LGPD:</strong> analytics com cookie exige aviso e base legal. Não instale rastreamento sem o cliente pedir e saber — a responsabilidade legal é dele, mas quem colocou a tag foi você. Deixe o ponto marcado no código e a decisão com ele.
+          </div>
+        </div>
+      </article>
+</section>
+<section class="parte" id="s11">
+      <div class="parte__cabeca">
+        <span class="parte__num">PARTE 11</span>
+        <h2>Segurança</h2>
+      </div>
+      <p class="parte__resumo">Landing page estática tem pouca superfície de ataque — mas os poucos riscos que existem são exatamente os que passam despercebidos.</p>
+
+      <article class="topico" id="t-xss" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>XSS — quando texto vira código</h3>
+          <span class="tag tag--novo">Novo</span>
+          <span class="tag tag--js">JS</span>
+        </div>
+        <div class="topico__corpo">
+          <p>XSS (Cross-Site Scripting) acontece quando conteúdo vindo de fora é inserido na página como HTML e o navegador executa. O caminho mais comum é o <code>innerHTML</code>.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">o erro</span><button class="copiar">copiar</button></div>
+            <pre><code>// nome vem da URL: ?nome=&lt;img src=x onerror="alert(1)"&gt;
+const nome = new URLSearchParams(location.search).get('nome');
+
+saudacao.innerHTML = `Olá, ${nome}!`;   // executa o código do atacante</code></pre>
+          </div>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">a correção</span><button class="copiar">copiar</button></div>
+            <pre><code>saudacao.textContent = `Olá, ${nome}!`;   // insere como texto, não como HTML</code></pre>
+          </div>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Origem do conteúdo</th><th>Pode usar innerHTML?</th></tr></thead>
+              <tbody>
+                <tr><td>Escrito por você no código</td><td>Sim</td></tr>
+                <tr><td>Parâmetro da URL</td><td>Não</td></tr>
+                <tr><td>Campo de formulário</td><td>Não</td></tr>
+                <tr><td>Resposta de API</td><td>Não</td></tr>
+                <tr><td><code>localStorage</code></td><td>Não — o visitante edita</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="nota">
+            <strong>Regra única que basta:</strong> <code>textContent</code> por padrão. Só troque por <code>innerHTML</code> quando você mesmo escreveu aquele HTML no código — e nunca com interpolação de dado externo no meio.
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-csp" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Content Security Policy</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Uma declaração que diz ao navegador de onde a página pode carregar coisas. Se um script de outra origem for injetado, o navegador simplesmente recusa.</p>
+
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div>
+            <pre><code>&lt;meta http-equiv="Content-Security-Policy"
+      content="default-src 'self';
+               style-src  'self' 'unsafe-inline' https://fonts.googleapis.com;
+               font-src   https://fonts.gstatic.com;
+               img-src    'self' data:;
+               script-src 'self' 'unsafe-inline'"&gt;</code></pre>
+          </div>
+
+          <div class="nota nota--alerta">
+            <strong>Entregando HTML único, existe um conflito:</strong> CSP rigoroso bloqueia CSS e JS inline, que é justamente o seu formato. Por isso o exemplo acima usa <code>'unsafe-inline'</code> — o que enfraquece bastante a proteção. A solução correta é usar <em>nonce</em>, mas isso exige servidor gerando a página. Numa landing page sem dados sensíveis, CSP é ganho pequeno; saber que existe importa mais que aplicar agora.
+          </div>
+
+          <h4>Outros cabeçalhos que a hospedagem configura</h4>
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Cabeçalho</th><th>Protege contra</th></tr></thead>
+              <tbody>
+                <tr><td><code>X-Frame-Options: DENY</code></td><td>Seu site ser embutido em iframe de golpe</td></tr>
+                <tr><td><code>X-Content-Type-Options: nosniff</code></td><td>Navegador adivinhar tipo de arquivo errado</td></tr>
+                <tr><td><code>Referrer-Policy</code></td><td>Vazar a URL de origem ao sair do site</td></tr>
+                <tr><td><code>Strict-Transport-Security</code></td><td>Acesso por HTTP sem criptografia</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-segredos" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Segredos, chaves e dependências</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+          <p>A regra é curta: <strong>tudo que está no front-end é público.</strong> Minificar, ofuscar ou esconder no meio do arquivo não muda isso — é só apertar F12.</p>
+
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Item</th><th>Pode ficar no HTML?</th></tr></thead>
+              <tbody>
+                <tr><td>Número de WhatsApp, e-mail público</td><td>Sim — é informação de contato</td></tr>
+                <tr><td>ID do Google Analytics</td><td>Sim — foi feito para ser público</td></tr>
+                <tr><td>Chave de API do Google Maps</td><td>Sim, <em>se</em> restrita ao domínio no painel do Google</td></tr>
+                <tr><td>Chave de envio de e-mail</td><td>Não. Nunca</td></tr>
+                <tr><td>Token de banco de dados ou CRM</td><td>Não. Nunca</td></tr>
+                <tr><td>Senha de qualquer coisa</td><td>Não. Nunca</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>Outras três precauções</h4>
+          <ul>
+            <li><strong><code>rel="noopener"</code> em todo <code>target="_blank"</code>.</strong> Sem isso, a página aberta consegue manipular a sua pela referência <code>window.opener</code>.</li>
+            <li><strong>Cuidado com script de CDN aleatório.</strong> Você está executando código de terceiro na página do seu cliente. Use CDNs conhecidas, com versão fixa — nunca <code>@latest</code>, que muda sem aviso.</li>
+            <li><strong>Nada de <code>.env</code>, backup ou <code>.git</code> na pasta publicada.</strong> Se o servidor entrega arquivo estático, ele entrega esses também para quem souber o caminho.</li>
+          </ul>
+
+          <div class="nota">
+            <strong>Teste rápido antes de entregar:</strong> abra o site publicado, aperte Ctrl+U e leia o fonte como se fosse um estranho. Tudo que você não gostaria de ver ali precisa sair — porque qualquer visitante vê exatamente isso.
+          </div>
+        </div>
+      </article>
+</section>
+<section class="parte" id="s12">
+      <div class="parte__cabeca">
+        <span class="parte__num">PARTE 12</span>
+        <h2>Glossário de siglas</h2>
+      </div>
+      <p class="parte__resumo">Para consultar quando aparecer numa documentação, num tutorial ou numa conversa.</p>
+
+      <article class="topico" id="t-glossario" data-marca="revisao">
+        <div class="topico__cabeca">
+          <h3>Siglas e termos</h3>
+          <span class="tag tag--revisao">Revisão</span>
+        </div>
+        <div class="topico__corpo">
+          <div class="tabela-caixa">
+            <table>
+              <thead><tr><th>Sigla</th><th>Significa</th><th>O que é</th></tr></thead>
+              <tbody>
+                <tr><td><strong>API</strong></td><td>Application Programming Interface</td><td>Contrato que permite dois sistemas conversarem</td></tr>
+                <tr><td><strong>CDN</strong></td><td>Content Delivery Network</td><td>Rede de servidores que entrega arquivos do ponto mais próximo</td></tr>
+                <tr><td><strong>CLS</strong></td><td>Cumulative Layout Shift</td><td>O quanto o layout pula durante o carregamento</td></tr>
+                <tr><td><strong>CMS</strong></td><td>Content Management System</td><td>Painel para o cliente editar o conteúdo sozinho (WordPress, Strapi)</td></tr>
+                <tr><td><strong>CSR</strong></td><td>Client-Side Rendering</td><td>O HTML é montado no navegador pelo JavaScript</td></tr>
+                <tr><td><strong>CSS</strong></td><td>Cascading Style Sheets</td><td>A linguagem de estilo</td></tr>
+                <tr><td><strong>DNS</strong></td><td>Domain Name System</td><td>Traduz o nome do domínio para o endereço do servidor</td></tr>
+                <tr><td><strong>DOM</strong></td><td>Document Object Model</td><td>A árvore de elementos que o JavaScript manipula</td></tr>
+                <tr><td><strong>HTML</strong></td><td>HyperText Markup Language</td><td>A linguagem de estrutura</td></tr>
+                <tr><td><strong>HTTP/HTTPS</strong></td><td>HyperText Transfer Protocol (Secure)</td><td>O protocolo da web; a versão “S” é criptografada</td></tr>
+                <tr><td><strong>INP</strong></td><td>Interaction to Next Paint</td><td>Quanto o site demora a responder a um toque</td></tr>
+                <tr><td><strong>JSON</strong></td><td>JavaScript Object Notation</td><td>Formato de texto para trocar dados</td></tr>
+                <tr><td><strong>LCP</strong></td><td>Largest Contentful Paint</td><td>Quando o maior elemento da tela termina de aparecer</td></tr>
+                <tr><td><strong>LGPD</strong></td><td>Lei Geral de Proteção de Dados</td><td>Lei brasileira sobre dados pessoais</td></tr>
+                <tr><td><strong>REST</strong></td><td>Representational State Transfer</td><td>Padrão comum de organização de APIs</td></tr>
+                <tr><td><strong>SDK</strong></td><td>Software Development Kit</td><td>Pacote de ferramentas para integrar com um serviço</td></tr>
+                <tr><td><strong>SEO</strong></td><td>Search Engine Optimization</td><td>Práticas para aparecer melhor na busca</td></tr>
+                <tr><td><strong>SPA</strong></td><td>Single Page Application</td><td>Site que troca o conteúdo sem recarregar a página</td></tr>
+                <tr><td><strong>SSG</strong></td><td>Static Site Generation</td><td>O HTML é gerado uma vez, na publicação</td></tr>
+                <tr><td><strong>SSR</strong></td><td>Server-Side Rendering</td><td>O HTML é montado no servidor a cada visita</td></tr>
+                <tr><td><strong>UI</strong></td><td>User Interface</td><td>O desenho visual da interface</td></tr>
+                <tr><td><strong>URL</strong></td><td>Uniform Resource Locator</td><td>O endereço de um recurso na web</td></tr>
+                <tr><td><strong>UX</strong></td><td>User Experience</td><td>A experiência de usar</td></tr>
+                <tr><td><strong>WCAG</strong></td><td>Web Content Accessibility Guidelines</td><td>As diretrizes oficiais de acessibilidade</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+</section>
+
+<nav class="passo" aria-label="Navegar entre trilhas">
+<a class="passo__item passo__item--ant" href="html-puro.html"><span>Anterior</span><strong>HTML puro — parte 1</strong></a>
+<a class="passo__item passo__item--prox" href="fluxo.html"><span>Próxima</span><strong>Fluxo de trabalho</strong></a>
+</nav>
+</main>
+</div>
+
+<footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<script src="app.js"></script>
+<script src="busca.js" defer></script>
+</body>
+</html>

@@ -9,12 +9,27 @@
 <meta property="og:title" content="Tráfego — Gustavo Tutorial">
 <meta property="og:description" content="Como a busca funciona, Search Console, SEO local com o Perfil da Empresa, GA4 e o básico de anúncios — o que faz um site ser encontrado.">
 <meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0D6B62" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
+<meta name="author" content="Gustavo">
+<link rel="canonical" href="https://gustavo-tutorial.vercel.app/trafego.html">
+<meta property="og:url" content="https://gustavo-tutorial.vercel.app/trafego.html">
+<meta property="og:image" content="https://gustavo-tutorial.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Gustavo Tutorial">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo">
 <div class="topo__interno">
 <a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
@@ -32,9 +47,11 @@
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Construir</p>
 <a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="qualidade.html"><strong>Qualidade</strong><span>Imagem, a11y, Vitals e testes</span></a>
 <a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="motion.html"><strong>Referência: Motion</strong><span>A API inteira, em português</span></a>
 <a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
-<a href="back-end.html"><strong>Back-end</strong><span>Quando precisa de servidor</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Servidor, banco e login</span></a>
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Vender</p>
@@ -44,8 +61,18 @@
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Método</p>
+<a href="fluxo.html"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
 <a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
 <a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+<div class="navmenu__grupo navmenu__grupo--trabalhar">
+<p class="navmenu__rotulo">Trabalhar</p>
+<a href="ferramentas.html"><strong>Ferramentas</strong><span>As oito do dia a dia</span></a>
+<a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
+<a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
+<a href="ferramentas.html#f-zap"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
+<a href="ferramentas.html#f-utm"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
+<a href="ia.html#t-gerador"><strong>Gerador de comando</strong><span>Brief para a IA</span></a>
 </div>
 </div>
 </details>
@@ -98,14 +125,14 @@
 </ol>
 </div>
 </nav>
-<main class="leitura">
+<main class="leitura" id="conteudo" tabindex="-1">
 <section class="abertura">
 <h1>Tráfego e visibilidade</h1>
 <p class="abertura__lead">A pergunta que todo cliente faz depois de quanto custa: vai aparecer no Google? Esta trilha responde de verdade — incluindo a parte que quase nenhum desenvolvedor conta, que é o perfil no Google valer mais que o site para negócio local.</p>
 <div class="legenda">
 <span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
 <span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
-<span>7 partes · 19 tópicos</span>
+<span>8 partes · 24 tópicos</span>
 </div>
 </section>
 <p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
@@ -480,9 +507,120 @@ MÊS 3     — expansão
 </article>
 </section>
 
+
+<section class="parte" id="s8">
+<div class="parte__cabeca"><span class="parte__num">PARTE 8</span><h2>Fechar o ciclo: de onde veio o contato</h2></div>
+<p class="parte__resumo">A pergunta que todo cliente faz e quase nenhum fornecedor responde: "de onde vieram esses orçamentos?". Saber que o site teve 400 visitas não serve para decisão nenhuma. Saber que os seis contatos vieram do anúncio de reforma, e nenhum do de interiores, muda para onde o dinheiro dele vai no mês seguinte.</p>
+
+<article class="topico" id="t-utm-problema" data-marca="novo">
+<div class="topico__cabeca"><h3>Por que o ciclo fica aberto</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O caminho de um cliente local costuma ser este: vê um anúncio no Instagram, entra no site, clica no botão do WhatsApp, conversa, fecha. O problema é que o rastro se quebra em dois pontos.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Etapa</th><th>Quem enxerga</th><th>Onde quebra</th></tr></thead>
+<tbody>
+<tr><td>Viu o anúncio</td><td>Gerenciador de anúncios</td><td>—</td></tr>
+<tr><td>Entrou no site</td><td>GA4</td><td>Sem UTM, a origem vira "direto" ou "social" genérico</td></tr>
+<tr><td>Clicou no WhatsApp</td><td>Ninguém, por padrão</td><td><strong>Primeira quebra:</strong> saída do site não é medida sozinha</td></tr>
+<tr><td>Conversou e fechou</td><td>Só o cliente sabe</td><td><strong>Segunda quebra:</strong> a conversa é do WhatsApp, não do site</td></tr>
+</tbody></table></div>
+<p>As duas quebras têm conserto, e nenhum deles é caro. A primeira se resolve com evento de clique. A segunda, com a mensagem pré-preenchida carregando a origem.</p>
+</div>
+</article>
+
+<article class="topico" id="t-utm-parametros" data-marca="novo">
+<div class="topico__cabeca"><h3>UTM — marcar o link antes de soltar</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>UTM são parâmetros na URL que dizem ao Analytics de onde a pessoa veio. Sem eles, o GA4 chuta — e chuta mal, porque clique vindo de aplicativo costuma chegar sem referência nenhuma.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">url</span><button class="copiar">copiar</button></div><pre><code>https://site.com.br/
+  ?utm_source=instagram      ← ONDE estava o link (instagram, google, whatsapp)
+  &amp;utm_medium=cpc            ← COMO chegou (cpc, organic, social, bio, email)
+  &amp;utm_campaign=reforma-out  ← QUAL campanha
+  &amp;utm_content=video-cozinha ← QUAL criativo, quando há mais de um</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Onde o link aparece</th><th>Marcação sugerida</th></tr></thead>
+<tbody>
+<tr><td>Bio do Instagram</td><td><code>utm_source=instagram&amp;utm_medium=bio</code></td></tr>
+<tr><td>Anúncio no Meta</td><td><code>utm_source=instagram&amp;utm_medium=cpc&amp;utm_campaign=...</code></td></tr>
+<tr><td>Google Ads</td><td>Ative a marcação automática e não use UTM manual junto</td></tr>
+<tr><td>Perfil da Empresa no Google</td><td><code>utm_source=google&amp;utm_medium=perfil</code></td></tr>
+<tr><td>Cartão com QR Code</td><td><code>utm_source=cartao&amp;utm_medium=qr</code></td></tr>
+<tr><td>Assinatura de e-mail</td><td><code>utm_source=email&amp;utm_medium=assinatura</code></td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Três regras que evitam relatório inútil:</strong> tudo em minúsculas e sem acento, porque <code>Instagram</code> e <code>instagram</code> viram duas linhas diferentes no relatório; <strong>nunca</strong> ponha UTM em link interno do próprio site, porque isso reinicia a sessão e apaga a origem verdadeira; e mantenha uma planilha com os nomes que você usa — três meses depois ninguém lembra se era <code>reforma-out</code> ou <code>out-reforma</code>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-utm-evento" data-marca="novo">
+<div class="topico__cabeca"><h3>Medir o clique no WhatsApp</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>Clique que leva para fora não é registrado sozinho. Como é justamente a conversão da página, ele precisa virar evento explícito.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>document.querySelectorAll('a[href*="wa.me"]').forEach(function (a) {
+  a.addEventListener('click', function () {
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'clique_whatsapp', {
+      origem_secao: a.closest('section')?.id || 'desconhecida',  // qual seção converteu
+      texto_botao: a.textContent.trim().slice(0, 40)
+    });
+  });
+});</code></pre></div>
+<p>No GA4, marque <code>clique_whatsapp</code> como <strong>evento principal</strong> (Admin → Eventos). A partir daí ele aparece nos relatórios como conversão, e a coluna de origem passa a mostrar quantos vieram de cada UTM.</p>
+<div class="nota"><strong>O <code>origem_secao</code> é o detalhe que vale mais do que parece:</strong> se 80% dos cliques saem do botão da hero e nenhum do botão que está depois das dúvidas, você descobriu que ninguém chega ao fim da página — e isso é uma decisão de layout, não de anúncio.</div>
+</div>
+</article>
+
+<article class="topico" id="t-utm-mensagem" data-marca="novo">
+<div class="topico__cabeca"><h3>A origem dentro da própria mensagem</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>Este é o truque que fecha a segunda quebra, e quase ninguém usa: a mensagem que abre no WhatsApp já chega ao cliente contando de onde a pessoa veio.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>const params = new URLSearchParams(location.search);
+const campanha = params.get('utm_campaign') || params.get('utm_source') || 'site';
+
+document.querySelectorAll('a[href*="wa.me"]').forEach(function (a) {
+  const secao = a.closest('section')?.id || 'geral';
+  const texto = `Olá! Vim pelo site e quero um orçamento. [${campanha}/${secao}]`;
+  a.href = 'https://wa.me/5567999999999?text=' + encodeURIComponent(texto);
+});</code></pre></div>
+<p>O cliente recebe: <em>"Olá! Vim pelo site e quero um orçamento. [reforma-out/hero]"</em>. Ele não precisa de painel, não precisa aprender GA4, não precisa perguntar nada — a informação chega junto com o contato, no lugar onde ele já trabalha.</p>
+<div class="nota"><strong>Duas ressalvas honestas.</strong> O código entre colchetes é visível para quem está mandando, então mantenha discreto e sem nada constrangedor — <code>[reforma-out/hero]</code> tudo bem, <code>[lead-frio-barato]</code> não. E isso não é preciso ao ponto de virar prova: a pessoa pode apagar o texto antes de enviar. É indicativo, e indicativo já é infinitamente mais do que nada.</div>
+</div>
+</article>
+
+<article class="topico" id="t-utm-relatorio" data-marca="novo">
+<div class="topico__cabeca"><h3>O relatório de uma página</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Com UTM marcado e evento configurado, o relatório mensal do cliente cabe em quatro números e uma frase. É o que sustenta o contrato de manutenção descrito na trilha <a href="negocio.html">Negócio</a>.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">relatório — outubro</span><button class="copiar">copiar</button></div><pre><code>Visitas                      412      (mês anterior: 358)
+Cliques no WhatsApp           27      (mês anterior: 19)
+Taxa de conversão            6,6%     (mês anterior: 5,3%)
+Origem dos 27 cliques        Instagram pago 14 · Google orgânico 8
+                             Perfil da Empresa 4 · direto 1
+
+Leitura: o anúncio de reforma trouxe o dobro de contato do de interiores,
+com o mesmo investimento. Sugiro concentrar em reforma em novembro.</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Mostre</th><th>Não mostre</th></tr></thead>
+<tbody>
+<tr><td>Contatos gerados</td><td>Usuários ativos, sessões, engajamento</td></tr>
+<tr><td>Taxa de conversão</td><td>Taxa de rejeição sem contexto</td></tr>
+<tr><td>Origem dos contatos</td><td>Tempo médio na página</td></tr>
+<tr><td>Comparação com o mês anterior</td><td>Gráfico que ele não sabe ler</td></tr>
+<tr><td>Uma recomendação clara</td><td>Vinte métricas sem recomendação</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>A última linha é a que importa.</strong> Relatório sem recomendação transfere ao cliente um trabalho que é seu — o de interpretar. Quatro números e uma frase de leitura valem mais que um painel de trinta gráficos, e levam quinze minutos por mês para produzir.</div>
+</div>
+</article>
+</section>
+
+
+<nav class="passo" aria-label="Navegar entre trilhas">
+<a class="passo__item passo__item--ant" href="landing-pages.html"><span>Anterior</span><strong>Landing pages</strong></a>
+<a class="passo__item passo__item--prox" href="movimento.html"><span>Próxima</span><strong>Movimento</strong></a>
+</nav>
 </main>
 </div>
 <footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
 <script src="app.js"></script>
+<script src="busca.js" defer></script>
 </body>
 </html>

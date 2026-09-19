@@ -9,12 +9,38 @@
 <meta property="og:title" content="Gustavo Tutorial">
 <meta property="og:description" content="Tutorial de desenvolvimento web escrito em português, do HTML puro ao lado comercial do trabalho.">
 <meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0D6B62" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
+<meta name="author" content="Gustavo">
+<link rel="canonical" href="https://gustavo-tutorial.vercel.app/">
+<meta property="og:url" content="https://gustavo-tutorial.vercel.app/">
+<meta property="og:image" content="https://gustavo-tutorial.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Gustavo Tutorial">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilo.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Gustavo Tutorial",
+  "url": "https://gustavo-tutorial.vercel.app/",
+  "inLanguage": "pt-BR",
+  "description": "Material de estudo de desenvolvimento web em português, do HTML puro ao lado comercial do trabalho.",
+  "author": { "@type": "Person", "name": "Gustavo" }
+}
+</script>
 </head>
 <body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo">
 <div class="topo__interno">
 <a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
@@ -27,9 +53,11 @@
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Construir</p>
 <a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="qualidade.html"><strong>Qualidade</strong><span>Imagem, a11y, Vitals e testes</span></a>
 <a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="motion.html"><strong>Referência: Motion</strong><span>A API inteira, em português</span></a>
 <a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
-<a href="back-end.html"><strong>Back-end</strong><span>Quando precisa de servidor</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Servidor, banco e login</span></a>
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Vender</p>
@@ -39,95 +67,167 @@
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Método</p>
+<a href="fluxo.html"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
 <a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
 <a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+<div class="navmenu__grupo navmenu__grupo--trabalhar">
+<p class="navmenu__rotulo">Trabalhar</p>
+<a href="ferramentas.html"><strong>Ferramentas</strong><span>As oito do dia a dia</span></a>
+<a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
+<a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
+<a href="ferramentas.html#f-zap"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
+<a href="ferramentas.html#f-utm"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
+<a href="ia.html#t-gerador"><strong>Gerador de comando</strong><span>Brief para a IA</span></a>
 </div>
 </div>
 </details>
 
 </nav></header>
-<main class="home">
-<section class="home__hero">
-<h1>Gustavo Tutorial</h1>
-<p>Material de estudo de desenvolvimento web, escrito em português e organizado por trilhas. Cada tópico traz o conceito, um exemplo de código real e a decisão prática por trás dele — nada de exemplo genérico que não se usa em projeto de verdade.</p>
-<div class="home__nums">
-<span><strong>8</strong> trilhas</span>
-<span><strong>52</strong> partes</span>
-<span><strong>220</strong> tópicos</span>
-<span>atualizado em setembro de 2026</span>
+<main class="home" id="conteudo" tabindex="-1">
+<section class="hero">
+<p class="hero__olho">Material de estudo · pt-BR · aberto</p>
+<h1>Desenvolvimento web, <em>do zero ao contrato.</em></h1>
+<p class="hero__lead">Onze trilhas escritas em português, organizadas na ordem em que os problemas aparecem no trabalho de verdade. Cada tópico traz o conceito, o código real e a decisão prática por trás dele — nada de exemplo genérico que não se usa em projeto de cliente.</p>
+<div class="hero__nums">
+<div class="hero__num"><strong>11</strong><span>trilhas</span></div>
+<div class="hero__num"><strong>84</strong><span>partes</span></div>
+<div class="hero__num"><strong>412</strong><span>tópicos</span></div>
+<div class="hero__num"><strong>set/26</strong><span>atualizado</span></div>
 </div>
 </section>
 
-<p class="home__titulo">Trilhas</p>
-<div class="cards">
-<a class="card-trilha" href="html-puro.html">
-<div class="card-trilha__topo">
+<p class="home__titulo">Trilhas <span class="home__titulo-nota">para estudar</span></p>
+<div class="grade">
+<a class="celula" href="html-puro.html">
+<span class="celula__num">01</span>
 <h2>HTML puro</h2>
-<span class="tag tag--novo">Trilha completa</span>
-</div>
-<p>HTML, CSS e JavaScript sem framework nenhum. Começa em o que é front-end e termina com o site no ar, com domínio e HTTPS. É a trilha que dá conta de um projeto inteiro sozinha.</p>
-<span class="card-trilha__pe">12 partes · 66 tópicos →</span>
+<p>HTML, CSS e JavaScript sem framework nenhum. Do que é front-end até o site no ar com domínio e HTTPS. Dá conta de um projeto inteiro sozinha.</p>
+<span class="celula__pe">12 partes · 66 tópicos<span class="celula__selo">2 páginas</span><span class="seta" aria-hidden="true">→</span></span>
 </a>
-<a class="card-trilha" href="landing-pages.html">
-<div class="card-trilha__topo">
+<a class="celula" href="fluxo.html">
+<span class="celula__num">02</span>
+<h2>Fluxo de trabalho</h2>
+<p>Terminal sem decoreba, Git de verdade — commit, branch, desfazer, push que vira deploy —, DevTools, e as cinco saídas para não repetir o mesmo menu em dez arquivos.</p>
+<span class="celula__pe">7 partes · 42 tópicos<span class="seta" aria-hidden="true">→</span></span>
+</a>
+<a class="celula" href="qualidade.html">
+<span class="celula__num">03</span>
+<h2>Qualidade</h2>
+<p>Imagem que não pesa 4 MB, acessibilidade de verdade com o lado legal brasileiro, Core Web Vitals medidos, formulário com máscara e CEP, e a checklist de entrega.</p>
+<span class="celula__pe">6 partes · 40 tópicos<span class="celula__selo">laboratório</span><span class="seta" aria-hidden="true">→</span></span>
+</a>
+<a class="celula" href="landing-pages.html">
+<span class="celula__num">04</span>
 <h2>Landing pages</h2>
-<span class="tag tag--novo">Trilha completa</span>
-</div>
-<p>A estratégia por trás da página: como extrair a informação do cliente, levantar as objeções reais, montar a arquitetura de seções, e o que colocar no lugar da prova social quando ela não existe — ou é proibida pelo conselho da categoria.</p>
-<span class="card-trilha__pe">8 partes · 28 tópicos →</span>
+<p>Como extrair a informação do cliente, levantar as objeções reais, montar a arquitetura de seções, e o que fazer quando não existe prova social.</p>
+<span class="celula__pe">8 partes · 28 tópicos<span class="seta" aria-hidden="true">→</span></span>
 </a>
-<a class="card-trilha" href="trafego.html">
-<div class="card-trilha__topo">
+<a class="celula" href="trafego.html">
+<span class="celula__num">05</span>
 <h2>Tráfego</h2>
-<span class="tag tag--novo">Trilha completa</span>
-</div>
-<p>Como a busca realmente funciona, Search Console na prática, e SEO local — o Perfil da Empresa no Google, que para cliente local costuma trazer mais contato que o site inteiro. Mais GA4 com evento de conversão e o básico de anúncios.</p>
-<span class="card-trilha__pe">7 partes · 19 tópicos →</span>
+<p>Como a busca funciona, Search Console, SEO local, GA4 com evento de conversão, UTM para saber de onde veio cada contato, e o relatório que o cliente entende.</p>
+<span class="celula__pe">8 partes · 24 tópicos<span class="seta" aria-hidden="true">→</span></span>
 </a>
-<a class="card-trilha" href="movimento.html">
-<div class="card-trilha__topo">
+<a class="celula" href="movimento.html">
+<span class="celula__num">06</span>
 <h2>Movimento</h2>
-<span class="tag tag--novo">Trilha completa</span>
-</div>
-<p>Animação que parece profissional é questão de tempo, curva e contenção — não de biblioteca. O que o CSS moderno já resolve sozinho, Motion e GSAP na prática, um catálogo para copiar em CSS, Motion e GSAP lado a lado, e um laboratório com doze efeitos rodando ao vivo na própria página.</p>
-<span class="card-trilha__pe">10 partes · 40 tópicos · 12 exemplos rodando →</span>
+<p>Tempo, curva e contenção — não biblioteca. O que o CSS já resolve sozinho, quando vale instalar algo, performance, GSAP na prática, e um catálogo para copiar nas três formas.</p>
+<span class="celula__pe">9 partes · 37 tópicos<span class="celula__selo">12 exemplos</span><span class="seta" aria-hidden="true">→</span></span>
 </a>
-<a class="card-trilha" href="frameworks.html">
-<div class="card-trilha__topo">
+<a class="celula" href="motion.html">
+<span class="celula__num">07</span>
+<h2>Referência: Motion</h2>
+<p>A API inteira em português: animate, scroll, inView, stagger, as curvas e as duas formas de mola. Com o quadro de opções de cada função e o equivalente em React.</p>
+<span class="celula__pe">8 partes · 44 tópicos<span class="celula__selo">referência</span><span class="seta" aria-hidden="true">→</span></span>
+</a>
+<a class="celula" href="frameworks.html">
+<span class="celula__num">08</span>
 <h2>Frameworks</h2>
-<span class="tag tag--novo">Trilha completa</span>
-</div>
-<p>Todos os formatos além do HTML puro: React e Tailwind lado a lado com vanilla, geradores de site estático como Astro, interatividade leve com Alpine, e os construtores visuais com que você compete no orçamento do cliente.</p>
-<span class="card-trilha__pe">4 partes · 13 tópicos →</span>
+<p>React e Tailwind lado a lado com vanilla, geradores estáticos como Astro, interatividade leve com Alpine, e os construtores visuais com que você compete.</p>
+<span class="celula__pe">4 partes · 13 tópicos<span class="seta" aria-hidden="true">→</span></span>
 </a>
-<a class="card-trilha" href="back-end.html">
-<div class="card-trilha__topo">
+<a class="celula" href="back-end.html">
+<span class="celula__num">09</span>
 <h2>Back-end</h2>
-<span class="tag tag--revisao">Em construção</span>
-</div>
-<p>O que não cabe no navegador: serverless functions, formulário que envia e-mail de verdade, automação sem código e painel para o cliente editar o próprio conteúdo.</p>
-<span class="card-trilha__pe">1 parte · 4 tópicos →</span>
+<p>Funções serverless e o segredo que não pode ir ao cliente, onde guardar dado, autenticação sem improviso, pagamento, CMS, e quando TypeScript e testes entram.</p>
+<span class="celula__pe">6 partes · 32 tópicos<span class="seta" aria-hidden="true">→</span></span>
 </a>
-<a class="card-trilha" href="negocio.html">
-<div class="card-trilha__topo">
+<a class="celula" href="negocio.html">
+<span class="celula__num">10</span>
 <h2>Negócio</h2>
-<span class="tag tag--revisao">Em construção</span>
-</div>
-<p>Design system, escala tipográfica, contraste, copy que converte e teste A/B — mais escopo, preço, contrato e o que combinar antes de entregar.</p>
-<span class="card-trilha__pe">1 parte · 6 tópicos →</span>
+<p>Design que parece caro, LGPD como entrega, quem é dono do domínio, manutenção que vira receita fixa, e o comercial inteiro — da prospecção ao contrato.</p>
+<span class="celula__pe">7 partes · 42 tópicos<span class="celula__selo">laboratório</span><span class="seta" aria-hidden="true">→</span></span>
 </a>
-<a class="card-trilha" href="ia.html">
-<div class="card-trilha__topo">
+<a class="celula" href="ia.html">
+<span class="celula__num">11</span>
 <h2>Trabalhando com IA</h2>
-<span class="tag tag--novo">Trilha completa</span>
+<p>As formas de referência, a anatomia do brief, como fatiar o trabalho, o feedback que converge, os riscos de entregar isso a um cliente, e o gerador de comando.</p>
+<span class="celula__pe">9 partes · 44 tópicos<span class="celula__selo">gerador</span><span class="seta" aria-hidden="true">→</span></span>
+</a>
 </div>
-<p>Como passar informação para uma IA produzir o que você quer: as formas de referência, a anatomia do brief, como fatiar o trabalho, o feedback que converge em vez de oscilar, os riscos de entregar isso a um cliente, e modelos de comando prontos.</p>
-<span class="card-trilha__pe">9 partes · 44 tópicos · com gerador →</span>
+
+
+<p class="home__titulo">Ferramentas <span class="home__titulo-nota">para usar durante o trabalho</span></p>
+<div class="grade">
+<a class="celula" href="ferramentas.html#f-checklist">
+<span class="celula__num">01</span>
+<h2>Checklist de entrega</h2>
+<p>Os 14 itens que se confere na URL de produção antes de dizer que está pronto. Marcável, salvo por cliente, com barra de progresso.</p>
+<span class="celula__pe"><span class="celula__selo">14 itens</span><span class="seta" aria-hidden="true">→</span></span>
+</a>
+<a class="celula" href="ferramentas.html#f-zap">
+<span class="celula__num">02</span>
+<h2>Link de WhatsApp</h2>
+<p>Número e mensagem viram o link com a codificação certa — que é onde o acento quebra quando se monta na mão.</p>
+<span class="celula__pe"><span class="celula__selo">com teste</span><span class="seta" aria-hidden="true">→</span></span>
+</a>
+<a class="celula" href="ferramentas.html#f-utm">
+<span class="celula__num">03</span>
+<h2>Gerador de UTM</h2>
+<p>A URL marcada, com a convenção já aplicada: minúscula, sem acento, sem espaço. E o histórico do que você já gerou.</p>
+<span class="celula__pe"><span class="celula__selo">com histórico</span><span class="seta" aria-hidden="true">→</span></span>
+</a>
+<a class="celula" href="ferramentas.html#f-contraste">
+<span class="celula__num">04</span>
+<h2>Contraste</h2>
+<p>Duas cores, a razão, o veredito de cada nível do WCAG e uma amostra real nos dois tamanhos de texto.</p>
+<span class="celula__pe"><span class="celula__selo">AA e AAA</span><span class="seta" aria-hidden="true">→</span></span>
+</a>
+<a class="celula" href="ferramentas.html#f-briefing">
+<span class="celula__num">05</span>
+<h2>Briefing</h2>
+<p>As dez perguntas da reunião de descoberta, preenchíveis durante a conversa. Copia o briefing pronto no fim.</p>
+<span class="celula__pe"><span class="celula__selo">10 perguntas</span><span class="seta" aria-hidden="true">→</span></span>
+</a>
+<a class="celula" href="ferramentas.html#f-preco">
+<span class="celula__num">06</span>
+<h2>Preço</h2>
+<p>Seu custo real por hora a partir das despesas e horas faturáveis, e a faixa do projeto com margem de erro.</p>
+<span class="celula__pe"><span class="celula__selo">com a conta</span><span class="seta" aria-hidden="true">→</span></span>
+</a>
+<a class="celula" href="ferramentas.html#f-proposta">
+<span class="celula__num">07</span>
+<h2>Proposta que fecha</h2>
+<p>Os oito pontos que mostram que você entendeu o problema antes do preço. Copia o texto pronto pra mandar.</p>
+<span class="celula__pe"><span class="celula__selo">8 pontos</span><span class="seta" aria-hidden="true">→</span></span>
+</a>
+<a class="celula" href="ferramentas.html#f-inventario">
+<span class="celula__num">08</span>
+<h2>Inventário de acessos</h2>
+<p>O mapa de domínio, hospedagem e contas do projeto — sem senha nenhuma escrita nele. Entrega junto com o site.</p>
+<span class="celula__pe"><span class="celula__selo">sem senha</span><span class="seta" aria-hidden="true">→</span></span>
+</a>
+<a class="celula" href="ia.html#t-gerador">
+<span class="celula__num">09</span>
+<h2>Gerador de comando</h2>
+<p>Monta o brief para a IA a partir dos campos, com diagnóstico do que está fraco e barra de força.</p>
+<span class="celula__pe"><span class="celula__selo">na trilha IA</span><span class="seta" aria-hidden="true">→</span></span>
 </a>
 </div>
 
 <div class="home__nota">
-<strong>Por onde começar:</strong> se você está aprendendo agora, vá pela trilha <a href="html-puro.html">HTML puro</a> na ordem das partes — ela é autossuficiente e leva do zero a um site publicado. Depois dela, <a href="landing-pages.html">Landing pages</a> e <a href="trafego.html">Tráfego</a> são as que mais mudam resultado de cliente. A de <a href="ia.html">IA</a> é sobre o método de trabalho em si, e traz um gerador de comando pronto para usar.
+<strong>Por onde começar:</strong> se você está aprendendo agora, vá pela trilha <a href="html-puro.html">HTML puro</a> na ordem das partes — ela é autossuficiente e leva do zero a um site publicado. Em paralelo, <a href="fluxo.html">Fluxo de trabalho</a> é a que muda mais o seu dia a dia: terminal, Git e DevTools valem para qualquer projeto, em qualquer linguagem. Depois dessas, <a href="landing-pages.html">Landing pages</a> e <a href="trafego.html">Tráfego</a> são as que mais mudam resultado de cliente, e <a href="negocio.html">Negócio</a> é a que mais muda o seu faturamento.
 </div>
 
 <div class="home__nota" style="background:transparent;border-left-color:var(--line)">
@@ -135,6 +235,8 @@
 </div>
 </main>
 <footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<script src="progresso.js"></script>
 <script src="app.js"></script>
+<script src="busca.js" defer></script>
 </body>
 </html>

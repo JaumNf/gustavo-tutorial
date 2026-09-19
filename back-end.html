@@ -9,12 +9,27 @@
 <meta property="og:title" content="Back-end — Gustavo Tutorial">
 <meta property="og:description" content="Serverless, formulário que envia e-mail de verdade, automação e CMS — o caminho entre site estático e servidor.">
 <meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0D6B62" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
+<meta name="author" content="Gustavo">
+<link rel="canonical" href="https://gustavo-tutorial.vercel.app/back-end.html">
+<meta property="og:url" content="https://gustavo-tutorial.vercel.app/back-end.html">
+<meta property="og:image" content="https://gustavo-tutorial.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Gustavo Tutorial">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo">
 <div class="topo__interno">
 <a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
@@ -32,9 +47,11 @@
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Construir</p>
 <a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="qualidade.html"><strong>Qualidade</strong><span>Imagem, a11y, Vitals e testes</span></a>
 <a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="motion.html"><strong>Referência: Motion</strong><span>A API inteira, em português</span></a>
 <a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
-<a href="back-end.html" class="is-atual"><strong>Back-end</strong><span>Quando precisa de servidor</span></a>
+<a href="back-end.html" class="is-atual"><strong>Back-end</strong><span>Servidor, banco e login</span></a>
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Vender</p>
@@ -44,8 +61,18 @@
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Método</p>
+<a href="fluxo.html"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
 <a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
 <a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+<div class="navmenu__grupo navmenu__grupo--trabalhar">
+<p class="navmenu__rotulo">Trabalhar</p>
+<a href="ferramentas.html"><strong>Ferramentas</strong><span>As oito do dia a dia</span></a>
+<a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
+<a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
+<a href="ferramentas.html#f-zap"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
+<a href="ferramentas.html#f-utm"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
+<a href="ia.html#t-gerador"><strong>Gerador de comando</strong><span>Brief para a IA</span></a>
 </div>
 </div>
 </details>
@@ -63,16 +90,59 @@
 <li><a href="#t-nocode">Automação sem código</a></li>
 <li><a href="#t-cms">Headless CMS</a></li>
 </ol>
+<a class="sumario__parte" href="#s2">2 · Serverless na prática</a>
+<ol>
+<li><a href="#t-sl-anatomia">Anatomia de uma função</a></li>
+<li><a href="#t-sl-segredo">Variáveis de ambiente — onde mora o segredo</a></li>
+<li><a href="#t-sl-email">Enviar e-mail de verdade</a></li>
+<li><a href="#t-sl-cors">CORS — o erro que todo mundo encontra</a></li>
+<li><a href="#t-sl-limites">Limites, custo e partida a frio</a></li>
+<li><a href="#t-sl-quando">Quando não usar</a></li>
+</ol>
+<a class="sumario__parte" href="#s3">3 · Guardar dado</a>
+<ol>
+<li><a href="#t-bd-quando">Você precisa mesmo de banco?</a></li>
+<li><a href="#t-bd-planilha">Planilha como banco — quando funciona</a></li>
+<li><a href="#t-bd-opcoes">As opções de banco, sem enrolação</a></li>
+<li><a href="#t-bd-modelar">Modelagem mínima — a tabela e o relacionamento</a></li>
+<li><a href="#t-bd-ler">Ler e escrever com segurança</a></li>
+<li><a href="#t-bd-backup">Backup e a conversa de LGPD</a></li>
+</ol>
+<a class="sumario__parte" href="#s4">4 · Autenticação</a>
+<ol>
+<li><a href="#t-au-naofaca">Por que não escrever login na mão</a></li>
+<li><a href="#t-au-provedores">Os provedores prontos</a></li>
+<li><a href="#t-au-sessao">Sessão, token e o que fica onde</a></li>
+<li><a href="#t-au-pede">O que realmente pede login — e o que não pede</a></li>
+<li><a href="#t-au-pagamento">Pagamento: nunca reinvente</a></li>
+</ol>
+<a class="sumario__parte" href="#s5">5 · O cliente editando sozinho</a>
+<ol>
+<li><a href="#t-cms-pergunta">A pergunta antes da ferramenta</a></li>
+<li><a href="#t-cms-tipos">Os tipos de CMS</a></li>
+<li><a href="#t-cms-git">CMS que salva no Git</a></li>
+<li><a href="#t-cms-treinar">Entregar o painel sem criar dependência</a></li>
+<li><a href="#t-cms-decisao">A tabela de decisão</a></li>
+</ol>
+<a class="sumario__parte" href="#s6">6 · O que existe e você não vai usar tão cedo</a>
+<ol>
+<li><a href="#t-ex-typescript">TypeScript</a></li>
+<li><a href="#t-ex-testes">Testes automatizados</a></li>
+<li><a href="#t-ex-pwa">PWA e instalação</a></li>
+<li><a href="#t-ex-i18n">Vários idiomas</a></li>
+<li><a href="#t-ex-monitorar">Saber que quebrou antes do cliente</a></li>
+<li><a href="#t-ex-mapa">O mapa completo — quando cada coisa aparece</a></li>
+</ol>
 </div>
 </nav>
-<main class="leitura">
+<main class="leitura" id="conteudo" tabindex="-1">
 <section class="abertura">
 <h1>Back-end</h1>
 <p class="abertura__lead">Tudo que não cabe no navegador: guardar dados, enviar e-mail, esconder uma chave de API, deixar o cliente editar o próprio conteúdo.</p>
 <div class="legenda">
 <span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
 <span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
-<span>1 partes · 4 tópicos</span>
+<span>6 partes · 32 tópicos</span>
 </div>
 </section>
 <p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
@@ -216,9 +286,585 @@
         </div>
       </article>
 </section>
+
+<section class="parte" id="s2">
+<div class="parte__cabeca"><span class="parte__num">PARTE 2</span><h2>Serverless na prática</h2></div>
+<p class="parte__resumo">A primeira função rodando, o segredo que não pode ir para o navegador, e os limites que ninguém conta antes. É a porta de entrada do back-end para quem entrega site estático — e continua sendo site estático, com uma função ao lado.</p>
+
+<article class="topico" id="t-sl-anatomia" data-marca="novo">
+<div class="topico__cabeca"><h3>Anatomia de uma função</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>Uma função serverless é um arquivo numa pasta com nome combinado. Na Vercel, tudo que está em <code>/api</code> vira um endereço automaticamente: <code>api/orcamento.js</code> responde em <code>seusite.com/api/orcamento</code>.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">api/orcamento.js</span><button class="copiar">copiar</button></div><pre><code>export default async function handler(req, res) {
+  // 1. só aceita o método certo
+  if (req.method !== 'POST') {
+    return res.status(405).json({ erro: 'Método não permitido' });
+  }
+
+  // 2. valida a entrada — NUNCA confie no que chega
+  const { nome, fone, mensagem } = req.body || {};
+  if (!nome || !fone) {
+    return res.status(400).json({ erro: 'Nome e telefone são obrigatórios' });
+  }
+
+  // 3. faz o trabalho
+  try {
+    await enviarEmail({ nome, fone, mensagem });
+    return res.status(200).json({ ok: true });
+  } catch (e) {
+    console.error(e);                       // aparece nos logs da Vercel
+    return res.status(500).json({ erro: 'Falha ao enviar' });
+  }
+}</code></pre></div>
+<p>Do lado do site, é um <code>fetch</code> comum:</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">no navegador</span><button class="copiar">copiar</button></div><pre><code>const r = await fetch('/api/orcamento', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ nome, fone, mensagem })
+});
+const dados = await r.json();
+if (!r.ok) throw new Error(dados.erro);</code></pre></div>
+<div class="nota"><strong>A regra de ouro do back-end</strong> está no passo 2: validação no navegador é conveniência para o usuário, não segurança. Qualquer pessoa manda um POST direto para o seu endereço sem passar pelo formulário. Tudo que chega precisa ser validado de novo, do lado de cá.</div>
+</div>
+</article>
+
+<article class="topico" id="t-sl-segredo" data-marca="novo">
+<div class="topico__cabeca"><h3>Variáveis de ambiente — onde mora o segredo</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>Esta é a razão número um para existir uma função serverless num site estático: <strong>existe uma chave que não pode aparecer no navegador</strong>. Chave de envio de e-mail, token de API, senha de banco.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>// ERRADO — qualquer visitante lê isso com Ctrl+U
+const CHAVE = 're_abc123...';
+fetch('https://api.resend.com/emails', { headers: { Authorization: 'Bearer ' + CHAVE }});
+
+// CERTO — a chave só existe no servidor
+// api/enviar.js
+const CHAVE = process.env.RESEND_API_KEY;</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">.env.local (fica no .gitignore)</span><button class="copiar">copiar</button></div><pre><code>RESEND_API_KEY=re_abc123...
+DATABASE_URL=postgres://...
+
+# na Vercel: Project Settings → Environment Variables
+# e escolha os ambientes: Production, Preview, Development</code></pre></div>
+<div class="nota"><strong>O detalhe que pega muita gente:</strong> em projetos com Vite ou Next, variáveis com prefixo <code>VITE_</code> ou <code>NEXT_PUBLIC_</code> são <em>propositalmente</em> embutidas no JavaScript do navegador. Se você colocar a chave secreta com esse prefixo porque "não estava funcionando", você acabou de publicá-la. Prefixo público é só para o que pode ser público — o ID do Analytics, por exemplo.</div>
+</div>
+</article>
+
+<article class="topico" id="t-sl-email" data-marca="revisao">
+<div class="topico__cabeca"><h3>Enviar e-mail de verdade</h3><span class="tag tag--revisao">Revisão</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>O caso concreto mais comum. Serviço de envio (Resend, SendGrid, Postmark) mais uma função de dez linhas.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">api/orcamento.js</span><button class="copiar">copiar</button></div><pre><code>const r = await fetch('https://api.resend.com/emails', {
+  method: 'POST',
+  headers: {
+    Authorization: 'Bearer ' + process.env.RESEND_API_KEY,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    from: 'Site &lt;site@vanessacarvalho.com.br&gt;',   // domínio verificado
+    to: 'contato@vanessacarvalho.com.br',
+    reply_to: email,                                 // responder vai para o visitante
+    subject: `Orçamento — ${nome}`,
+    text: `Nome: ${nome}\nWhatsApp: ${fone}\n\n${mensagem}`
+  })
+});</code></pre></div>
+<div class="nota"><strong>Dois detalhes que decidem se o e-mail chega ou cai no spam:</strong> o <code>from</code> precisa ser um domínio que você verificou no serviço (com os registros SPF e DKIM no DNS) — usar o Gmail do cliente ali faz o e-mail ser rejeitado. E o <code>reply_to</code> com o e-mail de quem preencheu é o que permite ao cliente simplesmente apertar "responder". Sem isso, ele responde para o próprio site.</div>
+</div>
+</article>
+
+<article class="topico" id="t-sl-cors" data-marca="novo">
+<div class="topico__cabeca"><h3>CORS — o erro que todo mundo encontra</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Uma hora aparece no Console: <em>"blocked by CORS policy"</em>. Não é bug, é o navegador protegendo o visitante — ele impede que um site faça requisição para outro domínio sem autorização explícita desse outro domínio.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>// se a função está no MESMO domínio do site, não existe CORS. Use caminho relativo:
+fetch('/api/orcamento')              // sem problema nenhum
+
+// se realmente precisa liberar outro domínio, é na resposta da função:
+res.setHeader('Access-Control-Allow-Origin', 'https://site-do-cliente.com.br');
+res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+if (req.method === 'OPTIONS') return res.status(200).end();   // o preflight</code></pre></div>
+<div class="nota"><strong>Nunca use <code>Allow-Origin: *</code> numa função que faz algo</strong> — enviar e-mail, gravar dado, gastar sua cota. Você está autorizando qualquer site do mundo a usar sua função às suas custas. Liste o domínio, e só ele.</div>
+</div>
+</article>
+
+<article class="topico" id="t-sl-limites" data-marca="novo">
+<div class="topico__cabeca"><h3>Limites, custo e partida a frio</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Limitação</th><th>O que significa</th></tr></thead>
+<tbody>
+<tr><td><strong>Tempo máximo</strong></td><td>Dezenas de segundos, conforme o plano. Processar vídeo ou gerar relatório grande não cabe.</td></tr>
+<tr><td><strong>Partida a frio</strong></td><td>Se ninguém chamou há um tempo, a primeira chamada demora mais. Invisível num formulário, perceptível numa busca ao vivo.</td></tr>
+<tr><td><strong>Sem estado</strong></td><td>Cada chamada começa do zero. Nada guardado em variável sobrevive. Guardar dado exige banco.</td></tr>
+<tr><td><strong>Sem disco</strong></td><td>Escrever arquivo não persiste. Upload vai para armazenamento externo.</td></tr>
+<tr><td><strong>Cota</strong></td><td>O plano gratuito da Vercel cobre com folga um site de serviço local. Uso comercial pesado passa a ter custo.</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>E o limite que mais importa no seu contexto:</strong> função serverless é uma porta aberta na internet. Sem limite por IP, alguém pode chamar mil vezes e esgotar sua cota de e-mail — ou sua fatura. Some o honeypot do formulário, um limite simples de chamadas por IP, e verifique os logs quando algo parecer estranho.</div>
+</div>
+</article>
+
+<article class="topico" id="t-sl-quando" data-marca="novo">
+<div class="topico__cabeca"><h3>Quando não usar</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Pedido</th><th>Precisa de função?</th><th>Alternativa</th></tr></thead>
+<tbody>
+<tr><td>Formulário mandando e-mail</td><td>Não, no começo</td><td>Formspree ou Web3Forms resolvem sem código</td></tr>
+<tr><td>Contato pelo WhatsApp</td><td>Não</td><td>Link <code>wa.me</code></td></tr>
+<tr><td>Formulário virando linha em planilha</td><td>Não</td><td>Make ou Zapier, sem programar</td></tr>
+<tr><td>Esconder chave de API de terceiro</td><td><strong>Sim</strong></td><td>Não tem alternativa. É o caso clássico.</td></tr>
+<tr><td>Gravar ou ler dado de um banco</td><td><strong>Sim</strong></td><td>Credencial de banco nunca vai ao navegador</td></tr>
+<tr><td>Pagamento</td><td><strong>Sim</strong></td><td>Confirmação de pagamento tem que ser no servidor</td></tr>
+<tr><td>Login e área restrita</td><td><strong>Sim</strong></td><td>Ver a parte de autenticação</td></tr>
+</tbody></table></div>
+<div class="nota">O critério é sempre o mesmo: <strong>existe algo aqui que o visitante não pode ver ou não pode falsificar?</strong> Se a resposta for não, provavelmente dá para resolver sem servidor — e sem servidor é mais barato, mais rápido e dura mais.</div>
+</div>
+</article>
+</section>
+<section class="parte" id="s3">
+<div class="parte__cabeca"><span class="parte__num">PARTE 3</span><h2>Guardar dado</h2></div>
+<p class="parte__resumo">A partir do momento em que algo precisa continuar existindo depois que a pessoa fecha a aba, você precisa de um lugar para guardar. As opções vão de uma planilha do Google a um banco de verdade — e a escolha errada aqui custa caro só lá na frente.</p>
+
+<article class="topico" id="t-bd-quando" data-marca="novo">
+<div class="topico__cabeca"><h3>Você precisa mesmo de banco?</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>O dado</th><th>Onde guardar</th></tr></thead>
+<tbody>
+<tr><td>Preferência do visitante (tema, filtro, rascunho)</td><td><code>localStorage</code> — fica no navegador dele, não é seu problema</td></tr>
+<tr><td>Conteúdo do site que o cliente edita</td><td>CMS, ou arquivo no repositório</td></tr>
+<tr><td>Contatos de formulário, até uns poucos por dia</td><td>E-mail, ou planilha via automação</td></tr>
+<tr><td>Lista de produtos, imóveis, cardápio — que muda</td><td>CMS ou banco</td></tr>
+<tr><td>Agendamento, pedido, cadastro de usuário</td><td>Banco, sem alternativa</td></tr>
+<tr><td>Qualquer coisa com dado sensível</td><td>Banco, com cuidado extra — e LGPD na conversa</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>A ordem certa de perguntar:</strong> "esse dado precisa ser pesquisado, filtrado ou relacionado com outro?" Se não precisar, quase sempre dá para viver sem banco. Um cardápio de trinta itens cabe num arquivo JSON no repositório, carrega instantaneamente e não tem custo mensal nenhum.</div>
+</div>
+</article>
+
+<article class="topico" id="t-bd-planilha" data-marca="novo">
+<div class="topico__cabeca"><h3>Planilha como banco — quando funciona</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Parece gambiarra e para muito caso de cliente local é a resposta certa: o dono já sabe usar, já tem a conta, consegue editar do celular, e não existe painel novo para ensinar.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Funciona bem para</th><th>Não use quando</th></tr></thead>
+<tbody>
+<tr><td>Receber e organizar contatos do formulário</td><td>Tiver mais de alguns milhares de linhas</td></tr>
+<tr><td>Cardápio, tabela de preços, lista de serviços</td><td>Vários usuários escrevendo ao mesmo tempo</td></tr>
+<tr><td>Cliente que quer ver e mexer sem depender de você</td><td>Houver dado sensível de terceiros</td></tr>
+<tr><td>Prova de conceito antes de investir em banco</td><td>A leitura for a cada visita do site</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>O caminho mais simples que existe:</strong> Make ou Zapier recebendo o formulário e gravando a linha na planilha, mais uma cópia por e-mail. Zero código, e é vendável como serviço à parte. Para o site <em>ler</em> da planilha, publique-a como CSV e cacheie a resposta — mas saiba que você está dependendo de um serviço que não foi feito para isso.</div>
+</div>
+</article>
+
+<article class="topico" id="t-bd-opcoes" data-marca="novo">
+<div class="topico__cabeca"><h3>As opções de banco, sem enrolação</h3><span class="tag tag--novo">Novo</span></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Opção</th><th>O que é</th><th>Boa para</th></tr></thead>
+<tbody>
+<tr><td><strong>Supabase</strong></td><td>Postgres gerenciado com API pronta, autenticação e armazenamento de arquivo</td><td>O mais completo para quem vem do front-end. Plano gratuito generoso.</td></tr>
+<tr><td><strong>Turso / SQLite</strong></td><td>Banco leve, rápido, distribuído</td><td>Leitura muito frequente, dado simples</td></tr>
+<tr><td><strong>Postgres na Vercel/Neon</strong></td><td>Postgres puro</td><td>Quem já sabe SQL e quer controle</td></tr>
+<tr><td><strong>Firebase</strong></td><td>Banco em tempo real do Google</td><td>Tempo real, chat, colaboração</td></tr>
+<tr><td><strong>Airtable / Notion</strong></td><td>Planilha turbinada com API</td><td>Cliente edita no painel bonito; volume pequeno</td></tr>
+</tbody></table></div>
+<div class="topico__corpo">
+<div class="nota"><strong>Para o seu tipo de projeto, a recomendação honesta é Supabase.</strong> Ele traz banco, login e upload de arquivo numa conta só, o painel é usável, e tem plano gratuito que aguenta um site de serviço. Os outros aparecem quando o projeto tem uma exigência específica que o Supabase não atende bem — e aí você já vai saber qual é.</div>
+</div>
+</article>
+
+<article class="topico" id="t-bd-modelar" data-marca="novo">
+<div class="topico__cabeca"><h3>Modelagem mínima — a tabela e o relacionamento</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Você não precisa de um curso de modelagem para um site de serviço. Precisa de três ideias.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">sql</span><button class="copiar">copiar</button></div><pre><code>-- 1. uma tabela por "coisa" do mundo real
+create table clientes (
+  id          uuid primary key default gen_random_uuid(),
+  nome        text not null,
+  telefone    text not null,
+  criado_em   timestamptz default now()
+);
+
+-- 2. relacionamento = guardar o id do outro
+create table agendamentos (
+  id          uuid primary key default gen_random_uuid(),
+  cliente_id  uuid references clientes(id) on delete cascade,
+  data        timestamptz not null,
+  servico     text not null,
+  status      text default 'pendente'
+);
+
+-- 3. índice no que você vai buscar
+create index on agendamentos (data);</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Hábito</th><th>Por quê</th></tr></thead>
+<tbody>
+<tr><td>Sempre um <code>id</code> próprio</td><td>Telefone e e-mail mudam; id não</td></tr>
+<tr><td>Sempre <code>criado_em</code></td><td>Você vai precisar saber "quando", e depois não dá para recuperar</td></tr>
+<tr><td><code>not null</code> no que é obrigatório</td><td>O banco vira a última linha de defesa contra dado quebrado</td></tr>
+<tr><td>Nome de campo em português ou inglês — mas um só</td><td>Metade misturada é o que dá erro às 2h da manhã</td></tr>
+</tbody></table></div>
+</div>
+</article>
+
+<article class="topico" id="t-bd-ler" data-marca="novo">
+<div class="topico__cabeca"><h3>Ler e escrever com segurança</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">api/agendar.js</span><button class="copiar">copiar</button></div><pre><code>import { createClient } from '@supabase/supabase-js';
+
+// chave de serviço: SÓ no servidor, nunca no navegador
+const db = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
+
+export default async function handler(req, res) {
+  if (req.method !== 'POST') return res.status(405).end();
+
+  const { nome, telefone, data, servico } = req.body || {};
+  if (!nome || !telefone || !data) return res.status(400).json({ erro: 'Dados faltando' });
+
+  const { data: linha, error } = await db
+    .from('agendamentos')
+    .insert({ nome, telefone, data, servico })
+    .select()
+    .single();
+
+  if (error) { console.error(error); return res.status(500).json({ erro: 'Falha ao salvar' }); }
+  return res.status(200).json({ ok: true, id: linha.id });
+}</code></pre></div>
+<div class="nota"><strong>Injeção de SQL</strong> acontece quando você monta a consulta concatenando texto que veio de fora: <code>"select * from x where nome = '" + nome + "'"</code>. Alguém digita uma aspa e o resto do comando vira instrução. A defesa é não concatenar nunca — use consulta parametrizada, ou uma biblioteca como o cliente do Supabase, que já faz isso. Vale o mesmo princípio do <code>textContent</code> contra XSS: dado de fora é dado, nunca comando.</div>
+</div>
+</article>
+
+<article class="topico" id="t-bd-backup" data-marca="novo">
+<div class="topico__cabeca"><h3>Backup e a conversa de LGPD</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>No momento em que existe banco, a entrega muda de natureza: você passou a guardar dado pessoal de terceiros, e isso tem consequência prática e contratual.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Obrigação nova</th><th>Como resolver</th></tr></thead>
+<tbody>
+<tr><td>Backup automático</td><td>Serviços gerenciados já fazem. Confirme a frequência e teste restaurar uma vez.</td></tr>
+<tr><td>Exclusão a pedido do titular</td><td>Precisa existir um jeito de apagar — mesmo que seja você rodando uma consulta</td></tr>
+<tr><td>Prazo de retenção</td><td>Defina e cumpra: "contatos apagados após 24 meses"</td></tr>
+<tr><td>Acesso restrito</td><td>Chave de serviço só no ambiente do servidor; ninguém mais com acesso ao painel</td></tr>
+<tr><td>Onde o dado fica</td><td>Escolha a região mais próxima — e saiba dizer ao cliente em que país está</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Isso muda o preço e muda o contrato.</strong> Site estático que só abre WhatsApp não guarda nada de ninguém. Site com banco de agendamento guarda nome, telefone e horário de dezenas de pessoas — e alguém precisa responder por isso. Deixe claro na proposta quem é o controlador (o cliente) e qual é o seu papel, como está na trilha <a href="negocio.html">Negócio</a>.</div>
+</div>
+</article>
+</section>
+<section class="parte" id="s4">
+<div class="parte__cabeca"><span class="parte__num">PARTE 4</span><h2>Autenticação</h2></div>
+<p class="parte__resumo">O assunto em que improvisar tem o pior retorno possível. Aqui a regra não é "aprenda a fazer": é "saiba o suficiente para escolher quem faz por você, e para não aceitar um pedido que não deveria aceitar".</p>
+
+<article class="topico" id="t-au-naofaca" data-marca="novo">
+<div class="topico__cabeca"><h3>Por que não escrever login na mão</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Um sistema de login parece simples — usuário, senha, confere — e não é. O que ele precisa ter, de verdade:</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Item</th><th>Por que é difícil</th></tr></thead>
+<tbody>
+<tr><td>Senha guardada com hash forte</td><td>Algoritmo certo, com sal e custo calibrado. Guardar senha em texto é falha grave — e ainda acontece.</td></tr>
+<tr><td>Sessão segura</td><td>Cookie <code>HttpOnly</code>, <code>Secure</code>, <code>SameSite</code>, com expiração e renovação</td></tr>
+<tr><td>Recuperação de senha</td><td>Token de uso único, com prazo, que não revela se o e-mail existe</td></tr>
+<tr><td>Limite de tentativas</td><td>Sem isso, força bruta acha a senha fraca de alguém</td></tr>
+<tr><td>Verificação de e-mail</td><td>Senão qualquer um cria conta com o e-mail de outro</td></tr>
+<tr><td>Segundo fator</td><td>Esperado hoje em qualquer coisa séria</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Cada um desses itens tem um jeito sutil de dar errado</strong>, e o erro não aparece em teste — aparece quando alguém explora. Provedores prontos resolvem os seis, são auditados, e custam zero para o volume de um site de serviço. Escrever isso na mão é assumir um risco que não é seu de assumir.</div>
+</div>
+</article>
+
+<article class="topico" id="t-au-provedores" data-marca="novo">
+<div class="topico__cabeca"><h3>Os provedores prontos</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Opção</th><th>Destaque</th><th>Quando</th></tr></thead>
+<tbody>
+<tr><td><strong>Supabase Auth</strong></td><td>Vem junto do banco, com e-mail, link mágico e login social</td><td>Se você já usa Supabase, é a escolha óbvia</td></tr>
+<tr><td><strong>Clerk</strong></td><td>Telas prontas e bonitas, integração rápida</td><td>Quando você quer resolver em uma tarde</td></tr>
+<tr><td><strong>Auth0</strong></td><td>Completo e corporativo</td><td>Exigência de empresa maior</td></tr>
+<tr><td><strong>Firebase Auth</strong></td><td>Sólido, bem documentado</td><td>Projeto já no ecossistema Google</td></tr>
+</tbody></table></div>
+<p>E o caminho que quase sempre é melhor para cliente de serviço local: <strong>link mágico</strong>. A pessoa digita o e-mail, recebe um link, clica e está dentro. Sem senha para criar, sem senha para esquecer, sem tela de recuperação.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>const { error } = await supabase.auth.signInWithOtp({
+  email,
+  options: { emailRedirectTo: 'https://site.com.br/painel' }
+});
+// pronto. sem senha, sem hash, sem recuperação para implementar.</code></pre></div>
+</div>
+</article>
+
+<article class="topico" id="t-au-sessao" data-marca="novo">
+<div class="topico__cabeca"><h3>Sessão, token e o que fica onde</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>Depois do login, o navegador precisa provar quem é a cada requisição. Duas formas, e a diferença importa.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th></th><th>Cookie de sessão</th><th>Token no localStorage</th></tr></thead>
+<tbody>
+<tr><td>Vai junto na requisição</td><td>Automaticamente</td><td>Você precisa anexar</td></tr>
+<tr><td>JavaScript consegue ler</td><td>Não, se for <code>HttpOnly</code></td><td>Sim — e isso é o problema</td></tr>
+<tr><td>Risco de XSS roubar</td><td>Baixo</td><td>Alto: um script injetado leva o token</td></tr>
+<tr><td>Recomendação</td><td><strong>Prefira</strong></td><td>Só quando não há alternativa</td></tr>
+</tbody></table></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>res.setHeader('Set-Cookie', [
+  `sessao=${token}`,
+  'HttpOnly',      // JavaScript não lê
+  'Secure',        // só por HTTPS
+  'SameSite=Lax',  // não vai em requisição de outro site
+  'Path=/',
+  'Max-Age=604800' // 7 dias
+].join('; '));</code></pre></div>
+<div class="nota"><strong>E o erro conceitual mais comum:</strong> esconder um botão no front-end não é proteger nada. A verificação tem que estar na função que devolve o dado. Se o endereço <code>/api/pedidos</code> devolve a lista para quem chamar, não importa que a tela de login exista — basta abrir o endereço direto.</div>
+</div>
+</article>
+
+<article class="topico" id="t-au-pede" data-marca="novo">
+<div class="topico__cabeca"><h3>O que realmente pede login — e o que não pede</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Clientes pedem "área do cliente" com frequência, e na maioria das vezes o que eles querem não precisa de login nenhum.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>O cliente pede</th><th>O que ele quer</th><th>Solução mais simples</th></tr></thead>
+<tbody>
+<tr><td>"Área do cliente para ver o andamento da obra"</td><td>Mandar foto e status</td><td>Grupo de WhatsApp, ou link secreto por projeto</td></tr>
+<tr><td>"Login para baixar o catálogo"</td><td>Capturar contato</td><td>Formulário que libera o PDF</td></tr>
+<tr><td>"Painel para eu ver os orçamentos"</td><td>Ver os contatos recebidos</td><td>Planilha ou e-mail</td></tr>
+<tr><td>"Cada cliente com senha para ver o projeto dele"</td><td>Privacidade dos arquivos</td><td>Pasta compartilhada no Drive</td></tr>
+<tr><td>"Agendamento online com histórico"</td><td>Isso sim</td><td>Login de verdade, ou ferramenta pronta de agendamento</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>A pergunta que resolve a reunião:</strong> "o que muda para você se isso tiver senha?". Se a resposta for "fica mais profissional", não precisa de login — precisa de design. Se for "os clientes não podem ver o projeto uns dos outros", aí sim existe um requisito real, e ele muda prazo e preço de forma significativa.</div>
+</div>
+</article>
+
+<article class="topico" id="t-au-pagamento" data-marca="novo">
+<div class="topico__cabeca"><h3>Pagamento: nunca reinvente</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Regra curta: <strong>dado de cartão nunca passa pelo seu código.</strong> Nem para "só validar", nem em campo do seu formulário. Quem processa é o gateway, na página dele ou num componente dele.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Caminho</th><th>Como funciona</th><th>Quando</th></tr></thead>
+<tbody>
+<tr><td><strong>Link de pagamento</strong></td><td>Você gera um link no painel e manda</td><td>Serviço sob orçamento. Zero código — e resolve a maioria dos casos.</td></tr>
+<tr><td><strong>Checkout hospedado</strong></td><td>O botão leva para a página do gateway</td><td>Produto de preço fixo, infoproduto</td></tr>
+<tr><td><strong>Integração completa</strong></td><td>Você cria a cobrança por API e recebe a confirmação por webhook</td><td>Loja, assinatura, volume</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Se chegar na integração completa, o ponto crítico é um só:</strong> confirme o pagamento pelo webhook do gateway, no servidor — nunca pelo que o navegador diz ao voltar. A URL de retorno pode ser acessada por qualquer um. No Brasil os nomes que você vai encontrar são Mercado Pago, Pagar.me, Asaas e Stripe; todos têm link de pagamento, que é por onde começar.</div>
+</div>
+</article>
+</section>
+<section class="parte" id="s5">
+<div class="parte__cabeca"><span class="parte__num">PARTE 5</span><h2>O cliente editando sozinho</h2></div>
+<p class="parte__resumo">Uma hora ele pergunta: "e se eu quiser mudar esse texto?". A resposta define se você ganha um contrato de manutenção, um painel para manter, ou um cliente que quebra o próprio site no sábado.</p>
+
+<article class="topico" id="t-cms-pergunta" data-marca="novo">
+<div class="topico__cabeca"><h3>A pergunta antes da ferramenta</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Antes de escolher CMS, descubra o que muda e com que frequência. A resposta quase sempre é bem menor do que o pedido sugere.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Frequência real</th><th>Solução honesta</th></tr></thead>
+<tbody>
+<tr><td>Duas ou três vezes por ano</td><td>Nenhuma. Está incluído na manutenção — e é mais rápido você fazer.</td></tr>
+<tr><td>Uma vez por mês, texto e foto</td><td>Edição direta no GitHub, ou CMS leve</td></tr>
+<tr><td>Toda semana, itens de uma lista</td><td>CMS de verdade, ou planilha</td></tr>
+<tr><td>Vários por dia, com equipe</td><td>CMS completo — e isso é outro projeto, com outro preço</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>O custo escondido que ninguém calcula:</strong> um painel é uma coisa a mais para manter, atualizar, e ensinar alguém a usar. Cliente que edita três vezes por ano e tem painel esquece a senha, esquece como faz, e te liga assim mesmo — só que agora você também precisa manter o painel. Para muita gente, "me manda o texto que eu troco em dez minutos" é melhor serviço e melhor negócio para os dois.</div>
+</div>
+</article>
+
+<article class="topico" id="t-cms-tipos" data-marca="novo">
+<div class="topico__cabeca"><h3>Os tipos de CMS</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Tipo</th><th>Como funciona</th><th>Custo real</th></tr></thead>
+<tbody>
+<tr><td><strong>Tradicional</strong><br><span style="font-size:13px">WordPress</span></td><td>Painel e site na mesma aplicação, com banco</td><td>Atualização constante, risco de invasão, hospedagem que aguente</td></tr>
+<tr><td><strong>Headless</strong><br><span style="font-size:13px">Sanity, Strapi, Contentful</span></td><td>Só guarda e entrega o conteúdo; a página continua sua</td><td>Mais uma conta, mais uma mensalidade acima de certo uso</td></tr>
+<tr><td><strong>Baseado em Git</strong><br><span style="font-size:13px">Decap, TinaCMS</span></td><td>O painel edita arquivos do repositório; salvar vira um commit</td><td>Zero de infraestrutura. Precisa de build.</td></tr>
+<tr><td><strong>Planilha / Notion</strong><br><span style="font-size:13px">Sheets, Airtable</span></td><td>O cliente edita onde já sabe mexer</td><td>Quase zero. Limite de volume.</td></tr>
+<tr><td><strong>GitHub direto</strong></td><td>O cliente edita o HTML na interface do GitHub</td><td>Zero. Exige um cliente destemido e um trecho bem isolado.</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Para o seu contexto, a ordem de preferência</strong> costuma ser: nada (manutenção), depois planilha, depois CMS baseado em Git, e só então headless. WordPress só quando o cliente exige por nome — e aí a conversa passa a ser sobre atualização de segurança, que é responsabilidade recorrente de alguém.</div>
+</div>
+</article>
+
+<article class="topico" id="t-cms-git" data-marca="novo">
+<div class="topico__cabeca"><h3>CMS que salva no Git</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>É a opção mais elegante para site estático: o cliente abre um painel comum, edita, clica em salvar — e o que acontece por baixo é um commit no repositório, que dispara o deploy automático.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling">config.yml — Decap CMS</span><button class="copiar">copiar</button></div><pre><code>backend:
+  name: github
+  repo: JaumNf/site-vanessa
+  branch: main
+
+media_folder: "img/uploads"
+
+collections:
+  - name: "servicos"
+    label: "Serviços"
+    folder: "conteudo/servicos"
+    create: true
+    fields:
+      - { name: titulo,  label: "Título",   widget: string }
+      - { name: resumo,  label: "Resumo",   widget: text }
+      - { name: foto,    label: "Foto",     widget: image }
+      - { name: preco,   label: "A partir de", widget: number, required: false }</code></pre></div>
+<p>As vantagens somam: não existe banco para manter, o histórico de tudo que o cliente mudou está no Git, e desfazer uma edição ruim é o mesmo <code>git revert</code> de sempre. Se o CMS sair do ar, o site continua no ar — o conteúdo está nos arquivos.</p>
+<div class="nota"><strong>O preço:</strong> isso exige uma etapa de build para transformar o conteúdo em HTML — o que nos leva de volta à conversa da trilha <a href="fluxo.html">Fluxo de trabalho</a>. Com Astro ou Eleventy no projeto, o encaixe é natural. Em HTML puro escrito à mão, não encaixa.</div>
+</div>
+</article>
+
+<article class="topico" id="t-cms-treinar" data-marca="novo">
+<div class="topico__cabeca"><h3>Entregar o painel sem criar dependência</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Painel entregue sem preparo volta como suporte eterno. Quatro coisas que resolvem quase tudo:</p>
+<p><strong>Grave um vídeo curto de tela.</strong> Cinco minutos mostrando as três operações que ele vai fazer — trocar um texto, trocar uma foto, publicar. Ele assiste de novo daqui a seis meses, quando esquecer; você não repete a explicação.</p>
+<p><strong>Limite o que dá para editar.</strong> Campo definido, não editor livre. Cliente com liberdade total cola texto do Word com formatação embutida e quebra o layout — e o conserto é seu.</p>
+<p><strong>Trave o que não pode mudar.</strong> Estrutura, menu, rodapé e SEO ficam fora do painel. O que ele edita é conteúdo, não arquitetura.</p>
+<p><strong>Mostre como desfazer.</strong> Se é CMS em Git, o histórico existe e você pode voltar. Saber disso dá segurança para ele mexer — e é justamente o medo de quebrar que faz o painel ficar sem uso.</p>
+<div class="nota"><strong>O sinal de que deu certo:</strong> passaram três meses e o cliente editou alguma coisa sem te chamar. Se ninguém nunca usou o painel, você construiu e mantém algo que não serviu para nada — e o correto é conversar sobre tirar.</div>
+</div>
+</article>
+
+<article class="topico" id="t-cms-decisao" data-marca="novo">
+<div class="topico__cabeca"><h3>A tabela de decisão</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Cenário</th><th>Escolha</th></tr></thead>
+<tbody>
+<tr><td>Landing page de serviço, conteúdo estável</td><td>Sem CMS. Alterações via manutenção.</td></tr>
+<tr><td>Site com portfólio que cresce devagar</td><td>CMS em Git, se já houver build; senão, manutenção</td></tr>
+<tr><td>Cardápio, tabela de preços que muda</td><td>Planilha lida pelo site, com cache</td></tr>
+<tr><td>Blog com publicação frequente</td><td>CMS em Git ou headless</td></tr>
+<tr><td>Catálogo grande, com busca e filtro</td><td>Headless com banco</td></tr>
+<tr><td>Equipe publicando, com aprovação</td><td>CMS completo — outro projeto, outro orçamento</td></tr>
+<tr><td>Cliente exige WordPress por nome</td><td>WordPress, com contrato de atualização de segurança</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>E a resposta para a pergunta original</strong>, a que ele fez na reunião: "dá para você mesma editar, sim — e eu te mostro as opções. Só me diz primeiro o que você imagina mudando, e de quanto em quanto tempo." Metade das vezes, a própria resposta dele encerra o assunto.</div>
+</div>
+</article>
+</section>
+<section class="parte" id="s6">
+<div class="parte__cabeca"><span class="parte__num">PARTE 6</span><h2>O que existe e você não vai usar tão cedo</h2></div>
+<p class="parte__resumo">Fecha o mapa. Cada um destes é legítimo, resolve um problema real, e não aparece no seu trabalho hoje. Saber o nome, o problema que resolve e o sinal de que chegou a hora vale mais do que estudar agora — e evita tanto o susto quanto a adoção precoce.</p>
+
+<article class="topico" id="t-ex-typescript" data-marca="novo">
+<div class="topico__cabeca"><h3>TypeScript</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>JavaScript com tipos declarados. O editor passa a saber o formato dos seus dados e avisa do erro enquanto você escreve, em vez de o erro aparecer no navegador do cliente.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">ts</span><button class="copiar">copiar</button></div><pre><code>type Servico = { titulo: string; preco: number; ativo: boolean };
+
+function formatar(s: Servico) {
+  return `${s.titulo} — R$ ${s.preco.toFixed(2)}`;
+}
+
+formatar({ titulo: 'Reforma', preco: '8000', ativo: true });
+//                            ^ erro apontado aqui, antes de rodar</code></pre></div>
+<div class="nota"><strong>O sinal de que chegou a hora:</strong> você tem um projeto com mais de uns poucos milhares de linhas, ou mais de uma pessoa mexendo, ou dados vindo de uma API com muitos campos. Em arquivo único de landing page, o custo de configurar supera o ganho. Um meio-termo barato: <code>// @ts-check</code> no topo de um <code>.js</code> mais tipos por comentário JSDoc — o VS Code já avisa, sem build nenhum.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ex-testes" data-marca="novo">
+<div class="topico__cabeca"><h3>Testes automatizados</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>Você já viu o mais útil deles na trilha <a href="qualidade.html">Qualidade</a>: o teste de fumaça. Os outros dois níveis existem e aparecem em projeto maior.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Tipo</th><th>Testa</th><th>Quando aparece</th></tr></thead>
+<tbody>
+<tr><td><strong>Unitário</strong> (Vitest, Jest)</td><td>Uma função isolada: "a máscara de CPF formata certo?"</td><td>Quando existe lógica de verdade, não só layout</td></tr>
+<tr><td><strong>Integração</strong></td><td>Peças conversando: "a função salva no banco?"</td><td>Com back-end próprio</td></tr>
+<tr><td><strong>Ponta a ponta</strong> (Playwright)</td><td>O fluxo do usuário no navegador real</td><td><strong>Já vale hoje</strong>, na versão fumaça</td></tr>
+</tbody></table></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">um teste unitário, para ver a cara</span><button class="copiar">copiar</button></div><pre><code>import { expect, test } from 'vitest';
+import { mascaraTelefone } from './mascaras.js';
+
+test('formata celular com nove dígitos', () =&gt; {
+  expect(mascaraTelefone('67999998888')).toBe('(67) 99999-8888');
+});
+test('ignora letras', () =&gt; {
+  expect(mascaraTelefone('67abc99999')).toBe('(67) 9999-9');
+});</code></pre></div>
+<div class="nota">O valor do teste não é achar o erro de hoje — é garantir que o conserto de hoje não volte daqui a três meses. Por isso ele só se paga em código que você vai manter por muito tempo.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ex-pwa" data-marca="novo">
+<div class="topico__cabeca"><h3>PWA e instalação</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Um site que o visitante instala na tela inicial do celular, abre sem a barra do navegador e funciona offline. São dois arquivos: um manifesto e um service worker.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Faz sentido</th><th>Não faz sentido</th></tr></thead>
+<tbody>
+<tr><td>Ferramenta que a pessoa usa toda semana</td><td>Landing page que se visita uma vez</td></tr>
+<tr><td>Painel interno de equipe</td><td>Site institucional</td></tr>
+<tr><td>Catálogo consultado em local sem sinal</td><td>Página de captura de contato</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>O risco de ligar isso sem precisar:</strong> service worker guarda a página em cache de forma agressiva. Você publica a correção, e o visitante continua vendo a versão antiga — às vezes por dias. É uma das fontes mais difíceis de diagnosticar do "mas eu já corrigi isso". Em site de cliente, só ligue se houver um motivo claro.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ex-i18n" data-marca="novo">
+<div class="topico__cabeca"><h3>Vários idiomas</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>Aparece quando o cliente atende estrangeiro — pousada, turismo, comércio exterior, clínica que recebe de fora. O erro comum é traduzir com JavaScript: o buscador indexa uma versão só, e você perde o ganho principal.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div><pre><code>&lt;!-- uma URL por idioma, HTML servido pronto em cada uma --&gt;
+site.com.br/          → português
+site.com.br/en/       → inglês
+site.com.br/es/       → espanhol
+
+&lt;!-- e no head de TODAS elas, apontando umas para as outras --&gt;
+&lt;link rel="alternate" hreflang="pt-BR" href="https://site.com.br/"&gt;
+&lt;link rel="alternate" hreflang="en"    href="https://site.com.br/en/"&gt;
+&lt;link rel="alternate" hreflang="x-default" href="https://site.com.br/"&gt;</code></pre></div>
+<div class="nota">Duplicar arquivo funciona para duas ou três páginas. Acima disso, é o caso clássico em que um gerador estático se paga: o conteúdo fica num arquivo por idioma e o build monta as versões. Cuidado com o óbvio que dá errado: número de telefone, moeda, formato de data e horário de atendimento também mudam por idioma.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ex-monitorar" data-marca="novo">
+<div class="topico__cabeca"><h3>Saber que quebrou antes do cliente</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Este é o único da parte que vale montar já — e é barato. Hoje, se o site do cliente sair do ar às 22h de sexta, você descobre quando ele te manda mensagem no domingo.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Camada</th><th>Ferramenta</th><th>Custo</th></tr></thead>
+<tbody>
+<tr><td>Site está no ar?</td><td>UptimeRobot, Better Stack — checam de minuto em minuto e avisam</td><td>Gratuito no plano básico</td></tr>
+<tr><td>Deu erro de JavaScript em algum visitante?</td><td>Sentry</td><td>Gratuito até um volume alto</td></tr>
+<tr><td>Função serverless falhou?</td><td>Logs da Vercel, com alerta</td><td>Incluído</td></tr>
+<tr><td>Formulário parou de chegar?</td><td>Um envio de teste automático por semana</td><td>Um script seu</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>O argumento comercial:</strong> monitoramento é um item excelente no pacote de manutenção. "Eu sou avisado em um minuto se o site sair do ar" é concreto, o cliente entende na hora, e te custa cinco minutos de configuração uma vez só. Descobrir antes dele e avisar antes de ele perguntar é o que faz a manutenção parecer barata.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ex-mapa" data-marca="novo">
+<div class="topico__cabeca"><h3>O mapa completo — quando cada coisa aparece</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Você precisa quando...</th><th>Assunto</th><th>Onde estudar</th></tr></thead>
+<tbody>
+<tr><td>Sempre</td><td>HTML, CSS, JS, Git, DevTools, imagem, acessibilidade</td><td>HTML puro, Fluxo, Qualidade</td></tr>
+<tr><td>Há uma chave que não pode ir ao navegador</td><td>Função serverless</td><td>Parte 2 daqui</td></tr>
+<tr><td>Algo precisa persistir e ser consultado</td><td>Banco de dados</td><td>Parte 3 daqui</td></tr>
+<tr><td>Uma pessoa não pode ver o dado de outra</td><td>Autenticação</td><td>Parte 4 daqui</td></tr>
+<tr><td>O cliente edita toda semana</td><td>CMS</td><td>Parte 5 daqui</td></tr>
+<tr><td>O projeto passa de alguns milhares de linhas</td><td>TypeScript</td><td>Aqui, e o básico em HTML puro</td></tr>
+<tr><td>Você mantém o mesmo código por anos</td><td>Testes</td><td>Aqui e em Qualidade</td></tr>
+<tr><td>O site tem 5+ páginas que você atualiza sempre</td><td>Gerador estático</td><td>Frameworks e Fluxo</td></tr>
+<tr><td>A interface tem muito estado que muda</td><td>React ou similar</td><td>Frameworks</td></tr>
+<tr><td>O cliente atende estrangeiro</td><td>Vários idiomas</td><td>Aqui</td></tr>
+<tr><td>Você tem cliente em produção</td><td>Monitoramento</td><td>Aqui</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>A leitura que importa da tabela:</strong> a primeira linha é o que você usa todo dia, e é quase tudo. As outras esperam um sinal específico. Estudar o que está embaixo antes do sinal chegar é o jeito mais comum de passar meses aprendendo ferramenta e nenhum mês entregando projeto — e o mercado paga por projeto entregue.</div>
+</div>
+</article>
+</section>
+
+
+<nav class="passo" aria-label="Navegar entre trilhas">
+<a class="passo__item passo__item--ant" href="frameworks.html"><span>Anterior</span><strong>Frameworks</strong></a>
+<a class="passo__item passo__item--prox" href="negocio.html"><span>Próxima</span><strong>Negócio</strong></a>
+</nav>
 </main>
 </div>
 <footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
 <script src="app.js"></script>
+<script src="busca.js" defer></script>
 </body>
 </html>

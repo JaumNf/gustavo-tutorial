@@ -9,12 +9,27 @@
 <meta property="og:title" content="Colofão — Gustavo Tutorial">
 <meta property="og:description" content="Como este site foi feito: o processo, as escolhas técnicas, o que a IA fez e o que não fez.">
 <meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0D6B62" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
+<meta name="author" content="Gustavo">
+<link rel="canonical" href="https://gustavo-tutorial.vercel.app/colofao.html">
+<meta property="og:url" content="https://gustavo-tutorial.vercel.app/colofao.html">
+<meta property="og:image" content="https://gustavo-tutorial.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Gustavo Tutorial">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo">
 <div class="topo__interno">
 <a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
@@ -27,9 +42,11 @@
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Construir</p>
 <a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="qualidade.html"><strong>Qualidade</strong><span>Imagem, a11y, Vitals e testes</span></a>
 <a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="motion.html"><strong>Referência: Motion</strong><span>A API inteira, em português</span></a>
 <a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
-<a href="back-end.html"><strong>Back-end</strong><span>Quando precisa de servidor</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Servidor, banco e login</span></a>
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Vender</p>
@@ -39,14 +56,24 @@
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Método</p>
+<a href="fluxo.html"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
 <a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
 <a href="colofao.html" class="is-atual"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+<div class="navmenu__grupo navmenu__grupo--trabalhar">
+<p class="navmenu__rotulo">Trabalhar</p>
+<a href="ferramentas.html"><strong>Ferramentas</strong><span>As oito do dia a dia</span></a>
+<a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
+<a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
+<a href="ferramentas.html#f-zap"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
+<a href="ferramentas.html#f-utm"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
+<a href="ia.html#t-gerador"><strong>Gerador de comando</strong><span>Brief para a IA</span></a>
 </div>
 </div>
 </details>
 <span class="navmenu__aqui">Colofão</span>
 </nav></header>
-<main class="home">
+<main class="home" id="conteudo" tabindex="-1">
 <section class="home__hero">
 <h1>Colofão</h1>
 <p>Colofão é a página no fim de um livro que conta como ele foi feito: em que tipografia, por quem, com que método. Esta é a deste site — escrita porque um material que ensina processo deveria mostrar o próprio.</p>
@@ -86,11 +113,24 @@
 <tr><td>Estilo</td><td>CSS puro, tokens no <code>:root</code></td><td>Tema claro e escuro trocando só as variáveis</td></tr>
 <tr><td>Comportamento</td><td>JavaScript puro, sem biblioteca</td><td>Filtro, marcador de progresso, sumário e gerador cabem em 200 linhas</td></tr>
 <tr><td>Tipografia</td><td>Bricolage Grotesque, Source Serif 4, JetBrains Mono</td><td>Grotesca com caráter nos títulos, serifada no corpo porque é material de leitura longa</td></tr>
-<tr><td>Único externo</td><td>Google Fonts</td><td>A única exceção à regra de não depender de terceiros</td></tr>
+<tr><td>Dependências externas</td><td>Google Fonts em todas as páginas; Motion e GSAP apenas em <em>Movimento</em></td><td>Três exceções conscientes à regra de não depender de terceiros — e as duas últimas caem para a versão nativa se o CDN não responder</td></tr>
 <tr><td>Versionamento</td><td>Git e GitHub</td><td>Público, para servir de exemplo do que a trilha ensina</td></tr>
 <tr><td>Publicação</td><td>Vercel, ligada ao repositório</td><td>Cada push republica sozinho</td></tr>
 </tbody></table></div>
-<p>O site inteiro são oito arquivos HTML, uma folha de estilo e dois scripts. Abre sem servidor, funciona offline depois de carregado, e não tem uma linha de código que dependa de alguém manter um pacote atualizado.</p>
+<p>O site inteiro são dezesseis arquivos HTML, uma folha de estilo e sete scripts de comportamento — mais dois arquivos de dados gerados por script (o índice da busca e o mapa de progresso, nenhum dos dois editado à mão), os ícones, o <code>sitemap.xml</code> e o <code>robots.txt</code>. Abre sem servidor, funciona offline depois de carregado, e não tem uma linha de código que dependa de alguém manter um pacote atualizado. Esse número muda toda vez que o site cresce — é por isso que ele está descrito em prosa e não como uma estatística fixa em algum lugar.</p>
+
+<h2>O que o site não fazia</h2>
+<p>Em setembro de 2026, com as dez trilhas prontas, veio a pergunta óbvia: o site cumpre o que ele próprio ensina? A auditoria — feita com a checklist da trilha de <a href="qualidade.html">Qualidade</a> e com os critérios da de <a href="trafego.html">Tráfego</a> — encontrou sete falhas. Não havia <code>sitemap.xml</code> nem <code>robots.txt</code>, que a trilha de Tráfego tem um tópico inteiro explicando. Não havia favicon nem imagem de compartilhamento: o link colado no WhatsApp saía sem miniatura, exatamente o erro que a trilha de Qualidade manda testar antes de entregar. Faltava o link de pular para o conteúdo, cujo CSS está escrito na mesma trilha. Faltava página 404, que está na checklist de entrega. E faltava <code>canonical</code> em dez das doze páginas.</p>
+<p>Tudo isso foi corrigido no mesmo dia em que foi encontrado. Fica registrado aqui de propósito, e não apagado: <strong>a distância entre o que se sabe e o que se faz é o assunto real deste site.</strong> Ela não some porque o material ficou bom — ela some quando alguém roda a checklist. Foi preciso rodar a checklist no próprio site para descobrir sete itens que qualquer uma das trilhas apontaria em trinta segundos num site de cliente.</p>
+<p>Uma exceção continua de pé, agora por escolha declarada: as fontes seguem vindo do Google, e não hospedadas aqui. A trilha de Qualidade diz para <em>considerar</em> hospedar — pelo desempenho e pelo IP que o Google registra. Para um site de estudo sem visitante para proteger, a conveniência ganhou. Num site de cliente com aviso de cookies, a resposta seria outra, e é assim que essa decisão deve ser tomada: caso a caso, e dita em voz alta.</p>
+</section>
+
+<section class="colofao__bloco">
+<h2>A trilha de referência e a divisão Estudar/Trabalhar</h2>
+<p>O material sobre animação nasceu direto na trilha de <a href="movimento.html">Movimento</a>, junto com o resto do conteúdo sobre Motion e GSAP. Com o tempo ficou claro que Motion merecia outra coisa: não uma trilha para ler do início ao fim, mas uma referência para procurar uma função pontual no meio de um projeto — o mesmo tipo de página que a própria motion.dev oferece, com um índice categorizado à esquerda e a seção atual sempre visível à direita. Foi assim que nasceu <a href="motion.html">Referência: Motion</a>, com a API inteira em português. A trilha de Movimento foi então enxugada: as duas partes que repetiam Motion viraram uma única parte de decisão — o essencial em poucas linhas, com um link para a referência completa — mantendo intacto tudo o que era exclusivo de GSAP.</p>
+<p>Separado disso, veio a pergunta de quem usa o site no dia a dia: o material de estudo e as ferramentas de trabalho são coisas diferentes, e misturá-las numa trilha só confundia as duas. A resposta foi consolidar o que já existia espalhado — a checklist de entrega da trilha de Qualidade, o roteiro de dez perguntas do briefing na trilha de Negócio, a matemática de contraste do laboratório visual, o conceito de UTM da trilha de Tráfego e a fórmula de precificação — em <a href="ferramentas.html">Ferramentas</a>: ferramentas que rodam inteiramente no navegador, sem enviar nada para lugar nenhum, com estado salvo por cliente no próprio aparelho. A home e o menu ganharam a divisão explícita entre <em>trilhas para estudar</em> e <em>ferramentas para usar durante o trabalho</em>. A lista cresceu depois: a proposta que fecha e o inventário de acessos, ambos de <a href="negocio.html">Negócio</a>, viraram ferramenta pelo mesmo critério das primeiras seis — texto que se redigita ou recalcula em todo projeto, não decisão que muda de cliente para cliente.</p>
+<p>Com quatrocentos e tantos tópicos espalhados por dezesseis páginas, achar algo específico só pela navegação lateral deixou de ser realista. A busca global (o ícone de lupa no cabeçalho, ou a tecla <kbd>/</kbd>) resolve isso: um índice é gerado por script a partir do conteúdo real de cada página e só é carregado na primeira vez que alguém abre a busca, para não pesar o carregamento normal de quem nunca usa.</p>
+<p>A própria trilha de HTML puro virou um exemplo do que a trilha de Qualidade ensina sobre peso de página: sessenta e seis tópicos numa página só passavam de 160 KB e deixavam o sumário do celular enorme. Ela foi dividida em duas páginas — <a href="html-puro.html">parte 1</a>, dos fundamentos ao CSS moderno, e <a href="html-puro-2.html">parte 2</a>, dos recursos nativos sem JavaScript até o glossário —, ligadas pela navegação de anterior/próxima no fim de cada uma. Continua sendo uma trilha só: um card na home, uma entrada no menu, o progresso contado junto. O que mudou foi só o tamanho de cada carregamento.</p>
 </section>
 
 <section class="colofao__bloco">
@@ -106,9 +146,15 @@
 </section>
 
 </div>
+
+<nav class="passo" aria-label="Navegar entre trilhas">
+<a class="passo__item passo__item--ant" href="ia.html"><span>Anterior</span><strong>Trabalhando com IA</strong></a>
+<a class="passo__item passo__item--prox" href="index.html"><span>Voltar ao</span><strong>Início</strong></a>
+</nav>
 </main>
 
 <footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
 <script src="app.js"></script>
+<script src="busca.js" defer></script>
 </body>
 </html>

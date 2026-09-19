@@ -9,12 +9,27 @@
 <meta property="og:title" content="Movimento — Gustavo Tutorial">
 <meta property="og:description" content="Princípios de animação, o que o CSS moderno já resolve sozinho, quando vale usar biblioteca, performance, acessibilidade e receitas prontas.">
 <meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0D6B62" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
+<meta name="author" content="Gustavo">
+<link rel="canonical" href="https://gustavo-tutorial.vercel.app/movimento.html">
+<meta property="og:url" content="https://gustavo-tutorial.vercel.app/movimento.html">
+<meta property="og:image" content="https://gustavo-tutorial.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Gustavo Tutorial">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo">
 <div class="topo__interno">
 <a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
@@ -32,9 +47,11 @@
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Construir</p>
 <a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="qualidade.html"><strong>Qualidade</strong><span>Imagem, a11y, Vitals e testes</span></a>
 <a href="movimento.html" class="is-atual"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="motion.html"><strong>Referência: Motion</strong><span>A API inteira, em português</span></a>
 <a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
-<a href="back-end.html"><strong>Back-end</strong><span>Quando precisa de servidor</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Servidor, banco e login</span></a>
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Vender</p>
@@ -44,8 +61,18 @@
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Método</p>
+<a href="fluxo.html"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
 <a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
 <a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+<div class="navmenu__grupo navmenu__grupo--trabalhar">
+<p class="navmenu__rotulo">Trabalhar</p>
+<a href="ferramentas.html"><strong>Ferramentas</strong><span>As oito do dia a dia</span></a>
+<a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
+<a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
+<a href="ferramentas.html#f-zap"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
+<a href="ferramentas.html#f-utm"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
+<a href="ia.html#t-gerador"><strong>Gerador de comando</strong><span>Brief para a IA</span></a>
 </div>
 </div>
 </details>
@@ -91,23 +118,17 @@
 <ol>
 <li><a href="#t-mv-receitas">Seis efeitos prontos</a></li>
 </ol>
-<a class="sumario__parte" href="#s7">7 · Motion na prática</a>
+<a class="sumario__parte" href="#s7">7 · As duas bibliotecas</a>
 <ol>
-<li><a href="#t-mt-oque">O que é e quando instalar</a></li>
-<li><a href="#t-mt-animate">animate — a função central</a></li>
-<li><a href="#t-mt-mola">Mola de verdade</a></li>
-<li><a href="#t-mt-inview">inView e stagger</a></li>
-<li><a href="#t-mt-scroll">scroll — animação atrelada à rolagem</a></li>
-</ol>
-<a class="sumario__parte" href="#s8">8 · GSAP na prática</a>
-<ol>
+<li><a href="#t-bi-quando">Antes de instalar qualquer uma</a></li>
+<li><a href="#t-bi-motion">Motion, em uma página</a></li>
 <li><a href="#t-gs-oque">O que é, e a mudança de licença</a></li>
 <li><a href="#t-gs-basico">to, from e fromTo</a></li>
 <li><a href="#t-gs-timeline">Timeline — o verdadeiro diferencial</a></li>
 <li><a href="#t-gs-scrolltrigger">ScrollTrigger</a></li>
 <li><a href="#t-gs-escolher">Motion ou GSAP</a></li>
 </ol>
-<a class="sumario__parte" href="#s9">9 · Catálogo para copiar</a>
+<a class="sumario__parte" href="#s8">8 · Catálogo para copiar</a>
 <ol>
 <li><a href="#t-cat-base">A base que todos usam</a></li>
 <li><a href="#t-cat-reveal">1 · Reveal ao rolar</a></li>
@@ -118,24 +139,24 @@
 <li><a href="#t-cat-transicao">6 · Transição entre páginas</a></li>
 <li><a href="#t-cat-decisao">A tabela de decisão</a></li>
 </ol>
-<a class="sumario__parte" href="#s10">10 · Laboratório: os efeitos rodando</a>
+<a class="sumario__parte" href="#s9">9 · Laboratório: os efeitos rodando</a>
 <ol>
 <li><a href="#t-lab-como">Como ler esta parte</a></li>
-<li><a href="#t-lab-entradas">1 · Entradas</a></li>
+<li><a href="#t-lab-entradas">1 · Entradas — o primeiro segundo</a></li>
 <li><a href="#t-lab-toque">2 · Reação ao toque</a></li>
 <li><a href="#t-lab-rolagem">3 · Ligado à rolagem</a></li>
 <li><a href="#t-lab-detalhes">4 · Detalhes que vendem</a></li>
 </ol>
 </div>
 </nav>
-<main class="leitura">
+<main class="leitura" id="conteudo" tabindex="-1">
 <section class="abertura">
 <h1>Movimento</h1>
 <p class="abertura__lead">Animação boa quase nunca é questão de biblioteca — é questão de tempo, curva e contenção. Esta trilha cobre os princípios, o que o CSS moderno já faz sem JavaScript, quando vale mesmo instalar algo, e por que movimento demais derruba conversão.</p>
 <div class="legenda">
 <span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
 <span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
-<span>10 partes · 40 tópicos</span>
+<span>9 partes · 37 tópicos</span>
 </div>
 </section>
 <p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
@@ -538,110 +559,42 @@ document.querySelectorAll('[data-reveal]').forEach(function (el) {
 </section>
 
 <section class="parte" id="s7">
-<div class="parte__cabeca"><span class="parte__num">PARTE 7</span><h2>Motion na prática</h2></div>
-<p class="parte__resumo">A biblioteca que era Framer Motion e hoje é independente, com versão em JavaScript puro. É a que dá mola de verdade — o principal motivo real para sair do CSS.</p>
+<div class="parte__cabeca"><span class="parte__num">PARTE 7</span><h2>As duas bibliotecas</h2></div>
+<p class="parte__resumo">Motion e GSAP são as duas que sobraram depois que o CSS moderno absorveu quase tudo. Esta parte é a decisão entre elas e o que você precisa saber de GSAP. A API do Motion inteira está na trilha <a href="motion.html">Referência: Motion</a> — aqui ela só aparece no que importa para escolher.</p>
 
-<article class="topico" id="t-mt-oque" data-marca="novo">
-<div class="topico__cabeca"><h3>O que é e quando instalar</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<article class="topico" id="t-bi-quando" data-marca="novo">
+<div class="topico__cabeca"><h3>Antes de instalar qualquer uma</h3><span class="tag tag--novo">Novo</span></div>
 <div class="topico__corpo">
-<p>O Motion nasceu como Framer Motion, biblioteca de animação para React. Hoje é projeto independente e tem API em JavaScript puro — ou seja, cabe no seu jeito de trabalhar, sem React e sem build.</p>
-<p>A razão para usá-lo, e a única que realmente justifica, é a <strong>mola</strong>. O CSS anima por duração e curva; o Motion anima por física — rigidez, amortecimento e velocidade. A diferença aparece em movimento que responde a gesto, e no jeito como o elemento assenta no fim.</p>
-<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">via CDN, versão global — não precisa de build</span><button class="copiar">copiar</button></div><pre><code>&lt;script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-  const { animate, scroll, inView, stagger, hover } = Motion;
-&lt;/script&gt;</code></pre></div>
-<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">via CDN, como módulo</span><button class="copiar">copiar</button></div><pre><code>&lt;script type="module"&gt;
-  import { animate, scroll, inView, stagger }
-    from "https://cdn.jsdelivr.net/npm/motion@latest/+esm";
-&lt;/script&gt;</code></pre></div>
-<div class="nota nota--alerta"><strong>Fixe a versão em projeto de cliente.</strong> <code>@latest</code> serve para testar; em produção, troque pelo número da versão. Se a biblioteca mudar de comportamento numa atualização, o site do cliente muda junto — sem você saber.</div>
-</div>
-</article>
-
-<article class="topico" id="t-mt-animate" data-marca="novo">
-<div class="topico__cabeca"><h3>animate — a função central</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
-<div class="topico__corpo">
-<p>Três argumentos: o que animar, para onde, e como.</p>
-<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>animate(
-  '.card',                                  // seletor ou elemento
-  { opacity: [0, 1], y: [20, 0] },          // de → para
-  { duration: 0.5, ease: [.22, .61, .36, 1] }
-);</code></pre></div>
-<p>Duas diferenças em relação ao CSS que valem notar. A duração é em <strong>segundos</strong>, não milissegundos. E existem atalhos de transformação independentes — <code>x</code>, <code>y</code>, <code>rotate</code>, <code>scale</code> — que podem ser animados separadamente, coisa que no CSS exige montar a string de <code>transform</code> inteira.</p>
+<p>As cinco partes anteriores foram sobre o que o CSS já faz. Este é o momento em que a resposta deixa de ser "CSS" — e são poucos casos.</p>
 <div class="tabela-caixa"><table>
-<thead><tr><th>Opção</th><th>O que faz</th></tr></thead>
+<thead><tr><th>Você precisa de</th><th>Biblioteca?</th></tr></thead>
 <tbody>
-<tr><td><code>duration</code></td><td>Tempo em segundos</td></tr>
-<tr><td><code>delay</code></td><td>Espera antes de começar; aceita <code>stagger()</code></td></tr>
-<tr><td><code>ease</code></td><td>Curva: nome pronto ou array de bézier</td></tr>
-<tr><td><code>type: 'spring'</code></td><td>Troca duração e curva por física</td></tr>
-<tr><td><code>stiffness</code>, <code>damping</code></td><td>Rigidez e amortecimento da mola</td></tr>
-<tr><td><code>repeat</code></td><td>Quantas vezes repetir</td></tr>
+<tr><td>Mola de verdade, reagindo a gesto</td><td><strong>Sim</strong> — o CSS não tem mola</td></tr>
+<tr><td>Cascata numa lista de tamanho desconhecido</td><td><strong>Sim</strong> — <code>nth-child</code> não dá conta</td></tr>
+<tr><td>Interromper preservando velocidade</td><td><strong>Sim</strong> — em CSS a transição reinicia</td></tr>
+<tr><td>Sequência longa, montada em partes</td><td><strong>Sim</strong> — e aqui o GSAP ganha</td></tr>
+<tr><td>Seção presa na rolagem contando uma história</td><td><strong>Sim</strong> — ScrollTrigger com <code>pin</code></td></tr>
+<tr><td>Reveal ao rolar, hover, transição entre páginas</td><td>Não. CSS faz melhor e de graça.</td></tr>
 </tbody></table></div>
+<div class="nota"><strong>Em landing page de serviço, a resposta honesta costuma ser "nenhuma".</strong> O peso, a dependência que envelhece e o risco de o CDN cair são custos reais, cobrados de um cliente que nunca vai notar a diferença. Instale quando a linha da tabela for verdadeira — não porque a biblioteca é boa.</div>
 </div>
 </article>
 
-<article class="topico" id="t-mt-mola" data-marca="novo">
-<div class="topico__cabeca"><h3>Mola de verdade</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<article class="topico" id="t-bi-motion" data-marca="novo">
+<div class="topico__cabeca"><h3>Motion, em uma página</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
 <div class="topico__corpo">
-<p>Aqui está a diferença que justifica a biblioteca. Em vez de dizer quanto tempo dura, você descreve o comportamento físico e deixa o tempo ser consequência.</p>
-<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">botão que responde ao toque</span><button class="copiar">copiar</button></div><pre><code>const botao = document.querySelector('.cta');
+<p>O que era Framer Motion, hoje independente e com versão em JavaScript puro — que é a que serve para HTML único. É a mais leve das duas e a melhor em mola.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">o essencial</span><button class="copiar">copiar</button></div><pre><code>&lt;script src="https://cdn.jsdelivr.net/npm/motion@12/dist/motion.js"&gt;&lt;/script&gt;
 
-botao.addEventListener('pointerdown', () =&gt; {
-  animate(botao, { scale: 0.96 }, { type: 'spring', stiffness: 600, damping: 20 });
-});
+const { animate, scroll, inView, stagger } = Motion;
 
-botao.addEventListener('pointerup', () =&gt; {
-  animate(botao, { scale: 1 }, { type: 'spring', stiffness: 400, damping: 12 });
-});</code></pre></div>
-<div class="tabela-caixa"><table>
-<thead><tr><th>Parâmetro</th><th>Aumentar deixa</th><th>Faixa que costuma funcionar</th></tr></thead>
-<tbody>
-<tr><td><code>stiffness</code></td><td>Mais rápido e mais seco</td><td>200 a 700</td></tr>
-<tr><td><code>damping</code></td><td>Menos oscilação no fim</td><td>10 a 30</td></tr>
-<tr><td><code>mass</code></td><td>Mais pesado e lento</td><td>0.5 a 2</td></tr>
-</tbody></table></div>
-<div class="nota"><strong>Como calibrar sem chutar:</strong> comece com <code>stiffness: 400</code> e <code>damping: 20</code>. Se ficou mole demais, suba a rigidez. Se ficou tremendo no fim, suba o amortecimento. Amortecimento muito alto elimina a mola e vira uma curva comum — se você chegou aí, provavelmente o CSS resolvia.</div>
+animate('.cta', { scale: [0.9, 1] }, { type: 'spring', bounce: 0.3 });
+animate('.card', { opacity: [0, 1], y: [20, 0] }, { delay: stagger(0.06) });
+inView('.secao', el =&gt; animate(el, { opacity: [0, 1] }));
+scroll(animate('.barra', { scaleX: [0, 1] }, { ease: 'linear' }));</code></pre></div>
+<div class="nota">Quatro linhas cobrem a maior parte do uso real. Opções de tempo, as duas formas de mola, a gramática do <code>offset</code>, o objeto de controle e o equivalente em React estão na trilha <a href="motion.html">Referência: Motion</a> — 8 partes, com índice de API e filtro.</div>
 </div>
 </article>
-
-<article class="topico" id="t-mt-inview" data-marca="novo">
-<div class="topico__cabeca"><h3>inView e stagger</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
-<div class="topico__corpo">
-<p>O reveal ao rolar em duas linhas, com encadeamento incluído.</p>
-<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>inView('.secao', (elemento) =&gt; {
-  animate(
-    elemento.querySelectorAll('.card'),
-    { opacity: [0, 1], y: [24, 0] },
-    { duration: 0.5, delay: stagger(0.06) }
-  );
-}, { amount: 0.2 });   // dispara com 20% visível</code></pre></div>
-<p>O <code>stagger(0.06)</code> aplica 60 milissegundos de atraso crescente entre os elementos — exatamente o encadeamento da Parte 1, sem calcular índice na mão.</p>
-<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">encadeamento a partir do centro</span><button class="copiar">copiar</button></div><pre><code>delay: stagger(0.05, { from: 'center' })
-// também aceita 'first', 'last' e um índice</code></pre></div>
-<div class="nota nota--alerta"><strong>A regra da Parte 1 continua valendo.</strong> Se o CSS deixar o card em <code>opacity: 0</code> à espera dessa função e o script não carregar, o conteúdo some. O estado final é o padrão; o inicial entra pela animação, que parte de <code>[0, 1]</code>.</div>
-</div>
-</article>
-
-<article class="topico" id="t-mt-scroll" data-marca="novo">
-<div class="topico__cabeca"><h3>scroll — animação atrelada à rolagem</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
-<div class="topico__corpo">
-<p>Diferente do <code>inView</code>, que dispara uma vez, o <code>scroll</code> liga o progresso da animação ao progresso da rolagem: rolou metade, a animação está na metade; voltou, ela volta.</p>
-<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">barra de progresso de leitura</span><button class="copiar">copiar</button></div><pre><code>scroll(
-  animate('.progresso', { scaleX: [0, 1] })
-);</code></pre></div>
-<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">parallax suave na foto do topo</span><button class="copiar">copiar</button></div><pre><code>scroll(
-  animate('.hero__foto', { y: [0, 80] }),
-  { target: document.querySelector('.hero'), offset: ['start start', 'end start'] }
-);</code></pre></div>
-<div class="nota">Vale comparar com a Parte 2: <code>animation-timeline: scroll()</code> faz a mesma coisa em CSS puro, sem biblioteca, e rodando fora da thread principal. Se o efeito é simples, o CSS ganha. O <code>scroll</code> do Motion compensa quando você precisa de lógica no meio — ler o progresso, decidir algo, animar mais de uma coisa em proporções diferentes.</div>
-</div>
-</article>
-</section>
-
-<section class="parte" id="s8">
-<div class="parte__cabeca"><span class="parte__num">PARTE 8</span><h2>GSAP na prática</h2></div>
-<p class="parte__resumo">O veterano da animação na web. Desde que a Webflow comprou o projeto, é inteiramente gratuito — inclusive os plugins que antes eram pagos, como o ScrollTrigger.</p>
 
 <article class="topico" id="t-gs-oque" data-marca="novo">
 <div class="topico__cabeca"><h3>O que é, e a mudança de licença</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
@@ -768,8 +721,8 @@ etapas.from('.semana-1', { opacity: 0, x: -40 })
 </article>
 </section>
 
-<section class="parte" id="s9">
-<div class="parte__cabeca"><span class="parte__num">PARTE 9</span><h2>Catálogo para copiar</h2></div>
+<section class="parte" id="s8">
+<div class="parte__cabeca"><span class="parte__num">PARTE 8</span><h2>Catálogo para copiar</h2></div>
 <p class="parte__resumo">Os efeitos que mais aparecem, cada um nas três formas — para você comparar o custo e escolher. Todos respeitam <code>prefers-reduced-motion</code> e degradam sem quebrar.</p>
 
 <article class="topico" id="t-cat-base" data-marca="novo">
@@ -945,8 +898,8 @@ gsap.to(alvo, {
 </section>
 
 
-<section class="parte" id="s10">
-<div class="parte__cabeca"><span class="parte__num">PARTE 10</span><h2>Laboratório: os efeitos rodando</h2></div>
+<section class="parte" id="s9">
+<div class="parte__cabeca"><span class="parte__num">PARTE 9</span><h2>Laboratório: os efeitos rodando</h2></div>
 <p class="parte__resumo">Doze efeitos funcionando aqui dentro da página, cada um com o código que o faz funcionar. Passe o mouse, role, clique em <em>rodar</em>. Todos respeitam <code>prefers-reduced-motion</code> e nenhum depende de biblioteca para existir — só três usam Motion ou GSAP, e mesmo esses caem para a versão nativa se a biblioteca não carregar.</p>
 
 <article class="topico" id="t-lab-como" data-marca="novo">
@@ -1277,10 +1230,16 @@ cab.addEventListener('click', () =&gt; item.classList.toggle('aberto'));</code><
 </article>
 </section>
 
+
+<nav class="passo" aria-label="Navegar entre trilhas">
+<a class="passo__item passo__item--ant" href="trafego.html"><span>Anterior</span><strong>Tráfego</strong></a>
+<a class="passo__item passo__item--prox" href="motion.html"><span>Próxima</span><strong>Referência: Motion</strong></a>
+</nav>
 </main>
 </div>
 <footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
 <script src="app.js"></script>
+<script src="busca.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
 <script src="demos.js" defer></script>
