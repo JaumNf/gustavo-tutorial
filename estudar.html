@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Gustavo Tutorial</title>
-<meta name="description" content="Tutorial de desenvolvimento web escrito em português, do HTML puro ao lado comercial do trabalho.">
+<title>Estudar — Gustavo Tutorial</title>
+<meta name="description" content="As onze trilhas de estudo: construção, captação e vendas, e método. Do HTML puro ao lado comercial do trabalho.">
 <meta name="color-scheme" content="light dark">
-<meta property="og:title" content="Gustavo Tutorial">
-<meta property="og:description" content="Tutorial de desenvolvimento web escrito em português, do HTML puro ao lado comercial do trabalho.">
+<meta property="og:title" content="Estudar — Gustavo Tutorial">
+<meta property="og:description" content="As onze trilhas de estudo, por categoria.">
 <meta property="og:type" content="website">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -15,8 +15,8 @@
 <meta name="theme-color" content="#0D6B62" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
 <meta name="author" content="Gustavo">
-<link rel="canonical" href="https://gustavo-tutorial.vercel.app/">
-<meta property="og:url" content="https://gustavo-tutorial.vercel.app/">
+<link rel="canonical" href="https://gustavo-tutorial.vercel.app/estudar.html">
+<meta property="og:url" content="https://gustavo-tutorial.vercel.app/estudar.html">
 <meta property="og:image" content="https://gustavo-tutorial.vercel.app/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -27,19 +27,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilo.css">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Gustavo Tutorial",
-  "url": "https://gustavo-tutorial.vercel.app/",
-  "inLanguage": "pt-BR",
-  "description": "Material de estudo de desenvolvimento web em português, do HTML puro ao lado comercial do trabalho.",
-  "author": { "@type": "Person", "name": "Gustavo" }
-}
-</script>
 </head>
-<body>
+<body data-modo="estudo">
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo">
 <div class="topo__interno">
@@ -88,42 +77,60 @@
 </div>
 </details>
 <div class="modos">
-<a class="modo" href="estudar.html">Estudar</a>
+<a class="modo is-atual" href="estudar.html">Estudar</a>
 <a class="modo modo--trabalho" href="ferramentas.html">Trabalhar</a>
 </div>
 </nav></header>
 <main class="home" id="conteudo" tabindex="-1">
-<section class="hub">
-<p class="hero__olho">Material de estudo · pt-BR · aberto</p>
-<h1>Desenvolvimento web, <em>do zero ao contrato.</em></h1>
-<p class="hub__lead">Escrito em português, na ordem em que os problemas aparecem no trabalho de verdade. De um lado o material para estudar; do outro, as ferramentas para usar enquanto você trabalha.</p>
-</section>
-
-<section class="home__busca">
-<label for="home-busca-campo" class="home__busca-rotulo">Procurar em tudo</label>
-<div class="home__busca-caixa">
-<span class="home__busca-icone" aria-hidden="true">&#9906;</span>
-<input type="search" id="home-busca-campo" class="home__busca-campo" autocomplete="off" placeholder="ex.: contraste, git, preço, WhatsApp…" aria-label="Buscar em todo o site">
-<kbd class="home__busca-atalho">/</kbd>
+<section class="hero hero--area">
+<p class="hero__olho">Área de estudo</p>
+<h1>Estudar</h1>
+<p class="hero__lead">Onze trilhas na ordem em que os problemas aparecem no trabalho de verdade. Cada tópico traz o conceito, o código real e a decisão prática por trás dele.</p>
+<div class="hero__nums">
+<div class="hero__num"><strong>11</strong><span>trilhas</span></div>
+<div class="hero__num"><strong>84</strong><span>partes</span></div>
+<div class="hero__num"><strong>412</strong><span>tópicos</span></div>
 </div>
 </section>
 
-<div class="portas">
-<a class="porta porta--estudo" href="estudar.html">
-<span class="porta__olho">Área de estudo</span>
-<h2>Estudar</h2>
-<p>As onze trilhas, da primeira linha de HTML ao contrato assinado. Construção, captação e vendas, e método.</p>
-<span class="porta__pe">11 trilhas · 84 partes · 412 tópicos<span class="seta" aria-hidden="true">→</span></span>
-</a>
-<a class="porta porta--trabalho" href="ferramentas.html">
-<span class="porta__olho">Área de trabalho</span>
-<h2>Trabalhar</h2>
-<p>As doze ferramentas do dia a dia: checklist, briefing, proposta, preço, WhatsApp, UTM, contraste, acessos, cabeçalho, paleta, tipografia e escala.</p>
-<span class="porta__pe">12 ferramentas · salvas neste navegador<span class="seta" aria-hidden="true">→</span></span>
-</a>
+<div class="home__mapa">
+<div class="home__grupo">
+<p class="home__titulo">Construção</p>
+<ul class="home__links">
+<li><a href="html-puro.html">HTML puro</a></li>
+<li><a href="qualidade.html">Qualidade</a></li>
+<li><a href="movimento.html">Movimento</a></li>
+<li><a href="motion.html">Referência: Motion</a></li>
+<li><a href="frameworks.html">Frameworks</a></li>
+<li><a href="back-end.html">Back-end</a></li>
+</ul>
+</div>
+<div class="home__grupo">
+<p class="home__titulo">Captação e Vendas</p>
+<ul class="home__links">
+<li><a href="landing-pages.html">Landing pages</a></li>
+<li><a href="trafego.html">Tráfego</a></li>
+<li><a href="negocio.html">Negócio</a></li>
+</ul>
+</div>
+<div class="home__grupo">
+<p class="home__titulo">Método</p>
+<ul class="home__links">
+<li><a href="fluxo.html">Fluxo de trabalho</a></li>
+<li><a href="ia.html">Trabalhando com IA</a></li>
+<li><a href="colofao.html">Colofão</a></li>
+</ul>
+</div>
 </div>
 
-<p class="hub__sobre">Sobre o site: <a href="patch-notes.html">Patch notes</a> · <a href="colofao.html">Colofão</a></p>
+<div class="home__nota">
+<strong>Por onde começar:</strong> se você está aprendendo agora, vá pela trilha <a href="html-puro.html">HTML puro</a> na ordem das partes — ela é autossuficiente e leva do zero a um site publicado. Em paralelo, <a href="fluxo.html">Fluxo de trabalho</a> é a que muda mais o seu dia a dia: terminal, Git e DevTools valem para qualquer projeto, em qualquer linguagem. Depois dessas, <a href="landing-pages.html">Landing pages</a> e <a href="trafego.html">Tráfego</a> são as que mais mudam resultado de cliente, e <a href="negocio.html">Negócio</a> é a que mais muda o seu faturamento.
+</div>
+
+<nav class="passo" aria-label="Navegar">
+<a class="passo__item passo__item--ant" href="index.html"><span>Voltar ao</span><strong>Início</strong></a>
+<a class="passo__item passo__item--prox" href="html-puro.html"><span>Começar por</span><strong>HTML puro</strong></a>
+</nav>
 </main>
 <footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
 <script src="app.js"></script>

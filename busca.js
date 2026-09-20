@@ -61,6 +61,18 @@
     if (e.target.hasAttribute('data-fechar')) fechar();
   });
 
+  /* ---------- caixa de busca embutida na home ---------- */
+  var homeCampo = document.getElementById('home-busca-campo');
+  if (homeCampo) {
+    var assumir = function () {
+      if (campo.value !== homeCampo.value) campo.value = homeCampo.value;
+      abrir();
+      procurar();
+    };
+    homeCampo.addEventListener('focus', assumir);
+    homeCampo.addEventListener('input', assumir);
+  }
+
   document.addEventListener('keydown', function (e) {
     var digitando = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName);
     if (!painel.hidden && e.key === 'Escape') { e.preventDefault(); fechar(); return; }

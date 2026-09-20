@@ -1,0 +1,12 @@
+{
+  "name": "gustavo-tutorial",
+  "private": true,
+  "description": "Material de estudo de desenvolvimento web em pt-BR, sem framework e sem build.",
+  "scripts": {
+    "verificar": "node scripts/verificar.mjs",
+    "indice": "python3 scripts/indice.py",
+    "sitemap": "python3 scripts/sitemap.py",
+    "menu": "python3 scripts/navmenu.py"
+  },
+  "devDependencies": { "playwright": "^1.47.0" }
+}

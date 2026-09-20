@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Patch notes — Gustavo Tutorial</title>
+<meta name="description" content="O que mudou no site, atualização por atualização: o que entrou, o que foi corrigido, o que foi reorganizado.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Patch notes — Gustavo Tutorial">
+<meta property="og:description" content="O que mudou no site, atualização por atualização: o que entrou, o que foi corrigido, o que foi reorganizado.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0D6B62" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
+<meta name="author" content="Gustavo">
+<link rel="canonical" href="https://gustavo-tutorial.vercel.app/patch-notes.html">
+<meta property="og:url" content="https://gustavo-tutorial.vercel.app/patch-notes.html">
+<meta property="og:image" content="https://gustavo-tutorial.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Gustavo Tutorial">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo">
+<div class="topo__interno">
+<a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
+<span style="margin-left:auto"></span><button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+</div>
+<nav class="navmenu" aria-label="Navegação do site">
+<details class="navmenu__caixa" id="navmenu">
+<summary class="navmenu__botao">Menu<span aria-hidden="true">&#9662;</span></summary>
+<div class="navmenu__painel">
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Construção</p>
+<a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="qualidade.html"><strong>Qualidade</strong><span>Imagem, a11y, Vitals e testes</span></a>
+<a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="motion.html"><strong>Referência: Motion</strong><span>A API inteira, em português</span></a>
+<a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Servidor, banco e login</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Captação e Vendas</p>
+<a href="landing-pages.html"><strong>Landing pages</strong><span>A estratégia da página</span></a>
+<a href="trafego.html"><strong>Tráfego</strong><span>Ser encontrado no Google</span></a>
+<a href="negocio.html"><strong>Negócio</strong><span>Preço, escopo e contrato</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Método</p>
+<a href="fluxo.html"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
+<a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
+<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+<div class="navmenu__grupo navmenu__grupo--trabalhar">
+<p class="navmenu__rotulo">Ferramentas</p>
+<a href="ferramentas.html"><strong>Ferramentas</strong><span>As doze do dia a dia</span></a>
+<a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
+<a href="ferramentas.html#f-proposta"><strong>Proposta que fecha</strong><span>Os oito pontos</span></a>
+<a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
+<a href="ferramentas.html#f-zap"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
+<a href="ferramentas.html#f-utm"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
+<a href="ia.html#t-ia-gerador"><strong>Gerador de comando</strong><span>Brief para a IA</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Patch notes</p>
+<a href="patch-notes.html" class="is-atual"><strong>Patch notes</strong><span>O que mudou no site</span></a>
+</div>
+</div>
+</details>
+<div class="modos">
+<a class="modo" href="estudar.html">Estudar</a>
+<a class="modo modo--trabalho" href="ferramentas.html">Trabalhar</a>
+</div>
+<span class="navmenu__aqui">Patch notes</span>
+</nav></header>
+<main class="home" id="conteudo" tabindex="-1">
+<section class="home__hero">
+<h1>Patch notes</h1>
+<p>O histórico de atualizações do site, mais recente primeiro. Cada entrada é o que mudou de fato — para o que aconteceu por trás de cada uma, com o raciocínio completo, o <a href="colofao.html">Colofão</a> é a página certa.</p>
+</section>
+
+<div class="patch">
+
+<article class="patch__entrada">
+<div class="patch__data">20 set 2026</div>
+<div class="patch__corpo">
+<h2>Três geradores de código em Ferramentas</h2>
+<ul>
+<li><a href="ferramentas.html#f-head">Cabeçalho da página</a> — título, descrição, canonical, Open Graph e o JSON-LD do negócio, prontos para colar. Avisa quando a descrição passa de 160 caracteres</li>
+<li><a href="ferramentas.html#f-paleta">Paleta em tokens</a> — a cor de destaque vira os seis papéis do <code>:root</code>, com o contraste de cada par já conferido. Se a cor não serve para texto, ele escurece até passar e entrega as duas versões</li>
+<li><a href="ferramentas.html#f-escala">Escala de texto e espaço</a> — base e razão viram a escala tipográfica com <code>clamp()</code> e a escala de 8 completa</li>
+<li><a href="ferramentas.html#f-fonte">Tipografia</a> — sete combinações de fonte com o motivo de cada uma, ou escolha à mão entre dezenove famílias. Sai o <code>&lt;link&gt;</code> do Google Fonts pedindo só os pesos marcados, e avisa quando passam de três por família</li>
+<li>Ferramentas passou de oito para doze, e ganhou o grupo "Gerar código" no índice lateral</li>
+</ul>
+</div>
+</article>
+
+<article class="patch__entrada">
+<div class="patch__data">20 set 2026</div>
+<div class="patch__corpo">
+<h2>Home nova, menu por categoria e esta página</h2>
+<ul>
+<li>Home reformulada: no lugar dos cards cheios de número e selo, uma caixa de busca grande logo abaixo do título e a lista de tudo agrupada por categoria</li>
+<li>Menu reorganizado em cinco categorias: Construção, Captação e Vendas, Método, Ferramentas e Patch notes</li>
+<li>Esta página criada — o registro do que muda, atualização por atualização</li>
+<li>Corrigido um link quebrado que vinha passando batido no menu: o atalho para o gerador de comando apontava para uma âncora que não existia</li>
+<li>Modo trabalho: em <a href="ferramentas.html">Ferramentas</a> o cabeçalho muda de cor — mesma casa, cômodo diferente</li>
+<li>Site reorganizado em três páginas: uma central, a área de <a href="estudar.html">Estudar</a> com as onze trilhas, e a área de <a href="ferramentas.html">Trabalhar</a> com as oito ferramentas. Continua um site só — um CSS, uma busca sobre tudo, um deploy — e o alternador Estudar/Trabalhar no topo troca de área de qualquer página</li>
+</ul>
+</div>
+</article>
+
+<article class="patch__entrada">
+<div class="patch__data">19 set 2026</div>
+<div class="patch__corpo">
+<h2>Ferramentas cresceu e HTML puro se dividiu</h2>
+<ul>
+<li>Duas ferramentas novas: <a href="ferramentas.html#f-proposta">Proposta que fecha</a> e <a href="ferramentas.html#f-inventario">Inventário de acessos</a> — Ferramentas agora tem oito</li>
+<li><a href="html-puro.html">HTML puro</a> dividido em duas páginas — a original passou de 160&nbsp;KB numa carga só</li>
+<li>Busca em todo o site (ícone de lupa no cabeçalho, ou a tecla <kbd>/</kbd>), com índice próprio carregado só na primeira busca</li>
+<li>Movimento enxugada: o conteúdo de Motion virou referência própria em <a href="motion.html">Referência: Motion</a>, sem repetir o que já estava lá</li>
+<li><a href="ferramentas.html">Ferramentas</a> criada como página própria, separando material de estudo do que se usa durante o trabalho</li>
+<li>Folha de impressão dedicada e foco preso dentro do modal de busca</li>
+</ul>
+</div>
+</article>
+
+<article class="patch__entrada">
+<div class="patch__data">18 set 2026</div>
+<div class="patch__corpo">
+<h2>Auditoria de higiene do site</h2>
+<p>O site foi checado contra a própria checklist que ensina — sete falhas encontradas e corrigidas no mesmo dia (o registro completo está no <a href="colofao.html">Colofão</a>):</p>
+<ul>
+<li><code>sitemap.xml</code> e <code>robots.txt</code></li>
+<li>Favicon e imagem de compartilhamento (<code>og.png</code>)</li>
+<li>Link de pular para o conteúdo</li>
+<li>Página de erro 404</li>
+<li><code>canonical</code> em todas as páginas</li>
+</ul>
+</div>
+</article>
+
+</div>
+
+<nav class="passo" aria-label="Navegar">
+<a class="passo__item passo__item--ant" href="colofao.html"><span>Anterior</span><strong>Colofão</strong></a>
+<a class="passo__item passo__item--prox" href="index.html"><span>Voltar ao</span><strong>Início</strong></a>
+</nav>
+</main>
+
+<footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<script src="app.js"></script>
+<script src="busca.js" defer></script>
+</body>
+</html>

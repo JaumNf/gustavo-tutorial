@@ -451,4 +451,411 @@
     });
     pintar();
   })();
+
+  /* ========== 9 · CABEÇALHO DA PÁGINA ========== */
+  (function () {
+    var caixa = $('#fer-head'); if (!caixa) return;
+    var ids = ['nome','oque','cidade','url','desc','img','cor','tel','email','area','tipo'];
+    var saida = $('#hd-saida'), conta = $('#hd-conta'), picker = $('#hd-cor-picker');
+
+    function esc(s) { return (s || '').replace(/[<>&]/g, function (c) { return {'<':'&lt;','>':'&gt;','&':'&amp;'}[c]; }); }
+    function v(id) { var el = $('#hd-' + id); return el ? el.value.trim() : ''; }
+    function limpaUrl(u) { return u.replace(/\/+$/, ''); }
+
+    function montar() {
+      ids.forEach(function (i) { guardar('hd-' + i, $('#hd-' + i).value); });
+
+      var nome = v('nome') || '[nome do negócio]';
+      var oque = v('oque'), cidade = v('cidade'), url = limpaUrl(v('url')), desc = v('desc');
+      var img = v('img'), cor = v('cor') || '#305546';
+      var tel = v('tel').replace(/\D/g, ''), email = v('email'), area = v('area'), tipo = v('tipo');
+
+      var titulo = nome + (oque ? ' — ' + oque : '') + (cidade ? ' | ' + cidade : '');
+      var n = desc.length;
+      conta.textContent = n ? (n + ' caracteres' + (n > 160 ? ' — acima de 160, o Google corta' : n < 70 ? ' — curta demais, use entre 70 e 160' : ' — bom tamanho')) : '';
+      conta.classList.toggle('is-ok', n >= 70 && n <= 160);
+
+      var L = [];
+      L.push('<title>' + titulo + '</title>');
+      L.push('<meta name="description" content="' + (desc || '[descrição]') + '">');
+      if (url) L.push('<link rel="canonical" href="' + url + '/">');
+      L.push('');
+      L.push('<!-- como o link aparece no WhatsApp e nas redes -->');
+      L.push('<meta property="og:title" content="' + nome + (oque ? ' — ' + oque : '') + '">');
+      L.push('<meta property="og:description" content="' + (desc || '[descrição]') + '">');
+      if (img) L.push('<meta property="og:image" content="' + (url ? url : '') + (img.charAt(0) === '/' ? img : '/' + img) + '">');
+      if (url) L.push('<meta property="og:url" content="' + url + '/">');
+      L.push('<meta property="og:type" content="website">');
+      L.push('<meta property="og:locale" content="pt_BR">');
+      L.push('<meta name="twitter:card" content="summary_large_image">');
+      L.push('');
+      L.push('<meta name="theme-color" content="' + cor + '">');
+      L.push('');
+      if (tel || email || area || url) {
+        var dados = { '@context': 'https://schema.org', '@type': tipo, name: nome };
+        if (tel) dados.telephone = '+' + tel;
+        if (email) dados.email = email;
+        if (area) dados.areaServed = area;
+        if (url) dados.url = url;
+        L.push('<script type="application/ld+json">');
+        L.push(JSON.stringify(dados, null, 2));
+        L.push('<\/script>');
+      }
+      saida.innerHTML = esc(L.join('\n'));
+    }
+
+    ids.forEach(function (i) {
+      var el = $('#hd-' + i);
+      var salvo = ler('hd-' + i, null);
+      if (salvo !== null && salvo !== '') el.value = salvo;
+      el.addEventListener('input', montar);
+      el.addEventListener('change', montar);
+    });
+    picker.addEventListener('input', function () { $('#hd-cor').value = picker.value.toUpperCase(); montar(); });
+    $('#hd-cor').addEventListener('input', function () {
+      if (/^#[0-9a-f]{6}$/i.test($('#hd-cor').value)) picker.value = $('#hd-cor').value;
+    });
+    $('#hd-copiar').addEventListener('click', function () { copiar(saida.textContent, this); });
+    montar();
+  })();
+
+  /* ========== 10 · PALETA EM TOKENS ========== */
+  (function () {
+    var caixa = $('#fer-paleta'); if (!caixa) return;
+    var campo = $('#pl-destaque'), picker = $('#pl-destaque-picker'), fundoSel = $('#pl-fundo');
+    var saida = $('#pl-saida'), vereditos = $('#pl-vereditos'), dica = $('#pl-dica'), amostra = $('#pl-amostra');
+
+    function hex(s) {
+      s = (s || '').trim().replace(/^#/, '');
+      if (/^[0-9a-f]{3}$/i.test(s)) s = s[0]+s[0]+s[1]+s[1]+s[2]+s[2];
+      return /^[0-9a-f]{6}$/i.test(s) ? '#' + s.toUpperCase() : null;
+    }
+    function rgb(h) { h = h.replace('#',''); return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)]; }
+    function lum(h) {
+      return rgb(h).map(function (c) { c /= 255; return c <= 0.03928 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4); })
+        .reduce(function (a, c, i) { return a + c * [0.2126, 0.7152, 0.0722][i]; }, 0);
+    }
+    function razao(a, b) { var x = lum(a), y = lum(b); return ((Math.max(x,y) + 0.05) / (Math.min(x,y) + 0.05)); }
+    function mistura(a, b, p) {
+      var A = rgb(a), B = rgb(b);
+      return '#' + [0,1,2].map(function (i) {
+        return Math.round(A[i] + (B[i] - A[i]) * p).toString(16).padStart(2, '0');
+      }).join('').toUpperCase();
+    }
+    function escurece(h, p) { return mistura(h, '#000000', p); }
+
+    function montar() {
+      var destaque = hex(campo.value) || '#305546';
+      var fundo = fundoSel.value;
+      guardar('pl-destaque', campo.value); guardar('pl-fundo', fundo);
+
+      /* os seis papéis */
+      var superficie = fundo === '#FFFFFF' ? '#F7F7F5' : '#FFFFFF';
+      var texto = '#3F444D';
+      var textoFraco = '#6B7280';
+      var linha = mistura(fundo, '#000000', 0.10);
+
+      /* se o destaque não passa em 4.5:1 no fundo, oferece uma versão escurecida que passa */
+      var r = razao(destaque, fundo);
+      var destaqueTexto = destaque, ajustes = 0;
+      while (razao(destaqueTexto, fundo) < 4.5 && ajustes < 20) { destaqueTexto = escurece(destaqueTexto, 0.06); ajustes++; }
+
+      var pares = [
+        ['Texto no fundo', razao(texto, fundo), 4.5],
+        ['Texto fraco no fundo', razao(textoFraco, fundo), 4.5],
+        ['Destaque no fundo', r, 4.5],
+        ['Branco no destaque', razao('#FFFFFF', destaque), 4.5]
+      ];
+      vereditos.innerHTML = pares.map(function (p) {
+        var ok = p[1] >= p[2];
+        return '<span class="ferr__veredito ' + (ok ? 'passa' : 'falha') + '">' + p[0] + ' ' + p[1].toFixed(2) + ':1</span>';
+      }).join('');
+
+      if (r < 4.5) {
+        dica.textContent = 'a cor escolhida dá ' + r.toFixed(2) + ':1 no fundo — não serve para texto. Use ' +
+                           destaqueTexto + ' (' + razao(destaqueTexto, fundo).toFixed(2) + ':1) em link e texto, e guarde a original só para fundo de botão.';
+        dica.classList.remove('is-ok');
+      } else {
+        dica.textContent = 'a cor de destaque passa em texto (' + r.toFixed(2) + ':1). Dá para usar em link, ícone e botão.';
+        dica.classList.add('is-ok');
+      }
+
+      var css = [
+        ':root {',
+        '  --fundo:       ' + fundo + ';   /* nunca branco puro */',
+        '  --superficie:  ' + superficie + ';   /* card, caixa */',
+        '  --texto:       ' + texto + ';   /* nunca preto puro */',
+        '  --texto-fraco: ' + textoFraco + ';   /* legenda, apoio */',
+        '  --destaque:    ' + destaque + ';   /* UMA cor: botão, link, ícone */'
+      ];
+      if (r < 4.5) css.push('  --destaque-texto: ' + destaqueTexto + ';   /* a mesma, escurecida para texto */');
+      css.push('  --linha:       ' + linha + ';   /* divisórias */');
+      css.push('}');
+      saida.textContent = css.join('\n');
+
+      amostra.style.background = fundo;
+      $('#pl-amostra-titulo').style.color = texto;
+      $('#pl-amostra-texto').style.color = texto;
+      $('#pl-amostra-fraco').style.color = textoFraco;
+      var botao = $('#pl-amostra-botao');
+      botao.style.background = destaque;
+      botao.style.color = razao('#FFFFFF', destaque) >= razao(texto, destaque) ? '#FFFFFF' : texto;
+    }
+
+    var salvo = ler('pl-destaque', null);
+    if (salvo) { campo.value = salvo; if (hex(salvo)) picker.value = hex(salvo); }
+    var fundoSalvo = ler('pl-fundo', null);
+    if (fundoSalvo) fundoSel.value = fundoSalvo;
+
+    picker.addEventListener('input', function () { campo.value = picker.value.toUpperCase(); montar(); });
+    campo.addEventListener('input', function () { var h = hex(campo.value); if (h) picker.value = h; montar(); });
+    fundoSel.addEventListener('change', montar);
+    $('#pl-copiar').addEventListener('click', function () { copiar(saida.textContent, this); });
+    montar();
+  })();
+
+  /* ========== 11 · ESCALA DE TEXTO E ESPAÇO ========== */
+  (function () {
+    var caixa = $('#fer-escala'); if (!caixa) return;
+    var ids = ['base','razao','entrelinha','espaco'];
+    var saida = $('#es-saida');
+
+    function montar() {
+      ids.forEach(function (i) { guardar('es-' + i, $('#es-' + i).value); });
+      var base = parseFloat($('#es-base').value) || 17;
+      var r = parseFloat($('#es-razao').value) || 1.25;
+      var el = parseFloat($('#es-entrelinha').value) || 1.6;
+      var e = parseFloat($('#es-espaco').value) || 8;
+
+      var p = function (n) { return Math.round(base * Math.pow(r, n)); };
+      var h1max = p(5), h1min = Math.max(32, Math.round(h1max * 0.58));
+      var h2max = p(3), h2min = Math.max(24, Math.round(h2max * 0.7));
+
+      /* a escala de 8 da trilha: meio passo, depois 1, 1.5, 2, 3, 4, 6, 8, 12, 16 */
+      var esc = [0.5, 1, 1.5, 2, 3, 4, 6, 8, 12, 16].map(function (m) { return e * m; });
+
+      var css = [
+        ':root {',
+        '  /* texto — base ' + base + 'px, razão ' + r.toFixed(3) + ' */',
+        '  --t-corpo:   ' + base + 'px;',
+        '  --t-peq:     ' + Math.max(14, p(-1)) + 'px;   /* nada abaixo de 14 */',
+        '  --t-g:       ' + p(1) + 'px;',
+        '  --t-h3:      ' + p(2) + 'px;',
+        '  --t-h2:      clamp(' + h2min + 'px, 3.5vw, ' + h2max + 'px);',
+        '  --t-h1:      clamp(' + h1min + 'px, 6vw, ' + h1max + 'px);',
+        '  --t-alt:     ' + el + ';   /* entrelinha do corpo */',
+        '',
+        '  /* espaço — escala de ' + e + ' */',
+      ];
+      esc.forEach(function (val, i) {
+        var nome = '--e' + (i + 1) + ':';
+        while (nome.length < 13) nome += ' ';
+        css.push('  ' + nome + val + 'px;');
+      });
+      css.push('}');
+      css.push('');
+      css.push('body  { font-size: var(--t-corpo); line-height: var(--t-alt); }');
+      css.push('p     { max-width: 68ch; }              /* medida: 60 a 75 caracteres */');
+      css.push('h1    { font-size: var(--t-h1); line-height: 1.05; letter-spacing: -0.02em; }');
+      css.push('h2    { font-size: var(--t-h2); line-height: 1.15; }');
+      css.push('.secao { padding-block: clamp(var(--e7), 8vw, var(--e9)); }');
+      saida.textContent = css.join('\n');
+    }
+
+    ids.forEach(function (i) {
+      var el = $('#es-' + i);
+      var salvo = ler('es-' + i, null);
+      if (salvo !== null && salvo !== '') el.value = salvo;
+      el.addEventListener('input', montar);
+      el.addEventListener('change', montar);
+    });
+    $('#es-copiar').addEventListener('click', function () { copiar(saida.textContent, this); });
+    montar();
+  })();
+
+  /* ========== 12 · TIPOGRAFIA ========== */
+  (function () {
+    var caixa = $('#fer-fonte'); if (!caixa) return;
+
+    /* famílias do Google Fonts, todas variáveis de 400 a 800 no latim */
+    var FAMILIAS = [
+      { n: 'Sistema',             p: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif', local: true },
+      { n: 'Sistema serifada',    p: 'Georgia, "Times New Roman", serif', local: true },
+      { n: 'Inter',               p: 'sans-serif' },
+      { n: 'Manrope',             p: 'sans-serif' },
+      { n: 'Outfit',              p: 'sans-serif' },
+      { n: 'Plus Jakarta Sans',   p: 'sans-serif' },
+      { n: 'Space Grotesk',       p: 'sans-serif' },
+      { n: 'Archivo',             p: 'sans-serif' },
+      { n: 'Bricolage Grotesque', p: 'sans-serif' },
+      { n: 'Figtree',             p: 'sans-serif' },
+      { n: 'Sora',                p: 'sans-serif' },
+      { n: 'Lora',                p: 'serif' },
+      { n: 'Source Serif 4',      p: 'serif' },
+      { n: 'Playfair Display',    p: 'serif' },
+      { n: 'Libre Baskerville',   p: 'serif' },
+      { n: 'Fraunces',            p: 'serif' },
+      { n: 'Newsreader',          p: 'serif' },
+      { n: 'JetBrains Mono',      p: 'monospace' },
+      { n: 'IBM Plex Mono',       p: 'monospace' }
+    ];
+
+    var COMBOS = [
+      { t: 'Sistema', tp: [400,700], c: 'Sistema', cp: [400],
+        r: 'Zero download. Carrega instantâneo e fica nativa em cada aparelho.' },
+      { t: 'Bricolage Grotesque', tp: [800], c: 'Source Serif 4', cp: [400,600],
+        r: 'Grotesca com caráter no título, serifada no corpo — para material de leitura longa.' },
+      { t: 'Playfair Display', tp: [700], c: 'Lora', cp: [400,600],
+        r: 'Serifada alta no título. Casamento, buffet, joalheria, advocacia.' },
+      { t: 'Space Grotesk', tp: [500,700], c: 'Inter', cp: [400,600],
+        r: 'Título com personalidade técnica e corpo neutro. Estúdio, agência, tecnologia.' },
+      { t: 'Outfit', tp: [600,800], c: 'Inter', cp: [400],
+        r: 'Geométrica e limpa nos dois. Serviço moderno sem querer chamar atenção.' },
+      { t: 'Fraunces', tp: [700], c: 'Figtree', cp: [400,600],
+        r: 'Serifada com humor no título, sem-serifa amigável no corpo. Gastronomia, artesanal.' },
+      { t: 'Archivo', tp: [700], c: 'Source Serif 4', cp: [400],
+        r: 'Título firme e corpo sério. Consultoria, saúde, educação.' }
+    ];
+
+    var selT = $('#fo-titulo'), selC = $('#fo-corpo');
+    var pesosT = $('#fo-titulo-pesos'), pesosC = $('#fo-corpo-pesos');
+    var combos = $('#fo-combos'), dica = $('#fo-dica');
+    var saidaLink = $('#fo-saida-link'), saidaCss = $('#fo-saida-css');
+    var PESOS = [400, 500, 600, 700, 800];
+    var injetado = {};
+
+    function acha(nome) {
+      for (var i = 0; i < FAMILIAS.length; i++) if (FAMILIAS[i].n === nome) return FAMILIAS[i];
+      return FAMILIAS[0];
+    }
+    function pilha(nome) {
+      var f = acha(nome);
+      return f.local ? f.p : "'" + f.n + "', " + f.p;
+    }
+    function marcados(cx) {
+      return Array.prototype.slice.call(cx.querySelectorAll('input:checked')).map(function (i) { return +i.value; }).sort();
+    }
+
+    FAMILIAS.forEach(function (f) {
+      [selT, selC].forEach(function (s) {
+        var o = document.createElement('option');
+        o.value = f.n; o.textContent = f.n + (f.local ? ' — sem download' : '');
+        s.appendChild(o);
+      });
+    });
+    [[pesosT, 't'], [pesosC, 'c']].forEach(function (par) {
+      par[0].innerHTML = PESOS.map(function (p) {
+        return '<label class="ferr__peso"><input type="checkbox" value="' + p + '" data-lado="' + par[1] + '"><span>' + p + '</span></label>';
+      }).join('');
+    });
+
+    combos.innerHTML = COMBOS.map(function (c, i) {
+      return '<button class="ferr__combo" type="button" data-i="' + i + '">' +
+             '<strong>' + c.t + (c.t === c.c ? '' : ' + ' + c.c) + '</strong>' +
+             '<span>' + c.r + '</span></button>';
+    }).join('');
+
+    function injetar(nome) {
+      var f = acha(nome);
+      if (f.local || injetado[nome]) return;
+      injetado[nome] = true;
+      var l = document.createElement('link');
+      l.rel = 'stylesheet';
+      l.href = 'https://fonts.googleapis.com/css2?family=' + nome.replace(/ /g, '+') +
+               ':wght@400;500;600;700;800&display=swap';
+      document.head.appendChild(l);
+    }
+
+    function montar() {
+      var nt = selT.value, nc = selC.value;
+      var pt = marcados(pesosT), pc = marcados(pesosC);
+      if (!pt.length) pt = [700];
+      if (!pc.length) pc = [400];
+
+      guardar('fo-titulo', nt); guardar('fo-corpo', nc);
+      guardar('fo-pt', pt); guardar('fo-pc', pc);
+
+      var fT = acha(nt), fC = acha(nc);
+      injetar(nt); injetar(nc);
+
+      /* link do Google Fonts — só as famílias que não são do sistema */
+      var externas = [];
+      if (!fT.local) externas.push({ n: nt, w: pt });
+      if (!fC.local && nc !== nt) externas.push({ n: nc, w: pc });
+      else if (!fC.local && nc === nt) externas[0].w = pt.concat(pc).filter(function (v, i, a) { return a.indexOf(v) === i; }).sort();
+
+      if (!externas.length) {
+        saidaLink.textContent = '/* nada a carregar — a pilha do sistema já está no aparelho */';
+      } else {
+        var url = 'https://fonts.googleapis.com/css2?' +
+          externas.map(function (f) { return 'family=' + f.n.replace(/ /g, '+') + ':wght@' + f.w.join(';'); }).join('&') +
+          '&display=swap';
+        saidaLink.textContent =
+          '<link rel="preconnect" href="https://fonts.googleapis.com">\n' +
+          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
+          '<link rel="stylesheet" href="' + url + '">';
+      }
+
+      var css = [
+        ':root {',
+        '  --fonte-titulo: ' + pilha(nt) + ';',
+        '  --fonte-corpo:  ' + pilha(nc) + ';',
+        '}',
+        '',
+        'body { font-family: var(--fonte-corpo); }',
+        'h1, h2, h3 {',
+        '  font-family: var(--fonte-titulo);',
+        '  font-weight: ' + pt[pt.length - 1] + ';',
+        '  text-wrap: balance;   /* tira a palavra órfã na última linha */',
+        '}'
+      ];
+      saidaCss.textContent = css.join('\n');
+
+      /* aviso de peso, pela regra da trilha: duas ou três por família */
+      var total = externas.reduce(function (a, f) { return a + f.w.length; }, 0);
+      if (!total) {
+        dica.textContent = 'nenhuma fonte externa: zero requisição, zero KB, e nada de IP registrado por terceiro.';
+        dica.classList.add('is-ok');
+      } else {
+        var kb = total * 20;
+        var demais = pt.length > 3 || pc.length > 3;
+        dica.textContent = total + (total === 1 ? ' peso' : ' pesos') + ' no total, algo em torno de ' + kb + ' KB' +
+          (demais ? ' — acima de três pesos por família o olho já não distingue, e o LCP sente.'
+                  : ' — dentro do razoável: dois ou três pesos por família.');
+        dica.classList.toggle('is-ok', !demais);
+      }
+
+      /* amostra */
+      $('#fo-p-titulo').style.cssText = 'font-family:' + pilha(nt) + ';font-weight:' + pt[pt.length - 1];
+      $('#fo-p-olho').style.cssText = 'font-family:' + pilha(nc) + ';font-weight:' + pc[0];
+      $('#fo-p-texto').style.cssText = 'font-family:' + pilha(nc) + ';font-weight:' + pc[0];
+      $('#fo-p-botao').style.fontFamily = pilha(nt);
+      $('#fo-p-botao').style.fontWeight = pt[pt.length - 1];
+    }
+
+    function aplicar(nt, pt, nc, pc) {
+      selT.value = nt; selC.value = nc;
+      Array.prototype.forEach.call(pesosT.querySelectorAll('input'), function (i) { i.checked = pt.indexOf(+i.value) !== -1; });
+      Array.prototype.forEach.call(pesosC.querySelectorAll('input'), function (i) { i.checked = pc.indexOf(+i.value) !== -1; });
+      montar();
+    }
+
+    combos.addEventListener('click', function (e) {
+      var b = e.target.closest && e.target.closest('[data-i]');
+      if (!b) return;
+      var c = COMBOS[+b.dataset.i];
+      aplicar(c.t, c.tp, c.c, c.cp);
+      Array.prototype.forEach.call(combos.querySelectorAll('.ferr__combo'), function (x) { x.classList.remove('is-atual'); });
+      b.classList.add('is-atual');
+    });
+    selT.addEventListener('change', montar);
+    selC.addEventListener('change', montar);
+    caixa.addEventListener('change', function (e) { if (e.target.type === 'checkbox') montar(); });
+    $('#fo-copiar-link').addEventListener('click', function () { copiar(saidaLink.textContent, this); });
+    $('#fo-copiar-css').addEventListener('click', function () { copiar(saidaCss.textContent, this); });
+
+    var st = ler('fo-titulo', null), sc = ler('fo-corpo', null);
+    if (st && sc) aplicar(st, ler('fo-pt', [700]), sc, ler('fo-pc', [400]));
+    else aplicar(COMBOS[1].t, COMBOS[1].tp, COMBOS[1].c, COMBOS[1].cp);
+  })();
 })();
