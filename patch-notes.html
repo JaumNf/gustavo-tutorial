@@ -94,6 +94,19 @@
 <article class="patch__entrada">
 <div class="patch__data">21 set 2026</div>
 <div class="patch__corpo">
+<h2>Animações de rolagem em Estudar e Modelos</h2>
+<ul>
+<li><a href="estudar.html">Estudar</a> e <a href="modelos.html">Modelos</a> agora entram aos poucos: o título sobe de trás de uma máscara, palavra por palavra, e os números do topo contam do zero</li>
+<li>Os blocos — o mapa das trilhas, link por link, os cartões de modelo, o índice e a navegação — sobem e aparecem quando chegam na tela. Quando vários chegam juntos, entram em escada, na ordem da página. Cada um entra uma vez só</li>
+<li>Ao rolar, o topo da página se afasta e esmaece. Isso só acontece nos navegadores que ligam animação à rolagem direto no CSS; nos outros, o topo fica parado</li>
+<li>Só se anima opacidade e deslocamento, com as propriedades <code>translate</code> e <code>opacity</code> separadas do <code>transform</code>, para não brigar com o hover dos cartões. Com "reduzir movimento" ligado, ou sem JavaScript, nada fica escondido</li>
+</ul>
+</div>
+</article>
+
+<article class="patch__entrada">
+<div class="patch__data">21 set 2026</div>
+<div class="patch__corpo">
 <h2>Trilha nova: Vibecoding</h2>
 <ul>
 <li><a href="vibecoding.html">Vibecoding</a>, a décima segunda trilha, ao lado de Trabalhando com IA: uma ensina como pedir, a outra com o quê trabalhar e onde buscar. Seis partes e 27 tópicos — o mapa das ferramentas (conversa, construtor, agente, mídia) e quando sair do construtor; onde achar referência e como desmontar uma antes de pedir; arquivo de contexto de cada ferramenta, skills, MCP, subagentes, hooks e modo plano; a IA em loop, o erro bem contado, o Git como botão de desfazer e a leitura do diff; a chave que vaza, o banco sem regra de acesso, a conta que dispara e o caminho para publicar; e como se manter atualizado sem trocar de ferramenta toda semana</li>

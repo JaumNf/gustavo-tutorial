@@ -783,3 +783,86 @@
     o.observe(el);
   }
 })();
+
+/* ============================================================
+   Rolagem: as páginas com <main data-revelar> entram aos poucos.
+   - o título sobe de trás de uma máscara, palavra por palavra
+   - os números do topo contam do zero
+   - blocos e cartões sobem e aparecem quando chegam na tela,
+     em escada quando chegam juntos, uma vez só
+   Roda no DOMContentLoaded porque a grade de modelos.js (defer)
+   só existe depois deste arquivo.
+   ============================================================ */
+(function () {
+  var main = document.querySelector('main[data-revelar]');
+  if (!main) return;
+  var calmo = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (calmo || !window.IntersectionObserver) return;
+  document.documentElement.classList.add('js-revela');
+
+  /* título: cada palavra dentro de uma máscara */
+  var h1 = main.querySelector('.hero h1');
+  if (h1 && !h1.children.length) {
+    var palavras = h1.textContent.trim().split(/\s+/);
+    h1.setAttribute('aria-label', h1.textContent.trim());
+    h1.innerHTML = palavras.map(function (p, i) {
+      return '<span class="rv-mascara" aria-hidden="true"><span style="--i:' + i + '">' + p + '</span></span>';
+    }).join(' ');
+  }
+
+  /* números: contam do zero, desacelerando no fim */
+  main.querySelectorAll('.hero__num strong').forEach(function (el) {
+    var alvo = parseInt(el.textContent, 10);
+    if (!(alvo > 0)) return;
+    el.style.minWidth = el.offsetWidth + 'px';
+    var inicio = null, dur = 1100;
+    el.textContent = '0';
+    setTimeout(function () {
+      requestAnimationFrame(function passo(agora) {
+        if (inicio === null) inicio = agora;
+        var t = Math.min((agora - inicio) / dur, 1);
+        el.textContent = Math.round(alvo * (1 - Math.pow(1 - t, 3)));
+        if (t < 1) requestAnimationFrame(passo);
+      });
+    }, 250);
+  });
+
+  function iniciar() {
+    var SELETOR = '.hero__olho, .hero__lead, .hero__nums, .ctas, .home__grupo, .home__links li, ' +
+      '.home__nota, .recentes, .passo, .mod-filtros, .mod-cel, .mod-lista__topo, .mod-indice__grupo, .mod-rodape';
+    var alvos = main.querySelectorAll(SELETOR);
+    var fila = [], agendado = false;
+
+    /* quem chega no mesmo quadro entra em escada, na ordem da página */
+    function soltar() {
+      agendado = false;
+      fila.sort(function (a, b) { return a.compareDocumentPosition(b) & 4 ? -1 : 1; });
+      fila.forEach(function (el, i) {
+        el.style.transitionDelay = Math.min(i, 8) * 55 + 'ms';
+        el.classList.add('is-revelado');
+      });
+      fila = [];
+    }
+    var obs = new IntersectionObserver(function (ents) {
+      ents.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        obs.unobserve(en.target);
+        fila.push(en.target);
+      });
+      if (fila.length && !agendado) { agendado = true; requestAnimationFrame(soltar); }
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0 });
+
+    alvos.forEach(function (el) {
+      el.classList.add('rv');
+      /* o atraso só vale na entrada: depois, hover e foco respondem na hora */
+      el.addEventListener('transitionend', function limpar(e) {
+        if (e.target !== el) return;
+        el.style.transitionDelay = '';
+        el.removeEventListener('transitionend', limpar);
+      });
+      obs.observe(el);
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar);
+  else iniciar();
+})();

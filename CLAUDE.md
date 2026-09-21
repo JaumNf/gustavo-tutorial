@@ -115,6 +115,11 @@ A **vitrine** (`<figure class="vitrine">`) é o exemplo vivo: palco escuro, bot�
 classe da própria demo (`.vx-cubo`, `.vx-pistas`, `.vx-pontos`, `.vx-paralaxe`, `.vx-revela`…). As
 "fotos" são as classes `.vx-foto--1` a `--5`, gradientes em CSS — nada de imagem de fora.
 
+**Rolagem:** a página cujo `<main>` tem `data-revelar` (hoje `estudar.html` e `modelos.html`) ganha as
+entradas do último bloco do `app.js`: título palavra por palavra, números contando, blocos subindo em
+escada ao entrar na tela (a lista `SELETOR`). Só esconde com a classe `js-revela` no `<html>`, que o JS
+só põe sem "reduzir movimento". Usa `translate`/`opacity`, nunca `transform`, para não brigar com hover.
+
 Cada trilha é uma página com esta estrutura, que os scripts dependem:
 
 ```html

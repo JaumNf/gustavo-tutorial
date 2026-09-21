@@ -3079,6 +3079,41 @@ body[data-modo="trabalho"] { --accent: #A8261C; --accent-soft: #FAE7E4; }
   .mod-janela__codigos { padding: 14px 14px 20px; }
 }
 
+/* ============================================================
+   Rolagem (main[data-revelar]) — só esconde se o JS rodou
+   ============================================================ */
+.rv-mascara { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .08em; margin-bottom: -.08em; }
+.rv-mascara > span { display: inline-block; }
+.js-revela .rv-mascara > span {
+  translate: 0 105%;
+  animation: rv-sobe .9s cubic-bezier(.23, 1, .32, 1) forwards;
+  animation-delay: calc(80ms + var(--i, 0) * 70ms);
+}
+@keyframes rv-sobe { to { translate: 0 0; } }
+
+/* translate e opacity são propriedades próprias: não brigam com o transform do hover */
+.js-revela .rv {
+  opacity: 0; translate: 0 18px;
+  transition: opacity .7s cubic-bezier(.23, 1, .32, 1), translate .7s cubic-bezier(.23, 1, .32, 1);
+}
+.js-revela .home__links li.rv { translate: -8px 0; }
+.js-revela .mod-cel.rv { translate: 0 28px; }
+.js-revela .rv.is-revelado { opacity: 1; translate: 0 0; }
+
+/* o topo da página se afasta ao rolar — só onde o navegador liga a animação à rolagem */
+@supports (animation-timeline: scroll()) {
+  .js-revela main[data-revelar] .hero {
+    animation: rv-afasta linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 420px;
+  }
+  @keyframes rv-afasta { to { opacity: .25; translate: 0 -40px; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-revela .rv, .js-revela .rv-mascara > span { opacity: 1; translate: none; animation: none; transition: none; }
+  .js-revela main[data-revelar] .hero { animation: none; }
+}
+
 @media print {
   .pular, .topo, .sumario, .indice, .nesta, .passo, .rodape,
   .marcar, .copiar, .btn-busca, .btn-icone, .busca,
