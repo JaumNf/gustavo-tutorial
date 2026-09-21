@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Cabeçalho da página — Ferramentas — Gustavo Tutorial</title>
+<meta name="description" content="O bloco de &lt;head&gt; que toda página precisa e que ninguém lembra de cor: título, descrição, canonical, Open Graph e os dados de negócio em JSON-LD.…">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Cabeçalho da página — Ferramentas — Gustavo Tutorial">
+<meta property="og:description" content="O bloco de &lt;head&gt; que toda página precisa e que ninguém lembra de cor: título, descrição, canonical, Open Graph e os dados de negócio em JSON-LD.…">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#A8261C" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
+<meta name="author" content="Gustavo">
+<link rel="canonical" href="https://gustavo-tutorial.vercel.app/ferramenta-cabecalho.html">
+<meta property="og:url" content="https://gustavo-tutorial.vercel.app/ferramenta-cabecalho.html">
+<meta property="og:image" content="https://gustavo-tutorial.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Gustavo Tutorial">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body data-modo="trabalho">
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo">
+<div class="topo__interno">
+<a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
+<button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+</div>
+<nav class="navmenu" aria-label="Navegação do site">
+<details class="navmenu__caixa" id="navmenu">
+<summary class="navmenu__botao">Menu<span aria-hidden="true">&#9662;</span></summary>
+<div class="navmenu__painel">
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Construção</p>
+<a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="qualidade.html"><strong>Qualidade</strong><span>Imagem, a11y, Vitals e testes</span></a>
+<a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="motion.html"><strong>Referência: Motion</strong><span>A API inteira, em português</span></a>
+<a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Servidor, banco e login</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Captação e Vendas</p>
+<a href="landing-pages.html"><strong>Landing pages</strong><span>A estratégia da página</span></a>
+<a href="trafego.html"><strong>Tráfego</strong><span>Ser encontrado no Google</span></a>
+<a href="negocio.html"><strong>Negócio</strong><span>Preço, escopo e contrato</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Método</p>
+<a href="fluxo.html"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
+<a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e revisão</span></a>
+<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+<div class="navmenu__grupo navmenu__grupo--trabalhar">
+<p class="navmenu__rotulo">Ferramentas</p>
+<a href="ferramentas.html" class="is-atual"><strong>Ferramentas</strong><span>As quatorze do dia a dia</span></a>
+<a href="ferramenta-checklist.html"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
+<a href="ferramenta-proposta.html"><strong>Proposta que fecha</strong><span>Os oito pontos</span></a>
+<a href="ferramenta-briefing.html"><strong>Briefing</strong><span>As dez perguntas</span></a>
+<a href="ferramenta-whatsapp.html"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
+<a href="ferramenta-utm.html"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
+<a href="ferramenta-gerador.html"><strong>Gerador de comando</strong><span>Onze tipos de pedido</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Patch notes</p>
+<a href="patch-notes.html"><strong>Patch notes</strong><span>O que mudou no site</span></a>
+</div>
+</div>
+</details>
+<div class="modos">
+<a class="modo" href="estudar.html">Estudar</a>
+<a class="modo modo--trabalho is-atual" href="ferramentas.html">Trabalhar</a>
+</div>
+</nav></header>
+<div class="palco palco--ref palco--ferramenta">
+<nav class="indice" id="indice" aria-label="Ferramentas">
+<button class="indice__abrir" id="indice-abrir" aria-expanded="false" aria-controls="indice-lista"><span>Ferramentas</span><span aria-hidden="true">&#9662;</span></button>
+<div class="indice__lista" id="indice-lista">
+<div class="indice__grupo">
+<p class="indice__rotulo">Visão geral</p>
+<a href="ferramentas.html">Todas as ferramentas</a>
+</div>
+<div class="indice__grupo">
+<p class="indice__rotulo">1 · Antes do projeto</p>
+<a href="ferramenta-briefing.html">Briefing</a>
+<a href="ferramenta-preco.html">Preço</a>
+<a href="ferramenta-proposta.html">Proposta que fecha</a>
+</div>
+<div class="indice__grupo">
+<p class="indice__rotulo">2 · Identidade</p>
+<a href="ferramenta-paleta.html">Paleta em tokens</a>
+<a href="ferramenta-contraste.html">Contraste</a>
+<a href="ferramenta-tipografia.html">Tipografia</a>
+<a href="ferramenta-escala.html">Escala de texto e espaço</a>
+<a href="ferramenta-design-system.html">Design system</a>
+</div>
+<div class="indice__grupo">
+<p class="indice__rotulo">3 · Montar a página</p>
+<a href="ferramenta-gerador.html">Gerador de comando</a>
+<a href="ferramenta-cabecalho.html" class="is-atual" aria-current="page">Cabeçalho da página</a>
+<a href="ferramenta-whatsapp.html">Link de WhatsApp</a>
+<a href="ferramenta-utm.html">Gerador de UTM</a>
+</div>
+<div class="indice__grupo">
+<p class="indice__rotulo">4 · Entregar</p>
+<a href="ferramenta-checklist.html">Checklist de entrega</a>
+<a href="ferramenta-inventario.html">Inventário de acessos</a>
+</div>
+<div class="indice__grupo">
+<p class="indice__rotulo">O raciocínio</p>
+<a href="estudar.html">As trilhas de onde elas saíram</a>
+</div>
+</div>
+</nav>
+
+<main class="leitura" id="conteudo" tabindex="-1">
+<nav class="migalha" aria-label="Você está em"><a href="ferramentas.html">Ferramentas</a><span aria-hidden="true">›</span><a href="ferramentas.html#fase-3">Fase 3 · Montar a página</a></nav>
+<section class="parte parte--pagina" id="f-head">
+<div class="parte__cabeca"><span class="parte__num">FERRAMENTA</span><h1>Cabeçalho da página</h1></div>
+<p class="parte__resumo">O bloco de <code>&lt;head&gt;</code> que toda página precisa e que ninguém lembra de cor: título, descrição, canonical, Open Graph e os dados de negócio em JSON-LD. Preencha uma vez, cole no projeto.</p>
+<div class="ferr" id="fer-head">
+<div class="ferr__grade">
+<div><label for="hd-nome">Nome do negócio</label>
+<input type="text" id="hd-nome" class="ferr__campo" placeholder="Art Bar"></div>
+<div><label for="hd-oque">O que faz <small>vira o título junto com a cidade</small></label>
+<input type="text" id="hd-oque" class="ferr__campo" placeholder="Bar de Drinks para Casamentos"></div>
+<div><label for="hd-cidade">Cidade e UF</label>
+<input type="text" id="hd-cidade" class="ferr__campo" placeholder="Campo Grande MS"></div>
+<div><label for="hd-url">Endereço do site</label>
+<input type="url" id="hd-url" class="ferr__campo" placeholder="https://artbar.com.br"></div>
+</div>
+<div class="ferr__linha"><label for="hd-desc">Descrição <small>até 160 caracteres, honesta, terminando no que fazer</small></label>
+<textarea id="hd-desc" class="ferr__campo" rows="2" placeholder="Bar de drinks completo para casamentos e eventos corporativos em MS. Peça seu orçamento no WhatsApp."></textarea>
+<p class="ferr__dica" id="hd-conta"></p></div>
+<div class="ferr__grade">
+<div><label for="hd-img">Imagem de compartilhamento <small>1200×630, caminho a partir da raiz</small></label>
+<input type="text" id="hd-img" class="ferr__campo" placeholder="/capa.jpg"></div>
+<div><label for="hd-cor">Cor do tema <small>a barra do navegador no celular</small></label>
+<div class="ferr__cor"><input type="color" id="hd-cor-picker" value="#305546" aria-label="Escolher cor do tema"><input type="text" id="hd-cor" class="ferr__campo" value="#305546"></div></div>
+</div>
+<p class="ferr__secao">Dados de negócio (JSON-LD)</p>
+<div class="ferr__grade">
+<div><label for="hd-tel">Telefone <small>com DDI, só números</small></label>
+<input type="text" id="hd-tel" class="ferr__campo" placeholder="5567999999999"></div>
+<div><label for="hd-email">E-mail</label>
+<input type="email" id="hd-email" class="ferr__campo" placeholder="contato@artbar.com.br"></div>
+<div><label for="hd-area">Área atendida</label>
+<input type="text" id="hd-area" class="ferr__campo" placeholder="Mato Grosso do Sul"></div>
+<div><label for="hd-tipo">Tipo de negócio <small>schema.org</small></label>
+<select id="hd-tipo" class="ferr__campo">
+<option value="LocalBusiness" selected>LocalBusiness — genérico</option>
+<option value="ProfessionalService">ProfessionalService — serviço profissional</option>
+<option value="HealthAndBeautyBusiness">HealthAndBeautyBusiness — saúde e beleza</option>
+<option value="EducationalOrganization">EducationalOrganization — ensino</option>
+<option value="FoodEstablishment">FoodEstablishment — alimentação</option>
+<option value="HomeAndConstructionBusiness">HomeAndConstructionBusiness — obra e reforma</option>
+</select></div>
+</div>
+<div class="ferr__bloco">
+<div class="ferr__bloco-barra"><span>head</span><button class="acao" id="hd-copiar" type="button">copiar</button></div>
+<pre><code id="hd-saida">preencha os campos acima</code></pre>
+</div>
+<div class="nota"><strong>O <code>og:image</code> não é detalhe:</strong> sem ele o link colado no WhatsApp sai como um retângulo cinza — e é por ali que o cliente divulga. 1200×630, caminho absoluto.</div>
+</div>
+</section>
+
+<nav class="passo" aria-label="Navegar">
+<a class="passo__item passo__item--ant" href="ferramenta-gerador.html"><span>Anterior</span><strong>Gerador de comando</strong></a>
+<a class="passo__item passo__item--prox" href="ferramenta-whatsapp.html"><span>Próxima</span><strong>Link de WhatsApp</strong></a>
+</nav>
+</main>
+</div>
+<footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<script src="app.js"></script>
+<script src="ref.js" defer></script>
+<script src="busca.js" defer></script>
+<script src="ferramentas.js" defer></script>
+</body>
+</html>

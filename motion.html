@@ -63,12 +63,12 @@
 <div class="navmenu__grupo navmenu__grupo--trabalhar">
 <p class="navmenu__rotulo">Ferramentas</p>
 <a href="ferramentas.html"><strong>Ferramentas</strong><span>As quatorze do dia a dia</span></a>
-<a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
-<a href="ferramentas.html#f-proposta"><strong>Proposta que fecha</strong><span>Os oito pontos</span></a>
-<a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
-<a href="ferramentas.html#f-zap"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
-<a href="ferramentas.html#f-utm"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
-<a href="ferramentas.html#f-gerador"><strong>Gerador de comando</strong><span>Onze tipos de pedido</span></a>
+<a href="ferramenta-checklist.html"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
+<a href="ferramenta-proposta.html"><strong>Proposta que fecha</strong><span>Os oito pontos</span></a>
+<a href="ferramenta-briefing.html"><strong>Briefing</strong><span>As dez perguntas</span></a>
+<a href="ferramenta-whatsapp.html"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
+<a href="ferramenta-utm.html"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
+<a href="ferramenta-gerador.html"><strong>Gerador de comando</strong><span>Onze tipos de pedido</span></a>
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Patch notes</p>
@@ -80,7 +80,6 @@
 <a class="modo is-atual" href="estudar.html">Estudar</a>
 <a class="modo modo--trabalho" href="ferramentas.html">Trabalhar</a>
 </div>
-<span class="navmenu__aqui">Referência: Motion</span>
 </nav></header>
 <div class="palco palco--ref">
 <nav class="indice" id="indice" aria-label="Índice da API">
@@ -923,6 +922,24 @@ alvo.addEventListener('pointerup', () =&gt; {
   arrastando = false;
   animate(alvo, { x: 0 }, { type: 'inertia', velocity, min: -600, max: 0 });
 });</code></pre></div>
+
+<figure class="vitrine">
+<div class="vitrine__palco">
+<div class="vitrine__acoes"><button class="vitrine__botao" type="button" data-acao="codigo" aria-expanded="false">ver código</button></div>
+<div class="vx-arrastavel" tabindex="0" role="img" aria-label="Cartão que pode ser arrastado"><span>arraste</span></div>
+</div>
+<figcaption class="vitrine__rodape"><span>Arraste e solte — ele volta com mola</span><span class="vitrine__dica">resistência depois de 120px</span></figcaption>
+<div class="vitrine__codigo" hidden><div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>/* quanto mais longe, menos anda: resistência em vez de parede */
+function comResistencia(d, limite) {
+  var a = Math.abs(d);
+  return a &lt;= limite ? d : Math.sign(d) * (limite + (a - limite) * 0.3);
+}
+/* ao soltar, volta com uma curva que passa do ponto */
+cartao.animate(
+  [{ transform: atual }, { transform: 'none' }],
+  { duration: 500, easing: 'cubic-bezier(.34, 1.56, .64, 1)' }
+);</code></pre></div></div>
+</figure>
 <div class="nota"><strong>Antes de construir isso:</strong> para carrossel de fotos, <code>overflow-x: auto</code> com <code>scroll-snap-type: x mandatory</code> resolve em quatro linhas de CSS, funciona com teclado, funciona com leitor de tela e tem inércia nativa do sistema. Gesto de arrastar feito à mão quase sempre fica pior que o nativo — e custa um dia.</div>
 </div>
 </article>
@@ -964,6 +981,20 @@ alvo.addEventListener('pointerup', () =&gt; {
   &lt;path d="M10 60 Q 60 10 110 45 T 190 30"
         stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/&gt;
 &lt;/svg&gt;</code></pre></div>
+
+<figure class="vitrine">
+<div class="vitrine__palco">
+<div class="vitrine__acoes"><button class="vitrine__botao vitrine__botao--principal" type="button" data-acao="desenhar">desenhar</button><button class="vitrine__botao" type="button" data-acao="codigo" aria-expanded="false">ver código</button></div>
+<svg class="vx-traco" viewBox="0 0 320 140" role="img" aria-label="Uma linha curva se desenhando"><path class="vx-traco__guia" d="M14 110 C 60 10, 118 14, 150 70 S 232 132, 306 34" pathLength="1"/><path class="vx-traco__linha" d="M14 110 C 60 10, 118 14, 150 70 S 232 132, 306 34" pathLength="1"/></svg>
+</div>
+<figcaption class="vitrine__rodape"><span>O traço que se desenha</span><span class="vitrine__dica">pathLength="1"</span></figcaption>
+<div class="vitrine__codigo" hidden><div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>path {
+  stroke-dasharray: 1;      /* com pathLength="1", 1 é o traço inteiro */
+  stroke-dashoffset: 1;     /* começa escondido */
+  transition: stroke-dashoffset 1.2s cubic-bezier(.65, 0, .35, 1);
+}
+path.is-desenhado { stroke-dashoffset: 0; }</code></pre></div></div>
+</figure>
 <div class="nota"><strong>Onde isso ganha dinheiro:</strong> logotipo desenhando na hero, um traço sublinhando a palavra-chave da chamada, o contorno de um ícone se formando ao entrar na tela. É barato — um SVG pesa alguns KB — e passa impressão de acabamento caro. Use uma vez por página.</div>
 </div>
 </article>

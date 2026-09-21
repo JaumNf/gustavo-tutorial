@@ -8,6 +8,7 @@ import { existsSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { lerTexto, escreverTexto } from './_texto.mjs';
+import { ARQUIVOS as FERRAMENTAS } from './_ferramentas.mjs';
 
 // roda a partir da raiz do repositório, não importa de onde foi chamado
 process.chdir(join(dirname(fileURLToPath(import.meta.url)), '..'));
@@ -24,7 +25,15 @@ function isoDataLocal(ms) {
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 }
 
-const txt = lerTexto('sitemap.xml');
+let txt = lerTexto('sitemap.xml');
+
+// página de ferramenta que ainda não está no sitemap entra antes do fim
+const BASE = 'https://gustavo-tutorial.vercel.app/';
+for (const arq of FERRAMENTAS) {
+  if (txt.includes(`<loc>${BASE}${arq}</loc>`)) continue;
+  txt = txt.replace('</urlset>', () =>
+    `  <url>\n    <loc>${BASE}${arq}</loc>\n    <lastmod>2000-01-01</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.6</priority>\n  </url>\n</urlset>`);
+}
 
 const novo = txt.replace(/<url>.*?<\/url>/gs, (bloco) => {
   const locMatch = bloco.match(/<loc>(.*?)<\/loc>/);

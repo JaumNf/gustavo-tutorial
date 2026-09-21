@@ -90,6 +90,20 @@
     el.dispatchEvent(new Event('input', { bubbles: true }));
     el.dispatchEvent(new Event('change', { bubbles: true }));
   }
+  /* hub → ferramentas.html → uma página por ferramenta. O mesmo mapa está em
+     scripts/_ferramentas.mjs: ferramenta nova entra nos dois. */
+  var PAGINA_DE = {
+    'f-briefing': 'ferramenta-briefing.html', 'f-preco': 'ferramenta-preco.html',
+    'f-proposta': 'ferramenta-proposta.html', 'f-paleta': 'ferramenta-paleta.html',
+    'f-contraste': 'ferramenta-contraste.html', 'f-fonte': 'ferramenta-tipografia.html',
+    'f-escala': 'ferramenta-escala.html', 'f-sistema': 'ferramenta-design-system.html',
+    'f-gerador': 'ferramenta-gerador.html', 'f-head': 'ferramenta-cabecalho.html',
+    'f-zap': 'ferramenta-whatsapp.html', 'f-utm': 'ferramenta-utm.html',
+    'f-checklist': 'ferramenta-checklist.html', 'f-inventario': 'ferramenta-inventario.html',
+    'projeto': 'ferramentas.html#projeto'
+  };
+  function ir(id) { return PAGINA_DE[id] || 'ferramentas.html'; }
+
   function nomeProjeto() { return String(ler('projeto', '') || '').trim(); }
   function chaveProjeto() { return nomeProjeto().toLowerCase() || 'sem-nome'; }
   function corHex(v) {
@@ -275,11 +289,11 @@
           cidade = String(ler('hd-cidade', '') || '').trim(), img = String(ler('hd-img', '') || '').trim();
       var titulo = nome ? nome + (oque ? ' — ' + oque : '') + (cidade ? ' | ' + cidade : '') : '';
       var REF = {
-        0:  ['#f-zap', 'Link de WhatsApp', fone.length >= 10 ? foneBonito(fone) : ''],
-        1:  ['#f-zap', 'Link de WhatsApp', ''],
-        3:  ['#f-head', 'Cabeçalho', titulo],
-        4:  ['#f-head', 'Cabeçalho', img ? 'og:image ' + img : ''],
-        11: ['#f-utm', 'Gerador de UTM', 'abra um link marcado e veja chegar']
+        0:  [ir('f-zap'), 'Link de WhatsApp', fone.length >= 10 ? foneBonito(fone) : ''],
+        1:  [ir('f-zap'), 'Link de WhatsApp', ''],
+        3:  [ir('f-head'), 'Cabeçalho', titulo],
+        4:  [ir('f-head'), 'Cabeçalho', img ? 'og:image ' + img : ''],
+        11: [ir('f-utm'), 'Gerador de UTM', 'abra um link marcado e veja chegar']
       };
       return REF[i] || null;
     }
@@ -352,7 +366,7 @@
       if (saida.textContent !== '—') copiar(saida.textContent, this);
     });
     /* o telefone do JSON-LD e o do botão têm de ser o mesmo número */
-    ligar(caixa.querySelector('.ferr__linha'), 'Cabeçalho', '#f-head', function () {
+    ligar(caixa.querySelector('.ferr__linha'), 'Cabeçalho', ir('f-head'), function () {
       var d = foneNacional(ler('hd-tel', ''));
       if (d.length < 10) return null;
       var agora = foneNacional(num.value);
@@ -422,7 +436,7 @@
     });
     $('#ut-limpar').addEventListener('click', function () { guardar('ut-historico', []); pintarHistorico(); });
     /* o endereço do site já está no canonical do Cabeçalho */
-    ligar(caixa.querySelector('.ferr__linha'), 'Cabeçalho', '#f-head', function () {
+    ligar(caixa.querySelector('.ferr__linha'), 'Cabeçalho', ir('f-head'), function () {
       var u = String(ler('hd-url', '') || '').trim().replace(/\/+$/, '');
       if (!u) return null;
       var agora = $('#ut-url').value.trim().replace(/\/+$/, '');
@@ -486,7 +500,7 @@
     tp.addEventListener('input', function () { texto.value = tp.value; calcular(); });
     fp.addEventListener('input', function () { fundo.value = fp.value; calcular(); });
     /* testar o par que a Paleta gerou: destaque sobre o fundo */
-    ligar(caixa.querySelector('.ferr__grade--cores'), 'Paleta', '#f-paleta', function () {
+    ligar(caixa.querySelector('.ferr__grade--cores'), 'Paleta', ir('f-paleta'), function () {
       var d = corHex(ler('pl-destaque', '')), f = corHex(ler('pl-fundo', ''));
       if (!d || !f) return null;
       if (corHex(texto.value) === d && corHex(fundo.value) === f) return null;
@@ -664,7 +678,7 @@
       });
       return saida;
     }
-    ligar(campos, 'Briefing', '#f-briefing', function () {
+    ligar(campos, 'Briefing', ir('f-briefing'), function () {
       var r = rascunhos(), ids = Object.keys(r);
       if (!ids.length) return null;
       return {
@@ -675,7 +689,7 @@
     }, 'trazer');
 
     /* da calculadora de Preço: a faixa vai para o Investimento */
-    ligar(dica, 'Preço', '#f-preco', function () {
+    ligar(dica, 'Preço', ir('f-preco'), function () {
       var f = faixaPreco(), campo = $('#pp-investimento');
       if (!f || !campo || campo.value.indexOf(f.texto) !== -1) return null;
       return {
@@ -777,8 +791,9 @@
       L.push('<title>' + titulo + '</title>');
       L.push('<meta name="description" content="' + (desc || '[descrição]') + '">');
       if (url) L.push('<link rel="canonical" href="' + url + '/">');
-      /* as fontes escolhidas na Tipografia entram aqui, que é onde elas vão */
-      var fontes = $('#fo-saida-link'), linkFontes = fontes ? fontes.textContent : '';
+      /* as fontes escolhidas na Tipografia entram aqui, que é onde elas vão.
+         Vem do que ela guardou: as duas moram em páginas diferentes. */
+      var linkFontes = String(ler('fo-link', '') || '');
       if (linkFontes.indexOf('<link') === 0) {
         L.push('');
         L.push('<!-- fontes, da ferramenta Tipografia -->');
@@ -823,13 +838,13 @@
     $('#hd-copiar').addEventListener('click', function () { copiar(saida.textContent, this); });
 
     /* o nome do projeto, se o campo ainda está vazio */
-    ligar(caixa.querySelector('.ferr__grade'), 'Projeto', '#projeto', function () {
+    ligar(caixa.querySelector('.ferr__grade'), 'Projeto', ir('projeto'), function () {
       var n = nomeProjeto();
       if (!n || v('nome')) return null;
       return { texto: n, aplicar: function () { preencher($('#hd-nome'), n); } };
     });
     /* theme-color = a cor de destaque da Paleta */
-    ligar($('#hd-img').closest('.ferr__grade'), 'Paleta', '#f-paleta', function () {
+    ligar($('#hd-img').closest('.ferr__grade'), 'Paleta', ir('f-paleta'), function () {
       var d = corHex(ler('pl-destaque', ''));
       if (!d || corHex(v('cor')) === d) return null;
       return {
@@ -838,7 +853,7 @@
       };
     });
     /* telefone do JSON-LD = o número do botão de WhatsApp */
-    ligar($('#hd-tel').closest('.ferr__grade'), 'Link de WhatsApp', '#f-zap', function () {
+    ligar($('#hd-tel').closest('.ferr__grade'), 'Link de WhatsApp', ir('f-zap'), function () {
       var d = foneNacional(ler('zp-num', ''));
       if (d.length < 10) return null;
       var agora = foneNacional(v('tel'));
@@ -953,7 +968,7 @@
     fundoSel.addEventListener('change', montar);
     $('#pl-copiar').addEventListener('click', function () { copiar(saida.textContent, this); });
     /* do inventário do Design system: a cor de marca que o CSS antigo já usava */
-    ligar(caixa.querySelector('.ferr__grade--cores'), 'Design system', '#f-sistema', function () {
+    ligar(caixa.querySelector('.ferr__grade--cores'), 'Design system', ir('f-sistema'), function () {
       var c = corDeMarca(inventariar(ler('ds-css', '')));
       if (!c || hex(campo.value) === c.hex) return null;
       return {
@@ -1238,6 +1253,7 @@
           '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
           '<link rel="stylesheet" href="' + url + '">';
       }
+      guardar('fo-link', saidaLink.textContent);   /* o Cabeçalho põe isto no <head> */
 
       /* CSS */
       var xC = xh[nc], xT = xh[nt];
@@ -1286,7 +1302,7 @@
       botao.style.color = pl.sobreDestaque || '#FFFFFF';
 
       var de = $('#fo-de');
-      de.innerHTML = 'Cores da <a href="#f-paleta">Paleta</a> (' + escHtml(pl.destaque) + ' sobre ' + escHtml(pl.fundo) + ') · tamanho e entrelinha da <a href="#f-escala">Escala</a> (' +
+      de.innerHTML = 'Cores da <a href="' + ir('f-paleta') + '">Paleta</a> (' + escHtml(pl.destaque) + ' sobre ' + escHtml(pl.fundo) + ') · tamanho e entrelinha da <a href="' + ir('f-escala') + '">Escala</a> (' +
         es.corpo + 'px, ' + es.alt + ')';
 
       pintarMedidas(nt, nc, fT, fC, medida, alinha);
@@ -1353,7 +1369,7 @@
         ['grande', es.g, false], ['corpo', es.corpo, false], ['pequeno', es.peq, false]
       ];
       $('#fo-escada').innerHTML =
-        '<p class="ferr__dica">A escala da <a href="#f-escala">Escala</a> (base ' + es.corpo + 'px, razão ' + (+es.razao || 1.25).toFixed(3) + ') nas duas fontes:</p>' +
+        '<p class="ferr__dica">A escala da <a href="' + ir('f-escala') + '">Escala</a> (base ' + es.corpo + 'px, razão ' + (+es.razao || 1.25).toFixed(3) + ') nas duas fontes:</p>' +
         DEGRAUS.map(function (d) {
           var titulo = d[2];
           return '<div class="ferr__degrau"><span class="ferr__degrau-n">' + d[0] + ' · ' + d[1] + 'px</span>' +
@@ -1814,10 +1830,10 @@
     function pintarFontes(s) {
       var pl = ler('pl-tokens', null) || {};
       fontes.innerHTML = [
-        ['#f-paleta', 'Paleta', 'destaque ' + escHtml(s.prim['destaque-500']) + ' sobre ' + escHtml(s.prim['neutro-0']) + ' — vira os primitivos e o modo claro' +
+        [ir('f-paleta'), 'Paleta', 'destaque ' + escHtml(s.prim['destaque-500']) + ' sobre ' + escHtml(s.prim['neutro-0']) + ' — vira os primitivos e o modo claro' +
           (pl.destaqueTexto && pl.destaqueTexto !== pl.destaque ? '; o link usa um tom mais escuro para passar em 4.5:1' : '')],
-        ['#f-fonte', 'Tipografia', escHtml(s.tipo.nomeT) + ' ' + s.tipo.pesoT + ' + ' + escHtml(s.tipo.nomeC) + ' ' + s.tipo.pesoC + ', medida ' + s.tipo.medida + 'ch'],
-        ['#f-escala', 'Escala', 'corpo ' + s.t.corpo + 'px, razão ' + (+s.t.razao).toFixed(3) + ', espaço de ' + s.t.base + ' em ' + s.e.length + ' degraus'],
+        [ir('f-fonte'), 'Tipografia', escHtml(s.tipo.nomeT) + ' ' + s.tipo.pesoT + ' + ' + escHtml(s.tipo.nomeC) + ' ' + s.tipo.pesoC + ', medida ' + s.tipo.medida + 'ch'],
+        [ir('f-escala'), 'Escala', 'corpo ' + s.t.corpo + 'px, razão ' + (+s.t.razao).toFixed(3) + ', espaço de ' + s.t.base + ' em ' + s.e.length + ' degraus'],
         ['movimento.html', 'Movimento', 'a curva cubic-bezier(' + CURVA.join(', ') + ') e o teto de 250ms para resposta ao gesto']
       ].map(function (f) {
         return '<li><a href="' + f[0] + '">' + f[1] + '</a><span>' + f[2] + '</span></li>';
@@ -1941,7 +1957,7 @@
       });
       return itens.length ? itens : null;
     }
-    ligar(formGer, 'as outras ferramentas', '#projeto', function () {
+    ligar(formGer, 'as outras ferramentas', ir('projeto'), function () {
       var itens = oferta();
       if (!itens) return null;
       var fontes = itens.map(function (i) { return i.de; }).filter(function (d, i, a) { return a.indexOf(d) === i; });
@@ -1964,10 +1980,12 @@
      com o próprio campo de nome. Aqui os cinco campos viram um só: mudar
      qualquer um muda todos, e cada ferramenta abre o que tinha daquele cliente. */
   (function () {
-    var campo = $('#pj-nome'); if (!campo) return;
+    /* o campo principal só existe na ferramentas.html; nas subpáginas, o nome
+       vem guardado e entra no campo de cliente da ferramenta que estiver lá */
     var DONOS = ['br', 'pp', 'cl', 'iv'];
-    var campos = [campo].concat(DONOS.map(function (d) { return $('#' + d + '-cliente'); }))
-                        .filter(Boolean);
+    var campos = [$('#pj-nome')].concat(DONOS.map(function (d) { return $('#' + d + '-cliente'); }))
+                                .filter(Boolean);
+    if (!campos.length) return;
     var lista = $('#pj-lista');
 
     function conhecidos() { var l = ler('projetos', []); return Array.isArray(l) ? l : []; }
@@ -2007,8 +2025,13 @@
       DONOS.forEach(function (d) { if (!inicial) inicial = String(ler(d + '-cliente', '') || ''); });
       DONOS.forEach(function (d) { var n = String(ler(d + '-cliente', '') || '').trim(); if (n) lembrar(n); });
     }
-    campo.value = inicial;
-    espalhar(campo);
+    /* cada campo que estiver diferente recebe o nome, e a ferramenta dona reabre o que tinha dele */
+    campos.forEach(function (c) {
+      if (c.value === inicial) return;
+      c.value = inicial;
+      c.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    guardar('projeto', inicial);
     pintarLista();
 
     campos.forEach(function (c) {
@@ -2019,7 +2042,7 @@
 
   /* ========== PROJETO · onde cada ferramenta está ========== */
   (function () {
-    var fluxo = document.querySelector('.fluxo'); if (!fluxo) return;
+    if (!document.querySelector('[data-estado]')) return;   /* só a ferramentas.html mostra o estado de cada uma */
     function n(k) { return parseFloat(ler(k, 0)) || 0; }
     function preenchidos(obj, total) {
       var c = 0;
@@ -2099,7 +2122,7 @@
     };
 
     function pintar() {
-      Array.prototype.forEach.call(fluxo.querySelectorAll('[data-estado]'), function (el) {
+      Array.prototype.forEach.call(document.querySelectorAll('[data-estado]'), function (el) {
         var f = ESTADO[el.getAttribute('data-estado')];
         if (!f) return;
         var r;

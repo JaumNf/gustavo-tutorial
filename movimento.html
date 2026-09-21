@@ -63,12 +63,12 @@
 <div class="navmenu__grupo navmenu__grupo--trabalhar">
 <p class="navmenu__rotulo">Ferramentas</p>
 <a href="ferramentas.html"><strong>Ferramentas</strong><span>As quatorze do dia a dia</span></a>
-<a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
-<a href="ferramentas.html#f-proposta"><strong>Proposta que fecha</strong><span>Os oito pontos</span></a>
-<a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
-<a href="ferramentas.html#f-zap"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
-<a href="ferramentas.html#f-utm"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
-<a href="ferramentas.html#f-gerador"><strong>Gerador de comando</strong><span>Onze tipos de pedido</span></a>
+<a href="ferramenta-checklist.html"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
+<a href="ferramenta-proposta.html"><strong>Proposta que fecha</strong><span>Os oito pontos</span></a>
+<a href="ferramenta-briefing.html"><strong>Briefing</strong><span>As dez perguntas</span></a>
+<a href="ferramenta-whatsapp.html"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
+<a href="ferramenta-utm.html"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
+<a href="ferramenta-gerador.html"><strong>Gerador de comando</strong><span>Onze tipos de pedido</span></a>
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Patch notes</p>
@@ -80,7 +80,6 @@
 <a class="modo is-atual" href="estudar.html">Estudar</a>
 <a class="modo modo--trabalho" href="ferramentas.html">Trabalhar</a>
 </div>
-<span class="navmenu__aqui">Movimento</span>
 </nav></header>
 <div class="palco">
 <nav class="sumario" id="sumario" aria-label="Sumário">
@@ -195,6 +194,17 @@
 <div class="topico__cabeca"><h3>Duração: as faixas que funcionam</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
 <div class="topico__corpo">
 <p>Tempo errado é o erro mais comum e o mais fácil de corrigir. A regra geral: quanto maior o elemento e maior a distância percorrida, mais longa a animação.</p>
+
+<figure class="vitrine">
+<div class="vitrine__palco">
+<div class="vitrine__acoes"><button class="vitrine__botao vitrine__botao--principal" type="button" data-acao="correr">correr</button><button class="vitrine__botao" type="button" data-acao="codigo" aria-expanded="false">ver código</button></div>
+<div class="vx-pistas"><div class="vx-pista" data-easing="cubic-bezier(.22, .61, .36, 1)" data-dur="150"><span class="vx-pista__nome">150ms · retorno ao toque</span><span class="vx-pista__trilho"><i class="vx-bola"></i></span></div><div class="vx-pista" data-easing="cubic-bezier(.22, .61, .36, 1)" data-dur="250"><span class="vx-pista__nome">250ms · menu, abrir e fechar</span><span class="vx-pista__trilho"><i class="vx-bola"></i></span></div><div class="vx-pista" data-easing="cubic-bezier(.22, .61, .36, 1)" data-dur="400"><span class="vx-pista__nome">400ms · entrada de seção</span><span class="vx-pista__trilho"><i class="vx-bola"></i></span></div><div class="vx-pista" data-easing="cubic-bezier(.22, .61, .36, 1)" data-dur="800"><span class="vx-pista__nome">800ms · lento demais para interface</span><span class="vx-pista__trilho"><i class="vx-bola"></i></span></div></div>
+</div>
+<figcaption class="vitrine__rodape"><span>A mesma curva, quatro durações</span><span class="vitrine__dica">--saida-suave</span></figcaption>
+<div class="vitrine__codigo" hidden><div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.toque  { transition: transform .15s var(--saida-suave); }
+.menu   { transition: transform .25s var(--saida-suave); }
+.secao  { transition: transform .4s  var(--saida-suave); }</code></pre></div></div>
+</figure>
 <div class="tabela-caixa"><table>
 <thead><tr><th>Situação</th><th>Faixa</th></tr></thead>
 <tbody>
@@ -224,6 +234,19 @@
 
 /* NUNCA use linear em movimento de interface.
    Só serve para rotação contínua e barra de progresso. */</code></pre></div>
+
+<figure class="vitrine">
+<div class="vitrine__palco">
+<div class="vitrine__acoes"><button class="vitrine__botao vitrine__botao--principal" type="button" data-acao="correr">correr</button><button class="vitrine__botao" type="button" data-acao="codigo" aria-expanded="false">ver código</button></div>
+<div class="vx-pistas"><div class="vx-pista" data-easing="linear" data-dur="900"><span class="vx-pista__nome">linear</span><span class="vx-pista__trilho"><i class="vx-bola"></i></span></div><div class="vx-pista" data-easing="cubic-bezier(.4, 0, 1, 1)" data-dur="900"><span class="vx-pista__nome">ease-in · --entrada-rapida</span><span class="vx-pista__trilho"><i class="vx-bola"></i></span></div><div class="vx-pista" data-easing="cubic-bezier(.22, .61, .36, 1)" data-dur="900"><span class="vx-pista__nome">saída suave · --saida-suave</span><span class="vx-pista__trilho"><i class="vx-bola"></i></span></div><div class="vx-pista" data-easing="cubic-bezier(.34, 1.56, .64, 1)" data-dur="900"><span class="vx-pista__nome">com passada · mola</span><span class="vx-pista__trilho"><i class="vx-bola"></i></span></div></div>
+</div>
+<figcaption class="vitrine__rodape"><span>A mesma distância, no mesmo tempo — só a curva muda</span><span class="vitrine__dica">900ms cada</span></figcaption>
+<div class="vitrine__codigo" hidden><div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>/* a mesma transição, quatro curvas */
+.linear  { transition: transform .9s linear; }
+.entrada { transition: transform .9s cubic-bezier(.4, 0, 1, 1); }     /* começa devagar: parece travar */
+.saida   { transition: transform .9s cubic-bezier(.22, .61, .36, 1); } /* começa rápido: responde na hora */
+.mola    { transition: transform .9s cubic-bezier(.34, 1.56, .64, 1); } /* passa do ponto e volta */</code></pre></div></div>
+</figure>
 <h4>Mola</h4>
 <p>Mola (<em>spring</em>) não é definida por duração e curva, e sim por rigidez, amortecimento e massa — como um objeto físico. O resultado tem uma pequena ultrapassagem antes de assentar, e é isso que dá a sensação de "vivo" que se vê em sites como o da biblioteca Motion.</p>
 <p>O CSS não tem mola nativa; é o principal motivo real para usar biblioteca de animação. Dá para imitar com <code>cubic-bezier</code> de valores acima de 1, mas é aproximação.</p>
@@ -246,6 +269,21 @@
 .card:nth-child(2) { animation-delay: 60ms; }
 .card:nth-child(3) { animation-delay: 120ms; }
 .card:nth-child(4) { animation-delay: 180ms; }</code></pre></div>
+
+<figure class="vitrine">
+<div class="vitrine__palco">
+<div class="vitrine__acoes"><button class="vitrine__botao vitrine__botao--principal" type="button" data-acao="denovo">de novo</button><button class="vitrine__botao" type="button" data-acao="codigo" aria-expanded="false">ver código</button></div>
+<div class="vx-pontos" data-origem="inicio"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="vitrine__controles" role="group" aria-label="De onde começa"><button class="vitrine__chip" type="button" data-origem="inicio" aria-pressed="true">do começo</button><button class="vitrine__chip" type="button" data-origem="centro" aria-pressed="false">do centro</button><button class="vitrine__chip" type="button" data-origem="fim" aria-pressed="false">do fim</button></div></div>
+<figcaption class="vitrine__rodape"><span>Encadeamento: 40ms entre um e outro</span><span class="vitrine__dica">animation-delay</span></figcaption>
+<div class="vitrine__codigo" hidden><div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.item { animation: surgir .4s var(--saida-suave) backwards; }
+.item:nth-child(1) { animation-delay: 0ms; }
+.item:nth-child(2) { animation-delay: 40ms; }
+.item:nth-child(3) { animation-delay: 80ms; }
+/* ou, com o índice numa variável: */
+.item { animation-delay: calc(var(--i) * 40ms); }
+@keyframes surgir { from { opacity: 0; transform: scale(.6); } }</code></pre></div></div>
+</figure>
 <p>O atraso ideal costuma ficar entre 40 e 80ms. Abaixo disso não se percebe; acima de 120ms a lista parece lenta, e com muitos itens o último demora demais para aparecer.</p>
 <div class="nota"><strong>Com muitos itens, encadeie só os primeiros.</strong> Doze cards com 80ms de atraso somam quase um segundo até o último. Aplicar o atraso apenas aos quatro primeiros mantém o efeito sem a espera.</div>
 </div>
@@ -305,6 +343,24 @@
   transform-origin: left;
 }
 @keyframes encher { from { scale: 0 1; } to { scale: 1 1; } }</code></pre></div>
+
+<figure class="vitrine">
+<div class="vitrine__palco vitrine__palco--alto vitrine__palco--rolagem">
+<div class="vitrine__acoes"><button class="vitrine__botao" type="button" data-acao="codigo" aria-expanded="false">ver código</button></div>
+<div class="vx-rolagem vx-paralaxe" tabindex="0" aria-label="Role para ver a paralaxe"><div class="vx-quadro"><div class="vx-foto vx-foto--1"></div><span class="vx-num">#001</span></div><div class="vx-quadro"><div class="vx-foto vx-foto--2"></div><span class="vx-num">#002</span></div><div class="vx-quadro"><div class="vx-foto vx-foto--3"></div><span class="vx-num">#003</span></div><div class="vx-quadro"><div class="vx-foto vx-foto--4"></div><span class="vx-num">#004</span></div><div class="vx-quadro"><div class="vx-foto vx-foto--5"></div><span class="vx-num">#005</span></div></div><div class="vx-barra" aria-hidden="true"></div>
+</div>
+<figcaption class="vitrine__rodape"><span>Paralaxe: role dentro do palco</span><span class="vitrine__dica">o número anda mais devagar que a foto</span></figcaption>
+<div class="vitrine__codigo" hidden><div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>/* o número se move mais devagar que a rolagem: é isso a profundidade */
+.numero {
+  animation: flutua linear both;
+  animation-timeline: view();      /* o progresso é a passagem pela tela */
+}
+@keyframes flutua {
+  from { transform: translateY(60px); }
+  to   { transform: translateY(-60px); }
+}
+@media (prefers-reduced-motion: reduce) { .numero { animation: none; } }</code></pre></div></div>
+</figure>
 <p><code>view()</code> atrela a animação à entrada do elemento na tela; <code>scroll()</code> atrela à rolagem da página inteira. O <code>animation-range</code> define em que ponto da entrada o movimento começa e termina.</p>
 <div class="nota nota--alerta"><strong>Suporte ainda é desigual.</strong> Chrome e Edge sim; os demais chegaram depois. Como é animação, degradar é seguro: onde não funciona, o elemento simplesmente aparece pronto. Mas isso só vale se o estado final for o padrão — veja a regra da Parte 1.</div>
 </div>
@@ -517,6 +573,14 @@ document.querySelectorAll('[data-reveal]').forEach(function (el) {
   obs.observe(el);
 });</code></pre></div>
 
+<figure class="vitrine">
+<div class="vitrine__palco vitrine__palco--rolagem">
+<div class="vitrine__acoes"><button class="vitrine__botao" type="button" data-acao="denovo">de novo</button></div>
+<div class="vx-rolagem vx-revela" tabindex="0" aria-label="Role para ver os cartões aparecerem"><p class="vx-rolagem__dica">role aqui dentro ↓</p><div class="vx-cartao" data-vx-reveal><span class="vx-foto vx-foto--2"></span><span class="vx-linhas"><i></i><i></i></span></div><div class="vx-cartao" data-vx-reveal><span class="vx-foto vx-foto--3"></span><span class="vx-linhas"><i></i><i></i></span></div><div class="vx-cartao" data-vx-reveal><span class="vx-foto vx-foto--4"></span><span class="vx-linhas"><i></i><i></i></span></div><div class="vx-cartao" data-vx-reveal><span class="vx-foto vx-foto--5"></span><span class="vx-linhas"><i></i><i></i></span></div><div class="vx-cartao" data-vx-reveal><span class="vx-foto vx-foto--1"></span><span class="vx-linhas"><i></i><i></i></span></div><div class="vx-cartao" data-vx-reveal><span class="vx-foto vx-foto--2"></span><span class="vx-linhas"><i></i><i></i></span></div></div>
+</div>
+<figcaption class="vitrine__rodape"><span>Reveal ao rolar — role dentro do palco</span><span class="vitrine__dica">IntersectionObserver</span></figcaption>
+</figure>
+
 <h4>2 · Menu que abre com altura automática</h4>
 <div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>/* grid resolve o problema clássico de animar height: auto */
 .painel {
@@ -527,12 +591,26 @@ document.querySelectorAll('[data-reveal]').forEach(function (el) {
 .painel.is-aberto { grid-template-rows: 1fr; }
 .painel > div { overflow: hidden; }</code></pre></div>
 
+<figure class="vitrine">
+<div class="vitrine__palco">
+<div class="vx-acordeao"><div class="vx-item"><button class="vx-item__cab" type="button" aria-expanded="true">O que está incluído?<span aria-hidden="true">+</span></button><div class="vx-painel is-aberto"><div><p>Estrutura, equipe e insumos. O cardápio é montado com você, no orçamento.</p></div></div></div><div class="vx-item"><button class="vx-item__cab" type="button" aria-expanded="false">Atende fora da cidade?<span aria-hidden="true">+</span></button><div class="vx-painel"><div><p>Sim — o deslocamento entra no orçamento, separado do resto.</p></div></div></div><div class="vx-item"><button class="vx-item__cab" type="button" aria-expanded="false">Como é o pagamento?<span aria-hidden="true">+</span></button><div class="vx-painel"><div><p>Entrada para reservar a data e o restante até a semana do evento.</p></div></div></div></div>
+</div>
+<figcaption class="vitrine__rodape"><span>Altura automática animada</span><span class="vitrine__dica">grid-template-rows: 0fr → 1fr</span></figcaption>
+</figure>
+
 <h4>3 · Botão com retorno ao toque</h4>
 <div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.botao {
   transition: transform .15s var(--padrao), background .2s;
 }
 .botao:hover  { transform: translateY(-2px); }
 .botao:active { transform: translateY(0) scale(.98); transition-duration: .05s; }</code></pre></div>
+
+<figure class="vitrine">
+<div class="vitrine__palco">
+<div class="vx-toques"><div><button class="vx-botao" type="button">Sem retorno</button><small>parece que não ouviu</small></div><div><button class="vx-botao vx-botao--com" type="button">Com retorno</button><small>afunda ao apertar</small></div></div>
+</div>
+<figcaption class="vitrine__rodape"><span>Clique e segure os dois</span><span class="vitrine__dica">:active com transition curta</span></figcaption>
+</figure>
 
 <h4>4 · Contador que anima ao aparecer</h4>
 <div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>function contar(el) {
@@ -547,6 +625,14 @@ document.querySelectorAll('[data-reveal]').forEach(function (el) {
   })(inicio);
 }</code></pre></div>
 
+<figure class="vitrine">
+<div class="vitrine__palco">
+<div class="vitrine__acoes"><button class="vitrine__botao" type="button" data-acao="denovo">de novo</button></div>
+<div class="vx-contador"><strong class="vx-contador__num" data-num="1250">0</strong><span>número de exemplo, contando do zero</span></div>
+</div>
+<figcaption class="vitrine__rodape"><span>Contador que anima ao aparecer</span><span class="vitrine__dica">desacelera no fim (ease-out)</span></figcaption>
+</figure>
+
 <h4>5 · Imagem que cresce no hover, sem estourar</h4>
 <div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.moldura { overflow: hidden; border-radius: 6px; }
 .moldura img {
@@ -554,6 +640,13 @@ document.querySelectorAll('[data-reveal]').forEach(function (el) {
   will-change: transform;
 }
 .moldura:hover img { transform: scale(1.05); }</code></pre></div>
+
+<figure class="vitrine">
+<div class="vitrine__palco">
+<div class="vx-molduras"><div class="vx-moldura vx-moldura--solta" tabindex="0"><span class="vx-moldura__janela"><span class="vx-foto vx-foto--3"></span></span><small>sem moldura: estoura</small></div><div class="vx-moldura" tabindex="0"><span class="vx-moldura__janela"><span class="vx-foto vx-foto--1"></span></span><small>com overflow: hidden</small></div></div>
+</div>
+<figcaption class="vitrine__rodape"><span>Passe o mouse nas duas fotos</span><span class="vitrine__dica">a moldura segura o zoom</span></figcaption>
+</figure>
 
 <h4>6 · Barra de progresso de leitura</h4>
 <div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css puro, sem JS</span><button class="copiar">copiar</button></div><pre><code>.progresso {
@@ -563,6 +656,13 @@ document.querySelectorAll('[data-reveal]').forEach(function (el) {
   animation-timeline: scroll();
 }
 @keyframes encher { from { scale: 0 1; } to { scale: 1 1; } }</code></pre></div>
+
+<figure class="vitrine">
+<div class="vitrine__palco vitrine__palco--rolagem">
+<div class="vx-rolagem vx-leitura" tabindex="0" aria-label="Texto de exemplo com barra de progresso"><div class="vx-progresso" aria-hidden="true"></div><p>Uma página de serviço é lida de cima para baixo, e quase ninguém chega ao fim.</p><p>A barra no topo diz quanto falta — e quem vê que falta pouco, continua.</p><p>Ela acompanha a rolagem deste palco, não da página: role aqui dentro.</p><p>Em CSS moderno, animation-timeline: scroll() faz isso sem uma linha de JavaScript.</p><p>Onde o navegador ainda não entende, a barra simplesmente não aparece — e nada quebra.</p><p>É o tipo de detalhe que ninguém elogia e todo mundo sente.</p><p>Uma página de serviço é lida de cima para baixo, e quase ninguém chega ao fim.</p><p>A barra no topo diz quanto falta — e quem vê que falta pouco, continua.</p><p>Ela acompanha a rolagem deste palco, não da página: role aqui dentro.</p><p>Em CSS moderno, animation-timeline: scroll() faz isso sem uma linha de JavaScript.</p><p>Onde o navegador ainda não entende, a barra simplesmente não aparece — e nada quebra.</p><p>É o tipo de detalhe que ninguém elogia e todo mundo sente.</p></div>
+</div>
+<figcaption class="vitrine__rodape"><span>Barra de progresso — role dentro do palco</span><span class="vitrine__dica">animation-timeline: scroll()</span></figcaption>
+</figure>
 
 <div class="nota">Todas usam as variáveis de curva da Parte 1. Declare-as uma vez no <code>:root</code> e o movimento do site inteiro fica coerente — é a mesma lógica de token que vale para cor e espaçamento.</div>
 </div>

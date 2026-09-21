@@ -33,12 +33,13 @@ Estes três são saída de script. Editar à mão significa perder a alteração
 | `progresso.js`     | `scripts/progresso.mjs`  | tópico adicionado, removido ou com `data-desde` |
 | `sitemap.xml`      | `scripts/sitemap.mjs`    | qualquer página for editada (atualiza datas) |
 
-O cabeçalho é uma linha só, de 48px: o `.topo__interno` usa `display: contents` para marca e botões
-entrarem na mesma linha do `<nav>`. Ele some ao descer e só volta depois de ~1s subindo (`SUBIDA` e
+O cabeçalho é uma linha só, de 48px, igual em toda página: marca à esquerda, menu e alternador no
+centro exato (absoluto a partir de 561px), busca e tema à direita. O `.topo__interno` usa
+`display: contents` para marca e botões entrarem na mesma linha do `<nav>`. Não tem rótulo de posição. Ele leva a cor da área (`[data-modo] .topo`), some ao descer e volta depois de ~0,3s subindo (`SUBIDA` e
 `PAUSA` no `app.js`). O filtro Tudo/Revisão/Novo das trilhas mora na abertura, não no topo.
 
-O menu de navegação das 17 páginas que têm cabeçalho e os sumários das trilhas também são gerados
-(`navmenu.mjs` e `sumario.mjs`) — veja abaixo.
+O menu de navegação das 31 páginas que têm cabeçalho, os sumários das trilhas e a navegação das
+páginas de ferramenta também são gerados (`navmenu.mjs`, `sumario.mjs` e `ferramentas.mjs`) — veja abaixo.
 
 ## Os scripts
 
@@ -51,14 +52,15 @@ portados e removidos. `scripts/_texto.mjs` normaliza CRLF↔LF na leitura/escrit
 node scripts/indice.mjs          # regera busca-indice.js a partir do conteúdo real
 node scripts/progresso.mjs       # regera progresso.js (mapa de tópicos por trilha)
 node scripts/sitemap.mjs         # atualiza as datas do sitemap pelo mtime dos arquivos
-node scripts/navmenu.mjs         # menu, data-modo e theme-color nas 18 páginas
+node scripts/navmenu.mjs         # menu, data-modo e theme-color nas 32 páginas
 node scripts/sumario.mjs <arquivo.html>   # regera o sumário lateral de uma trilha
+node scripts/ferramentas.mjs     # índice, "você está em" e anterior/próxima das ferramentas
 ```
 
 **`navmenu.mjs` é a fonte da verdade do menu e da área.** Para mudar categoria, link ou rótulo,
 edite a lista `GRUPOS` dentro dele e rode — nunca edite o `<nav class="navmenu">` das páginas
 diretamente, porque a próxima execução sobrescreve. O mapa `PAGINA` controla qual link fica
-marcado como atual e qual o rótulo de posição em cada arquivo; `MODO` controla se a página
+marcado como atual em cada arquivo (o segundo valor, o antigo rótulo de posição, não aparece mais); `MODO` controla se a página
 pertence à área de estudo ou à de trabalho, e dele saem **três** coisas geradas: o alternador no
 topo, o `data-modo` do `<body>` (que troca a cor da área no CSS) e a `<meta name="theme-color">`
 do tema claro. Nenhum dos três se edita à mão.
@@ -74,11 +76,36 @@ Rode sempre que adicionar ou remover um tópico de uma trilha.
 
 ## Estrutura do conteúdo
 
-O site tem três áreas:
+O site tem três níveis: **hub → páginas → subpáginas**.
 
-- `index.html` — a central, com a busca e as duas portas
-- `estudar.html` — área de estudo: as onze trilhas por categoria
-- `ferramentas.html` — área de trabalho: as quatorze ferramentas
+- `index.html` — o hub, com a busca e as duas portas
+- `estudar.html` — área de estudo; as subpáginas são as onze trilhas
+- `ferramentas.html` — área de trabalho: o projeto em andamento e o mapa das quatro fases, com um
+  cartão por ferramenta; as subpáginas são as quatorze `ferramenta-*.html`, uma por ferramenta
+
+Em tela de 1280px ou mais, a trilha usa três colunas: o sumário discreto no canto esquerdo, o texto
+no meio e os blocos de código na coluna da direita. O código não muda de lugar no HTML — o CSS o
+faz flutuar para a margem (float com margem negativa, a técnica da nota de margem), na altura do
+texto que vem logo depois dele. Abaixo disso, tudo volta a ser uma coluna só. O sumário só abre a
+lista de tópicos da parte que está sendo lida.
+
+O app.js embrulha cada grupo de exemplos seguidos (`.bloco-codigo` ou `.vitrine`) numa caixa `.exemplos`
+e, em tela larga, a sobe para antes do texto que vem logo antes dela — é o texto "par", que a seta
+aponta e que acende quando o mouse passa no exemplo. Em tela menor, a caixa volta para depois do par.
+Exemplo que é o primeiro filho do `.topico__corpo` não tem par: fica onde está, sem seta.
+
+**Sem buracos:** o tópico espera a coluna de exemplos terminar, então exemplo mais alto que o texto
+abre vazio. A função `encaixar()` do app.js mede cada tópico e, enquanto a coluna passar do texto
+em mais que `FOLGA` (140px), recolhe: primeiro o código dos grupos (do mais alto para o mais
+baixo), deixando a vitrine à mostra com um "Ver o código"; depois, se ainda não couber, o grupo
+inteiro vira o cartão "Abrir exemplo", que abre tudo num `<dialog>` e devolve ao fechar. Refaz a
+conta quando a fonte chega e ao redimensionar.
+
+A **vitrine** (`<figure class="vitrine">`) é o exemplo vivo: palco escuro, botões `data-acao`
+(`pausar`, `codigo`) no canto, controles no rodapé do palco, e o código dentro de
+`.vitrine__codigo`. O comportamento de cada demo fica no último bloco do `app.js`, guardado pela
+classe da própria demo (`.vx-cubo`, `.vx-pistas`, `.vx-pontos`, `.vx-paralaxe`, `.vx-revela`…). As
+"fotos" são as classes `.vx-foto--1` a `--5`, gradientes em CSS — nada de imagem de fora.
 
 Cada trilha é uma página com esta estrutura, que os scripts dependem:
 
@@ -123,21 +150,30 @@ propor uma nova, procure de onde ela sairia. Se não sair de lugar nenhum, prova
 existir.
 
 Cada ferramenta é uma IIFE independente em `ferramentas.js`, guardada pelo seu container, com
-estado salvo em `localStorage` sob o prefixo `gt-`.
+estado salvo em `localStorage` sob o prefixo `gt-`. Cada uma mora na sua página (`ferramenta-*.html`),
+e todas carregam o mesmo `ferramentas.js` — as que não estão na página saem pelo `if (!caixa) return`.
+
+A lista das ferramentas é uma só: `scripts/_ferramentas.mjs` (id, arquivo, nome, fase), lida por
+`navmenu`, `verificar`, `indice`, `sitemap` e `ferramentas.mjs`. O `ferramentas.js` tem o mesmo mapa
+id → arquivo (`PAGINA_DE`) e monta todo link entre ferramentas com `ir(id)`; nunca escreva `#f-...`
+num link, porque a âncora não existe na página da outra. Ferramenta nova: entra na lista, no
+`PAGINA_DE`, ganha a subpágina e um cartão na `ferramentas.html`, e depois `node scripts/ferramentas.mjs`.
 
 ### Fases e ligações
 
 A página segue a ordem do trabalho, em quatro `<div class="fase">`: antes do projeto (briefing,
 preço, proposta), identidade (paleta, contraste, tipografia, escala, design system), montar a página
-(gerador de comando, cabeçalho, WhatsApp, UTM) e entregar (checklist, inventário). O painel `#projeto` no topo tem o
+(gerador de comando, cabeçalho, WhatsApp, UTM) e entregar (checklist, inventário). O painel `#projeto` da `ferramentas.html` tem o
 nome do cliente — `gt-projeto` — espelhado nos campos de nome das quatro ferramentas que guardam
-por cliente, e mostra o estado de cada uma. Ferramenta nova entra numa fase e ganha uma função
-no objeto `ESTADO` do painel.
+por cliente, e os cartões mostram o estado de cada uma. Ferramenta nova entra numa fase e ganha uma função
+no objeto `ESTADO`. Nas subpáginas, o nome vem guardado e entra no campo de cliente da ferramenta.
 
 `guardar()` só avisa (`gt:mudou`) quando o valor muda de fato; quem escuta o aviso pode se
 remontar sem entrar em laço. Uma ligação entre ferramentas se faz com `ligar(antes, de, ir,
 valor, rotulo)`: mostra o valor da outra ferramenta com um botão para usar, e **nunca sobrescreve
 sozinha** — `valor()` devolve `null` quando não há o que oferecer ou o campo já está igual.
+Como as ferramentas moram em páginas diferentes, uma só enxerga a outra pelo que ela guardou —
+nunca pelo DOM (o Cabeçalho lê o `<link>` das fontes de `gt-fo-link`, não da página da Tipografia).
 Só ligue o que é o mesmo dado de verdade (o telefone do JSON-LD e o do botão, a cor da paleta e a
 theme-color); ferramenta sem dado em comum com as outras fica avulsa, como o inventário.
 

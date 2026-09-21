@@ -11,6 +11,7 @@ import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { lerTexto, escreverTexto } from './_texto.mjs';
+import { FERRAMENTAS } from './_ferramentas.mjs';
 
 // roda a partir da raiz do repositório, não importa de onde foi chamado
 process.chdir(join(dirname(fileURLToPath(import.meta.url)), '..'));
@@ -37,12 +38,12 @@ const GRUPOS = [
   ], null],
   ['Ferramentas', [
     ['ferramentas.html', 'Ferramentas', 'As quatorze do dia a dia'],
-    ['ferramentas.html#f-checklist', 'Checklist de entrega', 'Antes de publicar'],
-    ['ferramentas.html#f-proposta', 'Proposta que fecha', 'Os oito pontos'],
-    ['ferramentas.html#f-briefing', 'Briefing', 'As dez perguntas'],
-    ['ferramentas.html#f-zap', 'Link de WhatsApp', 'Com a mensagem pronta'],
-    ['ferramentas.html#f-utm', 'Gerador de UTM', 'Rastrear a origem'],
-    ['ferramentas.html#f-gerador', 'Gerador de comando', 'Onze tipos de pedido'],
+    ['ferramenta-checklist.html', 'Checklist de entrega', 'Antes de publicar'],
+    ['ferramenta-proposta.html', 'Proposta que fecha', 'Os oito pontos'],
+    ['ferramenta-briefing.html', 'Briefing', 'As dez perguntas'],
+    ['ferramenta-whatsapp.html', 'Link de WhatsApp', 'Com a mensagem pronta'],
+    ['ferramenta-utm.html', 'Gerador de UTM', 'Rastrear a origem'],
+    ['ferramenta-gerador.html', 'Gerador de comando', 'Onze tipos de pedido'],
   ], 'navmenu__grupo--trabalhar'],
   ['Patch notes', [
     ['patch-notes.html', 'Patch notes', 'O que mudou no site'],
@@ -56,6 +57,8 @@ for (const a of [
   'frameworks.html', 'back-end.html', 'landing-pages.html', 'trafego.html', 'negocio.html',
   'fluxo.html', 'ia.html', 'estudar.html',
 ]) MODO[a] = 'estudo';
+// cada ferramenta tem página própria, na área de trabalho
+for (const f of FERRAMENTAS) MODO[f.arquivo] = 'trabalho';
 
 // páginas sem cabeçalho: o hub navega pelo hero e pelos cards. Continua no
 // PAGINA abaixo porque o script ainda cuida do <body> e do theme-color dele.
@@ -82,6 +85,8 @@ const PAGINA = {
   'index.html': null,
   '404.html': null,
 };
+// subpáginas de ferramenta: o menu marca Ferramentas, e a posição diz qual
+for (const f of FERRAMENTAS) PAGINA[f.arquivo] = ['ferramentas.html', 'Ferramentas · ' + f.nome];
 
 function montarNav(arquivo) {
   const atual = PAGINA[arquivo];
@@ -112,7 +117,7 @@ function montarNav(arquivo) {
     `<a class="modo modo--trabalho${modo === 'trabalho' ? ' is-atual' : ''}" href="ferramentas.html">Trabalhar</a>`
   );
   partes.push('</div>');
-  if (aquiTexto) partes.push(`<span class="navmenu__aqui">${aquiTexto}</span>`);
+  // sem rótulo de posição: o cabeçalho é o mesmo em toda página (o texto segue no PAGINA, sem uso no topo)
   partes.push('</nav>');
   return partes.join('\n');
 }

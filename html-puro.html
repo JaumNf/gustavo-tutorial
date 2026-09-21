@@ -63,12 +63,12 @@
 <div class="navmenu__grupo navmenu__grupo--trabalhar">
 <p class="navmenu__rotulo">Ferramentas</p>
 <a href="ferramentas.html"><strong>Ferramentas</strong><span>As quatorze do dia a dia</span></a>
-<a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
-<a href="ferramentas.html#f-proposta"><strong>Proposta que fecha</strong><span>Os oito pontos</span></a>
-<a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
-<a href="ferramentas.html#f-zap"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
-<a href="ferramentas.html#f-utm"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
-<a href="ferramentas.html#f-gerador"><strong>Gerador de comando</strong><span>Onze tipos de pedido</span></a>
+<a href="ferramenta-checklist.html"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
+<a href="ferramenta-proposta.html"><strong>Proposta que fecha</strong><span>Os oito pontos</span></a>
+<a href="ferramenta-briefing.html"><strong>Briefing</strong><span>As dez perguntas</span></a>
+<a href="ferramenta-whatsapp.html"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
+<a href="ferramenta-utm.html"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
+<a href="ferramenta-gerador.html"><strong>Gerador de comando</strong><span>Onze tipos de pedido</span></a>
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Patch notes</p>
@@ -80,7 +80,6 @@
 <a class="modo is-atual" href="estudar.html">Estudar</a>
 <a class="modo modo--trabalho" href="ferramentas.html">Trabalhar</a>
 </div>
-<span class="navmenu__aqui">HTML puro</span>
 </nav></header>
 <div class="palco">
 <nav class="sumario" id="sumario" aria-label="Sumário">
@@ -965,6 +964,19 @@ a[href$=".pdf"]    { }   /* link cujo href termina em .pdf */</code></pre>
 }</code></pre>
           </div>
 
+<figure class="vitrine">
+<div class="vitrine__palco">
+<div class="vitrine__acoes"><button class="vitrine__botao" type="button" data-acao="codigo" aria-expanded="false">ver código</button></div>
+<div class="vx-flex" style="justify-content: flex-start"><span>A</span><span>B</span><span>C</span></div>
+<div class="vitrine__controles" role="group" aria-label="justify-content"><button class="vitrine__chip" type="button" data-flex="flex-start" aria-pressed="true">flex-start</button><button class="vitrine__chip" type="button" data-flex="center" aria-pressed="false">center</button><button class="vitrine__chip" type="button" data-flex="space-between" aria-pressed="false">space-between</button><button class="vitrine__chip" type="button" data-flex="space-evenly" aria-pressed="false">space-evenly</button></div></div>
+<figcaption class="vitrine__rodape"><span>justify-content ao vivo</span><span class="vitrine__dica">display: flex</span></figcaption>
+<div class="vitrine__codigo" hidden><div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.linha {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;   /* flex-start · center · space-between · space-evenly */
+}</code></pre></div></div>
+</figure>
+
           <div class="tabela-caixa">
             <table>
               <thead><tr><th>Propriedade</th><th>Valores úteis</th></tr></thead>
@@ -1010,6 +1022,20 @@ a[href$=".pdf"]    { }   /* link cujo href termina em .pdf */</code></pre>
   gap: 24px;
 }</code></pre>
           </div>
+
+<figure class="vitrine">
+<div class="vitrine__palco">
+<div class="vitrine__acoes"><button class="vitrine__botao" type="button" data-acao="codigo" aria-expanded="false">ver código</button></div>
+<div class="vx-grade-caixa"><div class="vx-grade"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div></div>
+<p class="vitrine__leitura" aria-live="polite"></p></div>
+<figcaption class="vitrine__rodape"><span>auto-fit + minmax: arraste o canto da caixa</span><span class="vitrine__dica">sem media query</span></figcaption>
+<div class="vitrine__codigo" hidden><div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.grade {
+  display: grid;
+  gap: 8px;
+  /* quantas colunas de 64px couberem; o que sobra, divide igual */
+  grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+}</code></pre></div></div>
+</figure>
 
           <p>Aquele <code>auto-fit</code> com <code>minmax</code> é o padrão mais útil do Grid: resolve responsividade de galeria sem escrever uma media query. Vale decorar.</p>
 
@@ -1203,6 +1229,37 @@ a[href$=".pdf"]    { }   /* link cujo href termina em .pdf */</code></pre>
 }
 .card { animation: surgir .6s cubic-bezier(.22,.61,.36,1) both; }</code></pre>
           </div>
+
+<figure class="vitrine">
+<div class="vitrine__palco">
+<div class="vitrine__acoes"><button class="vitrine__botao" type="button" data-acao="pausar" aria-pressed="false">pausar</button><button class="vitrine__botao" type="button" data-acao="codigo" aria-expanded="false">ver código</button></div>
+<div class="vx-cena"><div class="vx-cubo" role="img" aria-label="Um cubo girando em três dimensões"><span class="vx-f1"></span><span class="vx-f2"></span><span class="vx-f3"></span><span class="vx-f4"></span><span class="vx-f5"></span><span class="vx-f6"></span></div></div>
+</div>
+<figcaption class="vitrine__rodape"><span>Cubo 3D em CSS puro — arraste para girar</span><span class="vitrine__dica">transform-style: preserve-3d</span></figcaption>
+<div class="vitrine__codigo" hidden><div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.cena { perspective: 700px; }          /* a distância do olho: dá a profundidade */
+.cubo {
+  --l: 96px;
+  width: var(--l); height: var(--l);
+  position: relative;
+  transform-style: preserve-3d;        /* os filhos ficam no 3D, não achatados */
+  animation: gira 9s linear infinite;  /* movimento constante: linear */
+}
+.cubo span { position: absolute; inset: 0; }
+.f1 { transform: translateZ(calc(var(--l) / 2)); }
+.f2 { transform: rotateY(180deg) translateZ(calc(var(--l) / 2)); }
+.f3 { transform: rotateY(90deg)  translateZ(calc(var(--l) / 2)); }
+.f4 { transform: rotateY(-90deg) translateZ(calc(var(--l) / 2)); }
+.f5 { transform: rotateX(90deg)  translateZ(calc(var(--l) / 2)); }
+.f6 { transform: rotateX(-90deg) translateZ(calc(var(--l) / 2)); }
+
+@keyframes gira {
+  from { transform: rotateX(-22deg) rotateY(0deg); }
+  to   { transform: rotateX(-22deg) rotateY(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cubo { animation: none; transform: rotateX(-22deg) rotateY(38deg); }
+}</code></pre></div></div>
+</figure>
 
           <h4>Anime só duas propriedades</h4>
           <p><code>transform</code> e <code>opacity</code> são processadas pela placa de vídeo e não forçam o navegador a recalcular o layout. Animar <code>width</code>, <code>height</code>, <code>top</code> ou <code>margin</code> trava em celular. Precisa mover algo? Use <code>transform: translate()</code>, não <code>top</code>.</p>
@@ -1744,6 +1801,24 @@ body {
   color: var(--texto);
 }</code></pre>
           </div>
+
+<figure class="vitrine">
+<div class="vitrine__palco">
+<div class="vitrine__acoes"><button class="vitrine__botao" type="button" data-acao="codigo" aria-expanded="false">ver código</button></div>
+<div class="vx-tema" style="color-scheme: light"><p class="vx-tema__olho">Arquitetura · Campo Grande</p><p class="vx-tema__titulo">Reforma com cronograma fechado</p><p class="vx-tema__texto">Mesmo CSS, dois temas: só o <code>color-scheme</code> muda.</p><span class="vx-tema__botao">Pedir orçamento</span></div>
+<div class="vitrine__controles" role="group" aria-label="color-scheme"><button class="vitrine__chip" type="button" data-esquema="light" aria-pressed="true">claro</button><button class="vitrine__chip" type="button" data-esquema="dark" aria-pressed="false">escuro</button><button class="vitrine__chip" type="button" data-esquema="light dark" aria-pressed="false">o do sistema</button></div></div>
+<figcaption class="vitrine__rodape"><span>light-dark(): as duas cores num lugar só</span><span class="vitrine__dica">color-scheme</span></figcaption>
+<div class="vitrine__codigo" hidden><div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.card {
+  color-scheme: light;   /* dark, ou "light dark" para seguir o sistema */
+  background: light-dark(#FFFCF7, #16181C);
+  color:      light-dark(#3F444D, #E8E6E1);
+  border: 1px solid light-dark(#E6E2DA, #2E3236);
+}
+.card .botao {
+  background: light-dark(#7A1C30, #D9869A);
+  color:      light-dark(#FFFFFF, #16181C);
+}</code></pre></div></div>
+</figure>
           <p>Com <code>color-scheme: light dark</code> no <code>:root</code>, o navegador usa o primeiro valor de cada <code>light-dark()</code> quando o sistema está no claro e o segundo quando está no escuro — sem media query. Aproveite para escolher cada par com <a href="#t-cores">oklch()</a>: mesma cor, só a luminosidade muda.</p>
 
           <h4>O alternador manual: vencer a escolha do sistema</h4>

@@ -8,6 +8,7 @@ import { existsSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { lerTexto, escreverTexto } from './_texto.mjs';
+import { FERRAMENTAS } from './_ferramentas.mjs';
 
 // roda a partir da raiz do repositório, não importa de onde foi chamado
 process.chdir(join(dirname(fileURLToPath(import.meta.url)), '..'));
@@ -24,7 +25,7 @@ const TRILHAS = [
   ['frameworks.html', 'Frameworks'],
   ['back-end.html', 'Back-end'],
   ['negocio.html', 'Negócio'],
-  ['ferramentas.html', 'Ferramentas'],
+  ...FERRAMENTAS.map((f) => [f.arquivo, 'Ferramentas']),
   ['ia.html', 'Trabalhando com IA'],
   ['colofao.html', 'Colofão'],
   ['patch-notes.html', 'Patch notes'],
@@ -48,18 +49,18 @@ for (const [arq, trilha] of TRILHAS) {
   const h = lerTexto(arq);
   const corpo = h.slice(h.indexOf('<main'));
 
-  for (const sec of corpo.matchAll(/<section class="parte" id="[^"]+">(.*?)\n<\/section>/gs)) {
+  // "parte parte--pagina" é a seção única de uma subpágina de ferramenta
+  for (const sec of corpo.matchAll(/<section class="parte(?: parte--pagina)?" id="[^"]+">(.*?)\n<\/section>/gs)) {
     const txt = sec[1];
-    const pn = txt.match(/(?:PARTE (\d+)|FERRAMENTA)<\/span>\s*<h2>(.*?)<\/h2>/s);
+    const pn = txt.match(/(?:PARTE (\d+)|FERRAMENTA)<\/span>\s*<h[12]>(.*?)<\/h[12]>/s);
     const parte = pn ? (pn[1] ? `${pn[1]} · ${limpo(pn[2])}` : limpo(pn[2])) : '';
 
-    if (arq === 'ferramentas.html') {
-      const sid = sec[0].match(/<section class="parte" id="([^"]+)">/);
+    if (arq.startsWith('ferramenta-')) {
       const resumo = txt.match(/<p class="parte__resumo">(.*?)<\/p>/s);
       itens.push({
         t: limpo(pn[2]),
         p: 'Ferramenta',
-        u: arq + '#' + (sid ? sid[1] : ''),
+        u: arq,
         r: 'Ferramentas',
         d: limpo(resumo[1]).slice(0, 150),
         g: '',
@@ -77,7 +78,7 @@ for (const [arq, trilha] of TRILHAS) {
   }
 
   // páginas sem .parte (colofão)
-  if (!/<section class="parte"/.test(corpo)) {
+  if (!/<section class="parte[" ]/.test(corpo)) {
     for (const hh of corpo.matchAll(/<h2[^>]*>(.*?)<\/h2>/gs)) {
       itens.push({ t: limpo(hh[1]), p: '', u: arq, r: trilha, d: '', g: '' });
     }

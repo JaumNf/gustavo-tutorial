@@ -12,6 +12,7 @@ import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { extname, join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { ARQUIVOS as FERRAMENTAS } from './_ferramentas.mjs';
 
 const RAIZ = join(dirname(fileURLToPath(import.meta.url)), '..');
 const PORTA = 8899;
@@ -20,7 +21,8 @@ const PAGINAS = [
   'index.html', 'estudar.html', 'ferramentas.html', 'patch-notes.html', 'colofao.html',
   'html-puro.html', 'html-puro-2.html', 'fluxo.html', 'qualidade.html', 'landing-pages.html',
   'trafego.html', 'movimento.html', 'motion.html', 'frameworks.html', 'back-end.html',
-  'negocio.html', 'ia.html', '404.html'
+  'negocio.html', 'ia.html', '404.html',
+  ...FERRAMENTAS,
 ];
 
 /* quantos links o painel do menu deve ter — ajuste junto com GRUPOS em navmenu.mjs */

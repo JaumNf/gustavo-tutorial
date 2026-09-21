@@ -63,12 +63,12 @@
 <div class="navmenu__grupo navmenu__grupo--trabalhar">
 <p class="navmenu__rotulo">Ferramentas</p>
 <a href="ferramentas.html"><strong>Ferramentas</strong><span>As quatorze do dia a dia</span></a>
-<a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
-<a href="ferramentas.html#f-proposta"><strong>Proposta que fecha</strong><span>Os oito pontos</span></a>
-<a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
-<a href="ferramentas.html#f-zap"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
-<a href="ferramentas.html#f-utm"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
-<a href="ferramentas.html#f-gerador"><strong>Gerador de comando</strong><span>Onze tipos de pedido</span></a>
+<a href="ferramenta-checklist.html"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
+<a href="ferramenta-proposta.html"><strong>Proposta que fecha</strong><span>Os oito pontos</span></a>
+<a href="ferramenta-briefing.html"><strong>Briefing</strong><span>As dez perguntas</span></a>
+<a href="ferramenta-whatsapp.html"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
+<a href="ferramenta-utm.html"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
+<a href="ferramenta-gerador.html"><strong>Gerador de comando</strong><span>Onze tipos de pedido</span></a>
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Patch notes</p>
@@ -80,7 +80,6 @@
 <a class="modo" href="estudar.html">Estudar</a>
 <a class="modo modo--trabalho" href="ferramentas.html">Trabalhar</a>
 </div>
-<span class="navmenu__aqui">Patch notes</span>
 </nav></header>
 <main class="home" id="conteudo" tabindex="-1">
 <section class="home__hero">
@@ -93,9 +92,69 @@
 <article class="patch__entrada">
 <div class="patch__data">21 set 2026</div>
 <div class="patch__corpo">
+<h2>Sem buracos entre os tópicos, e doze exemplos vivos novos</h2>
+<ul>
+<li>A coluna de exemplos não abre mais buraco: quando os exemplos de um tópico descem muito além do texto, os maiores se recolhem. Primeiro só o código ("Ver o código"), deixando a demonstração à mostra; se ainda não couber, o grupo inteiro vira um cartão "Abrir exemplo" ao lado do texto, que abre o exemplo completo numa janela. O pior caso caiu de mais de 500px de vazio para menos de 140px</li>
+<li>Movimento ganhou dez vitrines: a corrida de curvas (linear, ease-in, saída suave e mola na mesma distância), as quatro durações lado a lado, o encadeamento que começa do início, do centro ou do fim, a paralaxe com rolagem por dentro do palco, e os seis efeitos prontos rodando — reveal ao rolar, altura automática, botão com e sem retorno ao toque, contador, zoom com e sem moldura e barra de leitura</li>
+<li>Motion ganhou o traço SVG que se desenha e o cartão para arrastar, que resiste depois de 120px e volta com mola ao soltar</li>
+<li>As "fotos" das vitrines são gradientes em CSS: nenhum arquivo nem serviço de fora</li>
+</ul>
+</div>
+</article>
+
+<article class="patch__entrada">
+<div class="patch__data">21 set 2026</div>
+<div class="patch__corpo">
+<h2>O mesmo cabeçalho em toda página</h2>
+<ul>
+<li>Marca à esquerda, menu e Estudar/Trabalhar no centro, busca e tema à direita — em qualquer página. Saiu o rótulo de posição ("Negócio", "Ferramentas · Cabeçalho da página"), que mudava a largura do topo de uma página para outra; quem diz onde você está é o título da página</li>
+</ul>
+</div>
+</article>
+
+<article class="patch__entrada">
+<div class="patch__data">21 set 2026</div>
+<div class="patch__corpo">
+<h2>Exemplos ao lado do texto, e os primeiros exemplos vivos</h2>
+<ul>
+<li>Em tela larga, cada exemplo sobe até a altura do texto que o apresenta, com uma seta apontando para ele. Passar o mouse no exemplo acende o texto a que ele pertence. Antes, o código ficava onde estava no HTML — às vezes muito abaixo do que ele explicava</li>
+<li>Vitrine: exemplo que roda de verdade, num palco com os controles no canto e o código a um clique. As quatro primeiras estão em HTML puro — um cubo 3D em CSS que dá para girar com o mouse (Transições e animações), <code>justify-content</code> ao vivo (Flexbox), uma grade que se reorganiza enquanto você arrasta o canto (Grid) e o mesmo card claro e escuro só trocando o <code>color-scheme</code> (Modo escuro)</li>
+<li>Tudo em CSS e JavaScript puros: o cubo não usa Three.js nem biblioteca nenhuma, e para quieto para quem pediu menos movimento</li>
+</ul>
+</div>
+</article>
+
+<article class="patch__entrada">
+<div class="patch__data">21 set 2026</div>
+<div class="patch__corpo">
+<h2>Uma página para cada ferramenta, e trilhas em três colunas</h2>
+<ul>
+<li>O site ficou em três níveis: hub, páginas e subpáginas. Cada uma das quatorze ferramentas ganhou a própria página, com endereço próprio, índice das fases ao lado e anterior/próxima no fim. A <a href="ferramentas.html">Ferramentas</a> virou o mapa: o projeto em andamento e um cartão por ferramenta, com o estado dela</li>
+<li>As ligações continuam entre as páginas: o que uma ferramenta guardou aparece na outra, com o botão para usar e o link levando à página de onde veio</li>
+<li>Em tela larga, as trilhas mostram o texto no meio e os exemplos de código na coluna da direita, na altura do texto. Em tela menor, continua tudo numa coluna</li>
+<li>O sumário das trilhas ficou discreto e foi para o canto: menor, mais apagado, e só a parte em leitura abre a lista de tópicos</li>
+<li>Em Estudar, a caixa "Chegou nos últimos 30 dias" foi para baixo do mapa das trilhas, e o nome da trilha não sai mais colado no selo — aparecia "HTML puronovo"</li>
+</ul>
+</div>
+</article>
+
+<article class="patch__entrada">
+<div class="patch__data">21 set 2026</div>
+<div class="patch__corpo">
+<h2>Cabeçalho mais rápido e com a cor da área de volta</h2>
+<ul>
+<li>O cabeçalho volta depois de uns 0,3 segundo rolando para cima, em vez de um segundo inteiro. Um único giro da roda ainda não traz ele de volta</li>
+<li>Ele voltou a acompanhar a cor da página: vermelho na área de trabalho, âmbar na de estudo; patch notes, colofão e 404, que não pertencem a nenhuma das duas, seguem neutros. Continua em uma linha só, translúcido</li>
+</ul>
+</div>
+</article>
+
+<article class="patch__entrada">
+<div class="patch__data">21 set 2026</div>
+<div class="patch__corpo">
 <h2>Gerador de comando na área de ferramentas, e um cabeçalho que sai da frente</h2>
 <ul>
-<li>O <a href="ferramentas.html#f-gerador">Gerador de comando</a> saiu da trilha de IA e virou a primeira ferramenta da fase "montar a página". Passou de cinco para onze tipos, em quatro grupos: começar (landing page, direções, arquivo de contexto, recomeçar conversa), construir (nova seção, texto da seção, animação), ajustar (feedback, correção pontual) e revisar (autocrítica, revisão final). Cada tipo aponta o tópico da trilha de onde veio</li>
+<li>O <a href="ferramenta-gerador.html">Gerador de comando</a> saiu da trilha de IA e virou a primeira ferramenta da fase "montar a página". Passou de cinco para onze tipos, em quatro grupos: começar (landing page, direções, arquivo de contexto, recomeçar conversa), construir (nova seção, texto da seção, animação), ajustar (feedback, correção pontual) e revisar (autocrítica, revisão final). Cada tipo aponta o tópico da trilha de onde veio</li>
 <li>Os campos vazios do gerador podem vir das outras ferramentas com um botão: nome do projeto, ofício e cidade do Cabeçalho, público e diferencial do Briefing, paleta, tipografia e escala de espaço. O que já estava preenchido no gerador continua salvo</li>
 <li>O cabeçalho caiu de duas linhas para uma, de uns 120px para 48px, e ficou neutro: a cor da área aparece só no alternador Estudar/Trabalhar. Ele reaparece depois de cerca de um segundo rolando para cima, não no primeiro movimento — voltar um parágrafo para reler não traz o topo de volta. E some mais rápido do que aparece</li>
 <li>O filtro Tudo/Revisão/Novo das trilhas saiu do cabeçalho e foi para a abertura, ao lado da legenda que explica as duas etiquetas</li>
@@ -108,8 +167,8 @@
 <div class="patch__corpo">
 <h2>Design system, tipografia refeita e oito tópicos novos</h2>
 <ul>
-<li>Ferramenta nova, <a href="ferramentas.html#f-sistema">Design system</a>, no fim da fase de identidade: conta os valores soltos de um CSS colado (cores, com as quase iguais agrupadas, tamanhos, espaços fora da grade de 4, raios e sombras), junta paleta, tipografia e escala com raio, sombra, movimento e modo escuro, e entrega tokens em três camadas, componentes com todos os estados, contraste conferido nos dois modos e um JSON no formato DTCG para plugins de tokens do Figma. Substitui a antiga "saída da fase"</li>
-<li><a href="ferramentas.html#f-fonte">Tipografia</a> refeita: famílias agrupadas por classe, 22 no total, cada uma pedindo ao Google só os pesos que ela tem — Lora, Space Grotesk, Libre Baskerville e IBM Plex Mono pediam o 800, que não existe nelas, e o pedido falhava. Mede a altura-x das duas fontes e a quantidade de caracteres por linha, mostra a escala inteira nas fontes escolhidas, e o CSS sai com medida, alinhamento, <code>font-size-adjust</code>, versalete e números tabulares</li>
+<li>Ferramenta nova, <a href="ferramenta-design-system.html">Design system</a>, no fim da fase de identidade: conta os valores soltos de um CSS colado (cores, com as quase iguais agrupadas, tamanhos, espaços fora da grade de 4, raios e sombras), junta paleta, tipografia e escala com raio, sombra, movimento e modo escuro, e entrega tokens em três camadas, componentes com todos os estados, contraste conferido nos dois modos e um JSON no formato DTCG para plugins de tokens do Figma. Substitui a antiga "saída da fase"</li>
+<li><a href="ferramenta-tipografia.html">Tipografia</a> refeita: famílias agrupadas por classe, 22 no total, cada uma pedindo ao Google só os pesos que ela tem — Lora, Space Grotesk, Libre Baskerville e IBM Plex Mono pediam o 800, que não existe nelas, e o pedido falhava. Mede a altura-x das duas fontes e a quantidade de caracteres por linha, mostra a escala inteira nas fontes escolhidas, e o CSS sai com medida, alinhamento, <code>font-size-adjust</code>, versalete e números tabulares</li>
 <li>A cor de marca que mais aparece no inventário vira sugestão na Paleta; a medida do parágrafo saiu da Escala e foi para a Tipografia</li>
 <li>Negócio ganhou sete tópicos: anatomia do tipo, classificação das fontes, acabamento tipográfico, inventário de interface, tokens em três camadas, atomic design com os estados de cada peça, e design system como produto. HTML puro ganhou um: Variáveis do Figma e o caminho dos tokens</li>
 </ul>
@@ -174,10 +233,10 @@
 <div class="patch__corpo">
 <h2>Três geradores de código em Ferramentas</h2>
 <ul>
-<li><a href="ferramentas.html#f-head">Cabeçalho da página</a> — título, descrição, canonical, Open Graph e o JSON-LD do negócio, prontos para colar. Avisa quando a descrição passa de 160 caracteres</li>
-<li><a href="ferramentas.html#f-paleta">Paleta em tokens</a> — a cor de destaque vira os seis papéis do <code>:root</code>, com o contraste de cada par já conferido. Se a cor não serve para texto, ele escurece até passar e entrega as duas versões</li>
-<li><a href="ferramentas.html#f-escala">Escala de texto e espaço</a> — base e razão viram a escala tipográfica com <code>clamp()</code> e a escala de 8 completa</li>
-<li><a href="ferramentas.html#f-fonte">Tipografia</a> — sete combinações de fonte com o motivo de cada uma, ou escolha à mão entre dezenove famílias. Sai o <code>&lt;link&gt;</code> do Google Fonts pedindo só os pesos marcados, e avisa quando passam de três por família</li>
+<li><a href="ferramenta-cabecalho.html">Cabeçalho da página</a> — título, descrição, canonical, Open Graph e o JSON-LD do negócio, prontos para colar. Avisa quando a descrição passa de 160 caracteres</li>
+<li><a href="ferramenta-paleta.html">Paleta em tokens</a> — a cor de destaque vira os seis papéis do <code>:root</code>, com o contraste de cada par já conferido. Se a cor não serve para texto, ele escurece até passar e entrega as duas versões</li>
+<li><a href="ferramenta-escala.html">Escala de texto e espaço</a> — base e razão viram a escala tipográfica com <code>clamp()</code> e a escala de 8 completa</li>
+<li><a href="ferramenta-tipografia.html">Tipografia</a> — sete combinações de fonte com o motivo de cada uma, ou escolha à mão entre dezenove famílias. Sai o <code>&lt;link&gt;</code> do Google Fonts pedindo só os pesos marcados, e avisa quando passam de três por família</li>
 <li>Ferramentas passou de oito para doze, e ganhou o grupo "Gerar código" no índice lateral</li>
 </ul>
 </div>
@@ -203,7 +262,7 @@
 <div class="patch__corpo">
 <h2>Ferramentas cresceu e HTML puro se dividiu</h2>
 <ul>
-<li>Duas ferramentas novas: <a href="ferramentas.html#f-proposta">Proposta que fecha</a> e <a href="ferramentas.html#f-inventario">Inventário de acessos</a> — Ferramentas agora tem oito</li>
+<li>Duas ferramentas novas: <a href="ferramenta-proposta.html">Proposta que fecha</a> e <a href="ferramenta-inventario.html">Inventário de acessos</a> — Ferramentas agora tem oito</li>
 <li><a href="html-puro.html">HTML puro</a> dividido em duas páginas — a original passou de 160&nbsp;KB numa carga só</li>
 <li>Busca em todo o site (ícone de lupa no cabeçalho, ou a tecla <kbd>/</kbd>), com índice próprio carregado só na primeira busca</li>
 <li>Movimento enxugada: o conteúdo de Motion virou referência própria em <a href="motion.html">Referência: Motion</a>, sem repetir o que já estava lá</li>
