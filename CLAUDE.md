@@ -38,7 +38,7 @@ centro exato (absoluto a partir de 561px), busca e tema à direita. O `.topo__in
 `display: contents` para marca e botões entrarem na mesma linha do `<nav>`. Não tem rótulo de posição. Ele leva a cor da área (`[data-modo] .topo`), some ao descer e volta depois de ~0,3s subindo (`SUBIDA` e
 `PAUSA` no `app.js`). O filtro Tudo/Revisão/Novo das trilhas mora na abertura, não no topo.
 
-O menu de navegação das 31 páginas que têm cabeçalho, os sumários das trilhas e a navegação das
+O menu de navegação das 32 páginas que têm cabeçalho, os sumários das trilhas e a navegação das
 páginas de ferramenta também são gerados (`navmenu.mjs`, `sumario.mjs` e `ferramentas.mjs`) — veja abaixo.
 
 ## Os scripts
@@ -52,7 +52,7 @@ portados e removidos. `scripts/_texto.mjs` normaliza CRLF↔LF na leitura/escrit
 node scripts/indice.mjs          # regera busca-indice.js a partir do conteúdo real
 node scripts/progresso.mjs       # regera progresso.js (mapa de tópicos por trilha)
 node scripts/sitemap.mjs         # atualiza as datas do sitemap pelo mtime dos arquivos
-node scripts/navmenu.mjs         # menu, data-modo e theme-color nas 32 páginas
+node scripts/navmenu.mjs         # menu, data-modo e theme-color nas 33 páginas
 node scripts/sumario.mjs <arquivo.html>   # regera o sumário lateral de uma trilha
 node scripts/ferramentas.mjs     # índice, "você está em" e anterior/próxima das ferramentas
 ```
@@ -79,9 +79,17 @@ Rode sempre que adicionar ou remover um tópico de uma trilha.
 O site tem três níveis: **hub → páginas → subpáginas**.
 
 - `index.html` — o hub, com a busca e as duas portas
-- `estudar.html` — área de estudo; as subpáginas são as onze trilhas
-- `ferramentas.html` — área de trabalho: o projeto em andamento e o mapa das quatro fases, com um
-  cartão por ferramenta; as subpáginas são as quatorze `ferramenta-*.html`, uma por ferramenta
+- `estudar.html` — área de estudo; as subpáginas são as doze trilhas (a mais nova, `vibecoding.html`,
+  fica ao lado de `ia.html`: uma ensina como pedir, a outra com o quê trabalhar e onde buscar)
+- `ferramentas.html` — área de trabalho, no mesmo formato da `estudar.html` (olho, título, números,
+  dois botões, o mapa das fases em colunas); embaixo, o projeto em andamento e um cartão por
+  ferramenta. As subpáginas são as quatorze `ferramenta-*.html` e a `modelos.html`
+- `modelos.html` — a galeria de modelos para copiar. Tudo sai de `modelos.js`: cada modelo é um objeto
+  com `html`, `css` e `js` (uma função de verdade — a página mostra o fonte dela com `toString()`,
+  sem eval), e o que a prévia roda é exatamente o texto que se copia. Modelo novo = um objeto a mais
+  na lista, com classes prefixadas `.m-<id>` e a cor em `var(--m-destaque, #F5C542)`. A busca
+  (`indice.mjs`) lê os modelos direto do `modelos.js`, e o contador "28 modelos" do hub, da
+  `ferramentas.html` e da `modelos.html` é prosa: atualize à mão
 
 Em tela de 1280px ou mais, a trilha usa três colunas: o sumário discreto no canto esquerdo, o texto
 no meio e os blocos de código na coluna da direita. O código não muda de lugar no HTML — o CSS o
@@ -197,7 +205,8 @@ tokens em JSON no padrão DTCG, que plugins de tokens do Figma importam.
 
 Rode a suíte. Ela abre todas as páginas em duas larguras e falha em: overflow horizontal, número
 de `<h1>` diferente de 1, contagem de links do menu diferente do esperado, âncora interna
-quebrada e erro de JavaScript no console.
+quebrada, id repetido na página e erro de JavaScript no console. Id repetido quase sempre é um
+script que colou um bloco duas vezes.
 
 ```
 node scripts/verificar.mjs
@@ -205,7 +214,7 @@ node scripts/verificar.mjs
 
 Depois disso, confira também:
 
-- Os contadores em prosa (ex.: "as quatorze do dia a dia", "11 trilhas · 84 partes") espalhados pela
+- Os contadores em prosa (ex.: "as quatorze do dia a dia", "12 trilhas · 90 partes · 448 tópicos") espalhados pela
   home, pelo menu e pelas metas — eles não são gerados, e ficam velhos calados.
 - Uma entrada nova em `patch-notes.html`, no topo, dizendo o que mudou — **em toda atualização**,
   por menor que seja. É pedido explícito do Gustavo, não opcional.

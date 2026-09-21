@@ -4,7 +4,8 @@
 
    uso:  node scripts/indice.mjs
    ============================================================ */
-import { existsSync, statSync } from 'node:fs';
+import { existsSync, statSync, readFileSync } from 'node:fs';
+import vm from 'node:vm';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { lerTexto, escreverTexto } from './_texto.mjs';
@@ -27,6 +28,7 @@ const TRILHAS = [
   ['negocio.html', 'Negócio'],
   ...FERRAMENTAS.map((f) => [f.arquivo, 'Ferramentas']),
   ['ia.html', 'Trabalhando com IA'],
+  ['vibecoding.html', 'Vibecoding'],
   ['colofao.html', 'Colofão'],
   ['patch-notes.html', 'Patch notes'],
 ];
@@ -82,6 +84,15 @@ for (const [arq, trilha] of TRILHAS) {
     for (const hh of corpo.matchAll(/<h2[^>]*>(.*?)<\/h2>/gs)) {
       itens.push({ t: limpo(hh[1]), p: '', u: arq, r: trilha, d: '', g: '' });
     }
+  }
+}
+
+// modelos.html é montada pelo modelos.js: os modelos saem dos dados, não do HTML
+if (existsSync('modelos.js')) {
+  const caixa = { window: {}, document: { getElementById: () => null } };
+  vm.runInNewContext(readFileSync('modelos.js', 'utf8'), caixa);
+  for (const m of caixa.window.GT_MODELOS || []) {
+    itens.push({ t: m.nome, p: 'Modelo · ' + m.cat, u: 'modelos.html#m-' + m.id, r: 'Modelos', d: m.desc.slice(0, 150), g: '' });
   }
 }
 

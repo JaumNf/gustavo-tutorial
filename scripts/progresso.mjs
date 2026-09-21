@@ -16,7 +16,7 @@ process.chdir(join(dirname(fileURLToPath(import.meta.url)), '..'));
 const TRILHAS = [
   'html-puro.html', 'fluxo.html', 'qualidade.html', 'landing-pages.html',
   'trafego.html', 'movimento.html', 'motion.html', 'frameworks.html',
-  'back-end.html', 'negocio.html', 'ia.html',
+  'back-end.html', 'negocio.html', 'ia.html', 'vibecoding.html',
 ];
 // paginas extras cujos topicos contam para a trilha-base indicada
 // (trilha longa dividida em mais de um arquivo, mas um so card na home)

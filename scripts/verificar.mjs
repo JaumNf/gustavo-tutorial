@@ -2,7 +2,7 @@
    verificar.mjs — a suíte que roda antes de dizer que terminou.
    Abre toda página em duas larguras e falha em:
    overflow horizontal, h1 fora de um, contagem de links do menu
-   errada, âncora interna quebrada, erro de JavaScript.
+   errada, âncora interna quebrada, id repetido, erro de JavaScript.
 
    uso:  node scripts/verificar.mjs
    (sobe um servidor local sozinho, na porta 8899)
@@ -21,12 +21,12 @@ const PAGINAS = [
   'index.html', 'estudar.html', 'ferramentas.html', 'patch-notes.html', 'colofao.html',
   'html-puro.html', 'html-puro-2.html', 'fluxo.html', 'qualidade.html', 'landing-pages.html',
   'trafego.html', 'movimento.html', 'motion.html', 'frameworks.html', 'back-end.html',
-  'negocio.html', 'ia.html', '404.html',
+  'negocio.html', 'ia.html', '404.html', 'modelos.html', 'vibecoding.html',
   ...FERRAMENTAS,
 ];
 
 /* quantos links o painel do menu deve ter — ajuste junto com GRUPOS em navmenu.mjs */
-const LINKS_DO_MENU = 20;
+const LINKS_DO_MENU = 22;
 
 /* páginas sem cabeçalho: exigir exatamente zero pega uma reintrodução acidental */
 const SEM_MENU = new Set(['index.html']);
@@ -74,6 +74,8 @@ for (const tela of [{ l: 1400, a: 900 }, { l: 390, a: 844 }]) {
         overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
         h1: document.querySelectorAll('h1').length,
         menu: document.querySelectorAll('.navmenu__painel a').length,
+        /* id repetido: sinal de bloco colado duas vezes por algum script */
+        repetidos: (() => { const visto = {}, rep = new Set(); document.querySelectorAll('[id]').forEach(e => { if (visto[e.id]) rep.add(e.id); visto[e.id] = 1; }); return [...rep]; })(),
         quebradas: [...document.querySelectorAll('a[href^="#"]')]
           .map(a => a.getAttribute('href'))
           .filter(h => h.length > 1 && !ids.has(h.slice(1)))
@@ -90,7 +92,7 @@ await navegador.close();
 servidor.close();
 
 const problemas = resultados.filter(r =>
-  r.overflow || r.h1 !== 1 || r.erros.length || r.quebradas.length ||
+  r.overflow || r.h1 !== 1 || r.erros.length || r.quebradas.length || r.repetidos.length ||
   (SEM_MENU.has(r.pagina) ? r.menu !== 0 : r.menu !== LINKS_DO_MENU)
 );
 

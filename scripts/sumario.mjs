@@ -39,7 +39,8 @@ for (const sec of corpo.matchAll(/<section class="parte" id="(s\d+)">(.*?)\n<\/s
 const novo = linhas.join('\n');
 
 const ini = h.indexOf('<p class="sumario__titulo">');
-const fim = h.indexOf('</div>\n</nav>');
+// procura o fim DEPOIS do começo: o menu do cabeçalho também termina em </div></nav>
+const fim = h.indexOf('</div>\n</nav>', ini);
 h = h.slice(0, ini) + novo + '\n' + h.slice(fim);
 
 const contar = (str, sub) => str.split(sub).length - 1;

@@ -29,7 +29,7 @@ let txt = lerTexto('sitemap.xml');
 
 // página de ferramenta que ainda não está no sitemap entra antes do fim
 const BASE = 'https://gustavo-tutorial.vercel.app/';
-for (const arq of FERRAMENTAS) {
+for (const arq of ['modelos.html', 'vibecoding.html', ...FERRAMENTAS]) {
   if (txt.includes(`<loc>${BASE}${arq}</loc>`)) continue;
   txt = txt.replace('</urlset>', () =>
     `  <url>\n    <loc>${BASE}${arq}</loc>\n    <lastmod>2000-01-01</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.6</priority>\n  </url>\n</urlset>`);

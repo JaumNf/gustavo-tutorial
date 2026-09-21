@@ -25,6 +25,7 @@ function indice(atual) {
     '<div class="indice__grupo">',
     '<p class="indice__rotulo">Visão geral</p>',
     `<a href="${HUB}"${atual === HUB ? ' class="is-atual" aria-current="page"' : ''}>Todas as ferramentas</a>`,
+    '<a href="modelos.html">Modelos para copiar</a>',
     '</div>',
   ];
   for (const fase of FASES) {
@@ -80,8 +81,9 @@ function gravar(arquivo, antes, depois) {
 }
 
 {
+  // a ferramentas.html tem o formato da área (sem barra lateral): só as subpáginas têm índice
   const h = lerTexto(HUB);
-  gravar(HUB, h, trocarBloco(h, '<nav class="indice"', indice(HUB), HUB));
+  if (h.includes('<nav class="indice"')) gravar(HUB, h, trocarBloco(h, '<nav class="indice"', indice(HUB), HUB));
 }
 FERRAMENTAS.forEach((f, i) => {
   if (!existsSync(f.arquivo)) throw new Error('falta a subpágina ' + f.arquivo);

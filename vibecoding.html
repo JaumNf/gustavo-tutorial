@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Vibecoding — Gustavo Tutorial</title>
+<meta name="description" content="Com o quê trabalhar e onde buscar: o mapa das ferramentas de IA, onde achar referência, skills, MCP e hooks, o que fazer quando a IA entra em loop, e como publicar sem vazar chave nem abrir o banco.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Vibecoding — Gustavo Tutorial">
+<meta property="og:description" content="Com o quê trabalhar e onde buscar: o mapa das ferramentas de IA, onde achar referência, skills, MCP e hooks, o que fazer quando a IA entra em loop, e como publicar sem vazar chave nem abrir o banco.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#7A4A06" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
+<meta name="author" content="Gustavo">
+<link rel="canonical" href="https://gustavo-tutorial.vercel.app/vibecoding.html">
+<meta property="og:url" content="https://gustavo-tutorial.vercel.app/vibecoding.html">
+<meta property="og:image" content="https://gustavo-tutorial.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Gustavo Tutorial">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body data-modo="estudo">
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo">
+<div class="topo__interno">
+<a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
+<button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+</div>
+<nav class="navmenu" aria-label="Navegação do site">
+<details class="navmenu__caixa" id="navmenu">
+<summary class="navmenu__botao">Menu<span aria-hidden="true">&#9662;</span></summary>
+<div class="navmenu__painel">
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Construção</p>
+<a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="qualidade.html"><strong>Qualidade</strong><span>Imagem, a11y, Vitals e testes</span></a>
+<a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="motion.html"><strong>Referência: Motion</strong><span>A API inteira, em português</span></a>
+<a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Servidor, banco e login</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Captação e Vendas</p>
+<a href="landing-pages.html"><strong>Landing pages</strong><span>A estratégia da página</span></a>
+<a href="trafego.html"><strong>Tráfego</strong><span>Ser encontrado no Google</span></a>
+<a href="negocio.html"><strong>Negócio</strong><span>Preço, escopo e contrato</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Método</p>
+<a href="fluxo.html"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
+<a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e revisão</span></a>
+<a href="vibecoding.html" class="is-atual"><strong>Vibecoding</strong><span>Ferramentas, referências e riscos</span></a>
+<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+<div class="navmenu__grupo navmenu__grupo--trabalhar">
+<p class="navmenu__rotulo">Ferramentas</p>
+<a href="ferramentas.html"><strong>Ferramentas</strong><span>As quatorze do dia a dia</span></a>
+<a href="modelos.html"><strong>Modelos para copiar</strong><span>Efeitos vivos, prontos</span></a>
+<a href="ferramenta-checklist.html"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
+<a href="ferramenta-proposta.html"><strong>Proposta que fecha</strong><span>Os oito pontos</span></a>
+<a href="ferramenta-briefing.html"><strong>Briefing</strong><span>As dez perguntas</span></a>
+<a href="ferramenta-whatsapp.html"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
+<a href="ferramenta-utm.html"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
+<a href="ferramenta-gerador.html"><strong>Gerador de comando</strong><span>Onze tipos de pedido</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Patch notes</p>
+<a href="patch-notes.html"><strong>Patch notes</strong><span>O que mudou no site</span></a>
+</div>
+</div>
+</details>
+<div class="modos">
+<a class="modo is-atual" href="estudar.html">Estudar</a>
+<a class="modo modo--trabalho" href="ferramentas.html">Trabalhar</a>
+</div>
+</nav></header>
+<div class="palco">
+<nav class="sumario" id="sumario" aria-label="Sumário">
+<button class="sumario__abrir" id="sumario-abrir" aria-expanded="false" aria-controls="sumario-lista"><span>Sumário</span><span aria-hidden="true">&#9662;</span></button>
+<div class="sumario__lista" id="sumario-lista">
+<p class="sumario__titulo">Vibecoding</p>
+<a class="sumario__parte" href="#s1">1 · O mapa das ferramentas</a>
+<ol>
+<li><a href="#t-vb-o-que-e">Vibecoding, sem romantizar</a></li>
+<li><a href="#t-vb-categorias">Quatro tipos de ferramenta</a></li>
+<li><a href="#t-vb-quando-migrar">Do construtor para o agente: quando sair</a></li>
+<li><a href="#t-vb-modelo">Modelo grande, modelo rápido</a></li>
+<li><a href="#t-vb-segunda-opiniao">Uma IA principal, as outras de segunda opinião</a></li>
+</ol>
+<a class="sumario__parte" href="#s2">2 · Referências: onde achar e como usar</a>
+<ol>
+<li><a href="#t-vb-ref-onde">Onde procurar</a></li>
+<li><a href="#t-vb-moodboard">Três referências, não trinta</a></li>
+<li><a href="#t-vb-desmontar">Desmontar a referência antes de pedir</a></li>
+<li><a href="#t-vb-inspiracao">Inspiração não é cópia</a></li>
+<li><a href="#t-vb-componentes">Biblioteca de componentes: quando vale</a></li>
+</ol>
+<a class="sumario__parte" href="#s3">3 · Os recursos dos agentes</a>
+<ol>
+<li><a href="#t-vb-contexto">O arquivo de regras de cada ferramenta</a></li>
+<li><a href="#t-vb-skills">Skills: ensinar uma vez, usar sempre</a></li>
+<li><a href="#t-vb-mcp">MCP: dar mãos para a IA</a></li>
+<li><a href="#t-vb-subagentes">Comandos, subagentes e hooks</a></li>
+<li><a href="#t-vb-plano">Modo plano e permissões</a></li>
+</ol>
+<a class="sumario__parte" href="#s4">4 · Quando dá errado</a>
+<ol>
+<li><a href="#t-vb-loop">A IA em loop</a></li>
+<li><a href="#t-vb-erro">Levando o erro certo</a></li>
+<li><a href="#t-vb-git">Git é o seu botão de desfazer</a></li>
+<li><a href="#t-vb-diff">Leia o diff, não a resposta</a></li>
+<li><a href="#t-vb-entender">Quando você não entende o código</a></li>
+</ol>
+<a class="sumario__parte" href="#s5">5 · Do protótipo ao ar, sem se machucar</a>
+<ol>
+<li><a href="#t-vb-chaves">A chave que vaza</a></li>
+<li><a href="#t-vb-banco">Banco aberto: o erro clássico</a></li>
+<li><a href="#t-vb-custo">A conta que dispara</a></li>
+<li><a href="#t-vb-publicar">Publicar sem nunca ter aberto um terminal</a></li>
+<li><a href="#t-vb-antes">Antes de mostrar para alguém</a></li>
+</ol>
+<a class="sumario__parte" href="#s6">6 · Se manter atualizado</a>
+<ol>
+<li><a href="#t-vb-acompanhar">Onde acompanhar sem se afogar</a></li>
+<li><a href="#t-vb-portavel">O que não muda quando a ferramenta muda</a></li>
+</ol>
+</div>
+</nav>
+
+<main class="leitura" id="conteudo" tabindex="-1">
+<section class="abertura">
+<h1>Vibecoding</h1>
+<p class="abertura__lead">A trilha <a href="ia.html">Trabalhando com IA</a> ensina como pedir. Esta ensina com o quê trabalhar e onde buscar: o mapa das ferramentas, onde achar referência, os recursos dos agentes, o que fazer quando a IA entra em loop, e como levar o projeto ao ar sem vazar chave nem abrir o banco.</p>
+<div class="legenda">
+<span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
+<span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
+<span>6 partes · 27 tópicos</span>
+</div>
+<div class="abertura__filtro"><span class="abertura__filtro-rot" aria-hidden="true">Mostrar</span>
+<div class="filtros" role="group" aria-label="Filtrar tópicos">
+<button class="filtro" data-filtro="tudo" aria-pressed="true">Tudo</button>
+<button class="filtro" data-filtro="revisao" aria-pressed="false">Revisão</button>
+<button class="filtro" data-filtro="novo" aria-pressed="false">Novo</button>
+</div>
+</div>
+</section>
+<p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
+<section class="parte" id="s1">
+<div class="parte__cabeca"><span class="parte__num">PARTE 1</span><h2>O mapa das ferramentas</h2></div>
+<p class="parte__resumo">Qual IA serve para quê, quando sair de uma e ir para outra, e por que trocar de ferramenta toda semana custa mais do que parece.</p>
+
+<article class="topico" id="t-vb-o-que-e" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Vibecoding, sem romantizar</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O termo foi popularizado por Andrej Karpathy no começo de 2025: você descreve o que quer, a IA escreve o código, e você julga pelo resultado em vez de ler linha por linha. Funciona — até o dia em que precisa de alguém que entenda o que foi escrito.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>A IA faz bem</th><th>Continua com você</th></tr></thead>
+<tbody>
+<tr><td>Escrever a primeira versão rápido</td><td>Decidir o que construir e para quem</td></tr>
+<tr><td>Trocar um layout inteiro em segundos</td><td>Julgar se ficou bom — e dizer por quê</td></tr>
+<tr><td>Lembrar sintaxe e padrões de qualquer linguagem</td><td>Verificar: abrir, clicar, testar no celular</td></tr>
+<tr><td>Explicar o código que ela mesma escreveu</td><td>Proteger chave, banco e dado de quem usa</td></tr>
+<tr><td>Seguir um brief bem escrito</td><td>Escrever o brief</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>O que separa quem entrega de quem trava</strong> não é a ferramenta: é saber pedir (a trilha <a href="ia.html">Trabalhando com IA</a>), saber verificar e saber desfazer. Esta trilha cobre o resto — com o quê trabalhar, onde buscar referência e como não se machucar.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-categorias" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Quatro tipos de ferramenta</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Os nomes mudam todo mês; as categorias, não. Saber em qual categoria está o problema já resolve metade da escolha.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Tipo</th><th>Exemplos</th><th>Serve para</th><th>Não serve para</th></tr></thead>
+<tbody>
+<tr><td>Conversa</td><td>Claude, ChatGPT, Gemini</td><td>pensar, planejar, escrever texto, revisar um trecho, tirar dúvida</td><td>manter um projeto de muitos arquivos</td></tr>
+<tr><td>Construtor no navegador</td><td>Lovable, v0, Bolt, Replit, Google AI Studio</td><td>a primeira versão em minutos, protótipo para mostrar, quem nunca instalou nada</td><td>controle fino, projeto que vai crescer por meses</td></tr>
+<tr><td>Agente no código</td><td>Claude Code, Cursor, GitHub Copilot, Codex</td><td>projeto de verdade: lê e edita seus arquivos, roda comandos, usa Git</td><td>quem ainda não sabe o que é uma pasta de projeto</td></tr>
+<tr><td>Mídia</td><td>geradores de imagem, vídeo e voz</td><td>assets, ilustração, variação de foto, locução</td><td>foto do produto real do cliente</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Um caminho comum:</strong> conversa para planejar e escrever o brief, construtor para ver a ideia de pé, agente para transformar em projeto de verdade. Nem todo projeto precisa das três etapas — site simples pode nascer direto no agente.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-quando-migrar" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Do construtor para o agente: quando sair</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Construtor é ótimo até deixar de ser. Os sinais de que chegou a hora de levar o código para um agente, no seu computador:</p>
+<ul>
+<li>cada ajuste pequeno custa um pedido inteiro e mexe em coisa que você não pediu</li>
+<li>você precisa de algo que a plataforma não oferece — outro banco, outra hospedagem, um script próprio</li>
+<li>o projeto virou coisa séria e precisa de histórico, revisão e backup</li>
+<li>você quer entender o que está no código, não só o que aparece na tela</li>
+</ul>
+<p><strong>Antes de começar num construtor, confira como o código sai de lá:</strong> a maioria sincroniza com o GitHub ou deixa baixar o projeto. Se não houver saída, o projeto mora na plataforma — e o dia em que ela mudar de preço ou de regra é o dia em que você recomeça do zero.</p>
+<div class="nota">Na hora de migrar, o primeiro pedido ao agente não é "continue o projeto": é "leia o projeto e me explique a estrutura em dez linhas". Depois, escreva o arquivo de contexto (<a href="#t-vb-contexto">veja a parte 3</a>).</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-modelo" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Modelo grande, modelo rápido</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Quase toda ferramenta deixa escolher entre um modelo mais capaz e um mais rápido. A regra prática: <strong>o grande para decidir, o rápido para executar</strong>.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Tarefa</th><th>Modelo</th></tr></thead>
+<tbody>
+<tr><td>Planejar a arquitetura, escolher a estrutura do projeto</td><td>o mais capaz</td></tr>
+<tr><td>Encontrar a causa de um erro difícil</td><td>o mais capaz</td></tr>
+<tr><td>Revisar o que foi feito antes de publicar</td><td>o mais capaz</td></tr>
+<tr><td>Trocar texto, ajustar cor, renomear, repetir um padrão já decidido</td><td>o rápido</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Não escolha modelo por ranking.</strong> Teste os dois na <em>sua</em> tarefa: pegue um pedido real que você já fez e compare o resultado. Ranking mede prova genérica; você entrega site.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-segunda-opiniao" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Uma IA principal, as outras de segunda opinião</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Trocar de ferramenta no meio do projeto quase sempre custa mais do que ganha: o contexto, as decisões e o jeito de pedir ficam para trás. Fique com uma principal — e use as outras como revisoras.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="texto">texto</span><button class="copiar">copiar</button></div><pre><code>Revise este código como se fosse para produção.
+Não reescreva nada. Liste, do mais grave ao menos grave:
+erros de lógica, falhas de segurança, o que quebra no celular
+e o que vai ser difícil de manter.
+
+[cole o arquivo ou o diff]</code></pre></div>
+<div class="nota">Um modelo diferente erra de um jeito diferente — e é por isso que ele enxerga o que o primeiro não viu. A mesma ideia da <a href="ia.html#t-ia-critica">autocrítica</a>, com um par de olhos novo.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s2">
+<div class="parte__cabeca"><span class="parte__num">PARTE 2</span><h2>Referências: onde achar e como usar</h2></div>
+<p class="parte__resumo">A trilha de IA ensina como descrever uma referência. Esta parte ensina onde procurar, como escolher poucas e como desmontar uma antes de pedir.</p>
+
+<article class="topico" id="t-vb-ref-onde" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Onde procurar</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Cada fonte serve a uma pergunta diferente. Procurar "site bonito" no lugar errado rende uma hora de rolagem e nenhuma decisão.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Você quer</th><th>Onde procurar</th></tr></thead>
+<tbody>
+<tr><td>Clima, cor, composição — o moodboard</td><td>Pinterest</td></tr>
+<tr><td>Projeto de design completo — identidade visual, interface, apresentação de case</td><td>Behance, Dribbble</td></tr>
+<tr><td>Tipografia com efeito, logo, peça gráfica pronta para adaptar</td><td>Kittl</td></tr>
+<tr><td>Página inteira de referência — hero, ritmo, seções</td><td>Awwwards, Godly, Land-book, Lapa Ninja, SiteInspire</td></tr>
+<tr><td>Tela de aplicativo — cadastro, painel, configurações</td><td>Mobbin</td></tr>
+<tr><td>Componente pronto para React e Tailwind</td><td>shadcn/ui, 21st.dev, Magic UI, Aceternity UI</td></tr>
+<tr><td>Componente em HTML e CSS puros</td><td>uiverse.io, CodePen — e os <a href="modelos.html">Modelos</a> deste site</td></tr>
+<tr><td>Movimento e efeito</td><td>motion.dev (exemplos), Codrops, a vitrine do GSAP</td></tr>
+<tr><td>Fonte</td><td>Google Fonts, Fontshare</td></tr>
+<tr><td>Ícone</td><td>Lucide, Phosphor, Heroicons</td></tr>
+<tr><td>Foto para rascunho</td><td>Unsplash, Pexels — e a licença de cada foto antes de publicar</td></tr>
+</tbody></table></div>
+<p>Pinterest, Behance, Dribbble e Kittl mostram <strong>design</strong> — o clima, a composição, a identidade. Awwwards, Godly e Land-book mostram <strong>site funcionando</strong> — a rolagem, o ritmo das seções, a interação. Um projeto bom costuma usar os dois: o primeiro para decidir como ele parece, o segundo para decidir como ele se comporta.</p>
+<div class="nota"><strong>Referência do mesmo ramo é a mais perigosa:</strong> ela dá a média da categoria. Procure o jeito de organizar em outro ramo — um restaurante com o ritmo de uma revista, um escritório de advocacia com a calma de uma galeria.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-moodboard" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Três referências, não trinta</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Trinta prints viram "faça algo moderno". Três prints, cada um com o motivo, viram decisão.</p>
+<p><strong>Junte muito, mande pouco.</strong> Coletar pode ser à vontade: no Pinterest, uma pasta por projeto, com seções dentro dela — layout, tipografia, cor, foto —, e o Behance e o Kittl para ver identidade e tipografia aplicadas de verdade. Na hora de pedir à IA, saem dali só as três que respondem às perguntas do projeto.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="texto">texto</span><button class="copiar">copiar</button></div><pre><code>REFERÊNCIAS (anexas)
+1. site-a.png — pego o ritmo: seções curtas, muito respiro entre elas
+2. site-b.png — pego só a hero: título enorme à esquerda, foto recortada à direita
+3. site-c.png — pego os cards de serviço: número grande, uma linha de texto
+
+NÃO pego: as cores de nenhum dos três, nem as fotos.</code></pre></div>
+<ul>
+<li><strong>Uma por pergunta:</strong> uma para o layout, uma para a tipografia, uma para o movimento.</li>
+<li><strong>Sempre com o motivo:</strong> referência sem motivo vira ordem de cópia.</li>
+<li><strong>Diga o que não pegar:</strong> corta a média das três antes de ela aparecer.</li>
+</ul>
+<div class="nota">As formas de passar referência — imagem, gravação de tela, descrição de tempo — estão em <a href="ia.html#t-ia-estrutura">Formas de referência</a>. Gravação de tela é a única que comunica movimento.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-desmontar" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Desmontar a referência antes de pedir</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Antes de mandar o print para a IA, abra a página original e tire as medidas. Com número na mão, o pedido deixa de ser "parecido com isso" e vira especificação.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>O que medir</th><th>Onde, no DevTools</th></tr></thead>
+<tbody>
+<tr><td>Fonte, peso e tamanho do título e do corpo</td><td>selecionar o texto → aba Computed → font-family, font-size</td></tr>
+<tr><td>Cores de fundo, texto e destaque</td><td>selecionar o elemento → Styles, ou o conta-gotas do seletor de cor</td></tr>
+<tr><td>Espaço entre as seções</td><td>selecionar a seção → a caixa de margem e padding no fim de Computed</td></tr>
+<tr><td>Largura máxima do texto</td><td>selecionar o parágrafo → max-width</td></tr>
+<tr><td>A curva e o tempo de uma animação</td><td>aba Animations — dá para rodar em câmera lenta</td></tr>
+</tbody></table></div>
+<div class="nota">O passo a passo do DevTools está na trilha <a href="fluxo.html#t-dev-elements">Fluxo de trabalho</a>. Para a paleta e a escala que saíram da medição, as ferramentas <a href="ferramenta-paleta.html">Paleta</a> e <a href="ferramenta-escala.html">Escala</a> fecham o sistema.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-inspiracao" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Inspiração não é cópia</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Estrutura, ritmo e ideia de interação não têm dono. Texto, foto, ilustração, logo e código com licença têm.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Pode pegar</th><th>Não pode pegar</th></tr></thead>
+<tbody>
+<tr><td>a ideia de hero dividida em duas colunas</td><td>a foto da hero</td></tr>
+<tr><td>o ritmo de seções curtas</td><td>o texto das seções</td></tr>
+<tr><td>um efeito de rolagem que você reescreve</td><td>o arquivo de CSS copiado inteiro</td></tr>
+<tr><td>a paleta como ponto de partida, ajustada</td><td>o logo ou algo que confunda as duas marcas</td></tr>
+</tbody></table></div>
+<div class="nota">Pedir para a IA "copiar este site" não muda de quem é o conteúdo. O que vale para o que a IA gera está em <a href="ia.html#t-ia-direitos">Direitos</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-componentes" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Biblioteca de componentes: quando vale</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Em projeto React com Tailwind — o que Lovable, v0 e Bolt costumam gerar —, o shadcn/ui virou o ponto de partida mais comum. A diferença para uma biblioteca tradicional: ele <strong>copia o código do componente para dentro do seu projeto</strong>. O código passa a ser seu; atualização é você quem decide.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">bash</span><button class="copiar">copiar</button></div><pre><code># num projeto React + Tailwind já criado
+npx shadcn@latest init
+npx shadcn@latest add button dialog</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Situação</th><th>Caminho</th></tr></thead>
+<tbody>
+<tr><td>Projeto React + Tailwind, painel ou app</td><td>shadcn/ui como base, e os componentes animados por cima</td></tr>
+<tr><td>Landing page em HTML puro</td><td>os <a href="modelos.html">Modelos</a> deste site, ou escrever o componente</td></tr>
+<tr><td>Precisa de um componente só</td><td>copie o componente, não instale a biblioteca inteira</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Peça para a IA usar a biblioteca que já está no projeto.</strong> Sem essa instrução, ela mistura três jeitos de fazer botão no mesmo site.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s3">
+<div class="parte__cabeca"><span class="parte__num">PARTE 3</span><h2>Os recursos dos agentes</h2></div>
+<p class="parte__resumo">Arquivo de contexto, skills, MCP, subagentes, hooks e modo plano: o que cada um resolve e quando vale configurar.</p>
+
+<article class="topico" id="t-vb-contexto" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>O arquivo de regras de cada ferramenta</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Todo agente lê um arquivo de instruções do projeto antes de começar. É onde moram as decisões travadas, o jeito de entregar e o que não pode ser tocado — o <a href="ia.html#t-ia-arquivo-estado">resumo que vira arquivo</a>.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Ferramenta</th><th>Arquivo</th></tr></thead>
+<tbody>
+<tr><td>Claude Code</td><td><code>CLAUDE.md</code> na raiz do projeto</td></tr>
+<tr><td>Cursor</td><td>regras em <code>.cursor/rules/</code></td></tr>
+<tr><td>GitHub Copilot</td><td><code>.github/copilot-instructions.md</code></td></tr>
+<tr><td>Codex e outros</td><td><code>AGENTS.md</code> na raiz</td></tr>
+</tbody></table></div>
+<p>O nome e o lugar mudam de versão para versão — confira na documentação da sua ferramenta. O conteúdo é o mesmo em todas, e dá para manter um arquivo só e apontar os outros para ele.</p>
+<div class="nota">O <a href="ferramenta-gerador.html">Gerador de comando</a> monta esse arquivo pelo tipo "Arquivo de contexto", puxando paleta, fontes e escala das outras ferramentas.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-skills" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Skills: ensinar uma vez, usar sempre</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Uma skill é uma pasta com um arquivo <code>SKILL.md</code>: um nome, uma descrição de quando ela serve, e as instruções. O agente lê só a descrição até precisar; quando a tarefa bate, carrega o resto. É o jeito de ensinar um processo seu — o checklist de entrega, o padrão de commit, o estilo de texto — sem colar tudo em toda conversa.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="markdown">markdown</span><button class="copiar">copiar</button></div><pre><code>---
+name: entrega-landing
+description: Use antes de entregar uma landing page ao cliente — revisa contraste, 390px, formulário e metadados.
+---
+
+# Entrega de landing page
+
+1. Abra a página em 390px e aponte o que estoura na horizontal.
+2. Confira contraste 4.5:1 em todo texto.
+3. Teste o formulário e o link de WhatsApp.
+4. Liste o que faltar como [PENDENTE]. Não corrija sem perguntar.</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Onde fica (Claude Code)</th><th>Vale para</th></tr></thead>
+<tbody>
+<tr><td><code>~/.claude/skills/nome/SKILL.md</code></td><td>todos os seus projetos</td></tr>
+<tr><td><code>.claude/skills/nome/SKILL.md</code></td><td>só este projeto, e vai junto no Git</td></tr>
+</tbody></table></div>
+<h4>Como usar: com a barra, pelo nome</h4>
+<p>O jeito garantido de usar uma skill é chamá-la: digite <code>/</code> seguido do nome, e o que vier depois vai junto como pedido. A barra também abre a lista das skills instaladas — não precisa decorar os nomes.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="texto">texto</span><button class="copiar">copiar</button></div><pre><code>/entrega-landing
+/entrega-landing só a página de contato
+/emil-design-eng revise os botões desta página</code></pre></div>
+<p>Sem a barra, a skill também pode entrar sozinha: quando o pedido bate com a descrição dela, o agente carrega por conta própria. Mas "pode" não é "vai" — para processo que precisa acontecer, chame pelo nome.</p>
+<div class="nota"><strong>A descrição é o que decide quando a skill entra sozinha.</strong> "Revisa coisas" nunca é chamada; "use antes de entregar uma landing page" é. Antes de escrever uma, procure uma pronta — há coleções inteiras publicadas —, mas leia antes de instalar: skill é instrução que o agente segue.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-mcp" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>MCP: dar mãos para a IA</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O Model Context Protocol é um padrão aberto, lançado pela Anthropic no fim de 2024, para ligar um assistente a outros sistemas: o navegador, o Figma, o GitHub, um banco de dados. Cada ligação é um "servidor MCP" que expõe ferramentas — e o agente passa a poder abrir a página, ler o frame do design ou consultar a tabela sozinho.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">bash</span><button class="copiar">copiar</button></div><pre><code># Claude Code: dar ao agente um navegador para abrir e testar a página
+claude mcp add playwright -- npx @playwright/mcp@latest
+
+# ver os que estão ligados
+claude mcp list</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Ligar a…</th><th>O agente passa a poder</th></tr></thead>
+<tbody>
+<tr><td>um navegador</td><td>abrir a página, clicar, medir e tirar print — verificar sem você</td></tr>
+<tr><td>o Figma</td><td>ler o frame e as variáveis do arquivo em vez de adivinhar pelo print</td></tr>
+<tr><td>o GitHub</td><td>ler issues e abrir pull request</td></tr>
+<tr><td>um banco de dados</td><td>consultar tabelas — e, se permitir, alterar</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Cada servidor é uma porta aberta.</strong> Dê o mínimo de acesso: leitura antes de escrita, banco de teste antes do de produção. E conteúdo que o agente lê por MCP — uma página, uma issue — pode trazer instrução escondida; o agente não deve obedecer texto que veio de fora, e você não deve aprovar ação que não pediu.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-subagentes" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Comandos, subagentes e hooks</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Três formas de automatizar o que você repete. Nenhuma é obrigatória — comece a usar quando se pegar digitando a mesma coisa pela terceira vez.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Recurso</th><th>O que é</th><th>Exemplo de uso</th></tr></thead>
+<tbody>
+<tr><td>Comando próprio</td><td>um pedido salvo, chamado por nome</td><td><code>/revisar</code> roda sempre a mesma revisão de entrega</td></tr>
+<tr><td>Subagente</td><td>um agente com contexto próprio, chamado pelo principal</td><td>procurar em cem arquivos sem encher a conversa principal</td></tr>
+<tr><td>Hook</td><td>um comando que roda sozinho num evento</td><td>formatar o código toda vez que um arquivo é editado</td></tr>
+</tbody></table></div>
+<p>No Claude Code, subagentes ficam em <code>.claude/agents/</code> e hooks nas configurações (<code>settings.json</code>). A diferença que importa: <strong>skill e comando são sugestão que o agente segue; hook é regra que o sistema executa</strong> — se precisa acontecer sempre, é hook.</p>
+<div class="nota">Hook roda comando no seu computador sem perguntar. Escreva você, leia antes de salvar, e nunca copie um de fonte que você não conhece.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-plano" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Modo plano e permissões</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Os agentes deixam escolher quanto de liberdade dar: perguntar antes de cada edição, editar sozinho, ou só planejar sem tocar em nada. O modo plano é o <a href="ia.html#t-ia-plano">plano antes do código</a> transformado em botão.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Situação</th><th>Modo</th></tr></thead>
+<tbody>
+<tr><td>Mudança grande, arquitetura, algo que você não sabe como fazer</td><td>plano: lê, pensa e propõe; você aprova</td></tr>
+<tr><td>Tarefa pequena e clara num projeto com Git</td><td>editar e mostrar o resultado</td></tr>
+<tr><td>Pasta com senha, chave ou dado de cliente</td><td>perguntar antes de cada comando</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Nunca rode um agente sem permissão nenhuma numa pasta que tenha o que perder</strong> — arquivo <code>.env</code>, backup, projeto sem commit. A opção existe para ambiente descartável, não para o seu computador de trabalho.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s4">
+<div class="parte__cabeca"><span class="parte__num">PARTE 4</span><h2>Quando dá errado</h2></div>
+<p class="parte__resumo">A IA em loop, o erro mal contado, a mudança que ninguém pediu. Como perceber cedo, voltar atrás e seguir.</p>
+
+<article class="topico" id="t-vb-loop" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>A IA em loop</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O sinal é sempre o mesmo: o erro volta, a correção desfaz a anterior, e o arquivo cresce a cada pedido. Continuar pedindo "tente de novo" só aprofunda o buraco.</p>
+<ol>
+<li><strong>Pare e peça a causa, não a correção:</strong> "sem mexer em nada, me diga em uma frase por que isso acontece".</li>
+<li><strong>Dê o que falta:</strong> a mensagem exata de erro, o passo a passo para reproduzir, o que já foi tentado.</li>
+<li><strong>Volte ao último estado bom:</strong> desfaça pelo Git e peça de novo, menor.</li>
+<li><strong>Recomece a conversa</strong> com um resumo curto — o contexto longo é parte do problema.</li>
+</ol>
+<div class="nota">Três tentativas iguais é o limite. Na quarta, a conversa já está carregando mais erro do que informação — use o tipo "Recomeçar conversa" do <a href="ferramenta-gerador.html">Gerador</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-erro" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Levando o erro certo</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>"Não está funcionando" obriga a IA a adivinhar. Um relato bom tem quatro partes e cabe em cinco linhas:</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="texto">texto</span><button class="copiar">copiar</button></div><pre><code>ONDE: o botão "Enviar" do formulário de contato
+O QUE ACONTECE: nada; o console mostra
+  TypeError: Cannot read properties of null (reading 'value') em form.js:12
+COMO REPRODUZIR: Chrome no celular, 390px, preencher e tocar em Enviar
+O QUE DEVERIA: abrir o WhatsApp com a mensagem pronta</code></pre></div>
+<ul>
+<li>A mensagem do console <strong>copiada</strong>, não resumida: o arquivo e a linha estão nela.</li>
+<li>O print quando o problema é visual — com a largura da tela anotada.</li>
+<li>O que mudou desde a última vez que funcionou.</li>
+</ul>
+<div class="nota">O tipo "Correção pontual" do <a href="ferramenta-gerador.html">Gerador de comando</a> monta esse relato e pede a causa antes da mudança.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-git" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Git é o seu botão de desfazer</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Com Git, errar sai barato: cada pedido grande começa de um ponto salvo, e voltar é um comando. Sem Git, a IA pode reescrever o arquivo que funcionava e não existe caminho de volta.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">bash</span><button class="copiar">copiar</button></div><pre><code>git add -A &amp;&amp; git commit -m "antes de refazer o menu"   # salva o ponto
+
+git diff                 # o que a IA mudou desde o último commit
+git restore arquivo.css  # desfaz as mudanças de um arquivo
+git restore .            # desfaz todas as mudanças ainda não salvas
+
+git log --oneline        # os pontos salvos
+git revert HEAD          # desfaz o último commit criando outro — seguro</code></pre></div>
+<div class="nota"><strong>Commit antes de cada pedido grande, não depois.</strong> O passo a passo do Git, do zero, está na trilha <a href="fluxo.html#t-git-problema">Fluxo de trabalho</a> — e o uso junto com agentes em <a href="fluxo.html#t-git-claude">Git com o Claude</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-diff" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Leia o diff, não a resposta</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>A resposta diz "pronto, corrigi". O diff mostra o que de fato mudou — e é onde aparecem os problemas que a resposta não conta.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>No diff, desconfie de</th><th>Porque</th></tr></thead>
+<tbody>
+<tr><td>arquivo que você não pediu para mexer</td><td>a IA "aproveitou para melhorar" — e pode ter quebrado</td></tr>
+<tr><td>teste apagado ou pulado</td><td>o teste parou de falhar porque sumiu, não porque passou</td></tr>
+<tr><td><code>.env</code>, chave ou configuração de deploy alterados</td><td>risco de segurança e de derrubar o site</td></tr>
+<tr><td>dependência nova no <code>package.json</code></td><td>mais peso, mais coisa para manter — era necessária?</td></tr>
+<tr><td>o arquivo inteiro reescrito para uma mudança pequena</td><td>variação escondida em partes já aprovadas</td></tr>
+</tbody></table></div>
+<div class="nota">Não precisa entender cada linha. Precisa saber <strong>onde</strong> mexeu e <strong>quanto</strong> — isso já pega a maior parte dos estragos.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-entender" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Quando você não entende o código</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Vai acontecer, e não é motivo para aceitar no escuro. Três pedidos resolvem quase sempre:</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="texto">texto</span><button class="copiar">copiar</button></div><pre><code>Explique este arquivo em dez linhas, para quem não programa:
+o que ele faz, de onde vêm os dados e para onde vão.
+
+Quais três coisas neste código quebrariam primeiro se
+mudássemos de hospedagem ou se dez vezes mais gente usasse?
+
+Me mostre a menor mudança possível para [o que eu quero],
+e explique cada linha dela antes de aplicar.</code></pre></div>
+<div class="nota">Aprender o básico da camada em que você trabalha paga rápido: a trilha <a href="html-puro.html">HTML puro</a> cobre o que está por baixo de qualquer framework, e <a href="frameworks.html">Frameworks</a> explica o que Lovable, v0 e Bolt geram.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s5">
+<div class="parte__cabeca"><span class="parte__num">PARTE 5</span><h2>Do protótipo ao ar, sem se machucar</h2></div>
+<p class="parte__resumo">Os erros que mais aparecem em projeto feito com IA: a chave exposta, o banco aberto, a conta que dispara. E o caminho mais curto para publicar.</p>
+
+<article class="topico" id="t-vb-chaves" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>A chave que vaza</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>Tudo o que está no JavaScript do navegador é público — qualquer pessoa abre o DevTools e lê. Isso inclui variável de ambiente com prefixo de "pública": <code>VITE_</code> no Vite e <code>NEXT_PUBLIC_</code> no Next.js vão parar dentro do arquivo que o visitante baixa.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">bash</span><button class="copiar">copiar</button></div><pre><code># .env — nunca vai para o Git
+OPENAI_API_KEY=sk-...          # só o servidor lê
+VITE_SUPABASE_URL=https://...  # público de propósito
+VITE_SUPABASE_ANON_KEY=...     # público de propósito, protegido pelas regras do banco
+
+# .gitignore
+.env
+.env.local</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Chave</th><th>Onde pode ficar</th></tr></thead>
+<tbody>
+<tr><td>Chave secreta de API paga (IA, pagamento, e-mail)</td><td>só no servidor ou numa função serverless</td></tr>
+<tr><td>Chave "anon" / pública de um serviço de banco</td><td>no front, <strong>desde que</strong> o banco tenha regras de acesso</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Vazou? Revogue e gere outra na hora.</strong> Apagar o commit não adianta: o histórico do Git, os clones e os robôs que varrem repositórios já viram. Chave secreta no front é o erro número um de projeto feito com IA — peça sempre "onde fica esta chave?". A função serverless que protege a chave está em <a href="back-end.html#t-sl-segredo">Back-end</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-banco" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Banco aberto: o erro clássico</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>No Supabase, a chave pública fica no front por projeto — quem protege os dados são as <strong>regras de acesso por linha</strong> (Row Level Security). Tabela sem essas regras, com a chave pública à vista, é tabela que qualquer pessoa lê e apaga.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="sql">sql</span><button class="copiar">copiar</button></div><pre><code>-- liga a proteção: sem regra, ninguém acessa pela chave pública
+alter table pedidos enable row level security;
+
+-- cada pessoa lê só os próprios pedidos
+create policy "ler os meus pedidos" on pedidos
+  for select using (auth.uid() = user_id);
+
+-- e só cria pedido em nome de si mesma
+create policy "criar o meu pedido" on pedidos
+  for insert with check (auth.uid() = user_id);</code></pre></div>
+<p>No Firebase, o equivalente são as regras de segurança do Firestore — e o "modo de teste", que libera tudo por um tempo, não é para ir ao ar.</p>
+<div class="nota"><strong>Teste como um estranho:</strong> abra o site numa aba anônima, sem login, e tente ler e escrever pela chave pública. Se der, o banco está aberto. Peça à IA: "liste as tabelas e as regras de acesso de cada uma".</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-custo" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>A conta que dispara</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Serviço cobrado por uso não avisa quando algo dá errado — cobra. Um laço que chama a API sem parar, um formulário sem proteção contra robô, ou uma chave vazada viram fatura.</p>
+<ul>
+<li><strong>Limite de gasto e alerta</strong> no painel de cada serviço pago, antes de ir ao ar.</li>
+<li><strong>Chamada paga sempre pelo servidor</strong>, nunca direto do navegador — e com limite de pedidos por pessoa.</li>
+<li><strong>Proteção no formulário</strong>: um campo-armadilha ou um desafio simples já barra a maior parte dos robôs.</li>
+<li><strong>Olhe o painel de uso</strong> nos primeiros dias depois de publicar.</li>
+</ul>
+<div class="nota">O formulário com proteção contra robô está em <a href="qualidade.html#t-form-spam">Qualidade</a>; o limite do plano gratuito de cada serviço, em <a href="back-end.html#t-sl-limites">Back-end</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-publicar" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Publicar sem nunca ter aberto um terminal</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O caminho mais curto hoje, e o que a maioria dos construtores e agentes já prepara:</p>
+<ol>
+<li>o código num repositório do GitHub (o construtor sincroniza, ou o agente faz o primeiro push);</li>
+<li>na Vercel, Netlify ou Cloudflare Pages: "importar projeto do GitHub";</li>
+<li>as variáveis de ambiente cadastradas no painel da hospedagem — não no código;</li>
+<li>cada push publica sozinho, e cada branch ganha um endereço de prévia para testar antes;</li>
+<li>o domínio próprio apontado por último, quando tudo estiver certo.</li>
+</ol>
+<div class="nota">Hospedagem e domínio em detalhe estão em <a href="html-puro-2.html#t-hospedagem">HTML puro</a>; o Git ligado à Vercel, em <a href="fluxo.html#t-git-vercel">Fluxo de trabalho</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-antes" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Antes de mostrar para alguém</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>A checagem curta que separa protótipo de coisa publicável. Peça à IA para conferir item por item — e confira você os três primeiros.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Conferir</th><th>Como</th></tr></thead>
+<tbody>
+<tr><td>Nenhuma chave secreta no front</td><td>procurar por "key", "secret" e "token" no código do navegador</td></tr>
+<tr><td>Banco com regra de acesso</td><td>aba anônima, sem login, tentar ler e escrever</td></tr>
+<tr><td>Funciona no celular</td><td>abrir em 390px e no celular de verdade</td></tr>
+<tr><td>Console sem erro vermelho</td><td>DevTools → Console, com a página aberta</td></tr>
+<tr><td>Formulário chega ao destino</td><td>enviar de verdade e ver a mensagem chegar</td></tr>
+<tr><td>Dados de exemplo removidos</td><td>procurar por "lorem", "exemplo", "[PREENCHER]"</td></tr>
+</tbody></table></div>
+<div class="nota">Para site de cliente, a lista completa é o <a href="ferramenta-checklist.html">Checklist de entrega</a>.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s6">
+<div class="parte__cabeca"><span class="parte__num">PARTE 6</span><h2>Se manter atualizado</h2></div>
+<p class="parte__resumo">As ferramentas mudam todo mês. O que acompanhar, o que ignorar, e o que não muda quando a ferramenta muda.</p>
+
+<article class="topico" id="t-vb-acompanhar" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Onde acompanhar sem se afogar</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<div class="tabela-caixa"><table>
+<thead><tr><th>Fonte</th><th>Serve para</th></tr></thead>
+<tbody>
+<tr><td>O registro de mudanças (changelog) oficial de cada ferramenta</td><td>saber o que mudou de fato, sem exagero</td></tr>
+<tr><td>A documentação oficial</td><td>o nome certo de cada arquivo, comando e recurso — é ela que envelhece mais devagar</td></tr>
+<tr><td>A comunidade da ferramenta (fórum, Discord, Reddit)</td><td>o problema que outra pessoa já teve e resolveu</td></tr>
+<tr><td>Vídeo de quem constrói ao vivo</td><td>ver o fluxo de trabalho, não a lista de novidades</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Desconfie de "a nova IA que muda tudo".</strong> Antes de migrar, teste a novidade num projeto pequeno e descartável, com um pedido que você já fez antes. Se não for claramente melhor na <em>sua</em> tarefa, fique onde está.</div>
+</div>
+</article>
+
+<article class="topico" id="t-vb-portavel" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>O que não muda quando a ferramenta muda</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Ferramenta troca; o método vai junto. Tudo isto funciona igual em qualquer uma delas — e é por isso que vale mais do que dominar os atalhos de uma só:</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Hábito</th><th>Onde está no site</th></tr></thead>
+<tbody>
+<tr><td>Um brief claro: ação, público, diferencial, o que não quer</td><td><a href="ia.html#t-ia-modelo-brief">Modelo de brief</a></td></tr>
+<tr><td>Pedir em partes pequenas, uma mudança por vez</td><td><a href="ia.html#t-ia-porque-fatiar">Fatiar o trabalho</a></td></tr>
+<tr><td>Plano antes do código</td><td><a href="ia.html#t-ia-plano">Peça o plano antes</a></td></tr>
+<tr><td>Verificar em vez de confiar</td><td><a href="ia.html#t-ia-verificar">Dê um jeito de verificar</a></td></tr>
+<tr><td>Commit antes de cada pedido grande</td><td><a href="#t-vb-git">Git é o seu botão de desfazer</a></td></tr>
+<tr><td>Um arquivo de contexto no projeto</td><td><a href="#t-vb-contexto">O arquivo de regras</a></td></tr>
+</tbody></table></div>
+<div class="nota">Quem tem esse método troca de ferramenta em uma tarde. Quem só tem a ferramenta recomeça do zero a cada lançamento.</div>
+</div>
+</article>
+</section>
+
+<nav class="passo" aria-label="Navegar entre trilhas">
+<a class="passo__item passo__item--ant" href="ia.html"><span>Anterior</span><strong>Trabalhando com IA</strong></a>
+<a class="passo__item passo__item--prox" href="colofao.html"><span>Próxima</span><strong>Colofão</strong></a>
+</nav>
+</main>
+</div>
+<footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<script src="app.js"></script>
+<script src="busca.js" defer></script>
+</body>
+</html>

@@ -34,10 +34,12 @@ const GRUPOS = [
   ['Método', [
     ['fluxo.html', 'Fluxo de trabalho', 'Terminal, Git e DevTools'],
     ['ia.html', 'Trabalhando com IA', 'Brief, referência e revisão'],
+    ['vibecoding.html', 'Vibecoding', 'Ferramentas, referências e riscos'],
     ['colofao.html', 'Colofão', 'Como este site foi feito'],
   ], null],
   ['Ferramentas', [
     ['ferramentas.html', 'Ferramentas', 'As quatorze do dia a dia'],
+    ['modelos.html', 'Modelos para copiar', 'Efeitos vivos, prontos'],
     ['ferramenta-checklist.html', 'Checklist de entrega', 'Antes de publicar'],
     ['ferramenta-proposta.html', 'Proposta que fecha', 'Os oito pontos'],
     ['ferramenta-briefing.html', 'Briefing', 'As dez perguntas'],
@@ -51,11 +53,11 @@ const GRUPOS = [
 ];
 
 // arquivo -> modo do alternador ('estudo', 'trabalho' ou undefined)
-const MODO = { 'ferramentas.html': 'trabalho' };
+const MODO = { 'ferramentas.html': 'trabalho', 'modelos.html': 'trabalho' };
 for (const a of [
   'html-puro.html', 'html-puro-2.html', 'qualidade.html', 'movimento.html', 'motion.html',
   'frameworks.html', 'back-end.html', 'landing-pages.html', 'trafego.html', 'negocio.html',
-  'fluxo.html', 'ia.html', 'estudar.html',
+  'fluxo.html', 'ia.html', 'vibecoding.html', 'estudar.html',
 ]) MODO[a] = 'estudo';
 // cada ferramenta tem página própria, na área de trabalho
 for (const f of FERRAMENTAS) MODO[f.arquivo] = 'trabalho';
@@ -79,9 +81,11 @@ const PAGINA = {
   'negocio.html': ['negocio.html', 'Negócio'],
   'fluxo.html': ['fluxo.html', 'Fluxo de trabalho'],
   'ia.html': ['ia.html', 'Trabalhando com IA'],
+  'vibecoding.html': ['vibecoding.html', 'Vibecoding'],
   'colofao.html': ['colofao.html', 'Colofão'],
   'patch-notes.html': ['patch-notes.html', 'Patch notes'],
   'ferramentas.html': ['ferramentas.html', null],
+  'modelos.html': ['modelos.html', null],
   'index.html': null,
   '404.html': null,
 };
