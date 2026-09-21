@@ -147,6 +147,7 @@
 <li><a href="#t-container">Container queries</a></li>
 <li><a href="#t-aninhamento">Aninhamento nativo e <code>@layer</code></a></li>
 <li><a href="#t-cores">Cores modernas: <code>oklch()</code> e <code>color-mix()</code></a></li>
+<li><a href="#t-modo-escuro">Modo escuro: <code>color-scheme</code>, <code>light-dark()</code> e o alternador sem flash</a></li>
 <li><a href="#t-scroll-css">Animação por rolagem sem JavaScript</a></li>
 <li><a href="#t-view-transitions">View Transitions</a></li>
 </ol>
@@ -159,7 +160,7 @@
 <div class="legenda">
 <span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
 <span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
-<span>6 partes · 40 tópicos · parte 1 de 2</span>
+<span>6 partes · 41 tópicos · parte 1 de 2</span>
 </div>
 </section>
 <p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
@@ -1705,6 +1706,90 @@ body:has(.menu-painel.is-aberto) {
           <div class="nota">
             <strong>Uso direto no seu trabalho:</strong> aquele fundo claro de seção que combina com a cor do cliente. Em vez de pedir o hexadecimal ou chutar no conta-gotas, você deriva do próprio token — e se o cliente trocar a cor, o fundo acompanha.
           </div>
+        </div>
+      </article>
+
+      <article class="topico" id="t-modo-escuro" data-marca="novo">
+        <div class="topico__cabeca">
+          <h3>Modo escuro: <code>color-scheme</code>, <code>light-dark()</code> e o alternador sem flash</h3>
+          <span class="tag tag--novo">Novo</span>
+          <span class="tag tag--css">CSS</span>
+        </div>
+        <div class="topico__corpo">
+          <p>Seguir o tema do sistema é fácil: um <code>@media (prefers-color-scheme: dark)</code> resolve quando o cliente não pede botão nenhum. O problema aparece quando ele pede — alternador manual, escolha lembrada na próxima visita, e a página sem piscar clara antes de escurecer.</p>
+
+          <h4>Primeiro: declare que a página sabe lidar com os dois temas</h4>
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div>
+            <pre><code>&lt;meta name="color-scheme" content="light dark"&gt;</code></pre>
+          </div>
+          <p>Sem essa declaração, o navegador trata a página como só-clara: barra de rolagem, campo de formulário e seletor de data continuam com aparência clara mesmo que o seu fundo seja escuro. Com ela, esses elementos nativos acompanham o tema. A propriedade <code>color-scheme</code> no CSS faz o mesmo; a meta tag tem a vantagem de ser lida antes do CSS carregar, o que ajuda a evitar um clarão branco no início.</p>
+
+          <h4><code>light-dark()</code> — as duas cores num lugar só</h4>
+          <p>Antes, cada cor que muda de tema pedia duas declarações: uma no <code>:root</code> e outra dentro do <code>@media (prefers-color-scheme: dark)</code>, repetidas para cada variável. A função <code>light-dark()</code> junta as duas.</p>
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div>
+            <pre><code>:root {
+  color-scheme: light dark;
+
+  --fundo: light-dark(#FFFFFF, #0D1514);
+  --texto: light-dark(#1A1A1A, #E8E8E8);
+  --marca: light-dark(oklch(38% 0.13 345), oklch(58% 0.13 345));
+}
+
+body {
+  background: var(--fundo);
+  color: var(--texto);
+}</code></pre>
+          </div>
+          <p>Com <code>color-scheme: light dark</code> no <code>:root</code>, o navegador usa o primeiro valor de cada <code>light-dark()</code> quando o sistema está no claro e o segundo quando está no escuro — sem media query. Aproveite para escolher cada par com <a href="#t-cores">oklch()</a>: mesma cor, só a luminosidade muda.</p>
+
+          <h4>O alternador manual: vencer a escolha do sistema</h4>
+          <p>Quando o cliente quer um botão de sol/lua, ele precisa sobrescrever a preferência do sistema. Um atributo no <code>&lt;html&gt;</code> troca o <code>color-scheme</code> dali, e o <code>light-dark()</code> acompanha sozinho.</p>
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div>
+            <pre><code>:root {
+  color-scheme: light dark; /* segue o sistema por padrão */
+}
+
+html[data-tema="claro"]  { color-scheme: light; }
+html[data-tema="escuro"] { color-scheme: dark;  }</code></pre>
+          </div>
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">app.js</span><button class="copiar">copiar</button></div>
+            <pre><code>const botao = document.querySelector('.alternador-tema');
+if (botao) {
+  botao.addEventListener('click', () =&gt; {
+    const raiz = document.documentElement;
+    // sem escolha salva, o "atual" é o que o sistema está mostrando
+    const escuroAgora = raiz.dataset.tema
+      ? raiz.dataset.tema === 'escuro'
+      : matchMedia('(prefers-color-scheme: dark)').matches;
+    const novo = escuroAgora ? 'claro' : 'escuro';
+    raiz.dataset.tema = novo;
+    try { localStorage.setItem('tema', novo); } catch (e) {}
+  });
+}</code></pre>
+          </div>
+          <p>A checagem com <code>matchMedia</code> não é enfeite: sem ela, quem está com o sistema no escuro clicaria no botão e nada mudaria na primeira vez, porque o "próximo" tema calculado seria o que já está na tela.</p>
+
+          <h4>O flash de tema errado — e como evitar</h4>
+          <p>Se você lê o <code>localStorage</code> só depois que a página carregou, o visitante vê a página abrir no tema padrão e trocar de repente para o salvo. A saída é aplicar o atributo <strong>antes</strong> do CSS renderizar, com um script inline no <code>&lt;head&gt;</code>, antes de qualquer <code>&lt;link rel="stylesheet"&gt;</code>.</p>
+          <div class="bloco-codigo">
+            <div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">no &lt;head&gt;, antes do CSS</span><button class="copiar">copiar</button></div>
+            <pre><code>&lt;script&gt;
+  try {
+    const salvo = localStorage.getItem('tema');
+    if (salvo) document.documentElement.dataset.tema = salvo;
+  } catch (e) {}
+&lt;/script&gt;</code></pre>
+          </div>
+
+          <div class="nota nota--alerta">
+            <strong>Por que inline e não no <code>app.js</code>:</strong> um arquivo externo só roda depois de baixado, e nesse intervalo o navegador já pintou a página no tema errado. O script precisa ser pequeno, ficar no começo do <code>&lt;head&gt;</code> e ter <code>try/catch</code> — aba anônima ou <code>localStorage</code> bloqueado não pode quebrar a página.
+          </div>
+
+          <p>A meta tag e o <code>light-dark()</code> funcionam sozinhos, seguindo o sistema. O alternador e o script inline só fazem sentido juntos, e só se o cliente pediu o botão — sem esse pedido, pare no <code>light-dark()</code>.</p>
         </div>
       </article>
 
