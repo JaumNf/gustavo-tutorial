@@ -32,17 +32,17 @@ const GRUPOS = [
   ], null],
   ['Método', [
     ['fluxo.html', 'Fluxo de trabalho', 'Terminal, Git e DevTools'],
-    ['ia.html', 'Trabalhando com IA', 'Brief, referência e o gerador'],
+    ['ia.html', 'Trabalhando com IA', 'Brief, referência e revisão'],
     ['colofao.html', 'Colofão', 'Como este site foi feito'],
   ], null],
   ['Ferramentas', [
-    ['ferramentas.html', 'Ferramentas', 'As treze do dia a dia'],
+    ['ferramentas.html', 'Ferramentas', 'As quatorze do dia a dia'],
     ['ferramentas.html#f-checklist', 'Checklist de entrega', 'Antes de publicar'],
     ['ferramentas.html#f-proposta', 'Proposta que fecha', 'Os oito pontos'],
     ['ferramentas.html#f-briefing', 'Briefing', 'As dez perguntas'],
     ['ferramentas.html#f-zap', 'Link de WhatsApp', 'Com a mensagem pronta'],
     ['ferramentas.html#f-utm', 'Gerador de UTM', 'Rastrear a origem'],
-    ['ia.html#t-ia-gerador', 'Gerador de comando', 'Brief para a IA'],
+    ['ferramentas.html#f-gerador', 'Gerador de comando', 'Onze tipos de pedido'],
   ], 'navmenu__grupo--trabalhar'],
   ['Patch notes', [
     ['patch-notes.html', 'Patch notes', 'O que mudou no site'],

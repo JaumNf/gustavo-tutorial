@@ -33,6 +33,10 @@ Estes três são saída de script. Editar à mão significa perder a alteração
 | `progresso.js`     | `scripts/progresso.mjs`  | tópico adicionado, removido ou com `data-desde` |
 | `sitemap.xml`      | `scripts/sitemap.mjs`    | qualquer página for editada (atualiza datas) |
 
+O cabeçalho é uma linha só, de 48px: o `.topo__interno` usa `display: contents` para marca e botões
+entrarem na mesma linha do `<nav>`. Ele some ao descer e só volta depois de ~1s subindo (`SUBIDA` e
+`PAUSA` no `app.js`). O filtro Tudo/Revisão/Novo das trilhas mora na abertura, não no topo.
+
 O menu de navegação das 17 páginas que têm cabeçalho e os sumários das trilhas também são gerados
 (`navmenu.mjs` e `sumario.mjs`) — veja abaixo.
 
@@ -74,7 +78,7 @@ O site tem três áreas:
 
 - `index.html` — a central, com a busca e as duas portas
 - `estudar.html` — área de estudo: as onze trilhas por categoria
-- `ferramentas.html` — área de trabalho: as treze ferramentas
+- `ferramentas.html` — área de trabalho: as quatorze ferramentas
 
 Cada trilha é uma página com esta estrutura, que os scripts dependem:
 
@@ -114,7 +118,7 @@ de um tópico antigo — só marque o que foi publicado de fato naquele dia.
 Uma ferramenta só entra se for **algo que se redigita ou recalcula em todo projeto**. Se é uma
 decisão que muda de cliente para cliente, fica como texto na trilha, para ler e pensar.
 
-Nenhuma das treze foi inventada: todas saíram de conteúdo que já existia numa trilha. Antes de
+Nenhuma das quatorze foi inventada: todas saíram de conteúdo que já existia numa trilha. Antes de
 propor uma nova, procure de onde ela sairia. Se não sair de lugar nenhum, provavelmente não deve
 existir.
 
@@ -125,7 +129,7 @@ estado salvo em `localStorage` sob o prefixo `gt-`.
 
 A página segue a ordem do trabalho, em quatro `<div class="fase">`: antes do projeto (briefing,
 preço, proposta), identidade (paleta, contraste, tipografia, escala, design system), montar a página
-(cabeçalho, WhatsApp, UTM) e entregar (checklist, inventário). O painel `#projeto` no topo tem o
+(gerador de comando, cabeçalho, WhatsApp, UTM) e entregar (checklist, inventário). O painel `#projeto` no topo tem o
 nome do cliente — `gt-projeto` — espelhado nos campos de nome das quatro ferramentas que guardam
 por cliente, e mostra o estado de cada uma. Ferramenta nova entra numa fase e ganha uma função
 no objeto `ESTADO` do painel.
@@ -143,6 +147,12 @@ Paleta, Escala e Tipografia guardam o resultado já calculado (`gt-pl-tokens`, `
 `FAMILIAS` declara em `w` os pesos que existem no Google Fonts: pedir um peso que a família não
 tem faz o Google recusar o `<link>` inteiro.
 
+**Gerador de comando** fica em `gerador.js` (não em `ferramentas.js`) e guarda sob `gt-gerador-<tipo>`,
+sem passar por `guardar()`; a ligação com as outras ferramentas é o bloco 14 do `ferramentas.js`, que
+avisa `gt:mudou` quando o formulário do gerador muda. Tipo novo entra no objeto `TIPOS`, com `sobre`
+e `ref` apontando o tópico da trilha de onde saiu, e no mapa `FONTES` se puder puxar dado de outra
+ferramenta. O tópico `ia.html#t-ia-gerador` continua existindo como ponte para a ferramenta.
+
 **Figma:** o site não fala com a API do Figma e não deve falar — exigiria guardar token de acesso
 e mandar dado para fora do navegador (regra 5). A ponte é por formato: o Design system exporta
 tokens em JSON no padrão DTCG, que plugins de tokens do Figma importam.
@@ -159,7 +169,7 @@ node scripts/verificar.mjs
 
 Depois disso, confira também:
 
-- Os contadores em prosa (ex.: "as treze do dia a dia", "11 trilhas · 84 partes") espalhados pela
+- Os contadores em prosa (ex.: "as quatorze do dia a dia", "11 trilhas · 84 partes") espalhados pela
   home, pelo menu e pelas metas — eles não são gerados, e ficam velhos calados.
 - Uma entrada nova em `patch-notes.html`, no topo, dizendo o que mudou — **em toda atualização**,
   por menor que seja. É pedido explícito do Gustavo, não opcional.

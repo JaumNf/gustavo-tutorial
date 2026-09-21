@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Ferramentas — Gustavo Tutorial</title>
-<meta name="description" content="Treze ferramentas ligadas entre si, na ordem do trabalho: briefing, preço e proposta; paleta, contraste, tipografia, escala e design system; cabeçalho, WhatsApp e UTM; checklist e inventário de acessos.">
+<meta name="description" content="Quatorze ferramentas ligadas entre si, na ordem do trabalho: briefing, preço e proposta; paleta, contraste, tipografia, escala e design system; gerador de comando para IA, cabeçalho, WhatsApp e UTM; checklist e inventário de acessos.">
 <meta name="color-scheme" content="light dark">
 <meta property="og:title" content="Ferramentas — Gustavo Tutorial">
-<meta property="og:description" content="Treze ferramentas para usar durante o trabalho.">
+<meta property="og:description" content="Quatorze ferramentas para usar durante o trabalho.">
 <meta property="og:type" content="website">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -57,18 +57,18 @@
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Método</p>
 <a href="fluxo.html"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
-<a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
+<a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e revisão</span></a>
 <a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
 </div>
 <div class="navmenu__grupo navmenu__grupo--trabalhar">
 <p class="navmenu__rotulo">Ferramentas</p>
-<a href="ferramentas.html" class="is-atual"><strong>Ferramentas</strong><span>As treze do dia a dia</span></a>
+<a href="ferramentas.html" class="is-atual"><strong>Ferramentas</strong><span>As quatorze do dia a dia</span></a>
 <a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
 <a href="ferramentas.html#f-proposta"><strong>Proposta que fecha</strong><span>Os oito pontos</span></a>
 <a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
 <a href="ferramentas.html#f-zap"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
 <a href="ferramentas.html#f-utm"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
-<a href="ia.html#t-ia-gerador"><strong>Gerador de comando</strong><span>Brief para a IA</span></a>
+<a href="ferramentas.html#f-gerador"><strong>Gerador de comando</strong><span>Onze tipos de pedido</span></a>
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Patch notes</p>
@@ -105,6 +105,7 @@
 </div>
 <div class="indice__grupo">
 <p class="indice__rotulo">3 · Montar a página</p>
+<a href="#f-gerador">Gerador de comando</a>
 <a href="#f-head">Cabeçalho da página</a>
 <a href="#f-zap">Link de WhatsApp</a>
 <a href="#f-utm">Gerador de UTM</a>
@@ -114,10 +115,6 @@
 <a href="#f-checklist">Checklist de entrega</a>
 <a href="#f-inventario">Inventário de acessos</a>
 </div>
-<div class="indice__grupo">
-<p class="indice__rotulo">Em outra página</p>
-<a href="ia.html#t-ia-gerador">Gerador de comando</a>
-</div>
 </div>
 </nav>
 
@@ -125,7 +122,7 @@
 <section class="abertura">
 <h1>Ferramentas</h1>
 <p class="abertura__lead">O resto do site é para estudar. Esta página é para usar enquanto você trabalha, na ordem em que o trabalho acontece: antes do projeto, identidade, montar a página, entregar. Tudo roda no seu navegador, nada é enviado para lugar nenhum, e o que você preenche fica salvo neste aparelho até você limpar.</p>
-<div class="legenda"><span>13 ferramentas</span><span>4 fases</span><span>salvas neste navegador</span></div>
+<div class="legenda"><span>14 ferramentas</span><span>4 fases</span><span>salvas neste navegador</span></div>
 <div class="ctas">
 <a class="cta cta--cheio" href="#f-briefing">Começar pelo briefing<span class="cta__seta" aria-hidden="true">&rsaquo;</span></a>
 <a class="cta cta--vazio" href="estudar.html">Voltar ao estudo<span class="cta__seta" aria-hidden="true">&rsaquo;</span></a>
@@ -139,7 +136,7 @@
 <input type="text" id="pj-nome" class="ferr__campo" placeholder="nome do cliente" list="pj-lista" autocomplete="off">
 <datalist id="pj-lista"></datalist>
 </div>
-<p class="projeto__nota">Um nome só para as treze. Briefing, proposta, checklist e inventário ficam guardados por cliente — troque o nome e cada uma abre o que já tinha daquele projeto. O que uma ferramenta já sabe aparece na seguinte, com um botão para usar.</p>
+<p class="projeto__nota">Um nome só para as quatorze. Briefing, proposta, checklist e inventário ficam guardados por cliente — troque o nome e cada uma abre o que já tinha daquele projeto. O que uma ferramenta já sabe aparece na seguinte, com um botão para usar.</p>
 </div>
 <ol class="fluxo">
 <li class="fluxo__fase">
@@ -163,6 +160,7 @@
 <li class="fluxo__fase">
 <a class="fluxo__nome" href="#fase-3"><span>3</span>Montar a página</a>
 <ul>
+<li><a href="#f-gerador"><span class="fluxo__ferr">Gerador de comando</span><span class="fluxo__estado" data-estado="f-gerador">—</span></a></li>
 <li><a href="#f-head"><span class="fluxo__ferr">Cabeçalho da página</span><span class="fluxo__estado" data-estado="f-head">—</span></a></li>
 <li><a href="#f-zap"><span class="fluxo__ferr">Link de WhatsApp</span><span class="fluxo__estado" data-estado="f-zap">—</span></a></li>
 <li><a href="#f-utm"><span class="fluxo__ferr">Gerador de UTM</span><span class="fluxo__estado" data-estado="f-utm">—</span></a></li>
@@ -507,8 +505,58 @@
 <div class="fase" id="fase-3">
 <span class="fase__num">FASE 3</span>
 <h2 class="fase__nome">Montar a página</h2>
-<p class="fase__resumo">O que vai no HTML: o <code>&lt;head&gt;</code>, o botão de WhatsApp e os links de divulgação. Telefone, endereço, cor e fontes passam de uma para a outra.</p>
+<p class="fase__resumo">O pedido para a IA, o <code>&lt;head&gt;</code>, o botão de WhatsApp e os links de divulgação. Nome, telefone, endereço, cor e fontes passam de uma para a outra.</p>
 </div>
+
+<section class="parte" id="f-gerador">
+<div class="parte__cabeca"><span class="parte__num">FERRAMENTA</span><h2>Gerador de comando</h2></div>
+<p class="parte__resumo">O pedido para a IA montado a partir das decisões, com o que está fraco apontado antes de você mandar. Onze tipos de comando, do brief da página à correção de um defeito — cada um saído de um tópico da trilha, e todos puxando o que as outras ferramentas já sabem.</p>
+<div class="ferr" id="fer-gerador">
+
+<div class="ger__tipos" id="ger-tipos" role="group" aria-label="Tipo de comando">
+<div class="ger__grupo"><span class="ger__grupo-rot">Começar</span>
+<button class="ger__tipo" type="button" data-tipo="lp" aria-pressed="true">Landing page</button>
+<button class="ger__tipo" type="button" data-tipo="direcoes" aria-pressed="false">Direções</button>
+<button class="ger__tipo" type="button" data-tipo="contexto" aria-pressed="false">Arquivo de contexto</button>
+<button class="ger__tipo" type="button" data-tipo="recomecar" aria-pressed="false">Recomeçar conversa</button>
+</div>
+<div class="ger__grupo"><span class="ger__grupo-rot">Construir</span>
+<button class="ger__tipo" type="button" data-tipo="secao" aria-pressed="false">Nova seção</button>
+<button class="ger__tipo" type="button" data-tipo="texto" aria-pressed="false">Texto da seção</button>
+<button class="ger__tipo" type="button" data-tipo="animacao" aria-pressed="false">Animação</button>
+</div>
+<div class="ger__grupo"><span class="ger__grupo-rot">Ajustar</span>
+<button class="ger__tipo" type="button" data-tipo="feedback" aria-pressed="false">Feedback</button>
+<button class="ger__tipo" type="button" data-tipo="correcao" aria-pressed="false">Correção pontual</button>
+</div>
+<div class="ger__grupo"><span class="ger__grupo-rot">Revisar</span>
+<button class="ger__tipo" type="button" data-tipo="critica" aria-pressed="false">Autocrítica</button>
+<button class="ger__tipo" type="button" data-tipo="revisao" aria-pressed="false">Revisão final</button>
+</div>
+</div>
+<p class="ger__sobre" id="ger-sobre"></p>
+
+<div class="ger">
+<div class="ger__form" id="ger-form"></div>
+
+<div class="ger__lado">
+<div class="ger__saida-caixa">
+<div class="ger__saida-barra">
+<span class="ger__saida-rot">Comando</span>
+<button class="copiar" id="ger-copiar" type="button">copiar</button>
+</div>
+<pre class="ger__saida"><code id="ger-saida"></code></pre>
+</div>
+
+<div class="ger__diag" id="ger-diag"></div>
+
+<button class="ger__limpar" id="ger-limpar" type="button">Limpar campos</button>
+</div>
+</div>
+
+<div class="nota"><strong>Nada do que você digita sai do navegador</strong> — o gerador monta o texto aqui, e quem manda para a IA é você. Os campos de cada tipo ficam salvos neste aparelho. O raciocínio por trás de cada campo está na trilha <a href="ia.html">Trabalhando com IA</a>.</div>
+</div>
+</section>
 
 <section class="parte" id="f-head">
 <div class="parte__cabeca"><span class="parte__num">FERRAMENTA</span><h2>Cabeçalho da página</h2></div>
@@ -653,7 +701,7 @@
 
 <nav class="passo" aria-label="Navegar">
 <a class="passo__item passo__item--ant" href="index.html"><span>Voltar ao</span><strong>Início</strong></a>
-<a class="passo__item passo__item--prox" href="ia.html#t-ia-gerador"><span>Outra ferramenta</span><strong>Gerador de comando</strong></a>
+<a class="passo__item passo__item--prox" href="ia.html"><span>O raciocínio do gerador</span><strong>Trabalhando com IA</strong></a>
 </nav>
 </main>
 <aside class="nesta" id="nesta" aria-label="Nesta página"></aside>
@@ -662,6 +710,7 @@
 <script src="app.js"></script>
 <script src="ref.js" defer></script>
 <script src="busca.js" defer></script>
+<script src="gerador.js" defer></script>
 <script src="ferramentas.js" defer></script>
 </body>
 </html>

@@ -1858,7 +1858,108 @@
     montar();
   })();
 
-  /* ========== PROJETO · um nome para as treze ==========
+  /* ========== 14 · GERADOR DE COMANDO — o que as outras já sabem ==========
+     O gerador mora em gerador.js e guarda por conta própria. Daqui só sai a
+     ligação: campos vazios do tipo aberto podem vir do projeto, do briefing,
+     da paleta, da tipografia e da escala — com botão, nunca sozinhos. */
+  (function () {
+    var caixa = $('#fer-gerador'), formGer = $('#ger-form');
+    if (!caixa || !formGer) return;
+
+    function tipoAberto() {
+      var b = caixa.querySelector('.ger__tipo[aria-pressed="true"]');
+      return b ? b.getAttribute('data-tipo') : '';
+    }
+    function txt(k) { return String(ler(k, '') || '').trim(); }
+    function briefing(i) { var r = ler('br-' + chaveProjeto(), {}); return String((r && r[i]) || '').trim(); }
+    function paletaTexto() {
+      var p = ler('pl-tokens', null);
+      if (!p || !p.destaque) return '';
+      return p.destaque + ' destaque — botão, link, ícone ativo; uma cor só\n' +
+             p.fundo + ' fundo — nunca branco puro\n' +
+             p.texto + ' texto — nunca preto puro\n' +
+             p.textoFraco + ' texto fraco — legenda e apoio';
+    }
+    function tipografiaTexto() {
+      var t = txt('fo-titulo'), c = txt('fo-corpo');
+      if (!t || !c) return '';
+      var pt = ler('fo-pt', []), pc = ler('fo-pc', []);
+      return t + (pt.length ? ' ' + pt[pt.length - 1] : '') + ' no título, ' + c + (pc.length ? ' ' + pc[0] : '') + ' no corpo';
+    }
+    function espacoTexto() {
+      var e = ler('es-tokens', null);
+      return e && Array.isArray(e.e) ? e.e.join(' / ') : '';
+    }
+    /* cada tipo: campo → [de onde, função que devolve o valor] */
+    var FONTES = {
+      lp: {
+        cliente: ['Projeto', function () { return nomeProjeto() || txt('hd-nome'); }],
+        oficio: ['Cabeçalho', function () { return txt('hd-oque'); }],
+        cidade: ['Cabeçalho', function () { return txt('hd-cidade'); }],
+        publico: ['Briefing', function () { return briefing(0); }],
+        origem: ['Briefing', function () { return briefing(1); }],
+        diferencial: ['Briefing', function () { return briefing(3); }],
+        fotos: ['Briefing', function () { return briefing(6); }],
+        paleta: ['Paleta', paletaTexto],
+        tipografia: ['Tipografia', tipografiaTexto]
+      },
+      contexto: {
+        nome: ['Projeto', function () { return nomeProjeto() || txt('hd-nome'); }],
+        oque: ['Briefing', function () {
+          var o = briefing(0), n = nomeProjeto(), q = txt('hd-oque'), c = txt('hd-cidade');
+          return o || (n && q ? n + ' — ' + q + (c ? ', ' + c : '') : '');
+        }],
+        sistema: ['Paleta', paletaTexto],
+        tipografia: ['Tipografia', tipografiaTexto],
+        espaco: ['Escala', espacoTexto]
+      },
+      recomecar: {
+        projeto: ['Projeto', function () {
+          var n = nomeProjeto(), q = txt('hd-oque'), c = txt('hd-cidade');
+          return n ? n + (q ? ', ' + q : '') + (c ? ', ' + c : '') : '';
+        }],
+        travado: ['Paleta e Tipografia', function () {
+          var p = ler('pl-tokens', null), t = tipografiaTexto();
+          return [p && p.destaque ? 'paleta com destaque ' + p.destaque : '', t ? 'fontes: ' + t : ''].filter(Boolean).join('\n');
+        }]
+      },
+      texto: {
+        objecao: ['Briefing', function () { return briefing(4); }]
+      }
+    };
+
+    function oferta() {
+      var t = tipoAberto(), mapa = FONTES[t];
+      if (!mapa) return null;
+      var itens = [];
+      Object.keys(mapa).forEach(function (campo) {
+        var el = $('#ger-' + t + '-' + campo);
+        if (!el || el.value.trim()) return;
+        var v = '';
+        try { v = mapa[campo][1](); } catch (e) {}
+        if (v) itens.push({ el: el, valor: v, de: mapa[campo][0], rotulo: el.previousElementSibling ? el.previousElementSibling.firstChild.textContent : campo });
+      });
+      return itens.length ? itens : null;
+    }
+    ligar(formGer, 'as outras ferramentas', '#projeto', function () {
+      var itens = oferta();
+      if (!itens) return null;
+      var fontes = itens.map(function (i) { return i.de; }).filter(function (d, i, a) { return a.indexOf(d) === i; });
+      return {
+        texto: itens.length + (itens.length === 1 ? ' campo vazio pode vir de ' : ' campos vazios podem vir de ') + fontes.join(', ') + ': ' +
+               itens.map(function (i) { return i.rotulo; }).join(', '),
+        aplicar: function () { itens.forEach(function (i) { preencher(i.el, i.valor); }); }
+      };
+    }, 'trazer');
+
+    /* o gerador não usa guardar(): avisa por aqui para a ligação e o painel acompanharem */
+    formGer.addEventListener('input', avisar);
+    caixa.querySelector('#ger-tipos').addEventListener('click', avisar);
+    var limpar = $('#ger-limpar');
+    if (limpar) limpar.addEventListener('click', avisar);
+  })();
+
+  /* ========== PROJETO · um nome para as quatorze ==========
      Briefing, proposta, checklist e inventário guardam por cliente, cada um
      com o próprio campo de nome. Aqui os cinco campos viram um só: mudar
      qualquer um muda todos, e cada ferramenta abre o que tinha daquele cliente. */
@@ -1963,6 +2064,14 @@
         var css = String(ler('ds-css', '') || '');
         if (css.trim()) return ['inventário: ' + Object.keys(inventariar(css).cores).length + ' cores', true];
         return [ler('ds-escuro', true) ? 'claro + escuro' : 'só claro', true];
+      },
+      'f-gerador': function () {
+        var TIPOS = ['lp', 'direcoes', 'contexto', 'recomecar', 'secao', 'texto', 'animacao', 'feedback', 'correcao', 'critica', 'revisao'];
+        var n = TIPOS.filter(function (t) {
+          var v = ler('gerador-' + t, {});
+          return v && Object.keys(v).some(function (k) { return String(v[k] || '').trim(); });
+        }).length;
+        return [n ? n + (n === 1 ? ' tipo em uso' : ' tipos em uso') : 'nenhum', n > 0];
       },
       'f-head': function () {
         var c = preenchidos({ a: ler('hd-nome', ''), b: ler('hd-desc', ''), c: ler('hd-url', ''), d: ler('hd-img', '') },

@@ -140,8 +140,10 @@
   });
 })();
 
-/* cabecalho flutuante: some ao descer, reaparece ao subir.
-   O hub nao tem cabecalho — a guarda cobre isso. */
+/* cabecalho flutuante: some ao descer, reaparece so depois de ~1s subindo.
+   Uma subida curta — voltar um paragrafo para reler — nao traz o topo de
+   volta; so a intencao clara de subir traz. O hub nao tem cabecalho — a
+   guarda cobre isso. */
 (function () {
   var topo = document.querySelector('.topo');
   if (!topo) return;
@@ -152,6 +154,9 @@
   var ate = 0, tempo = null;   /* trava temporaria durante pulo de ancora */
   var LIMIAR = 6;              /* ignora tremor de trackpad */
   var SOLTO = 120;             /* acima disto o topo aparece sempre */
+  var SUBIDA = 1000;           /* quanto tempo subindo ate o topo voltar */
+  var PAUSA = 450;             /* intervalo maior que isto entre dois giros da roda recomeca a conta */
+  var inicioSubida = 0, ultimaSubida = 0;
 
   function mostrar() { topo.classList.remove('topo--escondido'); }
   function esconder() { topo.classList.add('topo--escondido'); }
@@ -170,8 +175,16 @@
     if (y <= SOLTO) { ultimo = y; mostrar(); return; }
 
     var d = y - ultimo;
-    if (d > LIMIAR) { esconder(); ultimo = y; }
-    else if (d < -LIMIAR) { mostrar(); ultimo = y; }
+    if (d > LIMIAR) { esconder(); ultimo = y; inicioSubida = 0; }
+    else if (d < -LIMIAR) {
+      var agora = Date.now();
+      /* a roda do mouse gira aos trancos: entre trancos da mesma subida o
+         intervalo e curto; uma pausa maior quer dizer que a subida acabou */
+      if (!inicioSubida || agora - ultimaSubida > PAUSA) inicioSubida = agora;
+      ultimaSubida = agora;
+      ultimo = y;
+      if (agora - inicioSubida >= SUBIDA) mostrar();
+    }
   }
 
   window.addEventListener('scroll', function () {
@@ -198,6 +211,7 @@
      reapareceria bem em cima dele. Esconde e congela ate a rolagem terminar. */
   function travarPulo() {
     esconder();
+    inicioSubida = 0;
     ate = Date.now() + 900;
     clearTimeout(tempo);
     tempo = setTimeout(function () {
