@@ -2203,19 +2203,137 @@ body[data-modo="trabalho"] { --accent: #A8261C; --accent-soft: #FAE7E4; }
   }
   .fase__resumo { margin: 0; font-size: 17px; color: var(--ink-soft); max-width: 62ch; }
   .fase + .parte { padding-top: 40px; }
-  .fase__saida {
-    margin-top: 48px; padding: 20px 22px;
-    border: 1px dashed var(--accent); border-radius: 2px; background: var(--accent-soft);
-    scroll-margin-top: 78px;
+  /* ===== tipografia: rótulo de grupo, faixa, medidas e a escala nas fontes ===== */
+  .ferr__rotulo {
+    margin: 0 0 5px;
+    font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--ink);
   }
-  .fase__saida .ferr__bloco { margin-bottom: 0; }
+  .ferr__rotulo small { font-weight: 400; color: var(--muted); font-size: 12px; }
+  .ferr__peso small { color: var(--muted); font-size: 10.5px; }
+  .ferr__peso.is-indisponivel { opacity: .4; cursor: not-allowed; text-decoration: line-through; }
+  .ferr__opcoes { margin: 2px 0 18px; }
+  .ferr__combo em { font-family: var(--font-mono); font-style: normal; font-size: 10.5px; color: var(--accent); letter-spacing: .02em; }
+  .ferr__faixa { display: flex; align-items: center; gap: 12px; min-height: 40px; }
+  .ferr__faixa input[type="range"] { flex: 1; accent-color: var(--accent); }
+  .ferr__faixa output { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--ink); min-width: 4.5ch; }
+  .ferr__medidas { margin: 12px 0 18px; }
+  .ferr__medidas .ferr__dica { margin-bottom: 4px; }
+  .ferr__escada { border-top: 1px solid var(--line-soft); padding-top: 12px; margin-bottom: 18px; }
+  .ferr__degrau {
+    display: grid; grid-template-columns: 110px minmax(0, 1fr); align-items: baseline; gap: 12px;
+    padding: 8px 0; border-bottom: 1px solid var(--line-soft);
+  }
+  .ferr__degrau-n { font-family: var(--font-mono); font-size: 11px; color: var(--muted); white-space: nowrap; }
+  .ferr__degrau-t { color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ferr__campo--codigo { font-family: var(--font-mono); font-size: 12.5px; line-height: 1.5; }
+
+  /* ===== design system: inventário ===== */
+  .ds-inventario { display: grid; gap: 14px; margin: 6px 0 8px; }
+  .ds-grupo__t {
+    margin: 0 0 7px; font-family: var(--font-display); font-size: 13.5px; font-weight: 700; color: var(--ink);
+  }
+  .ds-grupo__t span { font-family: var(--font-mono); font-size: 11px; font-weight: 400; color: var(--muted); margin-left: 6px; }
+  .ds-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .ds-chip {
+    display: inline-flex; align-items: center; gap: 6px; max-width: 100%;
+    font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-soft);
+    border: 1px solid var(--line); border-radius: 3px; padding: 4px 8px; background: var(--surface);
+    overflow-wrap: anywhere;
+  }
+  .ds-chip b { color: var(--muted); font-weight: 400; }
+  .ds-chip.is-fora { border-color: var(--html); color: var(--html); background: var(--html-bg); }
+  .ds-chip--cor i {
+    flex: none; width: 14px; height: 14px; border-radius: 2px;
+    box-shadow: inset 0 0 0 1px rgb(0 0 0 / .15);
+  }
+  .ds-quase {
+    display: inline-flex; flex-wrap: wrap; gap: 3px; padding: 3px;
+    border: 1px dashed var(--html); border-radius: 4px;
+  }
+  .ds-quase .ds-chip { border-color: transparent; }
+
+  /* ===== design system: de onde vêm os valores ===== */
+  .ds-fontes { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 1px; background: var(--line-soft); border: 1px solid var(--line); }
+  .ds-fontes li {
+    display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 12px; align-items: baseline;
+    padding: 9px 12px; background: var(--surface); font-size: 13.5px; color: var(--ink-soft);
+  }
+  .ds-fontes a { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--accent); text-decoration: none; }
+  .ds-fontes a::before { content: "↳ "; font-weight: 400; color: var(--muted); }
+  .ds-fontes a:hover { text-decoration: underline; }
+
+  /* ===== design system: amostra viva — tudo lido das variáveis que o JS põe no container ===== */
+  .ds-barra { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-bottom: 12px; }
+  .ds-barra .ferr__vereditos { margin: 0; }
+  .ds-tema { display: inline-flex; gap: 4px; }
+  .ds-tema .acao:disabled { opacity: .4; cursor: not-allowed; }
+  .ds-amostra {
+    padding: var(--e5, 24px); margin-bottom: 20px;
+    border: 1px solid var(--line); border-radius: 2px;
+    background: var(--cor-fundo); color: var(--cor-texto);
+    font-family: var(--fonte-corpo); font-weight: var(--peso-corpo);
+    font-size: var(--t-corpo); line-height: var(--alt-corpo);
+  }
+  .ds-amostra p { margin: 0 0 var(--e3); }
+  .dsx-olho {
+    font-size: var(--t-peq); font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--cor-destaque-texto);
+  }
+  .dsx-titulo {
+    font-family: var(--fonte-titulo); font-weight: var(--peso-titulo);
+    font-size: var(--t-titulo); line-height: 1.1; letter-spacing: -.01em; text-wrap: balance;
+  }
+  .dsx-texto { max-width: 60ch; }
+  .dsx-link { color: var(--cor-destaque-texto); text-underline-offset: .15em; }
+  .dsx-fraco { color: var(--cor-texto-fraco); }
+  .dsx-linha { display: flex; flex-wrap: wrap; gap: var(--e2); margin: var(--e4) 0; }
+  .dsx-botao {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 48px; padding: var(--e3) var(--e5);
+    border: 0; border-radius: var(--raio-botao);
+    background: var(--cor-destaque); color: var(--cor-sobre-destaque);
+    font: inherit; font-weight: 600; cursor: pointer;
+    transition: background var(--dur) var(--curva), transform var(--dur) var(--curva);
+  }
+  .dsx-botao:hover { background: var(--cor-destaque-hover); }
+  .dsx-botao:focus-visible, .dsx-botao.is-foco { outline: 2px solid var(--cor-foco); outline-offset: 3px; }
+  .dsx-botao:active { transform: translateY(1px); }
+  .dsx-botao:disabled { opacity: .45; cursor: not-allowed; }
+  .dsx-botao--secundario { background: transparent; color: var(--cor-destaque-texto); box-shadow: inset 0 0 0 1.5px currentColor; }
+  .dsx-botao--secundario:hover { background: var(--cor-superficie); }
+  .dsx-grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--e3); margin-bottom: var(--e4); }
+  .dsx-campo { display: grid; gap: var(--e1); align-content: start; }
+  .dsx-campo label { font-size: var(--t-peq); font-weight: 600; }
+  .dsx-campo input {
+    min-height: 48px; padding: 0 var(--e3); width: 100%; box-sizing: border-box;
+    border: 1px solid var(--cor-campo-borda); border-radius: var(--raio);
+    background: var(--cor-superficie); color: var(--cor-texto); font: inherit;
+  }
+  .dsx-campo input:focus-visible { outline: 2px solid var(--cor-foco); outline-offset: 1px; }
+  .dsx-campo.is-erro input { border-color: var(--cor-erro); }
+  .dsx-campo.is-erro small { color: var(--cor-erro); font-size: var(--t-peq); }
+  .dsx-card {
+    padding: var(--e5); max-width: 340px;
+    border: 1px solid var(--cor-linha); border-radius: var(--raio);
+    background: var(--cor-superficie); box-shadow: var(--sombra-1);
+  }
+  .dsx-card .dsx-card-t { font-family: var(--fonte-titulo); font-weight: var(--peso-titulo); font-size: calc(var(--t-corpo) * 1.25); margin: var(--e2) 0 var(--e1); }
+  .dsx-card p:last-child { margin-bottom: 0; }
+  .dsx-tag {
+    display: inline-block; padding: 2px var(--e2); border-radius: 999px;
+    font-size: var(--t-peq); color: var(--cor-destaque-texto); box-shadow: inset 0 0 0 1px var(--cor-linha);
+  }
+  @media (prefers-reduced-motion: reduce) { .dsx-botao { transition: none; } }
+  @media (max-width: 640px) {
+    .ferr__degrau, .ds-fontes li { grid-template-columns: 1fr; gap: 2px; }
+    .ds-amostra { padding: 16px; }
+  }
 
   @media (max-width: 640px) {
     .projeto { padding: 18px 16px 20px; }
     .projeto__topo { grid-template-columns: 1fr; }
     .fluxo { grid-template-columns: 1fr; }
     .fase { margin-top: 72px; }
-    .fase__saida { padding: 16px 14px; }
     .ferr__elo .acao { margin-left: 0; }
   }
 

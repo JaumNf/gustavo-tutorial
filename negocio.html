@@ -67,7 +67,7 @@
 </div>
 <div class="navmenu__grupo navmenu__grupo--trabalhar">
 <p class="navmenu__rotulo">Ferramentas</p>
-<a href="ferramentas.html"><strong>Ferramentas</strong><span>As doze do dia a dia</span></a>
+<a href="ferramentas.html"><strong>Ferramentas</strong><span>As treze do dia a dia</span></a>
 <a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
 <a href="ferramentas.html#f-proposta"><strong>Proposta que fecha</strong><span>Os oito pontos</span></a>
 <a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
@@ -106,10 +106,17 @@
 <li><a href="#t-ds-hierarquia">Hierarquia: o olho precisa de uma ordem</a></li>
 <li><a href="#t-ds-espaco">Espaço — a escala de 8 e o ritmo</a></li>
 <li><a href="#t-ds-tipografia">Tipografia: tamanho, medida e altura</a></li>
+<li><a href="#t-tipo-anatomia">Anatomia do tipo — e o nome de cada coisa no CSS</a></li>
+<li><a href="#t-tipo-classes">Classificação: cinco famílias, cinco trabalhos</a></li>
+<li><a href="#t-tipo-acabamento">Acabamento: alinhamento, órfãs, caixa alta e números</a></li>
 <li><a href="#t-ds-cor">Cor: a paleta que funciona</a></li>
 <li><a href="#t-ds-caro">O que faz parecer caro — e o que faz parecer barato</a></li>
 <li><a href="#t-ds-referencia">Usar referência sem copiar</a></li>
 <li><a href="#t-ds-erros">Os cinco erros que mais aparecem</a></li>
+<li><a href="#t-ds-auditoria">Antes do sistema, o inventário</a></li>
+<li><a href="#t-ds-camadas">Tokens em três camadas: primitivo, semântico, componente</a></li>
+<li><a href="#t-ds-atomico">Do átomo à página — e os estados de cada peça</a></li>
+<li><a href="#t-ds-documentar">Design system é produto, não projeto</a></li>
 </ol>
 <a class="sumario__parte" href="#s3">3 · LGPD como parte da entrega</a>
 <ol>
@@ -146,6 +153,15 @@
 <li><a href="#t-cm-desconto">Quando pedem desconto</a></li>
 <li><a href="#t-cm-sinais">Sinais de cliente que vai dar problema</a></li>
 </ol>
+<a class="sumario__parte" href="#s7">7 · Laboratório visual</a>
+<ol>
+<li><a href="#t-vn-hierarquia">Hierarquia: para onde o olho vai primeiro</a></li>
+<li><a href="#t-vn-espaco">Espaço: escala contra achismo</a></li>
+<li><a href="#t-vn-medida">Medida de linha: onde a leitura quebra</a></li>
+<li><a href="#t-vn-cor">Cor na proporção certa</a></li>
+<li><a href="#t-vn-caro">O mesmo card, caro e barato</a></li>
+<li><a href="#t-vn-centro">Quando centralizar atrapalha</a></li>
+</ol>
 </div>
 </nav>
 <main class="leitura" id="conteudo" tabindex="-1">
@@ -155,7 +171,7 @@
 <div class="legenda">
 <span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
 <span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
-<span>7 partes · 42 tópicos</span>
+<span>7 partes · 49 tópicos</span>
 </div>
 </section>
 <p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
@@ -438,6 +454,80 @@ small  { font-size: 14px; }                             /* nada abaixo de 14 */<
 </div>
 </article>
 
+<article class="topico" id="t-tipo-anatomia" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Anatomia do tipo — e o nome de cada coisa no CSS</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>O vocabulário do designer tem correspondência exata no CSS. Saber qual é qual evita que "aumenta o espaço entre as letras" vire mudança na entrelinha.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Termo</th><th>O que é</th><th>No CSS</th></tr></thead>
+<tbody>
+<tr><td>Altura-x</td><td>a altura das minúsculas sem haste — x, a, e, o</td><td>não se define; se compensa com <code>font-size-adjust</code></td></tr>
+<tr><td>Ascendente e descendente</td><td>a haste que sobe (b, d, l) e a que desce (g, p, j)</td><td>pedem espaço: <code>line-height</code> baixo demais corta a descendente</td></tr>
+<tr><td>Linha de base</td><td>a linha onde as letras se apoiam</td><td><code>align-items: baseline</code> alinha textos de tamanhos diferentes</td></tr>
+<tr><td>Kerning</td><td>o ajuste entre um par específico de letras — AV, To, Wa</td><td><code>font-kerning: normal</code>; vem desenhado na fonte, não se mexe à mão</td></tr>
+<tr><td>Tracking</td><td>o espaço igual entre todas as letras de um trecho</td><td><code>letter-spacing</code></td></tr>
+<tr><td>Entrelinha (leading)</td><td>a distância de uma linha para a outra</td><td><code>line-height</code></td></tr>
+</tbody></table></div>
+<p><strong>A altura-x é o que decide o tamanho aparente.</strong> Duas fontes com o mesmo <code>font-size</code> podem parecer de tamanhos diferentes, porque o que o olho mede é a minúscula. Fonte de altura-x grande lê melhor em tamanho pequeno; ao combinar duas famílias, alturas-x parecidas fazem título e corpo conversarem.</p>
+<p>O uso prático no código é o <code>font-size-adjust</code>: ele faz a fonte de reserva ocupar o mesmo tamanho aparente da fonte da web enquanto ela carrega — o texto não "pula" quando a fonte chega.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size-adjust: 0.55;   /* exemplo: a altura-x da SUA fonte — a ferramenta de Tipografia mede */
+}
+.rotulo {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;   /* caixa alta pede tracking positivo */
+}
+h1 { letter-spacing: -0.02em; }   /* título grande pede o contrário */</code></pre></div>
+<div class="nota"><strong>Sobre a entrelinha de 1,125 a 1,2:</strong> é o número que guias de design costumam dar, e vale para título e texto curto. No corpo de texto da web, a referência é outra: o critério 1.4.12 do WCAG exige que a página continue funcionando quando o próprio usuário aumenta a entrelinha para 1,5. Corpo nasce em 1,5 ou mais; título fica perto de 1,1.</div>
+</div>
+</article>
+
+<article class="topico" id="t-tipo-classes" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Classificação: cinco famílias, cinco trabalhos</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>A classe da fonte diz para que ela foi desenhada. Usar fora do trabalho dela é o que faz a página parecer improvisada.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Classe</th><th>Exemplos</th><th>Serve para</th><th>Não serve para</th></tr></thead>
+<tbody>
+<tr><td>Serifada</td><td>Lora, Source Serif 4, Libre Baskerville</td><td>texto longo, marca tradicional — advocacia, casamento, gastronomia</td><td>rótulo e botão muito pequenos</td></tr>
+<tr><td>Sem serifa</td><td>Inter, Manrope, Figtree</td><td>interface, corpo de site de serviço, tudo que é pequeno</td><td>marca que pede tradição, sozinha</td></tr>
+<tr><td>Manuscrita (script)</td><td>Caveat</td><td>uma palavra, assinatura, um detalhe</td><td>parágrafo, botão e qualquer coisa em caixa alta</td></tr>
+<tr><td>Monoespaçada</td><td>JetBrains Mono, IBM Plex Mono</td><td>código, número que precisa alinhar, rótulo técnico</td><td>corpo de texto</td></tr>
+<tr><td>Display</td><td>Bebas Neue, DM Serif Display</td><td>título grande, uma linha</td><td>tamanho de corpo — foi desenhada para ser vista de longe</td></tr>
+</tbody></table></div>
+<p><strong>Pesos têm nome e número.</strong> 100 Thin, 200 Extra Light, 300 Light, 400 Regular, 500 Medium, 600 Semibold, 700 Bold, 800 Extra Bold, 900 Black. Nem toda família tem todos — e aí mora um erro comum: pedir <code>font-weight: 700</code> de uma fonte que você não baixou em 700 faz o navegador engordar o 400 na marra. É o negrito falso, borrado e largo demais.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>body {
+  font-synthesis-weight: none;   /* sem negrito falso: se o peso não foi baixado, aparece o erro */
+}</code></pre></div>
+<div class="nota"><strong>Como combinar duas famílias:</strong> por contraste de classe (serifada no título, sem serifa no corpo, ou o inverso) ou uma família só em dois pesos bem distantes. O que não funciona é juntar duas parecidas — duas sem serifa geométricas lado a lado parecem erro, não escolha.</div>
+</div>
+</article>
+
+<article class="topico" id="t-tipo-acabamento" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Acabamento: alinhamento, órfãs, caixa alta e números</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Os detalhes que o designer nota e o cliente sente sem saber o nome. Quase todos custam uma linha de CSS.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>p        { text-align: left; text-wrap: pretty; }   /* evita a palavra sozinha na última linha */
+h1, h2   { text-wrap: balance; }                    /* linhas de tamanho parecido no título */
+.rotulo  { text-transform: uppercase; letter-spacing: .08em; }
+.sigla   { font-variant-caps: all-small-caps; letter-spacing: .04em; }  /* PIX, CNPJ, LGPD sem gritar */
+.preco   { font-variant-numeric: tabular-nums; }    /* todo algarismo com a mesma largura */
+.justificado { text-align: justify; hyphens: auto; } /* só com &lt;html lang="pt-BR"&gt; certo */</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Regra</th><th>Por quê</th></tr></thead>
+<tbody>
+<tr><td>Alinhe o corpo à esquerda</td><td>a margem irregular da direita é o que o olho usa para achar o começo da linha seguinte</td></tr>
+<tr><td>Justifique só com hifenização</td><td>sem <code>hyphens: auto</code> o navegador estica os espaços e abre "rios" brancos no meio do parágrafo — e a hifenização depende do <code>lang</code> do <code>&lt;html&gt;</code></td></tr>
+<tr><td>Centralize só até três linhas</td><td>em texto longo centralizado, cada linha começa num lugar diferente</td></tr>
+<tr><td>Caixa alta só em texto curto</td><td>em frase longa some o contorno das palavras, que é o que a gente de fato lê</td></tr>
+<tr><td>Versalete para sigla no meio do texto</td><td>mantém a sigla em maiúsculas sem ela saltar do parágrafo</td></tr>
+<tr><td>Números tabulares em preço e tabela</td><td>com algarismos proporcionais, R$ 1.111 fica mais estreito que R$ 8.888 e a coluna desalinha</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Órfã e viúva</strong> são a palavra sozinha no fim do parágrafo e a linha solta no topo da coluna seguinte. <code>text-wrap: pretty</code> resolve a primeira nos navegadores que já o suportam; nos outros, a linha simplesmente quebra como sempre quebrou. Melhoria sem risco.</div>
+</div>
+</article>
+
 <article class="topico" id="t-ds-cor" data-marca="novo">
 <div class="topico__cabeca"><h3>Cor: a paleta que funciona</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
 <div class="topico__corpo">
@@ -496,6 +586,107 @@ small  { font-size: 14px; }                             /* nada abaixo de 14 */<
 <p><strong>3. Botão que não parece botão.</strong> Contorno fino, cor clara, sem preenchimento — o visitante não reconhece como clicável. O CTA principal é sólido, com contraste alto e área de toque de pelo menos 44px de altura.</p>
 <p><strong>4. Seções todas iguais.</strong> Oito blocos com o mesmo fundo, o mesmo espaçamento e o mesmo formato viram uma parede. Alterne: fundo neutro, fundo de superfície, uma seção com foto larga. A variação dá ritmo e marca o avanço da leitura.</p>
 <p><strong>5. Nenhum ponto de descanso.</strong> Informação densa do começo ao fim cansa. Uma frase grande sozinha no meio da página, com muito espaço em volta, funciona como respiro — e é onde o olho pousa quando a pessoa está rolando rápido.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ds-auditoria" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Antes do sistema, o inventário</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>A pergunta que convence qualquer um — cliente ou você mesmo — de que precisa de um design system: <strong>quantos cinzas diferentes existem nesta página? Quantos tamanhos de botão?</strong> Contar o que já existe antes de decidir é o inventário de interface, e é o primeiro passo de todo sistema. O resultado quase sempre assusta.</p>
+<ol>
+<li>Junte todo o CSS do site — o seu, o do site antigo do cliente ou o do concorrente.</li>
+<li>Conte os valores distintos de cor, tamanho de fonte, espaçamento, raio e sombra.</li>
+<li>Agrupe os quase iguais: <code>#333</code> e <code>#343434</code> são o mesmo cinza escolhido duas vezes.</li>
+<li>Escolha um representante de cada grupo. Essa lista curta já é a primeira camada de tokens.</li>
+</ol>
+<p>No Chrome, o painel <strong>CSS Overview</strong> do DevTools (em Mais ferramentas) faz uma contagem parecida na página aberta. Para o CSS que você tem em mãos, a ferramenta <a href="ferramentas.html#f-sistema">Design system</a> conta, mostra quantas vezes cada valor aparece e marca os parecidos e o que está fora da escala.</p>
+<div class="nota"><strong>Sistema não é falta de criatividade.</strong> É criar dentro de regras já decididas, para gastar a energia no que muda de projeto para projeto. Antes de desenhar um componente novo e bonito, pergunte se um que já existe resolve — quase sempre resolve.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ds-camadas" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Tokens em três camadas: primitivo, semântico, componente</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Nomear por papel e não por aparência é a camada do meio. Os sistemas grandes — Material, Carbon, Atlassian — separam em três, e o motivo aparece no dia em que o site ganha modo escuro.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Camada</th><th>Exemplo</th><th>Quem usa</th></tr></thead>
+<tbody>
+<tr><td>Primitivo</td><td><code>--vinho-700: #7A1C30</code></td><td>só a camada semântica; nunca a página direto</td></tr>
+<tr><td>Semântico</td><td><code>--cor-destaque: var(--vinho-700)</code></td><td>a página inteira</td></tr>
+<tr><td>Componente</td><td><code>--botao-fundo: var(--cor-destaque)</code></td><td>só o componente, e só quando ele é exceção</td></tr>
+</tbody></table></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>:root {
+  /* 1. primitivos: a lista de ingredientes */
+  --vinho-700: #7A1C30;   --vinho-300: #D9869A;
+  --areia-50:  #FFFCF7;   --grafite-900: #16181C;
+
+  /* 2. semânticos: o papel de cada um */
+  --cor-fundo:    var(--areia-50);
+  --cor-texto:    var(--grafite-900);
+  --cor-destaque: var(--vinho-700);
+
+  /* 3. componente: só onde precisa ser diferente */
+  --botao-fundo:  var(--cor-destaque);
+}
+
+[data-tema="escuro"] {
+  --cor-fundo:    var(--grafite-900);
+  --cor-texto:    var(--areia-50);
+  --cor-destaque: var(--vinho-300);   /* o vinho escuro some no fundo escuro */
+}</code></pre></div>
+<p>No modo escuro, só a camada semântica muda. Primitivos e componentes ficam intactos, e nenhum seletor de componente precisa saber que existe tema. É o mesmo modelo das Variáveis do Figma com modos — por isso tokens escritos assim passam de um lado para o outro sem tradução (<a href="html-puro-2.html#t-figma-variaveis">Variáveis do Figma</a>).</p>
+<div class="nota"><strong>Não crie a camada de componente por antecipação.</strong> Dez tokens de botão que só repetem o semântico são ruído. Ela nasce quando o componente precisa ser diferente do resto — o botão com fundo que não é o destaque, o campo com borda própria.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ds-atomico" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Do átomo à página — e os estados de cada peça</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>O atomic design, proposto por Brad Frost, dá nome às peças para designer e dev falarem da mesma coisa. Cada nível é montado com os de baixo.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Nível</th><th>Exemplo</th><th>No código</th></tr></thead>
+<tbody>
+<tr><td>Átomo</td><td>botão, campo, rótulo, ícone</td><td>uma classe: <code>.botao</code></td></tr>
+<tr><td>Molécula</td><td>rótulo + campo + mensagem de erro</td><td><code>.campo</code> com filhos</td></tr>
+<tr><td>Organismo</td><td>cabeçalho, formulário de orçamento, card de depoimento</td><td>uma seção inteira</td></tr>
+<tr><td>Template</td><td>a estrutura da página sem o conteúdo</td><td>o esqueleto do HTML</td></tr>
+<tr><td>Página</td><td>o template com texto e foto reais</td><td>onde o sistema é testado de verdade</td></tr>
+</tbody></table></div>
+<p><strong>Cada peça interativa tem estados, e todos precisam estar decididos:</strong> normal, hover, foco, pressionado e desabilitado — e o campo ganha o de erro. Estado que ninguém desenhou é estado que o dev inventa na hora, diferente em cada tela.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.botao               { background: var(--botao-fundo); color: var(--botao-texto);
+                       border-radius: var(--raio); transition: background var(--dur); }
+.botao:hover         { background: var(--botao-fundo-hover); }
+.botao:focus-visible { outline: 2px solid var(--cor-foco); outline-offset: 2px; }
+.botao:active        { transform: translateY(1px); }
+.botao:disabled      { opacity: .5; cursor: not-allowed; }
+
+.botao--secundario   { background: transparent; color: var(--cor-destaque-texto);
+                       box-shadow: inset 0 0 0 1px currentColor; }</code></pre></div>
+<div class="nota"><strong>Variante no Figma é modificador no CSS.</strong> A variante "secundário" vira <code>.botao--secundario</code>; a propriedade "tamanho" vira <code>.botao--grande</code>. Com o mesmo nome nos dois lados, a passagem do design para o código dispensa reunião.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ds-documentar" data-marca="novo" data-desde="2026-09-21">
+<div class="topico__cabeca"><h3>Design system é produto, não projeto</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Projeto termina; sistema tem versão. Se o botão muda e ninguém registra, alguém trabalha o dia inteiro em cima do componente antigo — e quem entra no projeto depois não tem onde conferir qual é o certo.</p>
+<p>Na escala de um freelancer, a documentação mínima tem três partes:</p>
+<ul>
+<li><strong>Os tokens</strong>, com amostra: cada cor com o papel dela, a escala de texto e a de espaço.</li>
+<li><strong>Cada componente com seus estados</strong>, e uma linha de quando usar e quando não usar.</li>
+<li><strong>O registro de mudanças</strong>: data, o que mudou, o que quebra.</li>
+</ul>
+<p>Não precisa de ferramenta especial. Uma página <code>/sistema.html</code> dentro do próprio projeto, com os componentes reais renderizados pelo mesmo CSS do site, é mais confiável que um PDF: ela não fica desatualizada, porque é o próprio código. O Storybook faz isso em escala para projetos em React, Vue ou Angular. O importante é que todo mundo do projeto tenha acesso.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Para estudar</th><th>De quem</th><th>O que olhar</th></tr></thead>
+<tbody>
+<tr><td>Material Design 3</td><td>Google</td><td>a paleta inteira gerada a partir de uma cor-semente; o guia de movimento</td></tr>
+<tr><td>Carbon</td><td>IBM</td><td>a parte de acessibilidade escrita em cada componente</td></tr>
+<tr><td>Polaris</td><td>Shopify</td><td>o guia de conteúdo: como escrever botão, erro e aviso</td></tr>
+<tr><td>Atlassian Design System</td><td>Atlassian</td><td>tokens semânticos com nomes que dizem onde usar</td></tr>
+<tr><td>Human Interface Guidelines</td><td>Apple</td><td>princípios e padrões de plataforma, sem código</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Adapte um existente em vez de começar do zero</strong> — mas adapte a estrutura, não a aparência. O <a href="patch-notes.html">patch notes</a> deste site é o registro de mudanças dele: a mesma ideia, aplicada a um projeto pequeno.</div>
 </div>
 </article>
 </section>

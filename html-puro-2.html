@@ -67,7 +67,7 @@
 </div>
 <div class="navmenu__grupo navmenu__grupo--trabalhar">
 <p class="navmenu__rotulo">Ferramentas</p>
-<a href="ferramentas.html"><strong>Ferramentas</strong><span>As doze do dia a dia</span></a>
+<a href="ferramentas.html"><strong>Ferramentas</strong><span>As treze do dia a dia</span></a>
 <a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
 <a href="ferramentas.html#f-proposta"><strong>Proposta que fecha</strong><span>Os oito pontos</span></a>
 <a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
@@ -114,6 +114,7 @@
 <li><a href="#t-editor">VS Code na prática</a></li>
 <li><a href="#t-prettier">Prettier e formatação</a></li>
 <li><a href="#t-figma">Do Figma para o código</a></li>
+<li><a href="#t-figma-variaveis">Variáveis do Figma e o caminho dos tokens</a></li>
 </ol>
 <a class="sumario__parte" href="#s10">10 · Entrega e produção</a>
 <ol>
@@ -145,7 +146,7 @@
 <div class="legenda">
 <span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
 <span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
-<span>6 partes · 26 tópicos · parte 2 de 2</span>
+<span>6 partes · 27 tópicos · parte 2 de 2</span>
 </div>
 </section>
 <p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
@@ -810,6 +811,36 @@ ul&gt;li.item$*5&gt;a      → lista de 5 itens numerados, cada um com link
           </div>
 
           <p>Um hábito que evita retrabalho: antes de codar, pergunte ao designer o que acontece no celular. O Figma quase sempre mostra só a versão desktop, e adivinhar o comportamento responsivo é a fonte mais comum de “não era isso que eu queria”.</p>
+        </div>
+      </article>
+
+      <article class="topico" id="t-figma-variaveis" data-marca="novo" data-desde="2026-09-21">
+        <div class="topico__cabeca">
+          <h3>Variáveis do Figma e o caminho dos tokens</h3>
+          <span class="tag tag--novo">Novo</span>
+        </div>
+        <div class="topico__corpo">
+<p>Os estilos de cor viram o bloco <code>:root</code>, como no tópico anterior. As <strong>Variáveis</strong> do Figma vão além: guardam cor, número (espaço, raio) e texto, podem apontar uma para a outra — o mesmo esquema de <a href="negocio.html#t-ds-camadas">primitivo e semântico</a> — e têm <strong>modos</strong>, que é como o designer desenha claro e escuro no mesmo arquivo.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>No Figma</th><th>No CSS</th></tr></thead>
+<tbody>
+<tr><td>Coleção de variáveis</td><td>um bloco <code>:root</code></td></tr>
+<tr><td>Variável que aponta para outra (alias)</td><td><code>var(--outra)</code></td></tr>
+<tr><td>Modo claro e modo escuro</td><td><code>[data-tema="escuro"]</code> ou <code>@media (prefers-color-scheme: dark)</code></td></tr>
+<tr><td>Variável de número</td><td>token de espaço ou de raio, em px</td></tr>
+<tr><td>Dev Mode</td><td>o painel em que o dev lê o nome da variável em vez de um hex solto</td></tr>
+</tbody></table></div>
+<p>O caminho de volta, do código para o Figma, passa pelo formato do <strong>Design Tokens Community Group</strong> do W3C: um JSON em que cada token tem <code>$type</code> e <code>$value</code>, e o alias é escrito entre chaves. Plugins de tokens para Figma, como o Tokens Studio, importam esse formato. A ferramenta <a href="ferramentas.html#f-sistema">Design system</a> exporta nele.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="json">json</span><button class="copiar">copiar</button></div><pre><code>{
+  "cor": {
+    "vinho-700": { "$type": "color", "$value": "#7A1C30" },
+    "destaque":  { "$type": "color", "$value": "{cor.vinho-700}" }
+  },
+  "espaco": {
+    "3": { "$type": "dimension", "$value": "16px" }
+  }
+}</code></pre></div>
+<div class="nota"><strong>Se o arquivo do cliente não usa variáveis</strong> — só cores soltas e textos sem estilo —, isso é o <a href="negocio.html#t-ds-auditoria">inventário</a> dando o alarme dentro do Figma. Vale apontar antes de codar: cada cor solta vira uma pergunta depois. E o Figma tem um servidor MCP oficial que deixa assistentes como o Claude Code ler o frame e as variáveis direto do arquivo; o aviso do tópico anterior continua valendo, porque a IA também tende a copiar medida fixa.</div>
         </div>
       </article>
 </section>

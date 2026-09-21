@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Ferramentas — Gustavo Tutorial</title>
-<meta name="description" content="Doze ferramentas ligadas entre si, na ordem do trabalho: briefing, preço e proposta; paleta, contraste, tipografia e escala; cabeçalho, WhatsApp e UTM; checklist e inventário de acessos.">
+<meta name="description" content="Treze ferramentas ligadas entre si, na ordem do trabalho: briefing, preço e proposta; paleta, contraste, tipografia, escala e design system; cabeçalho, WhatsApp e UTM; checklist e inventário de acessos.">
 <meta name="color-scheme" content="light dark">
 <meta property="og:title" content="Ferramentas — Gustavo Tutorial">
-<meta property="og:description" content="Doze ferramentas para usar durante o trabalho.">
+<meta property="og:description" content="Treze ferramentas para usar durante o trabalho.">
 <meta property="og:type" content="website">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -62,7 +62,7 @@
 </div>
 <div class="navmenu__grupo navmenu__grupo--trabalhar">
 <p class="navmenu__rotulo">Ferramentas</p>
-<a href="ferramentas.html" class="is-atual"><strong>Ferramentas</strong><span>As doze do dia a dia</span></a>
+<a href="ferramentas.html" class="is-atual"><strong>Ferramentas</strong><span>As treze do dia a dia</span></a>
 <a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
 <a href="ferramentas.html#f-proposta"><strong>Proposta que fecha</strong><span>Os oito pontos</span></a>
 <a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
@@ -101,6 +101,7 @@
 <a href="#f-contraste">Contraste</a>
 <a href="#f-fonte">Tipografia</a>
 <a href="#f-escala">Escala de texto e espaço</a>
+<a href="#f-sistema">Design system</a>
 </div>
 <div class="indice__grupo">
 <p class="indice__rotulo">3 · Montar a página</p>
@@ -124,7 +125,7 @@
 <section class="abertura">
 <h1>Ferramentas</h1>
 <p class="abertura__lead">O resto do site é para estudar. Esta página é para usar enquanto você trabalha, na ordem em que o trabalho acontece: antes do projeto, identidade, montar a página, entregar. Tudo roda no seu navegador, nada é enviado para lugar nenhum, e o que você preenche fica salvo neste aparelho até você limpar.</p>
-<div class="legenda"><span>12 ferramentas</span><span>4 fases</span><span>salvas neste navegador</span></div>
+<div class="legenda"><span>13 ferramentas</span><span>4 fases</span><span>salvas neste navegador</span></div>
 <div class="ctas">
 <a class="cta cta--cheio" href="#f-briefing">Começar pelo briefing<span class="cta__seta" aria-hidden="true">&rsaquo;</span></a>
 <a class="cta cta--vazio" href="estudar.html">Voltar ao estudo<span class="cta__seta" aria-hidden="true">&rsaquo;</span></a>
@@ -138,7 +139,7 @@
 <input type="text" id="pj-nome" class="ferr__campo" placeholder="nome do cliente" list="pj-lista" autocomplete="off">
 <datalist id="pj-lista"></datalist>
 </div>
-<p class="projeto__nota">Um nome só para as doze. Briefing, proposta, checklist e inventário ficam guardados por cliente — troque o nome e cada uma abre o que já tinha daquele projeto. O que uma ferramenta já sabe aparece na seguinte, com um botão para usar.</p>
+<p class="projeto__nota">Um nome só para as treze. Briefing, proposta, checklist e inventário ficam guardados por cliente — troque o nome e cada uma abre o que já tinha daquele projeto. O que uma ferramenta já sabe aparece na seguinte, com um botão para usar.</p>
 </div>
 <ol class="fluxo">
 <li class="fluxo__fase">
@@ -156,6 +157,7 @@
 <li><a href="#f-contraste"><span class="fluxo__ferr">Contraste</span><span class="fluxo__estado" data-estado="f-contraste">—</span></a></li>
 <li><a href="#f-fonte"><span class="fluxo__ferr">Tipografia</span><span class="fluxo__estado" data-estado="f-fonte">—</span></a></li>
 <li><a href="#f-escala"><span class="fluxo__ferr">Escala de texto e espaço</span><span class="fluxo__estado" data-estado="f-escala">—</span></a></li>
+<li><a href="#f-sistema"><span class="fluxo__ferr">Design system</span><span class="fluxo__estado" data-estado="f-sistema">—</span></a></li>
 </ul>
 </li>
 <li class="fluxo__fase">
@@ -259,7 +261,7 @@
 <div class="fase" id="fase-2">
 <span class="fase__num">FASE 2</span>
 <h2 class="fase__nome">Identidade</h2>
-<p class="fase__resumo">As decisões visuais que viram código: cor, contraste, fonte e escala. No fim da fase, as três saídas de CSS saem juntas num arquivo só.</p>
+<p class="fase__resumo">As decisões visuais que viram código: cor, contraste, fonte e escala. No fim da fase, o Design system junta tudo em tokens — para o CSS e para o Figma.</p>
 </div>
 
 <section class="parte" id="f-paleta">
@@ -315,33 +317,58 @@
 
 <section class="parte" id="f-fonte">
 <div class="parte__cabeca"><span class="parte__num">FERRAMENTA</span><h2>Tipografia</h2></div>
-<p class="parte__resumo">Escolher as duas famílias, ver como ficam juntas, e sair com o <code>&lt;link&gt;</code> do Google Fonts pedindo só os pesos que você vai usar — que é onde o peso da página escapa sem ninguém ver.</p>
+<p class="parte__resumo">Escolher as duas famílias pela classe, ver a escala inteira nelas, medir a altura-x e a medida da linha, e sair com o <code>&lt;link&gt;</code> do Google Fonts pedindo só os pesos usados e o CSS com o acabamento — que é onde o peso da página e o ar de improviso escapam sem ninguém ver.</p>
 <div class="ferr" id="fer-fonte">
 
-<p class="ferr__secao">Combinações que funcionam</p>
+<p class="ferr__secao">1 · Combinações que funcionam</p>
 <div class="ferr__combos" id="fo-combos"></div>
 
-<p class="ferr__secao">Ou escolha à mão</p>
+<p class="ferr__secao">2 · Ou escolha à mão</p>
 <div class="ferr__grade">
 <div><label for="fo-titulo">Família dos títulos</label>
-<select id="fo-titulo" class="ferr__campo"></select></div>
-<div><label for="fo-titulo-peso">Pesos do título <small>dois bem diferentes leem melhor que quatro parecidos</small></label>
-<div class="ferr__pesos" id="fo-titulo-pesos"></div></div>
+<select id="fo-titulo" class="ferr__campo"></select>
+<p class="ferr__dica" id="fo-classe-t"></p></div>
 <div><label for="fo-corpo">Família do corpo</label>
-<select id="fo-corpo" class="ferr__campo"></select></div>
-<div><label for="fo-corpo-peso">Pesos do corpo</label>
-<div class="ferr__pesos" id="fo-corpo-pesos"></div></div>
+<select id="fo-corpo" class="ferr__campo"></select>
+<p class="ferr__dica" id="fo-classe-c"></p></div>
+</div>
+<div class="ferr__grade">
+<div><p class="ferr__rotulo" id="fo-rt">Pesos do título <small>dois bem diferentes leem melhor que quatro parecidos</small></p>
+<div class="ferr__pesos" id="fo-titulo-pesos" role="group" aria-labelledby="fo-rt"></div></div>
+<div><p class="ferr__rotulo" id="fo-rc">Pesos do corpo <small>400 no texto; abaixo disso some na tela</small></p>
+<div class="ferr__pesos" id="fo-corpo-pesos" role="group" aria-labelledby="fo-rc"></div></div>
 </div>
 
-<p class="ferr__dica" id="fo-dica"></p>
+<p class="ferr__secao">3 · Medida e acabamento</p>
+<div class="ferr__grade">
+<div><label for="fo-medida">Medida do corpo <small>largura máxima do parágrafo, em ch</small></label>
+<div class="ferr__faixa"><input type="range" id="fo-medida" min="40" max="90" step="1" value="66"><output id="fo-medida-v" for="fo-medida">66ch</output></div></div>
+<div><label for="fo-alinha">Alinhamento do corpo</label>
+<select id="fo-alinha" class="ferr__campo">
+<option value="left" selected>à esquerda — o padrão</option>
+<option value="justify">justificado, com hifenização</option>
+<option value="center">centralizado</option>
+</select></div>
+</div>
+<div class="ferr__pesos ferr__opcoes" role="group" aria-label="Acabamento">
+<label class="ferr__peso"><input type="checkbox" id="fo-balance" checked><span>título equilibrado</span></label>
+<label class="ferr__peso"><input type="checkbox" id="fo-pretty" checked><span>sem órfã no corpo</span></label>
+<label class="ferr__peso"><input type="checkbox" id="fo-tab"><span>números tabulares</span></label>
+<label class="ferr__peso"><input type="checkbox" id="fo-versal"><span>versalete nas siglas</span></label>
+</div>
 
+<p class="ferr__secao">4 · A amostra, com as medidas</p>
+<p class="ferr__dica" id="fo-de"></p>
 <div class="ferr__amostra" id="fo-amostra">
 <p class="ferr__amostra-olho" id="fo-p-olho">Bar de drinks · Campo Grande MS</p>
 <p class="ferr__amostra-g" id="fo-p-titulo">Coquetelaria autoral para o seu casamento</p>
-<p class="ferr__amostra-p" id="fo-p-texto">Montamos o bar completo — estrutura, equipe, insumos e drinks assinados para o seu evento. O orçamento sai no mesmo dia, pelo WhatsApp, com o cardápio já ajustado ao número de convidados.</p>
+<p class="ferr__amostra-p" id="fo-p-texto">Montamos o bar completo — estrutura, equipe, insumos e drinks assinados para o seu evento. O orçamento sai no mesmo dia, pelo WhatsApp, com o cardápio já ajustado ao número de convidados. Pagamento por <span class="fo-sigla">PIX</span> ou cartão, com nota em nome do <span class="fo-sigla">CNPJ</span>; pacotes de <span class="fo-num">R$&nbsp;1.111</span> a <span class="fo-num">R$&nbsp;8.888</span>, a depender do número de horas de serviço.</p>
 <p><span class="ferr__botao-amostra" id="fo-p-botao">Pedir orçamento</span></p>
 </div>
+<div class="ferr__medidas" id="fo-medidas"></div>
+<div class="ferr__escada" id="fo-escada" aria-label="A escala nas fontes escolhidas"></div>
 
+<p class="ferr__secao">5 · A saída</p>
 <div class="ferr__bloco">
 <div class="ferr__bloco-barra"><span>head</span><button class="acao" id="fo-copiar-link" type="button">copiar</button></div>
 <pre><code id="fo-saida-link"></code></pre>
@@ -351,7 +378,7 @@
 <pre><code id="fo-saida-css"></code></pre>
 </div>
 
-<div class="nota"><strong>A opção de custo zero</strong> está na primeira combinação da lista: a pilha do sistema não baixa nada, carrega instantâneo e fica nativa em cada aparelho. Para site de serviço em que a tipografia não é o argumento, é escolha defensável — e o LCP agradece. Se for usar fonte do Google num site com aviso de cookies, lembre do que a trilha de <a href="negocio.html#t-lgpd-oque">Negócio</a> diz: o Google registra o IP de quem visita, e hospedar o <code>.woff2</code> você mesmo resolve os dois lados.</div>
+<div class="nota"><strong>A opção de custo zero</strong> está na primeira combinação da lista: a pilha do sistema não baixa nada, carrega instantâneo e fica nativa em cada aparelho. Para site de serviço em que a tipografia não é o argumento, é escolha defensável — e o LCP agradece. Se for usar fonte do Google num site com aviso de cookies, lembre do que a trilha de <a href="negocio.html#t-lgpd-oque">Negócio</a> diz: o Google registra o IP de quem visita, e hospedar o <code>.woff2</code> você mesmo resolve os dois lados. O vocabulário — altura-x, tracking, versalete — está em <a href="negocio.html#t-tipo-anatomia">Anatomia do tipo</a>.</div>
 </div>
 </section>
 
@@ -389,14 +416,93 @@
 </div>
 </section>
 
-<div class="fase__saida" id="f-identidade">
-<p class="ferr__secao">Saída da fase · a identidade num arquivo só</p>
-<p class="ferr__dica">Paleta, tipografia e escala juntas, na ordem em que vão no <code>estilo.css</code>. Muda sozinho quando você mexe em qualquer uma das três.</p>
+<section class="parte" id="f-sistema">
+<div class="parte__cabeca"><span class="parte__num">FERRAMENTA</span><h2>Design system</h2></div>
+<p class="parte__resumo">O fim da fase. Conta os valores soltos do CSS que já existe, junta paleta, tipografia e escala com as decisões que faltam — raio, sombra, movimento e modo escuro — e entrega os tokens em três camadas, os componentes com todos os estados e o JSON que plugins de tokens do Figma importam.</p>
+<div class="ferr" id="fer-sistema">
+
+<p class="ferr__secao">1 · Inventário — o que já existe</p>
+<div class="ferr__linha"><label for="ds-css">Cole um CSS <small>do site antigo do cliente, do seu rascunho ou do concorrente — fica só neste navegador</small></label>
+<textarea id="ds-css" class="ferr__campo ferr__campo--codigo" rows="6" spellcheck="false" placeholder=".botao { background: #7a1c30; padding: 14px 22px; border-radius: 6px; }"></textarea></div>
+<div class="ferr__topo"><button class="acao" id="ds-exemplo" type="button">colar um CSS bagunçado de exemplo</button><button class="acao" id="ds-limpar" type="button">limpar</button></div>
+<p class="ferr__dica" id="ds-veredito"></p>
+<div class="ds-inventario" id="ds-inventario"></div>
+
+<p class="ferr__secao">2 · O que vem das outras ferramentas</p>
+<ul class="ds-fontes" id="ds-fontes"></ul>
+
+<p class="ferr__secao">3 · As decisões que faltam</p>
+<div class="ferr__grade">
+<div><label for="ds-raio">Raio dos cantos</label>
+<select id="ds-raio" class="ferr__campo">
+<option value="0">0 — reto, sério</option>
+<option value="4">4px — discreto</option>
+<option value="8" selected>8px — amigável</option>
+<option value="14">14px — macio</option>
+</select></div>
+<div><label for="ds-botao">Forma do botão</label>
+<select id="ds-botao" class="ferr__campo">
+<option value="raio" selected>acompanha o raio</option>
+<option value="pilula">pílula</option>
+</select></div>
+<div><label for="ds-sombra">Sombra</label>
+<select id="ds-sombra" class="ferr__campo">
+<option value="nenhuma">nenhuma — separa por borda</option>
+<option value="sutil" selected>sutil</option>
+<option value="marcada">marcada</option>
+</select></div>
+<div><label for="ds-dur">Duração das transições <small>resposta ao gesto: até 250ms</small></label>
+<select id="ds-dur" class="ferr__campo">
+<option value="150">150ms — seca</option>
+<option value="200" selected>200ms — o padrão</option>
+<option value="250">250ms — o limite</option>
+</select></div>
+</div>
+<div class="ferr__pesos ferr__opcoes" role="group" aria-label="Modo escuro">
+<label class="ferr__peso"><input type="checkbox" id="ds-escuro" checked><span>gerar o modo escuro</span></label>
+</div>
+
+<p class="ferr__secao">4 · Os componentes, com os tokens</p>
+<div class="ds-barra">
+<div class="ds-tema" role="group" aria-label="Tema da amostra">
+<button class="acao" type="button" data-tema="claro" aria-pressed="true">claro</button>
+<button class="acao" type="button" data-tema="escuro" aria-pressed="false">escuro</button>
+</div>
+<div class="ferr__vereditos" id="ds-vereditos"></div>
+</div>
+<div class="ds-amostra" id="ds-amostra">
+<p class="dsx-olho">Bar de drinks · Campo Grande MS</p>
+<p class="dsx-titulo">Coquetelaria autoral para o seu casamento</p>
+<p class="dsx-texto">Texto de corpo na cor de texto, sobre o fundo, com um <a class="dsx-link" href="#f-sistema">link no meio da frase</a>. <span class="dsx-fraco">E uma linha de apoio no texto fraco.</span></p>
+<div class="dsx-linha">
+<button class="dsx-botao" type="button">Pedir orçamento</button>
+<button class="dsx-botao dsx-botao--secundario" type="button">Ver cardápio</button>
+<button class="dsx-botao is-foco" type="button" tabindex="-1">Com foco</button>
+<button class="dsx-botao" type="button" disabled>Desabilitado</button>
+</div>
+<div class="dsx-grade">
+<div class="dsx-campo"><label for="dsx-nome">Nome</label><input id="dsx-nome" type="text" value="Ana Souza"></div>
+<div class="dsx-campo is-erro"><label for="dsx-data">Data do evento</label><input id="dsx-data" type="text" value="31/02" aria-invalid="true" aria-describedby="dsx-data-erro"><small id="dsx-data-erro">Essa data não existe</small></div>
+</div>
+<div class="dsx-card"><span class="dsx-tag">Casamento</span><p class="dsx-card-t">Pacote completo</p><p class="dsx-fraco">Estrutura, equipe e drinks assinados.</p></div>
+</div>
+
+<p class="ferr__secao">5 · A saída</p>
 <div class="ferr__bloco">
-<div class="ferr__bloco-barra"><span>css · paleta + tipografia + escala</span><button class="acao" id="id-copiar" type="button">copiar</button></div>
-<pre><code id="id-saida"></code></pre>
+<div class="ferr__bloco-barra"><span>tokens.css · primitivo → semântico → componente</span><button class="acao" id="ds-copiar-tokens" type="button">copiar</button></div>
+<pre><code id="ds-saida-tokens"></code></pre>
 </div>
+<div class="ferr__bloco">
+<div class="ferr__bloco-barra"><span>componentes.css · com todos os estados</span><button class="acao" id="ds-copiar-comp" type="button">copiar</button></div>
+<pre><code id="ds-saida-comp"></code></pre>
 </div>
+<div class="ferr__bloco">
+<div class="ferr__bloco-barra"><span>tokens.json · formato DTCG, para o Figma</span><button class="acao" id="ds-copiar-json" type="button">copiar</button></div>
+<pre><code id="ds-saida-json"></code></pre>
+</div>
+<div class="nota"><strong>Para levar ao Figma:</strong> o JSON segue o formato do Design Tokens Community Group do W3C — cada token com <code>$type</code> e <code>$value</code>, alias entre chaves. Plugins de tokens, como o Tokens Studio, importam cada grupo como um conjunto: <code>semantico-claro</code> e <code>semantico-escuro</code> viram os dois temas. O raciocínio das camadas está em <a href="negocio.html#t-ds-camadas">Tokens em três camadas</a>, e o dos estados em <a href="negocio.html#t-ds-atomico">Do átomo à página</a>.</div>
+</div>
+</section>
 
 <div class="fase" id="fase-3">
 <span class="fase__num">FASE 3</span>

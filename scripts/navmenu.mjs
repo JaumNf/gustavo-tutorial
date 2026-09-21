@@ -36,7 +36,7 @@ const GRUPOS = [
     ['colofao.html', 'Colofão', 'Como este site foi feito'],
   ], null],
   ['Ferramentas', [
-    ['ferramentas.html', 'Ferramentas', 'As doze do dia a dia'],
+    ['ferramentas.html', 'Ferramentas', 'As treze do dia a dia'],
     ['ferramentas.html#f-checklist', 'Checklist de entrega', 'Antes de publicar'],
     ['ferramentas.html#f-proposta', 'Proposta que fecha', 'Os oito pontos'],
     ['ferramentas.html#f-briefing', 'Briefing', 'As dez perguntas'],

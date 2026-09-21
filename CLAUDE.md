@@ -74,7 +74,7 @@ O site tem três áreas:
 
 - `index.html` — a central, com a busca e as duas portas
 - `estudar.html` — área de estudo: as onze trilhas por categoria
-- `ferramentas.html` — área de trabalho: as doze ferramentas
+- `ferramentas.html` — área de trabalho: as treze ferramentas
 
 Cada trilha é uma página com esta estrutura, que os scripts dependem:
 
@@ -114,7 +114,7 @@ de um tópico antigo — só marque o que foi publicado de fato naquele dia.
 Uma ferramenta só entra se for **algo que se redigita ou recalcula em todo projeto**. Se é uma
 decisão que muda de cliente para cliente, fica como texto na trilha, para ler e pensar.
 
-Nenhuma das doze foi inventada: todas saíram de conteúdo que já existia numa trilha. Antes de
+Nenhuma das treze foi inventada: todas saíram de conteúdo que já existia numa trilha. Antes de
 propor uma nova, procure de onde ela sairia. Se não sair de lugar nenhum, provavelmente não deve
 existir.
 
@@ -124,7 +124,7 @@ estado salvo em `localStorage` sob o prefixo `gt-`.
 ### Fases e ligações
 
 A página segue a ordem do trabalho, em quatro `<div class="fase">`: antes do projeto (briefing,
-preço, proposta), identidade (paleta, contraste, tipografia, escala), montar a página
+preço, proposta), identidade (paleta, contraste, tipografia, escala, design system), montar a página
 (cabeçalho, WhatsApp, UTM) e entregar (checklist, inventário). O painel `#projeto` no topo tem o
 nome do cliente — `gt-projeto` — espelhado nos campos de nome das quatro ferramentas que guardam
 por cliente, e mostra o estado de cada uma. Ferramenta nova entra numa fase e ganha uma função
@@ -136,6 +136,16 @@ valor, rotulo)`: mostra o valor da outra ferramenta com um botão para usar, e *
 sozinha** — `valor()` devolve `null` quando não há o que oferecer ou o campo já está igual.
 Só ligue o que é o mesmo dado de verdade (o telefone do JSON-LD e o do botão, a cor da paleta e a
 theme-color); ferramenta sem dado em comum com as outras fica avulsa, como o inventário.
+
+Paleta, Escala e Tipografia guardam o resultado já calculado (`gt-pl-tokens`, `gt-es-tokens`,
+`gt-fo-pilha-t`/`-c`, `gt-fo-medida`) para o **Design system** ler sem refazer conta; ele é a
+última da fase 2 e não decide cor, fonte nem escala de novo. Na Tipografia, cada família da lista
+`FAMILIAS` declara em `w` os pesos que existem no Google Fonts: pedir um peso que a família não
+tem faz o Google recusar o `<link>` inteiro.
+
+**Figma:** o site não fala com a API do Figma e não deve falar — exigiria guardar token de acesso
+e mandar dado para fora do navegador (regra 5). A ponte é por formato: o Design system exporta
+tokens em JSON no padrão DTCG, que plugins de tokens do Figma importam.
 
 ## Antes de dizer que terminou
 
@@ -149,7 +159,7 @@ node scripts/verificar.mjs
 
 Depois disso, confira também:
 
-- Os contadores em prosa (ex.: "as doze do dia a dia", "11 trilhas · 84 partes") espalhados pela
+- Os contadores em prosa (ex.: "as treze do dia a dia", "11 trilhas · 84 partes") espalhados pela
   home, pelo menu e pelas metas — eles não são gerados, e ficam velhos calados.
 - Uma entrada nova em `patch-notes.html`, no topo, dizendo o que mudou — **em toda atualização**,
   por menor que seja. É pedido explícito do Gustavo, não opcional.
