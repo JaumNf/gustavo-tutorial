@@ -93,6 +93,21 @@
 <article class="patch__entrada">
 <div class="patch__data">20 set 2026</div>
 <div class="patch__corpo">
+<h2>Cada área com sua cor, e o cabeçalho que sai da frente</h2>
+<ul>
+<li>A home virou um hub sem cabeçalho nenhum: a navegação sai dos dois botões e dos cards. Nas outras páginas o cabeçalho passou a sumir quando você desce e voltar quando você sobe — com o Menu aberto ou o foco do teclado dentro dele, não some</li>
+<li>Cada área tem sua cor de destaque: o hub segue no verde, a área de estudo virou âmbar e Ferramentas virou vermelho. Troca o par <code>--accent</code>/<code>--accent-soft</code> inteiro, então link, etiqueta, filtro e marcador de estudado acompanham</li>
+<li>O âmbar é bronze de propósito. O âmbar-ouro óbvio dava a mesma cor de <code>--js</code>, usada nas etiquetas de camada JavaScript — em Referência: Motion são 31 delas, e <code>PARTE 1</code> ficaria igual a <code>JS</code></li>
+<li>Botões de chamada novos no hub, em Estudar e em Ferramentas: rótulo em mono, chevron e o preenchimento varrendo de um lado ao outro no hover</li>
+<li>Corrigido: a busca morria inteira em qualquer página sem cabeçalho — o atalho <kbd>/</kbd> e o campo da home dependiam, sem que isso estivesse escrito em lugar nenhum, do botão de lupa existir no topo</li>
+<li><code>scripts/navmenu.mjs</code> agora também escreve o <code>data-modo</code> do <code>&lt;body&gt;</code> e a cor da barra do navegador, a partir do mapa que ele já tinha. Antes o <code>data-modo</code> era escrito à mão e só duas páginas tinham</li>
+</ul>
+</div>
+</article>
+
+<article class="patch__entrada">
+<div class="patch__data">20 set 2026</div>
+<div class="patch__corpo">
 <h2>Três geradores de código em Ferramentas</h2>
 <ul>
 <li><a href="ferramentas.html#f-head">Cabeçalho da página</a> — título, descrição, canonical, Open Graph e o JSON-LD do negócio, prontos para colar. Avisa quando a descrição passa de 160 caracteres</li>

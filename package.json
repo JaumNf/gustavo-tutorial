@@ -4,9 +4,11 @@
   "description": "Material de estudo de desenvolvimento web em pt-BR, sem framework e sem build.",
   "scripts": {
     "verificar": "node scripts/verificar.mjs",
-    "indice": "python3 scripts/indice.py",
-    "sitemap": "python3 scripts/sitemap.py",
-    "menu": "python3 scripts/navmenu.py"
+    "indice": "node scripts/indice.mjs",
+    "progresso": "node scripts/progresso.mjs",
+    "sitemap": "node scripts/sitemap.mjs",
+    "menu": "node scripts/navmenu.mjs",
+    "sumario": "node scripts/sumario.mjs"
   },
   "devDependencies": { "playwright": "^1.47.0" }
 }

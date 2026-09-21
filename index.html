@@ -40,65 +40,23 @@
 </script>
 </head>
 <body>
-<a class="pular" href="#conteudo">Pular para o conteúdo</a>
-<header class="topo">
-<div class="topo__interno">
-<a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
-<span style="margin-left:auto"></span><button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
-</div>
-<nav class="navmenu" aria-label="Navegação do site">
-<details class="navmenu__caixa" id="navmenu">
-<summary class="navmenu__botao">Menu<span aria-hidden="true">&#9662;</span></summary>
-<div class="navmenu__painel">
-<div class="navmenu__grupo">
-<p class="navmenu__rotulo">Construção</p>
-<a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
-<a href="qualidade.html"><strong>Qualidade</strong><span>Imagem, a11y, Vitals e testes</span></a>
-<a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
-<a href="motion.html"><strong>Referência: Motion</strong><span>A API inteira, em português</span></a>
-<a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
-<a href="back-end.html"><strong>Back-end</strong><span>Servidor, banco e login</span></a>
-</div>
-<div class="navmenu__grupo">
-<p class="navmenu__rotulo">Captação e Vendas</p>
-<a href="landing-pages.html"><strong>Landing pages</strong><span>A estratégia da página</span></a>
-<a href="trafego.html"><strong>Tráfego</strong><span>Ser encontrado no Google</span></a>
-<a href="negocio.html"><strong>Negócio</strong><span>Preço, escopo e contrato</span></a>
-</div>
-<div class="navmenu__grupo">
-<p class="navmenu__rotulo">Método</p>
-<a href="fluxo.html"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
-<a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e o gerador</span></a>
-<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
-</div>
-<div class="navmenu__grupo navmenu__grupo--trabalhar">
-<p class="navmenu__rotulo">Ferramentas</p>
-<a href="ferramentas.html"><strong>Ferramentas</strong><span>As doze do dia a dia</span></a>
-<a href="ferramentas.html#f-checklist"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
-<a href="ferramentas.html#f-proposta"><strong>Proposta que fecha</strong><span>Os oito pontos</span></a>
-<a href="ferramentas.html#f-briefing"><strong>Briefing</strong><span>As dez perguntas</span></a>
-<a href="ferramentas.html#f-zap"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
-<a href="ferramentas.html#f-utm"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
-<a href="ia.html#t-ia-gerador"><strong>Gerador de comando</strong><span>Brief para a IA</span></a>
-</div>
-<div class="navmenu__grupo">
-<p class="navmenu__rotulo">Patch notes</p>
-<a href="patch-notes.html"><strong>Patch notes</strong><span>O que mudou no site</span></a>
-</div>
-</div>
-</details>
-<div class="modos">
-<a class="modo" href="estudar.html">Estudar</a>
-<a class="modo modo--trabalho" href="ferramentas.html">Trabalhar</a>
-</div>
-</nav></header>
-<main class="home" id="conteudo" tabindex="-1">
+<main class="home home--hub" id="conteudo" tabindex="-1">
 <section class="hub">
-<p class="hero__olho">Material de estudo · pt-BR · aberto</p>
+<div class="hub__fundo" aria-hidden="true">
+<span class="hub__glifo hub__glifo--a">&lt;/&gt;</span>
+<span class="hub__glifo hub__glifo--b">{ }</span>
+<span class="hub__glifo hub__glifo--c">#</span>
+<span class="hub__glifo hub__glifo--d">&lt;p&gt;</span>
+</div>
+<button class="btn-icone hub__tema" id="btn-tema" type="button" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+<div class="hub__centro">
+<p class="hub__selo">Material de estudo · pt-BR · aberto</p>
 <h1>Desenvolvimento web, <em>do zero ao contrato.</em></h1>
 <p class="hub__lead">Escrito em português, na ordem em que os problemas aparecem no trabalho de verdade. De um lado o material para estudar; do outro, as ferramentas para usar enquanto você trabalha.</p>
-</section>
-
+<div class="ctas">
+<a class="cta cta--cheio" href="estudar.html">Começar a estudar<span class="cta__seta" aria-hidden="true">&rsaquo;</span></a>
+<a class="cta cta--vazio" href="ferramentas.html">Abrir as ferramentas<span class="cta__seta" aria-hidden="true">&rsaquo;</span></a>
+</div>
 <section class="home__busca">
 <label for="home-busca-campo" class="home__busca-rotulo">Procurar em tudo</label>
 <div class="home__busca-caixa">
@@ -107,7 +65,15 @@
 <kbd class="home__busca-atalho">/</kbd>
 </div>
 </section>
+<ul class="hub__nums">
+<li><strong>11</strong><span>trilhas</span></li>
+<li><strong>412</strong><span>tópicos</span></li>
+<li><strong>12</strong><span>ferramentas</span></li>
+</ul>
+</div>
+</section>
 
+<div class="hub__corpo">
 <div class="portas">
 <a class="porta porta--estudo" href="estudar.html">
 <span class="porta__olho">Área de estudo</span>
@@ -124,6 +90,7 @@
 </div>
 
 <p class="hub__sobre">Sobre o site: <a href="patch-notes.html">Patch notes</a> · <a href="colofao.html">Colofão</a></p>
+</div>
 </main>
 <footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
 <script src="app.js"></script>

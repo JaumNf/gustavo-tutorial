@@ -11,18 +11,19 @@
     return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
   }
 
-  /* ---------- botão no cabeçalho ---------- */
+  /* ---------- botão no cabeçalho (só onde existe cabeçalho: o hub não tem) ---------- */
   var topo = document.querySelector('.topo__interno');
-  if (!topo) return;
-
-  var botao = document.createElement('button');
-  botao.className = 'btn-icone btn-busca';
-  botao.type = 'button';
-  botao.setAttribute('aria-label', 'Buscar no site');
-  botao.title = 'Buscar  (/)';
-  botao.innerHTML = '<span aria-hidden="true">&#9906;</span>';
-  var tema = document.getElementById('btn-tema');
-  if (tema) topo.insertBefore(botao, tema); else topo.appendChild(botao);
+  var botao = null;
+  if (topo) {
+    botao = document.createElement('button');
+    botao.className = 'btn-icone btn-busca';
+    botao.type = 'button';
+    botao.setAttribute('aria-label', 'Buscar no site');
+    botao.title = 'Buscar  (/)';
+    botao.innerHTML = '<span aria-hidden="true">&#9906;</span>';
+    var tema = document.getElementById('btn-tema');
+    if (tema) topo.insertBefore(botao, tema); else topo.appendChild(botao);
+  }
 
   /* ---------- painel ---------- */
   var painel = document.createElement('div');
@@ -43,7 +44,10 @@
   var indice = 0, atuais = [];
 
   /* ---------- abrir / fechar ---------- */
+  var anterior = null, restaurando = false;
+
   function abrir() {
+    anterior = document.activeElement;
     painel.hidden = false;
     document.body.style.overflow = 'hidden';
     campo.focus();
@@ -53,10 +57,16 @@
   function fechar() {
     painel.hidden = true;
     document.body.style.overflow = '';
-    botao.focus();
+    /* sem cabeçalho (hub), o foco volta para quem abriu */
+    var alvo = botao || anterior;
+    if (alvo && alvo.focus) {
+      restaurando = true;
+      alvo.focus();
+      setTimeout(function () { restaurando = false; }, 0);
+    }
   }
 
-  botao.addEventListener('click', abrir);
+  if (botao) botao.addEventListener('click', abrir);
   painel.addEventListener('click', function (e) {
     if (e.target.hasAttribute('data-fechar')) fechar();
   });
@@ -65,6 +75,8 @@
   var homeCampo = document.getElementById('home-busca-campo');
   if (homeCampo) {
     var assumir = function () {
+      /* ao fechar, o foco volta para este campo: sem a trava, reabriria em laço */
+      if (restaurando) return;
       if (campo.value !== homeCampo.value) campo.value = homeCampo.value;
       abrir();
       procurar();

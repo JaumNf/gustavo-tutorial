@@ -29,32 +29,42 @@ Estes três são saída de script. Editar à mão significa perder a alteração
 
 | Arquivo            | Gerado por              | Regenerar quando                            |
 |--------------------|-------------------------|---------------------------------------------|
-| `busca-indice.js`  | `scripts/indice.py`     | qualquer tópico, parte ou página mudar       |
-| `progresso.js`     | `scripts/progresso.py`  | tópicos forem adicionados ou removidos       |
-| `sitemap.xml`      | `scripts/sitemap.py`    | qualquer página for editada (atualiza datas) |
+| `busca-indice.js`  | `scripts/indice.mjs`     | qualquer tópico, parte ou página mudar       |
+| `progresso.js`     | `scripts/progresso.mjs`  | tópicos forem adicionados ou removidos       |
+| `sitemap.xml`      | `scripts/sitemap.mjs`    | qualquer página for editada (atualiza datas) |
 
-O menu de navegação das 19 páginas e os sumários das trilhas também são gerados
-(`navmenu.py` e `sumario.py`) — veja abaixo.
+O menu de navegação das 17 páginas que têm cabeçalho e os sumários das trilhas também são gerados
+(`navmenu.mjs` e `sumario.mjs`) — veja abaixo.
 
 ## Os scripts
 
-Todos rodam de qualquer lugar; cada um se reposiciona na raiz do repositório.
+Todos rodam de qualquer lugar; cada um se reposiciona na raiz do repositório. São Node puro
+(ESM, `.mjs`) — a máquina não tem Python instalado, por isso os antigos `scripts/*.py` foram
+portados e removidos. `scripts/_texto.mjs` normaliza CRLF↔LF na leitura/escrita, equivalente ao
+"universal newlines" do Python; os arquivos do repo usam CRLF.
 
 ```
-python3 scripts/indice.py        # regera busca-indice.js a partir do conteúdo real
-python3 scripts/progresso.py     # regera progresso.js (mapa de tópicos por trilha)
-python3 scripts/sitemap.py       # atualiza as datas do sitemap pelo mtime dos arquivos
-python3 scripts/navmenu.py       # reescreve o menu nas 19 páginas de uma vez
-python3 scripts/sumario.py <arquivo.html>   # regera o sumário lateral de uma trilha
+node scripts/indice.mjs          # regera busca-indice.js a partir do conteúdo real
+node scripts/progresso.mjs       # regera progresso.js (mapa de tópicos por trilha)
+node scripts/sitemap.mjs         # atualiza as datas do sitemap pelo mtime dos arquivos
+node scripts/navmenu.mjs         # menu, data-modo e theme-color nas 18 páginas
+node scripts/sumario.mjs <arquivo.html>   # regera o sumário lateral de uma trilha
 ```
 
-**`navmenu.py` é a fonte da verdade do menu.** Para mudar categoria, link ou rótulo, edite a
-lista `GRUPOS` dentro dele e rode — nunca edite o `<nav class="navmenu">` das páginas
+**`navmenu.mjs` é a fonte da verdade do menu e da área.** Para mudar categoria, link ou rótulo,
+edite a lista `GRUPOS` dentro dele e rode — nunca edite o `<nav class="navmenu">` das páginas
 diretamente, porque a próxima execução sobrescreve. O mapa `PAGINA` controla qual link fica
 marcado como atual e qual o rótulo de posição em cada arquivo; `MODO` controla se a página
-pertence à área de estudo ou à de trabalho (o alternador no topo).
+pertence à área de estudo ou à de trabalho, e dele saem **três** coisas geradas: o alternador no
+topo, o `data-modo` do `<body>` (que troca a cor da área no CSS) e a `<meta name="theme-color">`
+do tema claro. Nenhum dos três se edita à mão.
 
-**`sumario.py` lê a própria página.** Ele extrai as `<section class="parte">` e os
+`SEM_MENU` lista as páginas sem cabeçalho — hoje só a `index.html`, que é o hub e navega pelo
+hero e pelos cards. Elas continuam no `PAGINA` porque o script ainda cuida do `<body>` e do
+`theme-color` delas; só o bloco do `<nav>` é pulado. O `verificar.mjs` tem a mesma lista e exige
+que essas páginas tenham **zero** link de menu, para pegar um cabeçalho reintroduzido sem querer.
+
+**`sumario.mjs` lê a própria página.** Ele extrai as `<section class="parte">` e os
 `<article class="topico">` existentes e reconstrói o sumário e a contagem de partes/tópicos.
 Rode sempre que adicionar ou remover um tópico de uma trilha.
 

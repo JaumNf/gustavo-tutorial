@@ -23,8 +23,11 @@ const PAGINAS = [
   'negocio.html', 'ia.html', '404.html'
 ];
 
-/* quantos links o painel do menu deve ter — ajuste junto com GRUPOS em navmenu.py */
+/* quantos links o painel do menu deve ter — ajuste junto com GRUPOS em navmenu.mjs */
 const LINKS_DO_MENU = 20;
+
+/* páginas sem cabeçalho: exigir exatamente zero pega uma reintrodução acidental */
+const SEM_MENU = new Set(['index.html']);
 
 const TIPOS = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8',
@@ -85,7 +88,8 @@ await navegador.close();
 servidor.close();
 
 const problemas = resultados.filter(r =>
-  r.overflow || r.h1 !== 1 || r.menu !== LINKS_DO_MENU || r.erros.length || r.quebradas.length
+  r.overflow || r.h1 !== 1 || r.erros.length || r.quebradas.length ||
+  (SEM_MENU.has(r.pagina) ? r.menu !== 0 : r.menu !== LINKS_DO_MENU)
 );
 
 console.log(`${resultados.length} verificações (${PAGINAS.length} páginas × 2 telas)`);

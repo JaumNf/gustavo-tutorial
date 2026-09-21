@@ -7,17 +7,19 @@ No ar: https://gustavo-tutorial.vercel.app/
 
 ## Rodar localmente
 
-Não precisa instalar nada para ver o site. Qualquer servidor estático serve:
+Não precisa instalar nada além do Node para ver o site. Qualquer servidor estático serve:
 
-    python3 -m http.server 8000
+    npx serve . -l 8000
 
 E abra http://localhost:8000
 
 ## Depois de mexer no conteúdo
 
-    python3 scripts/indice.py      # regera o índice da busca
-    python3 scripts/sumario.py html-puro.html   # regera o sumário daquela trilha
-    python3 scripts/sitemap.py     # atualiza as datas do sitemap
+    node scripts/indice.mjs        # regera o índice da busca
+    node scripts/progresso.mjs     # regera progresso.js (mapa de tópicos por trilha)
+    node scripts/sumario.mjs html-puro.html   # regera o sumário daquela trilha
+    node scripts/sitemap.mjs       # atualiza as datas do sitemap
+    node scripts/navmenu.mjs       # reescreve o menu nas páginas
 
 ## Antes de publicar
 

@@ -139,3 +139,76 @@
     }
   });
 })();
+
+/* cabecalho flutuante: some ao descer, reaparece ao subir.
+   O hub nao tem cabecalho — a guarda cobre isso. */
+(function () {
+  var topo = document.querySelector('.topo');
+  if (!topo) return;
+
+  var menu = document.getElementById('navmenu');
+  var ultimo = window.pageYOffset || 0;
+  var agendado = false;
+  var ate = 0, tempo = null;   /* trava temporaria durante pulo de ancora */
+  var LIMIAR = 6;              /* ignora tremor de trackpad */
+  var SOLTO = 120;             /* acima disto o topo aparece sempre */
+
+  function mostrar() { topo.classList.remove('topo--escondido'); }
+  function esconder() { topo.classList.add('topo--escondido'); }
+
+  /* menu aberto ou foco de teclado dentro do topo: proibido esconder */
+  function preso() {
+    if (menu && menu.open) return true;
+    return topo.contains(document.activeElement || document.body);
+  }
+
+  function avaliar() {
+    var y = window.pageYOffset;
+    if (y < 0) y = 0;                                 /* overscroll do iOS */
+    if (preso()) { ultimo = y; mostrar(); return; }
+    if (Date.now() < ate) { ultimo = y; return; }     /* durante o pulo, nao mexe */
+    if (y <= SOLTO) { ultimo = y; mostrar(); return; }
+
+    var d = y - ultimo;
+    if (d > LIMIAR) { esconder(); ultimo = y; }
+    else if (d < -LIMIAR) { mostrar(); ultimo = y; }
+  }
+
+  window.addEventListener('scroll', function () {
+    if (agendado) return;
+    agendado = true;
+    requestAnimationFrame(function () { avaliar(); agendado = false; });
+  }, { passive: true });
+
+  /* aba em segundo plano nao roda rAF: se o quadro agendado for descartado,
+     a trava ficaria presa e o cabecalho congelaria. Destrava ao voltar. */
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState !== 'visible') return;
+    agendado = false;
+    ultimo = window.pageYOffset;
+    avaliar();
+  });
+
+  topo.addEventListener('focusin', mostrar);
+  if (menu) menu.addEventListener('toggle', function () {
+    if (menu.open) mostrar(); else ultimo = window.pageYOffset;
+  });
+
+  /* pulo de ancora: subir ate o alvo conta como rolagem para cima, e o topo
+     reapareceria bem em cima dele. Esconde e congela ate a rolagem terminar. */
+  function travarPulo() {
+    esconder();
+    ate = Date.now() + 900;
+    clearTimeout(tempo);
+    tempo = setTimeout(function () {
+      ultimo = window.pageYOffset;
+      avaliar();
+    }, 950);
+  }
+
+  document.addEventListener('click', function (e) {
+    var alvo = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (alvo && alvo.getAttribute('href').length > 1) travarPulo();
+  }, true);
+  window.addEventListener('hashchange', travarPulo);
+})();
