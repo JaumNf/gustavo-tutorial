@@ -212,3 +212,109 @@
   }, true);
   window.addEventListener('hashchange', travarPulo);
 })();
+
+/* conteudo recente: topico com data-desde="AAAA-MM-DD" ganha selo por 30 dias.
+   Some sozinho depois do prazo, sem ninguem precisar tirar do HTML.
+   Em estudar.html e no hub, a lista vem de window.GT_RECENTES (progresso.js). */
+(function () {
+  var DIAS = 30;
+  var MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+  var hoje = new Date();
+  hoje.setHours(0, 0, 0, 0);
+
+  function lerData(s) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || '');
+    return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
+  }
+  function recente(s) {
+    var d = lerData(s);
+    if (!d) return false;
+    var dias = Math.round((hoje - d) / 864e5);
+    return dias >= 0 && dias <= DIAS;
+  }
+  function rotulo(s) {
+    var d = lerData(s);
+    return d.getDate() + ' ' + MESES[d.getMonth()];
+  }
+
+  /* 1. nas trilhas: selo no topico e ponto no sumario lateral */
+  document.querySelectorAll('.topico[data-desde]').forEach(function (t) {
+    var d = t.getAttribute('data-desde');
+    if (!recente(d)) return;
+    t.classList.add('is-recente');
+    var h3 = t.querySelector('.topico__cabeca h3');
+    if (h3) {
+      var selo = document.createElement('span');
+      selo.className = 'selo-recente';
+      selo.textContent = 'Chegou ' + rotulo(d);
+      h3.parentNode.insertBefore(selo, h3.nextSibling);
+    }
+    var item = document.querySelector('.sumario a[href="#' + t.id + '"]');
+    if (item) {
+      item.classList.add('is-recente');
+      item.setAttribute('title', 'Chegou ' + rotulo(d));
+    }
+  });
+
+  var lista = window.GT_RECENTES;
+  if (!lista || !lista.length) return;
+  var atuais = lista.filter(function (r) { return recente(r.d); });
+  if (!atuais.length) return;
+
+  /* 2. estudar.html: lista do que chegou e marca nas trilhas */
+  var mapa = document.querySelector('.home__mapa');
+  if (mapa) {
+    var nomes = {};
+    atuais.forEach(function (r) {
+      var link = mapa.querySelector('.home__links a[href="' + r.a + '"]');
+      if (!link) return;
+      nomes[r.a] = link.textContent;
+      if (link.querySelector('.novidade')) return;
+      var pino = document.createElement('span');
+      pino.className = 'novidade';
+      pino.textContent = 'novo';
+      link.appendChild(pino);
+    });
+
+    var caixa = document.createElement('section');
+    caixa.className = 'recentes';
+    caixa.setAttribute('aria-labelledby', 'recentes-titulo');
+    var titulo = document.createElement('p');
+    titulo.className = 'home__titulo';
+    titulo.id = 'recentes-titulo';
+    titulo.textContent = 'Chegou nos últimos ' + DIAS + ' dias';
+    var ul = document.createElement('ul');
+    ul.className = 'recentes__lista';
+    atuais.slice(0, 6).forEach(function (r) {
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = r.u;
+      var data = document.createElement('span');
+      data.className = 'recentes__data';
+      data.textContent = rotulo(r.d);
+      var nome = document.createElement('strong');
+      nome.textContent = r.t;
+      var onde = document.createElement('span');
+      onde.className = 'recentes__trilha';
+      onde.textContent = nomes[r.a] || '';
+      a.appendChild(data); a.appendChild(nome); a.appendChild(onde);
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+    caixa.appendChild(titulo);
+    caixa.appendChild(ul);
+    mapa.parentNode.insertBefore(caixa, mapa);
+  }
+
+  /* 3. hub: aviso na porta de estudo */
+  var porta = document.querySelector('.porta--estudo');
+  if (porta) {
+    var pe = porta.querySelector('.porta__pe');
+    var aviso = document.createElement('span');
+    aviso.className = 'porta__novo';
+    aviso.textContent = atuais.length === 1
+      ? '1 tópico novo nos últimos ' + DIAS + ' dias'
+      : atuais.length + ' tópicos novos nos últimos ' + DIAS + ' dias';
+    porta.insertBefore(aviso, pe || null);
+  }
+})();

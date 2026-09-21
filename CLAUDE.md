@@ -30,7 +30,7 @@ Estes três são saída de script. Editar à mão significa perder a alteração
 | Arquivo            | Gerado por              | Regenerar quando                            |
 |--------------------|-------------------------|---------------------------------------------|
 | `busca-indice.js`  | `scripts/indice.mjs`     | qualquer tópico, parte ou página mudar       |
-| `progresso.js`     | `scripts/progresso.mjs`  | tópicos forem adicionados ou removidos       |
+| `progresso.js`     | `scripts/progresso.mjs`  | tópico adicionado, removido ou com `data-desde` |
 | `sitemap.xml`      | `scripts/sitemap.mjs`    | qualquer página for editada (atualiza datas) |
 
 O menu de navegação das 17 páginas que têm cabeçalho e os sumários das trilhas também são gerados
@@ -91,6 +91,24 @@ Cada trilha é uma página com esta estrutura, que os scripts dependem:
 `data-marca` aceita `novo` ou `revisao` e alimenta o filtro do topo. Os ids de tópico precisam
 ser únicos no site inteiro, porque o marcador de "Estudado" guarda por id em `localStorage`.
 
+### Conteúdo recém-chegado — `data-desde`
+
+Todo tópico **novo** entra com a data em que foi publicado:
+
+```html
+<article class="topico" id="t-alguma-coisa" data-marca="novo" data-desde="2026-09-21">
+```
+
+Com isso, por 30 dias, o `app.js` põe o selo "Chegou 21 set" no tópico e um ponto no sumário
+lateral; `estudar.html` ganha a caixa "Chegou nos últimos 30 dias" e a marca "novo" na trilha;
+e o hub avisa na porta de estudo. Passado o prazo, tudo some sozinho — não se tira o atributo
+do HTML. A lista sai de `window.GT_RECENTES`, que o `progresso.mjs` gera a partir dos atributos:
+rode `node scripts/progresso.mjs` depois de publicar.
+
+Não confundir com o `data-marca="novo"` e a etiqueta "Novo": aquela quer dizer "não é revisão"
+e está em quase todos os tópicos; `data-desde` quer dizer "chegou agora". Nunca invente a data
+de um tópico antigo — só marque o que foi publicado de fato naquele dia.
+
 ## Ferramentas — o critério de entrada
 
 Uma ferramenta só entra se for **algo que se redigita ou recalcula em todo projeto**. Se é uma
@@ -117,7 +135,10 @@ Depois disso, confira também:
 
 - Os contadores em prosa (ex.: "as doze do dia a dia", "11 trilhas · 84 partes") espalhados pela
   home, pelo menu e pelas metas — eles não são gerados, e ficam velhos calados.
-- Uma entrada nova em `patch-notes.html`, no topo, dizendo o que mudou.
+- Uma entrada nova em `patch-notes.html`, no topo, dizendo o que mudou — **em toda atualização**,
+  por menor que seja. É pedido explícito do Gustavo, não opcional.
+- Tópico novo leva `data-desde="AAAA-MM-DD"` com a data de publicação, e depois
+  `node scripts/progresso.mjs`.
 
 ## As duas páginas sobre o site
 
