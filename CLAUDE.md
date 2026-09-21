@@ -121,6 +121,22 @@ existir.
 Cada ferramenta é uma IIFE independente em `ferramentas.js`, guardada pelo seu container, com
 estado salvo em `localStorage` sob o prefixo `gt-`.
 
+### Fases e ligações
+
+A página segue a ordem do trabalho, em quatro `<div class="fase">`: antes do projeto (briefing,
+preço, proposta), identidade (paleta, contraste, tipografia, escala), montar a página
+(cabeçalho, WhatsApp, UTM) e entregar (checklist, inventário). O painel `#projeto` no topo tem o
+nome do cliente — `gt-projeto` — espelhado nos campos de nome das quatro ferramentas que guardam
+por cliente, e mostra o estado de cada uma. Ferramenta nova entra numa fase e ganha uma função
+no objeto `ESTADO` do painel.
+
+`guardar()` só avisa (`gt:mudou`) quando o valor muda de fato; quem escuta o aviso pode se
+remontar sem entrar em laço. Uma ligação entre ferramentas se faz com `ligar(antes, de, ir,
+valor, rotulo)`: mostra o valor da outra ferramenta com um botão para usar, e **nunca sobrescreve
+sozinha** — `valor()` devolve `null` quando não há o que oferecer ou o campo já está igual.
+Só ligue o que é o mesmo dado de verdade (o telefone do JSON-LD e o do botão, a cor da paleta e a
+theme-color); ferramenta sem dado em comum com as outras fica avulsa, como o inventário.
+
 ## Antes de dizer que terminou
 
 Rode a suíte. Ela abre todas as páginas em duas larguras e falha em: overflow horizontal, número

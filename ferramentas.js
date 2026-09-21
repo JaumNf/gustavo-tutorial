@@ -6,8 +6,24 @@
   'use strict';
   var $ = function (s) { return document.querySelector(s); };
 
+  /* guardar() avisa a página quando um valor muda de fato. As ligações entre
+     ferramentas escutam 'gt:mudou' e se repintam; como só avisa em mudança
+     real, uma ferramenta que se remonta ao ouvir o aviso não entra em laço. */
+  var aviso = null;
+  function avisar() {
+    if (aviso) return;
+    aviso = setTimeout(function () {
+      aviso = null;
+      document.dispatchEvent(new CustomEvent('gt:mudou'));
+    }, 0);
+  }
   function guardar(chave, valor) {
-    try { localStorage.setItem('gt-' + chave, JSON.stringify(valor)); } catch (e) {}
+    try {
+      var texto = JSON.stringify(valor);
+      if (localStorage.getItem('gt-' + chave) === texto) return;
+      localStorage.setItem('gt-' + chave, texto);
+    } catch (e) {}
+    avisar();
   }
   function ler(chave, padrao) {
     try { var v = localStorage.getItem('gt-' + chave); return v ? JSON.parse(v) : padrao; }
@@ -29,6 +45,78 @@
       try { ok = document.execCommand('copy'); } catch (e) {}
       document.body.removeChild(t); feito(ok);
     }
+  }
+
+  /* ---------- ligação: o que outra ferramenta já sabe, com botão para usar ----------
+     Nunca sobrescreve sozinha. valor() devolve { texto, aplicar } ou null
+     (null = nada a oferecer, ou o campo já está igual), e a linha some. */
+  function ligar(antes, de, ir, valor, rotulo) {
+    if (!antes || !antes.parentNode) return;
+    var p = document.createElement('p');
+    p.className = 'ferr__elo';
+    p.hidden = true;
+    var origem = document.createElement('a');
+    origem.className = 'ferr__elo-de';
+    origem.href = ir;
+    origem.textContent = de;
+    var texto = document.createElement('span');
+    texto.className = 'ferr__elo-valor';
+    var botao = document.createElement('button');
+    botao.type = 'button';
+    botao.className = 'acao';
+    botao.textContent = rotulo || 'usar';
+    p.appendChild(origem); p.appendChild(texto); p.appendChild(botao);
+    antes.parentNode.insertBefore(p, antes);
+
+    var atual = null;
+    function pintar() {
+      try { atual = valor(); } catch (e) { atual = null; }
+      p.hidden = !atual;
+      if (atual) texto.textContent = atual.texto;
+    }
+    botao.addEventListener('click', function () {
+      if (!atual) return;
+      atual.aplicar();
+      botao.textContent = 'feito';
+      setTimeout(function () { botao.textContent = rotulo || 'usar'; }, 1200);
+    });
+    document.addEventListener('gt:mudou', pintar);
+    pintar();
+  }
+  /* preenche um campo como se a pessoa tivesse digitado: a ferramenta dona salva e se remonta */
+  function preencher(el, valor) {
+    if (!el) return;
+    el.value = valor;
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+  function nomeProjeto() { return String(ler('projeto', '') || '').trim(); }
+  function chaveProjeto() { return nomeProjeto().toLowerCase() || 'sem-nome'; }
+  function corHex(v) {
+    v = String(v || '').trim().replace(/^#/, '');
+    if (/^[0-9a-f]{3}$/i.test(v)) v = v[0] + v[0] + v[1] + v[1] + v[2] + v[2];
+    return /^[0-9a-f]{6}$/i.test(v) ? '#' + v.toUpperCase() : null;
+  }
+  /* telefone só com DDD + número, sem o 55 */
+  function foneNacional(v) {
+    var d = String(v || '').replace(/\D/g, '');
+    if (d.length > 11 && d.indexOf('55') === 0) d = d.slice(2);
+    return d;
+  }
+  function foneBonito(d) {
+    return d.length === 11 ? d.slice(0, 2) + ' ' + d.slice(2, 7) + '-' + d.slice(7)
+         : d.length === 10 ? d.slice(0, 2) + ' ' + d.slice(2, 6) + '-' + d.slice(6) : d;
+  }
+  function brl(v) {
+    return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+  }
+  /* a faixa da calculadora de Preço, lida do que ela guardou */
+  function faixaPreco() {
+    var n = function (k) { return parseFloat(ler('pr-' + k, 0)) || 0; };
+    var horasMes = n('dias') * n('horas');
+    if (!horasMes || !n('projeto') || !n('margem')) return null;
+    var piso = ((n('despesas') + n('retirada')) / horasMes) * n('projeto') * n('margem');
+    return { piso: piso, texto: brl(piso) + ' a ' + brl(piso * 1.6) };
   }
 
   /* ========== 1 · CHECKLIST ========== */
@@ -54,13 +142,35 @@
     cliente.value = ler('cl-cliente', '');
 
     function chave() { return 'cl-' + (cliente.value.trim().toLowerCase() || 'sem-nome'); }
+    function esc(s) { return String(s).replace(/[<>&"]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]; }); }
+
+    /* o item aponta para a ferramenta que gerou aquilo, com o valor a conferir em produção */
+    function conferir(i) {
+      var fone = foneNacional(ler('zp-num', ''));
+      var nome = String(ler('hd-nome', '') || '').trim(), oque = String(ler('hd-oque', '') || '').trim(),
+          cidade = String(ler('hd-cidade', '') || '').trim(), img = String(ler('hd-img', '') || '').trim();
+      var titulo = nome ? nome + (oque ? ' — ' + oque : '') + (cidade ? ' | ' + cidade : '') : '';
+      var REF = {
+        0:  ['#f-zap', 'Link de WhatsApp', fone.length >= 10 ? foneBonito(fone) : ''],
+        1:  ['#f-zap', 'Link de WhatsApp', ''],
+        3:  ['#f-head', 'Cabeçalho', titulo],
+        4:  ['#f-head', 'Cabeçalho', img ? 'og:image ' + img : ''],
+        11: ['#f-utm', 'Gerador de UTM', 'abra um link marcado e veja chegar']
+      };
+      return REF[i] || null;
+    }
+    function assinatura() {
+      return ITENS.map(function (_, i) { var r = conferir(i); return r ? r[2] : ''; }).join('|');
+    }
 
     function pintar() {
       var marcados = ler(chave(), []);
       lista.innerHTML = ITENS.map(function (t, i) {
-        var on = marcados.indexOf(i) !== -1;
+        var on = marcados.indexOf(i) !== -1, r = conferir(i);
+        var ref = r ? '<small class="ferr__item-ir"><a href="' + r[0] + '">' + r[1] + '</a>' +
+                      (r[2] ? ' · ' + esc(r[2]) : '') + '</small>' : '';
         return '<li><label class="ferr__item' + (on ? ' is-feito' : '') + '">' +
-               '<input type="checkbox" data-i="' + i + '"' + (on ? ' checked' : '') + '><span>' + t + '</span></label></li>';
+               '<input type="checkbox" data-i="' + i + '"' + (on ? ' checked' : '') + '><span>' + t + ref + '</span></label></li>';
       }).join('');
       var n = marcados.length;
       contador.textContent = n + ' de ' + ITENS.length;
@@ -76,6 +186,12 @@
     });
     cliente.addEventListener('input', function () { guardar('cl-cliente', cliente.value); pintar(); });
     $('#cl-zerar').addEventListener('click', function () { guardar(chave(), []); pintar(); });
+    /* repinta só se o valor a conferir mudou — repintar à toa tira o foco da caixa marcada */
+    var ultima = assinatura();
+    document.addEventListener('gt:mudou', function () {
+      var a = assinatura();
+      if (a !== ultima) { ultima = a; pintar(); }
+    });
     pintar();
   })();
 
@@ -110,6 +226,17 @@
     msg.addEventListener('input', montar);
     $('#zp-copiar').addEventListener('click', function () {
       if (saida.textContent !== '—') copiar(saida.textContent, this);
+    });
+    /* o telefone do JSON-LD e o do botão têm de ser o mesmo número */
+    ligar(caixa.querySelector('.ferr__linha'), 'Cabeçalho', '#f-head', function () {
+      var d = foneNacional(ler('hd-tel', ''));
+      if (d.length < 10) return null;
+      var agora = foneNacional(num.value);
+      if (agora === d) return null;
+      return {
+        texto: (agora ? 'número diferente lá: ' : 'telefone ') + foneBonito(d),
+        aplicar: function () { preencher(num, d); }
+      };
     });
     montar();
   })();
@@ -170,6 +297,14 @@
       pintarHistorico();
     });
     $('#ut-limpar').addEventListener('click', function () { guardar('ut-historico', []); pintarHistorico(); });
+    /* o endereço do site já está no canonical do Cabeçalho */
+    ligar(caixa.querySelector('.ferr__linha'), 'Cabeçalho', '#f-head', function () {
+      var u = String(ler('hd-url', '') || '').trim().replace(/\/+$/, '');
+      if (!u) return null;
+      var agora = $('#ut-url').value.trim().replace(/\/+$/, '');
+      if (agora === u) return null;
+      return { texto: 'endereço ' + u + '/', aplicar: function () { preencher($('#ut-url'), u + '/'); } };
+    });
     montar(); pintarHistorico();
   })();
 
@@ -226,6 +361,16 @@
     [texto, fundo].forEach(function (e) { e.addEventListener('input', calcular); });
     tp.addEventListener('input', function () { texto.value = tp.value; calcular(); });
     fp.addEventListener('input', function () { fundo.value = fp.value; calcular(); });
+    /* testar o par que a Paleta gerou: destaque sobre o fundo */
+    ligar(caixa.querySelector('.ferr__grade--cores'), 'Paleta', '#f-paleta', function () {
+      var d = corHex(ler('pl-destaque', '')), f = corHex(ler('pl-fundo', ''));
+      if (!d || !f) return null;
+      if (corHex(texto.value) === d && corHex(fundo.value) === f) return null;
+      return {
+        texto: 'destaque ' + d + ' sobre o fundo ' + f,
+        aplicar: function () { preencher(texto, d); preencher(fundo, f); }
+      };
+    }, 'testar');
     calcular();
   })();
 
@@ -289,9 +434,6 @@
     var ids = ['despesas', 'retirada', 'dias', 'horas', 'projeto', 'margem'];
     var hora = $('#pr-hora'), faixa = $('#pr-faixa');
 
-    function brl(v) {
-      return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
-    }
     function calcular() {
       var v = {};
       ids.forEach(function (i) { var el = $('#pr-' + i); v[i] = parseFloat(el.value) || 0; guardar('pr-' + i, el.value); });
@@ -339,22 +481,12 @@
 
     function chave() { return 'pp-' + (cliente.value.trim().toLowerCase() || 'sem-nome'); }
     function esc(s) { return (s || '').replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }); }
-    function brl(v) { return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }); }
 
     function contar() {
       var r = ler(chave(), {});
       var n = CAMPOS.filter(function (c) { return (r[c.id] || '').trim(); }).length;
       contador.textContent = n + ' de ' + CAMPOS.length;
       contador.classList.toggle('is-completo', n === CAMPOS.length);
-    }
-    function pintarDica() {
-      var despesas = parseFloat(ler('pr-despesas', 0)) || 0, retirada = parseFloat(ler('pr-retirada', 0)) || 0,
-          dias = parseFloat(ler('pr-dias', 0)) || 0, horas = parseFloat(ler('pr-horas', 0)) || 0,
-          projeto = parseFloat(ler('pr-projeto', 0)) || 0, margem = parseFloat(ler('pr-margem', 0)) || 0;
-      var horasMes = dias * horas;
-      if (!horasMes || !projeto || !margem) { dica.textContent = ''; return; }
-      var piso = ((despesas + retirada) / horasMes) * projeto * margem;
-      dica.textContent = 'sugestão da calculadora de Preço: ' + brl(piso) + ' a ' + brl(piso * 1.6) + ' pelo projeto';
     }
     function pintar() {
       var r = ler(chave(), {});
@@ -364,7 +496,6 @@
                esc(r[c.id] || '') + '</textarea></div>';
       }).join('');
       contar();
-      pintarDica();
     }
     campos.addEventListener('input', function (e) {
       if (e.target.tagName !== 'TEXTAREA') return;
@@ -387,6 +518,49 @@
         }).join('\n') +
         '\n8. Validade da proposta\n' + dias + ' dias — até ' + ateData;
       copiar(txt, this);
+    });
+
+    /* do Briefing do mesmo cliente: as respostas viram rascunho dos campos que estão vazios */
+    var DO_BRIEFING = {
+      entendi: [[0, 'Vende'], [1, 'Hoje o cliente chega por'], [2, 'Contatos'], [3, 'Diferencial']],
+      incluido: [[8, 'O que ele pediu']],
+      prazo: [[9, 'Precisa estar no ar'], [6, 'Fotos e logo']]
+    };
+    var ROTULO = {};
+    CAMPOS.forEach(function (c) { ROTULO[c.id] = c.rotulo; });
+    function rascunhos() {
+      var br = ler('br-' + chaveProjeto(), {}), saida = {};
+      Object.keys(DO_BRIEFING).forEach(function (id) {
+        var campo = $('#pp-' + id);
+        if (!campo || campo.value.trim()) return;
+        var linhas = DO_BRIEFING[id].filter(function (p) { return (br[p[0]] || '').trim(); });
+        if (!linhas.length) return;
+        saida[id] = linhas.length === 1 ? br[linhas[0][0]].trim()
+          : linhas.map(function (p) { return p[1] + ': ' + br[p[0]].trim(); }).join('\n');
+      });
+      return saida;
+    }
+    ligar(campos, 'Briefing', '#f-briefing', function () {
+      var r = rascunhos(), ids = Object.keys(r);
+      if (!ids.length) return null;
+      return {
+        texto: 'respostas prontas para ' + ids.map(function (id) { return ROTULO[id]; }).join(', ') +
+               ' — só entram onde está vazio',
+        aplicar: function () { ids.forEach(function (id) { preencher($('#pp-' + id), r[id]); }); }
+      };
+    }, 'trazer');
+
+    /* da calculadora de Preço: a faixa vai para o Investimento */
+    ligar(dica, 'Preço', '#f-preco', function () {
+      var f = faixaPreco(), campo = $('#pp-investimento');
+      if (!f || !campo || campo.value.indexOf(f.texto) !== -1) return null;
+      return {
+        texto: f.texto + ' pelo projeto',
+        aplicar: function () {
+          var antes = campo.value.trim();
+          preencher(campo, (antes ? antes + '\n' : '') + f.texto);
+        }
+      };
     });
     pintar();
   })();
@@ -479,6 +653,13 @@
       L.push('<title>' + titulo + '</title>');
       L.push('<meta name="description" content="' + (desc || '[descrição]') + '">');
       if (url) L.push('<link rel="canonical" href="' + url + '/">');
+      /* as fontes escolhidas na Tipografia entram aqui, que é onde elas vão */
+      var fontes = $('#fo-saida-link'), linkFontes = fontes ? fontes.textContent : '';
+      if (linkFontes.indexOf('<link') === 0) {
+        L.push('');
+        L.push('<!-- fontes, da ferramenta Tipografia -->');
+        linkFontes.split('\n').forEach(function (l) { L.push(l); });
+      }
       L.push('');
       L.push('<!-- como o link aparece no WhatsApp e nas redes -->');
       L.push('<meta property="og:title" content="' + nome + (oque ? ' — ' + oque : '') + '">');
@@ -516,6 +697,35 @@
       if (/^#[0-9a-f]{6}$/i.test($('#hd-cor').value)) picker.value = $('#hd-cor').value;
     });
     $('#hd-copiar').addEventListener('click', function () { copiar(saida.textContent, this); });
+
+    /* o nome do projeto, se o campo ainda está vazio */
+    ligar(caixa.querySelector('.ferr__grade'), 'Projeto', '#projeto', function () {
+      var n = nomeProjeto();
+      if (!n || v('nome')) return null;
+      return { texto: n, aplicar: function () { preencher($('#hd-nome'), n); } };
+    });
+    /* theme-color = a cor de destaque da Paleta */
+    ligar($('#hd-img').closest('.ferr__grade'), 'Paleta', '#f-paleta', function () {
+      var d = corHex(ler('pl-destaque', ''));
+      if (!d || corHex(v('cor')) === d) return null;
+      return {
+        texto: 'destaque ' + d + ' como theme-color',
+        aplicar: function () { picker.value = d; preencher($('#hd-cor'), d); }
+      };
+    });
+    /* telefone do JSON-LD = o número do botão de WhatsApp */
+    ligar($('#hd-tel').closest('.ferr__grade'), 'Link de WhatsApp', '#f-zap', function () {
+      var d = foneNacional(ler('zp-num', ''));
+      if (d.length < 10) return null;
+      var agora = foneNacional(v('tel'));
+      if (agora === d) return null;
+      return {
+        texto: (agora ? 'número diferente lá: ' : 'telefone ') + foneBonito(d),
+        aplicar: function () { preencher($('#hd-tel'), '55' + d); }
+      };
+    });
+    /* a Tipografia monta depois desta; quando ela muda, o bloco se refaz com o <link> novo */
+    document.addEventListener('gt:mudou', montar);
     montar();
   })();
 
@@ -858,4 +1068,166 @@
     if (st && sc) aplicar(st, ler('fo-pt', [700]), sc, ler('fo-pc', [400]));
     else aplicar(COMBOS[1].t, COMBOS[1].tp, COMBOS[1].c, COMBOS[1].cp);
   })();
+
+  /* ========== PROJETO · um nome para as doze ==========
+     Briefing, proposta, checklist e inventário guardam por cliente, cada um
+     com o próprio campo de nome. Aqui os cinco campos viram um só: mudar
+     qualquer um muda todos, e cada ferramenta abre o que tinha daquele cliente. */
+  (function () {
+    var campo = $('#pj-nome'); if (!campo) return;
+    var DONOS = ['br', 'pp', 'cl', 'iv'];
+    var campos = [campo].concat(DONOS.map(function (d) { return $('#' + d + '-cliente'); }))
+                        .filter(Boolean);
+    var lista = $('#pj-lista');
+
+    function conhecidos() { var l = ler('projetos', []); return Array.isArray(l) ? l : []; }
+    function lembrar(nome) {
+      nome = nome.trim(); if (!nome) return;
+      var l = conhecidos().filter(function (n) { return n.toLowerCase() !== nome.toLowerCase(); });
+      l.unshift(nome);
+      guardar('projetos', l.slice(0, 20));
+      pintarLista();
+    }
+    function pintarLista() {
+      if (!lista) return;
+      lista.innerHTML = '';
+      conhecidos().forEach(function (n) {
+        var o = document.createElement('option'); o.value = n; lista.appendChild(o);
+      });
+    }
+
+    var espalhando = false;
+    function espalhar(origem) {
+      if (espalhando) return;
+      espalhando = true;
+      var nome = origem.value;
+      campos.forEach(function (c) {
+        if (c === origem || c.value === nome) return;
+        c.value = nome;
+        c.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+      espalhando = false;
+      guardar('projeto', nome);
+    }
+
+    /* primeira vez: o nome que alguma das quatro já tinha vira o do projeto */
+    var inicial = ler('projeto', null);
+    if (inicial === null) {
+      inicial = '';
+      DONOS.forEach(function (d) { if (!inicial) inicial = String(ler(d + '-cliente', '') || ''); });
+      DONOS.forEach(function (d) { var n = String(ler(d + '-cliente', '') || '').trim(); if (n) lembrar(n); });
+    }
+    campo.value = inicial;
+    espalhar(campo);
+    pintarLista();
+
+    campos.forEach(function (c) {
+      c.addEventListener('input', function () { espalhar(c); });
+      c.addEventListener('change', function () { lembrar(c.value); });
+    });
+  })();
+
+  /* ========== PROJETO · onde cada ferramenta está ========== */
+  (function () {
+    var fluxo = document.querySelector('.fluxo'); if (!fluxo) return;
+    function n(k) { return parseFloat(ler(k, 0)) || 0; }
+    function preenchidos(obj, total) {
+      var c = 0;
+      for (var i = 0; i < total.length; i++) if (String(obj[total[i]] || '').trim()) c++;
+      return c;
+    }
+    function lum(h) {
+      var x = parseInt(h.slice(1), 16);
+      return [(x >> 16) & 255, (x >> 8) & 255, x & 255].map(function (c) {
+        c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+      }).reduce(function (a, c, i) { return a + c * [0.2126, 0.7152, 0.0722][i]; }, 0);
+    }
+
+    /* cada função devolve [texto, completo?] */
+    var ESTADO = {
+      'f-briefing': function () {
+        var c = preenchidos(ler('br-' + chaveProjeto(), {}), [0,1,2,3,4,5,6,7,8,9]);
+        return [c + ' de 10', c === 10];
+      },
+      'f-preco': function () { var f = faixaPreco(); return [f ? 'piso ' + brl(f.piso) : '—', !!f]; },
+      'f-proposta': function () {
+        var c = preenchidos(ler('pp-' + chaveProjeto(), {}),
+          ['entendi', 'proponho', 'incluido', 'naoincluido', 'prazo', 'investimento', 'depois']);
+        return [c + ' de 7', c === 7];
+      },
+      'f-paleta': function () { var d = corHex(ler('pl-destaque', '')); return [d || '—', !!d]; },
+      'f-contraste': function () {
+        var a = corHex(ler('ct-texto', '')), b = corHex(ler('ct-fundo', ''));
+        if (!a || !b) return ['—', false];
+        var x = lum(a), y = lum(b), r = (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
+        return [r.toFixed(2) + ':1', r >= 4.5];
+      },
+      'f-fonte': function () {
+        var t = ler('fo-titulo', ''), c = ler('fo-corpo', '');
+        return [t ? (t === c ? t : t + ' + ' + c) : '—', !!t];
+      },
+      'f-escala': function () {
+        var b = ler('es-base', ''), r = ler('es-razao', '');
+        return [b ? b + 'px · ' + r : '—', !!b];
+      },
+      'f-head': function () {
+        var c = preenchidos({ a: ler('hd-nome', ''), b: ler('hd-desc', ''), c: ler('hd-url', ''), d: ler('hd-img', '') },
+                            ['a', 'b', 'c', 'd']);
+        return [c + ' de 4', c === 4];
+      },
+      'f-zap': function () {
+        var d = foneNacional(ler('zp-num', ''));
+        return d.length >= 10 ? [foneBonito(d), true] : ['sem número', false];
+      },
+      'f-utm': function () {
+        var h = ler('ut-historico', []), q = Array.isArray(h) ? h.length : 0;
+        return [q ? q + (q === 1 ? ' gerado' : ' gerados') : 'nenhum', q > 0];
+      },
+      'f-checklist': function () {
+        var m = ler('cl-' + chaveProjeto(), []), c = Array.isArray(m) ? m.length : 0;
+        return [c + ' de 14', c === 14];
+      },
+      'f-inventario': function () {
+        var l = ler('iv-' + chaveProjeto(), null);
+        if (!Array.isArray(l) || !l.length) return ['nenhum titular', false];
+        var c = l.filter(function (x) { return String(x.titular || '').trim(); }).length;
+        return [c + ' de ' + l.length + ' com titular', c === l.length];
+      }
+    };
+
+    function pintar() {
+      Array.prototype.forEach.call(fluxo.querySelectorAll('[data-estado]'), function (el) {
+        var f = ESTADO[el.getAttribute('data-estado')];
+        if (!f) return;
+        var r;
+        try { r = f(); } catch (e) { r = ['—', false]; }
+        el.textContent = r[0];
+        el.classList.toggle('is-completo', !!r[1]);
+      });
+    }
+    document.addEventListener('gt:mudou', pintar);
+    pintar();
+  })();
+
+  /* ========== IDENTIDADE · as três saídas de CSS num arquivo só ========== */
+  (function () {
+    var saida = $('#id-saida'); if (!saida) return;
+    var PARTES = [
+      ['#pl-saida', 'cor — Paleta em tokens'],
+      ['#fo-saida-css', 'fontes — Tipografia (o <link> vai no <head>, pelo Cabeçalho)'],
+      ['#es-saida', 'texto e espaço — Escala']
+    ];
+    function montar() {
+      saida.textContent = PARTES.map(function (p) {
+        var el = $(p[0]), t = el ? el.textContent.trim() : '';
+        return t ? '/* ===== ' + p[1] + ' ===== */\n' + t : '';
+      }).filter(Boolean).join('\n\n');
+    }
+    $('#id-copiar').addEventListener('click', function () { copiar(saida.textContent, this); });
+    document.addEventListener('gt:mudou', montar);
+    montar();
+  })();
+
+  /* tudo montado: um aviso inicial para as ligações lerem o estado completo */
+  avisar();
 })();
