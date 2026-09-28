@@ -79,17 +79,27 @@ Rode sempre que adicionar ou remover um tópico de uma trilha.
 O site tem três níveis: **hub → páginas → subpáginas**.
 
 - `index.html` — o hub, com a busca e as duas portas
-- `estudar.html` — área de estudo; as subpáginas são as doze trilhas (a mais nova, `vibecoding.html`,
+- `estudar.html` — área de estudo; as subpáginas são as catorze trilhas (`montar-o-site.html`, a mais nova, vem depois de HTML puro e junta
+  as peças num site inteiro — pastas, head, molde de seção, CSS em `@layer`, layout, ícones em SVG, vídeo e mapa sem peso, o CSS que poupa JavaScript e o
+  projeto-base, com os
+  mesmos nomes de token que o Design system exporta; `depois-do-ar.html` fica depois de Back-end e faz
+  par com a ferramenta Depois de publicar: a trilha é o porquê, a ferramenta o roteiro com datas; `vibecoding.html`
   fica ao lado de `ia.html`: uma ensina como pedir, a outra com o quê trabalhar e onde buscar)
 - `ferramentas.html` — área de trabalho, no mesmo formato da `estudar.html` (olho, título, números,
   dois botões, o mapa das fases em colunas); embaixo, o projeto em andamento e um cartão por
-  ferramenta. As subpáginas são as quatorze `ferramenta-*.html` e a `modelos.html`
+  ferramenta. As subpáginas são as quinze `ferramenta-*.html` e a `modelos.html`
 - `modelos.html` — a galeria de modelos para copiar. Tudo sai de `modelos.js`: cada modelo é um objeto
   com `html`, `css` e `js` (uma função de verdade — a página mostra o fonte dela com `toString()`,
   sem eval), e o que a prévia roda é exatamente o texto que se copia. Modelo novo = um objeto a mais
   na lista, com classes prefixadas `.m-<id>` e a cor em `var(--m-destaque, #F5C542)`. A busca
-  (`indice.mjs`) lê os modelos direto do `modelos.js`, e o contador "28 modelos" do hub, da
-  `ferramentas.html` e da `modelos.html` é prosa: atualize à mão
+  (`indice.mjs`) lê os modelos direto do `modelos.js`, e o contador "39 modelos" do hub, da
+  `ferramentas.html` e da `modelos.html` é prosa: atualize à mão.
+  **Seções** (`secao: true`, id `secao-<nome>`, classes `.s-<nome>`) são pedaços de site inteiros que usam o
+  projeto-base da trilha Montar o site — tokens e as classes `.secao`, `.container`, `.pilha`, `.fila`,
+  `.grade`, `.botao`. Como o CSS delas estiliza tags, elas nunca entram no `<style>` da galeria: rodam num
+  `<iframe srcdoc>` com o arquivo completo (`arquivo()`), em miniatura escalada na grade e em tamanho real
+  na janela, com o botão Celular/Tela grande. `GT_BASE_SECAO` no topo do `modelos.js` é cópia do
+  projeto-base de `montar-o-site.html#t-ms-projeto-base`: mudou um, mude o outro
 
 Em tela de 1280px ou mais, a trilha usa três colunas: o sumário discreto no canto esquerdo, o texto
 no meio e os blocos de código na coluna da direita. O código não muda de lugar no HTML — o CSS o
@@ -158,7 +168,7 @@ de um tópico antigo — só marque o que foi publicado de fato naquele dia.
 Uma ferramenta só entra se for **algo que se redigita ou recalcula em todo projeto**. Se é uma
 decisão que muda de cliente para cliente, fica como texto na trilha, para ler e pensar.
 
-Nenhuma das quatorze foi inventada: todas saíram de conteúdo que já existia numa trilha. Antes de
+Nenhuma das quinze foi inventada: todas saíram de conteúdo que já existia numa trilha. Antes de
 propor uma nova, procure de onde ela sairia. Se não sair de lugar nenhum, provavelmente não deve
 existir.
 
@@ -174,12 +184,18 @@ num link, porque a âncora não existe na página da outra. Ferramenta nova: ent
 
 ### Fases e ligações
 
-A página segue a ordem do trabalho, em quatro `<div class="fase">`: antes do projeto (briefing,
+A página segue a ordem do trabalho, em cinco `<div class="fase">`: antes do projeto (briefing,
 preço, proposta), identidade (paleta, contraste, tipografia, escala, design system), montar a página
-(gerador de comando, cabeçalho, WhatsApp, UTM) e entregar (checklist, inventário). O painel `#projeto` da `ferramentas.html` tem o
-nome do cliente — `gt-projeto` — espelhado nos campos de nome das quatro ferramentas que guardam
-por cliente, e os cartões mostram o estado de cada uma. Ferramenta nova entra numa fase e ganha uma função
+(gerador de comando, cabeçalho, WhatsApp, UTM), entregar (checklist, inventário) e acompanhar (depois de publicar). O painel `#projeto` da `ferramentas.html` tem o
+nome do cliente — `gt-projeto` — espelhado nos campos de nome das cinco ferramentas que guardam
+por cliente (`DONOS`), e os cartões mostram o estado de cada uma. Ferramenta nova entra numa fase e ganha uma função
 no objeto `ESTADO`. Nas subpáginas, o nome vem guardado e entra no campo de cliente da ferramenta.
+
+**Depois de publicar** (`ferramenta-depois-de-publicar.html`, bloco 15 do `ferramentas.js`) é o roteiro
+`trafego.html#t-tr-90dias` em datas: cinco blocos com prazo em dias (`de`/`ate`) contados da data de
+publicação, e um bloco mensal que guarda só o mês corrente. Os itens têm id estável (`bloco.item`), não
+índice — reordenar não desmarca nada. O contador "29" do `ESTADO` é o total da lista: item novo, atualize.
+Os lembretes saem num `.ics` montado no navegador (Blob), sem servidor.
 
 `guardar()` só avisa (`gt:mudou`) quando o valor muda de fato; quem escuta o aviso pode se
 remontar sem entrar em laço. Uma ligação entre ferramentas se faz com `ligar(antes, de, ir,
@@ -219,7 +235,7 @@ node scripts/verificar.mjs
 
 Depois disso, confira também:
 
-- Os contadores em prosa (ex.: "as quatorze do dia a dia", "12 trilhas · 90 partes · 448 tópicos") espalhados pela
+- Os contadores em prosa (ex.: "as quinze do dia a dia", "14 trilhas · 106 partes · 510 tópicos") espalhados pela
   home, pelo menu e pelas metas — eles não são gerados, e ficam velhos calados.
 - Uma entrada nova em `patch-notes.html`, no topo, dizendo o que mudou — **em toda atualização**,
   por menor que seja. É pedido explícito do Gustavo, não opcional.

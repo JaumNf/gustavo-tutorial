@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Montar o site — Gustavo Tutorial</title>
+<meta name="description" content="O esqueleto de todo projeto: a ordem de construção, as pastas, o head completo, o molde de seção, o CSS em camadas com reset e tokens, os padrões de layout, nomes de classe e o projeto-base pronto para copiar.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Montar o site — Gustavo Tutorial">
+<meta property="og:description" content="O esqueleto de todo projeto: a ordem de construção, as pastas, o head completo, o molde de seção, o CSS em camadas com reset e tokens, os padrões de layout, nomes de classe e o projeto-base pronto para copiar.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#F4F6F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
+<meta name="author" content="Gustavo">
+<link rel="canonical" href="https://gustavo-tutorial.vercel.app/montar-o-site.html">
+<meta property="og:url" content="https://gustavo-tutorial.vercel.app/montar-o-site.html">
+<meta property="og:image" content="https://gustavo-tutorial.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Gustavo Tutorial">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body data-modo="estudo">
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo">
+<div class="topo__interno">
+<a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
+<button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.25"/><path d="M12 3.75a8.25 8.25 0 0 1 0 16.5z" fill="currentColor" stroke="none"/></svg></button>
+</div>
+<nav class="navmenu" aria-label="Navegação do site">
+<details class="navmenu__caixa" id="navmenu">
+<summary class="navmenu__botao">Menu<svg class="ico ico--seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></summary>
+<div class="navmenu__painel">
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Construção</p>
+<a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="montar-o-site.html" class="is-atual" aria-current="page"><strong>Montar o site</strong><span>O esqueleto de todo projeto</span></a>
+<a href="qualidade.html"><strong>Qualidade</strong><span>Imagem, a11y, Vitals e testes</span></a>
+<a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="motion.html"><strong>Referência: Motion</strong><span>A API inteira, em português</span></a>
+<a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Servidor, banco e login</span></a>
+<a href="depois-do-ar.html"><strong>Depois do ar</strong><span>Publicar, medir, manter</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Captação e Vendas</p>
+<a href="landing-pages.html"><strong>Landing pages</strong><span>A estratégia da página</span></a>
+<a href="trafego.html"><strong>Tráfego</strong><span>Ser encontrado no Google</span></a>
+<a href="negocio.html"><strong>Negócio</strong><span>Preço, escopo e contrato</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Método</p>
+<a href="fluxo.html"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
+<a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e revisão</span></a>
+<a href="vibecoding.html"><strong>Vibecoding</strong><span>Ferramentas, referências e riscos</span></a>
+</div>
+<div class="navmenu__grupo navmenu__grupo--trabalhar">
+<p class="navmenu__rotulo">Trabalhar</p>
+<a href="ferramentas.html"><strong>Todas as ferramentas</strong><span>Em cinco fases, ligadas entre si</span></a>
+<a href="modelos.html"><strong>Modelos para copiar</strong><span>Seções e efeitos prontos</span></a>
+<a href="ferramenta-briefing.html" class="navmenu__compacto">Briefing</a>
+<a href="ferramenta-preco.html" class="navmenu__compacto">Preço</a>
+<a href="ferramenta-proposta.html" class="navmenu__compacto">Proposta que fecha</a>
+<a href="ferramenta-paleta.html" class="navmenu__compacto">Paleta em tokens</a>
+<a href="ferramenta-contraste.html" class="navmenu__compacto">Contraste</a>
+<a href="ferramenta-tipografia.html" class="navmenu__compacto">Tipografia</a>
+<a href="ferramenta-escala.html" class="navmenu__compacto">Escala de texto e espaço</a>
+<a href="ferramenta-design-system.html" class="navmenu__compacto">Design system</a>
+<a href="ferramenta-gerador.html" class="navmenu__compacto">Gerador de comando</a>
+<a href="ferramenta-cabecalho.html" class="navmenu__compacto">Cabeçalho da página</a>
+<a href="ferramenta-whatsapp.html" class="navmenu__compacto">Link de WhatsApp</a>
+<a href="ferramenta-utm.html" class="navmenu__compacto">Gerador de UTM</a>
+<a href="ferramenta-checklist.html" class="navmenu__compacto">Checklist de entrega</a>
+<a href="ferramenta-inventario.html" class="navmenu__compacto">Inventário de acessos</a>
+<a href="ferramenta-depois-de-publicar.html" class="navmenu__compacto">Depois de publicar</a>
+</div>
+<div class="navmenu__grupo navmenu__grupo--sobre">
+<p class="navmenu__rotulo">Sobre o site</p>
+<a href="patch-notes.html"><strong>Patch notes</strong><span>O que mudou no site</span></a>
+<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+</div>
+</details>
+<div class="modos">
+<a class="modo is-atual" href="estudar.html">Estudar</a>
+<a class="modo modo--trabalho" href="ferramentas.html">Trabalhar</a>
+</div>
+</nav></header>
+<div class="palco">
+<nav class="sumario" id="sumario" aria-label="Sumário">
+<button class="sumario__abrir" id="sumario-abrir" aria-expanded="false" aria-controls="sumario-lista"><span>Sumário</span><svg class="ico ico--seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></button>
+<div class="sumario__lista" id="sumario-lista">
+<p class="sumario__titulo">Montar o site</p>
+<a class="sumario__parte" href="#s1">1 · Antes do primeiro arquivo</a>
+<ol>
+<li><a href="#t-ms-ordem">A ordem em que um site se constrói</a></li>
+<li><a href="#t-ms-pastas">Onde cada arquivo mora</a></li>
+<li><a href="#t-ms-um-ou-varios">Um arquivo só ou vários?</a></li>
+</ol>
+<a class="sumario__parte" href="#s2">2 · O esqueleto do HTML</a>
+<ol>
+<li><a href="#t-ms-head">O head completo, em ordem</a></li>
+<li><a href="#t-ms-body">O body: as regiões da página</a></li>
+<li><a href="#t-ms-secao">O molde de seção</a></li>
+</ol>
+<a class="sumario__parte" href="#s3">3 · O CSS em camadas</a>
+<ol>
+<li><a href="#t-ms-camadas">A ordem do arquivo de estilo</a></li>
+<li><a href="#t-ms-reset">Um reset curto</a></li>
+<li><a href="#t-ms-tokens">Os tokens no :root</a></li>
+<li><a href="#t-ms-base">O estilo de base</a></li>
+</ol>
+<a class="sumario__parte" href="#s4">4 · Layout que se repete</a>
+<ol>
+<li><a href="#t-ms-container">O container</a></li>
+<li><a href="#t-ms-padroes">Pilha, fila e grade</a></li>
+<li><a href="#t-ms-celular">Do celular para cima</a></li>
+</ol>
+<a class="sumario__parte" href="#s5">5 · Nomes e organização</a>
+<ol>
+<li><a href="#t-ms-nomes">Nomes de classe que não viram bagunça</a></li>
+<li><a href="#t-ms-componentes">Pensar em componentes sem framework</a></li>
+<li><a href="#t-ms-js">O JavaScript de um site de serviço</a></li>
+</ol>
+<a class="sumario__parte" href="#s6">6 · Ícones e SVG</a>
+<ol>
+<li><a href="#t-ms-svg-formas">Três jeitos de pôr um SVG na página</a></li>
+<li><a href="#t-ms-currentcolor">currentColor: o ícone segue o texto</a></li>
+<li><a href="#t-ms-sprite">Sprite: desenhar uma vez, usar em todo lugar</a></li>
+<li><a href="#t-ms-icone-nome">Ícone que é botão precisa de nome</a></li>
+<li><a href="#t-ms-logo">O logo em SVG</a></li>
+<li><a href="#t-ms-svg-limpar">Limpar o SVG antes de usar</a></li>
+<li><a href="#t-ms-icones-onde">Onde achar ícones — e o que olhar antes</a></li>
+</ol>
+<a class="sumario__parte" href="#s7">7 · Vídeo, mapa e outros embeds</a>
+<ol>
+<li><a href="#t-ms-embed-custo">O que um embed custa</a></li>
+<li><a href="#t-ms-video-fachada">Vídeo do YouTube que carrega no clique</a></li>
+<li><a href="#t-ms-video-proprio">Vídeo próprio no site</a></li>
+<li><a href="#t-ms-mapa">Mapa: link, embed ou imagem</a></li>
+<li><a href="#t-ms-embed-privacidade">Embed também é coleta de dado</a></li>
+</ol>
+<a class="sumario__parte" href="#s8">8 · O que o CSS já resolve</a>
+<ol>
+<li><a href="#t-ms-carrossel">Carrossel sem biblioteca</a></li>
+<li><a href="#t-ms-accent">Cor nos controles do formulário</a></li>
+<li><a href="#t-ms-subgrid">Cards alinhados entre si</a></li>
+<li><a href="#t-ms-inert">Bloquear o fundo com inert</a></li>
+<li><a href="#t-ms-tabela">Tabela no celular</a></li>
+<li><a href="#t-ms-impressao">A página impressa</a></li>
+</ol>
+<a class="sumario__parte" href="#s9">9 · O projeto-base</a>
+<ol>
+<li><a href="#t-ms-projeto-base">O projeto-base inteiro</a></li>
+<li><a href="#t-ms-comecar">Antes da primeira seção</a></li>
+</ol>
+</div>
+</nav>
+
+<main class="leitura" id="conteudo" tabindex="-1">
+<section class="abertura">
+<nav class="migalha" aria-label="Você está em"><a href="estudar.html">Estudar</a><span aria-hidden="true">›</span><a href="estudar.html#g-construcao">Construção</a></nav>
+<h1>Montar o site</h1>
+<p class="abertura__lead">A trilha <a href="html-puro.html">HTML puro</a> ensina as peças — tag, seletor, flexbox, evento. Esta ensina a juntar as peças num site inteiro: em que ordem construir, onde cada arquivo mora, o esqueleto do HTML, o CSS em camadas, os padrões de layout que se repetem, os nomes que mantêm tudo legível, os ícones em SVG, os vídeos e mapas que não pesam, e o que o CSS já resolve sozinho. No fim, o projeto-base pronto para copiar, com os mesmos tokens que as ferramentas geram.</p>
+<div class="legenda">
+<span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
+<span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
+<span>9 partes · 36 tópicos</span>
+</div>
+<div class="abertura__filtro"><span class="abertura__filtro-rot" aria-hidden="true">Mostrar</span>
+<div class="filtros" role="group" aria-label="Filtrar tópicos">
+<button class="filtro" data-filtro="tudo" aria-pressed="true">Tudo</button>
+<button class="filtro" data-filtro="revisao" aria-pressed="false">Revisão</button>
+<button class="filtro" data-filtro="novo" aria-pressed="false">Novo</button>
+</div>
+</div>
+</section>
+<p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
+<section class="parte" id="s1">
+<div class="parte__cabeca"><span class="parte__num">PARTE 1</span><h2>Antes do primeiro arquivo</h2></div>
+<p class="parte__resumo">Todo site começa igual, e é por isso que vale ter um jeito fixo de começar. A ordem em que as coisas são construídas, onde cada arquivo mora e quando separar em vários.</p>
+
+<article class="topico" id="t-ms-ordem" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>A ordem em que um site se constrói</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O erro mais caro é começar pelo que dá mais vontade: a animação da hero, a cor do botão. Cada camada depende da de baixo, e mexer em baixo depois obriga a refazer o que está em cima.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Ordem</th><th>Camada</th><th>Pronta quando</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>Conteúdo</strong></td><td>o texto de cada seção existe — de verdade ou marcado como <code>[PREENCHER]</code></td></tr>
+<tr><td>2</td><td><strong>HTML</strong></td><td>a página lê bem sem CSS nenhum: títulos na ordem, listas como lista, botões como botão</td></tr>
+<tr><td>3</td><td><strong>Tokens</strong></td><td>cor, fonte, tamanhos e espaços decididos e em variáveis</td></tr>
+<tr><td>4</td><td><strong>Layout</strong></td><td>as seções se arrumam do celular à tela grande</td></tr>
+<tr><td>5</td><td><strong>Componentes</strong></td><td>botão, card, formulário, com todos os estados</td></tr>
+<tr><td>6</td><td><strong>Movimento</strong></td><td>só depois que o resto está certo — e só onde ajuda</td></tr>
+</tbody></table></div>
+<p>A camada 2 é a que mais se pula e a que mais protege: HTML que faz sentido sem estilo é HTML que o Google, o leitor de tela e a IA que resume o site entendem. O teste é desligar o CSS no DevTools e ler a página de cima a baixo.</p>
+<div class="nota">As camadas 3 e 5 já têm ferramenta: <a href="ferramenta-paleta.html">Paleta</a>, <a href="ferramenta-tipografia.html">Tipografia</a> e <a href="ferramenta-escala.html">Escala</a> decidem os tokens, e o <a href="ferramenta-design-system.html">Design system</a> junta tudo num <code>tokens.css</code>. O conteúdo da camada 1 sai da estratégia da trilha <a href="landing-pages.html">Landing pages</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-pastas" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Onde cada arquivo mora</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Não existe estrutura "certa", mas existe uma que não atrapalha: previsível, com nomes que dizem o que o arquivo é, e rasa — ninguém precisa abrir cinco pastas para achar a foto da fachada.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">projeto de site de serviço</span><button class="copiar">copiar</button></div><pre><code>nome-do-cliente/
+├── index.html
+├── obrigado.html
+├── politica-de-privacidade.html
+├── 404.html
+├── css/
+│   ├── tokens.css      ← sai da ferramenta Design system
+│   └── estilo.css      ← reset, base, layout, componentes
+├── js/
+│   └── app.js
+├── img/
+│   ├── hero.webp
+│   └── servicos/
+├── favicon.svg
+├── robots.txt
+└── sitemap.xml</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Regra de nome</th><th>Por quê</th></tr></thead>
+<tbody>
+<tr><td>tudo minúsculo</td><td>o servidor diferencia <code>Foto.jpg</code> de <code>foto.jpg</code>; o Windows, não — funciona no seu computador e quebra no ar</td></tr>
+<tr><td>sem acento, sem espaço, sem <code>ç</code></td><td>vira <code>%C3%A7</code> na URL e quebra em algum lugar</td></tr>
+<tr><td>palavras separadas por hífen</td><td><code>reforma-cozinha.webp</code> se lê; <code>reformacozinha</code> não</td></tr>
+<tr><td>o nome diz o que é</td><td><code>img_0231.jpg</code> obriga a abrir para saber</td></tr>
+</tbody></table></div>
+<div class="nota">Os arquivos que ficam na raiz — robots, sitemap, favicon, 404 — e para que cada um serve estão em <a href="depois-do-ar.html#t-da-arquivos">Os arquivos da raiz</a>, na trilha Depois do ar.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-um-ou-varios" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Um arquivo só ou vários?</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>As duas formas estão certas; o que decide é quantas páginas o site tem.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th></th><th>Um HTML com tudo dentro</th><th>HTML + <code>css/</code> + <code>js/</code></th></tr></thead>
+<tbody>
+<tr><td>Bom para</td><td>landing page de uma página só, entrega por arquivo, protótipo</td><td>duas páginas ou mais, site que vai crescer</td></tr>
+<tr><td>Vantagem</td><td>um arquivo abre em qualquer lugar, sem servidor</td><td>o CSS é baixado uma vez e reaproveitado em todas as páginas</td></tr>
+<tr><td>Custo</td><td>cada página nova copia o estilo inteiro</td><td>mais arquivos para organizar</td></tr>
+</tbody></table></div>
+<p>A regra prática: <strong>a partir da segunda página, separe</strong>. Duas páginas com o mesmo CSS colado dentro viram duas versões diferentes do site na primeira correção que for feita só numa delas.</p>
+<div class="nota">Por que o formato de arquivo único funciona tão bem para landing page está em <a href="html-puro-2.html#t-unico">HTML único autocontido</a>. E quando o que se repete é o HTML — o mesmo cabeçalho em dez páginas —, as saídas sem build estão em <a href="fluxo.html#s7">Reuso sem build</a>.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s2">
+<div class="parte__cabeca"><span class="parte__num">PARTE 2</span><h2>O esqueleto do HTML</h2></div>
+<p class="parte__resumo">O <code>&lt;head&gt;</code> que toda página precisa, o <code>&lt;body&gt;</code> com as regiões certas, e um molde de seção que se repete igual do começo ao fim.</p>
+
+<article class="topico" id="t-ms-head" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>O head completo, em ordem</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>O <code>&lt;head&gt;</code> não aparece na tela, mas decide como o site aparece em todo o resto: na aba, no Google, no WhatsApp, na tela do celular. A ordem abaixo não é enfeite — o <code>charset</code> e o <code>viewport</code> vêm primeiro porque o navegador precisa deles antes de ler qualquer outra coisa.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">head</span><button class="copiar">copiar</button></div><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+
+  &lt;title&gt;Nome do negócio — o que faz, onde&lt;/title&gt;
+  &lt;meta name="description" content="Uma frase que responde a busca e convida a clicar."&gt;
+  &lt;link rel="canonical" href="https://seusite.com.br/"&gt;
+
+  &lt;meta property="og:title" content="Nome do negócio — o que faz"&gt;
+  &lt;meta property="og:description" content="A mesma ideia da description, para quem recebe o link."&gt;
+  &lt;meta property="og:image" content="https://seusite.com.br/og.jpg"&gt;
+  &lt;meta property="og:url" content="https://seusite.com.br/"&gt;
+  &lt;meta property="og:type" content="website"&gt;
+  &lt;meta name="twitter:card" content="summary_large_image"&gt;
+
+  &lt;link rel="icon" href="/favicon.svg" type="image/svg+xml"&gt;
+  &lt;link rel="icon" href="/favicon.ico" sizes="32x32"&gt;
+  &lt;link rel="apple-touch-icon" href="/apple-touch-icon.png"&gt;
+  &lt;meta name="theme-color" content="#0D6B62"&gt;
+
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=...&amp;display=swap"&gt;
+
+  &lt;link rel="stylesheet" href="css/tokens.css"&gt;
+  &lt;link rel="stylesheet" href="css/estilo.css"&gt;
+  &lt;script src="js/app.js" defer&gt;&lt;/script&gt;
+&lt;/head&gt;</code></pre></div>
+<ul>
+<li><strong>fontes antes do CSS</strong>: o <code>preconnect</code> abre a conexão com o Google Fonts enquanto o resto ainda está sendo lido</li>
+<li><strong><code>defer</code> no script</strong>: ele baixa em paralelo e só roda depois que o HTML inteiro foi lido — pode ficar no <code>&lt;head&gt;</code> sem travar nada</li>
+<li><strong><code>tokens.css</code> antes do <code>estilo.css</code></strong>: as variáveis precisam existir antes de alguém usá-las</li>
+</ul>
+<div class="nota">O bloco de título, descrição, canonical, Open Graph e JSON-LD sai pronto da ferramenta <a href="ferramenta-cabecalho.html">Cabeçalho da página</a>. O que cada meta faz está em <a href="html-puro.html#t-anatomia">Anatomia de um documento HTML</a> e <a href="html-puro-2.html#t-seo">SEO e Open Graph</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-body" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>O body: as regiões da página</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>Quatro regiões resolvem quase todo site: <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code> e, dentro do header, um <code>&lt;nav&gt;</code>. Leitor de tela lista essas regiões e deixa pular direto para elas — por isso cada uma aparece <strong>uma vez só</strong> e o <code>&lt;main&gt;</code> tem o conteúdo, não o menu.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">body</span><button class="copiar">copiar</button></div><pre><code>&lt;body&gt;
+  &lt;a class="pular" href="#conteudo"&gt;Pular para o conteúdo&lt;/a&gt;
+
+  &lt;header class="topo"&gt;
+    &lt;div class="container topo__linha"&gt;
+      &lt;a class="marca" href="/"&gt;Nome do negócio&lt;/a&gt;
+      &lt;nav aria-label="Principal"&gt;
+        &lt;ul class="fila"&gt;
+          &lt;li&gt;&lt;a href="#servicos"&gt;Serviços&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#sobre"&gt;Sobre&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#contato"&gt;Contato&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/nav&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+
+  &lt;main id="conteudo"&gt;
+    &lt;section class="secao hero" aria-labelledby="titulo"&gt;
+      &lt;div class="container pilha"&gt;
+        &lt;h1 id="titulo"&gt;A promessa em uma linha&lt;/h1&gt;
+        &lt;p&gt;O que você faz, para quem, e por que confiar.&lt;/p&gt;
+        &lt;a class="botao" href="https://wa.me/55DDDNUMERO"&gt;Pedir orçamento&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section class="secao" id="servicos" aria-labelledby="servicos-titulo"&gt;
+      &lt;div class="container pilha"&gt;
+        &lt;h2 id="servicos-titulo"&gt;Serviços&lt;/h2&gt;
+        &lt;ul class="grade"&gt;
+          &lt;li class="card"&gt;...&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;footer class="rodape"&gt;
+    &lt;div class="container"&gt;
+      &lt;p&gt;© &lt;span data-ano&gt;2026&lt;/span&gt; Nome do negócio&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+<ul>
+<li>o link "Pular para o conteúdo" é o primeiro da página: quem navega pelo teclado não precisa passar pelo menu em toda página</li>
+<li>um <code>&lt;h1&gt;</code> só, com a promessa principal; cada seção começa num <code>&lt;h2&gt;</code></li>
+<li><code>aria-labelledby</code> liga a seção ao próprio título: o leitor de tela anuncia "Serviços, região" em vez de só "região"</li>
+<li>o botão que leva ao WhatsApp é um <code>&lt;a&gt;</code> — ele leva para outro lugar; <code>&lt;button&gt;</code> é para o que acontece na própria página</li>
+</ul>
+<div class="nota">Por que o HTML certo já é metade da acessibilidade está em <a href="html-puro.html#t-semantico">HTML semântico</a> e <a href="qualidade.html#t-a11y-semantica">Semântica: o HTML certo já é metade do caminho</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-secao" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>O molde de seção</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Uma landing page é uma sequência de seções, e o que faz ela parecer feita com cuidado é todas seguirem o mesmo molde: a mesma margem nas laterais, o mesmo respiro em cima e embaixo, o título sempre no mesmo lugar. Quando o molde é um só, seção nova custa minutos.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">o molde</span><button class="copiar">copiar</button></div><pre><code>&lt;section class="secao" id="depoimentos" aria-labelledby="depoimentos-titulo"&gt;
+  &lt;div class="container pilha"&gt;
+    &lt;h2 id="depoimentos-titulo"&gt;O que dizem os clientes&lt;/h2&gt;
+    &lt;!-- o conteúdo da seção --&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Peça</th><th>O que resolve</th></tr></thead>
+<tbody>
+<tr><td><code>.secao</code></td><td>o respiro vertical, igual em todas</td></tr>
+<tr><td><code>id</code></td><td>o menu e os botões levam direto para ela: <code>href="#depoimentos"</code></td></tr>
+<tr><td><code>.container</code></td><td>a largura máxima e a margem lateral, iguais em todas</td></tr>
+<tr><td><code>.pilha</code></td><td>o espaço entre título, texto e conteúdo</td></tr>
+</tbody></table></div>
+<p>Seção com fundo de cor diferente continua no molde: a cor vai na <code>&lt;section&gt;</code>, que ocupa a largura toda, e o <code>.container</code> dentro dela mantém o texto alinhado com o resto da página.</p>
+<div class="nota">Onze seções já prontas neste molde — topo com menu no celular, hero, serviços, quem faz, como funciona, depoimentos, planos, dúvidas, chamada final, contato e rodapé — estão na categoria <a href="modelos.html#m-secao-topo">Seções</a> dos Modelos, para copiar direto no projeto-base. Que seções uma landing page precisa, e em que ordem, é estratégia: está em <a href="landing-pages.html#t-lp-catalogo">O catálogo de seções</a> e <a href="landing-pages.html#t-lp-sequencia">A sequência lógica</a>. Aqui é só o molde onde elas entram.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s3">
+<div class="parte__cabeca"><span class="parte__num">PARTE 3</span><h2>O CSS em camadas</h2></div>
+<p class="parte__resumo">Um arquivo de estilo que cresce sem virar briga: em que ordem as coisas entram, o reset curto que todo projeto usa, onde moram os tokens e o que é estilo de base.</p>
+
+<article class="topico" id="t-ms-camadas" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>A ordem do arquivo de estilo</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>CSS sem ordem vira uma sequência de correções: a regra de baixo vence a de cima, alguém põe <code>!important</code>, e seis meses depois ninguém sabe por que o botão está azul. O <code>@layer</code> resolve isso declarando, logo na primeira linha, quem vence quem.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">a primeira linha do estilo.css</span><button class="copiar">copiar</button></div><pre><code>@layer reset, base, layout, componentes, utilitarios;</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Camada</th><th>O que entra</th><th>Exemplo</th></tr></thead>
+<tbody>
+<tr><td>reset</td><td>zerar as diferenças entre navegadores</td><td><code>box-sizing</code>, margens</td></tr>
+<tr><td>base</td><td>as tags sem classe</td><td><code>body</code>, <code>h1</code>, <code>a</code>, <code>:focus-visible</code></td></tr>
+<tr><td>layout</td><td>o que arruma, não o que enfeita</td><td><code>.container</code>, <code>.grade</code></td></tr>
+<tr><td>componentes</td><td>as peças com cara própria</td><td><code>.botao</code>, <code>.card</code>, <code>.topo</code></td></tr>
+<tr><td>utilitarios</td><td>exceções de uma propriedade só</td><td><code>.so-leitor</code></td></tr>
+</tbody></table></div>
+<p>Com as camadas declaradas, a de baixo na lista sempre vence a de cima, <strong>não importa a especificidade</strong>: um <code>.botao</code> em <code>componentes</code> vence um <code>a</code> em <code>base</code>, mesmo que a regra do <code>a</code> esteja escrita depois.</p>
+<div class="nota nota--alerta"><strong>O detalhe que pega:</strong> CSS escrito <em>fora</em> de qualquer camada vence todas elas. Isso é útil para uma correção de emergência, e é uma armadilha se um arquivo de terceiro for incluído sem camada — ele passa por cima de tudo. O resto da sintaxe está em <a href="html-puro.html#t-aninhamento">Aninhamento nativo e @layer</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-reset" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Um reset curto</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Cada navegador vem com estilos próprios: margens nos títulos, imagens que estouram a coluna, botões com outra fonte. O reset zera o que atrapalha e mais nada — não precisa de biblioteca, cabe em quinze linhas.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">reset</span><button class="copiar">copiar</button></div><pre><code>@layer reset {
+  *, *::before, *::after { box-sizing: border-box; }
+  * { margin: 0; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body { min-height: 100svh; }
+  img, picture, video, svg { display: block; max-width: 100%; height: auto; }
+  input, button, textarea, select { font: inherit; color: inherit; }
+  h1, h2, h3, h4, p, li { overflow-wrap: break-word; }
+  ul[class], ol[class] { list-style: none; padding: 0; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Linha</th><th>O problema que resolve</th></tr></thead>
+<tbody>
+<tr><td><code>box-sizing: border-box</code></td><td>largura de 300px com padding continua 300px, não 340px</td></tr>
+<tr><td><code>margin: 0</code></td><td>as margens do navegador somem; o espaço vem da escala, não de um padrão invisível</td></tr>
+<tr><td><code>img { max-width: 100% }</code></td><td>foto grande não estoura a coluna no celular</td></tr>
+<tr><td><code>font: inherit</code> nos campos</td><td>botão e campo usam a fonte do site, não a do sistema</td></tr>
+<tr><td><code>ul[class]</code></td><td>lista usada como layout perde os marcadores; lista de texto corrido mantém</td></tr>
+<tr><td><code>prefers-reduced-motion</code></td><td>quem pediu menos movimento no sistema recebe menos movimento</td></tr>
+</tbody></table></div>
+<div class="nota">O que é o box model, e por que o <code>border-box</code> muda a conta, está em <a href="html-puro.html#t-boxmodel">Box model</a>. O porquê do movimento reduzido, em <a href="movimento.html">Movimento</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-tokens" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Os tokens no :root</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Token é uma decisão de design com nome: <code>--cor-destaque</code> em vez de <code>#0D6B62</code> espalhado em vinte lugares. Mudar a cor do site vira mudar uma linha — e o modo escuro vira redefinir as mesmas variáveis com outros valores.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css/tokens.css</span><button class="copiar">copiar</button></div><pre><code>/* tokens.css — troque este arquivo inteiro pelo que sai da
+   ferramenta Design system: os nomes são os mesmos. */
+:root {
+  --cor-fundo:          #FFFFFF;
+  --cor-superficie:     #F6F7F7;
+  --cor-linha:          #DDE2E1;
+  --cor-texto:          #1C2524;
+  --cor-texto-fraco:    #5F6E6B;
+  --cor-destaque:       #0D6B62;
+  --cor-destaque-texto: #0D6B62;
+  --cor-destaque-hover: #0A554E;
+  --cor-sobre-destaque: #FFFFFF;
+  --cor-foco:           #0D6B62;
+
+  --fonte-titulo: system-ui, sans-serif;
+  --fonte-corpo:  system-ui, sans-serif;
+  --peso-titulo:  700;
+  --peso-corpo:   400;
+
+  --t-peq:   14px;
+  --t-corpo: 17px;
+  --t-h3:    clamp(20px, 2.5vw, 27px);
+  --t-h2:    clamp(29px, 3.5vw, 41px);
+  --t-h1:    clamp(32px, 6vw, 65px);
+  --alt-corpo:  1.6;
+  --alt-titulo: 1.1;
+  --medida:     66ch;
+
+  --e1: 4px;  --e2: 8px;  --e3: 12px; --e4: 16px; --e5: 24px;
+  --e6: 32px; --e7: 48px; --e8: 64px; --e9: 96px; --e10: 128px;
+
+  --raio: 8px;
+  --dur:  200ms;
+  --curva: cubic-bezier(.23, 1, .32, 1);
+}</code></pre></div>
+<p>Os nomes acima são exatamente os que a ferramenta <a href="ferramenta-design-system.html">Design system</a> exporta. O fluxo é: decidir cor, fonte e escala nas ferramentas da fase 2, baixar o <code>tokens.css</code> e colocar no lugar deste. O <code>estilo.css</code> não muda — ele só usa os nomes.</p>
+<div class="nota nota--alerta"><strong>Nenhum valor solto no estilo.css.</strong> Se aparecer <code>#333</code> ou <code>margin: 13px</code> no meio de um componente, ou é um token que faltou criar, ou é um erro. É essa regra que faz o site inteiro parecer da mesma mão. O porquê está em <a href="html-puro.html#t-variaveis">Variáveis CSS</a> e <a href="negocio.html#t-ds-camadas">as três camadas de token</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-base" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>O estilo de base</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>A camada de base estiliza as tags sozinhas, sem classe: o texto corrido, os títulos, os links, o foco. Feita direito, um parágrafo novo já nasce certo — sem ninguém lembrar de pôr classe nele.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">base</span><button class="copiar">copiar</button></div><pre><code>@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cor-fundo); color: var(--cor-texto);
+    font-family: var(--fonte-corpo); font-weight: var(--peso-corpo);
+    font-size: var(--t-corpo); line-height: var(--alt-corpo);
+  }
+  h1, h2, h3 {
+    font-family: var(--fonte-titulo); font-weight: var(--peso-titulo);
+    line-height: var(--alt-titulo); text-wrap: balance;
+  }
+  h1 { font-size: var(--t-h1); }
+  h2 { font-size: var(--t-h2); }
+  h3 { font-size: var(--t-h3); }
+  p  { max-width: var(--medida); text-wrap: pretty; }
+  a  { color: var(--cor-destaque-texto); text-underline-offset: .15em; }
+  :root { accent-color: var(--cor-destaque); }   /* marcar, opção e deslizar na cor da marca (parte 8) */
+  :focus-visible { outline: 2px solid var(--cor-foco); outline-offset: 3px; }
+  [id] { scroll-margin-top: var(--e9); }   /* a âncora não some atrás do topo fixo */
+}</code></pre></div>
+<ul>
+<li><code>text-wrap: balance</code> nos títulos evita a última linha com uma palavra só; <code>pretty</code> nos parágrafos evita a palavra órfã no fim. Navegador que não entende simplesmente ignora</li>
+<li><code>max-width: var(--medida)</code> no parágrafo segura a linha numa largura confortável de ler, mesmo em tela grande</li>
+<li><code>:focus-visible</code> mostra o foco para quem usa teclado, sem aparecer no clique do mouse</li>
+<li><code>scroll-margin-top</code> faz o link <code>#servicos</code> parar abaixo do topo fixo, e não com o título escondido atrás dele</li>
+</ul>
+<div class="nota">A medida da linha e o acabamento tipográfico estão em <a href="negocio.html#t-tipo-acabamento">Acabamento tipográfico</a>. O foco visível e por que ele não pode sumir, em <a href="qualidade.html#t-a11y-teclado">Teclado e foco visível</a>.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s4">
+<div class="parte__cabeca"><span class="parte__num">PARTE 4</span><h2>Layout que se repete</h2></div>
+<p class="parte__resumo">Quase todo layout de site de serviço é a combinação de poucos padrões. Ter cada um como uma classe pronta é o que faz a página se montar rápido e continuar alinhada.</p>
+
+<article class="topico" id="t-ms-container" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>O container</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>A largura máxima do conteúdo e a margem lateral no celular, numa linha só:</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">container</span><button class="copiar">copiar</button></div><pre><code>.container { width: min(100% - 2 * var(--e5), 72rem); margin-inline: auto; }</code></pre></div>
+<p>Leia assim: "a largura é o menor entre a tela menos 24px de cada lado e 72rem". No celular, vale a primeira — sobra margem dos dois lados. Na tela grande, vale a segunda — o conteúdo para de crescer e fica centralizado pelo <code>margin-inline: auto</code>. Nenhuma media query.</p>
+<p><strong>Uma largura para o site todo</strong>, não uma por seção. Texto corrido fica ainda mais estreito pela <code>--medida</code> do parágrafo; o que é mais largo — uma galeria, um mapa — sai do container de propósito, e isso é uma decisão, não um acidente.</p>
+</div>
+</article>
+
+<article class="topico" id="t-ms-padroes" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Pilha, fila e grade</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Três classes cobrem quase todo arranjo de uma página de serviço. Cada uma resolve uma pergunta só.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">os três padrões</span><button class="copiar">copiar</button></div><pre><code>@layer layout {
+  .container { width: min(100% - 2 * var(--e5), 72rem); margin-inline: auto; }
+  .secao     { padding-block: clamp(var(--e7), 8vw, var(--e9)); }
+
+  /* pilha: coisas uma embaixo da outra, com o mesmo respiro */
+  .pilha { display: flex; flex-direction: column; gap: var(--e5); }
+
+  /* fila: coisas lado a lado que quebram linha quando não cabem */
+  .fila  { display: flex; flex-wrap: wrap; align-items: center; gap: var(--e3); }
+
+  /* grade: quantas colunas couberem, nenhuma mais estreita que 16rem */
+  .grade {
+    display: grid; gap: var(--e5);
+    grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+  }
+}</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Padrão</th><th>A pergunta</th><th>Onde aparece</th></tr></thead>
+<tbody>
+<tr><td><code>.pilha</code></td><td>coisas uma embaixo da outra, com o mesmo espaço entre elas</td><td>título + texto + botão; o conteúdo de um card</td></tr>
+<tr><td><code>.fila</code></td><td>coisas lado a lado que quebram linha quando não cabem</td><td>os links do menu, os botões, as etiquetas</td></tr>
+<tr><td><code>.grade</code></td><td>quantas colunas couberem, todas iguais</td><td>cards de serviço, depoimentos, fotos</td></tr>
+</tbody></table></div>
+<p>A <code>.grade</code> é a que mais economiza: <code>auto-fit</code> com <code>minmax(min(16rem, 100%), 1fr)</code> dá uma coluna no celular, duas no tablet e três ou quatro na tela grande — sem uma media query sequer. O <code>min(16rem, 100%)</code> é o que impede a coluna de estourar numa tela menor que 16rem.</p>
+<div class="nota">A ideia de montar layout com poucos padrões pequenos e combináveis é o centro do livro <em>Every Layout</em>, de Heydon Pickering e Andy Bell. O funcionamento de cada propriedade está em <a href="html-puro.html#t-flexbox">Flexbox</a> e <a href="html-puro.html#t-grid">Grid</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-celular" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Do celular para cima</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>A maior parte das visitas de site de serviço chega pelo celular, e o layout de celular é o mais simples: uma coluna. Por isso o CSS começa por ele, e a tela grande é que ganha regras a mais — com <code>min-width</code>.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">celular primeiro</span><button class="copiar">copiar</button></div><pre><code>/* o padrão já é o celular: uma coluna */
+.hero { display: grid; gap: var(--e6); }
+
+/* a partir de onde o conteúdo pede, duas colunas */
+@media (min-width: 52rem) {
+  .hero { grid-template-columns: 1.2fr 1fr; align-items: center; }
+}</code></pre></div>
+<ul>
+<li><strong>o ponto de quebra vem do conteúdo</strong>, não de um aparelho: abra a página, alargue a janela devagar e ponha a media query onde o layout começa a ficar ruim</li>
+<li><strong>poucos pontos de quebra</strong>: com <code>.grade</code> e <code>clamp()</code> fazendo o trabalho, um ou dois costumam bastar</li>
+<li><strong>em <code>rem</code>, não em <code>px</code></strong>: quem aumentou a fonte no celular recebe o layout de uma coluna mais cedo, que é o que ele precisa</li>
+</ul>
+<div class="nota">Media query, <code>clamp()</code> e as unidades estão em <a href="html-puro.html#t-responsivo">Responsividade e media queries</a> e <a href="html-puro.html#t-unidades">Unidades de medida</a>. Quando o componente precisa reagir ao espaço que ele tem, não à tela, entram as <a href="html-puro.html#t-container">container queries</a>.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s5">
+<div class="parte__cabeca"><span class="parte__num">PARTE 5</span><h2>Nomes e organização</h2></div>
+<p class="parte__resumo">O que mantém um projeto legível daqui a seis meses: nomes de classe que dizem o que a coisa é, componentes pensados como peças, e um JavaScript que não derruba a página quando uma parte falha.</p>
+
+<article class="topico" id="t-ms-nomes" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Nomes de classe que não viram bagunça</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>O nome de classe descreve <strong>o que a coisa é</strong>, não como ela parece: <code>.card-servico</code> continua certo quando o card deixar de ser azul; <code>.caixa-azul</code>, não.</p>
+<p>Uma convenção leve, a mesma usada neste site, resolve quase tudo: o bloco, o elemento de dentro com dois sublinhados, a variação com dois hífens.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">bloco, elemento, variação</span><button class="copiar">copiar</button></div><pre><code>&lt;article class="card card--destaque"&gt;
+  &lt;h3 class="card__titulo"&gt;Reforma completa&lt;/h3&gt;
+  &lt;p class="card__texto"&gt;Do projeto à entrega da chave.&lt;/p&gt;
+&lt;/article&gt;</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Parte</th><th>Formato</th><th>Quer dizer</th></tr></thead>
+<tbody>
+<tr><td>bloco</td><td><code>.card</code></td><td>uma peça que faz sentido sozinha</td></tr>
+<tr><td>elemento</td><td><code>.card__titulo</code></td><td>uma parte que só existe dentro do bloco</td></tr>
+<tr><td>variação</td><td><code>.card--destaque</code></td><td>o mesmo bloco, um pouco diferente</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>O que ganha com isso:</strong> olhando só o HTML, dá para saber onde está o estilo de cada coisa; e nenhuma regra de um componente vaza para outro, porque ninguém escreve <code>.card h3</code> — escreve <code>.card__titulo</code>. A convenção se chama BEM; aqui ela é usada sem cerimônia.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-componentes" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Pensar em componentes sem framework</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Componente não é coisa de React. É uma peça com nome, que funciona em qualquer lugar da página e que tem todos os estados previstos: o botão normal, com o mouse em cima, com foco, pressionado e desabilitado.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Um componente está pronto quando</th><th>Teste</th></tr></thead>
+<tbody>
+<tr><td>funciona em qualquer seção</td><td>copiar para outra seção e não precisar mexer em nada</td></tr>
+<tr><td>não depende de onde está</td><td>nenhuma regra do tipo <code>.hero .botao</code></td></tr>
+<tr><td>tem todos os estados</td><td>Tab até ele, passar o mouse, apertar, desabilitar</td></tr>
+<tr><td>só usa tokens</td><td>nenhum valor solto no bloco dele</td></tr>
+</tbody></table></div>
+<p>A variação vem pela classe <code>--</code>, nunca pelo lugar: o botão da hero é um <code>.botao--grande</code> que qualquer outra seção pode usar, não um <code>.hero .botao</code> que só existe ali.</p>
+<div class="nota">A mesma ideia nos frameworks está em <a href="frameworks.html#t-componentes">Pensar em componentes</a>. Os componentes com todos os estados, já nos tokens do projeto, saem da ferramenta <a href="ferramenta-design-system.html">Design system</a>; efeitos prontos para copiar estão em <a href="modelos.html">Modelos</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-js" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>O JavaScript de um site de serviço</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>Site de serviço precisa de pouco JavaScript: o menu no celular, um acordeão, talvez um formulário. O risco não é o tamanho — é um erro num pedaço derrubar todos os outros.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js/app.js</span><button class="copiar">copiar</button></div><pre><code>/* app.js — cada bloco se guarda sozinho: se o elemento não existe, sai */
+
+/* ano do rodapé sempre atual */
+(function () {
+  var ano = document.querySelector('[data-ano]');
+  if (!ano) return;
+  ano.textContent = new Date().getFullYear();
+})();
+
+/* o próximo recurso entra aqui, no mesmo formato */</code></pre></div>
+<ul>
+<li><strong>cada recurso num bloco próprio</strong>, que começa verificando se o elemento existe — a página sem aquele elemento simplesmente pula o bloco</li>
+<li><strong>um arquivo, com <code>defer</code></strong>: roda depois que o HTML está pronto, sem esperar <code>DOMContentLoaded</code></li>
+<li><strong>o conteúdo não depende dele</strong>: com o JavaScript desligado, o texto continua lá e os links continuam funcionando</li>
+<li><strong><code>localStorage</code> dentro de <code>try</code></strong>: aba anônima e navegador bloqueado não podem quebrar a página</li>
+</ul>
+<div class="nota">São as mesmas regras que o JavaScript deste site segue. O básico de selecionar elemento e ouvir evento está em <a href="html-puro.html#t-selecionar">Selecionar e manipular elementos</a> e <a href="html-puro.html#t-eventos">Eventos</a>.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s6">
+<div class="parte__cabeca"><span class="parte__num">PARTE 6</span><h2>Ícones e SVG</h2></div>
+<p class="parte__resumo">Quase todo site tem ícone: no botão do WhatsApp, na lista de serviços, no menu do celular, no logo. SVG resolve todos — nítido em qualquer tela, leve, e com a cor controlada pelo CSS. O que muda é como ele entra na página.</p>
+
+<article class="topico" id="t-ms-svg-formas" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Três jeitos de pôr um SVG na página</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>O mesmo arquivo <code>.svg</code> pode entrar de três formas, e cada uma decide o que o CSS consegue fazer com ele.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Forma</th><th>Como fica</th><th>O CSS muda a cor?</th><th>Use para</th></tr></thead>
+<tbody>
+<tr><td>Inline</td><td>o código <code>&lt;svg&gt;</code> direto no HTML</td><td>sim, e anima</td><td>ícones, que precisam seguir a cor do texto</td></tr>
+<tr><td><code>&lt;img&gt;</code></td><td><code>&lt;img src="logo.svg" alt="..."&gt;</code></td><td>não</td><td>logo e ilustração que têm cor própria</td></tr>
+<tr><td>Fundo no CSS</td><td><code>background-image: url(...)</code></td><td>não</td><td>textura e enfeite, nunca conteúdo</td></tr>
+</tbody></table></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">ícone inline</span><button class="copiar">copiar</button></div><pre><code>&lt;svg class="icone" viewBox="0 0 24 24" aria-hidden="true"&gt;
+  &lt;path d="M5 12l5 5L20 7"/&gt;
+&lt;/svg&gt;</code></pre></div>
+<ul>
+<li><strong><code>viewBox</code></strong> é a folha de desenho — "0 0 24 24" quer dizer um quadrado de 24 unidades. Com ele, o ícone escala para qualquer tamanho sem perder nitidez</li>
+<li><strong>o tamanho vem do CSS</strong>, não de <code>width</code> e <code>height</code> no código: o mesmo ícone serve no botão pequeno e no card grande</li>
+<li><strong>fonte de ícones</strong> (um arquivo de fonte cheio de símbolos) era o jeito antigo: baixa o conjunto inteiro para usar cinco ícones, e aparece como quadradinho quando a fonte falha. SVG inline substituiu com vantagem</li>
+</ul>
+</div>
+</article>
+
+<article class="topico" id="t-ms-currentcolor" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>currentColor: o ícone segue o texto</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p><code>currentColor</code> é uma palavra do CSS que quer dizer "a cor do texto aqui". Um ícone desenhado com ela muda de cor junto com o link ou o botão onde está — no hover, no foco, no modo escuro — sem nenhuma regra a mais.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">a classe de todo ícone</span><button class="copiar">copiar</button></div><pre><code>.icone {
+  display: inline-block;           /* o reset põe todo svg em bloco */
+  vertical-align: -.25em;          /* alinha com a linha do texto */
+  width: 1.25em; height: 1.25em;   /* em: acompanha o tamanho do texto ao lado */
+  flex: none;                      /* não encolhe dentro de um flex */
+  fill: none;
+  stroke: currentColor;            /* a cor do texto em volta */
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">no botão</span><button class="copiar">copiar</button></div><pre><code>&lt;a class="botao" href="https://wa.me/55DDDNUMERO"&gt;
+  &lt;svg class="icone" viewBox="0 0 24 24" aria-hidden="true"&gt;
+    &lt;path d="M4 20l1.5-4A8 8 0 1 1 9 19.5z"/&gt;
+  &lt;/svg&gt;
+  Chamar no WhatsApp
+&lt;/a&gt;</code></pre></div>
+<p>A classe <code>.icone</code> já está no <code>estilo.css</code> do <a href="#t-ms-projeto-base">projeto-base</a>. O botão já tem a cor do texto definida; o ícone herda. Troque o <code>color</code> do botão no hover e o ícone troca junto. O <code>1.25em</code> faz o ícone crescer quando o texto cresce, e o <code>.botao</code> do projeto-base já tem <code>gap</code> para separar os dois.</p>
+<div class="nota">Ícone de traço (linha) usa <code>stroke</code>; ícone cheio usa <code>fill: currentColor</code> e <code>stroke: none</code>. Não misture os dois estilos no mesmo site — é o tipo de detalhe que faz a página parecer montada com pedaços de lugares diferentes.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-sprite" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Sprite: desenhar uma vez, usar em todo lugar</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>Colar o mesmo SVG em doze cards repete o desenho doze vezes no HTML. O sprite guarda cada ícone uma vez, com um nome, e cada uso só aponta para ele.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">o sprite, logo depois do &lt;body&gt;</span><button class="copiar">copiar</button></div><pre><code>&lt;svg width="0" height="0" style="position: absolute" aria-hidden="true"&gt;
+  &lt;symbol id="i-check" viewBox="0 0 24 24"&gt;&lt;path d="M5 12l5 5L20 7"/&gt;&lt;/symbol&gt;
+  &lt;symbol id="i-seta" viewBox="0 0 24 24"&gt;&lt;path d="M5 12h14M13 6l6 6-6 6"/&gt;&lt;/symbol&gt;
+  &lt;symbol id="i-fone" viewBox="0 0 24 24"&gt;&lt;path d="M5 4h4l2 5-3 2a11 11 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/&gt;&lt;/symbol&gt;
+&lt;/svg&gt;</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">cada uso</span><button class="copiar">copiar</button></div><pre><code>&lt;svg class="icone" aria-hidden="true"&gt;&lt;use href="#i-check"/&gt;&lt;/svg&gt;</code></pre></div>
+<p>O <code>&lt;use&gt;</code> copia o desenho do <code>&lt;symbol&gt;</code>, e o <code>viewBox</code> vem junto. A classe <code>.icone</code> continua valendo: cor, tamanho e espessura do traço passam para dentro da cópia.</p>
+<div class="nota nota--alerta"><strong>Sprite em arquivo separado</strong> (<code>&lt;use href="img/icones.svg#i-check"/&gt;</code>) economiza ainda mais, porque o navegador guarda o arquivo em cache — mas só funciona servido por um servidor, do mesmo domínio. Abrindo o HTML direto do computador, com dois cliques, os ícones somem no Chrome. Para landing page de uma página, o sprite dentro do HTML é o mais seguro.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-icone-nome" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Ícone que é botão precisa de nome</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>Quando o ícone acompanha um texto — "✓ Entrega no prazo" —, ele é enfeite, e o <code>aria-hidden="true"</code> o esconde do leitor de tela para não ser lido duas vezes. Quando o ícone é <strong>o botão inteiro</strong>, é o contrário: sem texto, o leitor de tela anuncia só "botão", e ninguém sabe o que ele faz.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">botão só com ícone</span><button class="copiar">copiar</button></div><pre><code>&lt;button class="botao-icone" type="button" aria-label="Fechar"&gt;
+  &lt;svg class="icone" aria-hidden="true"&gt;&lt;use href="#i-fechar"/&gt;&lt;/svg&gt;
+&lt;/button&gt;
+
+&lt;!-- ou, com texto que só o leitor de tela lê --&gt;
+&lt;a class="botao-icone" href="https://instagram.com/perfil"&gt;
+  &lt;svg class="icone" aria-hidden="true"&gt;&lt;use href="#i-instagram"/&gt;&lt;/svg&gt;
+  &lt;span class="so-leitor"&gt;Instagram&lt;/span&gt;
+&lt;/a&gt;</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Caso</th><th>O que fazer</th></tr></thead>
+<tbody>
+<tr><td>ícone ao lado de texto</td><td><code>aria-hidden="true"</code> no <code>&lt;svg&gt;</code></td></tr>
+<tr><td>botão ou link só com ícone</td><td>nome no <code>aria-label</code> ou num <code>.so-leitor</code>, e o SVG com <code>aria-hidden</code></td></tr>
+<tr><td>ícone que é informação sozinho (um selo, um gráfico)</td><td><code>role="img"</code> e <code>aria-label</code> no <code>&lt;svg&gt;</code></td></tr>
+</tbody></table></div>
+<div class="nota"><strong>E o tamanho do toque:</strong> um ícone de 20px é pequeno demais para o dedo. O botão em volta dele precisa ter pelo menos 44 por 44 pixels, com o ícone no centro. A classe <code>.so-leitor</code> é a do projeto-base; o porquê de tudo isso está em <a href="qualidade.html#t-a11y-aria">ARIA — e quando não usar</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-logo" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>O logo em SVG</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>Logo em PNG fica borrado na tela de alta densidade e pesa mais do que precisa. Em SVG, fica nítido em qualquer tamanho e costuma pesar poucos KB. Peça ao cliente o arquivo vetorial — <code>.svg</code>, <code>.ai</code>, <code>.pdf</code> ou <code>.eps</code> —, e não a imagem que ele tem no celular.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Onde</th><th>Como entra</th><th>Por quê</th></tr></thead>
+<tbody>
+<tr><td>No topo, com as cores da marca</td><td><code>&lt;img src="img/logo.svg" alt="Nome do negócio"&gt;</code></td><td>as cores são do desenho; o CSS não precisa mexer</td></tr>
+<tr><td>No rodapé ou sobre foto, em uma cor só</td><td>inline, com <code>fill: currentColor</code></td><td>a mesma marca em branco, em preto ou na cor do fundo, sem outro arquivo</td></tr>
+<tr><td>Na aba do navegador</td><td><code>favicon.svg</code>, com o <code>.ico</code> junto</td><td>nem todo navegador aceita favicon em SVG</td></tr>
+</tbody></table></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">o logo dentro de um link</span><button class="copiar">copiar</button></div><pre><code>&lt;a class="marca" href="/"&gt;
+  &lt;img src="img/logo.svg" alt="Nome do negócio" width="160" height="40"&gt;
+&lt;/a&gt;</code></pre></div>
+<p>O <code>alt</code> do logo é o <strong>nome do negócio</strong>, não "logo". E o <code>width</code> e <code>height</code> no <code>&lt;img&gt;</code> reservam o espaço antes do arquivo chegar — sem eles, o topo pula quando o logo carrega.</p>
+<div class="nota">Quando o cliente não tem o arquivo vetorial, redesenhar o logo é um serviço à parte, não um detalhe da entrega. O favicon e a imagem de compartilhamento estão em <a href="qualidade.html#t-img-favicon">Favicon e imagem de compartilhamento</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-svg-limpar" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Limpar o SVG antes de usar</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>SVG exportado do Figma, do Illustrator ou baixado de um site vem com coisa que não serve para nada na página: comentários do programa, metadados, ids gerados, números com oito casas decimais. Um ícone de 400 bytes chega com 3 KB.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">antes</span><button class="copiar">copiar</button></div><pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!-- Generator: Adobe Illustrator 27.0.0 --&gt;
+&lt;svg version="1.1" id="Camada_1" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="24px" height="24px" viewBox="0 0 24 24" xml:space="preserve"&gt;
+  &lt;g id="Grupo_12"&gt;&lt;path fill="#1D1D1B" d="M5.000001,12.000000 L10.000000,17.000000..."/&gt;&lt;/g&gt;
+&lt;/svg&gt;</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">depois</span><button class="copiar">copiar</button></div><pre><code>&lt;svg viewBox="0 0 24 24"&gt;&lt;path d="M5 12l5 5L20 7"/&gt;&lt;/svg&gt;</code></pre></div>
+<ul>
+<li>passe pelo <strong>SVGOMG</strong>, a versão no navegador do otimizador SVGO: arraste o arquivo e baixe o limpo</li>
+<li>mantenha o <code>viewBox</code> — é ele que deixa o SVG escalar</li>
+<li>tire o <code>fill</code> fixo dos ícones (<code>#1D1D1B</code>) para o <code>currentColor</code> do CSS funcionar</li>
+<li>confira o resultado a olho: a otimização agressiva às vezes arredonda demais e entorta uma curva</li>
+</ul>
+<div class="nota nota--alerta"><strong>SVG é código, não só imagem.</strong> Um SVG pode ter <code>&lt;script&gt;</code> dentro, e colado inline ele roda na sua página. Só cole SVG de fonte em que você confia, e passe pelo otimizador — ele remove o que não é desenho. O risco está explicado em <a href="html-puro-2.html#t-xss">XSS — quando texto vira código</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-icones-onde" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Onde achar ícones — e o que olhar antes</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Desenhar ícone não é o seu trabalho. Existem conjuntos gratuitos, bem desenhados e com licença que permite uso em site de cliente.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Conjunto</th><th>Estilo</th><th>Licença</th></tr></thead>
+<tbody>
+<tr><td>Lucide</td><td>traço, simples</td><td>ISC</td></tr>
+<tr><td>Heroicons</td><td>traço e cheio</td><td>MIT</td></tr>
+<tr><td>Phosphor</td><td>vários pesos do mesmo ícone</td><td>MIT</td></tr>
+<tr><td>Tabler Icons</td><td>traço, milhares de ícones</td><td>MIT</td></tr>
+<tr><td>Material Symbols</td><td>o do Google, ajustável</td><td>Apache 2.0</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>um conjunto por site</strong>: ícones de conjuntos diferentes têm espessura e cantos diferentes, e isso aparece</li>
+<li><strong>copie o SVG do site do conjunto</strong>, só dos ícones que vai usar — não instale um pacote de mil ícones para usar oito</li>
+<li><strong>confira a licença</strong> antes: todas acima permitem uso comercial, mas a licença está sempre no site do conjunto e é ela que vale</li>
+<li><strong>logo de rede social e do WhatsApp é marca registrada</strong>: use o arquivo oficial da central de marca de cada empresa, sem mudar proporção nem cor além do que as regras deles permitem</li>
+</ul>
+<div class="nota">Para o ícone que não existe em lugar nenhum — o símbolo do serviço específico do cliente —, a saída é uma ilustração encomendada ou uma foto, não um ícone improvisado. Onde procurar referência visual está em <a href="vibecoding.html#t-vb-ref-onde">Onde procurar</a>, na trilha Vibecoding.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s7">
+<div class="parte__cabeca"><span class="parte__num">PARTE 7</span><h2>Vídeo, mapa e outros embeds</h2></div>
+<p class="parte__resumo">O vídeo do YouTube, o mapa do Google e o post do Instagram são o que o cliente mais pede — e o que mais pesa na página. O padrão que resolve os três é o mesmo: mostrar uma imagem e só carregar o de verdade quando a pessoa pede.</p>
+
+<article class="topico" id="t-ms-embed-custo" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>O que um embed custa</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Colar o código de incorporação do YouTube parece colar uma imagem. Não é: o <code>&lt;iframe&gt;</code> abre uma segunda página dentro da sua, com o player inteiro, os scripts de medição e as fontes dele — tudo baixado no carregamento, antes de qualquer pessoa pensar em apertar o play.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Embed</th><th>O que chega junto</th><th>O que fazer</th></tr></thead>
+<tbody>
+<tr><td>Vídeo do YouTube ou Vimeo</td><td>o player e os scripts dele, centenas de KB</td><td>fachada: capa com botão, o player só no clique</td></tr>
+<tr><td>Mapa do Google</td><td>o mapa interativo inteiro</td><td>link de como chegar; ou o mapa com <code>loading="lazy"</code></td></tr>
+<tr><td>Post ou feed do Instagram</td><td>o script de incorporação da rede</td><td>um print com link para o post</td></tr>
+<tr><td>Avaliações do Google em widget</td><td>script de terceiro, às vezes pago</td><td>as avaliações escritas na página, com link para o perfil</td></tr>
+</tbody></table></div>
+<p>Para ver o custo real, abra o DevTools na aba <em>Network</em>, recarregue com e sem o embed e compare o total transferido. A diferença costuma ser maior que a página inteira sem ele.</p>
+<div class="nota">Embed pesado no topo da página derruba o LCP, a métrica de carregamento que o Google mede — está em <a href="qualidade.html#t-perf-lcp">Consertar o LCP</a>. O aviso curto já aparecia em <a href="html-puro-2.html#t-performance">Performance</a>; aqui está o como.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-video-fachada" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Vídeo do YouTube que carrega no clique</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>A fachada é uma imagem de capa com um botão de play por cima. Parece o player, pesa só a imagem, e no clique o botão é trocado pelo <code>&lt;iframe&gt;</code> de verdade, já tocando. Quem nunca aperta o play nunca baixa o player.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">a fachada</span><button class="copiar">copiar</button></div><pre><code>&lt;div class="video" data-video="ID_DO_VIDEO"&gt;
+  &lt;img src="img/capa-video.webp" alt="" width="1280" height="720" loading="lazy"&gt;
+  &lt;button class="video__play" type="button"&gt;
+    &lt;span class="so-leitor"&gt;Assistir ao vídeo: &lt;/span&gt;Como funciona a entrega
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.video { position: relative; aspect-ratio: 16 / 9; border-radius: var(--raio); overflow: hidden; background: #000; }
+.video img, .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; }
+.video__play {
+  position: absolute; inset: 0; display: grid; place-content: center; gap: var(--e2);
+  background: rgb(0 0 0 / .25); color: #fff; border: 0; cursor: pointer; font: inherit; font-weight: 600;
+}
+.video__play::before {   /* o triângulo do play */
+  content: ""; justify-self: center; width: 0; height: 0;
+  border-style: solid; border-width: 18px 0 18px 30px; border-color: transparent transparent transparent #fff;
+}</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>/* troca a capa pelo player só quando a pessoa pede */
+document.querySelectorAll('.video[data-video]').forEach(function (caixa) {
+  var botao = caixa.querySelector('.video__play');
+  if (!botao) return;
+  botao.addEventListener('click', function () {
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + caixa.dataset.video + '?autoplay=1';
+    f.title = botao.textContent.trim();
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    caixa.innerHTML = '';
+    caixa.appendChild(f);
+    f.focus();
+  });
+});</code></pre></div>
+<ul>
+<li><strong>a capa é sua</strong>, salva em <code>img/</code>: um quadro bonito do vídeo, em WebP. Dá para usar a miniatura que o YouTube gera, mas aí a página já fala com o servidor dele antes do clique</li>
+<li><strong><code>youtube-nocookie.com</code></strong> é o "modo de privacidade aprimorado" do próprio YouTube: segundo o Google, ele não guarda informação de quem visita até a pessoa dar play</li>
+<li><strong>o <code>title</code> do iframe</strong> é o que o leitor de tela anuncia; e o foco vai para o player, para quem usa teclado não se perder</li>
+<li><strong>o <code>aspect-ratio</code></strong> reserva o espaço do vídeo antes de tudo carregar — a página não pula</li>
+</ul>
+<div class="nota">No celular, alguns navegadores só tocam de verdade no segundo toque, dentro do próprio player. É uma regra do navegador, não um erro da fachada.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-video-proprio" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Vídeo próprio no site</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>Quando o vídeo é curto e é do cliente — a vitrine girando, o antes e depois, um fundo discreto na hero —, ele pode morar no próprio site com a tag <code>&lt;video&gt;</code>, sem player de ninguém.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">vídeo com controles</span><button class="copiar">copiar</button></div><pre><code>&lt;video controls preload="none" poster="img/capa-obra.webp" width="1280" height="720"&gt;
+  &lt;source src="video/obra.mp4" type="video/mp4"&gt;
+  Seu navegador não mostra vídeo. &lt;a href="video/obra.mp4"&gt;Baixe o arquivo&lt;/a&gt;.
+&lt;/video&gt;</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">vídeo de fundo, sem som</span><button class="copiar">copiar</button></div><pre><code>&lt;video autoplay muted loop playsinline preload="metadata" poster="img/hero.webp" aria-hidden="true"&gt;
+  &lt;source src="video/hero.mp4" type="video/mp4"&gt;
+&lt;/video&gt;</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Atributo</th><th>Por quê</th></tr></thead>
+<tbody>
+<tr><td><code>preload="none"</code></td><td>não baixa nada até a pessoa apertar play</td></tr>
+<tr><td><code>poster</code></td><td>a imagem que aparece antes — sem ela, fica um retângulo preto</td></tr>
+<tr><td><code>muted</code> + <code>playsinline</code></td><td>sem os dois, o iPhone não toca sozinho e abre em tela cheia</td></tr>
+<tr><td><code>aria-hidden</code> no fundo</td><td>vídeo decorativo não é conteúdo; o leitor de tela pula</td></tr>
+</tbody></table></div>
+<div class="nota nota--alerta"><strong>Vídeo longo não mora no site.</strong> Arquivo de vídeo pesa dezenas de megabytes, e cada visita consome banda da hospedagem — no plano gratuito, isso acaba. Até uns 30 segundos, comprimido e sem som, tudo bem; acima disso, YouTube ou Vimeo com a fachada. E vídeo que se mexe sozinho precisa parar para quem pediu menos movimento no sistema: pause-o com <code>prefers-reduced-motion</code> ou mostre só o <code>poster</code>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-mapa" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Mapa: link, embed ou imagem</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>O mapa interativo raramente é o que a pessoa precisa. No celular, o que ela quer é tocar e abrir o aplicativo de mapas já com a rota — e isso é um link.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Opção</th><th>Peso</th><th>Melhor para</th></tr></thead>
+<tbody>
+<tr><td>Link "Como chegar"</td><td>nenhum</td><td>quase sempre: abre o app de mapas no celular</td></tr>
+<tr><td>Imagem do mapa + link</td><td>uma imagem</td><td>quando a localização é argumento (perto do centro, fácil de estacionar)</td></tr>
+<tr><td>Mapa incorporado com <code>loading="lazy"</code></td><td>o mapa inteiro, mas só ao chegar perto</td><td>quando o cliente faz questão do mapa interativo</td></tr>
+</tbody></table></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">o link que abre o app</span><button class="copiar">copiar</button></div><pre><code>&lt;a href="https://www.google.com/maps/search/?api=1&amp;query=Rua+Exemplo+123+Cidade" target="_blank" rel="noopener"&gt;
+  Como chegar ↗
+&lt;/a&gt;</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">o mapa incorporado, sem pesar no carregamento</span><button class="copiar">copiar</button></div><pre><code>&lt;iframe
+  src="https://www.google.com/maps/embed?pb=..."
+  title="Mapa: Nome do negócio, Rua Exemplo, 123"
+  width="600" height="400" style="border: 0; width: 100%; height: auto; aspect-ratio: 3 / 2"
+  loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+  allowfullscreen&gt;&lt;/iframe&gt;</code></pre></div>
+<p>O endereço do <code>src</code> sai do próprio Google Maps: <em>Compartilhar</em>, depois <em>Incorporar um mapa</em>. O <code>loading="lazy"</code> faz o navegador só baixar o mapa quando a pessoa rola até perto dele — quem não chega ao rodapé nunca paga o custo.</p>
+<div class="nota">A seção <a href="modelos.html#m-secao-contato">Contato e horário</a> da galeria de Modelos já usa o link, não o mapa. O endereço escrito precisa ser o mesmo do Perfil da Empresa: <a href="trafego.html#t-tr-nap">Consistência de nome, endereço e telefone</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-embed-privacidade" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Embed também é coleta de dado</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Todo embed de terceiro — YouTube, Maps, Instagram, widget de chat — faz o navegador de quem visita conversar com o servidor daquela empresa, e muitos gravam cookies. Para a lei, é coleta de dado pessoal, mesmo que você não tenha instalado nenhum "rastreamento".</p>
+<ul>
+<li>a <strong>fachada</strong> resolve o peso e a privacidade de uma vez: nada é chamado até a pessoa clicar</li>
+<li>o <strong>link</strong> no lugar do mapa não coleta nada</li>
+<li>o que continuar incorporado entra na <strong>política de privacidade</strong>, com o nome da empresa</li>
+</ul>
+<div class="nota">Quais dados cada ferramenta coleta e o que isso pede do site estão em <a href="negocio.html#t-lgpd-coleta">O que você coleta sem perceber</a>, na trilha Negócio.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s8">
+<div class="parte__cabeca"><span class="parte__num">PARTE 8</span><h2>O que o CSS já resolve</h2></div>
+<p class="parte__resumo">Coisas que até pouco tempo pediam JavaScript, biblioteca ou gambiarra e hoje são uma ou duas linhas de CSS — e as duas situações que quase todo site esquece: a tabela no celular e a página impressa.</p>
+
+<article class="topico" id="t-ms-carrossel" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Carrossel sem biblioteca</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>A maior parte do que se chama carrossel é uma fila de cards que se arrasta para o lado. O navegador já faz isso — com a inércia do dedo, o encaixe em cada card e a barra de rolagem — sem uma linha de JavaScript.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.carrossel {
+  display: flex; gap: var(--e4);
+  overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;     /* para sempre num card, nunca no meio */
+  padding-bottom: var(--e3);         /* espaço para a barra de rolagem */
+}
+.carrossel &gt; * {
+  flex: 0 0 min(80%, 20rem);         /* o pedaço do próximo aparece: mostra que dá para arrastar */
+  scroll-snap-align: start;
+}</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div><pre><code>&lt;div class="carrossel" role="region" aria-label="Trabalhos recentes" tabindex="0"&gt;
+  &lt;figure&gt;...&lt;/figure&gt;
+  &lt;figure&gt;...&lt;/figure&gt;
+  &lt;figure&gt;...&lt;/figure&gt;
+&lt;/div&gt;</code></pre></div>
+<ul>
+<li>o <strong>pedaço do próximo card</strong> aparecendo na borda é o que avisa que existe mais — seta escondida não avisa ninguém</li>
+<li><code>tabindex="0"</code> deixa rolar pelo teclado, com as setas; o <code>aria-label</code> diz ao leitor de tela o que é a região</li>
+<li>carrossel que passa sozinho é outra coisa, e quase sempre piora: ninguém consegue ler o que sai da tela enquanto lê</li>
+</ul>
+<div class="nota">A versão com os pontinhos que acompanham e levam a cada card está pronta em <a href="modelos.html#m-carrossel">Carrossel sem biblioteca</a>, na galeria de Modelos.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-accent" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Cor nos controles do formulário</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Caixa de marcar, botão de opção, barra deslizante e barra de progresso vêm com a cor do sistema — azul, quase sempre. Estilizar cada um na mão era um trabalho inteiro. Hoje é uma linha.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>:root {
+  accent-color: var(--cor-destaque);   /* marcar, opção, deslizar e progresso na cor da marca */
+  color-scheme: light dark;            /* os controles nativos acompanham o modo escuro */
+}</code></pre></div>
+<p>O <code>accent-color</code> já está no <a href="#t-ms-projeto-base">projeto-base</a>. O <code>color-scheme</code> entra quando o site tiver modo escuro — ele faz a barra de rolagem, os campos e o calendário do <code>&lt;input type="date"&gt;</code> ficarem escuros quando o site está no modo escuro. Sem ele, aparece um campo branco brilhando no meio da página escura.</p>
+<div class="nota">O navegador ajusta o tom da marca dentro do controle para manter contraste. Se a cor de destaque for muito clara, o controle fica com um visto escuro — é proposital. Os formulários em si estão em <a href="qualidade.html#t-form-nativo">O que o navegador já faz de graça</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-subgrid" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Cards alinhados entre si</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Três cards lado a lado, cada um com um título de tamanho diferente: os textos e os botões ficam desalinhados, cada card na sua altura. O <code>subgrid</code> faz as linhas de dentro de cada card seguirem as mesmas linhas da grade — título com título, texto com texto, botão com botão.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.cards {
+  display: grid; gap: var(--e5);
+  grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+}
+.cards &gt; .card {
+  display: grid;
+  grid-row: span 3;               /* cada card ocupa três linhas: título, texto, botão */
+  grid-template-rows: subgrid;    /* e usa as linhas da grade de fora */
+  gap: var(--e3);                 /* o espaço entre as partes de dentro */
+}</code></pre></div>
+<p>O número do <code>span</code> é o número de partes do card. Card com imagem, título, texto e botão é <code>span 4</code>. Com o <code>subgrid</code>, o botão de todos os cards para na mesma altura sem ninguém medir nada.</p>
+<div class="nota">Funciona nos navegadores atuais desde 2023. Onde não funcionar, o card cai para uma grade comum — continua certo, só não fica alinhado. Grid em geral está em <a href="html-puro.html#t-grid">Grid</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-inert" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Bloquear o fundo com inert</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>Com o menu do celular aberto por cima da página, o Tab continua passando pelos links que estão atrás dele — invisíveis para quem vê, mas não para quem navega pelo teclado. O atributo <code>inert</code> desliga um pedaço inteiro da página: não recebe clique, nem foco, nem é lido.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js</span><button class="copiar">copiar</button></div><pre><code>/* ao abrir o menu, o resto da página sai de alcance; ao fechar, volta */
+function menuAberto(aberto) {
+  document.querySelector('main').inert = aberto;
+  document.querySelector('footer').inert = aberto;
+}</code></pre></div>
+<p>A janela feita com <code>&lt;dialog&gt;</code> e <code>showModal()</code> já faz isso sozinha — é um dos motivos para usá-la. O <code>inert</code> é para o que não é <code>&lt;dialog&gt;</code>: um menu lateral, um painel que desliza.</p>
+<div class="nota">O <code>&lt;dialog&gt;</code> e o que ele resolve estão em <a href="html-puro-2.html#t-dialog">&lt;dialog&gt;</a>. O topo com menu da galeria esconde o painel fechado com <code>visibility</code>, que também o tira do Tab: <a href="modelos.html#m-secao-topo">Topo com menu no celular</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-tabela" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Tabela no celular</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Tabela de preços, de horários, de especificações: no celular, ela ou espreme o texto até ficar ilegível, ou estoura a largura da página e faz tudo rolar para o lado. A saída mais simples e mais segura é deixar a tabela rolar sozinha, dentro de uma caixa.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">html</span><button class="copiar">copiar</button></div><pre><code>&lt;div class="tabela-rolagem" role="region" aria-label="Tabela de preços" tabindex="0"&gt;
+  &lt;table&gt;...&lt;/table&gt;
+&lt;/div&gt;</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css</span><button class="copiar">copiar</button></div><pre><code>.tabela-rolagem { overflow-x: auto; }
+.tabela-rolagem table { min-width: 36rem; border-collapse: collapse; }</code></pre></div>
+<ul>
+<li>só a tabela rola; a página continua parada — nada de rolagem lateral na página inteira</li>
+<li><code>tabindex="0"</code> para rolar pelo teclado, e o <code>aria-label</code> para o leitor de tela saber o que é</li>
+<li>se a tabela tem duas colunas — dia e horário, item e preço —, ela provavelmente cabe no celular sem rolar: teste antes de pôr a caixa</li>
+</ul>
+<div class="nota nota--alerta"><strong>O truque de virar cada linha num card</strong> no celular (trocando o <code>display</code> das células) funciona na tela, mas em alguns navegadores faz a tabela deixar de ser tabela para o leitor de tela — as relações entre cabeçalho e dado se perdem. Se usar, teste com leitor de tela; a caixa com rolagem não tem esse risco.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-impressao" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>A página impressa</h3><span class="tag tag--novo">Novo</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Cardápio, tabela de preços, política, orçamento: alguém vai imprimir, ou salvar em PDF pelo "Imprimir" do navegador. Sem estilo de impressão, sai o menu, o botão flutuante do WhatsApp, o fundo escuro gastando tinta e os links sem endereço.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">no fim do estilo.css</span><button class="copiar">copiar</button></div><pre><code>@media print {
+  .topo, .botao, .zap-flutuante, video, iframe { display: none; }
+  body { background: #fff; color: #000; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .85em; }
+  .card, figure, tr { break-inside: avoid; }   /* não corta um card no meio da folha */
+  h2, h3 { break-after: avoid; }               /* título não fica sozinho no pé da página */
+}</code></pre></div>
+<p>Para testar sem gastar papel: <em>Ctrl+P</em> (<em>Cmd+P</em> no Mac) e olhar a prévia, ou o DevTools, que simula a impressão na tela (<em>Rendering → Emulate CSS media type → print</em>).</p>
+<div class="nota">Três linhas de impressão resolvem a maior parte, e ninguém lembra delas até o cliente mandar o PDF torto. Por isso esse bloco já está no <code>estilo.css</code> do <a href="#t-ms-projeto-base">projeto-base</a>, na camada de utilitários.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s9">
+<div class="parte__cabeca"><span class="parte__num">PARTE 9</span><h2>O projeto-base</h2></div>
+<p class="parte__resumo">Tudo desta trilha junto, pronto para copiar: é o ponto de partida de todo site novo. Troque o tokens.css pelo do cliente e comece pela primeira seção.</p>
+
+<article class="topico" id="t-ms-projeto-base" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>O projeto-base inteiro</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span><span class="tag tag--css">CSS</span></div>
+<div class="topico__corpo">
+<p>Três arquivos e as pastas. O <code>index.html</code> é o esqueleto das partes 2; o <code>tokens.css</code> e o <code>estilo.css</code> são as partes 3 e 4 montadas; o <code>app.js</code> é o formato da parte 5.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">index.html</span><button class="copiar">copiar</button></div><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+
+  &lt;title&gt;Nome do negócio — o que faz, onde&lt;/title&gt;
+  &lt;meta name="description" content="Uma frase que responde a busca e convida a clicar."&gt;
+  &lt;link rel="canonical" href="https://seusite.com.br/"&gt;
+
+  &lt;meta property="og:title" content="Nome do negócio — o que faz"&gt;
+  &lt;meta property="og:description" content="A mesma ideia da description, para quem recebe o link."&gt;
+  &lt;meta property="og:image" content="https://seusite.com.br/og.jpg"&gt;
+  &lt;meta property="og:url" content="https://seusite.com.br/"&gt;
+  &lt;meta property="og:type" content="website"&gt;
+  &lt;meta name="twitter:card" content="summary_large_image"&gt;
+
+  &lt;link rel="icon" href="/favicon.svg" type="image/svg+xml"&gt;
+  &lt;link rel="icon" href="/favicon.ico" sizes="32x32"&gt;
+  &lt;link rel="apple-touch-icon" href="/apple-touch-icon.png"&gt;
+  &lt;meta name="theme-color" content="#0D6B62"&gt;
+
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=...&amp;display=swap"&gt;
+
+  &lt;link rel="stylesheet" href="css/tokens.css"&gt;
+  &lt;link rel="stylesheet" href="css/estilo.css"&gt;
+  &lt;script src="js/app.js" defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;a class="pular" href="#conteudo"&gt;Pular para o conteúdo&lt;/a&gt;
+
+  &lt;header class="topo"&gt;
+    &lt;div class="container topo__linha"&gt;
+      &lt;a class="marca" href="/"&gt;Nome do negócio&lt;/a&gt;
+      &lt;nav aria-label="Principal"&gt;
+        &lt;ul class="fila"&gt;
+          &lt;li&gt;&lt;a href="#servicos"&gt;Serviços&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#sobre"&gt;Sobre&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#contato"&gt;Contato&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/nav&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+
+  &lt;main id="conteudo"&gt;
+    &lt;section class="secao hero" aria-labelledby="titulo"&gt;
+      &lt;div class="container pilha"&gt;
+        &lt;h1 id="titulo"&gt;A promessa em uma linha&lt;/h1&gt;
+        &lt;p&gt;O que você faz, para quem, e por que confiar.&lt;/p&gt;
+        &lt;a class="botao" href="https://wa.me/55DDDNUMERO"&gt;Pedir orçamento&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section class="secao" id="servicos" aria-labelledby="servicos-titulo"&gt;
+      &lt;div class="container pilha"&gt;
+        &lt;h2 id="servicos-titulo"&gt;Serviços&lt;/h2&gt;
+        &lt;ul class="grade"&gt;
+          &lt;li class="card"&gt;...&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;footer class="rodape"&gt;
+    &lt;div class="container"&gt;
+      &lt;p&gt;© &lt;span data-ano&gt;2026&lt;/span&gt; Nome do negócio&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css/tokens.css</span><button class="copiar">copiar</button></div><pre><code>/* tokens.css — troque este arquivo inteiro pelo que sai da
+   ferramenta Design system: os nomes são os mesmos. */
+:root {
+  --cor-fundo:          #FFFFFF;
+  --cor-superficie:     #F6F7F7;
+  --cor-linha:          #DDE2E1;
+  --cor-texto:          #1C2524;
+  --cor-texto-fraco:    #5F6E6B;
+  --cor-destaque:       #0D6B62;
+  --cor-destaque-texto: #0D6B62;
+  --cor-destaque-hover: #0A554E;
+  --cor-sobre-destaque: #FFFFFF;
+  --cor-foco:           #0D6B62;
+
+  --fonte-titulo: system-ui, sans-serif;
+  --fonte-corpo:  system-ui, sans-serif;
+  --peso-titulo:  700;
+  --peso-corpo:   400;
+
+  --t-peq:   14px;
+  --t-corpo: 17px;
+  --t-h3:    clamp(20px, 2.5vw, 27px);
+  --t-h2:    clamp(29px, 3.5vw, 41px);
+  --t-h1:    clamp(32px, 6vw, 65px);
+  --alt-corpo:  1.6;
+  --alt-titulo: 1.1;
+  --medida:     66ch;
+
+  --e1: 4px;  --e2: 8px;  --e3: 12px; --e4: 16px; --e5: 24px;
+  --e6: 32px; --e7: 48px; --e8: 64px; --e9: 96px; --e10: 128px;
+
+  --raio: 8px;
+  --dur:  200ms;
+  --curva: cubic-bezier(.23, 1, .32, 1);
+}</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css/estilo.css</span><button class="copiar">copiar</button></div><pre><code>/* estilo.css — a ordem das camadas decide quem vence, não a ordem do arquivo */
+@layer reset, base, layout, componentes, utilitarios;
+
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; }
+  * { margin: 0; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body { min-height: 100svh; }
+  img, picture, video, svg { display: block; max-width: 100%; height: auto; }
+  input, button, textarea, select { font: inherit; color: inherit; }
+  h1, h2, h3, h4, p, li { overflow-wrap: break-word; }
+  ul[class], ol[class] { list-style: none; padding: 0; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cor-fundo); color: var(--cor-texto);
+    font-family: var(--fonte-corpo); font-weight: var(--peso-corpo);
+    font-size: var(--t-corpo); line-height: var(--alt-corpo);
+  }
+  h1, h2, h3 {
+    font-family: var(--fonte-titulo); font-weight: var(--peso-titulo);
+    line-height: var(--alt-titulo); text-wrap: balance;
+  }
+  h1 { font-size: var(--t-h1); }
+  h2 { font-size: var(--t-h2); }
+  h3 { font-size: var(--t-h3); }
+  p  { max-width: var(--medida); text-wrap: pretty; }
+  a  { color: var(--cor-destaque-texto); text-underline-offset: .15em; }
+  :root { accent-color: var(--cor-destaque); }   /* marcar, opção e deslizar na cor da marca (parte 8) */
+  :focus-visible { outline: 2px solid var(--cor-foco); outline-offset: 3px; }
+  [id] { scroll-margin-top: var(--e9); }   /* a âncora não some atrás do topo fixo */
+}
+
+@layer layout {
+  .container { width: min(100% - 2 * var(--e5), 72rem); margin-inline: auto; }
+  .secao     { padding-block: clamp(var(--e7), 8vw, var(--e9)); }
+
+  /* pilha: coisas uma embaixo da outra, com o mesmo respiro */
+  .pilha { display: flex; flex-direction: column; gap: var(--e5); }
+
+  /* fila: coisas lado a lado que quebram linha quando não cabem */
+  .fila  { display: flex; flex-wrap: wrap; align-items: center; gap: var(--e3); }
+
+  /* grade: quantas colunas couberem, nenhuma mais estreita que 16rem */
+  .grade {
+    display: grid; gap: var(--e5);
+    grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+  }
+}
+
+@layer componentes {
+  .pular { position: absolute; left: var(--e3); top: -100px; }
+  .pular:focus { top: var(--e3); }
+
+  .topo { position: sticky; top: 0; z-index: 10; background: var(--cor-fundo);
+          border-bottom: 1px solid var(--cor-linha); }
+  .topo__linha { display: flex; align-items: center; justify-content: space-between;
+                 gap: var(--e4); min-height: 64px; }
+  .topo a { color: inherit; text-decoration: none; }
+  .marca   { font-weight: 700; }
+
+  .botao {
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--e2);
+    min-height: 48px; padding: var(--e3) var(--e5); border-radius: var(--raio);
+    background: var(--cor-destaque); color: var(--cor-sobre-destaque);
+    font-weight: 600; text-decoration: none; align-self: start;
+    transition: background var(--dur) var(--curva), transform 120ms var(--curva);
+  }
+  .botao:active { transform: scale(.97); }
+  @media (hover: hover) { .botao:hover { background: var(--cor-destaque-hover); } }
+
+  .card { padding: var(--e5); background: var(--cor-superficie);
+          border: 1px solid var(--cor-linha); border-radius: var(--raio); }
+
+  /* ícone: o tamanho do texto ao lado, a cor dele (parte 6) */
+  .icone { display: inline-block; vertical-align: -.25em;   /* o reset põe svg em bloco */
+           width: 1.25em; height: 1.25em; flex: none; fill: none; stroke: currentColor;
+           stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  .rodape { padding-block: var(--e7); border-top: 1px solid var(--cor-linha);
+            color: var(--cor-texto-fraco); font-size: var(--t-peq); }
+}
+
+@layer utilitarios {
+  .so-leitor { position: absolute; width: 1px; height: 1px; overflow: hidden;
+               clip-path: inset(50%); white-space: nowrap; }
+
+  /* a página impressa ou salva em PDF (parte 8) */
+  @media print {
+    .topo, .botao, video, iframe { display: none; }
+    body { background: #fff; color: #000; }
+    a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .85em; }
+    .card, figure, tr { break-inside: avoid; }
+    h2, h3 { break-after: avoid; }
+  }
+}</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js/app.js</span><button class="copiar">copiar</button></div><pre><code>/* app.js — cada bloco se guarda sozinho: se o elemento não existe, sai */
+
+/* ano do rodapé sempre atual */
+(function () {
+  var ano = document.querySelector('[data-ano]');
+  if (!ano) return;
+  ano.textContent = new Date().getFullYear();
+})();
+
+/* o próximo recurso entra aqui, no mesmo formato */</code></pre></div>
+<div class="nota">No rodapé, <code>&lt;span data-ano&gt;&lt;/span&gt;</code> recebe o ano atual pelo <code>app.js</code> — o "© 2024" em 2026 é um dos sinais de site abandonado de <a href="depois-do-ar.html#t-da-envelhece">O conteúdo que envelhece</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-comecar" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Antes da primeira seção</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Com o projeto-base copiado, a sequência de um site novo fica sempre a mesma:</p>
+<ol>
+<li>criar a pasta com o nome do cliente e iniciar o Git (<a href="fluxo.html#t-git-iniciar">Começar um projeto</a>)</li>
+<li>gerar os tokens nas ferramentas da fase 2 e trocar o <code>tokens.css</code></li>
+<li>gerar o <code>&lt;head&gt;</code> na ferramenta <a href="ferramenta-cabecalho.html">Cabeçalho da página</a> e colar no lugar do de exemplo</li>
+<li>escrever o conteúdo de cada seção, mesmo que com <code>[PREENCHER]</code></li>
+<li>montar as seções no molde da parte 2, uma por vez, testando no celular a cada uma — as mais comuns já estão prontas, no formato do projeto-base, na categoria <a href="modelos.html#m-secao-topo">Seções</a> dos Modelos</li>
+<li>só então os efeitos — da trilha <a href="movimento.html">Movimento</a> ou dos <a href="modelos.html">Modelos</a></li>
+</ol>
+<div class="nota">Depois da construção vêm a <a href="qualidade.html">Qualidade</a> — imagem, acessibilidade, velocidade e teste — e a trilha <a href="depois-do-ar.html">Depois do ar</a>, com o que fazer quando o site é publicado.</div>
+</div>
+</article>
+</section>
+
+<nav class="passo" aria-label="Navegar entre trilhas">
+<a class="passo__item passo__item--ant" href="html-puro-2.html"><span>Anterior</span><strong>HTML puro — parte 2</strong></a>
+<a class="passo__item passo__item--prox" href="fluxo.html"><span>Próxima</span><strong>Fluxo de trabalho</strong></a>
+</nav>
+</main>
+</div>
+<footer class="rodape">
+<div class="rodape__interno">
+<p class="rodape__marca"><a href="index.html">Gustavo Tutorial</a><span>Material de estudo aberto, em português. Feito em HTML, CSS e JavaScript puros.</span></p>
+<nav class="rodape__nav" aria-label="Rodapé">
+<a href="estudar.html">Estudar</a>
+<a href="ferramentas.html">Trabalhar</a>
+<a href="modelos.html">Modelos</a>
+<a href="patch-notes.html">Patch notes</a>
+<a href="colofao.html">Colofão</a>
+</nav>
+</div>
+</footer>
+<script src="app.js"></script>
+<script src="busca.js" defer></script>
+</body>
+</html>

@@ -60,21 +60,37 @@
     });
   });
 
-  /* progresso nos cards da home (usa o mesmo gt-estudados acima) */
-  var celulas = document.querySelectorAll('.grade .celula[href]');
-  if (celulas.length && window.GT_PROGRESSO) {
-    celulas.forEach(function (cel) {
-      var ids = window.GT_PROGRESSO[cel.getAttribute('href')];
+  /* progresso no percurso da estudar.html (usa o mesmo gt-estudados acima):
+     "12 de 68 estudados" e uma linha fina que enche na proporção */
+  var itens = document.querySelectorAll('.percurso__item[href]');
+  if (itens.length && window.GT_PROGRESSO) {
+    itens.forEach(function (item) {
+      var ids = window.GT_PROGRESSO[item.getAttribute('href')];
       if (!ids || !ids.length) return;
       var feitos = ids.filter(function (id) { return estudados[id]; }).length;
       if (!feitos) return;
-      var pe = cel.querySelector('.celula__pe');
-      if (!pe) return;
-      var badge = document.createElement('span');
-      badge.className = 'celula__progresso' + (feitos === ids.length ? ' is-completo' : '');
-      badge.textContent = feitos === ids.length ? 'completo' : feitos + ' de ' + ids.length;
-      pe.insertBefore(badge, pe.querySelector('.seta'));
+      var p = document.createElement('span');
+      p.className = 'percurso__progresso' + (feitos === ids.length ? ' is-completo' : '');
+      p.textContent = feitos === ids.length ? 'Completa' : feitos + ' de ' + ids.length + ' estudados';
+      p.style.setProperty('--feito', (feitos / ids.length).toFixed(3));
+      item.appendChild(p);
     });
+  }
+
+  /* na trilha: quantos tópicos desta página já foram estudados, embaixo do título do sumário */
+  var titSum = document.querySelector('.sumario__titulo');
+  var topicos = document.querySelectorAll('.topico[id]');
+  if (titSum && topicos.length) {
+    var contador = document.createElement('span');
+    contador.className = 'sumario__conta';
+    var contar = function () {
+      var f = 0;
+      topicos.forEach(function (tp) { if (tp.classList.contains('is-estudado')) f++; });
+      contador.textContent = f ? f + ' de ' + topicos.length + ' estudados' : topicos.length + ' tópicos';
+    };
+    contar();
+    titSum.appendChild(contador);
+    document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('.marcar')) contar(); });
   }
 
   /* copiar codigo */
@@ -107,10 +123,37 @@
     document.querySelectorAll('.topico').forEach(function (t) { obs.observe(t); });
   }
 
-  /* sumario no celular */
+  /* sumario no celular: uma barra fina que acompanha a leitura — o botão diz a
+     parte em que você está, e a linha de baixo enche conforme a página avança */
   var sum = document.getElementById('sumario');
   var abrir = document.getElementById('sumario-abrir');
   if (sum && abrir) {
+    var rotulo = abrir.querySelector('span');
+    var partesSum = document.querySelectorAll('.parte[id]');
+    var barra = document.createElement('span');
+    barra.className = 'sumario__lido';
+    barra.setAttribute('aria-hidden', 'true');
+    sum.appendChild(barra);
+    if (rotulo && partesSum.length && window.IntersectionObserver) {
+      var nomeParte = {};
+      sum.querySelectorAll('.sumario__parte').forEach(function (a) { nomeParte[a.getAttribute('href').slice(1)] = a.textContent.trim(); });
+      var obsParte = new IntersectionObserver(function (ents) {
+        ents.forEach(function (en) {
+          if (en.isIntersecting && nomeParte[en.target.id]) rotulo.textContent = 'Parte ' + nomeParte[en.target.id];
+        });
+      }, { rootMargin: '-80px 0px -75% 0px', threshold: 0 });
+      partesSum.forEach(function (p) { obsParte.observe(p); });
+    }
+    var agendadoLido = false;
+    var medirLido = function () {
+      agendadoLido = false;
+      var alto = document.documentElement.scrollHeight - window.innerHeight;
+      barra.style.transform = 'scaleX(' + (alto > 0 ? Math.min(window.scrollY / alto, 1) : 0).toFixed(4) + ')';
+    };
+    window.addEventListener('scroll', function () {
+      if (!agendadoLido) { agendadoLido = true; requestAnimationFrame(medirLido); }
+    }, { passive: true });
+    medirLido();
     abrir.addEventListener('click', function () {
       var ab = sum.classList.toggle('is-aberto');
       abrir.setAttribute('aria-expanded', String(ab));
@@ -276,26 +319,25 @@
   if (!atuais.length) return;
 
   /* 2. estudar.html: lista do que chegou e marca nas trilhas */
-  var mapa = document.querySelector('.home__mapa');
+  var mapa = document.querySelector('.percurso');
   if (mapa) {
     var nomes = {};
     atuais.forEach(function (r) {
-      var link = mapa.querySelector('.home__links a[href="' + r.a + '"]');
+      var link = mapa.querySelector('.percurso__item[href="' + r.a + '"]');
       if (!link) return;
-      /* o nome sai antes do selo "novo" entrar no link — senão vira "HTML puronovo" */
-      if (!nomes[r.a]) nomes[r.a] = link.textContent;
+      if (!nomes[r.a]) nomes[r.a] = link.querySelector('.percurso__nome').textContent;
       if (link.querySelector('.novidade')) return;
       var pino = document.createElement('span');
       pino.className = 'novidade';
-      pino.textContent = 'novo';
-      link.appendChild(pino);
+      pino.textContent = 'Novo';
+      link.querySelector('.percurso__nome').appendChild(pino);
     });
 
     var caixa = document.createElement('section');
     caixa.className = 'recentes';
     caixa.setAttribute('aria-labelledby', 'recentes-titulo');
     var titulo = document.createElement('p');
-    titulo.className = 'home__titulo';
+    titulo.className = 'recentes__titulo';
     titulo.id = 'recentes-titulo';
     titulo.textContent = 'Chegou nos últimos ' + DIAS + ' dias';
     var ul = document.createElement('ul');
@@ -322,17 +364,6 @@
     mapa.parentNode.insertBefore(caixa, mapa.nextSibling);
   }
 
-  /* 3. hub: aviso na porta de estudo */
-  var porta = document.querySelector('.porta--estudo');
-  if (porta) {
-    var pe = porta.querySelector('.porta__pe');
-    var aviso = document.createElement('span');
-    aviso.className = 'porta__novo';
-    aviso.textContent = atuais.length === 1
-      ? '1 tópico novo nos últimos ' + DIAS + ' dias'
-      : atuais.length + ' tópicos novos nos últimos ' + DIAS + ' dias';
-    porta.insertBefore(aviso, pe || null);
-  }
 })();
 
 /* exemplos ao lado do texto: em tela larga (1280px+), cada grupo de exemplos
@@ -801,13 +832,26 @@
   document.documentElement.classList.add('js-revela');
 
   /* título: cada palavra dentro de uma máscara */
-  var h1 = main.querySelector('.hero h1');
-  if (h1 && !h1.children.length) {
-    var palavras = h1.textContent.trim().split(/\s+/);
+  var h1 = main.querySelector('.area__titulo, .hub__titulo');
+  if (h1) {
+    /* cada palavra numa máscara; um elemento dentro do título (o ponto do hub) entra junto da palavra anterior */
+    var nos = Array.prototype.slice.call(h1.childNodes), html = [], i = 0;
     h1.setAttribute('aria-label', h1.textContent.trim());
-    h1.innerHTML = palavras.map(function (p, i) {
-      return '<span class="rv-mascara" aria-hidden="true"><span style="--i:' + i + '">' + p + '</span></span>';
-    }).join(' ');
+    nos.forEach(function (no) {
+      if (no.nodeType === 3) {
+        no.textContent.split(/(\s+)/).forEach(function (p) {
+          if (!p) return;
+          if (/^\s+$/.test(p)) { html.push(' '); return; }
+          html.push('<span class="rv-mascara" aria-hidden="true"><span style="--i:' + (i++) + '">' + p + '</span></span>');
+        });
+      } else if (no.nodeType === 1) {
+        var ultimo = html.length - 1;
+        var extra = no.outerHTML.replace('<span', '<span aria-hidden="true"');
+        if (ultimo >= 0 && html[ultimo] !== ' ') html[ultimo] = html[ultimo].replace(/<\/span><\/span>$/, extra + '</span></span>');
+        else html.push(extra);
+      }
+    });
+    h1.innerHTML = html.join('');
   }
 
   /* números: contam do zero, desacelerando no fim */
@@ -828,8 +872,9 @@
   });
 
   function iniciar() {
-    var SELETOR = '.hero__olho, .hero__lead, .hero__nums, .ctas, .home__grupo, .home__links li, ' +
-      '.home__nota, .recentes, .passo, .mod-filtros, .mod-cel, .mod-lista__topo, .mod-indice__grupo, .mod-rodape';
+    var SELETOR = '.area__lead, .area__meta, .area__acoes, .hub__lead, .hub__base > *, ' +
+      '.percurso__cabeca, .percurso__item, .recentes, .projeto, .fase-grupo, .passo, ' +
+      '.mod-filtros, .mod-cel, .mod-lista__topo, .mod-indice__grupo, .mod-rodape';
     var alvos = main.querySelectorAll(SELETOR);
     var fila = [], agendado = false;
 

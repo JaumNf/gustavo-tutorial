@@ -10,6 +10,7 @@ export const FASES = [
   { n: 2, id: 'fase-2', nome: 'Identidade' },
   { n: 3, id: 'fase-3', nome: 'Montar a página' },
   { n: 4, id: 'fase-4', nome: 'Entregar' },
+  { n: 5, id: 'fase-5', nome: 'Acompanhar' },
 ];
 
 export const FERRAMENTAS = [
@@ -27,6 +28,7 @@ export const FERRAMENTAS = [
   { id: 'f-utm',        arquivo: 'ferramenta-utm.html',           nome: 'Gerador de UTM',           fase: 3 },
   { id: 'f-checklist',  arquivo: 'ferramenta-checklist.html',     nome: 'Checklist de entrega',     fase: 4 },
   { id: 'f-inventario', arquivo: 'ferramenta-inventario.html',    nome: 'Inventário de acessos',    fase: 4 },
+  { id: 'f-pos',        arquivo: 'ferramenta-depois-de-publicar.html', nome: 'Depois de publicar',  fase: 5 },
 ];
 
 export const ARQUIVOS = FERRAMENTAS.map((f) => f.arquivo);

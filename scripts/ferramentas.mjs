@@ -20,7 +20,7 @@ const HUB = 'ferramentas.html';
 function indice(atual) {
   const L = [
     '<nav class="indice" id="indice" aria-label="Ferramentas">',
-    '<button class="indice__abrir" id="indice-abrir" aria-expanded="false" aria-controls="indice-lista"><span>Ferramentas</span><span aria-hidden="true">&#9662;</span></button>',
+    '<button class="indice__abrir" id="indice-abrir" aria-expanded="false" aria-controls="indice-lista"><span>Ferramentas</span><svg class="ico ico--seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></button>',
     '<div class="indice__lista" id="indice-lista">',
     '<div class="indice__grupo">',
     '<p class="indice__rotulo">Visão geral</p>',
@@ -60,7 +60,7 @@ function passo(i) {
     : `<a class="passo__item passo__item--ant" href="${HUB}"><span>Voltar para</span><strong>Todas as ferramentas</strong></a>`;
   const b = prox
     ? `<a class="passo__item passo__item--prox" href="${prox.arquivo}"><span>Próxima</span><strong>${prox.nome}</strong></a>`
-    : `<a class="passo__item passo__item--prox" href="${HUB}"><span>Fim da fase 4</span><strong>Todas as ferramentas</strong></a>`;
+    : `<a class="passo__item passo__item--prox" href="${HUB}"><span>Fim da fase ${FERRAMENTAS[i].fase}</span><strong>Todas as ferramentas</strong></a>`;
   return `<nav class="passo" aria-label="Navegar">\n${a}\n${b}\n</nav>`;
 }
 

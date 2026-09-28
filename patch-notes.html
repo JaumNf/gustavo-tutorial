@@ -12,7 +12,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#0D6B62" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#F4F6F4" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
 <meta name="author" content="Gustavo">
 <link rel="canonical" href="https://gustavo-tutorial.vercel.app/patch-notes.html">
@@ -33,20 +33,22 @@
 <header class="topo">
 <div class="topo__interno">
 <a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
-<span style="margin-left:auto"></span><button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+<span style="margin-left:auto"></span><button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.25"/><path d="M12 3.75a8.25 8.25 0 0 1 0 16.5z" fill="currentColor" stroke="none"/></svg></button>
 </div>
 <nav class="navmenu" aria-label="Navegação do site">
 <details class="navmenu__caixa" id="navmenu">
-<summary class="navmenu__botao">Menu<span aria-hidden="true">&#9662;</span></summary>
+<summary class="navmenu__botao">Menu<svg class="ico ico--seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></summary>
 <div class="navmenu__painel">
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Construção</p>
 <a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="montar-o-site.html"><strong>Montar o site</strong><span>O esqueleto de todo projeto</span></a>
 <a href="qualidade.html"><strong>Qualidade</strong><span>Imagem, a11y, Vitals e testes</span></a>
 <a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
 <a href="motion.html"><strong>Referência: Motion</strong><span>A API inteira, em português</span></a>
 <a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
 <a href="back-end.html"><strong>Back-end</strong><span>Servidor, banco e login</span></a>
+<a href="depois-do-ar.html"><strong>Depois do ar</strong><span>Publicar, medir, manter</span></a>
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Captação e Vendas</p>
@@ -59,22 +61,31 @@
 <a href="fluxo.html"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
 <a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e revisão</span></a>
 <a href="vibecoding.html"><strong>Vibecoding</strong><span>Ferramentas, referências e riscos</span></a>
-<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
 </div>
 <div class="navmenu__grupo navmenu__grupo--trabalhar">
-<p class="navmenu__rotulo">Ferramentas</p>
-<a href="ferramentas.html"><strong>Ferramentas</strong><span>As quatorze do dia a dia</span></a>
-<a href="modelos.html"><strong>Modelos para copiar</strong><span>Efeitos vivos, prontos</span></a>
-<a href="ferramenta-checklist.html"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
-<a href="ferramenta-proposta.html"><strong>Proposta que fecha</strong><span>Os oito pontos</span></a>
-<a href="ferramenta-briefing.html"><strong>Briefing</strong><span>As dez perguntas</span></a>
-<a href="ferramenta-whatsapp.html"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
-<a href="ferramenta-utm.html"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
-<a href="ferramenta-gerador.html"><strong>Gerador de comando</strong><span>Onze tipos de pedido</span></a>
+<p class="navmenu__rotulo">Trabalhar</p>
+<a href="ferramentas.html"><strong>Todas as ferramentas</strong><span>Em cinco fases, ligadas entre si</span></a>
+<a href="modelos.html"><strong>Modelos para copiar</strong><span>Seções e efeitos prontos</span></a>
+<a href="ferramenta-briefing.html" class="navmenu__compacto">Briefing</a>
+<a href="ferramenta-preco.html" class="navmenu__compacto">Preço</a>
+<a href="ferramenta-proposta.html" class="navmenu__compacto">Proposta que fecha</a>
+<a href="ferramenta-paleta.html" class="navmenu__compacto">Paleta em tokens</a>
+<a href="ferramenta-contraste.html" class="navmenu__compacto">Contraste</a>
+<a href="ferramenta-tipografia.html" class="navmenu__compacto">Tipografia</a>
+<a href="ferramenta-escala.html" class="navmenu__compacto">Escala de texto e espaço</a>
+<a href="ferramenta-design-system.html" class="navmenu__compacto">Design system</a>
+<a href="ferramenta-gerador.html" class="navmenu__compacto">Gerador de comando</a>
+<a href="ferramenta-cabecalho.html" class="navmenu__compacto">Cabeçalho da página</a>
+<a href="ferramenta-whatsapp.html" class="navmenu__compacto">Link de WhatsApp</a>
+<a href="ferramenta-utm.html" class="navmenu__compacto">Gerador de UTM</a>
+<a href="ferramenta-checklist.html" class="navmenu__compacto">Checklist de entrega</a>
+<a href="ferramenta-inventario.html" class="navmenu__compacto">Inventário de acessos</a>
+<a href="ferramenta-depois-de-publicar.html" class="navmenu__compacto">Depois de publicar</a>
 </div>
-<div class="navmenu__grupo">
-<p class="navmenu__rotulo">Patch notes</p>
-<a href="patch-notes.html" class="is-atual"><strong>Patch notes</strong><span>O que mudou no site</span></a>
+<div class="navmenu__grupo navmenu__grupo--sobre">
+<p class="navmenu__rotulo">Sobre o site</p>
+<a href="patch-notes.html" class="is-atual" aria-current="page"><strong>Patch notes</strong><span>O que mudou no site</span></a>
+<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
 </div>
 </div>
 </details>
@@ -90,6 +101,95 @@
 </section>
 
 <div class="patch">
+
+<article class="patch__entrada">
+<div class="patch__data">26 set 2026</div>
+<div class="patch__corpo">
+<h2>Vídeo, mapa e o que o CSS já resolve</h2>
+<ul>
+<li>A trilha <a href="montar-o-site.html">Montar o site</a> ganhou duas partes, com 11 tópicos. O projeto-base continua sendo a última, agora a 9</li>
+<li><a href="montar-o-site.html#s7">Vídeo, mapa e outros embeds</a>: o que um embed de YouTube, Maps ou Instagram custa de verdade; a fachada, que mostra a capa do vídeo e só carrega o player no clique, pelo modo de privacidade aprimorado do YouTube; o vídeo próprio com <code>&lt;video&gt;</code>, e por que vídeo longo não mora no site; o mapa como link, como imagem ou incorporado só quando a pessoa chega perto; e por que todo embed também é coleta de dado</li>
+<li><a href="montar-o-site.html#s8">O que o CSS já resolve</a>: carrossel sem biblioteca, com encaixe e o pedaço do próximo card aparecendo; a cor da marca nos controles do formulário com uma linha; cards alinhados entre si com <code>subgrid</code>; o <code>inert</code> para o Tab não passar pelo que está atrás do menu aberto; a tabela que rola sozinha no celular; e a página impressa ou salva em PDF</li>
+<li>O projeto-base ganhou a cor da marca nos controles e o estilo de impressão, já prontos. As seções da galeria de Modelos usam o mesmo projeto-base e receberam as duas coisas junto</li>
+<li>Cada exemplo foi montado e testado antes de publicar: a fachada não faz nenhuma chamada ao YouTube antes do clique, o carrossel e a tabela rolam sem estourar a página no celular, os botões dos cards com <code>subgrid</code> param na mesma altura, e a impressão esconde o topo e mostra o endereço dos links</li>
+<li>Os contadores foram para 106 partes e 510 tópicos</li>
+</ul>
+</div>
+</article>
+
+<article class="patch__entrada">
+<div class="patch__data">26 set 2026</div>
+<div class="patch__corpo">
+<h2>Ícones e SVG na trilha Montar o site</h2>
+<ul>
+<li>A trilha <a href="montar-o-site.html">Montar o site</a> ganhou a parte <a href="montar-o-site.html#s6">Ícones e SVG</a>, com 7 tópicos. O projeto-base continua sendo a última parte, agora a 7</li>
+<li>Os três jeitos de pôr um SVG na página e o que cada um deixa o CSS fazer; o <code>currentColor</code>, que faz o ícone mudar de cor junto com o texto; o sprite com <code>&lt;symbol&gt;</code> e <code>&lt;use&gt;</code>, que desenha cada ícone uma vez só; e por que o sprite em arquivo separado some quando o HTML é aberto direto do computador</li>
+<li>Ícone que é o botão inteiro precisa de nome para o leitor de tela, e de 44 pixels de área de toque; o logo em SVG, com o <code>alt</code> sendo o nome do negócio; como limpar o SVG que sai do Figma ou do Illustrator, e por que só colar SVG de fonte confiável; e onde achar conjuntos de ícones gratuitos, com a licença de cada um</li>
+<li>O projeto-base ganhou a classe <code>.icone</code>, já pronta. No teste, o ícone pulava para a linha de cima quando ficava dentro de um link ou de uma frase — o reset põe todo SVG em bloco. A classe agora devolve o ícone para a linha do texto. As seções da galeria de Modelos usam o mesmo projeto-base e receberam a mudança junto</li>
+<li>Os contadores foram para 104 partes e 499 tópicos</li>
+</ul>
+</div>
+</article>
+
+<article class="patch__entrada">
+<div class="patch__data">26 set 2026</div>
+<div class="patch__corpo">
+<h2>Seções inteiras de site na galeria de Modelos</h2>
+<ul>
+<li>A galeria de <a href="modelos.html">Modelos</a> ganhou a categoria <strong>Seções</strong>, com onze seções prontas para copiar: topo com menu no celular, hero, serviços em cards, quem faz, como funciona, depoimentos, planos e preços, dúvidas frequentes, chamada final, contato e horário, e rodapé</li>
+<li>Todas usam o projeto-base da trilha <a href="montar-o-site.html">Montar o site</a> — os mesmos tokens e as mesmas classes de layout —, então entram direto no projeto: o HTML no <code>index.html</code>, o CSS no fim do <code>estilo.css</code>. Trocar o <code>tokens.css</code> pelo que sai do Design system muda a cor e a fonte de todas de uma vez</li>
+<li>O topo abre e fecha no celular com o botão, fecha no Esc e ao escolher um link, avisa ao leitor de tela se está aberto, e some também para o Tab quando fechado. As dúvidas usam <code>&lt;details&gt;</code>, sem JavaScript, abrindo uma de cada vez. O contato traz o horário numa tabela de verdade e o "como chegar" como link, não como mapa incorporado. O rodapé atualiza o ano sozinho</li>
+<li>Nada é inventado nos textos de exemplo: nota, número de avaliações, preço e depoimento aparecem entre colchetes, para trocar pelo real — o depoimento diz no próprio lugar que só entra texto autorizado</li>
+<li>Como o CSS de uma seção estiliza títulos e parágrafos, ele não pode encostar na página da galeria: cada seção roda isolada, dentro de um quadro com exatamente o arquivo que o botão "Copiar tudo" entrega. Na grade aparece uma miniatura da seção; na janela, em tamanho real, com o botão para ver no celular ou na tela grande</li>
+<li>Cada seção foi aberta sozinha, no celular e na tela grande, sem estouro lateral e sem erro. Os contadores foram para 39 modelos em 8 categorias</li>
+</ul>
+</div>
+</article>
+
+<article class="patch__entrada">
+<div class="patch__data">26 set 2026</div>
+<div class="patch__corpo">
+<h2>Trilha nova: Montar o site</h2>
+<ul>
+<li><a href="montar-o-site.html">Montar o site</a> é a décima quarta trilha e vem logo depois de HTML puro: a trilha de HTML ensina as peças, esta ensina a juntar as peças num site inteiro. São 6 partes e 18 tópicos</li>
+<li>A ordem em que um site se constrói (conteúdo, HTML, tokens, layout, componentes, movimento); onde cada arquivo mora e como nomear; quando manter tudo num arquivo só e quando separar; o <code>&lt;head&gt;</code> completo em ordem; as regiões do <code>&lt;body&gt;</code>; e um molde de seção que se repete igual do começo ao fim</li>
+<li>O CSS em camadas com <code>@layer</code> (reset, base, layout, componentes, utilitários), um reset curto explicado linha a linha, os tokens no <code>:root</code> e o estilo de base que faz um parágrafo novo já nascer certo</li>
+<li>Os padrões de layout que se repetem: o container numa linha só, e pilha, fila e grade — a grade vai de uma a quatro colunas sem nenhuma media query. Do celular para cima, com o ponto de quebra vindo do conteúdo</li>
+<li>Nomes de classe no formato bloco, elemento e variação; o que faz um componente estar pronto; e o JavaScript em blocos que não derrubam uns aos outros</li>
+<li>No fim, o <strong>projeto-base</strong> pronto para copiar: <code>index.html</code>, <code>tokens.css</code>, <code>estilo.css</code> e <code>app.js</code>. O <code>tokens.css</code> usa exatamente os nomes que a ferramenta Design system exporta, então o arquivo da ferramenta entra no lugar sem mexer no resto. O projeto foi montado a partir do que a página mostra e aberto no navegador, no celular e na tela grande, antes de publicar</li>
+<li>Os contadores foram para 14 trilhas, 103 partes e 492 tópicos</li>
+</ul>
+</div>
+</article>
+
+<article class="patch__entrada">
+<div class="patch__data">26 set 2026</div>
+<div class="patch__corpo">
+<h2>Trilha nova: Depois do ar</h2>
+<ul>
+<li><a href="depois-do-ar.html">Depois do ar</a> é a décima terceira trilha e fica depois de Back-end: o estudo do que fazer quando o site fica pronto, e do que acrescentar na estrutura além da home. São 7 partes e 26 tópicos</li>
+<li>Conteúdo que não existia em trilha nenhuma: os arquivos da raiz que todo site precisa (robots, sitemap, favicons, imagem de compartilhamento, 404); as páginas além da home e a página de obrigado, que mede conversão sem evento; o <code>vercel.json</code> — um endereço só com ou sem www, redirecionamento permanente, endereço sem <code>.html</code>, cabeçalhos de segurança e cache; o Bing Webmaster Tools; o que se sabe da busca feita por IA, sem prometer o que não se sabe; o calendário do que vence; e-mail no domínio com MX, SPF, DKIM e DMARC, e como mexer no DNS sem derrubar o e-mail; e o conteúdo que envelhece</li>
+<li>Onde o assunto já tinha tópico — Search Console, Perfil da Empresa, Analytics, monitoramento, backup, relatório e manutenção —, o tópico novo é uma ponte curta com a decisão prática e o link para o tópico completo, em vez de repetir o texto</li>
+<li>Faz par com a ferramenta <a href="ferramenta-depois-de-publicar.html">Depois de publicar</a>: a trilha explica o porquê, a ferramenta dá o roteiro com datas. As duas apontam uma para a outra, e as trilhas Tráfego e Negócio apontam para a nova</li>
+<li>Os contadores foram para 13 trilhas, 97 partes e 474 tópicos; o hub ainda dizia "12 ferramentas" no topo e passou para 15</li>
+</ul>
+</div>
+</article>
+
+<article class="patch__entrada">
+<div class="patch__data">26 set 2026</div>
+<div class="patch__corpo">
+<h2>Ferramenta nova: Depois de publicar</h2>
+<ul>
+<li><a href="ferramenta-depois-de-publicar.html">Depois de publicar</a> é a décima quinta ferramenta e abre a fase 5, <strong>Acompanhar</strong>: o que fazer depois que o site entra no ar, dividido em cinco blocos com prazo — no dia, primeira semana, primeiro, segundo e terceiro mês. São 29 itens: Search Console verificado e sitemap enviado, Perfil da Empresa no Google, nome, endereço e telefone iguais em todo lugar, Analytics com o clique no WhatsApp, avaliações, o primeiro relatório e o que decidir no terceiro mês</li>
+<li>Com a data de publicação preenchida, cada bloco mostra quando vence, qual é a vez e o que ficou para trás. O bloco "Todo mês" traz a manutenção (site no ar, domínio e certificado, backup, relatório) e zera sozinho a cada mês</li>
+<li>Cada item aponta o tópico da trilha que explica o porquê e, quando outra ferramenta já sabe o valor, mostra o que conferir: a busca <code>site:</code> com o domínio do Cabeçalho, o endereço do sitemap, o nome e o telefone para bater com o perfil, quantos itens do Checklist de entrega estão marcados</li>
+<li>Copia o roteiro com as datas, para mandar ao cliente, e baixa os lembretes num arquivo <code>.ics</code> que abre no Google Agenda, no Apple e no Outlook — um evento no vencimento de cada bloco, só com o que falta, e um mensal. O arquivo é montado no navegador, nada é enviado</li>
+<li>Nenhum item foi inventado: o roteiro já existia em prosa em <a href="trafego.html#t-tr-90dias">Os primeiros noventa dias</a>, na trilha Tráfego, com o resto vindo das partes de domínio, backup e manutenção da trilha Negócio. O tópico agora aponta para a ferramenta, e o Checklist de entrega também</li>
+<li>Guarda por cliente, com o mesmo nome de projeto das outras; o cartão na página de Ferramentas mostra o andamento e a data. Os contadores foram para 15 ferramentas e 5 fases, e o menu ganhou o link</li>
+</ul>
+</div>
+</article>
 
 <article class="patch__entrada">
 <div class="patch__data">21 set 2026</div>
@@ -335,7 +435,18 @@
 </nav>
 </main>
 
-<footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<footer class="rodape">
+<div class="rodape__interno">
+<p class="rodape__marca"><a href="index.html">Gustavo Tutorial</a><span>Material de estudo aberto, em português. Feito em HTML, CSS e JavaScript puros.</span></p>
+<nav class="rodape__nav" aria-label="Rodapé">
+<a href="estudar.html">Estudar</a>
+<a href="ferramentas.html">Trabalhar</a>
+<a href="modelos.html">Modelos</a>
+<a href="patch-notes.html">Patch notes</a>
+<a href="colofao.html">Colofão</a>
+</nav>
+</div>
+</footer>
 <script src="app.js"></script>
 <script src="busca.js" defer></script>
 </body>

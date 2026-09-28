@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Estudar — Gustavo Tutorial</title>
-<meta name="description" content="As doze trilhas de estudo: construção, captação e vendas, e método. Do HTML puro ao lado comercial do trabalho.">
+<meta name="description" content="As catorze trilhas de estudo: construção, captação e vendas, e método. Do HTML puro ao lado comercial do trabalho.">
 <meta name="color-scheme" content="light dark">
 <meta property="og:title" content="Estudar — Gustavo Tutorial">
-<meta property="og:description" content="As doze trilhas de estudo, por categoria.">
+<meta property="og:description" content="As catorze trilhas de estudo, por categoria.">
 <meta property="og:type" content="website">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#7A4A06" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#F4F6F4" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
 <meta name="author" content="Gustavo">
 <link rel="canonical" href="https://gustavo-tutorial.vercel.app/estudar.html">
@@ -33,20 +33,22 @@
 <header class="topo">
 <div class="topo__interno">
 <a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
-<span style="margin-left:auto"></span><button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+<span style="margin-left:auto"></span><button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.25"/><path d="M12 3.75a8.25 8.25 0 0 1 0 16.5z" fill="currentColor" stroke="none"/></svg></button>
 </div>
 <nav class="navmenu" aria-label="Navegação do site">
 <details class="navmenu__caixa" id="navmenu">
-<summary class="navmenu__botao">Menu<span aria-hidden="true">&#9662;</span></summary>
+<summary class="navmenu__botao">Menu<svg class="ico ico--seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></summary>
 <div class="navmenu__painel">
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Construção</p>
 <a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="montar-o-site.html"><strong>Montar o site</strong><span>O esqueleto de todo projeto</span></a>
 <a href="qualidade.html"><strong>Qualidade</strong><span>Imagem, a11y, Vitals e testes</span></a>
 <a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
 <a href="motion.html"><strong>Referência: Motion</strong><span>A API inteira, em português</span></a>
 <a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
 <a href="back-end.html"><strong>Back-end</strong><span>Servidor, banco e login</span></a>
+<a href="depois-do-ar.html"><strong>Depois do ar</strong><span>Publicar, medir, manter</span></a>
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Captação e Vendas</p>
@@ -59,22 +61,31 @@
 <a href="fluxo.html"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
 <a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e revisão</span></a>
 <a href="vibecoding.html"><strong>Vibecoding</strong><span>Ferramentas, referências e riscos</span></a>
-<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
 </div>
 <div class="navmenu__grupo navmenu__grupo--trabalhar">
-<p class="navmenu__rotulo">Ferramentas</p>
-<a href="ferramentas.html"><strong>Ferramentas</strong><span>As quatorze do dia a dia</span></a>
-<a href="modelos.html"><strong>Modelos para copiar</strong><span>Efeitos vivos, prontos</span></a>
-<a href="ferramenta-checklist.html"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
-<a href="ferramenta-proposta.html"><strong>Proposta que fecha</strong><span>Os oito pontos</span></a>
-<a href="ferramenta-briefing.html"><strong>Briefing</strong><span>As dez perguntas</span></a>
-<a href="ferramenta-whatsapp.html"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
-<a href="ferramenta-utm.html"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
-<a href="ferramenta-gerador.html"><strong>Gerador de comando</strong><span>Onze tipos de pedido</span></a>
+<p class="navmenu__rotulo">Trabalhar</p>
+<a href="ferramentas.html"><strong>Todas as ferramentas</strong><span>Em cinco fases, ligadas entre si</span></a>
+<a href="modelos.html"><strong>Modelos para copiar</strong><span>Seções e efeitos prontos</span></a>
+<a href="ferramenta-briefing.html" class="navmenu__compacto">Briefing</a>
+<a href="ferramenta-preco.html" class="navmenu__compacto">Preço</a>
+<a href="ferramenta-proposta.html" class="navmenu__compacto">Proposta que fecha</a>
+<a href="ferramenta-paleta.html" class="navmenu__compacto">Paleta em tokens</a>
+<a href="ferramenta-contraste.html" class="navmenu__compacto">Contraste</a>
+<a href="ferramenta-tipografia.html" class="navmenu__compacto">Tipografia</a>
+<a href="ferramenta-escala.html" class="navmenu__compacto">Escala de texto e espaço</a>
+<a href="ferramenta-design-system.html" class="navmenu__compacto">Design system</a>
+<a href="ferramenta-gerador.html" class="navmenu__compacto">Gerador de comando</a>
+<a href="ferramenta-cabecalho.html" class="navmenu__compacto">Cabeçalho da página</a>
+<a href="ferramenta-whatsapp.html" class="navmenu__compacto">Link de WhatsApp</a>
+<a href="ferramenta-utm.html" class="navmenu__compacto">Gerador de UTM</a>
+<a href="ferramenta-checklist.html" class="navmenu__compacto">Checklist de entrega</a>
+<a href="ferramenta-inventario.html" class="navmenu__compacto">Inventário de acessos</a>
+<a href="ferramenta-depois-de-publicar.html" class="navmenu__compacto">Depois de publicar</a>
 </div>
-<div class="navmenu__grupo">
-<p class="navmenu__rotulo">Patch notes</p>
+<div class="navmenu__grupo navmenu__grupo--sobre">
+<p class="navmenu__rotulo">Sobre o site</p>
 <a href="patch-notes.html"><strong>Patch notes</strong><span>O que mudou no site</span></a>
+<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
 </div>
 </div>
 </details>
@@ -83,56 +94,47 @@
 <a class="modo modo--trabalho" href="ferramentas.html">Trabalhar</a>
 </div>
 </nav></header>
-<main class="home" id="conteudo" tabindex="-1" data-revelar>
-<section class="hero hero--area">
-<p class="hero__olho">Área de estudo</p>
-<h1>Estudar</h1>
-<p class="hero__lead">Doze trilhas na ordem em que os problemas aparecem no trabalho de verdade. Cada tópico traz o conceito, o código real e a decisão prática por trás dele.</p>
-<div class="hero__nums">
-<div class="hero__num"><strong>12</strong><span>trilhas</span></div>
-<div class="hero__num"><strong>90</strong><span>partes</span></div>
-<div class="hero__num"><strong>448</strong><span>tópicos</span></div>
+<main class="home area-pagina" id="conteudo" tabindex="-1" data-revelar>
+<section class="area">
+<h1 class="area__titulo">Estudar</h1>
+<p class="area__lead">Catorze trilhas na ordem em que os problemas aparecem no trabalho de verdade. Cada tópico traz o conceito, o código real e a decisão prática por trás dele.</p>
+<p class="area__meta">14 trilhas · 106 partes · 510 tópicos</p>
+<div class="area__acoes">
+<a class="cta cta--cheio" href="html-puro.html">Começar por HTML puro<span class="cta__seta"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+<a class="area__link" href="ferramentas.html">Ir para as ferramentas</a>
 </div>
 </section>
 
-<div class="ctas">
-<a class="cta cta--cheio" href="html-puro.html">Começar por HTML puro<span class="cta__seta" aria-hidden="true">&rsaquo;</span></a>
-<a class="cta cta--vazio" href="ferramentas.html">Ir para as ferramentas<span class="cta__seta" aria-hidden="true">&rsaquo;</span></a>
-</div>
-
-<div class="home__mapa">
-<div class="home__grupo">
-<p class="home__titulo">Construção</p>
-<ul class="home__links">
-<li><a href="html-puro.html">HTML puro</a></li>
-<li><a href="qualidade.html">Qualidade</a></li>
-<li><a href="movimento.html">Movimento</a></li>
-<li><a href="motion.html">Referência: Motion</a></li>
-<li><a href="frameworks.html">Frameworks</a></li>
-<li><a href="back-end.html">Back-end</a></li>
-</ul>
-</div>
-<div class="home__grupo">
-<p class="home__titulo">Captação e Vendas</p>
-<ul class="home__links">
-<li><a href="landing-pages.html">Landing pages</a></li>
-<li><a href="trafego.html">Tráfego</a></li>
-<li><a href="negocio.html">Negócio</a></li>
-</ul>
-</div>
-<div class="home__grupo">
-<p class="home__titulo">Método</p>
-<ul class="home__links">
-<li><a href="fluxo.html">Fluxo de trabalho</a></li>
-<li><a href="ia.html">Trabalhando com IA</a></li>
-<li><a href="vibecoding.html">Vibecoding</a></li>
-<li><a href="colofao.html">Colofão</a></li>
-</ul>
-</div>
-</div>
-
-<div class="home__nota">
-<strong>Por onde começar:</strong> se você está aprendendo agora, vá pela trilha <a href="html-puro.html">HTML puro</a> na ordem das partes — ela é autossuficiente e leva do zero a um site publicado. Em paralelo, <a href="fluxo.html">Fluxo de trabalho</a> é a que muda mais o seu dia a dia: terminal, Git e DevTools valem para qualquer projeto, em qualquer linguagem. Depois dessas, <a href="landing-pages.html">Landing pages</a> e <a href="trafego.html">Tráfego</a> são as que mais mudam resultado de cliente, e <a href="negocio.html">Negócio</a> é a que mais muda o seu faturamento.
+<div class="percurso">
+<section class="percurso__grupo" id="g-construcao" aria-labelledby="g-construcao-t">
+<div class="percurso__cabeca"><h2 id="g-construcao-t">Construção</h2><p>Do primeiro arquivo ao site no ar. Quem está começando vai pela 01, na ordem das partes.</p></div>
+<ol class="percurso__lista">
+<li><a class="percurso__item" href="html-puro.html"><span class="percurso__num" aria-hidden="true">01</span><span class="percurso__nome">HTML puro</span><span class="percurso__desc">Do zero ao site publicado</span><span class="percurso__meta">12 partes · 68 tópicos</span></a></li>
+<li><a class="percurso__item" href="montar-o-site.html"><span class="percurso__num" aria-hidden="true">02</span><span class="percurso__nome">Montar o site</span><span class="percurso__desc">O esqueleto de todo projeto</span><span class="percurso__meta">9 partes · 36 tópicos</span></a></li>
+<li><a class="percurso__item" href="qualidade.html"><span class="percurso__num" aria-hidden="true">03</span><span class="percurso__nome">Qualidade</span><span class="percurso__desc">Imagem, acessibilidade, velocidade e testes</span><span class="percurso__meta">6 partes · 40 tópicos</span></a></li>
+<li><a class="percurso__item" href="movimento.html"><span class="percurso__num" aria-hidden="true">04</span><span class="percurso__nome">Movimento</span><span class="percurso__desc">Animação com critério</span><span class="percurso__meta">9 partes · 37 tópicos</span></a></li>
+<li><a class="percurso__item" href="motion.html"><span class="percurso__num" aria-hidden="true">05</span><span class="percurso__nome">Referência: Motion</span><span class="percurso__desc">A API inteira, em português</span><span class="percurso__meta">8 partes · 44 tópicos</span></a></li>
+<li><a class="percurso__item" href="frameworks.html"><span class="percurso__num" aria-hidden="true">06</span><span class="percurso__nome">Frameworks</span><span class="percurso__desc">Formatos além do vanilla</span><span class="percurso__meta">4 partes · 13 tópicos</span></a></li>
+<li><a class="percurso__item" href="back-end.html"><span class="percurso__num" aria-hidden="true">07</span><span class="percurso__nome">Back-end</span><span class="percurso__desc">Servidor, banco e login</span><span class="percurso__meta">6 partes · 32 tópicos</span></a></li>
+<li><a class="percurso__item" href="depois-do-ar.html"><span class="percurso__num" aria-hidden="true">08</span><span class="percurso__nome">Depois do ar</span><span class="percurso__desc">Publicar, medir, manter</span><span class="percurso__meta">7 partes · 26 tópicos</span></a></li>
+</ol>
+</section>
+<section class="percurso__grupo" id="g-captacao" aria-labelledby="g-captacao-t">
+<div class="percurso__cabeca"><h2 id="g-captacao-t">Captação e Vendas</h2><p>O que faz a página trazer cliente — e o que muda o seu faturamento.</p></div>
+<ol class="percurso__lista">
+<li><a class="percurso__item" href="landing-pages.html"><span class="percurso__num" aria-hidden="true">09</span><span class="percurso__nome">Landing pages</span><span class="percurso__desc">A estratégia da página</span><span class="percurso__meta">8 partes · 28 tópicos</span></a></li>
+<li><a class="percurso__item" href="trafego.html"><span class="percurso__num" aria-hidden="true">10</span><span class="percurso__nome">Tráfego</span><span class="percurso__desc">Ser encontrado no Google</span><span class="percurso__meta">8 partes · 24 tópicos</span></a></li>
+<li><a class="percurso__item" href="negocio.html"><span class="percurso__num" aria-hidden="true">11</span><span class="percurso__nome">Negócio</span><span class="percurso__desc">Preço, escopo e contrato</span><span class="percurso__meta">7 partes · 49 tópicos</span></a></li>
+</ol>
+</section>
+<section class="percurso__grupo" id="g-metodo" aria-labelledby="g-metodo-t">
+<div class="percurso__cabeca"><h2 id="g-metodo-t">Método</h2><p>Terminal, Git, DevTools e IA. Valem para qualquer projeto, em paralelo com qualquer trilha.</p></div>
+<ol class="percurso__lista">
+<li><a class="percurso__item" href="fluxo.html"><span class="percurso__num" aria-hidden="true">12</span><span class="percurso__nome">Fluxo de trabalho</span><span class="percurso__desc">Terminal, Git e DevTools</span><span class="percurso__meta">7 partes · 42 tópicos</span></a></li>
+<li><a class="percurso__item" href="ia.html"><span class="percurso__num" aria-hidden="true">13</span><span class="percurso__nome">Trabalhando com IA</span><span class="percurso__desc">Brief, referência e revisão</span><span class="percurso__meta">9 partes · 44 tópicos</span></a></li>
+<li><a class="percurso__item" href="vibecoding.html"><span class="percurso__num" aria-hidden="true">14</span><span class="percurso__nome">Vibecoding</span><span class="percurso__desc">Ferramentas, referências e riscos</span><span class="percurso__meta">6 partes · 27 tópicos</span></a></li>
+</ol>
+</section>
 </div>
 
 <nav class="passo" aria-label="Navegar">
@@ -140,7 +142,18 @@
 <a class="passo__item passo__item--prox" href="html-puro.html"><span>Começar por</span><strong>HTML puro</strong></a>
 </nav>
 </main>
-<footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<footer class="rodape">
+<div class="rodape__interno">
+<p class="rodape__marca"><a href="index.html">Gustavo Tutorial</a><span>Material de estudo aberto, em português. Feito em HTML, CSS e JavaScript puros.</span></p>
+<nav class="rodape__nav" aria-label="Rodapé">
+<a href="estudar.html">Estudar</a>
+<a href="ferramentas.html">Trabalhar</a>
+<a href="modelos.html">Modelos</a>
+<a href="patch-notes.html">Patch notes</a>
+<a href="colofao.html">Colofão</a>
+</nav>
+</div>
+</footer>
 <script src="progresso.js"></script>
 <script src="app.js"></script>
 <script src="busca.js" defer></script>

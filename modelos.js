@@ -10,8 +10,736 @@
    movimento; curva forte de saída; aperto de .97 no clique; nada de
    hover sem mouse; e respeito a prefers-reduced-motion.
    A cor de destaque vem de --m-destaque, com um padrão no próprio CSS.
+
+   As SEÇÕES são diferentes: cada uma é um pedaço de site inteiro e usa o
+   projeto-base da trilha Montar o site (tokens + estilo). Rodam num <iframe>
+   com o arquivo completo — o CSS delas estiliza h1, p e a, e não pode vazar
+   para a galeria. GT_BASE_SECAO é cópia do projeto-base da trilha: mudou lá,
+   muda aqui.
    ============================================================ */
+window.GT_BASE_SECAO =
+`/* tokens.css — troque este arquivo inteiro pelo que sai da
+   ferramenta Design system: os nomes são os mesmos. */
+:root {
+  --cor-fundo:          #FFFFFF;
+  --cor-superficie:     #F6F7F7;
+  --cor-linha:          #DDE2E1;
+  --cor-texto:          #1C2524;
+  --cor-texto-fraco:    #5F6E6B;
+  --cor-destaque:       #0D6B62;
+  --cor-destaque-texto: #0D6B62;
+  --cor-destaque-hover: #0A554E;
+  --cor-sobre-destaque: #FFFFFF;
+  --cor-foco:           #0D6B62;
+
+  --fonte-titulo: system-ui, sans-serif;
+  --fonte-corpo:  system-ui, sans-serif;
+  --peso-titulo:  700;
+  --peso-corpo:   400;
+
+  --t-peq:   14px;
+  --t-corpo: 17px;
+  --t-h3:    clamp(20px, 2.5vw, 27px);
+  --t-h2:    clamp(29px, 3.5vw, 41px);
+  --t-h1:    clamp(32px, 6vw, 65px);
+  --alt-corpo:  1.6;
+  --alt-titulo: 1.1;
+  --medida:     66ch;
+
+  --e1: 4px;  --e2: 8px;  --e3: 12px; --e4: 16px; --e5: 24px;
+  --e6: 32px; --e7: 48px; --e8: 64px; --e9: 96px; --e10: 128px;
+
+  --raio: 8px;
+  --dur:  200ms;
+  --curva: cubic-bezier(.23, 1, .32, 1);
+}
+
+/* estilo.css — a ordem das camadas decide quem vence, não a ordem do arquivo */
+@layer reset, base, layout, componentes, utilitarios;
+
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; }
+  * { margin: 0; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body { min-height: 100svh; }
+  img, picture, video, svg { display: block; max-width: 100%; height: auto; }
+  input, button, textarea, select { font: inherit; color: inherit; }
+  h1, h2, h3, h4, p, li { overflow-wrap: break-word; }
+  ul[class], ol[class] { list-style: none; padding: 0; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cor-fundo); color: var(--cor-texto);
+    font-family: var(--fonte-corpo); font-weight: var(--peso-corpo);
+    font-size: var(--t-corpo); line-height: var(--alt-corpo);
+  }
+  h1, h2, h3 {
+    font-family: var(--fonte-titulo); font-weight: var(--peso-titulo);
+    line-height: var(--alt-titulo); text-wrap: balance;
+  }
+  h1 { font-size: var(--t-h1); }
+  h2 { font-size: var(--t-h2); }
+  h3 { font-size: var(--t-h3); }
+  p  { max-width: var(--medida); text-wrap: pretty; }
+  a  { color: var(--cor-destaque-texto); text-underline-offset: .15em; }
+  :root { accent-color: var(--cor-destaque); }   /* marcar, opção e deslizar na cor da marca (parte 8) */
+  :focus-visible { outline: 2px solid var(--cor-foco); outline-offset: 3px; }
+  [id] { scroll-margin-top: var(--e9); }   /* a âncora não some atrás do topo fixo */
+}
+
+@layer layout {
+  .container { width: min(100% - 2 * var(--e5), 72rem); margin-inline: auto; }
+  .secao     { padding-block: clamp(var(--e7), 8vw, var(--e9)); }
+
+  /* pilha: coisas uma embaixo da outra, com o mesmo respiro */
+  .pilha { display: flex; flex-direction: column; gap: var(--e5); }
+
+  /* fila: coisas lado a lado que quebram linha quando não cabem */
+  .fila  { display: flex; flex-wrap: wrap; align-items: center; gap: var(--e3); }
+
+  /* grade: quantas colunas couberem, nenhuma mais estreita que 16rem */
+  .grade {
+    display: grid; gap: var(--e5);
+    grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+  }
+}
+
+@layer componentes {
+  .pular { position: absolute; left: var(--e3); top: -100px; }
+  .pular:focus { top: var(--e3); }
+
+  .topo { position: sticky; top: 0; z-index: 10; background: var(--cor-fundo);
+          border-bottom: 1px solid var(--cor-linha); }
+  .topo__linha { display: flex; align-items: center; justify-content: space-between;
+                 gap: var(--e4); min-height: 64px; }
+  .topo a { color: inherit; text-decoration: none; }
+  .marca   { font-weight: 700; }
+
+  .botao {
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--e2);
+    min-height: 48px; padding: var(--e3) var(--e5); border-radius: var(--raio);
+    background: var(--cor-destaque); color: var(--cor-sobre-destaque);
+    font-weight: 600; text-decoration: none; align-self: start;
+    transition: background var(--dur) var(--curva), transform 120ms var(--curva);
+  }
+  .botao:active { transform: scale(.97); }
+  @media (hover: hover) { .botao:hover { background: var(--cor-destaque-hover); } }
+
+  .card { padding: var(--e5); background: var(--cor-superficie);
+          border: 1px solid var(--cor-linha); border-radius: var(--raio); }
+
+  /* ícone: o tamanho do texto ao lado, a cor dele (parte 6) */
+  .icone { display: inline-block; vertical-align: -.25em;   /* o reset põe svg em bloco */
+           width: 1.25em; height: 1.25em; flex: none; fill: none; stroke: currentColor;
+           stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  .rodape { padding-block: var(--e7); border-top: 1px solid var(--cor-linha);
+            color: var(--cor-texto-fraco); font-size: var(--t-peq); }
+}
+
+@layer utilitarios {
+  .so-leitor { position: absolute; width: 1px; height: 1px; overflow: hidden;
+               clip-path: inset(50%); white-space: nowrap; }
+
+  /* a página impressa ou salva em PDF (parte 8) */
+  @media print {
+    .topo, .botao, video, iframe { display: none; }
+    body { background: #fff; color: #000; }
+    a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .85em; }
+    .card, figure, tr { break-inside: avoid; }
+    h2, h3 { break-after: avoid; }
+  }
+}`;
+
 window.GT_MODELOS = [
+
+/* ================= SEÇÕES =================
+   Seções inteiras de site, para colar no projeto-base da trilha Montar o site.
+   Usam os tokens dele (--cor-*, --e*, --t-*) e as classes de layout
+   (.secao, .container, .pilha, .fila, .grade, .botao). Por isso rodam num
+   <iframe> com o projeto-base junto — o CSS delas não pode encostar no site. */
+{
+  id: 'secao-topo', cat: 'Seções', secao: true, miniatura: 390, nome: 'Topo com menu no celular',
+  desc: 'Marca, links e o botão principal. Abaixo de 48rem o menu vira um painel que abre no botão, fecha no Esc e ao escolher um link.',
+  assina: 'aria-expanded + visibility no painel',
+  ref: 'montar-o-site.html#t-ms-body',
+  raiz: '.s-topo',
+  html:
+`<header class="s-topo">
+  <div class="container s-topo__linha">
+    <a class="s-topo__marca" href="#">Nome do negócio</a>
+    <button class="s-topo__abrir" type="button" aria-expanded="false" aria-controls="s-topo-menu">
+      <span class="so-leitor">Abrir menu</span>
+      <span class="s-topo__icone" aria-hidden="true"></span>
+    </button>
+    <nav class="s-topo__nav" id="s-topo-menu" aria-label="Principal">
+      <ul class="s-topo__menu">
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#duvidas">Dúvidas</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+      <a class="botao s-topo__cta" href="https://wa.me/55DDDNUMERO">Pedir orçamento</a>
+    </nav>
+  </div>
+</header>`,
+  css:
+`.s-topo {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--cor-fundo); border-bottom: 1px solid var(--cor-linha);
+}
+.s-topo__linha {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--e4); min-height: 64px;
+}
+.s-topo__marca {
+  font-family: var(--fonte-titulo); font-weight: var(--peso-titulo); font-size: 18px;
+  color: var(--cor-texto); text-decoration: none;
+}
+.s-topo__nav  { display: flex; align-items: center; gap: var(--e6); }
+.s-topo__menu { display: flex; gap: var(--e5); }
+.s-topo__menu a { color: var(--cor-texto); text-decoration: none; font-weight: 500; }
+@media (hover: hover) { .s-topo__menu a:hover { color: var(--cor-destaque-texto); } }
+.s-topo__abrir { display: none; }
+
+/* celular: o menu vira um painel embaixo do topo */
+@media (max-width: 47.99rem) {
+  .s-topo__abrir {
+    display: grid; place-items: center; width: 44px; height: 44px; cursor: pointer;
+    background: none; border: 1px solid var(--cor-linha); border-radius: var(--raio);
+  }
+  .s-topo__icone, .s-topo__icone::before, .s-topo__icone::after {
+    display: block; width: 18px; height: 2px; border-radius: 2px; background: currentColor;
+    transition: transform var(--dur) var(--curva);
+  }
+  .s-topo__icone { position: relative; }
+  .s-topo__icone::before, .s-topo__icone::after { content: ""; position: absolute; left: 0; }
+  .s-topo__icone::before { transform: translateY(-6px); }
+  .s-topo__icone::after  { transform: translateY(6px); }
+  .s-topo.is-aberto .s-topo__icone { background: transparent; }
+  .s-topo.is-aberto .s-topo__icone::before { transform: rotate(45deg); }
+  .s-topo.is-aberto .s-topo__icone::after  { transform: rotate(-45deg); }
+
+  /* fechado, o painel some também para o Tab: visibility, não só opacity */
+  .s-topo__nav {
+    position: absolute; left: 0; right: 0; top: 100%;
+    flex-direction: column; align-items: stretch; gap: var(--e5); padding: var(--e5);
+    background: var(--cor-fundo); border-bottom: 1px solid var(--cor-linha);
+    opacity: 0; transform: translateY(-8px); visibility: hidden;
+    transition: opacity var(--dur) var(--curva), transform var(--dur) var(--curva), visibility 0s linear var(--dur);
+  }
+  .s-topo.is-aberto .s-topo__nav {
+    opacity: 1; transform: none; visibility: visible; transition-delay: 0s;
+  }
+  .s-topo__menu { flex-direction: column; gap: 0; }
+  .s-topo__menu a { display: block; padding: var(--e3) 0; font-size: 18px; }
+  .s-topo__cta { align-self: stretch; }
+}`,
+  js: function (raiz) {
+    var botao = raiz.querySelector('.s-topo__abrir');
+    var rotulo = botao.querySelector('.so-leitor');
+    function alternar(abrir) {
+      raiz.classList.toggle('is-aberto', abrir);
+      botao.setAttribute('aria-expanded', String(abrir));
+      rotulo.textContent = abrir ? 'Fechar menu' : 'Abrir menu';
+    }
+    botao.addEventListener('click', function () {
+      alternar(!raiz.classList.contains('is-aberto'));
+    });
+    /* escolher um link fecha; Esc também, devolvendo o foco ao botão */
+    raiz.querySelectorAll('.s-topo__menu a').forEach(function (a) {
+      a.addEventListener('click', function () { alternar(false); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape' || !raiz.classList.contains('is-aberto')) return;
+      alternar(false);
+      botao.focus();
+    });
+  }
+},
+{
+  id: 'secao-hero', cat: 'Seções', secao: true, nome: 'Hero',
+  desc: 'A promessa, para quem é, o botão principal e um segundo caminho. A foto vai para o lado a partir de 52rem.',
+  assina: 'grid-template-columns: 1.1fr 1fr',
+  ref: 'landing-pages.html#t-lp-hero-tarefa',
+  raiz: '.s-hero',
+  html:
+`<section class="secao s-hero" aria-labelledby="s-hero-titulo">
+  <div class="container s-hero__grade">
+    <div class="pilha">
+      <p class="s-hero__olho">Serviço · Cidade</p>
+      <h1 id="s-hero-titulo">A promessa principal, numa frase que o cliente entende</h1>
+      <p class="s-hero__lead">Para quem é, o que resolve e por que confiar — em duas frases, no máximo.</p>
+      <div class="fila">
+        <a class="botao" href="https://wa.me/55DDDNUMERO">Pedir orçamento</a>
+        <a class="s-hero__secundario" href="#servicos">Ver os serviços</a>
+      </div>
+      <p class="s-hero__prova">[nota] no Google · [número] avaliações</p>
+    </div>
+    <!-- troque por <img src="img/hero.webp" alt="..." width="1200" height="900"> -->
+    <div class="s-hero__foto" role="img" aria-label="Foto do trabalho"></div>
+  </div>
+</section>`,
+  css:
+`.s-hero__grade { display: grid; gap: var(--e7); align-items: center; }
+.s-hero__olho {
+  font-size: var(--t-peq); font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--cor-destaque-texto);
+}
+.s-hero__lead { font-size: calc(var(--t-corpo) * 1.15); color: var(--cor-texto-fraco); }
+.s-hero__secundario { font-weight: 600; }
+.s-hero__prova { font-size: var(--t-peq); color: var(--cor-texto-fraco); }
+.s-hero__foto {
+  aspect-ratio: 4 / 3; border-radius: var(--raio);
+  background: linear-gradient(135deg, var(--cor-destaque), var(--cor-superficie));
+}
+@media (min-width: 52rem) {
+  .s-hero__grade { grid-template-columns: 1.1fr 1fr; }
+}`
+},
+{
+  id: 'secao-servicos', cat: 'Seções', secao: true, nome: 'Serviços em cards',
+  desc: 'Um card por serviço, com ícone, o que inclui e o pedido de orçamento. De uma a três colunas, sem media query.',
+  assina: 'repeat(auto-fit, minmax(min(16rem, 100%), 1fr))',
+  ref: 'montar-o-site.html#t-ms-padroes',
+  raiz: '.s-servicos',
+  html:
+`<section class="secao s-servicos" id="servicos" aria-labelledby="s-servicos-titulo">
+  <div class="container pilha">
+    <div class="pilha s-servicos__cabeca">
+      <h2 id="s-servicos-titulo">Serviços</h2>
+      <p>Uma frase dizendo o que todos os serviços têm em comum.</p>
+    </div>
+    <ul class="grade">
+      <li class="pilha s-servicos__card">
+        <svg class="s-servicos__icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+        <h3>Primeiro serviço</h3>
+        <p>O que está incluído e o resultado que o cliente leva.</p>
+        <a href="https://wa.me/55DDDNUMERO">Pedir orçamento deste →</a>
+      </li>
+      <li class="pilha s-servicos__card">
+        <svg class="s-servicos__icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18"/></svg>
+        <h3>Segundo serviço</h3>
+        <p>O que está incluído e o resultado que o cliente leva.</p>
+        <a href="https://wa.me/55DDDNUMERO">Pedir orçamento deste →</a>
+      </li>
+      <li class="pilha s-servicos__card">
+        <svg class="s-servicos__icone" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <h3>Terceiro serviço</h3>
+        <p>O que está incluído e o resultado que o cliente leva.</p>
+        <a href="https://wa.me/55DDDNUMERO">Pedir orçamento deste →</a>
+      </li>
+    </ul>
+  </div>
+</section>`,
+  css:
+`.s-servicos__cabeca { gap: var(--e3); }
+.s-servicos__card {
+  gap: var(--e3); padding: var(--e6);
+  background: var(--cor-superficie); border: 1px solid var(--cor-linha); border-radius: var(--raio);
+}
+.s-servicos__icone {
+  width: 28px; height: 28px; fill: none; stroke: var(--cor-destaque);
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+.s-servicos__card h3 { font-size: calc(var(--t-corpo) * 1.25); }
+/* o link desce para o pé do card: todos alinhados, mesmo com texto de tamanho diferente */
+.s-servicos__card a { margin-top: auto; font-weight: 600; text-decoration: none; }`
+},
+{
+  id: 'secao-sobre', cat: 'Seções', secao: true, nome: 'Quem faz',
+  desc: 'Foto, quem está por trás do trabalho e três diferenciais que dá para verificar. Pessoa, não empresa genérica.',
+  assina: 'li::before com o ✓ na cor de destaque',
+  ref: 'landing-pages.html#t-lp-substitutos',
+  raiz: '.s-sobre',
+  html:
+`<section class="secao s-sobre" id="sobre" aria-labelledby="s-sobre-titulo">
+  <div class="container s-sobre__grade">
+    <!-- troque por <img src="img/sobre.webp" alt="..." width="800" height="800"> -->
+    <div class="s-sobre__foto" role="img" aria-label="Foto de quem faz o trabalho"></div>
+    <div class="pilha">
+      <h2 id="s-sobre-titulo">Quem faz</h2>
+      <p>Quem está por trás do trabalho, há quanto tempo faz isso e por que faz desse jeito.</p>
+      <ul class="s-sobre__lista">
+        <li>Um diferencial que dá para verificar</li>
+        <li>Outro diferencial concreto, com número se houver</li>
+        <li>O que o cliente não precisa se preocupar</li>
+      </ul>
+    </div>
+  </div>
+</section>`,
+  css:
+`.s-sobre__grade { display: grid; gap: var(--e7); align-items: center; }
+.s-sobre__foto {
+  aspect-ratio: 1; border-radius: var(--raio);
+  background: linear-gradient(160deg, var(--cor-superficie), var(--cor-destaque));
+}
+.s-sobre__lista { display: grid; gap: var(--e3); }
+.s-sobre__lista li { display: flex; gap: var(--e3); }
+.s-sobre__lista li::before {
+  content: "✓"; flex: none; display: grid; place-items: center;
+  width: 22px; height: 22px; margin-top: .15em; border-radius: 50%;
+  background: var(--cor-destaque); color: var(--cor-sobre-destaque);
+  font-size: 13px; font-weight: 700;
+}
+@media (min-width: 52rem) {
+  .s-sobre__grade { grid-template-columns: 1fr 1.2fr; }
+}`
+},
+{
+  id: 'secao-passos', cat: 'Seções', secao: true, nome: 'Como funciona',
+  desc: 'Três passos numerados do primeiro contato à entrega. O número sai do CSS: trocar a ordem não exige renumerar.',
+  assina: 'counter(passo, decimal-leading-zero)',
+  ref: 'landing-pages.html#t-lp-catalogo',
+  raiz: '.s-passos',
+  html:
+`<section class="secao s-passos" aria-labelledby="s-passos-titulo">
+  <div class="container pilha">
+    <h2 id="s-passos-titulo">Como funciona</h2>
+    <ol class="s-passos__lista">
+      <li>
+        <h3>Você chama</h3>
+        <p>Pelo WhatsApp, contando o que precisa. A resposta chega em até [prazo].</p>
+      </li>
+      <li>
+        <h3>Orçamento</h3>
+        <p>Com o que está incluído, o prazo e o valor — por escrito.</p>
+      </li>
+      <li>
+        <h3>Execução</h3>
+        <p>Do combinado à entrega, com o que o cliente precisa saber em cada etapa.</p>
+      </li>
+    </ol>
+  </div>
+</section>`,
+  css:
+`.s-passos__lista { display: grid; gap: var(--e6); counter-reset: passo; }
+.s-passos__lista li {
+  counter-increment: passo; display: grid; gap: var(--e2); align-content: start;
+  padding-top: var(--e5); border-top: 2px solid var(--cor-linha);
+}
+.s-passos__lista li::before {
+  content: counter(passo, decimal-leading-zero);
+  font-family: var(--fonte-titulo); font-weight: var(--peso-titulo);
+  font-size: var(--t-h3); line-height: 1; color: var(--cor-destaque-texto);
+}
+.s-passos__lista h3 { font-size: calc(var(--t-corpo) * 1.2); }
+@media (min-width: 48rem) {
+  .s-passos__lista { grid-template-columns: repeat(3, 1fr); }
+}`
+},
+{
+  id: 'secao-depoimentos', cat: 'Seções', secao: true, nome: 'Depoimentos',
+  desc: 'Citação, nome e o que o cliente contratou. Só com texto real e autorizado — o modelo deixa isso escrito no lugar do texto.',
+  assina: '<figure> + <blockquote> + <figcaption>',
+  ref: 'landing-pages.html#t-lp-sem-prova',
+  raiz: '.s-depoimentos',
+  html:
+`<section class="secao s-depoimentos" aria-labelledby="s-depoimentos-titulo">
+  <div class="container pilha">
+    <h2 id="s-depoimentos-titulo">Quem já contratou</h2>
+    <ul class="grade">
+      <li>
+        <figure class="s-depoimentos__card">
+          <blockquote><p>Texto real do cliente, com o resultado que ele teve. Nunca invente: peça autorização para publicar.</p></blockquote>
+          <figcaption><strong>[Nome do cliente]</strong><span>[o que contratou]</span></figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure class="s-depoimentos__card">
+          <blockquote><p>O melhor depoimento conta o antes e o depois, com as palavras de quem viveu.</p></blockquote>
+          <figcaption><strong>[Nome do cliente]</strong><span>[o que contratou]</span></figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure class="s-depoimentos__card">
+          <blockquote><p>Curto vale mais que longo. Duas ou três frases bastam.</p></blockquote>
+          <figcaption><strong>[Nome do cliente]</strong><span>[o que contratou]</span></figcaption>
+        </figure>
+      </li>
+    </ul>
+  </div>
+</section>`,
+  css:
+`.s-depoimentos__card {
+  display: flex; flex-direction: column; gap: var(--e5); height: 100%; padding: var(--e6);
+  background: var(--cor-superficie); border: 1px solid var(--cor-linha); border-radius: var(--raio);
+}
+.s-depoimentos__card blockquote { font-size: calc(var(--t-corpo) * 1.05); }
+.s-depoimentos__card blockquote::before {
+  content: "\\201C"; display: block; height: 28px;
+  font-family: var(--fonte-titulo); font-size: 56px; line-height: 1; color: var(--cor-destaque);
+}
+.s-depoimentos__card figcaption { margin-top: auto; display: grid; gap: 2px; font-size: var(--t-peq); }
+.s-depoimentos__card figcaption span { color: var(--cor-texto-fraco); }`
+},
+{
+  id: 'secao-precos', cat: 'Seções', secao: true, nome: 'Planos e preços',
+  desc: 'Três planos lado a lado, o do meio em destaque, a lista do que inclui e um botão por plano, alinhados no pé.',
+  assina: 'margin-top: auto no botão',
+  ref: 'negocio.html#t-cm-preco',
+  raiz: '.s-precos',
+  html:
+`<section class="secao s-precos" aria-labelledby="s-precos-titulo">
+  <div class="container pilha">
+    <div class="pilha s-precos__cabeca">
+      <h2 id="s-precos-titulo">Planos</h2>
+      <p>Uma linha dizendo o que todos os planos incluem.</p>
+    </div>
+    <ul class="grade s-precos__lista">
+      <li class="pilha s-precos__plano">
+        <h3>Essencial</h3>
+        <p class="s-precos__valor"><strong>R$ [valor]</strong> <span>por projeto</span></p>
+        <ul class="s-precos__itens">
+          <li>O que está incluído</li>
+          <li>Outro item</li>
+        </ul>
+        <a class="botao s-precos__botao" href="https://wa.me/55DDDNUMERO">Quero este</a>
+      </li>
+      <li class="pilha s-precos__plano s-precos__plano--destaque">
+        <p class="s-precos__selo">Mais pedido</p>
+        <h3>Completo</h3>
+        <p class="s-precos__valor"><strong>R$ [valor]</strong> <span>por projeto</span></p>
+        <ul class="s-precos__itens">
+          <li>Tudo do Essencial</li>
+          <li>O que este tem a mais</li>
+          <li>Outro item a mais</li>
+        </ul>
+        <a class="botao s-precos__botao" href="https://wa.me/55DDDNUMERO">Quero este</a>
+      </li>
+      <li class="pilha s-precos__plano">
+        <h3>Sob medida</h3>
+        <p class="s-precos__valor"><strong>Sob consulta</strong></p>
+        <ul class="s-precos__itens">
+          <li>Para o que não cabe nos outros</li>
+        </ul>
+        <a class="botao s-precos__botao" href="https://wa.me/55DDDNUMERO">Conversar</a>
+      </li>
+    </ul>
+  </div>
+</section>`,
+  css:
+`.s-precos__cabeca { gap: var(--e3); }
+.s-precos__lista { row-gap: var(--e7); }
+.s-precos__plano {
+  position: relative; gap: var(--e4); padding: var(--e6);
+  background: var(--cor-fundo); border: 1px solid var(--cor-linha); border-radius: var(--raio);
+}
+.s-precos__plano--destaque { border: 2px solid var(--cor-destaque); }
+.s-precos__selo {
+  position: absolute; top: 0; left: var(--e6); transform: translateY(-50%);
+  padding: var(--e1) var(--e3); border-radius: 999px;
+  background: var(--cor-destaque); color: var(--cor-sobre-destaque);
+  font-size: var(--t-peq); font-weight: 600;
+}
+.s-precos__valor strong { font-family: var(--fonte-titulo); font-size: var(--t-h3); }
+.s-precos__valor span   { font-size: var(--t-peq); color: var(--cor-texto-fraco); }
+.s-precos__itens { display: grid; gap: var(--e2); }
+.s-precos__itens li::before { content: "✓  "; color: var(--cor-destaque-texto); font-weight: 700; }
+.s-precos__botao { margin-top: auto; align-self: stretch; }
+/* só o plano em destaque leva o botão cheio */
+.s-precos__plano:not(.s-precos__plano--destaque) .s-precos__botao {
+  background: transparent; color: var(--cor-destaque-texto);
+  box-shadow: inset 0 0 0 2px var(--cor-destaque);
+}`
+},
+{
+  id: 'secao-faq', cat: 'Seções', secao: true, nome: 'Dúvidas frequentes',
+  desc: 'Pergunta e resposta com <details>: o texto fica no HTML mesmo fechado, e o name faz abrir uma de cada vez. Sem JavaScript.',
+  assina: '<details name="faq">',
+  ref: 'trafego.html#t-tr-js',
+  raiz: '.s-faq',
+  html:
+`<section class="secao s-faq" id="duvidas" aria-labelledby="s-faq-titulo">
+  <div class="container pilha">
+    <h2 id="s-faq-titulo">Dúvidas frequentes</h2>
+    <div class="s-faq__lista">
+      <details class="s-faq__item" name="faq" open>
+        <summary>Quanto tempo leva?</summary>
+        <p>A resposta direta primeiro, depois o detalhe. Escreva as perguntas que chegam de verdade no WhatsApp.</p>
+      </details>
+      <details class="s-faq__item" name="faq">
+        <summary>Atende em qual região?</summary>
+        <p>As cidades ou os bairros, do jeito que as pessoas procuram.</p>
+      </details>
+      <details class="s-faq__item" name="faq">
+        <summary>Como é o pagamento?</summary>
+        <p>As formas aceitas e quando se paga cada parte.</p>
+      </details>
+      <details class="s-faq__item" name="faq">
+        <summary>E se eu não gostar do resultado?</summary>
+        <p>O que está previsto — revisão, garantia, prazo para pedir ajuste.</p>
+      </details>
+    </div>
+  </div>
+</section>`,
+  css:
+`.s-faq__lista { max-width: 48rem; border-top: 1px solid var(--cor-linha); }
+.s-faq__item { border-bottom: 1px solid var(--cor-linha); }
+.s-faq__item summary {
+  display: flex; justify-content: space-between; align-items: center; gap: var(--e4);
+  padding: var(--e5) 0; cursor: pointer; list-style: none;
+  font-family: var(--fonte-titulo); font-weight: var(--peso-titulo); font-size: calc(var(--t-corpo) * 1.1);
+}
+.s-faq__item summary::-webkit-details-marker { display: none; }
+.s-faq__item summary::after {
+  content: "+"; flex: none; font-size: 26px; line-height: 1; color: var(--cor-destaque-texto);
+  transition: transform var(--dur) var(--curva);
+}
+.s-faq__item[open] summary::after { transform: rotate(45deg); }
+.s-faq__item p { padding-bottom: var(--e5); color: var(--cor-texto-fraco); }`
+},
+{
+  id: 'secao-chamada', cat: 'Seções', secao: true, nome: 'Chamada final',
+  desc: 'O fim da página repete a promessa e diz o que acontece depois do clique — quem responde e em quanto tempo.',
+  assina: 'background: var(--cor-destaque)',
+  ref: 'landing-pages.html#t-lp-mensagem',
+  raiz: '.s-chamada',
+  html:
+`<section class="secao s-chamada" aria-labelledby="s-chamada-titulo">
+  <div class="container pilha s-chamada__caixa">
+    <h2 id="s-chamada-titulo">Pronto para começar?</h2>
+    <p>Repita a promessa e diga o que acontece depois do clique: quem responde e em quanto tempo.</p>
+    <a class="botao s-chamada__botao" href="https://wa.me/55DDDNUMERO">Chamar no WhatsApp</a>
+  </div>
+</section>`,
+  css:
+`.s-chamada__caixa {
+  align-items: center; text-align: center; padding: var(--e8) var(--e6);
+  background: var(--cor-destaque); color: var(--cor-sobre-destaque);
+  border-radius: calc(var(--raio) * 2);
+}
+.s-chamada__caixa p { margin-inline: auto; opacity: .9; }
+/* o botão inverte: fundo claro sobre a faixa de cor */
+.s-chamada__botao { align-self: center; background: var(--cor-sobre-destaque); color: var(--cor-destaque); }
+@media (hover: hover) { .s-chamada__botao:hover { background: var(--cor-fundo); } }`
+},
+{
+  id: 'secao-contato', cat: 'Seções', secao: true, nome: 'Contato e horário',
+  desc: 'Endereço, telefone, WhatsApp, o link de como chegar e o horário numa tabela de verdade. Nome, endereço e telefone iguais aos do Perfil da Empresa.',
+  assina: '<address> + <table> com <th scope="row">',
+  ref: 'trafego.html#t-tr-nap',
+  raiz: '.s-contato',
+  html:
+`<section class="secao s-contato" id="contato" aria-labelledby="s-contato-titulo">
+  <div class="container s-contato__grade">
+    <div class="pilha">
+      <h2 id="s-contato-titulo">Onde estamos</h2>
+      <address class="s-contato__dados">
+        <p><strong>Nome do negócio</strong><br>Rua Exemplo, 123 — Bairro<br>Cidade — UF, 00000-000</p>
+        <p><a href="tel:+55DDDNUMERO">(DDD) 0000-0000</a></p>
+      </address>
+      <div class="fila">
+        <a class="botao" href="https://wa.me/55DDDNUMERO">WhatsApp</a>
+        <a class="s-contato__mapa" href="https://www.google.com/maps/search/?api=1&amp;query=Rua+Exemplo+123+Cidade" target="_blank" rel="noopener">Como chegar ↗</a>
+      </div>
+    </div>
+    <table class="s-contato__horario">
+      <caption>Horário</caption>
+      <tbody>
+        <tr><th scope="row">Segunda a sexta</th><td>8h às 18h</td></tr>
+        <tr><th scope="row">Sábado</th><td>8h às 12h</td></tr>
+        <tr><th scope="row">Domingo e feriado</th><td>Fechado</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>`,
+  css:
+`.s-contato__grade { display: grid; gap: var(--e7); }
+.s-contato__dados { display: grid; gap: var(--e3); font-style: normal; }
+.s-contato__mapa  { font-weight: 600; }
+.s-contato__horario { width: 100%; align-self: start; border-collapse: collapse; }
+.s-contato__horario caption {
+  padding-bottom: var(--e3); text-align: left;
+  font-family: var(--fonte-titulo); font-weight: var(--peso-titulo); font-size: var(--t-h3);
+}
+.s-contato__horario th, .s-contato__horario td {
+  padding: var(--e3) 0; border-bottom: 1px solid var(--cor-linha); text-align: left;
+}
+.s-contato__horario th { font-weight: 400; color: var(--cor-texto-fraco); }
+.s-contato__horario td { text-align: right; font-weight: 600; }
+@media (min-width: 52rem) {
+  .s-contato__grade { grid-template-columns: 1fr 1fr; }
+}`
+},
+{
+  id: 'secao-rodape', cat: 'Seções', secao: true, nome: 'Rodapé',
+  desc: 'Marca, navegação, contato, CNPJ, política de privacidade e o ano que se atualiza sozinho.',
+  assina: 'textContent = new Date().getFullYear()',
+  ref: 'depois-do-ar.html#t-da-envelhece',
+  raiz: '.s-rodape',
+  html:
+`<footer class="s-rodape">
+  <div class="container s-rodape__grade">
+    <div class="pilha s-rodape__marca">
+      <a class="s-rodape__nome" href="#">Nome do negócio</a>
+      <p>Uma linha sobre o que faz e onde atende.</p>
+    </div>
+    <nav aria-label="Rodapé">
+      <p class="s-rodape__rot">Navegar</p>
+      <ul class="s-rodape__lista">
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p class="s-rodape__rot">Contato</p>
+      <ul class="s-rodape__lista">
+        <li><a href="https://wa.me/55DDDNUMERO">WhatsApp</a></li>
+        <li><a href="https://instagram.com/perfil">Instagram</a></li>
+        <li><a href="mailto:contato@seusite.com.br">contato@seusite.com.br</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container s-rodape__base">
+    <p>© <span data-ano>2026</span> Nome do negócio · CNPJ 00.000.000/0000-00</p>
+    <a href="politica-de-privacidade.html">Política de privacidade</a>
+  </div>
+</footer>`,
+  css:
+`.s-rodape {
+  padding-block: var(--e8) var(--e6); font-size: var(--t-peq);
+  background: var(--cor-superficie); border-top: 1px solid var(--cor-linha);
+}
+.s-rodape__grade {
+  display: grid; gap: var(--e6);
+  grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr));
+}
+.s-rodape__marca { gap: var(--e3); }
+.s-rodape__marca p { color: var(--cor-texto-fraco); }
+.s-rodape__nome {
+  font-family: var(--fonte-titulo); font-weight: var(--peso-titulo); font-size: 18px;
+  color: var(--cor-texto); text-decoration: none;
+}
+.s-rodape__rot {
+  margin-bottom: var(--e3); font-size: 12px; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--cor-texto-fraco);
+}
+.s-rodape__lista { display: grid; gap: var(--e2); }
+.s-rodape__lista a { color: var(--cor-texto); text-decoration: none; overflow-wrap: anywhere; }
+@media (hover: hover) { .s-rodape__lista a:hover { color: var(--cor-destaque-texto); text-decoration: underline; } }
+.s-rodape__base {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--e3);
+  margin-top: var(--e7); padding-top: var(--e5);
+  border-top: 1px solid var(--cor-linha); color: var(--cor-texto-fraco);
+}
+.s-rodape__base a { color: inherit; }`,
+  js: function (raiz) {
+    var ano = raiz.querySelector('[data-ano]');
+    if (ano) ano.textContent = new Date().getFullYear();
+  }
+},
 
 /* ================= MOVIMENTO ================= */
 {
@@ -1136,6 +1864,13 @@ window.GT_MODELOS = [
   }
   function arquivo(m) {
     var js = codigoJs(m);
+    if (m.secao) {
+      return '<!DOCTYPE html>\n<html lang="pt-BR">\n<head>\n<meta charset="UTF-8">\n' +
+        '<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>' + esc(m.nome) + '</title>\n<style>\n' +
+        '/* o projeto-base (trilha Montar o site): no seu projeto, são os arquivos tokens.css e estilo.css */\n' +
+        window.GT_BASE_SECAO + '\n\n/* a seção */\n' + m.css + '\n</style>\n</head>\n<body>\n\n' + m.html + '\n\n' +
+        (js ? '<script>\n' + js + '\n<\/script>\n' : '') + '</body>\n</html>\n';
+    }
     return '<!DOCTYPE html>\n<html lang="pt-BR">\n<head>\n<meta charset="UTF-8">\n' +
       '<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>' + esc(m.nome) + '</title>\n<style>\n' +
       ':root { --m-destaque: #F5C542; color-scheme: dark; }\n' +
@@ -1145,10 +1880,48 @@ window.GT_MODELOS = [
 
   /* o CSS de todos os modelos entra uma vez na página — é o mesmo texto que se copia */
   var estilo = document.createElement('style');
-  estilo.textContent = MODELOS.map(function (m) { return m.css; }).join('\n\n');
+  estilo.textContent = MODELOS.filter(function (m) { return !m.secao; }).map(function (m) { return m.css; }).join('\n\n');
   document.head.appendChild(estilo);
 
-  function montar(m, alvo) {
+  /* seção: um iframe com o arquivo inteiro. Na grade, uma miniatura em escala;
+     na janela, do tamanho do conteúdo, na largura escolhida */
+  function quadro(m, miniatura) {
+    var f = document.createElement('iframe');
+    f.className = miniatura ? 'mod-sec mod-sec--mini' : 'mod-sec';
+    f.title = 'Prévia: ' + m.nome;
+    f.srcdoc = arquivo(m);
+    if (miniatura) {
+      f.setAttribute('tabindex', '-1');
+      f.setAttribute('aria-hidden', 'true');
+      f.setAttribute('loading', 'lazy');
+      f.dataset.largura = m.miniatura || 1200;
+    } else {
+      f.addEventListener('load', function () { medirQuadro(f); });
+    }
+    return f;
+  }
+  function escalar(f) {
+    var caixa = f.parentNode; if (!caixa || !caixa.clientWidth) return;
+    var larg = +f.dataset.largura, esc = caixa.clientWidth / larg;
+    f.style.width = larg + 'px';
+    f.style.height = Math.ceil(caixa.clientHeight / esc) + 'px';
+    f.style.transform = 'scale(' + esc + ')';
+  }
+  function medirQuadro(f) {
+    try {
+      var d = f.contentDocument;
+      if (d && d.documentElement) f.style.height = Math.max(d.documentElement.scrollHeight, 360) + 'px';
+    } catch (e) {}
+  }
+
+  function montar(m, alvo, miniatura) {
+    if (m.secao) {
+      alvo.innerHTML = '';
+      var f = quadro(m, miniatura);
+      alvo.appendChild(f);
+      if (miniatura) escalar(f);
+      return;
+    }
     alvo.innerHTML = m.html;
     if (!m.js) return;
     alvo.querySelectorAll(m.raiz).forEach(function (raiz) {
@@ -1163,17 +1936,22 @@ window.GT_MODELOS = [
     cel.id = 'm-' + m.id;
     cel.setAttribute('data-cat', m.cat);
     cel.innerHTML =
-      '<div class="mod-cel__palco"></div>' +
+      '<div class="mod-cel__palco' + (m.secao ? ' mod-cel__palco--secao" inert' : '"') + '></div>' +
       '<button class="mod-cel__abrir" type="button">' +
         '<span class="mod-cel__num">' + doisDigitos(i + 1) + ' · ' + esc(m.cat) + '</span>' +
         '<span class="mod-cel__nome">' + esc(m.nome) + '<span class="mod-cel__seta" aria-hidden="true">→</span></span>' +
         '<span class="mod-cel__desc">' + esc(m.desc) + '</span>' +
         '<code class="mod-cel__assina">' + esc(m.assina) + '</code>' +
       '</button>';
-    montar(m, cel.querySelector('.mod-cel__palco'));
+    montar(m, cel.querySelector('.mod-cel__palco'), true);
     cel.querySelector('.mod-cel__abrir').addEventListener('click', function () { abrir(m, i); });
     grade.appendChild(cel);
   });
+
+  /* as miniaturas acompanham a largura da célula */
+  var reescalar = function () { grade.querySelectorAll('.mod-sec--mini').forEach(escalar); };
+  if (window.ResizeObserver) new ResizeObserver(reescalar).observe(grade);
+  else window.addEventListener('resize', reescalar);
 
   /* ---------- filtro por categoria ---------- */
   var filtros = document.getElementById('mod-filtros');
@@ -1189,6 +1967,7 @@ window.GT_MODELOS = [
       var cat = b.getAttribute('data-cat');
       filtros.querySelectorAll('[data-cat]').forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
       grade.querySelectorAll('.mod-cel').forEach(function (cel) { cel.hidden = cat !== 'Todos' && cel.getAttribute('data-cat') !== cat; });
+      reescalar();
     });
   }
 
@@ -1211,12 +1990,17 @@ window.GT_MODELOS = [
     '<div class="mod-janela__barra"><div><p class="mod-janela__num"></p><h2 class="mod-janela__titulo" id="mod-janela-titulo"></h2></div>' +
     '<button class="mod-janela__fechar" type="button" aria-label="Fechar">×</button></div>' +
     '<p class="mod-janela__desc"></p>' +
+    '<div class="mod-janela__telas" role="group" aria-label="Largura da prévia" hidden>' +
+      '<button class="mod-tela" type="button" data-tela="390" aria-pressed="false">Celular</button>' +
+      '<button class="mod-tela" type="button" data-tela="100%" aria-pressed="true">Tela grande</button>' +
+    '</div>' +
     '<div class="mod-janela__palco"></div>' +
     '<div class="mod-janela__acoes">' +
       '<button class="mod-botao mod-botao--cheio" type="button" data-acao="tudo">Copiar tudo (um arquivo .html)</button>' +
       '<button class="mod-botao" type="button" data-acao="sozinho">Abrir sozinho ↗</button>' +
       '<a class="mod-botao mod-janela__ref" hidden>De onde vem →</a>' +
     '</div>' +
+    '<p class="mod-janela__nota" hidden>Esta seção usa o <a href="montar-o-site.html#t-ms-projeto-base">projeto-base</a> da trilha Montar o site — os tokens e as classes <code>.secao</code>, <code>.container</code>, <code>.pilha</code>, <code>.fila</code>, <code>.grade</code> e <code>.botao</code>. No projeto, cole o HTML no <code>index.html</code> e o CSS no fim do <code>estilo.css</code>. O arquivo único já vem com tudo.</p>' +
     '<div class="mod-janela__codigos"></div>';
   document.body.appendChild(janela);
   var atual = null;
@@ -1237,7 +2021,12 @@ window.GT_MODELOS = [
     janela.querySelector('.mod-janela__num').textContent = doisDigitos(i + 1) + ' · ' + m.cat;
     janela.querySelector('.mod-janela__titulo').textContent = m.nome;
     janela.querySelector('.mod-janela__desc').textContent = m.desc;
-    montar(m, janela.querySelector('.mod-janela__palco'));
+    var palco = janela.querySelector('.mod-janela__palco');
+    palco.classList.toggle('mod-janela__palco--secao', !!m.secao);
+    janela.querySelector('.mod-janela__telas').hidden = !m.secao;
+    janela.querySelector('.mod-janela__nota').hidden = !m.secao;
+    montar(m, palco);
+    if (m.secao) tela(m.miniatura && m.miniatura < 600 ? '390' : '100%');
     var ref = janela.querySelector('.mod-janela__ref');
     ref.hidden = !m.ref;
     if (m.ref) ref.href = m.ref;
@@ -1250,9 +2039,21 @@ window.GT_MODELOS = [
     janela.scrollTop = 0;
     if (history.replaceState) history.replaceState(null, '', '#m-' + m.id);
   }
+  function tela(larg) {
+    janela.querySelectorAll('.mod-tela').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-tela') === larg)); });
+    var f = janela.querySelector('.mod-sec');
+    if (!f) return;
+    f.style.width = larg === '100%' ? '100%' : larg + 'px';
+    setTimeout(function () { medirQuadro(f); }, 60);
+  }
+  janela.querySelector('.mod-janela__telas').addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-tela]');
+    if (b) tela(b.getAttribute('data-tela'));
+  });
   janela.querySelector('.mod-janela__fechar').addEventListener('click', function () { janela.close(); });
   janela.addEventListener('click', function (e) { if (e.target === janela) janela.close(); });
   janela.addEventListener('close', function () {
+    if (janela.open) return;   /* o aviso de fechar chegou depois de a janela já ter reaberto */
     janela.querySelector('.mod-janela__palco').innerHTML = '';   /* para animação e observador da cópia */
     atual = null;
     if (history.replaceState) history.replaceState(null, '', location.pathname);

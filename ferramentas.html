@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Ferramentas — Gustavo Tutorial</title>
-<meta name="description" content="Quatorze ferramentas e 28 modelos visuais para copiar, ligados entre si, na ordem do trabalho: briefing, preço e proposta; paleta, contraste, tipografia, escala e design system; gerador de comando para IA, cabeçalho, WhatsApp e UTM; checklist e inventário de acessos.">
+<meta name="description" content="Quinze ferramentas e 39 modelos para copiar, ligados entre si, na ordem do trabalho: briefing, preço e proposta; paleta, contraste, tipografia, escala e design system; gerador de comando para IA, cabeçalho, WhatsApp e UTM; checklist e inventário de acessos.">
 <meta name="color-scheme" content="light dark">
 <meta property="og:title" content="Ferramentas — Gustavo Tutorial">
-<meta property="og:description" content="Quatorze ferramentas para usar durante o trabalho.">
+<meta property="og:description" content="Quinze ferramentas para usar durante o trabalho — do briefing aos primeiros noventa dias no ar.">
 <meta property="og:type" content="website">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#A8261C" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#F4F6F4" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
 <meta name="author" content="Gustavo">
 <link rel="canonical" href="https://gustavo-tutorial.vercel.app/ferramentas.html">
@@ -33,20 +33,22 @@
 <header class="topo">
 <div class="topo__interno">
 <a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
-<button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema">&#9680;</button>
+<button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.25"/><path d="M12 3.75a8.25 8.25 0 0 1 0 16.5z" fill="currentColor" stroke="none"/></svg></button>
 </div>
 <nav class="navmenu" aria-label="Navegação do site">
 <details class="navmenu__caixa" id="navmenu">
-<summary class="navmenu__botao">Menu<span aria-hidden="true">&#9662;</span></summary>
+<summary class="navmenu__botao">Menu<svg class="ico ico--seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></summary>
 <div class="navmenu__painel">
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Construção</p>
 <a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="montar-o-site.html"><strong>Montar o site</strong><span>O esqueleto de todo projeto</span></a>
 <a href="qualidade.html"><strong>Qualidade</strong><span>Imagem, a11y, Vitals e testes</span></a>
 <a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
 <a href="motion.html"><strong>Referência: Motion</strong><span>A API inteira, em português</span></a>
 <a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
 <a href="back-end.html"><strong>Back-end</strong><span>Servidor, banco e login</span></a>
+<a href="depois-do-ar.html"><strong>Depois do ar</strong><span>Publicar, medir, manter</span></a>
 </div>
 <div class="navmenu__grupo">
 <p class="navmenu__rotulo">Captação e Vendas</p>
@@ -59,22 +61,31 @@
 <a href="fluxo.html"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
 <a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e revisão</span></a>
 <a href="vibecoding.html"><strong>Vibecoding</strong><span>Ferramentas, referências e riscos</span></a>
-<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
 </div>
 <div class="navmenu__grupo navmenu__grupo--trabalhar">
-<p class="navmenu__rotulo">Ferramentas</p>
-<a href="ferramentas.html" class="is-atual"><strong>Ferramentas</strong><span>As quatorze do dia a dia</span></a>
-<a href="modelos.html"><strong>Modelos para copiar</strong><span>Efeitos vivos, prontos</span></a>
-<a href="ferramenta-checklist.html"><strong>Checklist de entrega</strong><span>Antes de publicar</span></a>
-<a href="ferramenta-proposta.html"><strong>Proposta que fecha</strong><span>Os oito pontos</span></a>
-<a href="ferramenta-briefing.html"><strong>Briefing</strong><span>As dez perguntas</span></a>
-<a href="ferramenta-whatsapp.html"><strong>Link de WhatsApp</strong><span>Com a mensagem pronta</span></a>
-<a href="ferramenta-utm.html"><strong>Gerador de UTM</strong><span>Rastrear a origem</span></a>
-<a href="ferramenta-gerador.html"><strong>Gerador de comando</strong><span>Onze tipos de pedido</span></a>
+<p class="navmenu__rotulo">Trabalhar</p>
+<a href="ferramentas.html" class="is-atual" aria-current="page"><strong>Todas as ferramentas</strong><span>Em cinco fases, ligadas entre si</span></a>
+<a href="modelos.html"><strong>Modelos para copiar</strong><span>Seções e efeitos prontos</span></a>
+<a href="ferramenta-briefing.html" class="navmenu__compacto">Briefing</a>
+<a href="ferramenta-preco.html" class="navmenu__compacto">Preço</a>
+<a href="ferramenta-proposta.html" class="navmenu__compacto">Proposta que fecha</a>
+<a href="ferramenta-paleta.html" class="navmenu__compacto">Paleta em tokens</a>
+<a href="ferramenta-contraste.html" class="navmenu__compacto">Contraste</a>
+<a href="ferramenta-tipografia.html" class="navmenu__compacto">Tipografia</a>
+<a href="ferramenta-escala.html" class="navmenu__compacto">Escala de texto e espaço</a>
+<a href="ferramenta-design-system.html" class="navmenu__compacto">Design system</a>
+<a href="ferramenta-gerador.html" class="navmenu__compacto">Gerador de comando</a>
+<a href="ferramenta-cabecalho.html" class="navmenu__compacto">Cabeçalho da página</a>
+<a href="ferramenta-whatsapp.html" class="navmenu__compacto">Link de WhatsApp</a>
+<a href="ferramenta-utm.html" class="navmenu__compacto">Gerador de UTM</a>
+<a href="ferramenta-checklist.html" class="navmenu__compacto">Checklist de entrega</a>
+<a href="ferramenta-inventario.html" class="navmenu__compacto">Inventário de acessos</a>
+<a href="ferramenta-depois-de-publicar.html" class="navmenu__compacto">Depois de publicar</a>
 </div>
-<div class="navmenu__grupo">
-<p class="navmenu__rotulo">Patch notes</p>
+<div class="navmenu__grupo navmenu__grupo--sobre">
+<p class="navmenu__rotulo">Sobre o site</p>
 <a href="patch-notes.html"><strong>Patch notes</strong><span>O que mudou no site</span></a>
+<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
 </div>
 </div>
 </details>
@@ -83,63 +94,16 @@
 <a class="modo modo--trabalho is-atual" href="ferramentas.html">Trabalhar</a>
 </div>
 </nav></header>
-<main class="home" id="conteudo" tabindex="-1">
-<section class="hero hero--area">
-<p class="hero__olho">Área de trabalho</p>
-<h1>Ferramentas</h1>
-<p class="hero__lead">Quatorze ferramentas na ordem em que o trabalho acontece — antes do projeto, identidade, montar a página, entregar — e 28 modelos visuais para copiar e colar. Tudo roda no seu navegador; nada é enviado para lugar nenhum.</p>
-<div class="hero__nums">
-<div class="hero__num"><strong>14</strong><span>ferramentas</span></div>
-<div class="hero__num"><strong>4</strong><span>fases</span></div>
-<div class="hero__num"><strong>28</strong><span>modelos</span></div>
+<main class="home area-pagina" id="conteudo" tabindex="-1" data-revelar>
+<section class="area">
+<h1 class="area__titulo">Ferramentas</h1>
+<p class="area__lead">Quinze ferramentas na ordem em que o trabalho acontece, do briefing aos primeiros noventa dias no ar, ligadas entre si. Tudo roda no seu navegador; nada é enviado para lugar nenhum.</p>
+<p class="area__meta">15 ferramentas · 5 fases · 39 modelos para copiar</p>
+<div class="area__acoes">
+<a class="cta cta--cheio" href="ferramenta-briefing.html">Começar pelo briefing<span class="cta__seta"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+<a class="area__link" href="modelos.html">Ver os modelos</a>
 </div>
 </section>
-
-<div class="ctas">
-<a class="cta cta--cheio" href="ferramenta-briefing.html">Começar pelo briefing<span class="cta__seta" aria-hidden="true">&rsaquo;</span></a>
-<a class="cta cta--vazio" href="modelos.html">Ver os modelos<span class="cta__seta" aria-hidden="true">&rsaquo;</span></a>
-</div>
-
-<div class="home__mapa home__mapa--quatro">
-<div class="home__grupo">
-<p class="home__titulo">1 · Antes do projeto</p>
-<ul class="home__links">
-<li><a href="ferramenta-briefing.html">Briefing</a></li>
-<li><a href="ferramenta-preco.html">Preço</a></li>
-<li><a href="ferramenta-proposta.html">Proposta que fecha</a></li>
-</ul>
-</div>
-<div class="home__grupo">
-<p class="home__titulo">2 · Identidade</p>
-<ul class="home__links">
-<li><a href="ferramenta-paleta.html">Paleta em tokens</a></li>
-<li><a href="ferramenta-contraste.html">Contraste</a></li>
-<li><a href="ferramenta-tipografia.html">Tipografia</a></li>
-<li><a href="ferramenta-escala.html">Escala de texto e espaço</a></li>
-<li><a href="ferramenta-design-system.html">Design system</a></li>
-</ul>
-</div>
-<div class="home__grupo">
-<p class="home__titulo">3 · Montar a página</p>
-<ul class="home__links">
-<li><a href="ferramenta-gerador.html">Gerador de comando</a></li>
-<li><a href="ferramenta-cabecalho.html">Cabeçalho da página</a></li>
-<li><a href="ferramenta-whatsapp.html">Link de WhatsApp</a></li>
-<li><a href="ferramenta-utm.html">Gerador de UTM</a></li>
-</ul>
-</div>
-<div class="home__grupo">
-<p class="home__titulo">4 · Entregar</p>
-<ul class="home__links">
-<li><a href="ferramenta-checklist.html">Checklist de entrega</a></li>
-<li><a href="ferramenta-inventario.html">Inventário de acessos</a></li>
-</ul>
-</div>
-</div>
-
-<div class="home__nota">
-<strong>Modelos para copiar:</strong> botões, cards, menus, formulários, avisos e efeitos de movimento prontos, rodando de verdade, com o HTML, o CSS e o JavaScript de cada um — <a href="modelos.html">abra a galeria</a> e teste antes de levar para o projeto.
-</div>
 
 <section class="projeto" id="projeto" aria-labelledby="pj-titulo">
 <div class="projeto__topo">
@@ -148,10 +112,11 @@
 <input type="text" id="pj-nome" class="ferr__campo" placeholder="nome do cliente" list="pj-lista" autocomplete="off">
 <datalist id="pj-lista"></datalist>
 </div>
-<p class="projeto__nota">Um nome só para as quatorze. Briefing, proposta, checklist e inventário ficam guardados por cliente — troque o nome e cada uma abre o que já tinha daquele projeto. O que uma ferramenta já sabe aparece na seguinte, com um botão para usar.</p>
+<p class="projeto__nota">Um nome só para as quinze. Briefing, proposta, checklist, inventário e o depois de publicar ficam guardados por cliente — troque o nome e cada uma abre o que já tinha daquele projeto. O que uma ferramenta já sabe aparece na seguinte, com um botão para usar.</p>
 </div>
 </section>
 
+<section class="fase-grupo">
 <div class="fase" id="fase-1">
 <span class="fase__num">FASE 1</span>
 <h2 class="fase__nome">Antes do projeto</h2>
@@ -162,7 +127,9 @@
 <a class="ferr-card" id="f-preco" href="ferramenta-preco.html"><span class="ferr-card__nome">Preço</span><span class="ferr-card__resumo">Primeiro o seu custo real por hora trabalhada — que quase nunca é o que se imagina. Depois a faixa do projeto, a partir das horas que ele realmente leva.</span><span class="ferr-card__estado fluxo__estado" data-estado="f-preco">—</span></a>
 <a class="ferr-card" id="f-proposta" href="ferramenta-proposta.html"><span class="ferr-card__nome">Proposta que fecha</span><span class="ferr-card__resumo">Os oito pontos que fazem uma proposta mostrar que você entendeu o problema antes de mostrar o preço. Preencha e copie o texto pronto para mandar.</span><span class="ferr-card__estado fluxo__estado" data-estado="f-proposta">—</span></a>
 </div>
+</section>
 
+<section class="fase-grupo">
 <div class="fase" id="fase-2">
 <span class="fase__num">FASE 2</span>
 <h2 class="fase__nome">Identidade</h2>
@@ -175,7 +142,9 @@
 <a class="ferr-card" id="f-escala" href="ferramenta-escala.html"><span class="ferr-card__nome">Escala de texto e espaço</span><span class="ferr-card__resumo">Espaçamento escolhido no olho — 13px aqui, 27px ali — é o que faz a página parecer amadora sem ninguém saber dizer por quê. A solução é não escolher: gere a escala e use só ela.</span><span class="ferr-card__estado fluxo__estado" data-estado="f-escala">—</span></a>
 <a class="ferr-card" id="f-sistema" href="ferramenta-design-system.html"><span class="ferr-card__nome">Design system</span><span class="ferr-card__resumo">O fim da fase. Conta os valores soltos do CSS que já existe, junta paleta, tipografia e escala com as decisões que faltam — raio, sombra, movimento e modo escuro — e entrega os tokens em três camadas, os componentes com todos os estados e o JSON que plugins de tokens do Figma importam.</span><span class="ferr-card__estado fluxo__estado" data-estado="f-sistema">—</span></a>
 </div>
+</section>
 
+<section class="fase-grupo">
 <div class="fase" id="fase-3">
 <span class="fase__num">FASE 3</span>
 <h2 class="fase__nome">Montar a página</h2>
@@ -187,7 +156,9 @@
 <a class="ferr-card" id="f-zap" href="ferramenta-whatsapp.html"><span class="ferr-card__nome">Link de WhatsApp</span><span class="ferr-card__resumo">Monta o link com a mensagem já escrita, com a codificação correta — que é onde o acento quebra quando se faz na mão.</span><span class="ferr-card__estado fluxo__estado" data-estado="f-zap">—</span></a>
 <a class="ferr-card" id="f-utm" href="ferramenta-utm.html"><span class="ferr-card__nome">Gerador de UTM</span><span class="ferr-card__resumo">A URL marcada, com a convenção já aplicada — minúscula, sem acento, sem espaço. E o histórico do que você já gerou, que é a planilha que a trilha Tráfego manda manter.</span><span class="ferr-card__estado fluxo__estado" data-estado="f-utm">—</span></a>
 </div>
+</section>
 
+<section class="fase-grupo">
 <div class="fase" id="fase-4">
 <span class="fase__num">FASE 4</span>
 <h2 class="fase__nome">Entregar</h2>
@@ -197,13 +168,36 @@
 <a class="ferr-card" id="f-checklist" href="ferramenta-checklist.html"><span class="ferr-card__nome">Checklist de entrega</span><span class="ferr-card__resumo">Os quatorze itens que se confere na URL de produção antes de dizer ao cliente que está pronto. Marque conforme for; fica salvo por cliente.</span><span class="ferr-card__estado fluxo__estado" data-estado="f-checklist">—</span></a>
 <a class="ferr-card" id="f-inventario" href="ferramenta-inventario.html"><span class="ferr-card__nome">Inventário de acessos</span><span class="ferr-card__resumo">O mapa de onde está cada acesso do projeto e em nome de quem — sem senha nenhuma escrita nele. Entrega junto com o site.</span><span class="ferr-card__estado fluxo__estado" data-estado="f-inventario">—</span></a>
 </div>
+</section>
+
+<section class="fase-grupo">
+<div class="fase" id="fase-5">
+<span class="fase__num">FASE 5</span>
+<h2 class="fase__nome">Acompanhar</h2>
+<p class="fase__resumo">O site no ar é o começo, não o fim: os primeiros noventa dias decidem se ele aparece no Google e se traz contato — e é onde nasce a manutenção mensal.</p>
+</div>
+<div class="ferr-cards">
+<a class="ferr-card" id="f-pos" href="ferramenta-depois-de-publicar.html"><span class="ferr-card__nome">Depois de publicar</span><span class="ferr-card__resumo">O roteiro dos primeiros noventa dias em datas, a partir do dia em que o site entrou no ar: Search Console, sitemap, Perfil da Empresa, Analytics, avaliações, o primeiro relatório e o que decidir no terceiro mês. Baixa os lembretes para a agenda.</span><span class="ferr-card__estado fluxo__estado" data-estado="f-pos">—</span></a>
+</div>
+</section>
 
 <nav class="passo" aria-label="Navegar">
 <a class="passo__item passo__item--ant" href="index.html"><span>Voltar ao</span><strong>Início</strong></a>
 <a class="passo__item passo__item--prox" href="modelos.html"><span>Copiar e colar</span><strong>Modelos</strong></a>
 </nav>
 </main>
-<footer class="rodape">Gustavo Tutorial · material de estudo aberto · feito em HTML, CSS e JavaScript puros</footer>
+<footer class="rodape">
+<div class="rodape__interno">
+<p class="rodape__marca"><a href="index.html">Gustavo Tutorial</a><span>Material de estudo aberto, em português. Feito em HTML, CSS e JavaScript puros.</span></p>
+<nav class="rodape__nav" aria-label="Rodapé">
+<a href="estudar.html">Estudar</a>
+<a href="ferramentas.html">Trabalhar</a>
+<a href="modelos.html">Modelos</a>
+<a href="patch-notes.html">Patch notes</a>
+<a href="colofao.html">Colofão</a>
+</nav>
+</div>
+</footer>
 <script src="app.js"></script>
 <script src="busca.js" defer></script>
 <script src="ferramentas.js" defer></script>

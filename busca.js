@@ -20,7 +20,7 @@
     botao.type = 'button';
     botao.setAttribute('aria-label', 'Buscar no site');
     botao.title = 'Buscar  (/)';
-    botao.innerHTML = '<span aria-hidden="true">&#9906;</span>';
+    botao.innerHTML = '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>';
     var tema = document.getElementById('btn-tema');
     if (tema) topo.insertBefore(botao, tema); else topo.appendChild(botao);
   }

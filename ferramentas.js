@@ -100,6 +100,7 @@
     'f-gerador': 'ferramenta-gerador.html', 'f-head': 'ferramenta-cabecalho.html',
     'f-zap': 'ferramenta-whatsapp.html', 'f-utm': 'ferramenta-utm.html',
     'f-checklist': 'ferramenta-checklist.html', 'f-inventario': 'ferramenta-inventario.html',
+    'f-pos': 'ferramenta-depois-de-publicar.html',
     'projeto': 'ferramentas.html#projeto'
   };
   function ir(id) { return PAGINA_DE[id] || 'ferramentas.html'; }
@@ -325,6 +326,340 @@
     cliente.addEventListener('input', function () { guardar('cl-cliente', cliente.value); pintar(); });
     $('#cl-zerar').addEventListener('click', function () { guardar(chave(), []); pintar(); });
     /* repinta só se o valor a conferir mudou — repintar à toa tira o foco da caixa marcada */
+    var ultima = assinatura();
+    document.addEventListener('gt:mudou', function () {
+      var a = assinatura();
+      if (a !== ultima) { ultima = a; pintar(); }
+    });
+    pintar();
+  })();
+
+  /* ========== 15 · DEPOIS DE PUBLICAR ==========
+     O roteiro dos primeiros noventa dias (trilha Tráfego, parte 7) em datas,
+     contadas do dia em que o site entrou no ar. Guarda por cliente:
+     { data: 'AAAA-MM-DD', feitos: [ids], mes: { 'AAAA-MM': [ids] } }.
+     O bloco mensal zera sozinho a cada mês — é rotina, não etapa. */
+  (function () {
+    var caixa = $('#fer-pos'); if (!caixa) return;
+    var cliente = $('#dp-cliente'), campoData = $('#dp-data'), blocos = $('#dp-blocos'),
+        contador = $('#dp-contador'), fita = $('#dp-fita'), resumo = $('#dp-agora');
+    cliente.value = ler('dp-cliente', '');
+
+    function chaveDe(prefixo) { return prefixo + (cliente.value.trim().toLowerCase() || 'sem-nome'); }
+    function txt(k) { return String(ler(k, '') || '').trim(); }
+    function dominio() {
+      var u = txt('hd-url').replace(/^https?:\/\//i, '').replace(/\/.*$/, '').replace(/^www\./i, '');
+      return u;
+    }
+    function urlSite() { return txt('hd-url').replace(/\/+$/, ''); }
+
+    /* cada item: o que fazer, onde a trilha explica, e — quando outra ferramenta
+       já sabe o valor — o link para ela com o valor a conferir */
+    var BLOCOS = [
+      { id: 'dia', nome: 'No dia', de: 0, ate: 0, itens: [
+        { id: 'checklist', t: 'Checklist de entrega completo, na URL de produção',
+          ferr: function () {
+            var m = ler(chaveDe('cl-'), []), n = Array.isArray(m) ? m.length : 0;
+            return [ir('f-checklist'), 'Checklist de entrega', n + ' de 14 marcados'];
+          } },
+        { id: 'dominio', t: 'Domínio no CPF ou CNPJ do cliente, com o e-mail dele como contato',
+          por: ['negocio.html#t-ac-dominio', 'O domínio é do cliente'] },
+        { id: 'noindex', t: 'Nenhum noindex nem Disallow: / esquecido do ambiente de teste',
+          por: ['trafego.html#t-tr-robots', 'robots.txt e sitemap.xml'] },
+        { id: 'acessos', t: 'Cada acesso anotado no inventário, em nome de quem',
+          ferr: function () {
+            var l = ler(chaveDe('iv-'), null);
+            var n = Array.isArray(l) ? l.length : 0;
+            return [ir('f-inventario'), 'Inventário de acessos', n ? n + (n === 1 ? ' acesso anotado' : ' acessos anotados') : ''];
+          } }
+      ] },
+      { id: 'sem', nome: 'Primeira semana', de: 1, ate: 7, itens: [
+        { id: 'console', t: 'Search Console verificado — pela tag no <head> ou por registro DNS',
+          por: ['trafego.html#t-tr-console', 'O que ele responde'],
+          ferr: function () { var u = urlSite(); return u ? [ir('f-head'), 'Cabeçalho', 'propriedade ' + u + '/'] : null; } },
+        { id: 'sitemap', t: 'Sitemap enviado no Search Console',
+          por: ['trafego.html#t-tr-robots', 'robots.txt e sitemap.xml'],
+          ferr: function () { var u = urlSite(); return u ? [ir('f-head'), 'Cabeçalho', u + '/sitemap.xml'] : null; } },
+        { id: 'inspecao', t: 'Indexação pedida para a página principal, na Inspeção de URL',
+          por: ['trafego.html#t-tr-console', 'O que ele responde'] },
+        { id: 'perfil', t: 'Perfil da Empresa no Google criado ou reivindicado',
+          por: ['trafego.html#t-tr-perfil', 'O Perfil da Empresa'] },
+        { id: 'categoria', t: 'Categoria principal do perfil escolhida com cuidado',
+          por: ['trafego.html#t-tr-perfil', 'O Perfil da Empresa'] },
+        { id: 'nap', t: 'Nome, endereço e telefone iguais no site e no perfil, até na abreviação',
+          por: ['trafego.html#t-tr-nap', 'Consistência de NAP'],
+          ferr: function () {
+            var n = txt('hd-nome'), f = foneNacional(ler('zp-num', ''));
+            var v = [n, f.length >= 10 ? foneBonito(f) : ''].filter(Boolean).join(' · ');
+            return v ? [ir('f-head'), 'Cabeçalho', 'confira: ' + v] : null;
+          } },
+        { id: 'ga4', t: 'Analytics instalado e clique_whatsapp marcado como evento principal',
+          por: ['trafego.html#t-utm-evento', 'Medir o clique no WhatsApp'] },
+        { id: 'cookies', t: 'Se há rastreamento com cookie: aviso que bloqueia antes do aceite e política de privacidade',
+          por: ['trafego.html#t-tr-lgpd', 'Consentimento e LGPD'] },
+        { id: 'pixel', t: 'Se o cliente vai anunciar: pixel instalado antes da primeira campanha',
+          por: ['trafego.html#t-tr-pixel', 'O que o cliente precisa entender'] }
+      ] },
+      { id: 'mes1', nome: 'Primeiro mês', de: 8, ate: 30, itens: [
+        { id: 'site', t: 'Buscar site: no Google — se não aparece nada, o problema é indexação, não posição',
+          por: ['trafego.html#t-tr-mecanismo', 'Rastrear, indexar, ranquear'],
+          ferr: function () { var d = dominio(); return d ? [ir('f-head'), 'Cabeçalho', 'site:' + d] : null; } },
+        { id: 'indexacao', t: 'Relatório de indexação do Search Console sem página de fora por erro',
+          por: ['trafego.html#t-tr-console', 'O que ele responde'] },
+        { id: 'fotos', t: 'Cinco fotos reais no perfil',
+          por: ['trafego.html#t-tr-perfil', 'O Perfil da Empresa'] },
+        { id: 'avaliacao', t: 'Rotina de pedir avaliação, com o link curto do Google',
+          por: ['trafego.html#t-tr-avaliacoes', 'Avaliações sem constranger'] },
+        { id: 'base', t: 'Linha de base anotada: quantos contatos por semana',
+          por: ['trafego.html#t-tr-oquever', 'O que olhar e o que ignorar'] },
+        { id: 'depoimento', t: 'Depoimento pedido logo depois da entrega aprovada, com pergunta específica',
+          por: ['negocio.html#t-mt-encerrar', 'Encerrar bem'] }
+      ] },
+      { id: 'mes2', nome: 'Segundo mês', de: 31, ate: 60, itens: [
+        { id: 'buscas', t: 'Ler as buscas reais no relatório de Desempenho',
+          por: ['trafego.html#t-tr-usar', 'O que fazer com os dados'] },
+        { id: 'titulo', t: 'Corrigir title e description conforme as buscas que já aparecem',
+          por: ['trafego.html#t-tr-usar', 'O que fazer com os dados'],
+          ferr: function () {
+            var n = txt('hd-nome'), o = txt('hd-oque'), c = txt('hd-cidade');
+            return n ? [ir('f-head'), 'Cabeçalho', 'hoje: ' + n + (o ? ' — ' + o : '') + (c ? ' | ' + c : '')] : null;
+          } },
+        { id: 'duvidas', t: 'Responder na própria página as dúvidas que se repetem no WhatsApp',
+          por: ['trafego.html#t-tr-90dias', 'Os primeiros noventa dias'] },
+        { id: 'responder', t: 'Primeiras avaliações respondidas, inclusive as negativas',
+          por: ['trafego.html#t-tr-avaliacoes', 'Avaliações sem constranger'] },
+        { id: 'relatorio', t: 'Primeiro relatório de uma página: quatro números e uma frase de leitura',
+          por: ['trafego.html#t-utm-relatorio', 'O relatório de uma página'],
+          ferr: function () {
+            var h = ler('ut-historico', []), q = Array.isArray(h) ? h.length : 0;
+            return [ir('f-utm'), 'Gerador de UTM', q ? q + (q === 1 ? ' link marcado' : ' links marcados') + ' para ler a origem' : 'marque os links antes de divulgar'];
+          } }
+      ] },
+      { id: 'mes3', nome: 'Terceiro mês', de: 61, ate: 90, itens: [
+        { id: 'secao', t: 'Revisar qual seção converte, pela origem do clique no WhatsApp',
+          por: ['trafego.html#t-utm-evento', 'Medir o clique no WhatsApp'] },
+        { id: 'servico', t: 'Avaliar se cabe uma página por serviço',
+          por: ['trafego.html#t-tr-conteudo', 'Por que uma LP sozinha ranqueia pouco'] },
+        { id: 'informacional', t: 'Avaliar conteúdo para busca informacional — as perguntas do público',
+          por: ['trafego.html#t-tr-intencao', 'Intenção de busca'] },
+        { id: 'canal', t: 'Decidir com o cliente: orgânico, anúncio ou os dois',
+          por: ['trafego.html#t-tr-anuncio', 'Busca ou rede social'] },
+        { id: 'manutencao', t: 'Propor a manutenção mensal, com o relatório como entrega',
+          por: ['negocio.html#t-mt-contrato', 'Contrato de manutenção'] }
+      ] }
+    ];
+    var MENSAL = { id: 'mensal', nome: 'Todo mês', itens: [
+      { id: 'noar', t: 'Site no ar, formulário chegando, Lighthouse conferido',
+        por: ['negocio.html#t-mt-contrato', 'Contrato de manutenção'] },
+      { id: 'vencer', t: 'Domínio e certificado longe do vencimento',
+        por: ['negocio.html#t-mt-quebrou', 'Quando o site sai do ar'] },
+      { id: 'branch', t: 'Toda mudança passou por branch e pré-visualização antes de ir ao ar',
+        por: ['negocio.html#t-mt-ambientes', 'Produção e pré-visualização'] },
+      { id: 'backup', t: 'Fotos originais e textos aprovados com cópia fora do seu computador',
+        por: ['negocio.html#t-ac-backup', 'Backup'] },
+      { id: 'mesrel', t: 'Relatório do mês enviado, com uma recomendação',
+        por: ['trafego.html#t-utm-relatorio', 'O relatório de uma página'] }
+    ] };
+    var TOTAL = BLOCOS.reduce(function (a, b) { return a + b.itens.length; }, 0);
+    var MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+    var MESES_LONGOS = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+
+    /* datas sempre ao meio-dia local: somar dias não tropeça em horário de verão */
+    function dataDe(iso) {
+      var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
+      return m ? new Date(+m[1], +m[2] - 1, +m[3], 12) : null;
+    }
+    function hoje() { var d = new Date(); d.setHours(12, 0, 0, 0); return d; }
+    function somar(d, n) { var x = new Date(d.getTime()); x.setDate(x.getDate() + n); return x; }
+    function dias(a, b) { return Math.round((b - a) / 864e5); }
+    function curta(d) { return ('0' + d.getDate()).slice(-2) + ' ' + MESES[d.getMonth()]; }
+    function mesAtual() { var d = hoje(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2); }
+
+    function estado() {
+      var e = ler(chaveDe('dp-'), null);
+      if (!e || typeof e !== 'object') e = {};
+      if (!Array.isArray(e.feitos)) e.feitos = [];
+      if (!e.mes || typeof e.mes !== 'object') e.mes = {};
+      return e;
+    }
+    function salvar(e) { guardar(chaveDe('dp-'), e); }
+    function chaveItem(b, it) { return b.id + '.' + it.id; }
+
+    /* a situação de um bloco: quando vence e se está na vez, atrasado ou feito */
+    function situacao(b, e, zero) {
+      var feitos = b.itens.filter(function (it) { return e.feitos.indexOf(chaveItem(b, it)) !== -1; }).length;
+      var r = { feitos: feitos, classe: '', quando: b.de === 0 ? 'dia 0' : 'dias ' + b.de + ' a ' + b.ate };
+      if (!zero) return r;
+      var ini = somar(zero, b.de), fim = somar(zero, b.ate), h = hoje();
+      if (feitos === b.itens.length) { r.classe = 'is-feito'; r.quando = 'feito · até ' + curta(fim); }
+      else if (h > fim) { r.classe = 'is-atrasado'; r.quando = 'passou de ' + curta(fim) + ' · ' + dias(fim, h) + (dias(fim, h) === 1 ? ' dia' : ' dias'); }
+      else if (h >= ini) {
+        var f = dias(h, fim);
+        r.classe = 'is-agora';
+        r.quando = b.de === 0 ? 'hoje' : 'até ' + curta(fim) + ' · ' + (f === 0 ? 'vence hoje' : 'faltam ' + f + (f === 1 ? ' dia' : ' dias'));
+      }
+      else r.quando = b.de === b.ate ? curta(ini) : curta(ini) + ' a ' + curta(fim);
+      r.fim = fim;
+      return r;
+    }
+
+    function esc(s) { return escHtml(s); }
+    function linhaItem(b, it, marcado) {
+      var partes = [];
+      if (it.por) partes.push('<a href="' + it.por[0] + '">' + esc(it.por[1]) + '</a>');
+      if (it.ferr) {
+        var r = null;
+        try { r = it.ferr(); } catch (err) {}
+        if (r) partes.push('<a href="' + r[0] + '">' + esc(r[1]) + '</a>' + (r[2] ? ' · ' + esc(r[2]) : ''));
+      }
+      var ref = partes.length ? '<small class="ferr__item-ir">' + partes.join(' <span aria-hidden="true">/</span> ') + '</small>' : '';
+      return '<li><label class="ferr__item' + (marcado ? ' is-feito' : '') + '">' +
+             '<input type="checkbox" data-bloco="' + b.id + '" data-item="' + it.id + '"' + (marcado ? ' checked' : '') + '>' +
+             '<span>' + esc(it.t) + ref + '</span></label></li>';
+    }
+
+    function pintar() {
+      var e = estado(), zero = dataDe(e.data);
+      if (document.activeElement !== campoData) campoData.value = e.data || '';
+      var html = '', total = 0, agora = null, atrasados = 0;
+      BLOCOS.forEach(function (b) {
+        var s = situacao(b, e, zero);
+        total += s.feitos;
+        if (s.classe === 'is-atrasado') atrasados += b.itens.length - s.feitos;
+        if (s.classe === 'is-agora') agora = { b: b, s: s };
+        html += '<section class="dp-bloco ' + s.classe + '" aria-labelledby="dp-b-' + b.id + '">' +
+          '<div class="dp-bloco__topo"><h2 class="dp-bloco__titulo" id="dp-b-' + b.id + '">' + b.nome + '</h2>' +
+          '<span class="dp-bloco__quando">' + s.quando + '</span>' +
+          '<span class="dp-bloco__conta">' + s.feitos + ' de ' + b.itens.length + '</span></div>' +
+          '<ul class="ferr__lista">' + b.itens.map(function (it) {
+            return linhaItem(b, it, e.feitos.indexOf(chaveItem(b, it)) !== -1);
+          }).join('') + '</ul></section>';
+      });
+      var mes = mesAtual(), doMes = Array.isArray(e.mes[mes]) ? e.mes[mes] : [];
+      var d = hoje();
+      html += '<section class="dp-bloco dp-bloco--mensal" aria-labelledby="dp-b-mensal">' +
+        '<div class="dp-bloco__topo"><h2 class="dp-bloco__titulo" id="dp-b-mensal">' + MENSAL.nome + '</h2>' +
+        '<span class="dp-bloco__quando">' + MESES_LONGOS[d.getMonth()] + ' de ' + d.getFullYear() + ' · zera a cada mês</span>' +
+        '<span class="dp-bloco__conta">' + doMes.length + ' de ' + MENSAL.itens.length + '</span></div>' +
+        '<ul class="ferr__lista">' + MENSAL.itens.map(function (it) {
+          return linhaItem(MENSAL, it, doMes.indexOf(it.id) !== -1);
+        }).join('') + '</ul></section>';
+      blocos.innerHTML = html;
+
+      contador.textContent = total + ' de ' + TOTAL;
+      contador.classList.toggle('is-completo', total === TOTAL);
+      fita.style.width = (total / TOTAL * 100) + '%';
+
+      if (!zero) resumo.textContent = 'Preencha o dia em que o site entrou no ar: cada bloco ganha a data em que vence.';
+      else {
+        var n = dias(zero, hoje());
+        var t = n < 0 ? 'O site entra no ar em ' + curta(zero) + ' — faltam ' + (-n) + (n === -1 ? ' dia.' : ' dias.')
+              : 'Hoje é o dia ' + n + ' desde a publicação.';
+        if (total === TOTAL) t += ' Os noventa dias estão feitos — daqui em diante, é o bloco mensal.';
+        else if (agora) t += ' Na vez: ' + agora.b.nome.toLowerCase() + ' — ' + agora.s.quando + '.';
+        if (atrasados) t += ' E ' + atrasados + (atrasados === 1 ? ' item ficou' : ' itens ficaram') + ' para trás — é o que vem antes.';
+        resumo.textContent = t;
+      }
+      resumo.classList.toggle('is-ok', !!zero && !atrasados);
+      $('#dp-agenda').disabled = !zero;
+    }
+
+    blocos.addEventListener('change', function (ev) {
+      var c = ev.target;
+      if (c.type !== 'checkbox') return;
+      var e = estado(), b = c.getAttribute('data-bloco'), it = c.getAttribute('data-item');
+      var lista, chave;
+      if (b === 'mensal') {
+        var m = mesAtual(), doMes = Array.isArray(e.mes[m]) ? e.mes[m] : [];
+        e.mes = {}; e.mes[m] = doMes;   /* só o mês corrente importa: o anterior não volta */
+        lista = doMes; chave = it;
+      } else { lista = e.feitos; chave = b + '.' + it; }
+      var pos = lista.indexOf(chave);
+      if (c.checked && pos === -1) lista.push(chave);
+      if (!c.checked && pos !== -1) lista.splice(pos, 1);
+      salvar(e);
+      /* repinta e devolve o foco à caixa marcada */
+      pintar();
+      var volta = blocos.querySelector('input[data-bloco="' + b + '"][data-item="' + it + '"]');
+      if (volta) volta.focus();
+    });
+    campoData.addEventListener('change', function () {
+      var e = estado();
+      e.data = campoData.value || '';
+      salvar(e); pintar();
+    });
+    cliente.addEventListener('input', function () { guardar('dp-cliente', cliente.value); pintar(); });
+    $('#dp-zerar').addEventListener('click', function () {
+      var e = estado();
+      salvar({ data: e.data || '', feitos: [], mes: {} }); pintar();
+    });
+
+    /* o roteiro em texto, com as datas — para mandar ao cliente ou colar numa tarefa */
+    function roteiro() {
+      var e = estado(), zero = dataDe(e.data), nome = cliente.value.trim();
+      var L = ['Depois de publicar' + (nome ? ' — ' + nome : '') +
+               (zero ? ' (no ar desde ' + curta(zero) + ' de ' + zero.getFullYear() + ')' : '')];
+      BLOCOS.forEach(function (b) {
+        var s = situacao(b, e, zero);
+        L.push('', b.nome.toUpperCase() + ' · ' + (zero ? (b.de === 0 ? curta(zero) : 'até ' + curta(somar(zero, b.ate))) : s.quando));
+        b.itens.forEach(function (it) {
+          L.push('  [' + (e.feitos.indexOf(chaveItem(b, it)) !== -1 ? 'x' : ' ') + '] ' + it.t);
+        });
+      });
+      L.push('', 'TODO MÊS');
+      MENSAL.itens.forEach(function (it) { L.push('  [ ] ' + it.t); });
+      return L.join('\n');
+    }
+    $('#dp-copiar').addEventListener('click', function () { copiar(roteiro(), this); });
+
+    /* lembretes na agenda: um evento por bloco, no dia em que vence, e um mensal.
+       O arquivo é montado aqui e baixado direto — não passa por servidor nenhum. */
+    function ics(s) { return String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n'); }
+    function dobrar(linha) {
+      var out = [];
+      while (linha.length > 70) { out.push(linha.slice(0, 70)); linha = ' ' + linha.slice(70); }
+      out.push(linha);
+      return out.join('\r\n');
+    }
+    function diaIcs(d) { return d.getFullYear() + ('0' + (d.getMonth() + 1)).slice(-2) + ('0' + d.getDate()).slice(-2); }
+    $('#dp-agenda').addEventListener('click', function () {
+      var e = estado(), zero = dataDe(e.data);
+      if (!zero) return;
+      var nome = cliente.value.trim() || 'Site', agora = new Date();
+      var carimbo = agora.toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+      var uid = nome.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + diaIcs(zero);
+      var L = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Gustavo Tutorial//Depois de publicar//PT', 'CALSCALE:GREGORIAN'];
+      function evento(id, dia, titulo, texto, regra) {
+        L.push('BEGIN:VEVENT', 'UID:' + uid + '-' + id + '@gustavo-tutorial', 'DTSTAMP:' + carimbo,
+               'DTSTART;VALUE=DATE:' + diaIcs(dia), 'DTEND;VALUE=DATE:' + diaIcs(somar(dia, 1)));
+        if (regra) L.push(regra);
+        L.push('SUMMARY:' + ics(titulo), 'DESCRIPTION:' + ics(texto), 'END:VEVENT');
+      }
+      BLOCOS.forEach(function (b) {
+        var falta = b.itens.filter(function (it) { return e.feitos.indexOf(chaveItem(b, it)) === -1; });
+        if (!falta.length) return;
+        evento(b.id, somar(zero, b.ate), nome + ' · ' + b.nome + ': ' + falta.length + (falta.length === 1 ? ' item' : ' itens'),
+               falta.map(function (it) { return '- ' + it.t; }).join('\n'));
+      });
+      evento('mensal', somar(zero, 30), nome + ' · manutenção do mês',
+             MENSAL.itens.map(function (it) { return '- ' + it.t; }).join('\n'), 'RRULE:FREQ=MONTHLY;COUNT=12');
+      L.push('END:VCALENDAR');
+      var texto = L.map(dobrar).join('\r\n') + '\r\n';
+      var url = URL.createObjectURL(new Blob([texto], { type: 'text/calendar;charset=utf-8' }));
+      var a = document.createElement('a');
+      a.href = url; a.download = 'depois-de-publicar-' + uid + '.ics';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      var b = this, antes = b.textContent;
+      b.textContent = 'baixado'; setTimeout(function () { b.textContent = antes; }, 1400);
+    });
+
+    /* os valores das outras ferramentas mudam: repinta só se algum mudou de fato */
+    function assinatura() {
+      return BLOCOS.map(function (b) {
+        return b.itens.map(function (it) { try { return it.ferr ? JSON.stringify(it.ferr()) : ''; } catch (err) { return ''; } }).join('|');
+      }).join('#');
+    }
     var ultima = assinatura();
     document.addEventListener('gt:mudou', function () {
       var a = assinatura();
@@ -1975,14 +2310,14 @@
     if (limpar) limpar.addEventListener('click', avisar);
   })();
 
-  /* ========== PROJETO · um nome para as quatorze ==========
-     Briefing, proposta, checklist e inventário guardam por cliente, cada um
-     com o próprio campo de nome. Aqui os cinco campos viram um só: mudar
+  /* ========== PROJETO · um nome para as quinze ==========
+     Briefing, proposta, checklist, inventário e o depois de publicar guardam por
+     cliente, cada um com o próprio campo de nome. Aqui os seis campos viram um só: mudar
      qualquer um muda todos, e cada ferramenta abre o que tinha daquele cliente. */
   (function () {
     /* o campo principal só existe na ferramentas.html; nas subpáginas, o nome
        vem guardado e entra no campo de cliente da ferramenta que estiver lá */
-    var DONOS = ['br', 'pp', 'cl', 'iv'];
+    var DONOS = ['br', 'pp', 'cl', 'iv', 'dp'];
     var campos = [$('#pj-nome')].concat(DONOS.map(function (d) { return $('#' + d + '-cliente'); }))
                                 .filter(Boolean);
     if (!campos.length) return;
@@ -2118,6 +2453,12 @@
         if (!Array.isArray(l) || !l.length) return ['nenhum titular', false];
         var c = l.filter(function (x) { return String(x.titular || '').trim(); }).length;
         return [c + ' de ' + l.length + ' com titular', c === l.length];
+      },
+      'f-pos': function () {
+        var e = ler('dp-' + chaveProjeto(), null);
+        var feitos = e && Array.isArray(e.feitos) ? e.feitos.length : 0;
+        if (!e || !e.data) return [feitos ? feitos + ' de 29 · sem data' : 'sem data', false];
+        return [feitos + ' de 29 · no ar desde ' + e.data.split('-').reverse().slice(0, 2).join('/'), feitos === 29];
       }
     };
 

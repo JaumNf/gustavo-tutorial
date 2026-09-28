@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Depois do ar — Gustavo Tutorial</title>
+<meta name="description" content="O que fazer depois de publicar o site: os arquivos e páginas que faltam, o vercel.json, Search Console e Bing, medir e monitorar, e-mail no domínio com SPF e DMARC, e como manter o site vivo.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Depois do ar — Gustavo Tutorial">
+<meta property="og:description" content="O que fazer depois de publicar o site: os arquivos e páginas que faltam, o vercel.json, Search Console e Bing, medir e monitorar, e-mail no domínio com SPF e DMARC, e como manter o site vivo.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#F4F6F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
+<meta name="author" content="Gustavo">
+<link rel="canonical" href="https://gustavo-tutorial.vercel.app/depois-do-ar.html">
+<meta property="og:url" content="https://gustavo-tutorial.vercel.app/depois-do-ar.html">
+<meta property="og:image" content="https://gustavo-tutorial.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Gustavo Tutorial">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body data-modo="estudo">
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo">
+<div class="topo__interno">
+<a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
+<button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.25"/><path d="M12 3.75a8.25 8.25 0 0 1 0 16.5z" fill="currentColor" stroke="none"/></svg></button>
+</div>
+<nav class="navmenu" aria-label="Navegação do site">
+<details class="navmenu__caixa" id="navmenu">
+<summary class="navmenu__botao">Menu<svg class="ico ico--seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></summary>
+<div class="navmenu__painel">
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Construção</p>
+<a href="html-puro.html"><strong>HTML puro</strong><span>Do zero ao site publicado</span></a>
+<a href="montar-o-site.html"><strong>Montar o site</strong><span>O esqueleto de todo projeto</span></a>
+<a href="qualidade.html"><strong>Qualidade</strong><span>Imagem, a11y, Vitals e testes</span></a>
+<a href="movimento.html"><strong>Movimento</strong><span>Animação com critério</span></a>
+<a href="motion.html"><strong>Referência: Motion</strong><span>A API inteira, em português</span></a>
+<a href="frameworks.html"><strong>Frameworks</strong><span>Formatos além do vanilla</span></a>
+<a href="back-end.html"><strong>Back-end</strong><span>Servidor, banco e login</span></a>
+<a href="depois-do-ar.html" class="is-atual" aria-current="page"><strong>Depois do ar</strong><span>Publicar, medir, manter</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Captação e Vendas</p>
+<a href="landing-pages.html"><strong>Landing pages</strong><span>A estratégia da página</span></a>
+<a href="trafego.html"><strong>Tráfego</strong><span>Ser encontrado no Google</span></a>
+<a href="negocio.html"><strong>Negócio</strong><span>Preço, escopo e contrato</span></a>
+</div>
+<div class="navmenu__grupo">
+<p class="navmenu__rotulo">Método</p>
+<a href="fluxo.html"><strong>Fluxo de trabalho</strong><span>Terminal, Git e DevTools</span></a>
+<a href="ia.html"><strong>Trabalhando com IA</strong><span>Brief, referência e revisão</span></a>
+<a href="vibecoding.html"><strong>Vibecoding</strong><span>Ferramentas, referências e riscos</span></a>
+</div>
+<div class="navmenu__grupo navmenu__grupo--trabalhar">
+<p class="navmenu__rotulo">Trabalhar</p>
+<a href="ferramentas.html"><strong>Todas as ferramentas</strong><span>Em cinco fases, ligadas entre si</span></a>
+<a href="modelos.html"><strong>Modelos para copiar</strong><span>Seções e efeitos prontos</span></a>
+<a href="ferramenta-briefing.html" class="navmenu__compacto">Briefing</a>
+<a href="ferramenta-preco.html" class="navmenu__compacto">Preço</a>
+<a href="ferramenta-proposta.html" class="navmenu__compacto">Proposta que fecha</a>
+<a href="ferramenta-paleta.html" class="navmenu__compacto">Paleta em tokens</a>
+<a href="ferramenta-contraste.html" class="navmenu__compacto">Contraste</a>
+<a href="ferramenta-tipografia.html" class="navmenu__compacto">Tipografia</a>
+<a href="ferramenta-escala.html" class="navmenu__compacto">Escala de texto e espaço</a>
+<a href="ferramenta-design-system.html" class="navmenu__compacto">Design system</a>
+<a href="ferramenta-gerador.html" class="navmenu__compacto">Gerador de comando</a>
+<a href="ferramenta-cabecalho.html" class="navmenu__compacto">Cabeçalho da página</a>
+<a href="ferramenta-whatsapp.html" class="navmenu__compacto">Link de WhatsApp</a>
+<a href="ferramenta-utm.html" class="navmenu__compacto">Gerador de UTM</a>
+<a href="ferramenta-checklist.html" class="navmenu__compacto">Checklist de entrega</a>
+<a href="ferramenta-inventario.html" class="navmenu__compacto">Inventário de acessos</a>
+<a href="ferramenta-depois-de-publicar.html" class="navmenu__compacto">Depois de publicar</a>
+</div>
+<div class="navmenu__grupo navmenu__grupo--sobre">
+<p class="navmenu__rotulo">Sobre o site</p>
+<a href="patch-notes.html"><strong>Patch notes</strong><span>O que mudou no site</span></a>
+<a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+</div>
+</div>
+</details>
+<div class="modos">
+<a class="modo is-atual" href="estudar.html">Estudar</a>
+<a class="modo modo--trabalho" href="ferramentas.html">Trabalhar</a>
+</div>
+</nav></header>
+<div class="palco">
+<nav class="sumario" id="sumario" aria-label="Sumário">
+<button class="sumario__abrir" id="sumario-abrir" aria-expanded="false" aria-controls="sumario-lista"><span>Sumário</span><svg class="ico ico--seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></button>
+<div class="sumario__lista" id="sumario-lista">
+<p class="sumario__titulo">Depois do ar</p>
+<a class="sumario__parte" href="#s1">1 · O site no ar é o começo</a>
+<ol>
+<li><a href="#t-da-mapa">O que muda depois de publicar</a></li>
+<li><a href="#t-da-24h">As primeiras 24 horas</a></li>
+<li><a href="#t-da-producao">Nunca mais mexer direto em produção</a></li>
+</ol>
+<a class="sumario__parte" href="#s2">2 · A estrutura que todo site precisa ter</a>
+<ol>
+<li><a href="#t-da-arquivos">Os arquivos da raiz</a></li>
+<li><a href="#t-da-paginas">As páginas além da home</a></li>
+<li><a href="#t-da-obrigado">A página de obrigado</a></li>
+<li><a href="#t-da-jsonld">Dados estruturados: o que vale a pena</a></li>
+</ol>
+<a class="sumario__parte" href="#s3">3 · O servidor: o vercel.json</a>
+<ol>
+<li><a href="#t-da-www">Um endereço só: com ou sem www</a></li>
+<li><a href="#t-da-301">Mudou a URL? Redirecione</a></li>
+<li><a href="#t-da-cleanurls">Endereço sem .html</a></li>
+<li><a href="#t-da-headers">Cabeçalhos de segurança</a></li>
+<li><a href="#t-da-cache">Cache: o que o navegador guarda</a></li>
+</ol>
+<a class="sumario__parte" href="#s4">4 · Ser encontrado</a>
+<ol>
+<li><a href="#t-da-console">Search Console no primeiro dia</a></li>
+<li><a href="#t-da-bing">Bing Webmaster Tools</a></li>
+<li><a href="#t-da-perfil">O Perfil da Empresa no Google</a></li>
+<li><a href="#t-da-ia">Quando a busca é feita por uma IA</a></li>
+</ol>
+<a class="sumario__parte" href="#s5">5 · Medir e vigiar</a>
+<ol>
+<li><a href="#t-da-medir">Medir o que importa</a></li>
+<li><a href="#t-da-uptime">Saber que caiu antes do cliente</a></li>
+<li><a href="#t-da-vitals">Velocidade de verdade, não de laboratório</a></li>
+<li><a href="#t-da-vencimentos">O calendário do que vence</a></li>
+</ol>
+<a class="sumario__parte" href="#s6">6 · E-mail no domínio</a>
+<ol>
+<li><a href="#t-da-email">O e-mail com o nome da empresa</a></li>
+<li><a href="#t-da-spf">SPF, DKIM e DMARC: por que cai no spam</a></li>
+<li><a href="#t-da-dns">Mexer no DNS sem derrubar nada</a></li>
+</ol>
+<a class="sumario__parte" href="#s7">7 · Manter vivo</a>
+<ol>
+<li><a href="#t-da-backup">O que guardar, e onde</a></li>
+<li><a href="#t-da-envelhece">O conteúdo que envelhece</a></li>
+<li><a href="#t-da-relatorio">O relatório e a manutenção</a></li>
+</ol>
+</div>
+</nav>
+
+<main class="leitura" id="conteudo" tabindex="-1">
+<section class="abertura">
+<nav class="migalha" aria-label="Você está em"><a href="estudar.html">Estudar</a><span aria-hidden="true">›</span><a href="estudar.html#g-construcao">Construção</a></nav>
+<h1>Depois do ar</h1>
+<p class="abertura__lead">O site pronto é metade do trabalho. Esta trilha é a outra metade: os arquivos e páginas que todo site precisa além da home, a configuração do servidor, como ser encontrado, medir e saber que caiu, o e-mail no domínio, e como manter tudo vivo. Onde o assunto já tem tópico em outra trilha, o tópico aqui é a ponte; o roteiro com datas está na ferramenta <a href="ferramenta-depois-de-publicar.html">Depois de publicar</a>.</p>
+<div class="legenda">
+<span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
+<span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
+<span>7 partes · 26 tópicos</span>
+</div>
+<div class="abertura__filtro"><span class="abertura__filtro-rot" aria-hidden="true">Mostrar</span>
+<div class="filtros" role="group" aria-label="Filtrar tópicos">
+<button class="filtro" data-filtro="tudo" aria-pressed="true">Tudo</button>
+<button class="filtro" data-filtro="revisao" aria-pressed="false">Revisão</button>
+<button class="filtro" data-filtro="novo" aria-pressed="false">Novo</button>
+</div>
+</div>
+</section>
+<p class="vazio" id="vazio">Nenhum tópico com esse filtro.</p>
+<section class="parte" id="s1">
+<div class="parte__cabeca"><span class="parte__num">PARTE 1</span><h2>O site no ar é o começo</h2></div>
+<p class="parte__resumo">Publicar não encerra o projeto: é quando ele começa a ser encontrado, medido e cobrado. O que muda no seu jeito de trabalhar a partir desse dia.</p>
+
+<article class="topico" id="t-da-mapa" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>O que muda depois de publicar</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Até o dia da publicação, a pergunta era "está bonito e funciona?". Depois dela, passa a ser "alguém está achando, e está virando contato?". São trabalhos diferentes, com ritmos diferentes — e a maior parte do que decide o resultado acontece nos primeiros noventa dias.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Quando</th><th>O foco</th><th>Onde está nesta trilha</th></tr></thead>
+<tbody>
+<tr><td>No dia</td><td>conferir a produção, deixar o site encontrável</td><td><a href="#t-da-24h">As primeiras 24 horas</a></td></tr>
+<tr><td>Primeira semana</td><td>Search Console, Perfil da Empresa, medição</td><td><a href="#s4">Parte 4</a> e <a href="#s5">Parte 5</a></td></tr>
+<tr><td>Primeiro mês</td><td>ver se indexou, anotar a linha de base</td><td><a href="#t-da-console">Search Console</a></td></tr>
+<tr><td>Segundo e terceiro mês</td><td>ajustar pelo que as buscas mostram, decidir o próximo passo</td><td><a href="#t-da-relatorio">O relatório</a></td></tr>
+<tr><td>Todo mês, depois</td><td>site no ar, vencimentos, backup, relatório</td><td><a href="#s7">Parte 7</a></td></tr>
+</tbody></table></div>
+<div class="nota"><strong>O roteiro com datas</strong> está na ferramenta <a href="ferramenta-depois-de-publicar.html">Depois de publicar</a>: você põe o dia em que o site entrou no ar e ela mostra o que vence quando, guarda por cliente e baixa os lembretes para a agenda. O roteiro original, em texto, é <a href="trafego.html#t-tr-90dias">Os primeiros noventa dias</a>, na trilha Tráfego.</div>
+</div>
+</article>
+
+<article class="topico" id="t-da-24h" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>As primeiras 24 horas</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O que funcionou no seu computador não está garantido no endereço de verdade. Caminho de arquivo com maiúscula, imagem que ficou na pasta errada, link apontando para <code>localhost</code>: tudo isso só aparece em produção.</p>
+<ul>
+<li>abrir o endereço final no celular, fora do Wi-Fi, em aba anônima</li>
+<li>clicar em todo botão de WhatsApp e mandar a mensagem de teste até o fim</li>
+<li>enviar o formulário e conferir que chegou onde devia</li>
+<li>colar o link no WhatsApp e ver se a miniatura aparece</li>
+<li>abrir <code>/pagina-que-nao-existe</code> e ver a 404</li>
+</ul>
+<div class="nota">A lista completa, marcável e salva por cliente, é a ferramenta <a href="ferramenta-checklist.html">Checklist de entrega</a>. O raciocínio de cada item está em <a href="qualidade.html#t-teste-checklist">Testar antes de entregar</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-da-producao" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Nunca mais mexer direto em produção</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Depois que o site está no ar — e principalmente se está recebendo anúncio pago — toda mudança nasce num branch, vira um endereço de pré-visualização, é aprovada ali e só então entra no ar. Na Vercel, isso já vem pronto: cada push num branch gera um link próprio.</p>
+<p>O motivo é simples: um erro num endereço de teste não custa nada; o mesmo erro no site que está recebendo visita custa contato perdido, e às vezes dinheiro de anúncio.</p>
+<div class="nota">O passo a passo com os comandos está em <a href="negocio.html#t-mt-ambientes">Produção e pré-visualização</a>, na trilha Negócio.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s2">
+<div class="parte__cabeca"><span class="parte__num">PARTE 2</span><h2>A estrutura que todo site precisa ter</h2></div>
+<p class="parte__resumo">A home é o que o cliente vê. Em volta dela existem arquivos e páginas que ninguém pede e que fazem falta no primeiro dia — para o buscador, para o WhatsApp, para a lei e para medir.</p>
+
+<article class="topico" id="t-da-arquivos" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Os arquivos da raiz</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Todos moram na raiz do site, ao lado do <code>index.html</code>. Nenhum dá trabalho; todos são esquecidos.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Arquivo</th><th>Para que serve</th><th>Precisa?</th><th>Onde se aprende</th></tr></thead>
+<tbody>
+<tr><td><code>robots.txt</code></td><td>diz ao robô do buscador o que ele pode ler e onde está o mapa do site</td><td>sim</td><td><a href="trafego.html#t-tr-robots">robots.txt e sitemap.xml</a></td></tr>
+<tr><td><code>sitemap.xml</code></td><td>a lista das páginas, com a data da última mudança</td><td>sim, a partir de duas páginas</td><td><a href="trafego.html#t-tr-robots">robots.txt e sitemap.xml</a></td></tr>
+<tr><td><code>favicon.svg</code>, <code>favicon.ico</code></td><td>o ícone da aba e dos favoritos</td><td>sim</td><td><a href="qualidade.html#t-img-favicon">Favicon e imagem de compartilhamento</a></td></tr>
+<tr><td><code>apple-touch-icon.png</code></td><td>o ícone quando alguém salva o site na tela do iPhone (180×180)</td><td>sim</td><td><a href="qualidade.html#t-img-favicon">Favicon e imagem de compartilhamento</a></td></tr>
+<tr><td><code>og.png</code> ou <code>og.jpg</code></td><td>a miniatura do link no WhatsApp e nas redes (1200×630)</td><td>sim</td><td><a href="qualidade.html#t-img-favicon">Favicon e imagem de compartilhamento</a></td></tr>
+<tr><td><code>404.html</code></td><td>a página de quem digitou errado ou seguiu um link velho</td><td>sim</td><td><a href="#t-da-paginas">As páginas além da home</a></td></tr>
+<tr><td><code>vercel.json</code></td><td>redirecionamentos, cabeçalhos e cache do servidor</td><td>quando precisar</td><td><a href="#s3">Parte 3</a></td></tr>
+<tr><td><code>site.webmanifest</code></td><td>nome, cor e ícone para "instalar" o site como app</td><td>não, só se virar app</td><td><a href="html-puro-2.html#t-pwa">PWA</a></td></tr>
+</tbody></table></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">a raiz de um site pronto</span><button class="copiar">copiar</button></div><pre><code>seusite/
+├── index.html
+├── obrigado.html
+├── politica-de-privacidade.html
+├── 404.html
+├── robots.txt
+├── sitemap.xml
+├── favicon.svg
+├── favicon.ico
+├── apple-touch-icon.png
+├── og.jpg
+├── vercel.json
+└── img/</code></pre></div>
+<div class="nota">Na Vercel e na Netlify, o <code>404.html</code> na raiz já vira a página de erro sozinho — não precisa configurar nada.</div>
+</div>
+</article>
+
+<article class="topico" id="t-da-paginas" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>As páginas além da home</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Uma landing page pode ser uma página só para quem visita. Para quem publica, quase sempre são quatro.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Página</th><th>Por que existe</th><th>Quando é obrigatória</th></tr></thead>
+<tbody>
+<tr><td>Contato</td><td>endereço, telefone, horário, mapa — o que o Perfil da Empresa também mostra, igual</td><td>negócio local: na prática, sempre (pode ser uma seção da home)</td></tr>
+<tr><td>Política de privacidade</td><td>dizer que dado é coletado, para quê e com quem é compartilhado</td><td>quando há formulário, analytics com cookie ou pixel</td></tr>
+<tr><td>Obrigado</td><td>confirmar o envio do formulário e medir a conversão</td><td>quando há formulário</td></tr>
+<tr><td>404</td><td>não deixar quem errou o endereço num beco sem saída</td><td>sempre</td></tr>
+</tbody></table></div>
+<p>A política de privacidade não precisa ser um documento jurídico de dez páginas para um site pequeno, mas precisa dizer a verdade sobre o que o site faz. O modelo e o que ela deve conter estão em <a href="negocio.html#t-lgpd-politica">Política de privacidade</a>, na trilha Negócio.</p>
+<div class="nota"><strong>A 404 que ajuda</strong> diz em uma frase o que aconteceu, e oferece a saída: um link para a home e o botão de WhatsApp. É a única página do site que só é vista por quem já está um pouco frustrado.</div>
+</div>
+</article>
+
+<article class="topico" id="t-da-obrigado" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>A página de obrigado</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>Quando o formulário é enviado, a pessoa precisa de uma confirmação clara — e você precisa de um jeito de contar quantas vezes isso aconteceu. A página de obrigado resolve as duas coisas: cada visita a <code>/obrigado</code> é um envio.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">o formulário manda para ela</span><button class="copiar">copiar</button></div><pre><code>&lt;form action="/api/contato" method="post"&gt;
+  ...
+&lt;/form&gt;
+
+&lt;!-- na função que recebe o envio, depois de processar: --&gt;
+&lt;!-- return Response.redirect(new URL('/obrigado', request.url), 303); --&gt;</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">obrigado.html</span><button class="copiar">copiar</button></div><pre><code>&lt;head&gt;
+  &lt;title&gt;Recebemos sua mensagem&lt;/title&gt;
+  &lt;!-- fora do Google: ninguém deve cair aqui por busca --&gt;
+  &lt;meta name="robots" content="noindex"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Recebemos sua mensagem&lt;/h1&gt;
+  &lt;p&gt;Respondemos em até um dia útil, pelo e-mail que você informou.&lt;/p&gt;
+  &lt;p&gt;Com pressa? &lt;a href="https://wa.me/55DDDNUMERO"&gt;Chame no WhatsApp&lt;/a&gt;.&lt;/p&gt;
+  &lt;a href="/"&gt;Voltar ao início&lt;/a&gt;
+&lt;/body&gt;</code></pre></div>
+<p>No Analytics, a visita a <code>/obrigado</code> já é contada como qualquer página — dá para marcá-la como conversão sem escrever evento nenhum. E a própria página é um lugar para dizer <strong>o que acontece agora</strong>: em quanto tempo alguém responde, e por onde.</p>
+<div class="nota">Três cuidados: <code>noindex</code> para ela não aparecer na busca; não pôr link para ela no menu (senão visita de curioso vira "conversão"); e dizer um prazo de resposta que o cliente consegue cumprir. O envio do formulário em si está em <a href="back-end.html#t-sl-email">Enviar e-mail de verdade</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-da-jsonld" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Dados estruturados: o que vale a pena</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>Dados estruturados são um bloco de JSON-LD que descreve o negócio para o buscador em formato de máquina. Para site de serviço, o essencial é um só: <code>LocalBusiness</code> (ou um tipo mais específico dele), com nome, endereço e telefone <strong>exatamente iguais</strong> aos do Perfil da Empresa.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Tipo</th><th>Vale a pena?</th><th>Por quê</th></tr></thead>
+<tbody>
+<tr><td><code>LocalBusiness</code></td><td>sim</td><td>reforça nome, endereço e telefone — a consistência que o buscador cruza</td></tr>
+<tr><td><code>Organization</code></td><td>sim, se não for negócio local</td><td>nome, logo e redes sociais oficiais da empresa</td></tr>
+<tr><td><code>BreadcrumbList</code></td><td>a partir de várias páginas</td><td>o caminho da página aparece no resultado da busca</td></tr>
+<tr><td><code>FAQPage</code></td><td>não para o resultado rico</td><td>desde 2023 o Google só mostra o resultado de FAQ para sites de governo e saúde; o bloco não faz mal, mas não muda o resultado</td></tr>
+</tbody></table></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">BreadcrumbList</span><button class="copiar">copiar</button></div><pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Início",   "item": "https://seusite.com.br/" },
+    { "@type": "ListItem", "position": 2, "name": "Serviços", "item": "https://seusite.com.br/servicos" }
+  ]
+}
+&lt;/script&gt;</code></pre></div>
+<div class="nota">O bloco de <code>LocalBusiness</code> sai pronto da ferramenta <a href="ferramenta-cabecalho.html">Cabeçalho da página</a>. Por que ele precisa bater com o perfil está em <a href="trafego.html#t-tr-nap">Consistência de nome, endereço e telefone</a>. Para conferir se o Google entende o bloco, cole a URL no teste de resultados avançados dele.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s3">
+<div class="parte__cabeca"><span class="parte__num">PARTE 3</span><h2>O servidor: o vercel.json</h2></div>
+<p class="parte__resumo">Um arquivo de configuração na raiz do projeto decide como o servidor responde: qual endereço é o oficial, para onde vai uma URL antiga, que proteção o navegador liga e quanto tempo ele guarda cada arquivo. A sintaxe é da Vercel; as ideias valem para qualquer hospedagem.</p>
+
+<article class="topico" id="t-da-www" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Um endereço só: com ou sem www</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p><code>seusite.com.br</code> e <code>www.seusite.com.br</code> são, para o buscador, dois sites. Se os dois abrem a mesma página sem redirecionar, a autoridade da página se divide e o Search Console mostra dados partidos.</p>
+<p>A decisão é uma só — qualquer uma das duas serve — e todo o resto obedece a ela: o endereço que a outra redireciona, o <code>canonical</code>, o <code>og:url</code>, o sitemap e o que vai no cartão de visita.</p>
+<ol>
+<li>no painel da Vercel, em <em>Domains</em>, adicione os dois endereços</li>
+<li>marque um como principal e o outro para redirecionar a ele</li>
+<li>confira: abrir o endereço "errado" tem que trocar sozinho, na barra, para o certo</li>
+</ol>
+<div class="nota">O <code>canonical</code> de cada página aponta sempre para a versão oficial. A ferramenta <a href="ferramenta-cabecalho.html">Cabeçalho da página</a> monta o <code>canonical</code> a partir do endereço que você informar — informe o oficial.</div>
+</div>
+</article>
+
+<article class="topico" id="t-da-301" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Mudou a URL? Redirecione</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Trocar o nome de uma página — <code>/servicos.html</code> virou <code>/servicos</code>, ou uma seção virou página própria — quebra todo link que existia para ela: o do Google, o do Instagram, o do cartão impresso. O redirecionamento permanente avisa ao navegador e ao buscador que o endereço mudou, e o buscador transfere para o novo o que o antigo já tinha.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">vercel.json</span><button class="copiar">copiar</button></div><pre><code>{
+  "redirects": [
+    { "source": "/servicos.html", "destination": "/servicos", "permanent": true },
+    { "source": "/promocao-natal", "destination": "/", "permanent": true }
+  ]
+}</code></pre></div>
+<p>Na Vercel, <code>"permanent": true</code> responde com o código 308 — a versão moderna do 301, que o Google trata do mesmo jeito. <code>false</code> responde 307, temporário: use só quando o endereço antigo vai voltar.</p>
+<div class="nota"><strong>Antes de apagar uma página</strong>, veja no Search Console se ela recebe visita. Se recebe, redirecione para a mais parecida — nunca para a home por preguiça, porque o buscador trata isso quase como uma página que sumiu.</div>
+</div>
+</article>
+
+<article class="topico" id="t-da-cleanurls" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Endereço sem .html</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Por padrão, o arquivo <code>sobre.html</code> abre em <code>/sobre.html</code>. Com <code>cleanUrls</code>, ele passa a abrir em <code>/sobre</code>, e quem acessar com <code>.html</code> é redirecionado. É mais limpo de ler, de ditar ao telefone e de pôr num cartão.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">vercel.json</span><button class="copiar">copiar</button></div><pre><code>{
+  "cleanUrls": true,
+  "trailingSlash": false
+}</code></pre></div>
+<p><code>trailingSlash: false</code> escolhe <code>/sobre</code> em vez de <code>/sobre/</code> — mais uma decisão de endereço único, igual à do www.</p>
+<div class="nota nota--alerta"><strong>Ligou depois do site no ar?</strong> Troque também os <code>canonical</code>, o <code>og:url</code> e o <code>sitemap.xml</code> para os endereços novos, sem <code>.html</code>. Senão cada página aponta como oficial para um endereço que redireciona — um sinal contraditório para o buscador.</div>
+</div>
+</article>
+
+<article class="topico" id="t-da-headers" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Cabeçalhos de segurança</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Cabeçalho de resposta é uma instrução que o servidor manda junto com a página e o navegador obedece. Os de segurança custam uma configuração e fecham portas que um site pequeno nem sabe que estavam abertas. O que cada um protege está em <a href="html-puro-2.html#t-csp">Content Security Policy</a>, na trilha HTML puro; aqui está como ligar.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">vercel.json</span><button class="copiar">copiar</button></div><pre><code>{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
+        { "key": "Content-Security-Policy", "value": "frame-ancestors 'self'" }
+      ]
+    }
+  ]
+}</code></pre></div>
+<ul>
+<li><code>frame-ancestors</code> impede que outro site mostre o seu dentro de um iframe — e só funciona como cabeçalho: dentro da tag <code>&lt;meta&gt;</code> ele é ignorado</li>
+<li><code>Permissions-Policy</code> desliga câmera, microfone e localização para qualquer script da página; se o site usa um mapa com "onde estou", tire o <code>geolocation</code> da lista</li>
+<li>o HTTPS obrigatório (<code>Strict-Transport-Security</code>) a Vercel já manda sozinha</li>
+</ul>
+<div class="nota">Para conferir, abra o DevTools, aba <em>Network</em>, clique no documento da página e veja <em>Response Headers</em>. Ou cole o endereço num verificador de cabeçalhos de segurança, que dá nota para cada um.</div>
+</div>
+</article>
+
+<article class="topico" id="t-da-cache" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Cache: o que o navegador guarda</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Cache é o navegador guardar um arquivo para não baixar de novo na próxima visita. Ajuda na velocidade — e é a causa do clássico "subi a mudança e o cliente diz que não mudou nada".</p>
+<p>Na Vercel, o padrão para arquivo estático é <code>Cache-Control: public, max-age=0, must-revalidate</code>: o navegador pode guardar, mas pergunta ao servidor a cada visita se mudou. É seguro — a mudança aparece na hora — e para um site pequeno quase não custa velocidade, porque a resposta "não mudou" é minúscula.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">vercel.json — só para o que nunca muda</span><button class="copiar">copiar</button></div><pre><code>{
+  "headers": [
+    {
+      "source": "/img/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ]
+}</code></pre></div>
+<p>Guardar por um ano (<code>31536000</code> segundos) só é seguro para arquivo que <strong>nunca muda com o mesmo nome</strong>. Se a foto for trocada, ela entra com outro nome — <code>fachada-2.jpg</code> — e não sobrescreve a antiga.</p>
+<div class="nota nota--alerta"><strong>Não faça isso com o CSS e o JavaScript</strong> sem versionar o nome. Com cache de um ano, o <code>estilo.css</code> corrigido nunca chega a quem já visitou. Se quiser cache longo neles, mude o endereço a cada versão: <code>estilo.css?v=2</code>. Na dúvida, fique no padrão da Vercel.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s4">
+<div class="parte__cabeca"><span class="parte__num">PARTE 4</span><h2>Ser encontrado</h2></div>
+<p class="parte__resumo">O site no ar não aparece no Google sozinho no primeiro dia. O que avisar, onde se cadastrar, e o que muda quando a busca é feita por uma IA.</p>
+
+<article class="topico" id="t-da-console" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Search Console no primeiro dia</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>É a ferramenta gratuita do Google que mostra o que ele pensa do site: se indexou, para que buscas aparece, e o que está com erro. Cadastrar no primeiro dia importa porque os dados só começam a ser contados a partir do cadastro — não dá para ver o passado depois.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Tipo de propriedade</th><th>Verificação</th><th>Quando usar</th></tr></thead>
+<tbody>
+<tr><td>Domínio</td><td>registro TXT no DNS</td><td>o melhor: cobre com e sem www, http e https, e todos os subdomínios</td></tr>
+<tr><td>Prefixo de URL</td><td>tag no <code>&lt;head&gt;</code>, arquivo na raiz ou o Analytics</td><td>quando você não tem acesso ao DNS do cliente</td></tr>
+</tbody></table></div>
+<ol>
+<li>cadastrar a propriedade e verificar</li>
+<li>em <em>Sitemaps</em>, enviar o endereço do <code>sitemap.xml</code></li>
+<li>em <em>Inspeção de URL</em>, colar a home e pedir a indexação</li>
+<li>voltar em uma ou duas semanas e ver o relatório de páginas indexadas</li>
+</ol>
+<div class="nota">O que cada relatório responde e o que fazer com os números está na parte 2 da trilha Tráfego: <a href="trafego.html#t-tr-console">O que ele responde</a> e <a href="trafego.html#t-tr-usar">O que fazer com os dados</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-da-bing" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Bing Webmaster Tools</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>É o Search Console do Bing — e o cadastro leva dois minutos, porque ele <strong>importa a propriedade direto do Search Console</strong>, já verificada, com o sitemap junto. Quase ninguém faz, e por isso vale.</p>
+<p>O motivo não é só o Bing: os resultados do Yahoo vêm do índice dele, e boa parte dos do DuckDuckGo também. Estar bem indexado ali cobre vários buscadores de uma vez.</p>
+<p>O Bing também aceita o <strong>IndexNow</strong>: um aviso que o site manda na hora em que uma página muda, em vez de esperar o robô passar. Para site que muda pouco, o sitemap enviado já resolve; o IndexNow faz diferença em quem publica conteúdo com frequência.</p>
+</div>
+</article>
+
+<article class="topico" id="t-da-perfil" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>O Perfil da Empresa no Google</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Para negócio que atende numa região, o bloco de mapa que aparece acima dos resultados da busca vem do Perfil da Empresa — não do site. Muitas vezes ele traz mais contato que o site inteiro, e é a primeira coisa a configurar depois da publicação.</p>
+<p>Os pontos que decidem: a categoria principal certa, o nome, endereço e telefone <strong>idênticos</strong> aos do site, fotos reais e avaliações que chegam com constância.</p>
+<div class="nota">Tudo isso está desenvolvido na parte 4 da trilha Tráfego: <a href="trafego.html#t-tr-perfil">O Perfil da Empresa</a>, <a href="trafego.html#t-tr-nap">Consistência de nome, endereço e telefone</a> e <a href="trafego.html#t-tr-avaliacoes">Avaliações sem constranger</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-da-ia" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Quando a busca é feita por uma IA</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Cada vez mais gente pergunta a um assistente de IA em vez de digitar no buscador. Não existe um "SEO para IA" separado e garantido — mas o que se sabe aponta para o mesmo lugar que o SEO bem feito:</p>
+<ul>
+<li><strong>texto no HTML</strong>, não dentro de imagem nem só depois do JavaScript: o robô que lê para a IA tem o mesmo problema que o do buscador (<a href="trafego.html#t-tr-js">Por que HTML puro tem vantagem</a>)</li>
+<li><strong>resposta direta à pergunta real</strong>: quanto custa, quanto tempo leva, atende onde — escrita como frase, não como slogan</li>
+<li><strong>os dados iguais em todo lugar</strong>: site, perfil, redes e diretórios contando a mesma história</li>
+<li><strong>ser citado fora do próprio site</strong>: avaliação, matéria local, lista de fornecedores</li>
+</ul>
+<div class="nota nota--alerta"><strong>Sobre o <code>llms.txt</code>:</strong> é uma proposta de arquivo na raiz resumindo o site para modelos de linguagem. Não custa nada criar, mas nenhum dos grandes buscadores confirmou que usa. Não venda como serviço nem prometa resultado com ele.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s5">
+<div class="parte__cabeca"><span class="parte__num">PARTE 5</span><h2>Medir e vigiar</h2></div>
+<p class="parte__resumo">Saber se o site traz contato, se continua rápido para quem visita, e se caiu — de preferência antes de o cliente perceber.</p>
+
+<article class="topico" id="t-da-medir" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Medir o que importa</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Com trinta visitas por semana, quase toda métrica é ruído. O que importa em site de serviço cabe em duas perguntas: <strong>quanta gente chegou</strong> e <strong>quanta clicou para falar</strong> — no WhatsApp, no telefone ou no formulário.</p>
+<ol>
+<li>instalar o Analytics (ou uma alternativa sem cookie, como Plausible ou Umami)</li>
+<li>transformar o clique no WhatsApp num evento, com a seção de onde saiu</li>
+<li>marcar esse evento — e a visita à página de obrigado — como conversão</li>
+<li>marcar com UTM todo link divulgado fora do site</li>
+</ol>
+<div class="nota">O código do evento e a configuração do GA4 estão em <a href="trafego.html#t-tr-ga4">GA4 na prática</a> e <a href="trafego.html#t-utm-evento">Medir o clique no WhatsApp</a>. Os links marcados saem da ferramenta <a href="ferramenta-utm.html">Gerador de UTM</a>. E rastreamento com cookie pede aviso antes: <a href="trafego.html#t-tr-lgpd">Consentimento e LGPD</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-da-uptime" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Saber que caiu antes do cliente</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Se o site sair do ar às dez da noite de sexta, sem monitor você descobre quando o cliente manda mensagem no domingo. Um monitor de disponibilidade acessa o site a cada poucos minutos e avisa por e-mail ou aplicativo quando ele não responde — e o plano gratuito dos serviços mais conhecidos já basta para um site pequeno.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Monitorar</th><th>Por quê</th></tr></thead>
+<tbody>
+<tr><td>a home</td><td>o site inteiro fora do ar: domínio vencido, deploy quebrado, hospedagem</td></tr>
+<tr><td>a função do formulário, se houver</td><td>a página pode estar no ar e o envio, quebrado — o pior tipo de falha, porque é silenciosa</td></tr>
+<tr><td>a validade do domínio e do certificado</td><td>alguns monitores avisam semanas antes de vencer</td></tr>
+</tbody></table></div>
+<div class="nota">As camadas de monitoramento e as ferramentas estão em <a href="back-end.html#t-ex-monitorar">Saber que quebrou antes do cliente</a>. O que fazer quando o alerta chega, na ordem do mais provável, está em <a href="negocio.html#t-mt-quebrou">Quando o site sai do ar</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-da-vitals" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Velocidade de verdade, não de laboratório</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O Lighthouse mede a página uma vez, no seu computador, numa conexão simulada. O Search Console mostra os <strong>Core Web Vitals</strong> medidos nos visitantes reais, em celulares reais — e é esse que conta para o Google.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th></th><th>Lighthouse</th><th>Core Web Vitals do Search Console</th></tr></thead>
+<tbody>
+<tr><td>De onde vem</td><td>um teste que você roda</td><td>o navegador Chrome de quem visitou</td></tr>
+<tr><td>Quando serve</td><td>antes de publicar, e a cada mudança</td><td>depois de publicar, acompanhando o mês</td></tr>
+<tr><td>Limite</td><td>não é o celular do seu público</td><td>site com pouca visita aparece como "dados insuficientes"</td></tr>
+</tbody></table></div>
+<p>Em site pequeno, o mais comum é o relatório ficar vazio por falta de volume. Nesse caso, o Lighthouse rodado no celular, em aba anônima, continua sendo a melhor medida que você tem.</p>
+<div class="nota">O que cada métrica mede e como corrigir está na parte 3 da trilha Qualidade: <a href="qualidade.html#t-perf-vitals">Core Web Vitals</a> e <a href="qualidade.html#t-perf-medir">Medir de verdade</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-da-vencimentos" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>O calendário do que vence</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Site estático quase não quebra sozinho. Quando cai, quase sempre é porque alguma coisa venceu e o aviso foi para um e-mail que ninguém lê.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>O que vence</th><th>Com que frequência</th><th>Como não ser pego</th></tr></thead>
+<tbody>
+<tr><td>Domínio</td><td>na data de renovação — no registro.br, a cada ano ou no prazo que foi pago</td><td>o e-mail de contato é o do cliente, e ele sabe que o aviso vai chegar</td></tr>
+<tr><td>Certificado HTTPS</td><td>renovado automaticamente pela Vercel e pela Netlify</td><td>só vira problema se o DNS for mexido e parar de apontar para a hospedagem</td></tr>
+<tr><td>Cartão do cliente</td><td>na validade do cartão</td><td>serviço pago (e-mail, plano de hospedagem, ferramenta) para de cobrar e desliga</td></tr>
+<tr><td>Conta gratuita parada</td><td>quando a plataforma muda a regra</td><td>saber quais serviços o site usa — o inventário</td></tr>
+</tbody></table></div>
+<div class="nota">Anote todos no <a href="ferramenta-inventario.html">Inventário de acessos</a>, em nome de quem estão. O "domínio é do cliente" e o porquê estão em <a href="negocio.html#t-ac-dominio">O domínio é do cliente. Sempre.</a></div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s6">
+<div class="parte__cabeca"><span class="parte__num">PARTE 6</span><h2>E-mail no domínio</h2></div>
+<p class="parte__resumo">Quase todo cliente pede, cedo ou tarde, o e-mail com o nome da empresa. É a parte do DNS em que um erro não derruba o site — derruba o e-mail, e ninguém percebe por dias.</p>
+
+<article class="topico" id="t-da-email" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>O e-mail com o nome da empresa</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p><code>contato@seusite.com.br</code> passa mais confiança que um endereço gratuito, e fica com a empresa se o funcionário sair. O domínio é o mesmo do site; quem recebe as mensagens é um provedor de e-mail — Google Workspace, Microsoft 365, Zoho e outros —, que você aponta no DNS.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Registro</th><th>O que faz no e-mail</th></tr></thead>
+<tbody>
+<tr><td>MX</td><td>diz para qual servidor entregar as mensagens do domínio</td></tr>
+<tr><td>TXT (SPF)</td><td>lista quem pode enviar e-mail em nome do domínio</td></tr>
+<tr><td>TXT ou CNAME (DKIM)</td><td>a assinatura que prova que a mensagem não foi alterada</td></tr>
+<tr><td>TXT (DMARC)</td><td>o que o destino faz quando as duas provas acima falham</td></tr>
+</tbody></table></div>
+<p>Cada provedor mostra no painel os valores exatos para copiar. Não invente nem copie de tutorial antigo: os valores mudam de provedor para provedor, e às vezes do mesmo provedor com o tempo.</p>
+<div class="nota nota--alerta"><strong>O site e o e-mail moram no mesmo DNS.</strong> Trocar os servidores de DNS do domínio (os "nameservers") para os da hospedagem apaga os registros de e-mail que estavam no lugar antigo, se ninguém copiar antes. O site continua no ar; o e-mail para de chegar.</div>
+</div>
+</article>
+
+<article class="topico" id="t-da-spf" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>SPF, DKIM e DMARC: por que cai no spam</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Os três existem porque qualquer um pode escrever qualquer endereço no campo "De". Eles são a forma de o domínio provar que a mensagem é dele — e, sem eles, o Gmail e o Outlook desconfiam.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th></th><th>Prova o quê</th><th>Sem ele</th></tr></thead>
+<tbody>
+<tr><td>SPF</td><td>que o servidor que enviou está autorizado</td><td>mensagem de servidor não listado vai para o spam</td></tr>
+<tr><td>DKIM</td><td>que a mensagem chegou sem alteração</td><td>perde a assinatura que os grandes provedores esperam</td></tr>
+<tr><td>DMARC</td><td>o que fazer quando SPF e DKIM falham, e para onde mandar relatório</td><td>o destino decide sozinho, e golpista pode usar seu domínio</td></tr>
+</tbody></table></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">registros TXT de exemplo</span><button class="copiar">copiar</button></div><pre><code>seusite.com.br         TXT  "v=spf1 include:_spf.google.com ~all"
+_dmarc.seusite.com.br  TXT  "v=DMARC1; p=none; rua=mailto:dmarc@seusite.com.br"</code></pre></div>
+<p>O <code>p=none</code> do DMARC só observa e manda relatório — é o jeito seguro de começar. Depois que os relatórios mostrarem que só os seus servidores enviam, dá para endurecer para <code>quarantine</code> e <code>reject</code>.</p>
+<div class="nota nota--alerta"><strong>O erro mais comum: dois registros SPF.</strong> O domínio só pode ter um. Quando o formulário do site passa a enviar por outro serviço, esse serviço entra no <em>mesmo</em> registro, com outro <code>include:</code> — nunca num segundo TXT começando com <code>v=spf1</code>, que invalida os dois.</div>
+<div class="nota">Desde 2024, Gmail e Yahoo exigem autenticação de quem envia para eles, e quem envia em volume precisa dos três. O e-mail que o formulário do site manda também passa por isso: <a href="back-end.html#t-sl-email">Enviar e-mail de verdade</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-da-dns" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>Mexer no DNS sem derrubar nada</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O DNS é onde site e e-mail se encontram, e uma mudança errada leva horas para aparecer — e horas para desfazer. O jeito seguro é sempre o mesmo:</p>
+<ol>
+<li><strong>fotografar a zona antes</strong>: print ou cópia de todos os registros que existem hoje</li>
+<li><strong>uma mudança por vez</strong>, e esperar ela valer antes da próxima</li>
+<li><strong>não mexer de novo</strong> se não abriu em dez minutos: a propagação pode levar horas</li>
+<li><strong>conferir o e-mail</strong> depois de qualquer mudança no domínio, mandando e recebendo uma mensagem</li>
+</ol>
+<div class="nota">O que são os registros A, CNAME, MX e TXT, e a propagação, está em <a href="html-puro-2.html#t-dominio">Domínio, DNS e HTTPS</a>, na trilha HTML puro.</div>
+</div>
+</article>
+</section>
+
+<section class="parte" id="s7">
+<div class="parte__cabeca"><span class="parte__num">PARTE 7</span><h2>Manter vivo</h2></div>
+<p class="parte__resumo">Site que ninguém atualiza envelhece rápido — e o cliente percebe antes de você. O que guardar, o que revisar e como isso vira receita todo mês.</p>
+
+<article class="topico" id="t-da-backup" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>O que guardar, e onde</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O código está no seu computador, no GitHub e na Vercel: são três cópias sem você fazer nada. O que costuma existir numa cópia só são as <strong>fotos originais do cliente</strong>, o logo em vetor e os textos aprovados — justamente o que ele não tem como refazer.</p>
+<div class="nota">A tabela do que guardar, onde e com que frequência está em <a href="negocio.html#t-ac-backup">Backup — o que, onde, quando</a>, na trilha Negócio.</div>
+</div>
+</article>
+
+<article class="topico" id="t-da-envelhece" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>O conteúdo que envelhece</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>O site não quebra, mas começa a mentir: o horário mudou, o preço subiu, a promoção de Natal ainda está lá em março, a foto é de uma equipe que não existe mais. Quem visita não sabe qual informação está velha — e passa a desconfiar de todas.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>O que revisar</th><th>Sinal de que envelheceu</th></tr></thead>
+<tbody>
+<tr><td>Preços e condições</td><td>o cliente responde "esse valor não vale mais"</td></tr>
+<tr><td>Horário e endereço</td><td>diferente do Perfil da Empresa</td></tr>
+<tr><td>Promoções e datas</td><td>qualquer data que já passou</td></tr>
+<tr><td>Fotos</td><td>equipe, fachada ou produto que mudaram</td></tr>
+<tr><td>Depoimentos</td><td>muito antigos, ou de serviço que não é mais oferecido</td></tr>
+<tr><td>O ano no rodapé</td><td>"© 2024" em 2026 passa a impressão de site abandonado</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Uma revisão por trimestre</strong>, de quinze minutos, com o cliente olhando junto, resolve quase tudo — e é um item concreto para o pacote de manutenção.</div>
+</div>
+</article>
+
+<article class="topico" id="t-da-relatorio" data-marca="novo" data-desde="2026-09-26">
+<div class="topico__cabeca"><h3>O relatório e a manutenção</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>Depois de três meses sem mexer em nada, o cliente pergunta pelo que está pagando. O relatório responde antes: quatro números — visitas, contatos, taxa de conversão, de onde vieram — e uma frase de leitura com uma recomendação.</p>
+<p>É o que transforma "fiz um site" em acompanhamento com entrega visível todo mês, e o que sustenta a mensalidade.</p>
+<div class="nota">O modelo do relatório está em <a href="trafego.html#t-utm-relatorio">O relatório de uma página</a>. Os modelos de pacote e o que colocar em cada um estão em <a href="negocio.html#t-mt-contrato">Contrato de manutenção</a>. E a rotina mensal já está no fim da ferramenta <a href="ferramenta-depois-de-publicar.html">Depois de publicar</a>.</div>
+</div>
+</article>
+</section>
+
+<nav class="passo" aria-label="Navegar entre trilhas">
+<a class="passo__item passo__item--ant" href="back-end.html"><span>Anterior</span><strong>Back-end</strong></a>
+<a class="passo__item passo__item--prox" href="negocio.html"><span>Próxima</span><strong>Negócio</strong></a>
+</nav>
+</main>
+</div>
+<footer class="rodape">
+<div class="rodape__interno">
+<p class="rodape__marca"><a href="index.html">Gustavo Tutorial</a><span>Material de estudo aberto, em português. Feito em HTML, CSS e JavaScript puros.</span></p>
+<nav class="rodape__nav" aria-label="Rodapé">
+<a href="estudar.html">Estudar</a>
+<a href="ferramentas.html">Trabalhar</a>
+<a href="modelos.html">Modelos</a>
+<a href="patch-notes.html">Patch notes</a>
+<a href="colofao.html">Colofão</a>
+</nav>
+</div>
+</footer>
+<script src="app.js"></script>
+<script src="busca.js" defer></script>
+</body>
+</html>

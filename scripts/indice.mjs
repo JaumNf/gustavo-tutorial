@@ -25,6 +25,8 @@ const TRILHAS = [
   ['motion.html', 'Referência: Motion'],
   ['frameworks.html', 'Frameworks'],
   ['back-end.html', 'Back-end'],
+  ['depois-do-ar.html', 'Depois do ar'],
+  ['montar-o-site.html', 'Montar o site'],
   ['negocio.html', 'Negócio'],
   ...FERRAMENTAS.map((f) => [f.arquivo, 'Ferramentas']),
   ['ia.html', 'Trabalhando com IA'],
