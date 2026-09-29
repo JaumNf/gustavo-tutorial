@@ -944,7 +944,15 @@
       { id: 'naoincluido', rotulo: 'O que não está incluído',   dica: 'evita mal-entendido depois' },
       { id: 'prazo',       rotulo: 'Prazo e etapas',            dica: 'o que depende dele: fotos, textos, aprovação' },
       { id: 'investimento',rotulo: 'Investimento',              dica: 'valor, forma de pagamento, entrada de 40 a 50%' },
+      { id: 'garantias',   rotulo: 'Garantias',                 dica: 'o que ele confere sozinho, com data ou número — e o que acontece se não cumprir' },
       { id: 'depois',      rotulo: 'Depois da entrega',         dica: 'rodadas de ajuste, manutenção opcional' }
+    ];
+    /* as garantias que se medem (negocio.html#t-cm-garantias): um clique põe o texto no campo, para editar */
+    var GARANTIAS = [
+      { nome: 'prazo', texto: 'Prazo: no ar em 14 dias corridos a partir do recebimento de textos, fotos e acessos. Se o material atrasar, o prazo anda junto.' },
+      { nome: 'nota de desempenho', texto: 'Desempenho: nota 90 ou mais no PageSpeed Insights, versão celular, na página publicada, no dia da entrega — com print datado.' },
+      { nome: 'o site é seu', texto: 'Propriedade: domínio, hospedagem e código no seu nome e no seu e-mail, entregues com a lista de acessos.' },
+      { nome: '30 dias de correção', texto: 'Correção: 30 dias de correção de erro sem custo, a partir da publicação. Erro é o que foi combinado e não funciona; mudança nova é orçada à parte.' }
     ];
     var campos = $('#pp-campos'), contador = $('#pp-contador'), cliente = $('#pp-cliente'),
         modelo = $('#pp-modelo'), validade = $('#pp-validade'), dica = $('#pp-dica');
@@ -964,16 +972,37 @@
     function pintar() {
       var r = ler(chave(), {});
       campos.innerHTML = CAMPOS.map(function (c) {
+        var extra = c.id !== 'garantias' ? '' :
+          '<div class="pp-garantias" role="group" aria-label="Acrescentar garantia"><span>Acrescentar:</span>' +
+          GARANTIAS.map(function (g, i) {
+            return '<button type="button" class="acao" data-garantia="' + i + '">+ ' + g.nome + '</button>';
+          }).join('') + '</div>';
         return '<div class="ferr__linha"><label for="pp-' + c.id + '">' + c.rotulo + ' <small>' + c.dica + '</small></label>' +
-               '<textarea id="pp-' + c.id + '" data-id="' + c.id + '" class="ferr__campo" rows="2">' +
-               esc(r[c.id] || '') + '</textarea></div>';
+               '<textarea id="pp-' + c.id + '" data-id="' + c.id + '" class="ferr__campo" rows="' + (c.id === 'garantias' ? 4 : 2) + '">' +
+               esc(r[c.id] || '') + '</textarea>' + extra + '</div>';
       }).join('');
+      marcarGarantias();
       contar();
     }
     campos.addEventListener('input', function (e) {
       if (e.target.tagName !== 'TEXTAREA') return;
       var r = ler(chave(), {}); r[e.target.dataset.id] = e.target.value;
       guardar(chave(), r); contar();
+      if (e.target.dataset.id === 'garantias') marcarGarantias();
+    });
+    /* o botão fica marcado enquanto o texto dele estiver no campo; clicar de novo não duplica */
+    function marcarGarantias() {
+      var g = $('#pp-garantias'); if (!g) return;
+      campos.querySelectorAll('[data-garantia]').forEach(function (b) {
+        b.setAttribute('aria-pressed', g.value.indexOf(GARANTIAS[b.dataset.garantia].texto) >= 0 ? 'true' : 'false');
+      });
+    }
+    campos.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-garantia]'); if (!b) return;
+      var g = $('#pp-garantias'), texto = GARANTIAS[b.dataset.garantia].texto;
+      if (g.value.indexOf(texto) >= 0) return;
+      g.value = (g.value.trim() ? g.value.replace(/\s+$/, '') + '\n' : '') + texto;
+      g.dispatchEvent(new Event('input', { bubbles: true }));
     });
     cliente.addEventListener('input', function () { guardar('pp-cliente', cliente.value); pintar(); });
     modelo.addEventListener('change', function () { guardar('pp-modelo', modelo.value); });
@@ -989,7 +1018,7 @@
         CAMPOS.map(function (c, i) {
           return (i + 1) + '. ' + c.rotulo + '\n' + ((r[c.id] || '').trim() || '(não preenchido)') + '\n';
         }).join('\n') +
-        '\n8. Validade da proposta\n' + dias + ' dias — até ' + ateData;
+        '\n' + (CAMPOS.length + 1) + '. Validade da proposta\n' + dias + ' dias — até ' + ateData;
       copiar(txt, this);
     });
 
@@ -2400,8 +2429,8 @@
       'f-preco': function () { var f = faixaPreco(); return [f ? 'piso ' + brl(f.piso) : '—', !!f]; },
       'f-proposta': function () {
         var c = preenchidos(ler('pp-' + chaveProjeto(), {}),
-          ['entendi', 'proponho', 'incluido', 'naoincluido', 'prazo', 'investimento', 'depois']);
-        return [c + ' de 7', c === 7];
+          ['entendi', 'proponho', 'incluido', 'naoincluido', 'prazo', 'investimento', 'garantias', 'depois']);
+        return [c + ' de 8', c === 8];
       },
       'f-paleta': function () { var d = corHex(ler('pl-destaque', '')); return [d || '—', !!d]; },
       'f-contraste': function () {

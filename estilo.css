@@ -2336,6 +2336,8 @@
   textarea.ferr__campo { font-family: var(--font-display); font-size: 14.5px; line-height: 1.5; resize: vertical; }
 
   .ferr__linha { margin-bottom: 13px; }
+  .pp-garantias { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-top: 8px; }
+  .pp-garantias > span { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
   .ferr__linha label, .ferr__grade label {
     display: block; margin-bottom: 5px;
     font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--ink);
