@@ -146,6 +146,8 @@
 <li><a href="#t-ms-video-fachada">Vídeo do YouTube que carrega no clique</a></li>
 <li><a href="#t-ms-video-proprio">Vídeo próprio no site</a></li>
 <li><a href="#t-ms-mapa">Mapa: link, embed ou imagem</a></li>
+<li><a href="#t-ms-instagram">Feed do Instagram que se atualiza sozinho</a></li>
+<li><a href="#t-ms-agendamento">Agendamento pelo site</a></li>
 <li><a href="#t-ms-embed-privacidade">Embed também é coleta de dado</a></li>
 </ol>
 <a class="sumario__parte" href="#s8">8 · O que o CSS já resolve</a>
@@ -173,7 +175,7 @@
 <div class="legenda">
 <span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
 <span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
-<span>9 partes · 36 tópicos</span>
+<span>9 partes · 38 tópicos</span>
 </div>
 <div class="abertura__filtro"><span class="abertura__filtro-rot" aria-hidden="true">Mostrar</span>
 <div class="filtros" role="group" aria-label="Filtrar tópicos">
@@ -812,7 +814,7 @@
 
 <section class="parte" id="s7">
 <div class="parte__cabeca"><span class="parte__num">PARTE 7</span><h2>Vídeo, mapa e outros embeds</h2></div>
-<p class="parte__resumo">O vídeo do YouTube, o mapa do Google e o post do Instagram são o que o cliente mais pede — e o que mais pesa na página. O padrão que resolve os três é o mesmo: mostrar uma imagem e só carregar o de verdade quando a pessoa pede.</p>
+<p class="parte__resumo">O vídeo do YouTube, o mapa do Google, o feed do Instagram e a agenda de horários são o que o cliente mais pede — e o que mais pesa na página. O padrão que resolve quase todos é o mesmo: mostrar uma imagem ou um link e só carregar o de verdade quando a pessoa pede.</p>
 
 <article class="topico" id="t-ms-embed-custo" data-marca="novo" data-desde="2026-09-26">
 <div class="topico__cabeca"><h3>O que um embed custa</h3><span class="tag tag--novo">Novo</span></div>
@@ -823,7 +825,7 @@
 <tbody>
 <tr><td>Vídeo do YouTube ou Vimeo</td><td>o player e os scripts dele, centenas de KB</td><td>fachada: capa com botão, o player só no clique</td></tr>
 <tr><td>Mapa do Google</td><td>o mapa interativo inteiro</td><td>link de como chegar; ou o mapa com <code>loading="lazy"</code></td></tr>
-<tr><td>Post ou feed do Instagram</td><td>o script de incorporação da rede</td><td>um print com link para o post</td></tr>
+<tr><td>Post ou feed do Instagram</td><td>o script de incorporação da rede</td><td>um print com link para o post; ou o <a href="#t-ms-instagram">feed pela API</a>, sem o script</td></tr>
 <tr><td>Avaliações do Google em widget</td><td>script de terceiro, às vezes pago</td><td>as avaliações escritas na página, com link para o perfil</td></tr>
 </tbody></table></div>
 <p>Para ver o custo real, abra o DevTools na aba <em>Network</em>, recarregue com e sem o embed e compare o total transferido. A diferença costuma ser maior que a página inteira sem ele.</p>
@@ -920,6 +922,113 @@ document.querySelectorAll('.video[data-video]').forEach(function (caixa) {
   allowfullscreen&gt;&lt;/iframe&gt;</code></pre></div>
 <p>O endereço do <code>src</code> sai do próprio Google Maps: <em>Compartilhar</em>, depois <em>Incorporar um mapa</em>. O <code>loading="lazy"</code> faz o navegador só baixar o mapa quando a pessoa rola até perto dele — quem não chega ao rodapé nunca paga o custo.</p>
 <div class="nota">A seção <a href="modelos.html#m-secao-contato">Contato e horário</a> da galeria de Modelos já usa o link, não o mapa. O endereço escrito precisa ser o mesmo do Perfil da Empresa: <a href="trafego.html#t-tr-nap">Consistência de nome, endereço e telefone</a>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-instagram" data-marca="novo" data-desde="2026-09-29">
+<div class="topico__cabeca"><h3>Feed do Instagram que se atualiza sozinho</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>"Quero o Instagram no site, atualizando sozinho" é pedido comum — e é o item que mais quebra depois da entrega. Antes de prometer, escolha o caminho de propósito:</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Caminho</th><th>Atualiza sozinho</th><th>O que custa</th></tr></thead>
+<tbody>
+<tr><td>Print dos posts com link para o perfil</td><td>não</td><td>nada; alguém troca as imagens de vez em quando</td></tr>
+<tr><td>Widget pronto de um serviço de terceiro</td><td>sim</td><td>o script dele na página, o que ele coleta de quem visita e o plano dele — leia os três antes</td></tr>
+<tr><td>Integração própria pela API da Meta</td><td>sim</td><td>uma função no servidor e um token que vence a cada 60 dias</td></tr>
+</tbody></table></div>
+<p>A API mudou em 4 de dezembro de 2024: a Meta desligou a antiga <em>Basic Display API</em>, a única que aceitava conta pessoal. Hoje o caminho oficial é a <em>Instagram API com login do Instagram</em>, que só funciona com <strong>conta profissional</strong> (Comercial ou Criador de conteúdo). Se o cliente usa conta pessoal, a primeira conversa é essa. A preparação, em resumo: um app do tipo <em>Business</em> no painel de desenvolvedor da Meta, a conta do cliente ligada a ele com a permissão <code>instagram_business_basic</code> e um token de acesso de longa duração gerado ali. O painel da Meta muda de lugar com frequência — siga o <a href="https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/get-started" target="_blank" rel="noopener">guia oficial</a> no dia, não um print antigo.</p>
+<p>O token nunca vai para o JavaScript da página: quem o tiver lê a conta. Ele fica numa variável de ambiente da Vercel, e uma função no servidor busca os posts e devolve só o que a página precisa:</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">api/instagram.mjs — a função na Vercel</span><button class="copiar">copiar</button></div><pre><code>/* INSTAGRAM_TOKEN fica em Settings → Environment Variables, nunca no código */
+export async function GET() {
+  const campos = 'caption,media_type,media_url,thumbnail_url,permalink';
+  const url = 'https://graph.instagram.com/me/media?fields=' + campos +
+    '&amp;limit=9&amp;access_token=' + process.env.INSTAGRAM_TOKEN;
+
+  const r = await fetch(url);
+  if (!r.ok) return Response.json([], { status: 502 });
+
+  const { data = [] } = await r.json();
+  const posts = data
+    .map((p) =&gt; ({
+      link: p.permalink,
+      /* vídeo usa a miniatura; post com música protegida vem sem media_url */
+      imagem: p.media_type === 'VIDEO' ? p.thumbnail_url : p.media_url,
+      texto: (p.caption || '').slice(0, 120),
+    }))
+    .filter((p) =&gt; p.imagem);
+
+  /* a CDN da Vercel guarda a resposta por uma hora: a Meta não é chamada a cada visita */
+  return Response.json(posts, {
+    headers: { 'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400' },
+  });
+}</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">na página: o link já funciona sem JavaScript</span><button class="copiar">copiar</button></div><pre><code>&lt;div class="insta" data-insta&gt;
+  &lt;a href="https://instagram.com/perfil_do_cliente" target="_blank" rel="noopener"&gt;Ver no Instagram&lt;/a&gt;
+&lt;/div&gt;</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="css">css da grade</span><button class="copiar">copiar</button></div><pre><code>.insta__grade {
+  list-style: none; padding: 0; margin: 0 0 var(--e3);
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--e1);
+}
+.insta__grade img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: var(--raio); }</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">troca o link pela grade quando os posts chegam</span><button class="copiar">copiar</button></div><pre><code>var caixa = document.querySelector('[data-insta]');
+if (caixa) {
+  fetch('/api/instagram')
+    .then(function (r) { return r.ok ? r.json() : []; })
+    .then(function (posts) {
+      if (!posts.length) return;            /* deu errado: fica o link */
+      var grade = document.createElement('ul');
+      grade.className = 'insta__grade';
+      posts.forEach(function (p) {
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.href = p.link; a.target = '_blank'; a.rel = 'noopener';
+        var img = document.createElement('img');
+        img.src = p.imagem; img.alt = p.texto; img.loading = 'lazy';
+        img.width = 320; img.height = 320;
+        a.appendChild(img); li.appendChild(a); grade.appendChild(li);
+      });
+      caixa.prepend(grade);
+    })
+    .catch(function () {});
+}</code></pre></div>
+<ul>
+<li><strong>o texto do post vira o <code>alt</code></strong> — é o que existe; se a legenda for só emoji, a foto fica sem descrição útil, e vale saber disso antes</li>
+<li><strong>o link para o perfil continua embaixo</strong>: se a Meta cair ou o token vencer, a seção vira um link, não um buraco</li>
+<li><strong>as fotos vêm do servidor da Meta</strong>, então o navegador de quem visita fala com ela — entra na política de privacidade, como <a href="#t-ms-embed-privacidade">todo embed</a></li>
+</ul>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="bash">renovar o token — no terminal, antes dos 60 dias</span><button class="copiar">copiar</button></div><pre><code>curl "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&amp;access_token=TOKEN_ATUAL"</code></pre></div>
+<div class="nota nota--alerta"><strong>O token vence em 60 dias.</strong> Ele pode ser renovado a partir de 24 horas de vida, antes de vencer, e o novo vale mais 60 dias a partir da renovação — é a chamada acima. Ela devolve um token novo: troque a variável na Vercel e publique de novo. Esqueceu, o feed some e volta o link. Por isso esse item é manutenção de verdade, com data: ponha no calendário da <a href="ferramenta-depois-de-publicar.html">Depois de publicar</a> e cobre dentro do <a href="negocio.html#t-mt-contrato">contrato de manutenção</a> — é exatamente o que justifica a mensalidade.</div>
+</div>
+</article>
+
+<article class="topico" id="t-ms-agendamento" data-marca="novo" data-desde="2026-09-29">
+<div class="topico__cabeca"><h3>Agendamento pelo site</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>Consulta, sessão, aula experimental, visita com hora marcada: quando o negócio vive de horário, a pessoa quer escolher o dela sem esperar resposta. Mas agendamento só funciona se a agenda do cliente for a verdade — se ele marca no caderno e esquece de bloquear no sistema, o site oferece um horário que não existe, e o WhatsApp era melhor. Pergunte como ele marca hoje antes de propor.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Opção</th><th>Como entra no site</th><th>Quando</th></tr></thead>
+<tbody>
+<tr><td>WhatsApp com mensagem pronta</td><td>um link — <a href="ferramenta-whatsapp.html">Link de WhatsApp</a></td><td>a agenda é de cabeça, ou cada caso pede conversa</td></tr>
+<tr><td>Página de agendamento do Google Agenda</td><td>link, botão com pop-up ou página incorporada</td><td>o cliente já usa o Google Agenda; conta pessoal gratuita cria, e alguns recursos pedem assinatura do Google</td></tr>
+<tr><td>Calendly ou serviço parecido</td><td>link, pop-up ou incorporado — o Calendly oferece os três em todos os planos</td><td>mais de um tipo de atendimento, lembretes, pagamento na marcação</td></tr>
+<tr><td>Sistema próprio, com banco</td><td>back-end</td><td>regra que nenhum pronto cobre — e aí é outro projeto: <a href="back-end.html#t-bd-quando">Você precisa mesmo de banco?</a></td></tr>
+</tbody></table></div>
+<p>No Google Agenda, a página de agendamento fica em <em>Páginas de agendamento</em>; o código sai de <em>Opções → Opções de compartilhamento → Incorporar no site</em>, em duas formas: a página inteira dentro do site, ou um botão que abre um pop-up. O jeito mais leve é nenhum dos dois — um link:</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">o botão que só abre a agenda: não pesa nada</span><button class="copiar">copiar</button></div><pre><code>&lt;a class="botao" href="LINK_DA_PAGINA_DE_AGENDAMENTO" target="_blank" rel="noopener"&gt;
+  Escolher um horário
+&lt;/a&gt;</code></pre></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">a agenda dentro da página, só quando a pessoa chega nela</span><button class="copiar">copiar</button></div><pre><code>&lt;iframe
+  src="ENDERECO_DO_CODIGO_DE_INCORPORACAO"
+  title="Agendar horário com Nome do negócio"
+  loading="lazy"
+  style="border: 0; width: 100%; height: 640px"&gt;&lt;/iframe&gt;</code></pre></div>
+<ul>
+<li><strong>a conta da agenda é do cliente</strong>, como o <a href="negocio.html#t-ac-dominio">domínio</a>: é nela que ficam nome, telefone e horário de cada pessoa que marcou</li>
+<li><strong>o pop-up e a página incorporada carregam o script do serviço</strong>; o link não carrega nada. Incorporado, ponha numa página própria (<code>agendar.html</code>) ou perto do fim, com <code>loading="lazy"</code>, para não pesar a abertura</li>
+<li><strong>o iframe precisa de <code>title</code></strong>, que é o que o leitor de tela anuncia; e teste a marcação inteira no celular, porque é lá que ela acontece</li>
+<li><strong>quem marca deixa dado pessoal no serviço</strong> — o nome dele entra na <a href="negocio.html#t-lgpd-politica">política de privacidade</a></li>
+</ul>
+<div class="nota">Agendamento integrado é item de escopo, com preço próprio — está na lista do que sai da entrega em <a href="negocio.html#t-mt-escopo">O que está e o que não está incluído</a>. E o clique em "Escolher um horário" se mede como o do WhatsApp: <a href="trafego.html#t-utm-evento">Medir o clique no WhatsApp</a>.</div>
 </div>
 </article>
 

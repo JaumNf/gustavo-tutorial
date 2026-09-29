@@ -116,6 +116,7 @@
 <ol>
 <li><a href="#t-lp-sequencia">A sequência lógica</a></li>
 <li><a href="#t-lp-catalogo">O catálogo de seções</a></li>
+<li><a href="#t-lp-para-quem-nao">"Para quem não é": a seção que filtra</a></li>
 <li><a href="#t-lp-quantas">Quantas seções, e o que corta</a></li>
 <li><a href="#t-lp-ordem-trafego">A ordem muda com o tráfego</a></li>
 </ol>
@@ -161,7 +162,7 @@
 <div class="legenda">
 <span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
 <span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
-<span>8 partes · 28 tópicos</span>
+<span>8 partes · 29 tópicos</span>
 </div>
 <div class="abertura__filtro"><span class="abertura__filtro-rot" aria-hidden="true">Mostrar</span>
 <div class="filtros" role="group" aria-label="Filtrar tópicos">
@@ -352,6 +353,48 @@ NÃO ENTRA: "Sobre mim", "Nossos valores", "Missão e visão"
 <tr><td><strong>Conversão</strong></td><td>O que eu faço agora?</td><td>Sempre</td></tr>
 </tbody></table></div>
 <div class="nota nota--alerta"><strong>Duas seções que quase nunca se justificam:</strong> "Missão, visão e valores" e "Nossa história desde 1998". Nenhuma responde a uma dúvida de quem está decidindo. Se o cliente insistir, o lugar delas é depois da conversão, não antes — e em uma linha, não em uma seção.</div>
+</div>
+</article>
+
+<article class="topico" id="t-lp-para-quem-nao" data-marca="novo" data-desde="2026-09-29">
+<div class="topico__cabeca"><h3>"Para quem não é": a seção que filtra</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>A seção "Para quem é" do catálogo ganha força quando vem com o avesso: dizer, com todas as letras, para quem o serviço <strong>não</strong> serve. Parece perder cliente; na prática, tira da conversa quem ia pechinchar, atrasar ou se frustrar, e faz quem fica se sentir escolhido.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Serve quando</th><th>Não serve quando</th></tr></thead>
+<tbody>
+<tr><td>O serviço tem recorte claro de preço, prazo ou tipo de caso</td><td>O negócio aceita qualquer cliente que aparecer</td></tr>
+<tr><td>Muita conversa hoje termina em "achei caro" ou "não era isso"</td><td>Ainda não há conversa suficiente para saber quem não serve</td></tr>
+<tr><td>Cada item é uma condição objetiva que a pessoa confere sozinha</td><td>O texto vira lista de defeitos de cliente — tom de desprezo afasta todo mundo</td></tr>
+</tbody></table></div>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">as duas colunas, com as condições que a pessoa confere</span><button class="copiar">copiar</button></div><pre><code>&lt;section class="secao" aria-labelledby="pra-quem"&gt;
+  &lt;div class="container"&gt;
+    &lt;h2 id="pra-quem"&gt;É para você?&lt;/h2&gt;
+    &lt;div class="grade"&gt;
+      &lt;div&gt;
+        &lt;h3&gt;Faz sentido se&lt;/h3&gt;
+        &lt;ul&gt;
+          &lt;li&gt;você precisa de uma página no ar em até 3 semanas&lt;/li&gt;
+          &lt;li&gt;consegue mandar textos e fotos na primeira semana&lt;/li&gt;
+          &lt;li&gt;quer o domínio e o site no seu nome&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;h3&gt;Não é o melhor caminho se&lt;/h3&gt;
+        &lt;ul&gt;
+          &lt;li&gt;você precisa de loja com estoque e pagamento&lt;/li&gt;
+          &lt;li&gt;o site depende de um sistema que ainda não existe&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre></div>
+<ul>
+<li><strong>escreva a condição, não o cliente</strong>: "precisa de loja com estoque" filtra sem ofender; "cliente que só quer preço" ofende e não filtra</li>
+<li><strong>dê uma saída a quem não serve</strong> — "para loja, eu indico uma plataforma pronta" transforma o não em confiança, e às vezes em indicação</li>
+<li><strong>entra antes do investimento</strong>: quem chega ao preço já sabe que o caso dele se encaixa</li>
+</ul>
+<div class="nota">As classes <code>.secao</code>, <code>.container</code> e <code>.grade</code> são as do <a href="montar-o-site.html#t-ms-projeto-base">projeto-base</a>. Os sinais de quem vai dar problema, que alimentam a coluna da direita, estão em <a href="negocio.html#t-cm-sinais">Sinais de cliente que vai dar problema</a>.</div>
 </div>
 </article>
 
