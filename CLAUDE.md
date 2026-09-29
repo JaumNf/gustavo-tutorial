@@ -39,8 +39,10 @@ Gemini por não ter custo; o Claude foi a primeira versão e saiu por ser pago. 
   a cada pergunta, pega os 7 tópicos com mais termos em comum e manda como `<trechos>` junto da pergunta;
 - responde em fluxo (texto puro, sem as partes `thought` do Gemini) e devolve os tópicos usados no
   cabeçalho `X-Fontes`; o `ia.js` mostra embaixo só os que a resposta citou;
-- tenta os modelos da lista `MODELOS` em ordem (`gemini-3.8-flash`, depois `gemini-3.5-flash-lite`):
-  só passa para o próximo quando o atual devolve 429, porque cada modelo tem a própria cota gratuita.
+- tenta os modelos da lista `MODELOS` em ordem (`gemini-3.8-flash`, `gemini-3.5-flash-lite`, `gemini-3.1-flash-lite`):
+  passa para o próximo quando o atual devolve 429 (cota gratuita acabou) ou 500/503 (o Google diz que o
+  modelo está sobrecarregado — aconteceu logo no primeiro teste em produção), porque cada modelo tem a
+  própria cota e a própria fila.
   Com as duas esgotadas, o painel diz que a cota acabou. Os limites exatos só aparecem no AI Studio;
   os nomes de modelo do Google mudam com frequência — confira em ai.google.dev/gemini-api/docs/models
   antes de trocar;

@@ -10,9 +10,10 @@
    ============================================================ */
 import { readFileSync } from 'node:fs';
 
-/* em ordem: se o primeiro estourar a cota gratuita (429), o próximo tenta — cada modelo tem a sua */
-const MODELOS = ['gemini-3.8-flash', 'gemini-3.5-flash-lite'];
+/* em ordem: se um estiver sem cota gratuita (429) ou sobrecarregado (500/503), o próximo tenta */
+const MODELOS = ['gemini-3.8-flash', 'gemini-3.5-flash-lite', 'gemini-3.1-flash-lite'];
 const API = 'https://generativelanguage.googleapis.com/v1beta/models/';
+const TENTAR_OUTRO = new Set([429, 500, 503]);
 const MAX_PERGUNTA = 1200;     // caracteres da pergunta
 const MAX_TURNOS = 8;          // mensagens de histórico aceitas
 const MAX_TRECHOS = 7;         // tópicos do site mandados como contexto
@@ -138,7 +139,8 @@ export async function POST(request) {
     generationConfig: { maxOutputTokens: 4000 },
   });
 
-  /* tenta os modelos em ordem; só passa para o próximo quando a cota gratuita do atual acabou */
+  /* tenta os modelos em ordem; passa para o próximo quando a cota gratuita do atual acabou (429)
+     ou quando o Google diz que ele está sobrecarregado (500/503) — cada modelo tem a sua cota e a sua fila */
   let resposta = null;
   for (const modelo of MODELOS) {
     try {
@@ -152,11 +154,13 @@ export async function POST(request) {
       console.error('perguntar: rede', e.message);
       return erro(502, 'Não consegui falar com a IA. Tente de novo.');
     }
-    if (resposta.status !== 429) break;
+    if (!TENTAR_OUTRO.has(resposta.status)) break;
+    console.error('perguntar:', modelo, resposta.status, (await resposta.text()).slice(0, 200));
   }
   if (!resposta.ok) {
-    console.error('perguntar:', resposta.status, (await resposta.text()).slice(0, 300));
+    if (!TENTAR_OUTRO.has(resposta.status)) console.error('perguntar:', resposta.status, (await resposta.text()).slice(0, 300));
     if (resposta.status === 429) return erro(429, 'A cota gratuita da IA acabou por agora. Tente de novo daqui a pouco ou amanhã.');
+    if (resposta.status >= 500) return erro(503, 'A IA do Google está sobrecarregada agora. Tente de novo em instantes.');
     return erro(502, 'Algo deu errado do lado da IA. Tente de novo.');
   }
 
