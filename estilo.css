@@ -3098,3 +3098,164 @@
   .parte { break-before: page; }
   .parte:first-of-type { break-before: avoid; }
 }
+
+/* ============================================================
+   IA DO SITE — o chat (ia.js + api/perguntar.mjs)
+   Painel à direita, na mesma linguagem do resto: fio, sem sombra
+   colorida, o teal só no que é ação.
+   ============================================================ */
+.visualmente-oculto {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* o botão que acompanha a página: fixo no canto, como o do WhatsApp */
+.ia-fab {
+  position: fixed; z-index: 150;
+  right: max(20px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom));
+  width: 58px; height: 58px; border: 0; border-radius: 50%; cursor: pointer;
+  display: grid; place-items: center;
+  background: var(--accent); color: var(--surface);
+  box-shadow: 0 10px 28px -8px rgb(8 16 15 / .55), 0 2px 6px rgb(8 16 15 / .2);
+  transition: transform .2s cubic-bezier(.23, 1, .32, 1), opacity .2s ease, scale .2s cubic-bezier(.23, 1, .32, 1);
+}
+.ia-fab .ico { width: 26px; height: 26px; }
+.ia-fab:hover { transform: translateY(-2px); }
+.ia-fab:active { transform: scale(.94); }
+.ia-fab.is-escondido { opacity: 0; scale: .85; pointer-events: none; }
+@media (max-width: 560px) {
+  .ia-fab { width: 54px; height: 54px; right: 16px; bottom: max(16px, env(safe-area-inset-bottom)); }
+}
+@media print { .ia-fab { display: none; } }
+.busca__ia {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 12px 19px; border: 0; border-top: 1px solid var(--line); background: none; cursor: pointer;
+  font-family: var(--font-display); font-size: 14.5px; color: var(--ink-soft); text-align: left;
+}
+.busca__ia strong { color: var(--accent); font-weight: 700; }
+.busca__ia:hover strong { text-decoration: underline; text-underline-offset: 3px; }
+
+.ia { position: fixed; inset: 0; z-index: 210; }
+.ia[hidden] { display: none; }
+.ia__fundo {
+  position: absolute; inset: 0; background: rgba(8, 16, 15, .45);
+  opacity: 0; transition: opacity .2s ease;
+}
+.ia__painel {
+  position: absolute; top: 0; right: 0; bottom: 0;
+  width: min(460px, 100%);
+  display: flex; flex-direction: column;
+  background: var(--ground); color: var(--ink);
+  border-left: 1px solid var(--line);
+  translate: 100% 0;
+  transition: translate .26s cubic-bezier(.32, .72, 0, 1);
+}
+.ia.is-aberto .ia__fundo { opacity: 1; }
+.ia.is-aberto .ia__painel { translate: 0 0; }
+
+.ia__topo {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px 14px 22px; border-bottom: 1px solid var(--line);
+}
+.ia__titulo { margin: 0 auto 0 0; font-size: 19px; font-weight: 700; letter-spacing: -.02em; }
+.ia__acao {
+  border: 0; background: none; padding: 6px 2px; cursor: pointer;
+  font-family: var(--font-display); font-size: 13.5px; font-weight: 600; color: var(--muted);
+}
+.ia__acao:hover { color: var(--accent); }
+
+.ia__rolo { flex: 1; overflow-y: auto; padding: 22px 22px 8px; overscroll-behavior: contain; }
+.ia__vazio p { margin: 0 0 18px; font-size: 16px; line-height: 1.55; color: var(--ink-soft); }
+.ia__sugestoes { display: grid; border-top: 1px solid var(--line); }
+.ia__sugestao {
+  text-align: left; border: 0; border-bottom: 1px solid var(--line); background: none;
+  padding: 13px 2px; cursor: pointer; color: var(--ink);
+  font-family: var(--font-display); font-size: 15px; font-weight: 600; line-height: 1.3;
+  transition: color .15s ease;
+}
+.ia__sugestao:hover { color: var(--accent); }
+
+.ia__pergunta {
+  margin: 0 0 12px; padding-top: 18px; border-top: 1px solid var(--line);
+  font-family: var(--font-display); font-size: 17px; font-weight: 700; letter-spacing: -.01em; line-height: 1.3;
+  white-space: pre-wrap;
+}
+.ia__pergunta p { margin: 0; }
+.ia__print {
+  display: block; max-width: 200px; max-height: 160px; margin-bottom: 10px;
+  border: 1px solid var(--line); border-radius: var(--radius); object-fit: contain; background: var(--surface);
+}
+.ia__pergunta:first-child { border-top: 0; padding-top: 0; }
+.ia__resposta { margin: 0 0 24px; font-size: 15.5px; line-height: 1.6; color: var(--ink-soft); }
+.ia__resposta > :first-child { margin-top: 0; }
+.ia__resposta p, .ia__resposta ul, .ia__resposta ol { margin: 0 0 12px; }
+.ia__resposta ul, .ia__resposta ol { padding-left: 20px; }
+.ia__resposta strong { color: var(--ink); }
+.ia__resposta code { font-size: .88em; }
+.ia__resposta.is-erro { color: var(--muted); font-style: italic; }
+.ia__resposta.is-escrevendo:empty::before {
+  content: 'Procurando no site…'; color: var(--muted); font-style: italic;
+}
+.ia__codigo {
+  margin: 0 0 12px; padding: 12px 14px; overflow-x: auto;
+  background: var(--code-bg); color: var(--code-ink); border-radius: var(--radius);
+  font-family: var(--font-mono); font-size: 12.5px; line-height: 1.55;
+}
+.ia__codigo code { background: none; border: 0; padding: 0; color: inherit; font-size: inherit; }
+
+.ia__fontes { display: grid; margin-top: 14px; border-top: 1px solid var(--line); }
+.ia__fontes span {
+  padding: 10px 0 4px; font-family: var(--font-mono); font-size: 11.5px; color: var(--muted);
+}
+.ia__fontes a {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  padding: 7px 0; border-bottom: 1px solid var(--line-soft);
+  font-family: var(--font-display); font-size: 14px; font-weight: 600;
+  color: var(--ink); text-decoration: none;
+}
+.ia__fontes a:hover { color: var(--accent); }
+.ia__fontes small { flex: none; font-family: var(--font-mono); font-size: 11px; font-weight: 400; color: var(--muted); }
+
+.ia__form {
+  display: grid; gap: 8px;
+  padding: 14px 16px 16px 22px; border-top: 1px solid var(--line); background: var(--ground);
+}
+.ia__linha { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: end; }
+.ia__clipe {
+  width: 46px; height: 46px; display: grid; place-items: center; cursor: pointer;
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--ink-soft);
+  transition: border-color .15s ease, color .15s ease;
+}
+.ia__clipe:hover, .ia__clipe:focus-within { border-color: var(--accent); color: var(--accent); }
+.ia__anexo { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-size: 14px; font-weight: 600; }
+.ia__anexo[hidden] { display: none; }
+.ia__anexo img { width: 56px; height: 42px; object-fit: cover; border: 1px solid var(--line); border-radius: var(--radius); }
+.ia__anexo .ia__acao { margin-left: auto; }
+.ia__anexo-erro { color: var(--muted); font-weight: 400; font-style: italic; }
+.ia__soltar {
+  position: absolute; inset: 12px; display: none; place-items: center;
+  border: 2px dashed var(--accent); border-radius: 6px;
+  background: color-mix(in srgb, var(--ground) 88%, transparent);
+  font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--accent);
+  pointer-events: none;
+}
+.ia__painel.is-soltando .ia__soltar { display: grid; }
+.ia__campo {
+  width: 100%; resize: none; max-height: 160px; field-sizing: content; min-height: 46px;
+  padding: 11px 13px; border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--surface); color: var(--ink);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.4;
+}
+.ia__campo:focus { outline: none; border-color: var(--accent); }
+.ia__enviar {
+  width: 46px; height: 46px; border: 0; border-radius: var(--radius); cursor: pointer;
+  background: var(--accent); color: var(--surface); display: grid; place-items: center;
+  transition: transform .16s cubic-bezier(.23, 1, .32, 1), opacity .15s ease;
+}
+.ia__enviar:active { transform: scale(.95); }
+.ia__enviar:disabled { opacity: .45; cursor: default; }
+.ia__aviso { margin: 0; font-size: 12.5px; line-height: 1.45; color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ia__painel, .ia__fundo, .ia-fab { transition: none; }
+}

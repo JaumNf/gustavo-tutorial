@@ -4,7 +4,7 @@
 
    uso:  node scripts/indice.mjs
    ============================================================ */
-import { existsSync, statSync, readFileSync } from 'node:fs';
+import { existsSync, statSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import vm from 'node:vm';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -48,6 +48,8 @@ function limpo(s) {
 }
 
 const itens = [];
+// o texto inteiro de cada tópico, para a IA do site (api/perguntar.mjs) ler — não vai para o navegador
+const conteudo = [];
 for (const [arq, trilha] of TRILHAS) {
   if (!existsSync(arq)) continue;
   const h = lerTexto(arq);
@@ -61,6 +63,7 @@ for (const [arq, trilha] of TRILHAS) {
 
     if (arq.startsWith('ferramenta-')) {
       const resumo = txt.match(/<p class="parte__resumo">(.*?)<\/p>/s);
+      conteudo.push({ t: limpo(pn[2]), p: 'Ferramenta', r: 'Ferramentas', u: arq, x: limpo(resumo[1]) });
       itens.push({
         t: limpo(pn[2]),
         p: 'Ferramenta',
@@ -78,6 +81,11 @@ for (const [arq, trilha] of TRILHAS) {
       const tags = [...t[3].matchAll(/<span class="tag tag--(\w+)"/g)].map((m) => m[1]).join(' ');
       const trecho = limpo(t[4]).slice(0, 150);
       itens.push({ t: limpo(t[2]), p: parte, u: arq + '#' + t[1], r: trilha, d: trecho, g: tags });
+    }
+    for (const a of txt.matchAll(/<article class="topico" id="([^"]+)"[^>]*>\s*<div class="topico__cabeca">\s*<h3>(.*?)<\/h3>.*?<\/div>(.*?)<\/article>/gs)) {
+      // os botões das vitrines e o "marcar como estudado" não são conteúdo
+      const corpoT = a[3].replace(/<button[^>]*>.*?<\/button>/gs, ' ');
+      conteudo.push({ t: limpo(a[2]), p: parte, r: trilha, u: arq + '#' + a[1], x: limpo(corpoT).slice(0, 6000) });
     }
   }
 
@@ -103,3 +111,7 @@ escreverTexto(
   '/* gerado automaticamente — não editar à mão */\nwindow.GT_BUSCA=' + JSON.stringify(itens) + ';\n'
 );
 console.log('itens indexados:', itens.length, '|', Math.floor(statSync('busca-indice.js').size / 1024), 'KB');
+
+mkdirSync('api', { recursive: true });
+writeFileSync('api/_conteudo.json', JSON.stringify(conteudo));
+console.log('tópicos para a IA:', conteudo.length, '|', Math.floor(statSync('api/_conteudo.json').size / 1024), 'KB');

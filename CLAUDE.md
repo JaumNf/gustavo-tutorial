@@ -27,6 +27,44 @@ corrija cada frase que deixou de ser verdade — `grep -il "nada é enviado\|sem
 acha as candidatas (nas trilhas, parte dessas menções é conteúdo de aula e fica). E uma chave de API
 nunca vai no JavaScript da página: mora numa variável de ambiente da Vercel, lida por uma função no servidor.
 
+## A IA do site
+
+Um botão fixo no canto inferior direito (`.ia-fab`, criado pelo `ia.js`, carregado em toda página depois
+do `busca.js`) acompanha a rolagem e abre um painel de chat que chama `POST /api/perguntar` — a função
+`api/perguntar.mjs`, que roda na Vercel e fala com o **Gemini, do Google, no plano gratuito da API**,
+por `fetch` direto no REST (`streamGenerateContent?alt=sse`), sem pacote. O Gustavo escolheu o
+Gemini por não ter custo; o Claude foi a primeira versão e saiu por ser pago. A função:
+
+- lê `api/_conteudo.json` (texto inteiro de cada tópico e ferramenta, **gerado pelo `indice.mjs`**) e,
+  a cada pergunta, pega os 7 tópicos com mais termos em comum e manda como `<trechos>` junto da pergunta;
+- responde em fluxo (texto puro, sem as partes `thought` do Gemini) e devolve os tópicos usados no
+  cabeçalho `X-Fontes`; o `ia.js` mostra embaixo só os que a resposta citou;
+- tenta os modelos da lista `MODELOS` em ordem (`gemini-3.8-flash`, depois `gemini-3.5-flash-lite`):
+  só passa para o próximo quando o atual devolve 429, porque cada modelo tem a própria cota gratuita.
+  Com as duas esgotadas, o painel diz que a cota acabou. Os limites exatos só aparecem no AI Studio;
+  os nomes de modelo do Google mudam com frequência — confira em ai.google.dev/gemini-api/docs/models
+  antes de trocar;
+- recusa origem de outro site e limita 12 perguntas por IP a cada 10 minutos (por instância);
+- aceita **um print** por pedido (`imagem: { tipo, dados }` na mensagem do usuário, base64, até 3,5 milhões
+  de caracteres — a Vercel recusa corpo acima de 4,5 MB), mandado ao Gemini como `inlineData`. O `ia.js`
+  reduz o print no navegador para no máximo 1568px e JPEG antes de enviar, e reenvia o último print preso
+  à pergunta em que foi mandado, para a IA ainda enxergá-lo nas perguntas seguintes. O print inteiro fica
+  só na memória; o `sessionStorage` guarda uma miniatura.
+
+A chave é `GEMINI_API_KEY`, criada no Google AI Studio (sem cartão): na Vercel, em Settings → Environment
+Variables; no computador, num `.env.local` na raiz (está no `.gitignore`). **Nunca no JavaScript da
+página.** Sem chave, a função responde 503 e o painel diz "A IA ainda não foi configurada". Não ative
+faturamento no projeto do Google sem o Gustavo pedir: é o que mantém o custo em zero.
+
+Para testar a IA localmente, o servidor é `node scripts/servidor.mjs` (porta 8000, entrada do
+`launch.json`): serve os arquivos e roda a função como a Vercel. Um servidor estático comum não roda
+`/api`. A busca também tem a linha "Pergunte à IA do site", que leva o termo digitado para o chat.
+
+**O aviso do painel é promessa.** Ele diz que a pergunta e o print vão para o Gemini, do Google, no plano
+gratuito, e que o Google pode usar esse conteúdo para melhorar os produtos dele — é o que a página de
+preços do Google diz do plano gratuito. Trocou de provedor, de plano ou passou a guardar conversa no
+servidor: o aviso muda no mesmo pacote.
+
 ## Arquivos gerados — nunca editar à mão
 
 Estes três são saída de script. Editar à mão significa perder a alteração na próxima geração:
@@ -34,6 +72,7 @@ Estes três são saída de script. Editar à mão significa perder a alteração
 | Arquivo            | Gerado por              | Regenerar quando                            |
 |--------------------|-------------------------|---------------------------------------------|
 | `busca-indice.js`  | `scripts/indice.mjs`     | qualquer tópico, parte ou página mudar       |
+| `api/_conteudo.json` | `scripts/indice.mjs`   | junto com o `busca-indice.js` (é o que a IA lê) |
 | `progresso.js`     | `scripts/progresso.mjs`  | tópico adicionado, removido ou com `data-desde` |
 | `sitemap.xml`      | `scripts/sitemap.mjs`    | qualquer página for editada (atualiza datas) |
 

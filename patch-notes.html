@@ -105,6 +105,21 @@
 <article class="patch__entrada">
 <div class="patch__data">29 set 2026</div>
 <div class="patch__corpo">
+<h2>Pergunte à IA do site</h2>
+<ul>
+<li>Um botão redondo no canto de toda página, que acompanha a rolagem como o do WhatsApp, abre um painel de conversa com a IA do site, o Gemini, do Google, no plano gratuito — o site não paga por pergunta</li>
+<li>Dá para mandar <strong>print</strong>: pelo botão de imagem, colando com Ctrl+V ou arrastando para o painel. Serve para tirar dúvida de erro no console, de código, de layout quebrado ou de uma tela de ferramenta. O print é reduzido no navegador antes de sair, e vale também para as perguntas seguintes da mesma conversa</li>
+<li>A resposta vem com base no próprio conteúdo: a cada pergunta, o servidor procura os tópicos das trilhas e ferramentas que tratam do assunto e manda só eles junto. A resposta aponta o tópico com link, e embaixo aparecem os tópicos citados</li>
+<li>Na busca, "Não achou? Pergunte à IA do site" leva junto o que já foi digitado</li>
+<li>O painel avisa, antes de qualquer pergunta, que o texto e o print são enviados para o Google, que no plano gratuito pode usar esse conteúdo para melhorar os produtos dele, e pede para não mandar senha nem dado de cliente. A conversa fica só na aba aberta e some ao fechar o navegador. As ferramentas continuam sem enviar nada</li>
+<li>Há um limite de perguntas seguidas por pessoa, e o plano gratuito do Google tem cota por minuto e por dia. Quando ela acaba, o painel avisa em vez de cobrar</li>
+</ul>
+</div>
+</article>
+
+<article class="patch__entrada">
+<div class="patch__data">29 set 2026</div>
+<div class="patch__corpo">
 <h2>As cinco regras do site foram revogadas</h2>
 <ul>
 <li>Deixam de valer: sem framework e sem build, Google Fonts como única dependência externa, JavaScript defensivo obrigatório, <code>localStorage</code> sempre em try/catch e nada saindo do navegador. Biblioteca, CDN, API e função no servidor passam a ser possíveis quando fizerem sentido</li>
@@ -477,5 +492,6 @@
 </footer>
 <script src="app.js"></script>
 <script src="busca.js" defer></script>
+<script src="ia.js" defer></script>
 </body>
 </html>

@@ -134,11 +134,12 @@
 <tr><td>Estilo</td><td>CSS puro, tokens no <code>:root</code></td><td>Tema claro e escuro trocando só as variáveis</td></tr>
 <tr><td>Comportamento</td><td>JavaScript puro, sem biblioteca</td><td>Filtro, marcador de progresso, sumário e gerador cabem em 200 linhas</td></tr>
 <tr><td>Tipografia</td><td>Bricolage Grotesque, Source Serif 4, JetBrains Mono</td><td>Grotesca com caráter nos títulos, serifada no corpo porque é material de leitura longa</td></tr>
-<tr><td>Dependências externas</td><td>Google Fonts em todas as páginas; Motion e GSAP apenas em <em>Movimento</em></td><td>Três exceções conscientes à regra de não depender de terceiros — e as duas últimas caem para a versão nativa se o CDN não responder</td></tr>
+<tr><td>Dependências externas</td><td>Google Fonts em todas as páginas; Motion e GSAP apenas em <em>Movimento</em>; a API do Gemini para a IA do site</td><td>As duas bibliotecas de animação caem para a versão nativa se o CDN não responder. A IA é o único pedaço que depende de um servidor</td></tr>
+<tr><td>IA do site</td><td>Gemini, do Google, no plano gratuito, chamado por uma função na Vercel</td><td>Gratuito porque o site não cobra de ninguém e não deveria pagar por pergunta. A chave fica no servidor, nunca na página. A função procura os tópicos do site que tratam da pergunta e manda só eles junto, para a resposta apontar onde o assunto está explicado</td></tr>
 <tr><td>Versionamento</td><td>Git e GitHub</td><td>Público, para servir de exemplo do que a trilha ensina</td></tr>
 <tr><td>Publicação</td><td>Vercel, ligada ao repositório</td><td>Cada push republica sozinho</td></tr>
 </tbody></table></div>
-<p>O site inteiro são dezesseis arquivos HTML, uma folha de estilo e sete scripts de comportamento — mais dois arquivos de dados gerados por script (o índice da busca e o mapa de progresso, nenhum dos dois editado à mão), os ícones, o <code>sitemap.xml</code> e o <code>robots.txt</code>. Abre sem servidor, funciona offline depois de carregado, e não tem uma linha de código que dependa de alguém manter um pacote atualizado. Esse número muda toda vez que o site cresce — é por isso que ele está descrito em prosa e não como uma estatística fixa em algum lugar.</p>
+<p>O site inteiro são dezesseis arquivos HTML, uma folha de estilo e sete scripts de comportamento — mais dois arquivos de dados gerados por script (o índice da busca e o mapa de progresso, nenhum dos dois editado à mão), os ícones, o <code>sitemap.xml</code> e o <code>robots.txt</code>. Abre sem servidor, funciona offline depois de carregado, e não tem uma linha de código que dependa de alguém manter um pacote atualizado — nem a IA, que fala com o Google direto, sem biblioteca. Esse número muda toda vez que o site cresce — é por isso que ele está descrito em prosa e não como uma estatística fixa em algum lugar.</p>
 
 <h2>O que o site não fazia</h2>
 <p>Em setembro de 2026, com as dez trilhas prontas, veio a pergunta óbvia: o site cumpre o que ele próprio ensina? A auditoria — feita com a checklist da trilha de <a href="qualidade.html">Qualidade</a> e com os critérios da de <a href="trafego.html">Tráfego</a> — encontrou sete falhas. Não havia <code>sitemap.xml</code> nem <code>robots.txt</code>, que a trilha de Tráfego tem um tópico inteiro explicando. Não havia favicon nem imagem de compartilhamento: o link colado no WhatsApp saía sem miniatura, exatamente o erro que a trilha de Qualidade manda testar antes de entregar. Faltava o link de pular para o conteúdo, cujo CSS está escrito na mesma trilha. Faltava página 404, que está na checklist de entrega. E faltava <code>canonical</code> em dez das doze páginas.</p>
@@ -157,7 +158,7 @@
 <section class="colofao__bloco">
 <h2>As regras que viraram ponto de partida</h2>
 <p>Até o fim de setembro de 2026 o site se obrigava a cinco regras: nenhum framework nem etapa de build, o Google Fonts como única dependência de fora, JavaScript que confere se o elemento existe antes de mexer nele, o armazenamento local sempre protegido contra erro, e nada saindo do navegador de quem usa. Elas eram o argumento do site — ensinar a não depender de pacote que envelhece, e não depender de nenhum.</p>
-<p>Em 29 de setembro elas foram revogadas. Tinham cumprido o papel de provar que dá para ir longe só com o que o navegador oferece, e passaram a impedir coisas que o site quer fazer — como uma IA que responda dúvidas sobre o próprio conteúdo, o que exige um servidor guardando a chave de acesso. O que está publicado continua escrito do mesmo jeito, e as ferramentas continuam sem enviar nada. Quando isso mudar, a frase que disser o contrário muda junto, no mesmo dia. Uma regra pode deixar de existir; o que o site afirma sobre si mesmo continua precisando ser verdade.</p>
+<p>Em 29 de setembro elas foram revogadas. Tinham cumprido o papel de provar que dá para ir longe só com o que o navegador oferece, e passaram a impedir coisas que o site quer fazer — como uma IA que responda dúvidas sobre o próprio conteúdo, o que exige um servidor guardando a chave de acesso. O que está publicado continua escrito do mesmo jeito, e as ferramentas continuam sem enviar nada. Quando isso mudar, a frase que disser o contrário muda junto, no mesmo dia. A primeira mudança veio logo: o botão redondo no canto de toda página manda a pergunta — e o print, se houver — para o Gemini, do Google, e diz isso no próprio painel antes de a pessoa escrever — inclusive que, no plano gratuito, o Google pode usar o que recebe. Uma regra pode deixar de existir; o que o site afirma sobre si mesmo continua precisando ser verdade.</p>
 </section>
 
 <section class="colofao__bloco">
@@ -194,5 +195,6 @@
 </footer>
 <script src="app.js"></script>
 <script src="busca.js" defer></script>
+<script src="ia.js" defer></script>
 </body>
 </html>

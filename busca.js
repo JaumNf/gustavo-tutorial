@@ -91,6 +91,8 @@
     if (!painel.hidden && e.key === 'Tab') {
       /* prende o foco dentro do modal: campo + itens de resultado */
       var focaveis = [campo].concat(Array.prototype.slice.call(saida.querySelectorAll('a')));
+      var ia = painel.querySelector('.busca__ia');   /* posto pelo ia.js */
+      if (ia) focaveis.push(ia);
       var pos = focaveis.indexOf(document.activeElement);
       if (e.shiftKey) {
         if (pos <= 0) { e.preventDefault(); focaveis[focaveis.length - 1].focus(); }

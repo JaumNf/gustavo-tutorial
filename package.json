@@ -10,5 +10,7 @@
     "menu": "node scripts/navmenu.mjs",
     "sumario": "node scripts/sumario.mjs"
   },
-  "devDependencies": { "playwright": "^1.47.0" }
+  "devDependencies": {
+    "playwright": "^1.47.0"
+  }
 }
