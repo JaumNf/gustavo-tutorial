@@ -37,11 +37,17 @@ Como responder:
 - Assuntos fora de desenvolvimento web, design, marketing digital ou trabalho com cliente: responda em uma frase que você é a IA do site e sugira o que pode ajudar.`;
 
 /* ---------- busca dos trechos: a mesma ideia da busca do site, no texto inteiro ---------- */
-const PARADAS = new Set('a o e é de da do das dos em no na nos nas um uma uns umas para pra por com sem que qual quais como quando onde porque por que se eu tu ele ela você voce me te meu minha seu sua isso isto esse essa este esta ao aos à às ou mais menos muito já ja não nao sim ter tem fazer faz ser está esta são sao foi vai pode posso consigo quero preciso'.split(' '));
+const PARADAS = new Set('a o e é de da do das dos em no na nos nas um uma uns umas para pra pro pros por com sem que qual quais como quando onde porque por que se eu tu ele ela você voce me te meu minha seu sua isso isto esse essa este esta ao aos à às ou mais menos muito já ja não nao sim ter tem fazer faz ser está esta são sao foi vai pode posso consigo quero preciso'.split(' '));
 function norm(s) { return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+function raiz(w) {
+  if (w.length < 5) return w;
+  const r = w.replace(/(oes|aes|coes|cao|ens|em|ar|er|ir|[aeiou]s?)$/, '');
+  return r.length >= 3 ? r : w;
+}
 function termos(texto) {
-  /* radical curto: 'calculo' acha 'calculadora', 'imagem' acha 'imagens' */
-  return [...new Set(norm(texto).split(/[^a-z0-9#.+-]+/).filter((w) => w.length > 2 && !PARADAS.has(w)).map((w) => (w.length > 5 ? w.slice(0, 5) : w)))];
+  /* radical: tira a terminação — 'calculo' acha 'calculadora', 'publicar' acha 'publicação',
+     e 'contrato' ('contrat') não confunde com 'contraste' ('contras') */
+  return [...new Set(norm(texto).split(/[^a-z0-9#.+-]+/).filter((w) => w.length > 2 && !PARADAS.has(w)).map(raiz))];
 }
 const INDICE = CONTEUDO.map((c) => ({ c, t: norm(c.t), m: norm(c.r + ' ' + c.p), x: norm(c.x) }));
 function trechos(texto) {
@@ -49,13 +55,16 @@ function trechos(texto) {
   if (!ts.length) return [];
   return INDICE
     .map((i) => {
-      let nota = 0;
+      let nota = 0, noTitulo = 0;
       for (const q of ts) {
-        if (i.t.includes(q)) nota += 8;
+        if (i.t.includes(q)) { nota += 8; noTitulo++; }
         if (i.m.includes(q)) nota += 3;
         const n = i.x.split(q).length - 1;
         if (n) nota += Math.min(n, 6);
       }
+      /* ferramenta com o nome na pergunta ("botão de WhatsApp" → Link de WhatsApp) sobe: é o "fazer" da resposta,
+         e o texto curto da página dela nunca empata com o de uma trilha */
+      if (noTitulo && i.c.p === 'Ferramenta') nota += 14;
       return { i, nota };
     })
     .filter((r) => r.nota > 3)

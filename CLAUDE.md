@@ -36,7 +36,9 @@ por `fetch` direto no REST (`streamGenerateContent?alt=sse`), sem pacote. O Gust
 Gemini por não ter custo; o Claude foi a primeira versão e saiu por ser pago. A função:
 
 - lê `api/_conteudo.json` (texto inteiro de cada tópico e ferramenta, **gerado pelo `indice.mjs`**) e,
-  a cada pergunta, pega os 7 tópicos com mais termos em comum e manda como `<trechos>` junto da pergunta;
+  a cada pergunta, pega os 7 tópicos com mais termos em comum e manda como `<trechos>` junto da pergunta.
+  As palavras são comparadas pela raiz (`raiz()` tira vogal final, plural e -ar/-er/-ir), e uma ferramenta
+  cujo nome aparece na pergunta ganha peso extra — o texto da página dela é curto e perdia para as trilhas;
 - responde em fluxo (texto puro, sem as partes `thought` do Gemini) e devolve os tópicos usados no
   cabeçalho `X-Fontes`; o `ia.js` mostra embaixo só os que a resposta citou;
 - tenta os modelos da lista `MODELOS` em ordem (`gemini-3.8-flash`, `gemini-3.5-flash-lite`, `gemini-3.1-flash-lite`):

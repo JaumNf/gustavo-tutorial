@@ -63,7 +63,9 @@ for (const [arq, trilha] of TRILHAS) {
 
     if (arq.startsWith('ferramenta-')) {
       const resumo = txt.match(/<p class="parte__resumo">(.*?)<\/p>/s);
-      conteudo.push({ t: limpo(pn[2]), p: 'Ferramenta', r: 'Ferramentas', u: arq, x: limpo(resumo[1]) });
+      // a página inteira da ferramenta (rótulos, exemplo, nota), não só o resumo: com texto curto ela perdia para as trilhas
+      const tudo = txt.replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<button[^>]*>.*?<\/button>/gs, ' ');
+      conteudo.push({ t: limpo(pn[2]), p: 'Ferramenta', r: 'Ferramentas', u: arq, x: limpo(tudo).replace(/^FERRAMENTA\s+/, '').slice(0, 3000) });
       itens.push({
         t: limpo(pn[2]),
         p: 'Ferramenta',
