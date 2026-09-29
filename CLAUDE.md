@@ -35,11 +35,19 @@ Estes três são saída de script. Editar à mão significa perder a alteração
 
 O cabeçalho é uma linha só, de 48px, igual em toda página: marca à esquerda, menu e alternador no
 centro exato (absoluto a partir de 561px), busca e tema à direita. O `.topo__interno` usa
-`display: contents` para marca e botões entrarem na mesma linha do `<nav>`. Não tem rótulo de posição. Ele leva a cor da área (`[data-modo] .topo`), some ao descer e volta depois de ~0,3s subindo (`SUBIDA` e
-`PAUSA` no `app.js`). O filtro Tudo/Revisão/Novo das trilhas mora na abertura, não no topo.
+`display: contents` para marca e botões entrarem na mesma linha do `<nav>`. Não tem rótulo de posição
+nem cor de área: o site tem **um acento só** (`--accent`, teal), e a área em que se está aparece
+apenas na pílula ativa do alternador (`.modo.is-atual`). O topo some ao descer e volta depois de ~0,3s
+subindo (`SUBIDA` e `PAUSA` no `app.js`). O filtro Tudo/Revisão/Novo das trilhas mora na abertura, não no topo.
 
-O menu de navegação das 32 páginas que têm cabeçalho, os sumários das trilhas e a navegação das
-páginas de ferramenta também são gerados (`navmenu.mjs`, `sumario.mjs` e `ferramentas.mjs`) — veja abaixo.
+O painel do menu (`.navmenu__painel`) é `position: fixed`, mas o bloco que o contém é o `.topo`
+(por causa do `backdrop-filter`); ele se centraliza com `left: 0; right: 0; margin-inline: auto;
+width: fit-content`, sem `transform`. Não troque por `left: 50%` + translate: foi assim que ele
+vazava para fora da tela.
+
+O menu de navegação das 36 páginas que têm cabeçalho, o rodapé, a migalha das trilhas, os sumários e a
+navegação das páginas de ferramenta também são gerados (`navmenu.mjs`, `sumario.mjs` e
+`ferramentas.mjs`) — veja abaixo. O sistema visual (cores, fontes, grades de fio) está em `DESIGN.md`.
 
 ## Os scripts
 
@@ -52,7 +60,7 @@ portados e removidos. `scripts/_texto.mjs` normaliza CRLF↔LF na leitura/escrit
 node scripts/indice.mjs          # regera busca-indice.js a partir do conteúdo real
 node scripts/progresso.mjs       # regera progresso.js (mapa de tópicos por trilha)
 node scripts/sitemap.mjs         # atualiza as datas do sitemap pelo mtime dos arquivos
-node scripts/navmenu.mjs         # menu, data-modo e theme-color nas 33 páginas
+node scripts/navmenu.mjs         # menu, rodapé, migalha, ícone do tema, data-modo e theme-color nas 37 páginas
 node scripts/sumario.mjs <arquivo.html>   # regera o sumário lateral de uma trilha
 node scripts/ferramentas.mjs     # índice, "você está em" e anterior/próxima das ferramentas
 ```
@@ -62,8 +70,15 @@ edite a lista `GRUPOS` dentro dele e rode — nunca edite o `<nav class="navmenu
 diretamente, porque a próxima execução sobrescreve. O mapa `PAGINA` controla qual link fica
 marcado como atual em cada arquivo (o segundo valor, o antigo rótulo de posição, não aparece mais); `MODO` controla se a página
 pertence à área de estudo ou à de trabalho, e dele saem **três** coisas geradas: o alternador no
-topo, o `data-modo` do `<body>` (que troca a cor da área no CSS) e a `<meta name="theme-color">`
-do tema claro. Nenhum dos três se edita à mão.
+topo, o `data-modo` do `<body>` e a `<meta name="theme-color">` (`#0B1211` no hub, `#F4F6F4` no resto).
+Nenhum dos três se edita à mão.
+
+Os grupos do menu são cinco — Construção, Captação e Vendas, Método, Trabalhar e Sobre o site — e o
+Trabalhar lista as quinze ferramentas lidas de `_ferramentas.mjs`, em links compactos (`desc` `null`
+vira `.navmenu__compacto`). São **33 links** (`LINKS_DO_MENU` no `verificar.mjs`): mudou o menu, mude
+o número. O mesmo script gera ainda o rodapé (`aplicarRodape`), a migalha "Estudar › Grupo" logo depois
+da `<section class="abertura">` das trilhas (`aplicarMigalha`, pelo `GRUPOS_DE_ESTUDO`) e o ícone SVG
+do botão de tema (`aplicarIconeTema`).
 
 `SEM_MENU` lista as páginas sem cabeçalho — hoje só a `index.html`, que é o hub e navega pelo
 hero e pelos cards. Elas continuam no `PAGINA` porque o script ainda cuida do `<body>` e do
@@ -78,16 +93,18 @@ Rode sempre que adicionar ou remover um tópico de uma trilha.
 
 O site tem três níveis: **hub → páginas → subpáginas**.
 
-- `index.html` — o hub, com a busca e as duas portas
-- `estudar.html` — área de estudo; as subpáginas são as catorze trilhas (`montar-o-site.html`, a mais nova, vem depois de HTML puro e junta
+- `index.html` — o hub: um palco escuro (`.hub`, `#0B1211` nos dois temas) com o título grande, a busca
+  como barra principal e as duas portas embaixo. Não tem o cabeçalho comum; tem o próprio `.hub__topo`
+- `estudar.html` — área de estudo: o topo `.area` (título, lead, contagem, botões) e o `.percurso`, as
+  trilhas numeradas 01–14 em três grupos, numa grade de fios; o `app.js` põe "N de M estudados" em cada
+  item. As subpáginas são as catorze trilhas (`montar-o-site.html`, a mais nova, vem depois de HTML puro e junta
   as peças num site inteiro — pastas, head, molde de seção, CSS em `@layer`, layout, ícones em SVG, vídeo e mapa sem peso, o CSS que poupa JavaScript e o
   projeto-base, com os
   mesmos nomes de token que o Design system exporta; `depois-do-ar.html` fica depois de Back-end e faz
   par com a ferramenta Depois de publicar: a trilha é o porquê, a ferramenta o roteiro com datas; `vibecoding.html`
   fica ao lado de `ia.html`: uma ensina como pedir, a outra com o quê trabalhar e onde buscar)
-- `ferramentas.html` — área de trabalho, no mesmo formato da `estudar.html` (olho, título, números,
-  dois botões, o mapa das fases em colunas); embaixo, o projeto em andamento e um cartão por
-  ferramenta. As subpáginas são as quinze `ferramenta-*.html` e a `modelos.html`
+- `ferramentas.html` — área de trabalho, com o mesmo topo `.area` da `estudar.html`; embaixo, o projeto
+  em andamento e cada fase num `.fase-grupo` (título à esquerda, cartões à direita). As subpáginas são as quinze `ferramenta-*.html` e a `modelos.html`
 - `modelos.html` — a galeria de modelos para copiar. Tudo sai de `modelos.js`: cada modelo é um objeto
   com `html`, `css` e `js` (uma função de verdade — a página mostra o fonte dela com `toString()`,
   sem eval), e o que a prévia roda é exatamente o texto que se copia. Modelo novo = um objeto a mais
@@ -155,7 +172,7 @@ Todo tópico **novo** entra com a data em que foi publicado:
 
 Com isso, por 30 dias, o `app.js` põe o selo "Chegou 21 set" no tópico e um ponto no sumário
 lateral; `estudar.html` ganha a caixa "Chegou nos últimos 30 dias" e a marca "novo" na trilha;
-e o hub avisa na porta de estudo. Passado o prazo, tudo some sozinho — não se tira o atributo
+e o percurso da `estudar.html` marca a trilha com "Novo". Passado o prazo, tudo some sozinho — não se tira o atributo
 do HTML. A lista sai de `window.GT_RECENTES`, que o `progresso.mjs` gera a partir dos atributos:
 rode `node scripts/progresso.mjs` depois de publicar.
 
