@@ -7,21 +7,25 @@ No ar em https://gustavo-tutorial.vercel.app/ — GitHub ligado à Vercel, cada 
 
 ---
 
-## As regras que não se quebram
+## Como o site é feito — e as regras que deixaram de existir
 
-Estas não são preferências de estilo: são o argumento do site. Ele ensina a não depender de
-pacote que envelhece, e por isso ele próprio não depende.
+Até 29 set 2026 o site tinha cinco regras fixas: sem framework nem build, só o Google Fonts de fora,
+JavaScript defensivo, `localStorage` em try/catch e nada saindo do navegador. **O Gustavo revogou as
+cinco** porque limitavam a produção. Framework, npm, etapa de build, biblioteca, CDN, API externa e
+função no servidor da Vercel agora são permitidos quando fizerem sentido.
 
-1. **Sem framework e sem etapa de build.** HTML, CSS e JavaScript escritos direto. Nada de npm
-   install para o site funcionar, nada de bundler, nada de transpilador.
-2. **Uma única dependência externa: Google Fonts.** Motion e GSAP entram apenas em
-   `movimento.html` e `motion.html`, e caem para a versão nativa se o CDN não responder.
-3. **JavaScript sempre defensivo.** Cada bloco começa verificando se o elemento existe
-   (`if (!caixa) return;`). Um recurso quebrado nunca derruba os outros na mesma página.
-4. **`localStorage` sempre dentro de try/catch.** Aba anônima e armazenamento bloqueado não
-   podem quebrar a página.
-5. **Nada sai do navegador.** As ferramentas não enviam dado para lugar nenhum. Isso está escrito
-   na página e precisa continuar verdade.
+O código que existe hoje ainda foi escrito sob elas — HTML, CSS e JS direto, sem build, blocos que
+começam com `if (!caixa) return;` e `localStorage` dentro de try/catch. Isso é o estado atual, não
+obrigação: siga o padrão do arquivo que estiver editando, e mudar de abordagem é uma decisão a
+combinar, não um acidente.
+
+**O que continua valendo, porque é honestidade e não regra de código:** várias páginas dizem ao
+visitante que as ferramentas "não enviam nada para lugar nenhum" e o Colofão descreve o site como
+sem framework e sem dependência. Enquanto for verdade, fica. No mesmo pacote em que algo passar a
+mandar dado para fora (um chat com IA, um formulário, um login) ou entrar uma dependência nova,
+corrija cada frase que deixou de ser verdade — `grep -il "nada é enviado\|sem framework\|única dependência" *.html`
+acha as candidatas (nas trilhas, parte dessas menções é conteúdo de aula e fica). E uma chave de API
+nunca vai no JavaScript da página: mora numa variável de ambiente da Vercel, lida por uma função no servidor.
 
 ## Arquivos gerados — nunca editar à mão
 
@@ -235,8 +239,8 @@ avisa `gt:mudou` quando o formulário do gerador muda. Tipo novo entra no objeto
 e `ref` apontando o tópico da trilha de onde saiu, e no mapa `FONTES` se puder puxar dado de outra
 ferramenta. O tópico `ia.html#t-ia-gerador` continua existindo como ponte para a ferramenta.
 
-**Figma:** o site não fala com a API do Figma e não deve falar — exigiria guardar token de acesso
-e mandar dado para fora do navegador (regra 5). A ponte é por formato: o Design system exporta
+**Figma:** o site não fala com a API do Figma. Falar exigiria guardar token de acesso num servidor e
+mandar dado para fora do navegador — possível agora, mas com as ressalvas da seção de regras. A ponte atual é por formato: o Design system exporta
 tokens em JSON no padrão DTCG, que plugins de tokens do Figma importam.
 
 ## Antes de dizer que terminou
