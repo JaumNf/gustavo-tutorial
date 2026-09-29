@@ -86,6 +86,7 @@
 <p class="navmenu__rotulo">Sobre o site</p>
 <a href="patch-notes.html"><strong>Patch notes</strong><span>O que mudou no site</span></a>
 <a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+<a href="saiu-e-entrou.html"><strong>Saiu e entrou</strong><span>O texto antigo ao lado do novo</span></a>
 </div>
 </div>
 </details>
@@ -147,6 +148,7 @@
 <li><a href="#t-mt-pedidos">Como o cliente pede alteração</a></li>
 <li><a href="#t-mt-escopo">O que está e o que não está incluído</a></li>
 <li><a href="#t-mt-contrato">Contrato de manutenção</a></li>
+<li><a href="#t-mt-mensalidade">A mensalidade: o que ela compra</a></li>
 <li><a href="#t-mt-quebrou">Quando o site sai do ar</a></li>
 <li><a href="#t-mt-encerrar">Encerrar bem</a></li>
 </ol>
@@ -181,7 +183,7 @@
 <div class="legenda">
 <span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
 <span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
-<span>7 partes · 51 tópicos</span>
+<span>7 partes · 52 tópicos</span>
 </div>
 <div class="abertura__filtro"><span class="abertura__filtro-rot" aria-hidden="true">Mostrar</span>
 <div class="filtros" role="group" aria-label="Filtrar tópicos">
@@ -973,6 +975,33 @@ git switch main &amp;&amp; git merge promocao-outubro &amp;&amp; git push
 · Backup e atualização do que precisar
 · Atendimento prioritário se sair do ar</code></pre></div>
 <div class="nota"><strong>O relatório é o que segura o contrato.</strong> Sem ele, depois de três meses sem mexer em nada, o cliente pergunta pelo que está pagando. Uma página por mês com quatro números e uma frase de leitura é barata de produzir e responde a pergunta antes dela ser feita.</div>
+</div>
+</article>
+
+<article class="topico" id="t-mt-mensalidade" data-marca="novo" data-desde="2026-09-29">
+<div class="topico__cabeca"><h3>A mensalidade: o que ela compra</h3><span class="tag tag--novo">Novo</span></div>
+<div class="topico__corpo">
+<p>"Hospedagem R$ 60/mês" é a linha mais comum nas tabelas de preço de quem faz site — e a que mais esconde problema. Se o site está num plano gratuito, o cliente paga todo mês por algo que custa zero. E, dependendo do plano, a hospedagem nem permite o uso: os termos da Vercel restringem o plano gratuito a uso pessoal e não comercial, e listam como comercial, com essas palavras, <strong>receber pagamento para criar, atualizar ou hospedar o site</strong>.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Onde o site mora</th><th>Site de cliente pode?</th><th>O que diz a fonte</th></tr></thead>
+<tbody>
+<tr><td>Vercel, plano gratuito</td><td>não</td><td>as <a href="https://vercel.com/docs/limits/fair-use-guidelines" target="_blank" rel="noopener">regras de uso justo</a> exigem Pro ou Enterprise para qualquer uso comercial</td></tr>
+<tr><td>Vercel, plano Pro</td><td>sim</td><td>é pago, por assento da equipe</td></tr>
+<tr><td>Netlify, plano gratuito</td><td>sim</td><td>a própria <a href="https://www.netlify.com/blog/introducing-netlify-free-plan/" target="_blank" rel="noopener">Netlify</a> diz que o gratuito aceita projeto comercial</td></tr>
+<tr><td>GitHub Pages</td><td>não</td><td>o <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits" target="_blank" rel="noopener">GitHub</a> proíbe usar para negócio</td></tr>
+<tr><td>Hospedagem tradicional</td><td>sim</td><td>é paga desde o começo</td></tr>
+</tbody></table></div>
+<p>A saída honesta tem duas partes. A hospedagem fica <strong>na conta e no nome do cliente</strong> (como o <a href="#t-ac-dominio">domínio</a>), num plano que aceita uso comercial; se ela custar algo, o custo aparece como custo, no cartão dele. E a mensalidade que você cobra passa a se chamar pelo que é: <strong>manutenção</strong> — o trabalho que você faz todo mês.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Na tabela de preços</th><th>O que ela promete de verdade</th></tr></thead>
+<tbody>
+<tr><td>"Hospedagem"</td><td>nada que o cliente consiga conferir</td></tr>
+<tr><td>"Manutenção: até 2 alterações de conteúdo por mês"</td><td>trabalho com limite claro — a linha entre alteração e projeto novo está em <a href="#t-mt-escopo">O que está e o que não está incluído</a></td></tr>
+<tr><td>"Monitoramento: se cair, eu sei antes de você e respondo no mesmo dia útil"</td><td>algo que você controla — <a href="depois-do-ar.html#t-da-uptime">Saber que caiu antes do cliente</a></td></tr>
+<tr><td>"Domínio e o que vence, renovados no prazo"</td><td>o <a href="depois-do-ar.html#t-da-vencimentos">calendário do que vence</a>, incluindo o token do feed do Instagram</td></tr>
+<tr><td>"Relatório mensal: visitas, cliques no WhatsApp, o que mudou"</td><td>prova de que a mensalidade trabalha — <a href="depois-do-ar.html#t-da-relatorio">O relatório e a manutenção</a></td></tr>
+</tbody></table></div>
+<div class="nota nota--alerta"><strong>Não prometa "99,9% no ar".</strong> Esse número é do fornecedor, não seu: você não controla o servidor. Na Vercel, o acordo de disponibilidade (SLA) aparece como recurso do plano Enterprise; planos gratuitos, em geral, não trazem nenhum. Prometa o que depende de você — saber que caiu e responder no prazo — e deixe o resto para <a href="#t-mt-quebrou">Quando o site sai do ar</a>. Os termos acima foram lidos na fonte em 29 set 2026 e mudam: releia antes de fechar contrato.</div>
 </div>
 </article>
 

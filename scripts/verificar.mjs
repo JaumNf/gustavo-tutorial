@@ -18,7 +18,7 @@ const RAIZ = join(dirname(fileURLToPath(import.meta.url)), '..');
 const PORTA = 8899;
 
 const PAGINAS = [
-  'index.html', 'estudar.html', 'ferramentas.html', 'patch-notes.html', 'colofao.html',
+  'index.html', 'estudar.html', 'ferramentas.html', 'patch-notes.html', 'saiu-e-entrou.html', 'colofao.html',
   'html-puro.html', 'html-puro-2.html', 'fluxo.html', 'qualidade.html', 'landing-pages.html',
   'trafego.html', 'movimento.html', 'motion.html', 'frameworks.html', 'back-end.html',
   'negocio.html', 'ia.html', '404.html', 'modelos.html', 'vibecoding.html', 'depois-do-ar.html', 'montar-o-site.html',
@@ -26,7 +26,7 @@ const PAGINAS = [
 ];
 
 /* quantos links o painel do menu deve ter — ajuste junto com GRUPOS em navmenu.mjs */
-const LINKS_DO_MENU = 33;
+const LINKS_DO_MENU = 34;
 
 /* páginas sem cabeçalho: exigir exatamente zero pega uma reintrodução acidental */
 const SEM_MENU = new Set(['index.html']);

@@ -33,6 +33,7 @@ const TRILHAS = [
   ['vibecoding.html', 'Vibecoding'],
   ['colofao.html', 'Colofão'],
   ['patch-notes.html', 'Patch notes'],
+  ['saiu-e-entrou.html', 'Saiu e entrou'],
 ];
 
 function limpo(s) {

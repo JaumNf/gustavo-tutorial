@@ -2792,6 +2792,29 @@
   .home__titulo-nota { font-weight: 400; letter-spacing: .04em; text-transform: none; color: var(--muted); opacity: .8; }
 
   .patch { display: flex; flex-direction: column; margin-top: 40px; }
+
+  /* saiu e entrou: o texto antigo ao lado do novo */
+  .trocas { display: grid; gap: 0; margin-top: 40px; }
+  .troca { padding: 28px 0; border-top: 1px solid var(--line); }
+  .troca:first-of-type { border-top: 0; padding-top: 6px; }
+  .troca__cabeca { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; margin-bottom: 8px; }
+  .troca__cabeca time { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); }
+  .troca__cabeca h2 { margin: 0; font-size: 19px; letter-spacing: -.01em; }
+  .troca__cabeca h2 a { color: var(--ink); text-decoration-color: var(--line); }
+  .troca__cabeca h2 a:hover { color: var(--accent); }
+  .troca__motivo { max-width: 68ch; margin: 0 0 16px; color: var(--ink-soft); }
+  .troca__lados { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); }
+  .troca__lado { padding: 16px 18px 18px; font-size: 15px; line-height: 1.6; }
+  .troca__lado + .troca__lado { border-left: 1px solid var(--line); }
+  .troca__lado--saiu { background: var(--surface-2); color: var(--muted); }
+  .troca__lado--entrou { background: var(--accent-soft); color: var(--ink); }
+  .troca__lado del, .troca__lado ins { text-decoration: none; }
+  .troca__rotulo { display: block; margin-bottom: 6px; font-family: var(--font-mono); font-size: 11.5px; font-weight: 700; color: var(--muted); }
+  .troca__lado--entrou .troca__rotulo { color: var(--accent); }
+  @media (max-width: 760px) {
+    .troca__lados { grid-template-columns: 1fr; }
+    .troca__lado + .troca__lado { border-left: 0; border-top: 1px solid var(--line); }
+  }
   .patch__entrada {
     display: grid; grid-template-columns: 120px 1fr; gap: 26px;
     padding: 30px 0; border-top: 1px solid var(--line-soft);

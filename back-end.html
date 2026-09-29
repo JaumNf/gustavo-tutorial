@@ -86,6 +86,7 @@
 <p class="navmenu__rotulo">Sobre o site</p>
 <a href="patch-notes.html"><strong>Patch notes</strong><span>O que mudou no site</span></a>
 <a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+<a href="saiu-e-entrou.html"><strong>Saiu e entrou</strong><span>O texto antigo ao lado do novo</span></a>
 </div>
 </div>
 </details>
@@ -183,7 +184,7 @@
           <span class="tag tag--novo">Novo</span>
         </div>
         <div class="topico__corpo">
-          <p>Em vez de manter um servidor ligado, você escreve uma função isolada que roda só quando alguém chama, e depois desliga. Sem servidor para administrar, sem custo fixo, e o plano gratuito da Vercel ou Netlify cobre muito mais do que uma landing page precisa.</p>
+          <p>Em vez de manter um servidor ligado, você escreve uma função isolada que roda só quando alguém chama, e depois desliga. Sem servidor para administrar, sem custo fixo, e a cota gratuita cobre muito mais do que uma landing page precisa — lembrando que, na Vercel, o plano gratuito é só para projeto pessoal: site de cliente vai no plano Pro, ou na Netlify, cujo gratuito aceita projeto comercial.</p>
 
           <p>Na Vercel, basta criar uma pasta <code>api/</code> ao lado do seu HTML. Cada arquivo ali vira um endereço.</p>
 
@@ -420,7 +421,7 @@ if (req.method === 'OPTIONS') return res.status(200).end();   // o preflight</co
 <tr><td><strong>Partida a frio</strong></td><td>Se ninguém chamou há um tempo, a primeira chamada demora mais. Invisível num formulário, perceptível numa busca ao vivo.</td></tr>
 <tr><td><strong>Sem estado</strong></td><td>Cada chamada começa do zero. Nada guardado em variável sobrevive. Guardar dado exige banco.</td></tr>
 <tr><td><strong>Sem disco</strong></td><td>Escrever arquivo não persiste. Upload vai para armazenamento externo.</td></tr>
-<tr><td><strong>Cota</strong></td><td>O plano gratuito da Vercel cobre com folga um site de serviço local. Uso comercial pesado passa a ter custo.</td></tr>
+<tr><td><strong>Cota</strong></td><td>A cota gratuita cobre com folga um site de serviço local. Mas o plano gratuito da Vercel é restrito a uso pessoal e não comercial — site de cliente pede o plano Pro. A Netlify aceita projeto comercial no gratuito.</td></tr>
 </tbody></table></div>
 <div class="nota"><strong>E o limite que mais importa no seu contexto:</strong> função serverless é uma porta aberta na internet. Sem limite por IP, alguém pode chamar mil vezes e esgotar sua cota de e-mail — ou sua fatura. Some o honeypot do formulário, um limite simples de chamadas por IP, e verifique os logs quando algo parecer estranho.</div>
 </div>

@@ -86,6 +86,7 @@
 <p class="navmenu__rotulo">Sobre o site</p>
 <a href="patch-notes.html"><strong>Patch notes</strong><span>O que mudou no site</span></a>
 <a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
+<a href="saiu-e-entrou.html"><strong>Saiu e entrou</strong><span>O texto antigo ao lado do novo</span></a>
 </div>
 </div>
 </details>
@@ -122,6 +123,7 @@
 <li><a href="#t-tr-perfil">O Perfil da Empresa no Google</a></li>
 <li><a href="#t-tr-nap">Consistência de nome, endereço e telefone</a></li>
 <li><a href="#t-tr-avaliacoes">Avaliações: como pedir sem constranger</a></li>
+<li><a href="#t-tr-segmentos">Uma página por segmento, ou por cidade</a></li>
 </ol>
 <a class="sumario__parte" href="#s5">5 · Analytics</a>
 <ol>
@@ -139,6 +141,14 @@
 <li><a href="#t-tr-90dias">Os primeiros noventa dias</a></li>
 <li><a href="#t-tr-expectativa">Alinhar expectativa antes de prometer</a></li>
 </ol>
+<a class="sumario__parte" href="#s8">8 · Fechar o ciclo: de onde veio o contato</a>
+<ol>
+<li><a href="#t-utm-problema">Por que o ciclo fica aberto</a></li>
+<li><a href="#t-utm-parametros">UTM — marcar o link antes de soltar</a></li>
+<li><a href="#t-utm-evento">Medir o clique no WhatsApp</a></li>
+<li><a href="#t-utm-mensagem">A origem dentro da própria mensagem</a></li>
+<li><a href="#t-utm-relatorio">O relatório de uma página</a></li>
+</ol>
 </div>
 </nav>
 <main class="leitura" id="conteudo" tabindex="-1">
@@ -149,7 +159,7 @@
 <div class="legenda">
 <span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
 <span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
-<span>8 partes · 24 tópicos</span>
+<span>8 partes · 25 tópicos</span>
 </div>
 <div class="abertura__filtro"><span class="abertura__filtro-rot" aria-hidden="true">Mostrar</span>
 <div class="filtros" role="group" aria-label="Filtrar tópicos">
@@ -388,6 +398,36 @@ Sitemap: https://seudominio.com.br/sitemap.xml</code></pre></div>
 <p>Sobre avaliação negativa: responder com calma e oferecer solução costuma impressionar mais quem lê do que uma sequência de notas cinco. Quem está decidindo lê justamente as negativas para ver como o negócio reage.</p>
 </div>
 </article>
+<article class="topico" id="t-tr-segmentos" data-marca="novo" data-desde="2026-09-29">
+<div class="topico__cabeca"><h3>Uma página por segmento, ou por cidade</h3><span class="tag tag--novo">Novo</span><span class="tag tag--html">HTML</span></div>
+<div class="topico__corpo">
+<p>Agência que aparece bem no Google costuma ter dezenas de páginas assim: "sites para advogados", "sites para academias", "sites para imobiliárias". Cada uma disputa uma busca diferente, e o dono da academia que chega nela vê trabalho de academia. É a mesma ideia para o cliente: a clínica com cinco tratamentos ganha uma página por tratamento, porque ninguém busca "clínica", busca o tratamento.</p>
+<p>O risco mora no atalho. As <a href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener">políticas de spam do Google</a> chamam de <em>doorway</em> (página de entrada) a página criada para ranquear em buscas específicas e parecidas — e dão como exemplo justamente páginas feitas para regiões ou cidades que levam todas para o mesmo lugar. Trocar o nome da cidade num texto igual é o caso de manual.</p>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Página que ajuda</th><th>Página de entrada (o Google pune)</th></tr></thead>
+<tbody>
+<tr><td>Portfólio daquele segmento</td><td>O mesmo portfólio em todas</td></tr>
+<tr><td>As dúvidas e objeções daquele tipo de cliente</td><td>O mesmo texto com o nome do segmento trocado</td></tr>
+<tr><td>Pacote ou faixa de preço pensada para ele</td><td>"Entre em contato" igual em todas</td></tr>
+<tr><td>A cidade onde você atende de fato</td><td>Cinquenta cidades onde você nunca pisou</td></tr>
+</tbody></table></div>
+<p><strong>O teste:</strong> troque o nome do segmento no texto. Se a página continuar servindo para o outro, ela não devia existir.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="html">sites-para-dentistas.html — o que muda de uma para outra</span><button class="copiar">copiar</button></div><pre><code>&lt;title&gt;Site para dentista em Campo Grande | Nome&lt;/title&gt;
+&lt;meta name="description" content="Página para clínica odontológica: agendamento, convênios e antes e depois dentro das regras do CFO."&gt;
+&lt;link rel="canonical" href="https://seudominio.com.br/sites-para-dentistas.html"&gt;
+...
+&lt;h1&gt;Site para clínica odontológica&lt;/h1&gt;
+&lt;!-- o que é só deste segmento: os projetos dele, as dúvidas dele, a regra do conselho dele --&gt;</code></pre></div>
+<ul>
+<li><strong>comece por dois ou três segmentos</strong> onde você já tem trabalho para mostrar; página de segmento sem portfólio do segmento é a página de entrada da tabela — <a href="negocio.html#t-cm-portfolio">Portfólio quando você tem pouco</a> ajuda a começar</li>
+<li><strong>a home aponta para cada uma</strong> (uma seção "Atendemos"), e cada uma aponta de volta — página que só se acha pela busca o Google também estranha</li>
+<li><strong>para aparecer no mapa da cidade</strong>, o que pesa é o <a href="#t-tr-perfil">Perfil da Empresa</a>, não uma página por bairro</li>
+<li><strong>confira no <a href="depois-do-ar.html#t-da-console">Search Console</a></strong> por quais buscas cada página aparece: a que não aparece para nada em três meses pede conteúdo, não mais páginas</li>
+</ul>
+<div class="nota">Setor com regra própria de publicidade, como saúde e advocacia, muda o que cada página pode mostrar — <a href="landing-pages.html#t-lp-regulamentacao">Regulamentação</a> lista os cuidados.</div>
+</div>
+</article>
+
 </section>
 
 <section class="parte" id="s5">

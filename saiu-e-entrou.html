@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Modelos para copiar — Gustavo Tutorial</title>
-<meta name="description" content="39 modelos em HTML, CSS e JavaScript puros — seções inteiras de site, botões, cards, menus, formulários, avisos e movimento — rodando na página, para testar e copiar.">
+<title>Saiu e entrou — Gustavo Tutorial</title>
+<meta name="description" content="Todo texto que foi tirado ou reescrito no site, com a versão antiga ao lado da nova, para comparar.">
 <meta name="color-scheme" content="light dark">
-<meta property="og:title" content="Modelos para copiar — Gustavo Tutorial">
-<meta property="og:description" content="39 modelos em HTML, CSS e JavaScript puros — seções inteiras de site, botões, cards, menus, formulários, avisos e movimento — rodando na página, para testar e copiar.">
+<meta property="og:title" content="Saiu e entrou — Gustavo Tutorial">
+<meta property="og:description" content="Todo texto que foi tirado ou reescrito no site, com a versão antiga ao lado da nova, para comparar.">
 <meta property="og:type" content="website">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -15,8 +15,8 @@
 <meta name="theme-color" content="#F4F6F4" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0D1514" media="(prefers-color-scheme: dark)">
 <meta name="author" content="Gustavo">
-<link rel="canonical" href="https://gustavo-tutorial.vercel.app/modelos.html">
-<meta property="og:url" content="https://gustavo-tutorial.vercel.app/modelos.html">
+<link rel="canonical" href="https://gustavo-tutorial.vercel.app/saiu-e-entrou.html">
+<meta property="og:url" content="https://gustavo-tutorial.vercel.app/saiu-e-entrou.html">
 <meta property="og:image" content="https://gustavo-tutorial.vercel.app/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -28,12 +28,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilo.css">
 </head>
-<body data-modo="trabalho">
+<body>
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo">
 <div class="topo__interno">
 <a class="marca" href="index.html"><span class="marca__selo" aria-hidden="true">&lt;/&gt;</span><span>Gustavo Tutorial</span></a>
-<button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.25"/><path d="M12 3.75a8.25 8.25 0 0 1 0 16.5z" fill="currentColor" stroke="none"/></svg></button>
+<span style="margin-left:auto"></span><button class="btn-icone" id="btn-tema" aria-label="Alternar tema claro e escuro" title="Alternar tema"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.25"/><path d="M12 3.75a8.25 8.25 0 0 1 0 16.5z" fill="currentColor" stroke="none"/></svg></button>
 </div>
 <nav class="navmenu" aria-label="Navegação do site">
 <details class="navmenu__caixa" id="navmenu">
@@ -65,7 +65,7 @@
 <div class="navmenu__grupo navmenu__grupo--trabalhar">
 <p class="navmenu__rotulo">Trabalhar</p>
 <a href="ferramentas.html"><strong>Todas as ferramentas</strong><span>Em cinco fases, ligadas entre si</span></a>
-<a href="modelos.html" class="is-atual" aria-current="page"><strong>Modelos para copiar</strong><span>Seções e efeitos prontos</span></a>
+<a href="modelos.html"><strong>Modelos para copiar</strong><span>Seções e efeitos prontos</span></a>
 <a href="ferramenta-briefing.html" class="navmenu__compacto">Briefing</a>
 <a href="ferramenta-preco.html" class="navmenu__compacto">Preço</a>
 <a href="ferramenta-proposta.html" class="navmenu__compacto">Proposta que fecha</a>
@@ -86,42 +86,48 @@
 <p class="navmenu__rotulo">Sobre o site</p>
 <a href="patch-notes.html"><strong>Patch notes</strong><span>O que mudou no site</span></a>
 <a href="colofao.html"><strong>Colofão</strong><span>Como este site foi feito</span></a>
-<a href="saiu-e-entrou.html"><strong>Saiu e entrou</strong><span>O texto antigo ao lado do novo</span></a>
+<a href="saiu-e-entrou.html" class="is-atual" aria-current="page"><strong>Saiu e entrou</strong><span>O texto antigo ao lado do novo</span></a>
 </div>
 </div>
 </details>
 <div class="modos">
 <a class="modo" href="estudar.html">Estudar</a>
-<a class="modo modo--trabalho is-atual" href="ferramentas.html">Trabalhar</a>
+<a class="modo modo--trabalho" href="ferramentas.html">Trabalhar</a>
 </div>
 </nav></header>
-<main class="home modelos" id="conteudo" tabindex="-1" data-revelar>
-<section class="area">
-<h1 class="area__titulo">Modelos</h1>
-<p class="area__lead">Seções inteiras de site, efeitos e componentes, rodando de verdade. Teste aqui, abra o modelo para ver o código e copie o HTML, o CSS e o JavaScript — ou tudo num arquivo só, que abre sozinho no navegador.</p>
-<p class="area__meta">39 modelos · 8 categorias · nenhuma biblioteca</p>
+<main class="home" id="conteudo" tabindex="-1">
+<section class="home__hero">
+<h1>Saiu e entrou</h1>
+<p>Todo texto que foi tirado ou reescrito no site fica aqui, com a versão antiga ao lado da nova — mais recente primeiro. O <a href="patch-notes.html">Patch notes</a> diz o que mudou; esta página mostra, palavra por palavra, o que deixou de estar escrito. Acréscimo puro não entra: só o que saiu. O registro começa em 29 de setembro de 2026; o que mudou antes disso está no histórico do repositório.</p>
 </section>
 
-<div class="mod-filtros" id="mod-filtros" role="group" aria-label="Filtrar por categoria"></div>
+<div class="trocas">
+<!-- entrada nova sempre no topo, logo abaixo desta linha -->
+<article class="troca">
+<div class="troca__cabeca"><time datetime="2026-09-29">29 set 2026</time><h2><a href="back-end.html#t-serverless">Back-end · Serverless functions</a></h2></div>
+<p class="troca__motivo">O plano gratuito da Vercel é restrito a uso pessoal e não comercial; o texto dava a entender que servia para site de cliente.</p>
+<div class="troca__lados">
+<div class="troca__lado troca__lado--saiu"><span class="troca__rotulo">Saiu</span><del>Sem servidor para administrar, sem custo fixo, e o plano gratuito da Vercel ou Netlify cobre muito mais do que uma landing page precisa.</del></div>
+<div class="troca__lado troca__lado--entrou"><span class="troca__rotulo">Entrou</span><ins>Sem servidor para administrar, sem custo fixo, e a cota gratuita cobre muito mais do que uma landing page precisa — lembrando que, na Vercel, o plano gratuito é só para projeto pessoal: site de cliente vai no plano Pro, ou na Netlify, cujo gratuito aceita projeto comercial.</ins></div>
+</div>
+</article>
 
-<div class="mod-grade" id="mod-grade"></div>
-<noscript><p class="home__nota">Os modelos rodam em JavaScript: com ele desligado, não há o que testar nesta página.</p></noscript>
-
-<section class="mod-lista" aria-labelledby="mod-lista-titulo">
-<div class="mod-lista__topo"><h2 id="mod-lista-titulo">Todos os modelos</h2><p>Por categoria. Cada um abre com o código.</p></div>
-<div class="mod-indice" id="mod-indice"></div>
-</section>
-
-<div class="mod-rodape">
-<span>Feito para</span><strong>HTML</strong><strong>CSS</strong><strong>JavaScript</strong><span>— sem biblioteca, sem build</span>
-<a href="ferramentas.html">Todas as ferramentas →</a>
+<article class="troca">
+<div class="troca__cabeca"><time datetime="2026-09-29">29 set 2026</time><h2><a href="back-end.html#t-sl-limites">Back-end · Limites, custo e partida a frio (linha "Cota")</a></h2></div>
+<p class="troca__motivo">O mesmo erro: "uso comercial pesado passa a ter custo" sugeria que uso comercial leve era permitido no gratuito. Não é, em nenhuma quantidade.</p>
+<div class="troca__lados">
+<div class="troca__lado troca__lado--saiu"><span class="troca__rotulo">Saiu</span><del>O plano gratuito da Vercel cobre com folga um site de serviço local. Uso comercial pesado passa a ter custo.</del></div>
+<div class="troca__lado troca__lado--entrou"><span class="troca__rotulo">Entrou</span><ins>A cota gratuita cobre com folga um site de serviço local. Mas o plano gratuito da Vercel é restrito a uso pessoal e não comercial — site de cliente pede o plano Pro. A Netlify aceita projeto comercial no gratuito.</ins></div>
+</div>
+</article>
 </div>
 
 <nav class="passo" aria-label="Navegar">
-<a class="passo__item passo__item--ant" href="ferramentas.html"><span>Voltar para</span><strong>Ferramentas</strong></a>
-<a class="passo__item passo__item--prox" href="movimento.html"><span>O porquê de cada efeito</span><strong>Movimento</strong></a>
+<a class="passo__item passo__item--ant" href="patch-notes.html"><span>Anterior</span><strong>Patch notes</strong></a>
+<a class="passo__item passo__item--prox" href="index.html"><span>Voltar ao</span><strong>Início</strong></a>
 </nav>
 </main>
+
 <footer class="rodape">
 <div class="rodape__interno">
 <p class="rodape__marca"><a href="index.html">Gustavo Tutorial</a><span>Material de estudo aberto, em português. Feito em HTML, CSS e JavaScript puros.</span></p>
@@ -137,6 +143,5 @@
 <script src="app.js"></script>
 <script src="busca.js" defer></script>
 <script src="ia.js" defer></script>
-<script src="modelos.js" defer></script>
 </body>
 </html>

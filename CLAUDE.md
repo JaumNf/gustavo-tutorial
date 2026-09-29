@@ -5,6 +5,12 @@ mais as ferramentas que ele usa durante o trabalho de cliente.
 
 No ar em https://gustavo-tutorial.vercel.app/ — GitHub ligado à Vercel, cada push republica.
 
+**Plano da Vercel:** os termos da Vercel restringem o plano gratuito (Hobby) a uso pessoal e não comercial,
+e contam como comercial anunciar a venda de produto ou serviço. Hoje o site é material aberto, sem venda.
+Quando ele se ligar à empresa de sites do Gustavo (está nos planos), passa a ser comercial: o projeto vai
+para o plano Pro, ou para uma hospedagem cujo gratuito aceite uso comercial (a Netlify diz que aceita).
+Avise o Gustavo antes de fazer essa ligação.
+
 ---
 
 ## Como o site é feito — e as regras que deixaram de existir
@@ -92,7 +98,7 @@ O painel do menu (`.navmenu__painel`) é `position: fixed`, mas o bloco que o co
 width: fit-content`, sem `transform`. Não troque por `left: 50%` + translate: foi assim que ele
 vazava para fora da tela.
 
-O menu de navegação das 36 páginas que têm cabeçalho, o rodapé, a migalha das trilhas, os sumários e a
+O menu de navegação das 37 páginas que têm cabeçalho, o rodapé, a migalha das trilhas, os sumários e a
 navegação das páginas de ferramenta também são gerados (`navmenu.mjs`, `sumario.mjs` e
 `ferramentas.mjs`) — veja abaixo. O sistema visual (cores, fontes, grades de fio) está em `DESIGN.md`.
 
@@ -107,7 +113,7 @@ portados e removidos. `scripts/_texto.mjs` normaliza CRLF↔LF na leitura/escrit
 node scripts/indice.mjs          # regera busca-indice.js a partir do conteúdo real
 node scripts/progresso.mjs       # regera progresso.js (mapa de tópicos por trilha)
 node scripts/sitemap.mjs         # atualiza as datas do sitemap pelo mtime dos arquivos
-node scripts/navmenu.mjs         # menu, rodapé, migalha, ícone do tema, data-modo e theme-color nas 37 páginas
+node scripts/navmenu.mjs         # menu, rodapé, migalha, ícone do tema, data-modo e theme-color nas 38 páginas
 node scripts/sumario.mjs <arquivo.html>   # regera o sumário lateral de uma trilha
 node scripts/ferramentas.mjs     # índice, "você está em" e anterior/próxima das ferramentas
 ```
@@ -122,7 +128,7 @@ Nenhum dos três se edita à mão.
 
 Os grupos do menu são cinco — Construção, Captação e Vendas, Método, Trabalhar e Sobre o site — e o
 Trabalhar lista as quinze ferramentas lidas de `_ferramentas.mjs`, em links compactos (`desc` `null`
-vira `.navmenu__compacto`). São **33 links** (`LINKS_DO_MENU` no `verificar.mjs`): mudou o menu, mude
+vira `.navmenu__compacto`). São **34 links** (`LINKS_DO_MENU` no `verificar.mjs`): mudou o menu, mude
 o número. O mesmo script gera ainda o rodapé (`aplicarRodape`), a migalha "Estudar › Grupo" logo depois
 da `<section class="abertura">` das trilhas (`aplicarMigalha`, pelo `GRUPOS_DE_ESTUDO`) e o ícone SVG
 do botão de tema (`aplicarIconeTema`).
@@ -299,17 +305,25 @@ node scripts/verificar.mjs
 
 Depois disso, confira também:
 
-- Os contadores em prosa (ex.: "as quinze do dia a dia", "14 trilhas · 106 partes · 515 tópicos") espalhados pela
+- Os contadores em prosa (ex.: "as quinze do dia a dia", "14 trilhas · 106 partes · 517 tópicos") espalhados pela
   home, pelo menu e pelas metas — eles não são gerados, e ficam velhos calados.
 - Uma entrada nova em `patch-notes.html`, no topo, dizendo o que mudou — **em toda atualização**,
   por menor que seja. É pedido explícito do Gustavo, não opcional.
+- **Todo texto de conteúdo que saiu ou foi reescrito** entra em `saiu-e-entrou.html`, no topo (logo abaixo
+  do comentário `entrada nova sempre no topo`): data, link para o tópico, o motivo, e o texto antigo em
+  `<del>` ao lado do novo em `<ins>`, copiados literalmente (HTML escapado). Acréscimo puro não entra;
+  contador em prosa e metadado também não. Pedido explícito do Gustavo, para poder comparar sempre. Antes de
+  commitar, rode `git diff --word-diff=plain` nas páginas de conteúdo e procure `[-` — cada trecho removido
+  que não seja contador precisa estar na página.
 - Tópico novo leva `data-desde="AAAA-MM-DD"` com a data de publicação, e depois
   `node scripts/progresso.mjs`.
 
-## As duas páginas sobre o site
+## As três páginas sobre o site
 
 - `patch-notes.html` — o registro seco do que mudou, mais recente primeiro. Toda entrega ganha
   uma entrada.
+- `saiu-e-entrou.html` — o texto que foi tirado ou reescrito, com a versão antiga ao lado da nova.
+  Começa em 29 set 2026; o que mudou antes está no histórico do git.
 - `colofao.html` — o raciocínio por trás: por que o site é assim, o que a IA fez e o que não
   fez, e os erros que foram encontrados nele próprio. O site registra os próprios erros de
   propósito, e não os apaga — a distância entre o que se sabe e o que se faz é o assunto dele.

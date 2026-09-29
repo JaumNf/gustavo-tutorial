@@ -54,6 +54,7 @@ const GRUPOS = [
   ['Sobre o site', 'g-sobre', [
     ['patch-notes.html', 'Patch notes', 'O que mudou no site'],
     ['colofao.html', 'Colofão', 'Como este site foi feito'],
+    ['saiu-e-entrou.html', 'Saiu e entrou', 'O texto antigo ao lado do novo'],
   ], 'navmenu__grupo--sobre'],
 ];
 const GRUPOS_DE_ESTUDO = new Set(['g-construcao', 'g-captacao', 'g-metodo']);
@@ -92,6 +93,7 @@ const PAGINA = {
   'vibecoding.html': ['vibecoding.html', 'Vibecoding'],
   'colofao.html': ['colofao.html', 'Colofão'],
   'patch-notes.html': ['patch-notes.html', 'Patch notes'],
+  'saiu-e-entrou.html': ['saiu-e-entrou.html', 'Saiu e entrou'],
   'ferramentas.html': ['ferramentas.html', null],
   'modelos.html': ['modelos.html', null],
   'index.html': null,
