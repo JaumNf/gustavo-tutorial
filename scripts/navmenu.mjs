@@ -179,11 +179,35 @@ function aplicarMigalha(html, arquivo) {
   return html.replace('<section class="abertura">\n', () => '<section class="abertura">\n' + nav + '\n');
 }
 
+// a mesma migalha, dita ao Google (BreadcrumbList): Início › Estudar › trilha, ou Início › Ferramentas › ferramenta.
+// O grupo (Construção…) fica de fora porque o link dele é uma âncora da estudar.html, não uma página.
+const SITE = 'https://gustavo-tutorial.vercel.app/';
+const NOME_DA_TRILHA = { 'html-puro-2.html': 'Parte 2' };
+function aplicarMigalhaJsonLd(html, arquivo) {
+  html = html.replace(/<script type="application\/ld\+json" id="gt-migalha">.*?<\/script>\n/s, '');
+  const itens = [['Início', '']];
+  const ferramenta = FERRAMENTAS.find((f) => f.arquivo === arquivo);
+  if (ferramenta) itens.push(['Ferramentas', 'ferramentas.html'], [ferramenta.nome, arquivo]);
+  else if (arquivo === 'modelos.html') itens.push(['Ferramentas', 'ferramentas.html'], ['Modelos para copiar', arquivo]);
+  else if (MODO[arquivo] === 'estudo' && arquivo !== 'estudar.html') {
+    itens.push(['Estudar', 'estudar.html']);
+    if (arquivo === 'html-puro-2.html') itens.push(['HTML puro', 'html-puro.html']);
+    itens.push([NOME_DA_TRILHA[arquivo] || PAGINA[arquivo][1], arquivo]);
+  } else return html;
+  const dados = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: itens.map(([name, url], i) => ({ '@type': 'ListItem', position: i + 1, name, item: SITE + url })),
+  };
+  const bloco = `<script type="application/ld+json" id="gt-migalha">${JSON.stringify(dados)}</script>\n`;
+  return html.replace('</head>', () => bloco + '</head>');
+}
+
 // o rodapé é o mesmo em toda página, e é um mapa curto do site
 const RODAPE = [
   '<footer class="rodape">',
   '<div class="rodape__interno">',
-  '<p class="rodape__marca"><a href="index.html">Gustavo Tutorial</a><span>Material de estudo aberto, em português. Feito em HTML, CSS e JavaScript puros.</span></p>',
+  '<p class="rodape__marca"><a href="./">Gustavo Tutorial</a><span>Material de estudo aberto, em português. Feito em HTML, CSS e JavaScript puros.</span></p>',
   '<nav class="rodape__nav" aria-label="Rodapé">',
   '<a href="estudar.html">Estudar</a>',
   '<a href="ferramentas.html">Trabalhar</a>',
@@ -215,6 +239,7 @@ for (const arq of Object.keys(PAGINA)) {
   let h2 = aplicarModo(h, arq);
   h2 = aplicarThemeColor(h2, arq);
   h2 = aplicarMigalha(h2, arq);
+  h2 = aplicarMigalhaJsonLd(h2, arq);
   h2 = aplicarRodape(h2);
   h2 = aplicarIconeTema(h2);
 

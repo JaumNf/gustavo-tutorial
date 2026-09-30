@@ -130,8 +130,14 @@ Os grupos do menu são cinco — Construção, Captação e Vendas, Método, Tra
 Trabalhar lista as quinze ferramentas lidas de `_ferramentas.mjs`, em links compactos (`desc` `null`
 vira `.navmenu__compacto`). São **34 links** (`LINKS_DO_MENU` no `verificar.mjs`): mudou o menu, mude
 o número. O mesmo script gera ainda o rodapé (`aplicarRodape`), a migalha "Estudar › Grupo" logo depois
-da `<section class="abertura">` das trilhas (`aplicarMigalha`, pelo `GRUPOS_DE_ESTUDO`) e o ícone SVG
+da `<section class="abertura">` das trilhas (`aplicarMigalha`, pelo `GRUPOS_DE_ESTUDO`), a mesma migalha em
+JSON-LD `BreadcrumbList` no `<head>` das trilhas, ferramentas e Modelos (`aplicarMigalhaJsonLd`, bloco
+`id="gt-migalha"`: Início › Estudar › trilha, ou Início › Ferramentas › ferramenta) e o ícone SVG
 do botão de tema (`aplicarIconeTema`).
+
+O link para a página inicial é sempre `href="./"`, nunca `index.html`: `index.html` é outra URL para a mesma
+página, que o Google precisa consolidar pelo canonical. Na `404.html` é `href="/"`, porque ela aparece em
+qualquer endereço.
 
 `SEM_MENU` lista as páginas sem cabeçalho — hoje só a `index.html`, que é o hub e navega pelo
 hero e pelos cards. Elas continuam no `PAGINA` porque o script ainda cuida do `<body>` e do
