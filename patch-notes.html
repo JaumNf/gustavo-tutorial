@@ -106,6 +106,21 @@
 <article class="patch__entrada">
 <div class="patch__data">29 set 2026</div>
 <div class="patch__corpo">
+<h2>Motion 13: animateView, arc() e a versão fixada</h2>
+<ul>
+<li>A trilha <a href="motion.html">Referência: Motion</a> foi conferida contra o repositório do Motion, que está na versão 13</li>
+<li><a href="motion.html#t-re-view">animateView: o layout animado, agora sem React</a>: a animação de layout, que era só do React, chegou ao JavaScript puro pela View Transitions API — com o exemplo de um filtro de cardápio ou portfólio</li>
+<li><a href="motion.html#t-re-arco">Mover em arco: arc()</a>: o movimento em curva. A documentação diz que funciona no JavaScript puro; no teste, na 13.4.6, não funcionou, e o tópico diz por quê e como fazer arco em HTML puro enquanto isso</li>
+<li><strong>Correção:</strong> "Os dois recursos que só existem no React" deixou de ser verdade e virou "Os dois recursos que nasceram no React"; a tabela "Quando migrar" foi atualizada pelo mesmo motivo</li>
+<li>O exemplo de versão fixada foi de <code>motion@12</code> para <code>motion@13</code>, e a trilha <a href="movimento.html">Movimento</a>, que carregava <code>motion@latest</code> nas próprias demos — o contrário do que a trilha ensina —, agora carrega <code>motion@13</code></li>
+<li>O texto trocado está em <a href="saiu-e-entrou.html">Saiu e entrou</a>, que agora quebra linha em endereço longo — no celular, a caixa vazava para o lado. Os contadores foram para 519 tópicos</li>
+</ul>
+</div>
+</article>
+
+<article class="patch__entrada">
+<div class="patch__data">29 set 2026</div>
+<div class="patch__corpo">
 <h2>Um erro sobre hospedagem gratuita, dois tópicos e a página Saiu e entrou</h2>
 <ul>
 <li>Página nova, <a href="saiu-e-entrou.html">Saiu e entrou</a>, em "Sobre o site": todo texto tirado ou reescrito fica lá, com a versão antiga ao lado da nova, para sempre dar para comparar. Começa pelas duas frases corrigidas abaixo</li>

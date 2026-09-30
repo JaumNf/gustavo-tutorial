@@ -305,7 +305,7 @@ node scripts/verificar.mjs
 
 Depois disso, confira também:
 
-- Os contadores em prosa (ex.: "as quinze do dia a dia", "14 trilhas · 106 partes · 517 tópicos") espalhados pela
+- Os contadores em prosa (ex.: "as quinze do dia a dia", "14 trilhas · 106 partes · 519 tópicos") espalhados pela
   home, pelo menu e pelas metas — eles não são gerados, e ficam velhos calados.
 - Uma entrada nova em `patch-notes.html`, no topo, dizendo o que mudou — **em toda atualização**,
   por menor que seja. É pedido explícito do Gustavo, não opcional.

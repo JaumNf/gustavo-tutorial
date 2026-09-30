@@ -2804,7 +2804,7 @@
   .troca__cabeca h2 a:hover { color: var(--accent); }
   .troca__motivo { max-width: 68ch; margin: 0 0 16px; color: var(--ink-soft); }
   .troca__lados { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); }
-  .troca__lado { padding: 16px 18px 18px; font-size: 15px; line-height: 1.6; }
+  .troca__lado { padding: 16px 18px 18px; font-size: 15px; line-height: 1.6; overflow-wrap: anywhere; min-width: 0; }
   .troca__lado + .troca__lado { border-left: 1px solid var(--line); }
   .troca__lado--saiu { background: var(--surface-2); color: var(--muted); }
   .troca__lado--entrou { background: var(--accent-soft); color: var(--ink); }

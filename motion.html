@@ -168,6 +168,8 @@
 <p class="indice__rotulo">React</p>
 <a href="#t-re-componente"><code>motion.div</code> e props</a>
 <a href="#t-re-layout"><code>layout</code> · <code>layoutId</code></a>
+<a href="#t-re-view"><code>animateView</code> (JS puro)</a>
+<a href="#t-re-arco"><code>arc()</code></a>
 <a href="#t-re-hooks">os hooks</a>
 <a href="#t-re-migrar">migrar ou não</a>
 </div>
@@ -186,7 +188,7 @@
 <div class="legenda">
 <span><span class="tag tag--revisao">Revisão</span> já conversamos sobre isso</span>
 <span><span class="tag tag--novo">Novo</span> ainda não vimos</span>
-<span>8 partes · 44 tópicos</span>
+<span>8 partes · 46 tópicos</span>
 </div>
 <div class="abertura__filtro"><span class="abertura__filtro-rot" aria-hidden="true">Mostrar</span>
 <div class="filtros" role="group" aria-label="Filtrar tópicos">
@@ -245,7 +247,7 @@
 <tr><td>Módulo ES</td><td>Quer só uma ou duas funções</td><td>Não roda em <code>file://</code>, precisa de servidor</td></tr>
 <tr><td>npm</td><td>Projeto com Vite, Astro, React</td><td>Traz <code>node_modules</code> junto</td></tr>
 </tbody></table></div>
-<div class="nota"><strong>Fixe a versão em entrega de cliente.</strong> <code>motion@latest</code> é ótimo para estudar e péssimo para um site que vai ficar dois anos no ar: uma mudança grande na biblioteca chega sozinha e quebra a página sem ninguém ter tocado em nada. Troque por uma versão explícita, como <code>motion@12</code>, e atualize quando você quiser.</div>
+<div class="nota"><strong>Fixe a versão em entrega de cliente.</strong> <code>motion@latest</code> é ótimo para estudar e péssimo para um site que vai ficar dois anos no ar: uma mudança grande na biblioteca chega sozinha e quebra a página sem ninguém ter tocado em nada. Troque por uma versão explícita, como <code>motion@13</code>, e atualize quando você quiser.</div>
 </div>
 </article>
 
@@ -1141,7 +1143,7 @@ animate(estado, { x: 100, opacidade: 1 }, {
 </article>
 
 <article class="topico" id="t-re-layout" data-marca="novo">
-<div class="topico__cabeca"><h3>Os dois recursos que só existem no React</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__cabeca"><h3>Os dois recursos que nasceram no React</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
 <div class="topico__corpo">
 <p><strong>Animação de layout.</strong> Com <code>layout</code>, o elemento anima sozinho quando a posição ou o tamanho dele muda por qualquer motivo — um filtro reordenou a lista, um acordeão abriu, a janela mudou de tamanho. Isso é difícil de fazer à mão porque exige medir antes e depois e inverter a diferença.</p>
 <div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">react</span><button class="copiar">copiar</button></div><pre><code>{itensFiltrados.map(i =&gt; (
@@ -1152,7 +1154,70 @@ animate(estado, { x: 100, opacidade: 1 }, {
 <div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">react</span><button class="copiar">copiar</button></div><pre><code>&lt;motion.img layoutId={`foto-${obra.id}`} src={obra.mini} /&gt;
 // e, no modal aberto:
 &lt;motion.img layoutId={`foto-${obra.id}`} src={obra.grande} /&gt;</code></pre></div>
-<div class="nota"><strong>E o equivalente em HTML puro:</strong> para o segundo caso existe <code>view-transition-name</code> no CSS, nativo, que faz um elemento "viajar" entre duas páginas. Não é tão flexível, mas resolve o caso principal — a foto do card virando a foto da página do projeto — sem framework nenhum.</div>
+<div class="nota"><strong>E o equivalente em HTML puro:</strong> desde junho de 2026, o Motion em JavaScript puro faz os dois com o <a href="#t-re-view"><code>animateView</code></a>, no próximo tópico. E, para o segundo caso, existe ainda <code>view-transition-name</code> no CSS, nativo, que faz um elemento "viajar" entre duas páginas. Não é tão flexível, mas resolve o caso principal — a foto do card virando a foto da página do projeto — sem framework nenhum.</div>
+</div>
+</article>
+
+<article class="topico" id="t-re-view" data-marca="novo" data-desde="2026-09-29">
+<div class="topico__cabeca"><h3>animateView: o layout animado, agora sem React</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>Desde a versão 12.41, de junho de 2026, o Motion em JavaScript puro tem o <code>animateView</code>. Ele faz, com a View Transitions API do próprio navegador, o que o <code>layout</code> faz no React: você muda o DOM do jeito que quiser, e os elementos marcados deslizam da posição antiga para a nova — sem medir nada, sem calcular posição.</p>
+<p>A função que você passa só muda a página. O resto é encadeado: <code>.add()</code> diz quais elementos acompanhar, e os métodos seguintes valem para eles.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">js — filtro de cardápio ou portfólio</span><button class="copiar">copiar</button></div><pre><code>const { animateView } = Motion;
+const lista = document.querySelector('.catalogo');
+
+// só muda o DOM: esconde o que não é da categoria
+function filtrar(categoria) {
+  for (const item of lista.children) {
+    item.hidden = categoria !== 'tudo' &amp;&amp; item.dataset.cat !== categoria;
+  }
+}
+
+function aoClicar(categoria) {
+  animateView(() =&gt; filtrar(categoria), { duration: 0.4 })
+    .add('.catalogo &gt; li')        // cada item ganha um view-transition-name
+    .enter({ opacity: [0, 1] })    // os que aparecem
+    .exit({ opacity: 0 });         // os que somem
+  // os que ficam deslizam sozinhos para o lugar novo
+}</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Método</th><th>Faz</th></tr></thead>
+<tbody>
+<tr><td><code>.add(alvo)</code></td><td>Marca os elementos (seletor ou elemento) para acompanhar a mudança</td></tr>
+<tr><td><code>.add(de, para)</code></td><td>Um elemento que vira outro — a miniatura que vira a foto grande</td></tr>
+<tr><td><code>.layout(opcoes)</code></td><td>A curva e a duração do deslocamento</td></tr>
+<tr><td><code>.enter()</code> · <code>.exit()</code></td><td>O que só aparece e o que só some na mudança</td></tr>
+<tr><td><code>.new()</code> · <code>.old()</code></td><td>A imagem nova e a antiga de um mesmo elemento, cada uma com a sua animação</td></tr>
+<tr><td><code>.class(nome)</code></td><td>Dá um <code>view-transition-class</code> para você estilizar no CSS</td></tr>
+<tr><td><code>.crop(false)</code> · <code>.group(false)</code></td><td>Desligam o recorte automático e o agrupamento pelo DOM</td></tr>
+</tbody></table></div>
+<p>As opções de tempo são as mesmas da <a href="#s3">Parte 3</a>, inclusive mola: <code>animateView(mudar, { type: 'spring', bounce: 0.3 })</code>. A chamada devolve o mesmo objeto de controle do <code>animate</code>, com <code>pause()</code>, <code>cancel()</code> e <code>finished</code>.</p>
+<div class="nota"><strong>Três cuidados.</strong> Onde o navegador não tem View Transitions, a mudança acontece sem animação — o filtro continua funcionando, só não desliza. Uma transição de tela por vez: se o visitante clicar de novo no meio, o Motion enfileira a próxima em vez de deixar a tela quebrar. E a documentação não fala de "reduzir movimento", então faça você, como na <a href="#t-an-calmo">Parte 2</a>: com <code>prefers-reduced-motion: reduce</code>, chame <code>filtrar()</code> direto, sem o <code>animateView</code>.</div>
+</div>
+</article>
+
+<article class="topico" id="t-re-arco" data-marca="novo" data-desde="2026-09-29">
+<div class="topico__cabeca"><h3>Mover em arco: arc() — por enquanto, só no React</h3><span class="tag tag--novo">Novo</span><span class="tag tag--js">JS</span></div>
+<div class="topico__corpo">
+<p>Desde a 12.40, de maio de 2026, o Motion tem <code>arc()</code>: em vez de ir em linha reta de um ponto a outro, o elemento faz uma curva, como um objeto jogado. Ele entra na opção <code>path</code> da transição e vale para <code>x</code> e <code>y</code> — e para a animação de layout, que é onde mais aparece: a miniatura que voa em curva até virar a foto aberta.</p>
+<div class="bloco-codigo"><div class="bloco-codigo__barra"><span class="bloco-codigo__ling" data-l="js">react</span><button class="copiar">copiar</button></div><pre><code>import { arc, motion } from "motion/react";
+
+// crie uma vez, fora do componente: reaproveitar deixa a interrupção mais suave
+const emArco = arc({ strength: 0.5 });
+
+&lt;motion.div
+  animate={{ x: 200, y: 100 }}
+  transition={{ duration: 0.8, path: emArco }}
+/&gt;</code></pre></div>
+<div class="tabela-caixa"><table>
+<thead><tr><th>Opção</th><th>Padrão</th><th>Faz</th></tr></thead>
+<tbody>
+<tr><td><code>strength</code></td><td>0.5</td><td>Quanto a curva se abre. <code>0</code> é linha reta</td></tr>
+<tr><td><code>peak</code></td><td>0.5</td><td>Onde fica o ponto mais alto do arco. <code>0.5</code> é no meio</td></tr>
+<tr><td><code>direction</code></td><td>automático</td><td><code>'cw'</code> (sentido horário) ou <code>'ccw'</code> (anti-horário)</td></tr>
+<tr><td><code>rotate</code></td><td><code>false</code></td><td><code>true</code> gira o elemento acompanhando a curva</td></tr>
+</tbody></table></div>
+<div class="nota"><strong>Por que está na parte de React.</strong> A documentação do Motion diz que o <code>arc()</code> também funciona com o <code>animate()</code> do JavaScript puro. Testamos em 29 de setembro de 2026, na versão 13.4.6, e não funciona: o elemento vai em linha reta, sem erro nenhum. O código-fonte explica — no JavaScript puro, o <code>animate()</code> de um elemento comum anima direto no estilo, sem o objeto intermediário que o <code>path</code> usa. Enquanto isso não mudar, arco em HTML puro sai de dois jeitos: dar uma curva diferente para cada eixo (<code>{ x: { ease: 'linear' }, y: { ease: 'easeOut' } }</code>, como na <a href="#t-an-porvalor">Parte 2</a>) ou usar <code>offset-path</code>, o caminho de movimento do próprio CSS.</div>
 </div>
 </article>
 
@@ -1186,7 +1251,7 @@ const suave = useSpring(y, { stiffness: 120, damping: 20 });
 <tbody>
 <tr><td>Landing page de serviço</td><td>Não. Nem de longe.</td></tr>
 <tr><td>Site institucional de 6 páginas</td><td>Não — se o problema é repetição, veja a Parte 7 da trilha <a href="fluxo.html">Fluxo de trabalho</a></td></tr>
-<tr><td>Catálogo com filtro e reordenação animada</td><td>Talvez — <code>layout</code> é difícil de reimplementar</td></tr>
+<tr><td>Catálogo com filtro e reordenação animada</td><td>Não mais só por isso — o <a href="#t-re-view"><code>animateView</code></a> faz a reordenação animada em HTML puro</td></tr>
 <tr><td>Galeria com miniatura abrindo em modal</td><td>Não necessariamente — View Transitions cobre boa parte</td></tr>
 <tr><td>Painel com muito estado que muda</td><td>Sim, mas aí a razão é o estado, não a animação</td></tr>
 </tbody></table></div>
@@ -1206,6 +1271,7 @@ inView(alvo, callback, opcoes)           → função de limpeza
 hover(alvo, callback)                    → função de limpeza
 press(alvo, callback)                    → função de limpeza
 stagger(segundos, {startDelay, from, ease})  → gerador de delay
+animateView(mudarDOM, opcoes)            → .add() .enter() .exit() .layout()
 
 // ── opções de tempo ─────────────────────────────────────────────
 duration  delay  repeat  repeatType  repeatDelay  times  ease
@@ -1213,6 +1279,7 @@ type: 'tween' | 'spring' | 'inertia'
 spring novo:   bounce, visualDuration
 spring físico: stiffness, damping, mass, velocity, restDelta
 por propriedade: { opacity: { duration: .2 }, y: { type:'spring' } }
+path: arc({ strength, peak, direction, rotate })   (só React, por enquanto)
 
 // ── curvas ──────────────────────────────────────────────────────
 linear  easeIn/Out/InOut  backIn/Out/InOut  circIn/Out/InOut
